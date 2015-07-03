@@ -1,8 +1,8 @@
 <?php	
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/HTMLPages.properties.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/database/DatabaseController.db.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/ResourcesController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/pages.properties.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/database/databaseController.db.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/resourcesController.control.php";
 
 
 final class RestRouter { 
@@ -56,11 +56,11 @@ final class RestRouter {
 	}
 	
 	private function execute_service_request($request, $connection) {
-			return self::get_service_controller()->execute_request($request->get_uri(), $request->get_type(), $connection);
+		return self::get_service_controller()->execute_request($request->get_uri(), $request->get_type(), $connection);
 	}
 	
 	private function execute_action_request($request, $connection) {
-			return self::get_action_controller()->execute_request($request->get_uri(), $request->get_parameters(), $request->get_type(), $connection);
+		return self::get_action_controller()->execute_request($request->get_uri(), $request->get_parameters(), $request->get_type(), $connection);
 	}
 	
 	private function execute_state_var_request($request, $connection) {

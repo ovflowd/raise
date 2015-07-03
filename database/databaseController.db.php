@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/Database.properties.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/database.properties.php";
 
 final class DatabaseController {
 

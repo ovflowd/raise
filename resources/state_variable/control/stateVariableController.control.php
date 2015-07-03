@@ -1,9 +1,10 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/slave_controller/db/SlaveController.db.php";
-final class SlaveController {
-	
-	var $db_slave_controller;
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/state_variable/db/stateVariableController.db.php"; 
+
+final class StateVariableController {
+
+	var $db_state_var_controller;
 	
 	public function __construct() {
 		self::start_db_controller();
@@ -23,23 +24,20 @@ final class SlaveController {
 				return http_response(405); //code for not allowed method			
 		}
 	}
-
+	
 	public function execute_get_request($request, $connection) {		
 		switch(self::number_of_params($request)) {
-	   		case 1: 
-				return self::select_all_slaves($connection);
+	   	case 1: 
+				return self::select_all_state_vars($connection);
 
-	   		case 2:		
-				return self::select_slave_by_unic_name($request[1], $connection);
-		
-	   		case 3:
-				return self::choose_request($request[2], $request[1], $connection); 
-
-	   		default:
+	   	case 2:		
+				return self::select_state_var_by_id($request[1], $connection);
+			
+	   	default:
 				return http_response(405); //code for not allowed method			
 		}
 	
-	}
+	}	
 	
 	public function execute_post_request($request, $connection) {
 	
@@ -53,23 +51,16 @@ final class SlaveController {
 	
 	} 
 	
+	private function select_all_state_vars($connection) {
+		return $this->db_state_var_controller->select_all_state_vars($connection);
+	}
+	
+	private function select_state_var_by_id($request, $connection) {
+		return $this->db_state_var_controller->select_state_var_by_id($request, $connection);
+	}
+	
 	private function start_db_controller() {
-		$this->db_slave_controller = new DBSlaveController();	
-	}
-
-	private function choose_request($request, $slave_name, $connection) {
-		if(strcmp($request,'devices') == 0) {				
-			return $this->db_slave_controller->select_all_associated_devices($slave_name,$connection);
-		}
- 		return http_response(405);	
-	}
-	
-	private function select_slave_by_unic_name($request, $connection) {
-		return $this->db_slave_controller->select_slave_by_unic_name($request, $connection);
-	}
-	
-	private function select_all_slaves($connection) {
-		return $this->db_slave_controller->select_all_slaves($connection);
+		$this->db_state_var_controller = new DBStateVarController();	
 	}
 	
 	private function number_of_params($request) {

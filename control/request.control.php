@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/model/Request.model.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/model/request.model.php";
 
 class RequestControl {
 

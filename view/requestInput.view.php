@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/Request.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/communication/ExternalCommunicator.communication.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/request.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/communication/externalCommunicator.communication.php";
 
 
 class RequestInput {
@@ -33,10 +33,10 @@ class RequestInput {
 
 	private function create_request() {
 		$request_uri = self::get_request_uri_array();
+		$script_name = self::get_script_name_array();
 		$request_method = $_SERVER['REQUEST_METHOD'];
 		$server_protocol = $_SERVER['SERVER_PROTOCOL'];
-		$script_name = self::get_script_name_array();
-
+		
 		return $this->request_control->create_request($request_uri, $request_method, $server_protocol, $script_name);
 	}
 

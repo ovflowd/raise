@@ -1,15 +1,19 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/state_variable/db/StateVariableController.db.php"; 
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/device/db/deviceController.db.php"; 	
 
-final class StateVariableController {
-
-	var $db_state_var_controller;
+final class DeviceController {
+	
+	var $db_device_controller;
 	
 	public function __construct() {
 		self::start_db_controller();
 	}
-
+	
+	private function start_db_controller() {
+		$this->db_device_controller = new DBDeviceController();	
+	}
+	
 	public function execute_request($request, $request_type, $connection) {
 		switch($request_type) {
 			case 'GET':
@@ -28,16 +32,19 @@ final class StateVariableController {
 	public function execute_get_request($request, $connection) {		
 		switch(self::number_of_params($request)) {
 	   	case 1: 
-				return self::select_all_state_vars($connection);
+				return self::select_all_devices($connection);
 
 	   	case 2:		
-				return self::select_state_var_by_id($request[1], $connection);
+				return self::select_device_by_id($request[1], $connection);
+		
+	   	case 3:
+				return self::choose_request($request[2], $request[1], $connection); 
 			
 	   	default:
 				return http_response(405); //code for not allowed method			
 		}
 	
-	}	
+	}
 	
 	public function execute_post_request($request, $connection) {
 	
@@ -51,21 +58,25 @@ final class StateVariableController {
 	
 	} 
 	
-	private function select_all_state_vars($connection) {
-		return $this->db_state_var_controller->select_all_state_vars($connection);
+	private function choose_request($request, $device_id, $connection) {
+		if(strcmp($request,'services') == 0) {				
+			return $this->db_device_controller->select_associated_services($device_id,$connection);
+		}
+ 		return http_response(405);	
+	}	
+	
+	private function select_all_devices($connection) {
+		return $this->db_device_controller->select_all_devices($connection);
 	}
 	
-	private function select_state_var_by_id($request, $connection) {
-		return $this->db_state_var_controller->select_state_var_by_id($request, $connection);
-	}
-	
-	private function start_db_controller() {
-		$this->db_state_var_controller = new DBStateVarController();	
+	private function select_device_by_id($request,$connection) {
+		return $this->db_device_controller->select_device_by_id($request,$connection);	
 	}
 	
 	private function number_of_params($request) {
 		return (sizeof($request) - 1);
 	}
 }
+
 
 ?>

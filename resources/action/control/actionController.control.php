@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/action/db/ActionController.db.php"; 	
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/action/db/actionController.db.php"; 	
 
 final class ActionController {
 	
@@ -53,7 +53,7 @@ final class ActionController {
 				return self::get_control_layer_json($request[1],$parameters,$connection);  
 			
 	   	  default:
-				return http_response_code(405); //return a json with http code			
+				return http_response_code(405); //TODO:return a json with http code			
 		}
 	}
 	

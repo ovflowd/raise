@@ -1,6 +1,6 @@
 <?php
 
-include "view/RequestInput.view.php";
+include "view/requestInput.view.php";
 
 $ri = new RequestInput();
 echo $ri->start();

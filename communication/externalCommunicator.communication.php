@@ -1,8 +1,8 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/util/Socket.helper.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/util/RestRouter.helper.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/Socket.properties.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/util/socket.helper.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/util/restRouter.helper.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/socket.properties.php";
 
 final class ExternalCommunicator {
 
