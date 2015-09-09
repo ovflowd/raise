@@ -1,8 +1,8 @@
 <?php	
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/properties/pages.properties.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/database/databaseController.db.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/resourcesController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/properties/pages.properties.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/database/databaseController.db.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/control/resourcesController.control.php";
 
 
 final class RestRouter { 

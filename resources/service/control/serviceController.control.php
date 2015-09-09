@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/service/db/serviceController.db.php"; 
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/service/db/serviceController.db.php"; 
 
 final class ServiceController {
 	
