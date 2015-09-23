@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/device/db/deviceController.db.php"; 	
+include $_SERVER['DOCUMENT_ROOT']."/resources/device/db/deviceController.db.php";
 
 final class DeviceController {
 	

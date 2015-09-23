@@ -1,10 +1,10 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/slave_controller/control/slaveController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/device/control/deviceController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/service/control/serviceController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/action/control/actionController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/state_variable/control/stateVariableController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/resources/slave_controller/control/slaveController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/resources/device/control/deviceController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/resources/service/control/serviceController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/resources/action/control/actionController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/resources/state_variable/control/stateVariableController.control.php";
 
 final class ResourceController {
 

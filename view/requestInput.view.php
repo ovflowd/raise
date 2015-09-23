@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/control/request.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/communication/externalCommunicator.communication.php";
+include $_SERVER['DOCUMENT_ROOT']."/control/request.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/communication/externalCommunicator.communication.php";
 
 
 class RequestInput {
