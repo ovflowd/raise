@@ -39,11 +39,8 @@ final class RestRouter {
 		   	return self::execute_action_request($request, self::get_connection());
 		   
 		   case 'state_variable' :
-		   	return self::execute_state_var_request($request, self::get_connection());
-	
-		   case 'resource':
-		   		$resources = array("slave_controller", "device", "service", "action", "state_variable");
-		   		return json_encode($resources);			    	    
+		   	return self::execute_state_var_request($request, self::get_connection());	
+		    	    
 			default:
 		    	global $welcome_page;
 		    	return $welcome_page;
