@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/resources/action/db/actionController.db.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/action/db/actionController.db.php"; 	
 
 final class ActionController {
 	

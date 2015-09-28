@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/resources/state_variable/db/stateVariableController.db.php";
+include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/state_variable/db/stateVariableController.db.php"; 
 
 final class StateVariableController {
 
