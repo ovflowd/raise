@@ -1,10 +1,10 @@
 <?php
 
-class HttpStatus {
-	
-	var $code;
-	var $message;
+/**
+ * Class HttpStatus
+ */
+class HttpStatus
+{
+    var $code;
+    var $message;
 }
-
-
-?>

@@ -2,7 +2,8 @@
 
 $query_create_db = "CREATE DATABASE IF NOT EXISTS 'uiot' ";
 
-$query_create_slave_controller_tb = "CREATE TABLE IF NOT EXISTS `slave_controller` (
+$query_create_slave_controller_tb
+    = "CREATE TABLE IF NOT EXISTS `slave_controller` (
 						`PK_Unic_Name` varchar(255) NOT NULL,
 						`TE_Type` text NOT NULL,
 					        `TE_Address` text,						
@@ -10,14 +11,16 @@ $query_create_slave_controller_tb = "CREATE TABLE IF NOT EXISTS `slave_controlle
 						`BO_Deleted` tinyint(4) NOT NULL DEFAULT '0'
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
-$query_create_action_tb = "CREATE TABLE IF NOT EXISTS `action` (
+$query_create_action_tb
+    = "CREATE TABLE IF NOT EXISTS `action` (
 						`PK_Id` int(11) NOT NULL,
 						`FK_Service` int(11) NOT NULL,
 						`TE_Name` varchar(32) NOT NULL,
 						`BO_Deleted` tinyint(4) NOT NULL DEFAULT '0'
 						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9";
 
-$query_create_argument_tb = "CREATE TABLE IF NOT EXISTS `argument` (
+$query_create_argument_tb
+    = "CREATE TABLE IF NOT EXISTS `argument` (
 						`PK_Id` int(11) NOT NULL,
 						`FK_Action` int(11) NOT NULL,
 						`TE_Name` varchar(32) NOT NULL COMMENT 'REQUIRED. Name of formal parameter. The name SHOULD be 							 chosen to reflect the semantic use of the argument. MUST NOT contain a hyphen character (“-”, 2D 							 Hex in UTF-8). First character MUST be a USASCII letter (“A”-“Z”, “a”-“z”), USASCII digit 							 (“0”-“9”), an underscore (“_”), or a non- experimental Unicode letter or digit greater than U+007F. 							Succeeding characters MUST be a USASCII letter (“A”-“Z”, “a”-“z”), USASCII digit (“0”-“9”), an underscore (“_”), a period (“.”), a Unicode combiningchar, an extender, or a non-experimental Unicode letter or digit greater than U+007 . The first three letters MUST NOT be “XML” in any combination of case. String. Case sensitive. SHOULD be < 32 characters.',
@@ -25,10 +28,11 @@ $query_create_argument_tb = "CREATE TABLE IF NOT EXISTS `argument` (
 						`TE_Ret_Val` text COMMENT 'OPTIONAL. Identifies at most one output argument as the return value. If inc									luded, MUST be included as a subelement of the first output argument. (Element only; no value.)\n',
 						`FK_Related_State_Variable` int(11) NOT NULL,
 						`BO_Deleted` tinyint(4) NOT NULL DEFAULT '0'
-						 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13" ;
+						 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13";
 
 
-$query_create_device_tb = "CREATE TABLE IF NOT EXISTS `device` (
+$query_create_device_tb
+    = "CREATE TABLE IF NOT EXISTS `device` (
 							`PK_Id` int(11) NOT NULL COMMENT 'REQUIRED. Unique Device Name. Universally-unique identifier for the device, whether root or embedded. MUST be the same over time for a specific device instance (i.e., MUST survive reboots). MUST match the field value of the NT header field in device discovery messages. MUST match the prefix of the USN header field in all discovery messages. (Section 1, “Discovery” explains the NT and USN header fields.) MUST begin with “uuid:” followed by a UUID suffix specified by a UPnP vendor. See section 1.1.4, “UUID format and RECOMMENDED generation algorithms” for the MANDATORY UUID format.\n',
   							`TE_UDN` varchar(255) NOT NULL,
   							`FK_Slave_Controller` varchar(255) NOT NULL,
@@ -48,7 +52,8 @@ $query_create_device_tb = "CREATE TABLE IF NOT EXISTS `device` (
   							`BO_Deleted` tinyint(4) NOT NULL DEFAULT '0'
 							) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16";
 
-$query_create_service_tb = "CREATE TABLE IF NOT EXISTS `service` (
+$query_create_service_tb
+    = "CREATE TABLE IF NOT EXISTS `service` (
 							`PK_Id` int(11) NOT NULL,
   							`FK_Device` int(11) NOT NULL,
   							`TE_Friendly_Name` text NOT NULL,
@@ -65,7 +70,8 @@ $query_create_service_tb = "CREATE TABLE IF NOT EXISTS `service` (
 							) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23";
 
 
-$query_create_state_variable_tb = "CREATE TABLE IF NOT EXISTS `state_variable` (
+$query_create_state_variable_tb
+    = "CREATE TABLE IF NOT EXISTS `state_variable` (
 					  `PK_Id` int(11) NOT NULL,
   					  `FK_Service` int(11) NOT NULL,
 					  `TE_Name` varchar(32) NOT NULL,
@@ -83,7 +89,8 @@ $query_create_state_variable_tb = "CREATE TABLE IF NOT EXISTS `state_variable` (
 					) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;";
 
 
-$query_create_users_tb = "CREATE TABLE IF NOT EXISTS `users` (
+$query_create_users_tb
+    = "CREATE TABLE IF NOT EXISTS `users` (
 			 `PK_Id` int(11) NOT NULL,
 			 `TE_Name` text,
 			 `TE_Username` text NOT NULL,
@@ -91,6 +98,3 @@ $query_create_users_tb = "CREATE TABLE IF NOT EXISTS `users` (
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;";
 
 $query_select_all_slaves = "SELECT PK_Unic_Name,TE_Type,TE_Address,TE_Description FROM slave_controler";
-
-
-?>
