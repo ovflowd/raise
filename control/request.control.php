@@ -1,6 +1,6 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/model/request.model.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/model/request.model.php";
 
 class RequestControl {
 

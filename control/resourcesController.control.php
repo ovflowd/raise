@@ -1,10 +1,10 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/slave_controller/control/slaveController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/device/control/deviceController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/service/control/serviceController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/action/control/actionController.control.php";
-include $_SERVER['DOCUMENT_ROOT']."/service_rest_api/resources/state_variable/control/stateVariableController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/slave_controller/control/slaveController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/device/control/deviceController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/service/control/serviceController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/action/control/actionController.control.php";
+include $_SERVER['DOCUMENT_ROOT']."/uiot-api-rest/resources/state_variable/control/stateVariableController.control.php";
 
 final class ResourceController {
 
