@@ -1,8 +1,8 @@
 <?php
 
-include ROOT_REST_DIR . "/properties/pages.properties.php";
-include ROOT_REST_DIR . "/database/databaseController.db.php";
-include ROOT_REST_DIR . "/control/resourcesController.control.php";
+include_once ROOT_REST_DIR . "/properties/pages.properties.php";
+include_once ROOT_REST_DIR . "/database/databaseController.db.php";
+include_once ROOT_REST_DIR . "/control/resourcesController.control.php";
 
 /**
  * Class RestRouter
@@ -59,8 +59,9 @@ final class RestRouter
                 return self::execute_state_var_request($request, self::get_connection());
 
             case 'resource':
-                $resources = array("slave_controller", "device", "service", "action", "state_variable");
-                return json_encode($resources);
+                 return self::execute_resource_request($request, self::get_connection());
+                //$resources = array("slave_controller", "device", "service", "action", "state_variable");
+                //return json_encode($resources);
             default:
                 global $welcome_page;
                 return $welcome_page;
@@ -125,5 +126,10 @@ final class RestRouter
     private function get_state_var_controller()
     {
         return self::get_resource_controller()->get_state_var_controller();
+    }
+
+    private function execute_resource_request($request, $connection) 
+    {
+        return self::get_resource_controller()->execute_request($request->get_uri(), $connection);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/resources/action/db/actionController.db.php";
+include_once ROOT_REST_DIR . "/resources/action/db/actionController.db.php";
 
 /**
  * Class ActionController

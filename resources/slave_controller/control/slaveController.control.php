@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/resources/slave_controller/db/slaveController.db.php";
+include_once ROOT_REST_DIR . "/resources/slave_controller/db/slaveController.db.php";
 
 /**
  * Class SlaveController

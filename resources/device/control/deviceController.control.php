@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/resources/device/db/deviceController.db.php";
+include_once ROOT_REST_DIR . "/resources/device/db/deviceController.db.php";
 
 /**
  * Class DeviceController

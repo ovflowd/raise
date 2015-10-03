@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/resources/service/db/serviceController.db.php";
+include_once ROOT_REST_DIR . "/resources/service/db/serviceController.db.php";
 
 /**
  * Class ServiceController

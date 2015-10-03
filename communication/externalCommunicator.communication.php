@@ -1,8 +1,8 @@
 <?php
 
-include ROOT_REST_DIR . "/util/socket.helper.php";
-include ROOT_REST_DIR . "/util/restRouter.helper.php";
-include ROOT_REST_DIR . "/properties/socket.properties.php";
+include_once ROOT_REST_DIR . "/util/socket.helper.php";
+include_once ROOT_REST_DIR . "/util/restRouter.helper.php";
+include_once ROOT_REST_DIR . "/properties/socket.properties.php";
 
 /**
  * Class ExternalCommunicator

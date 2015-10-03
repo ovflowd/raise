@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/model/request.model.php";
+include_once ROOT_REST_DIR . "/model/request.model.php";
 
 /**
  * Class RequestControl

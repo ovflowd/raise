@@ -25,7 +25,7 @@ $query_create_argument_tb
 						`FK_Action` int(11) NOT NULL,
 						`TE_Name` varchar(32) NOT NULL COMMENT 'REQUIRED. Name of formal parameter. The name SHOULD be 							 chosen to reflect the semantic use of the argument. MUST NOT contain a hyphen character (“-”, 2D 							 Hex in UTF-8). First character MUST be a USASCII letter (“A”-“Z”, “a”-“z”), USASCII digit 							 (“0”-“9”), an underscore (“_”), or a non- experimental Unicode letter or digit greater than U+007F. 							Succeeding characters MUST be a USASCII letter (“A”-“Z”, “a”-“z”), USASCII digit (“0”-“9”), an underscore (“_”), a period (“.”), a Unicode combiningchar, an extender, or a non-experimental Unicode letter or digit greater than U+007 . The first three letters MUST NOT be “XML” in any combination of case. String. Case sensitive. SHOULD be < 32 characters.',
 					    `EN_Direction` enum('in','out') NOT NULL COMMENT 'REQUIRED. Defines whether argument is an input or out									put parameter.\nMUST be either “in” or “out” and not both. All input arguments MUST be listed before a								   ny output arguments.\n',
-						`TE_Ret_Val` text COMMENT 'OPTIONAL. Identifies at most one output argument as the return value. If inc									luded, MUST be included as a subelement of the first output argument. (Element only; no value.)\n',
+						`TE_Ret_Val` text COMMENT 'OPTIONAL. Identifies at most one output argument as the return value. If inc									luded, MUST be include_onced as a subelement of the first output argument. (Element only; no value.)\n',
 						`FK_Related_State_Variable` int(11) NOT NULL,
 						`BO_Deleted` tinyint(4) NOT NULL DEFAULT '0'
 						 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13";

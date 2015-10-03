@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/properties/database.properties.php";
+include_once ROOT_REST_DIR . "/properties/database.properties.php";
 
 /**
  * Class DatabaseController

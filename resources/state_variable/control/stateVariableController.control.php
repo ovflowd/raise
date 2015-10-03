@@ -1,6 +1,6 @@
 <?php
 
-include ROOT_REST_DIR . "/resources/state_variable/db/stateVariableController.db.php";
+include_once ROOT_REST_DIR . "/resources/state_variable/db/stateVariableController.db.php";
 
 /**
  * Class StateVariableController

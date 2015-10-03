@@ -1,7 +1,7 @@
 <?php
 
-include ROOT_REST_DIR . "/control/request.control.php";
-include ROOT_REST_DIR . "/communication/externalCommunicator.communication.php";
+include_once ROOT_REST_DIR . "/control/request.control.php";
+include_once ROOT_REST_DIR . "/communication/externalCommunicator.communication.php";
 
 /**
  * Class RequestInput
@@ -15,6 +15,7 @@ class RequestInput
     {
         self::set_request_control(new RequestControl());
         self::set_external_comunnicator(new ExternalCommunicator(SCKT_PORT, SCKT_ADDRESS));
+
     }
 
     private function set_request_control($request_control)

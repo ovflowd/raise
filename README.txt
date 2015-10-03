@@ -35,7 +35,7 @@ Download and install from here:
     ErrorLog "/complete/path/to/php/code/logs/uiot_rest_api-error_log"
     CustomLog "/complete/path/to/php/code/logs/uiot_rest_api-access_log" common
     <Directory "/complete/path/to/php/code/">
-            Options Indexes FollowSymLinks Includes execCGI
+            Options Indexes FollowSymLinks include_onces execCGI
             AllowOverride All
             Order Allow,Deny
             Allow From All
