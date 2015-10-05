@@ -37,7 +37,7 @@ final class SlaveController
 
     public function execute_get_request($request, $connection)
     {
-        switch (self::number_of_params($request)) {
+        switch (sizeof($request)) {
             case 1:
                 return self::select_all_slaves($connection);
 

@@ -3,6 +3,7 @@
 include_once ROOT_REST_DIR . "/properties/pages.properties.php";
 include_once ROOT_REST_DIR . "/database/databaseController.db.php";
 include_once ROOT_REST_DIR . "/control/resourcesController.control.php";
+include_once ROOT_REST_DIR . "/model/httpStatus.model.php";
 
 /**
  * Class RestRouter
@@ -41,16 +42,16 @@ final class RestRouter
 
     public function submit_request($request)
     {
-        switch ($request->get_uri()[0]) {
+        switch ($request->get_resource()) {
 
             case 'slave_controller' :
                 return self::execute_sc_request($request, self::get_connection());
 
             case 'device' :
-                return self::execute_dev_request($request, self::get_connection());
+                return self::execute_device_request($request, self::get_connection());
 
             case 'service' :
-                return self::execute_service_request($request, self::get_connection());
+                return self::execute_service_request($request, self::get_connection()); 
 
             case 'action' :
                 return self::execute_action_request($request, self::get_connection());
@@ -59,12 +60,10 @@ final class RestRouter
                 return self::execute_state_var_request($request, self::get_connection());
 
             case 'resource':
-                 return self::execute_resource_request($request, self::get_connection());
-                //$resources = array("slave_controller", "device", "service", "action", "state_variable");
-                //return json_encode($resources);
+                return self::execute_resource_request($request, self::get_connection());
+                
             default:
-                global $welcome_page;
-                return $welcome_page;
+                return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);
         }
     }
 
@@ -88,9 +87,9 @@ final class RestRouter
         return $this->db_controller->get_PDO_object();
     }
 
-    private function execute_dev_request($request, $connection)
+    private function execute_device_request($request, $connection)
     {
-        return self::get_device_controller()->execute_request($request->get_uri(), $request->get_type(), $connection);
+        return self::get_device_controller()->execute_request($request, $connection);
     }
 
     private function get_device_controller()

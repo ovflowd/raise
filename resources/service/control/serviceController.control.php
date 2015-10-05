@@ -22,22 +22,22 @@ final class ServiceController
     public function execute_request($request, $request_type, $connection)
     {
         switch ($request_type) {
-            case 'GET':
+            case "GET":
                 return self::execute_get_request($request, $connection);
-            case 'POST':
+            case "POST":
                 return self::execute_post_request($request, $connection);
-            case 'PUT':
+            case "PUT":
                 return self::execute_put_request($request, $connection);
-            case 'DELETE':
+            case "DELETE":
                 return self::execute_delete_request($request, $connection);
             default:
-                return http_response(405); //code for not allowed method
+                return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
         }
     }
 
     public function execute_get_request($request, $connection)
     {
-        switch (self::number_of_params($request)) {
+        switch (sizeof($request)) {
             case 1:
                 return self::select_all_services($connection);
 
@@ -51,11 +51,6 @@ final class ServiceController
                 return http_response(405); //code for not allowed method
         }
 
-    }
-
-    private function number_of_params($request)
-    {
-        return (sizeof($request) - 1);
     }
 
     private function select_all_services($connection)

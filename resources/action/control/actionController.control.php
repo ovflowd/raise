@@ -37,7 +37,7 @@ final class ActionController
 
     public function execute_get_request($request, $connection)
     {
-        switch (self::number_of_elements($request)) {
+        switch (sizeof($request)) {
             case 1:
                 return self::select_all_actions($connection);
 
@@ -48,11 +48,6 @@ final class ActionController
                 return http_response_code(405); //return a json with http code
         }
 
-    }
-
-    private function number_of_elements($request)
-    {
-        return (sizeof($request) - 1);
     }
 
     private function select_all_actions($connection)
