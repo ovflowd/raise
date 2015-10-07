@@ -89,23 +89,8 @@ final class DatabaseController
     {
         try {
             switch (self::get_type()):
-                case 'pgsql':
-                    $conn = self::get_pgsql_connection();
-                    break;
                 case 'mysql':
                     $conn = self::get_mysql_connection();
-                    break;
-                case 'sqlite':
-                    $conn = self::get_sqlite_connection();
-                    break;
-                case 'ibase':
-                    $conn = self::get_ibase_connection();
-                    break;
-                case 'oci8':
-                    $conn = self::get_oci8_connection();
-                    break;
-                case 'mssql':
-                    $conn = self::get_mssql_connection();
                     break;
             endswitch;
         } catch (Exception $exception) {

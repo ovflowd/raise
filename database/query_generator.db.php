@@ -78,15 +78,9 @@ class QueryGenerator
 			case "device":
 					return select_device_services($uri[1]);
 			case "service":
-					return select_service_by_id($uri[1]);
-			case "action":
-					return select_action_by_id($uri[1]);
+					return select_service_actions($uri[1]);
 			case "slave_controller":
-					return select_slave_by_id($uri[1]);
-			case "state_variable":
-					return select_state_var_by_id($uri[1]);
-			case "resource":
-					return select_resource_by_id($uri[1]);								
+					return select_slave_devices($uri[1]);								
 			default: 
 					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
 		}
