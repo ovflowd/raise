@@ -7,3 +7,5 @@ include_once ROOT_REST_DIR . "/view/request_input.view.php";
 
 $ri = new RequestInput();
 echo $ri->start();
+
+
