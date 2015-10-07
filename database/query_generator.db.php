@@ -3,6 +3,9 @@
 include_once ROOT_REST_DIR . "/properties/querys.properties.php";
 include_once ROOT_REST_DIR . "/model/http_status.model.php";
 
+
+//this class nedd refactoring based on resources (model,control, db)
+//should not be implemented based on URI
 class QueryGenerator
 {
 
@@ -70,6 +73,28 @@ class QueryGenerator
 					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
 		}
 	}
+
+		public function get_by_id($uri)
+	{
+		switch($uri[0])
+		{
+			case "device":
+					return select_device_by_id($uri[1]);
+			case "service":
+					return select_service_by_id($uri[1]);
+			case "action":
+					return select_action_by_id($uri[1]);
+			case "slave_controller":
+					return select_slave_by_id($uri[1]);
+			case "state_variable":
+					return select_state_var_by_id($uri[1]);
+			case "resource":
+					return select_resource_by_id($uri[1]);								
+			default: 
+					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
+		}
+	}
+
 
 	public function get_associeted_resource($uri)
 	{
