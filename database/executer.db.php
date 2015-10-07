@@ -2,9 +2,9 @@
 
 class DBExecuter
 {
-	public function select($query, $connection)
+    public function select($query, $connection)
     {
-    	$encode             = array();
+        $encode             = array();
         $result             = $connection->query($query);
 
         if ($result->rowCount() > 0) {

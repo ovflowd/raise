@@ -20,7 +20,7 @@ final class RequestRouter
 
     public function submit_request($request)
     {
-       return self::execute_request($request, self::get_connection());
+        return self::execute_request($request, self::get_connection());
     }
 
     private function create_db_controller()

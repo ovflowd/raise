@@ -20,8 +20,9 @@ class Socket
     {
         $return_code  = "OK";
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        if ($this->socket === false)
-            $return_code = "Failed to create socket. Reason: " . socket_strerror(socket_last_error()) . "\n";
+        if ($this->socket === false) {
+                    $return_code = "Failed to create socket. Reason: " . socket_strerror(socket_last_error()) . "\n";
+        }
         return $return_code;
     }
 
@@ -35,21 +36,26 @@ class Socket
                 $return = $this->read();
                 $this->disconnect_socket();
                 return $return;
-            else:
+            else {
+                :
                 return '{"status":"fail","message":"' . str_replace('"', '\\"', $init) . '"}';
+            }
             endif;
-        else:
+        else {
+            :
             return '{"status":"fail","message":"' . $init . '"}';
+        }
         endif;
     }
 
     private function connect_socket()
     {
         $result = socket_connect($this->socket, $this->address, $this->port);
-        if ($result === false)
-            return "Failed to connect socket. Reason: " . socket_strerror(socket_last_error($this->socket)) . "\n";
-        else
-            return "OK";
+        if ($result === false) {
+                    return "Failed to connect socket. Reason: " . socket_strerror(socket_last_error($this->socket)) . "\n";
+        } else {
+                    return "OK";
+        }
     }
 
     private function write($data)
@@ -60,8 +66,9 @@ class Socket
     private function read()
     {
         $return = "";
-        while ($next = socket_read($this->socket, 2048))
-            $return .= $next;
+        while ($next = socket_read($this->socket, 2048)) {
+                    $return .= $next;
+        }
         return $return;
     }
 
