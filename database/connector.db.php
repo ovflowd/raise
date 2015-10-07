@@ -25,6 +25,26 @@ final class DatabaseController
         self::set_port($database['port']);
     }
 
+    public function get_user()
+    {
+        return $this->user;
+    }
+
+    public function set_user($user)
+    {
+        $this->user = (isset($user) ? $user : NULL);
+    }
+
+    public function get_pass()
+    {
+        return $this->pass;
+    }
+
+    public function set_pass($pass)
+    {
+        $this->pass = (isset($pass) ? $pass : NULL);
+    }
+
     public function get_name()
     {
         return $this->name;
@@ -53,6 +73,16 @@ final class DatabaseController
     public function set_port($port)
     {
         $this->port = (isset($port) ? $port : NULL);
+    }
+
+    public function get_type()
+    {
+        return $this->type;
+    }
+
+    public function set_type($type)
+    {
+        $this->type = (isset($type) ? $type : NULL);
     }
 
     public function get_PDO_object()
@@ -84,33 +114,8 @@ final class DatabaseController
         return $conn;
     }
 
-    public function get_type()
-    {
-        return $this->type;
-    }
-
-    public function set_type($type)
-    {
-        $this->type = (isset($type) ? $type : NULL);
-    }
-
-    private function get_pgsql_connection()
-    {
-        self::set_port('5432');
-        $conn = new PDO("pgsql:dbname={$this->name};
-								user={$this->user};
-								password={$this->pass};
-								host=$this->host;
-								port={$this->port}",
-            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
-
     private function get_mysql_connection()
     {
-        self::set_port('3306');
         $conn = new PDO("mysql:host={$this->host};
 								port={$this->port};
 								dbname={$this->name}",
@@ -122,61 +127,12 @@ final class DatabaseController
         return $conn;
     }
 
-    public function get_user()
-    {
-        return $this->user;
-    }
+    
+  
 
-    public function set_user($user)
-    {
-        $this->user = (isset($user) ? $user : NULL);
-    }
+  
 
-    public function get_pass()
-    {
-        return $this->pass;
-    }
+  
 
-    public function set_pass($pass)
-    {
-        $this->pass = (isset($pass) ? $pass : NULL);
-    }
-
-    private function get_sqlite_connection()
-    {
-        $conn = new PDO("sqlite:{$this->name}");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
-
-    private function get_ibase_connection()
-    {
-        $conn = new PDO("firebird:dbname={$this->name}",
-            self::get_user(),
-            self::get_pass());
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
-
-    private function get_oci8_connection()
-    {
-        $conn = new PDO("oci:dbname={$this->name}",
-            self::get_user(),
-            self::get_pass());
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
-
-    private function get_mssql_connection()
-    {
-        $conn = new PDO("mssql:host={$this->host},
-	 							1433;dbname={$this->name}",
-            self::get_user(),
-            self::get_pass());
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
+   
 }

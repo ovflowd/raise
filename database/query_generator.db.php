@@ -1,128 +1,95 @@
 <?php
 
-//include_once ROOT_REST_DIR . "/properties/querys.properties.php";
+include_once ROOT_REST_DIR . "/properties/querys.properties.php";
+include_once ROOT_REST_DIR . "/model/http_status.model.php";
 
 class QueryGenerator
 {
-	//var $device_querys;
-
-	public function __construct()
-	{
-		//global $device_querys;
-		//$this->device_querys = $device_querys;
-	}
 
 	public function get_uri_query($uri)
 	{
-		//first element of uri is always resource
-		switch($uri[0])
-		{
-			case "device":
-					return self::get_device_query($uri);
-			case "service":
-					return self::get_service_query($uri);
-			case "action":
-					return self::get_action_query($uri);
-			case "slave_controller":
-					return self::get_slave_controller_query($uri);
-			case "state_variable":
-					return self::get_slave_controller_query($uri);
-			case "resource":
-					return self::get_resource_query($uri);								
-			default: 
-					return NULL;		
+		switch(sizeof($uri))
+        {
+            case 1:
+                return self::get_all($uri);
+
+            case 2:
+                return self::get_by_id($uri);
+
+             case 3:
+             	return self::get_associeted_resource($uri);
+
+            default:
+            	return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
 		}
 	}
 
 	public function get_parameters_query($parameters, $resource)
 	{
-
+		//TODO
 	}
 
-	private function get_device_query($uri)
+	private function get_all($uri)
 	{
-		switch(sizeof($uri))
-        {
-            case 1:
-                return "SELECT PK_Id,TE_UDN,FK_Slave_Controller,TE_Friendly_Name,TE_Device_Type FROM device WHERE BO_Deleted = 0";
-
-            case 2:
-                return "SELECT PK_Id,TE_UDN,FK_Slave_Controller,TE_Friendly_Name,TE_Device_Type FROM device WHERE PK_Id =
-					   '" . $uri[1] . "';"; //WHERE BO_Deleted = 0
-            case 3:
-                return "SELECT PK_Id, TE_Friendly_Name, TE_Service_Id, TE_Service_Type, TE_Description
-				FROM service WHERE FK_Device = '" . $uri[1] . "';"; //WHERE BO_Deleted = 0
-
-            default:
-            	return NULL;
+		switch($uri[0])
+		{
+			case "device":
+					return select_all_devices();
+			case "service":
+					return select_all_services();
+			case "action":
+					return select_all_actions();
+			case "slave_controller":
+					return select_all_slave_controllers();
+			case "state_variable":
+					return select_all_state_variables();
+			case "resource":
+					return select_all_resources();								
+			default: 
+					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);		
 		}
 	}
 
-	private function get_service_query($uri)
+	public function get_by_id($uri)
 	{
-		switch(sizeof($uri))
-        {
-            case 1:
-                return ;
-
-            case 2:
-                return ;
-            case 3:
-                return;
-
-            default:
-            	return NULL;
+		switch($uri[0])
+		{
+			case "device":
+					return select_device_by_id($uri[1]);
+			case "service":
+					return select_service_by_id($uri[1]);
+			case "action":
+					return select_action_by_id($uri[1]);
+			case "slave_controller":
+					return select_slave_by_id($uri[1]);
+			case "state_variable":
+					return select_state_var_by_id($uri[1]);
+			case "resource":
+					return select_resource_by_id($uri[1]);								
+			default: 
+					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
 		}
 	}
 
-	private function get_action_query($uri)
+	public function get_associeted_resource($uri)
 	{
-		switch(sizeof($uri))
-        {
-            case 1:
-                return "SELECT PK_Id,TE_Name,FK_Service FROM action WHERE BO_Deleted = 0";
-
-            case 2:
-                return "SELECT PK_Id,TE_Name,FK_Service FROM action WHERE PK_Id =
-					   '" . $uri[1] . "' AND BO_Deleted = 0";
-            case 3:
-                return;
-
-            default:
-            	return NULL;
+		switch($uri[0])
+		{
+			case "device":
+					return select_device_services($uri[1]);
+			case "service":
+					return select_service_by_id($uri[1]);
+			case "action":
+					return select_action_by_id($uri[1]);
+			case "slave_controller":
+					return select_slave_by_id($uri[1]);
+			case "state_variable":
+					return select_state_var_by_id($uri[1]);
+			case "resource":
+					return select_resource_by_id($uri[1]);								
+			default: 
+					return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
 		}
 	}
 
-	private function get_slave_controller_query($uri)
-	{
-		switch(sizeof($uri))
-        {
-            case 1:
-                return ;
-
-            case 2:
-                return ;
-            case 3:
-                return ;
-
-            default:
-            	return NULL;
-		}
-	}
-
-	private function get_state_variables_query($uri)
-	{
-		switch(sizeof($uri))
-        {
-            case 1:
-                return ;
-            case 2:
-                return ;
-            case 3:
-                return ;
-
-            default:
-            	return NULL;
-		}
-	}
 }	
