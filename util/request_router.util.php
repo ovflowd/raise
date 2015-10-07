@@ -18,7 +18,7 @@ final class RequestRouter
         self::create_resource_controller();
     }
 
-     public function submit_request($request)
+    public function submit_request($request)
     {
        return self::execute_request($request, self::get_connection());
     }
@@ -46,7 +46,5 @@ final class RequestRouter
     private function execute_request($request, $connection)
     {
         return self::get_resource_controller()->execute_request($request, $connection);
-    }
-
-   
+    } 
 }

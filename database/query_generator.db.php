@@ -14,6 +14,7 @@ class QueryGenerator
 
 	public function get_uri_query($uri)
 	{
+		//first element of uri is always resource
 		switch($uri[0])
 		{
 			case "device":
@@ -115,7 +116,6 @@ class QueryGenerator
         {
             case 1:
                 return ;
-
             case 2:
                 return ;
             case 3:
