@@ -25,6 +25,9 @@ final class DatabaseController
         self::set_port($database['port']);
     }
 
+    /**
+     * @return string|null
+     */
     public function get_user()
     {
         return $this->user;
@@ -35,6 +38,9 @@ final class DatabaseController
         $this->user = (isset($user) ? $user : NULL);
     }
 
+    /**
+     * @return string|null
+     */
     public function get_pass()
     {
         return $this->pass;

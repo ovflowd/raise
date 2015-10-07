@@ -11,7 +11,7 @@ class QueryGenerator
 
     public function get_uri_query($uri)
     {
-        switch(sizeof($uri))
+        switch (sizeof($uri))
         {
             case 1:
                 return self::get_all($uri);
@@ -34,7 +34,7 @@ class QueryGenerator
 
     private function get_all($uri)
     {
-        switch($uri[0])
+        switch ($uri[0])
         {
             case "device":
                     return select_all_devices();
@@ -55,7 +55,7 @@ class QueryGenerator
 
     public function get_by_id($uri)
     {
-        switch($uri[0])
+        switch ($uri[0])
         {
             case "device":
                     return select_device_by_id($uri[1]);
@@ -76,7 +76,7 @@ class QueryGenerator
 
         public function get_by_id($uri)
     {
-        switch($uri[0])
+        switch ($uri[0])
         {
             case "device":
                     return select_device_by_id($uri[1]);
@@ -98,7 +98,7 @@ class QueryGenerator
 
     public function get_associeted_resource($uri)
     {
-        switch($uri[0])
+        switch ($uri[0])
         {
             case "device":
                     return select_device_services($uri[1]);

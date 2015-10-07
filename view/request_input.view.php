@@ -36,7 +36,7 @@ class RequestInput
     {
         $request_object = self::create_request_object();
 
-        if(self::is_valid($request_object))
+        if (self::is_valid($request_object))
             return $this->request_router->submit_request($request_object);
         else
             return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
@@ -45,9 +45,9 @@ class RequestInput
     private function create_request_object()
     {
         return $this->request_control->create_request(self::get_request_uri(), 
-                                                      self::get_request_method(), 
-                                                      self::get_request_protocol(), 
-                                                      self::get_request_script_name());
+                                                        self::get_request_method(), 
+                                                        self::get_request_protocol(), 
+                                                        self::get_request_script_name());
     }
 
     private function get_request_uri()
@@ -72,6 +72,6 @@ class RequestInput
 
     private function is_valid($request)
     {
-       return $this->request_control->is_valid($request);
+        return $this->request_control->is_valid($request);
     }
 }

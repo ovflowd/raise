@@ -39,7 +39,7 @@ class Request
 
     private function set_resource($uri)
     {
-        if(empty(array_filter(self::get_uri())))   
+        if (empty(array_filter(self::get_uri())))   
             $this->resource = NULL;
         else
             $this->resource = self::get_uri()[0];     
@@ -82,7 +82,7 @@ class Request
 
     public function has_parameters()
     {
-        if(self::get_parameters() == NULL) 
+        if (self::get_parameters() == NULL) 
             return false;
         
         return true;
@@ -90,7 +90,7 @@ class Request
 
     public function has_composed_uri()
     {
-        if(sizeof(self::get_uri()) > 1)
+        if (sizeof(self::get_uri()) > 1)
             return true;
         
         return false;
@@ -138,7 +138,7 @@ class Request
     {
         $string_parameters = self::get_uri_parameters_as_string(end($uri));
         
-        if($string_parameters !== "")
+        if ($string_parameters !== "")
             return self::get_uri_parameters_as_array($string_parameters);
          
         return NULL;
@@ -149,7 +149,7 @@ class Request
         $parameters = array();
         $tmp_array = explode('&', $string_parameters);
         
-        foreach($tmp_array as $parameter) 
+        foreach ($tmp_array as $parameter) 
         {
             $key_value_parameter = explode("=", $parameter);
             $parameters[$key_value_parameter[0]] = $key_value_parameter[1];
