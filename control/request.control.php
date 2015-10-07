@@ -7,7 +7,6 @@ include_once ROOT_REST_DIR . "/model/request.model.php";
  */
 class RequestControl
 {
-    var $request;
 
     //TODO: retrieve methods from database
     var $methods = array("GET", "POST", "PUT", "DELETE");
@@ -17,7 +16,7 @@ class RequestControl
 
     public function __construct()
     {
-        $this->request = NULL;
+        //TODO
     }
 
     public function create_request($request_uri, $request_method, $server_protocol, $script_name)
