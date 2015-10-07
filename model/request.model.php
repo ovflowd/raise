@@ -8,13 +8,13 @@ class Request
     var $uri;
     var $resource;
     var $parameters;
-    var $type;
+    var $method;
     var $protocol;
     var $script_name;
 
-    public function __construct($uri, $type, $protocol, $script_name)
+    public function __construct($uri, $method, $protocol, $script_name)
     {
-        self::set_type($type);
+        self::set_method($method);
         self::set_script_name($script_name);
         self::set_protocol($protocol);
         self::set_uri(self::prepare_uri($uri));
@@ -22,10 +22,92 @@ class Request
         self::set_parameters($uri);
     }
 
+    public function get_uri()
+    {
+        return $this->uri;
+    }
+
+    private function set_uri($uri)
+    {
+        $this->uri = $uri;
+    }
+
+    public function get_resource()
+    {
+        return $this->resource;
+    }
+
+    private function set_resource($uri)
+    {
+        if(empty(array_filter(self::get_uri())))   
+            $this->resource = NULL;
+        else
+            $this->resource = self::get_uri()[0];     
+    }
+
+    public function get_parameters()
+    {
+        return $this->parameters;
+    }
+
+    public function get_method()
+    {
+        return $this->method;
+    }
+
+    private function set_method($method)
+    {
+        $this->method = $method;
+    }
+
+    public function get_protocol()
+    {
+        return $this->protocol;
+    }
+
+    private function set_protocol($protocol)
+    {
+        $this->protocol = $protocol;
+    }
+
+    public function get_script_name()
+    {
+        return $this->script_name;
+    }
+
+    private function set_script_name($script_name)
+    {
+        $this->script_name = $script_name;
+    }
+
+    public function has_parameters()
+    {
+        if(self::get_parameters() == NULL) 
+            return false;
+        
+        return true;
+    }
+
+    public function has_composed_uri()
+    {
+        if(sizeof(self::get_uri()) > 1)
+            return true;
+        
+        return false;
+    }
+
     private function prepare_uri($raw_uri)
     {
-        $tmp_uri = self::remove_script_parameters($raw_uri);
-        return self::remove_uri_parameters($tmp_uri);
+        return self::remove_uri_parameters(self::remove_script_parameters($raw_uri));
+    }
+
+
+    private function get_uri_parameters_as_string($raw_string_parameters)
+    {
+        if (!strpos($raw_string_parameters, '?') === 0 || strpos($raw_string_parameters, '?') === FALSE) {
+            return ""; 
+        }
+        return end(explode('?', $raw_string_parameters)); 
     }
 
     private function remove_script_parameters($uri)
@@ -36,7 +118,6 @@ class Request
             }
         }
 
-        //return a uri_array with no empty elements
         return array_filter(array_values($uri)); 
     }
 
@@ -75,86 +156,5 @@ class Request
         }
 
         return $parameters;  
-    }
-
-    private function get_uri_parameters_as_string($raw_string_parameters)
-    {
-        //if first element is different from '?' or if '?' is not included on string
-        if (!strpos($raw_string_parameters, '?') === 0 || strpos($raw_string_parameters, '?') === FALSE) {
-            return ""; 
-        }
-        //return all parameters as string without character '?'
-        return end(explode('?', $raw_string_parameters)); 
-    }
-
-    public function get_uri()
-    {
-        return $this->uri;
-    }
-
-    private function set_uri($uri)
-    {
-        $this->uri = $uri;
-    }
-
-    public function get_resource()
-    {
-        return $this->resource;
-    }
-
-    private function set_resource($uri)
-    {
-        $this->resource = self::get_uri()[0];
-    }
-
-    public function get_parameters()
-    {
-        return $this->parameters;
-    }
-
-    public function get_type()
-    {
-        return $this->type;
-    }
-
-    private function set_type($type)
-    {
-        $this->type = $type;
-    }
-
-    public function get_protocol()
-    {
-        return $this->protocol;
-    }
-
-    private function set_protocol($protocol)
-    {
-        $this->protocol = $protocol;
-    }
-
-    public function get_script_name()
-    {
-        return $this->script_name;
-    }
-
-    private function set_script_name($script_name)
-    {
-        $this->script_name = $script_name;
-    }
-
-    public function has_parameters()
-    {
-        if(self::get_parameters() == NULL) 
-            return false;
-        
-        return true;
-    }
-
-    public function has_composed_uri()
-    {
-        if(sizeof(self::get_uri()) > 1)
-            return true;
-        
-        return false;
     }
 }

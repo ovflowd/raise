@@ -18,6 +18,8 @@ class QueryGenerator
 		{
 			case "device":
 					return self::get_device_query($uri);
+			case "service":
+					return self::get_service_query($uri);		
 			default: 
 					return NULL;		
 		}

@@ -14,8 +14,9 @@ final class DatabaseController
     var $type;
     var $port;
 
-    public function __construct($database)
+    public function __construct()
     {
+        global $database;
         self::set_user($database['user']);
         self::set_pass($database['pass']);
         self::set_name($database['name']);
