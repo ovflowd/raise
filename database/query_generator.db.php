@@ -20,7 +20,7 @@ class QueryGenerator
                 return self::get_by_id($uri);
 
                 case 3:
-                 return self::get_associeted_resource($uri);
+                 return self::get_associated_resource($uri);
 
             default:
                 return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
@@ -87,6 +87,11 @@ class QueryGenerator
             default: 
                     return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
         }
+    }
+
+    public function generate_query($queryable_resource)
+    {
+
     }
 
 }	

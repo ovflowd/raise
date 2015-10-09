@@ -7,7 +7,7 @@ include_once ROOT_REST_DIR . "/model/http_status.model.php";
 /**
  * Class RestRouter
  */
-final class RequestRouter
+ class RequestRouter
 {
     var $db_controller;
     var $resource_controller;
@@ -30,12 +30,18 @@ final class RequestRouter
 
     public function submit_request($request)
     {
-        return self::execute_request($request, self::get_connection());
-    }
-
-    private function execute_request($request, $connection)
-    {
-        return self::get_resource_controller()->execute_request($request, $connection);
+        switch ($request->get_method()) {
+            case "GET":
+                return self::get_resource_controller()->execute_get_request($request);
+            case "POST":
+                return self::get_resource_controller()->execute_post_request($request);
+            case "PUT":
+                return self::get_resource_controller()->execute_put_request($request);
+            case "DELETE":
+                return self::get_resource_controller()->execute_delete_request($request);
+            default:
+                return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
+        }
     }
 
     private function get_resource_controller()
@@ -43,8 +49,5 @@ final class RequestRouter
         return $this->resource_controller;
     }
 
-    private function get_connection()
-    {
-        return $this->db_controller->get_PDO_object();
-    }
+
 }

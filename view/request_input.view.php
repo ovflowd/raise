@@ -34,12 +34,15 @@ class RequestInput
 
     private function submit_request()
     {
-        $request_object = self::create_request_object();
-
-        if (self::is_valid($request_object))
-            return $this->request_router->submit_request($request_object);
-        else
+        try
+        {
+            return $this->request_router->submit_request(self::create_request_object());
+        }
+        catch(Exception $e)
+        {
             return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
+        }
+
     }
 
     private function create_request_object()
