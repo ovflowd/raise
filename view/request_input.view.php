@@ -17,11 +17,6 @@ class RequestInput
         self::set_request_router(new RequestRouter());
     }
 
-    public function start()
-    {
-        return self::submit_request();
-    }
-
     private function set_request_control($request_control)
     {
         $this->request_control = $request_control;
@@ -30,6 +25,11 @@ class RequestInput
     private function set_request_router($request_router)
     {
         $this->request_router = $request_router;
+    }
+
+    public function start()
+    {
+        return self::submit_request();
     }
 
     private function submit_request()
@@ -44,20 +44,15 @@ class RequestInput
 
     private function create_request_object()
     {
-        return $this->request_control->create_request(self::get_request_uri(), 
-                                                        self::get_request_method(), 
-                                                        self::get_request_protocol(), 
-                                                        self::get_request_script_name());
+        return $this->request_control->create_request(self::get_request_uri(),
+            self::get_request_method(),
+            self::get_request_protocol(),
+            self::get_request_script_name());
     }
 
     private function get_request_uri()
     {
         return explode('/', $_SERVER['REQUEST_URI']);
-    }
-
-    private function get_request_script_name()
-    {
-        return explode('/', $_SERVER['SCRIPT_NAME']);
     }
 
     private function get_request_method()
@@ -68,6 +63,11 @@ class RequestInput
     private function get_request_protocol()
     {
         return $_SERVER['SERVER_PROTOCOL'];
+    }
+
+    private function get_request_script_name()
+    {
+        return explode('/', $_SERVER['SCRIPT_NAME']);
     }
 
     private function is_valid($request)

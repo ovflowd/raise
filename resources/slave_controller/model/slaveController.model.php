@@ -15,24 +15,14 @@ class SlaveController
         return $this->name;
     }
 
-    function get_type()
-    {
-        return $this->type;
-    }
-
-    function get_address()
-    {
-        return $this->address;
-    }
-
-    function get_description()
-    {
-        return $this->description;
-    }
-
     function set_name($name)
     {
         $this->name = $name;
+    }
+
+    function get_type()
+    {
+        return $this->type;
     }
 
     function set_type($type)
@@ -40,9 +30,19 @@ class SlaveController
         $this->type = $type;
     }
 
+    function get_address()
+    {
+        return $this->address;
+    }
+
     function set_address($address)
     {
         $this->address = $address;
+    }
+
+    function get_description()
+    {
+        return $this->description;
     }
 
     function set_description($description)

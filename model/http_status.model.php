@@ -12,15 +12,31 @@ class HTTPStatus
     /**
      * @param integer $code
      */
-    public function __construct($code) 
+    public function __construct($code)
     {
         self::set_code($code);
-        self::set_message();	
+        self::set_message();
     }
 
-    public function set_code($code)
+    private function set_message()
     {
-        $this->code = $code;
+        switch (self::get_code()) {
+            case 400:
+                $this->message = "Bad request";
+                break;
+
+            case 404:
+                $this->message = "Resource not found";
+                break;
+
+            case 405:
+                $this->message = "Method not allowed";
+                break;
+
+            default:
+                self::set_message("");
+                break;
+        }
     }
 
     public function get_code()
@@ -28,22 +44,9 @@ class HTTPStatus
         return $this->code;
     }
 
-    private function set_message()
+    public function set_code($code)
     {
-        switch(self::get_code())
-        {
-            case 400: $this->message = "Bad request";
-                        break;
-
-            case 404: $this->message = "Resource not found";
-                        break;
-
-            case 405: $this->message = "Method not allowed";
-                        break;
-
-            default:  self::set_message("");
-                        break; 			  	
-        }
+        $this->code = $code;
     }
 
 }
