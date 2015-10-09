@@ -24,7 +24,7 @@ class ResourceController
     private function create_query_generator()
     {
         $this->query_generator = new QueryGenerator();
-    }     
+    }
 
     public function execute_request($request, $connection)
     {
@@ -38,22 +38,18 @@ class ResourceController
             case "DELETE":
                 return self::execute_delete_request($request, $connection);
             default:
-                return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT); 
+                return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
         }
     }
 
     public function execute_get_request($request, $connection)
     {
-        if ($request->has_parameters() && $request->has_composed_uri())
-        {
+        if ($request->has_parameters() && $request->has_composed_uri()) {
             return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
-        } 
-        else if ($request->has_parameters())
-                {
-                return self::get_by_parameters($request->get_parameters(), $request->get_resource(), $connection);
-                }  
-                else 
-                return self::get_by_uri($request->get_uri(), $connection);
+        } else if ($request->has_parameters()) {
+            return self::get_by_parameters($request->get_parameters(), $request->get_resource(), $connection);
+        } else
+            return self::get_by_uri($request->get_uri(), $connection);
     }
 
     private function get_by_parameters($parameters, $resource)
@@ -61,14 +57,14 @@ class ResourceController
         //TODO
     }
 
-    private function get_by_uri($uri,$connection)
+    private function get_by_uri($uri, $connection)
     {
-            $query = $this->query_generator->get_uri_query($uri);
-    	 
-            if($query !== NULL)	
+        $query = $this->query_generator->get_uri_query($uri);
+
+        if ($query !== NULL)
             return $this->db_executer->select($query, $connection);
 
-        return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);   
+        return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);
     }
 
     public function execute_post_request($request, $connection)

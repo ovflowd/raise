@@ -1,7 +1,7 @@
 <?php
 
 //querys select all <resource>
-function select_all_devices() 
+function select_all_devices()
 {
     return "SELECT PK_Id,TE_UDN,FK_Slave_Controller,TE_Friendly_Name,TE_Device_Type FROM device WHERE BO_Deleted = 0";
 }
@@ -48,7 +48,6 @@ function select_device_services($device_id)
 
 // $device_querys = array("all" => $select_all_devices, "by-id" => $select_device_by_id, 
 // 					   "services" => $select_device_services);
-
 
 
 // $querys = array("device" => $device_querys());

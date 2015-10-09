@@ -18,11 +18,6 @@ final class RequestRouter
         self::create_resource_controller();
     }
 
-    public function submit_request($request)
-    {
-        return self::execute_request($request, self::get_connection());
-    }
-
     private function create_db_controller()
     {
         $this->db_controller = new DatabaseController();
@@ -33,18 +28,23 @@ final class RequestRouter
         $this->resource_controller = new ResourceController();
     }
 
-    private function get_resource_controller()
+    public function submit_request($request)
     {
-        return $this->resource_controller;
-    }
-   
-    private function get_connection()
-    {
-        return $this->db_controller->get_PDO_object();
+        return self::execute_request($request, self::get_connection());
     }
 
     private function execute_request($request, $connection)
     {
         return self::get_resource_controller()->execute_request($request, $connection);
-    } 
+    }
+
+    private function get_resource_controller()
+    {
+        return $this->resource_controller;
+    }
+
+    private function get_connection()
+    {
+        return $this->db_controller->get_PDO_object();
+    }
 }

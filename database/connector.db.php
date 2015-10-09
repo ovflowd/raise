@@ -25,32 +25,6 @@ final class DatabaseController
         self::set_port($database['port']);
     }
 
-    /**
-     * @return string|null
-     */
-    public function get_user()
-    {
-        return $this->user;
-    }
-
-    public function set_user($user)
-    {
-        $this->user = (isset($user) ? $user : NULL);
-    }
-
-    /**
-     * @return string|null
-     */
-    public function get_pass()
-    {
-        return $this->pass;
-    }
-
-    public function set_pass($pass)
-    {
-        $this->pass = (isset($pass) ? $pass : NULL);
-    }
-
     public function get_name()
     {
         return $this->name;
@@ -81,16 +55,6 @@ final class DatabaseController
         $this->port = (isset($port) ? $port : NULL);
     }
 
-    public function get_type()
-    {
-        return $this->type;
-    }
-
-    public function set_type($type)
-    {
-        $this->type = (isset($type) ? $type : NULL);
-    }
-
     public function get_PDO_object()
     {
         try {
@@ -103,6 +67,16 @@ final class DatabaseController
             return $exception->getMessage();
         }
         return $conn;
+    }
+
+    public function get_type()
+    {
+        return $this->type;
+    }
+
+    public function set_type($type)
+    {
+        $this->type = (isset($type) ? $type : NULL);
     }
 
     private function get_mysql_connection()
@@ -118,12 +92,31 @@ final class DatabaseController
         return $conn;
     }
 
-    
-  
+    /**
+     * @return string|null
+     */
+    public function get_user()
+    {
+        return $this->user;
+    }
 
-  
+    public function set_user($user)
+    {
+        $this->user = (isset($user) ? $user : NULL);
+    }
 
-  
+    /**
+     * @return string|null
+     */
+    public function get_pass()
+    {
+        return $this->pass;
+    }
 
-   
+    public function set_pass($pass)
+    {
+        $this->pass = (isset($pass) ? $pass : NULL);
+    }
+
+
 }

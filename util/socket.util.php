@@ -11,17 +11,17 @@ class Socket
 
     public function __construct($port, $address)
     {
-        $this->port    = ($port == null) ? "" : $port;
+        $this->port = ($port == null) ? "" : $port;
         $this->address = ($address == null) ? "" : $address;
         $this->init_socket();
     }
 
     private function init_socket()
     {
-        $return_code  = "OK";
+        $return_code = "OK";
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         if ($this->socket === false) {
-                    $return_code = "Failed to create socket. Reason: " . socket_strerror(socket_last_error()) . "\n";
+            $return_code = "Failed to create socket. Reason: " . socket_strerror(socket_last_error()) . "\n";
         }
         return $return_code;
     }
@@ -29,32 +29,29 @@ class Socket
     public function send_data($data)
     {
         $init = $this->init_socket();
-        if ($init == "OK"):
+        if ($init == "OK") {
             $init = $this->connect_socket();
-            if ($init == "OK"):
+            if ($init == "OK") {
+
                 $this->write($data);
                 $return = $this->read();
                 $this->disconnect_socket();
                 return $return;
-            else {
-                :
+            } else {
                 return '{"status":"fail","message":"' . str_replace('"', '\\"', $init) . '"}';
             }
-            endif;
-        else {
-            :
+        } else {
             return '{"status":"fail","message":"' . $init . '"}';
         }
-        endif;
     }
 
     private function connect_socket()
     {
         $result = socket_connect($this->socket, $this->address, $this->port);
         if ($result === false) {
-                    return "Failed to connect socket. Reason: " . socket_strerror(socket_last_error($this->socket)) . "\n";
+            return "Failed to connect socket. Reason: " . socket_strerror(socket_last_error($this->socket)) . "\n";
         } else {
-                    return "OK";
+            return "OK";
         }
     }
 
@@ -67,7 +64,7 @@ class Socket
     {
         $return = "";
         while ($next = socket_read($this->socket, 2048)) {
-                    $return .= $next;
+            $return .= $next;
         }
         return $return;
     }
