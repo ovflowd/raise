@@ -22,12 +22,15 @@ class RequestControl
     public function create_request($request_uri, $request_method, $server_protocol, $script_name)
     {
         $request = new Request($request_uri, $request_method, $server_protocol, $script_name);
-        return $request;
+        if(self::is_valid($request))
+            return $request;
+        else
+            throw new Exception("Bad request"); //TODO: create a Exception Object for request
     }
 
     public function is_valid($request)
     {
-        return self::has_valid_method($request) && self::has_valid_resource($request);
+        return self::has_valid_method($request) && self::has_valid_resource($request) && self::is_uri_or_parameters_based($request);
     }
 
     private function has_valid_method($request)
@@ -38,5 +41,10 @@ class RequestControl
     private function has_valid_resource($request)
     {
         return in_array($request->get_resource(), $this->resources);
+    }
+
+    private function is_uri_or_parameters_based($request)
+    {
+        return !($request->has_parameters() && $request->has_composed_uri());
     }
 }

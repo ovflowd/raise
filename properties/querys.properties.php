@@ -45,9 +45,3 @@ function select_device_services($device_id)
 // $select_service_actions = ;
 
 // $select_service_state_variables = ;
-
-// $device_querys = array("all" => $select_all_devices, "by-id" => $select_device_by_id, 
-// 					   "services" => $select_device_services);
-
-
-// $querys = array("device" => $device_querys());
