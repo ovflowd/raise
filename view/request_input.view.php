@@ -13,7 +13,7 @@ class RequestInput
 
     public function __construct()
     {
-        self::set_request_control(new RequestControl());
+        self::set_request_control(new RequestController());
         self::set_request_router(new RequestRouter());
     }
 
@@ -34,20 +34,18 @@ class RequestInput
 
     private function submit_request()
     {
-        try
-        {
-            return $this->request_router->submit_request(self::create_request_object());
-        }
-        catch(Exception $e)
-        {
-            return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
-        }
+        $request = self::create_request_object();
 
+        if(self::is_valid($request))
+            return $this->request_router->submit_request($request);
+         else
+            return $request->get_error_status();
     }
 
     private function create_request_object()
     {
-        return $this->request_control->create_request(self::get_request_uri(),
+        return $this->request_control->create_request(
+            self::get_request_uri(),
             self::get_request_method(),
             self::get_request_protocol(),
             self::get_request_script_name());
@@ -75,6 +73,6 @@ class RequestInput
 
     private function is_valid($request)
     {
-        return $this->request_control->is_valid($request);
+        return (is_a($request, 'Request') && is_null($request->get_error_status()));
     }
 }

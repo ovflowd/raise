@@ -5,7 +5,7 @@ include_once ROOT_REST_DIR . "/properties/database.properties.php";
 /**
  * Class DatabaseController
  */
-final class DatabaseController
+final class DatabaseConnector
 {
     var $user;
     var $pass;

@@ -10,7 +10,7 @@ DEFINE('DB_USER', 'root');
 
 DEFINE('DB_PASS', '');
 
-DEFINE('DB_NAME', 'cms');
+DEFINE('DB_NAME', 'uiot');
 
 DEFINE('DB_TYPE', 'mysql');
 

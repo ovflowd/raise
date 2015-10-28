@@ -1,6 +1,6 @@
 <?php
 
-class DBExecuter
+class DatabaseExecuter
 {
     public function select($query, $connection)
     {
@@ -14,6 +14,6 @@ class DBExecuter
         }
 
         $connection = null; //destroying PDO object
-        return json_encode($encode, JSON_PRETTY_PRINT);
+        return $encode;
     }
 }

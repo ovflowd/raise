@@ -5,7 +5,7 @@ include_once ROOT_REST_DIR . "/model/request.model.php";
 /**
  * Class RequestControl
  */
-class RequestControl
+class RequestController
 {
 
     //TODO: retrieve methods from database
@@ -17,15 +17,17 @@ class RequestControl
     public function __construct()
     {
         //TODO
+        //self::set_methods();
+        //self::set_resources();
     }
 
     public function create_request($request_uri, $request_method, $server_protocol, $script_name)
     {
         $request = new Request($request_uri, $request_method, $server_protocol, $script_name);
-        if(self::is_valid($request))
-            return $request;
-        else
-            throw new Exception("Bad request"); //TODO: create a Exception Object for request
+        if(!self::is_valid($request))
+            $request->set_error_status(json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT));
+
+        return $request;
     }
 
     public function is_valid($request)

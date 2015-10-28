@@ -4,8 +4,7 @@ include_once ROOT_REST_DIR . "/properties/querys.properties.php";
 include_once ROOT_REST_DIR . "/model/http_status.model.php";
 
 
-//this class nedd refactoring based on resources (model,control, db)
-//should not be implemented based on URI
+
 class QueryGenerator
 {
 
@@ -19,7 +18,7 @@ class QueryGenerator
             case 2:
                 return self::get_by_id($uri);
 
-                case 3:
+            case 3:
                  return self::get_associated_resource($uri);
 
             default:
@@ -29,7 +28,7 @@ class QueryGenerator
 
     public function get_parameters_query($parameters, $resource)
     {
-        //TODO
+        return self::generate_query();
     }
 
     private function get_all($uri)
@@ -88,10 +87,4 @@ class QueryGenerator
                     return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
         }
     }
-
-    public function generate_query($queryable_resource)
-    {
-
-    }
-
 }	

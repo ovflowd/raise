@@ -11,6 +11,7 @@ class Request
     var $method;
     var $protocol;
     var $script_name;
+    var $error_status;
 
     public function __construct($uri, $method, $protocol, $script_name)
     {
@@ -18,7 +19,7 @@ class Request
         self::set_script_name($script_name);
         self::set_protocol($protocol);
         self::set_uri(self::prepare_uri($uri));
-        self::set_resource($uri);
+        self::set_resource();
         self::set_parameters($uri);
     }
 
@@ -40,6 +41,11 @@ class Request
     private function set_uri($uri)
     {
         $this->uri = $uri;
+    }
+
+    public function set_error_status($http_status)
+    {
+        $this->error_status = $http_status;
     }
 
     private function prepare_uri($raw_uri)
@@ -66,7 +72,7 @@ class Request
         return array_filter(array_values($uri));
     }
 
-    private function set_resource($uri)
+    private function set_resource()
     {
         if (empty(array_filter(self::get_uri())))
             $this->resource = NULL;
@@ -143,12 +149,14 @@ class Request
         return true;
     }
 
-    /**
-     * @return mixed
-     */
     public function get_parameters()
     {
         return $this->parameters;
+    }
+
+    public function get_error_status()
+    {
+        return $this->error_status;
     }
 
     public function has_composed_uri()

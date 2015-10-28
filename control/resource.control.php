@@ -24,12 +24,12 @@ class ResourceController
 
     private function create_db_connector()
     {
-        $this->db_connector = new DatabaseController();
+        $this->db_connector = new DatabaseConnector();
     }
 
     private function create_db_executer()
     {
-        $this->db_executer = new DBExecuter();
+        $this->db_executer = new DatabaseExecuter();
     }
 
     private function create_query_generator()
@@ -42,44 +42,29 @@ class ResourceController
         $this->queryable_controller = new QueryableController();
     }
 
-    public function execute_get_request($request)
+    public function execute_request($request)
     {
-        if ($request->has_parameters()) {
-            return self::get_by_parameters(self::create_resource($request->get_parameters(), $request->get_resource()));
-        } else
-            return self::get_by_uri($request->get_uri());
+        if ($request->has_parameters())
+            return self::by_parameters($request->get_resource(), $request->get_parameters(), $request->get_method());
+        else
+            return self::by_uri($request->get_uri());
     }
 
-    public function execute_post_request($request)
-    {
-        //TODO
-    }
-
-    public function execute_put_request($request)
-    {
-        //TODO
-    }
-
-    public function execute_delete_request($request)
-    {
-        //TODO
-    }
-
-    private function get_query($parameters, $resource_name, $method)
+    private function get_query($resource_name, $parameters, $method)
     {
         try {
-            return $this->queryable_controller->genarate_query($resource_name, $parameters, $method);
+            return $this->queryable_controller->generate_query($resource_name, $parameters, $method);
         } catch(Exception $e) {
             return new json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
         }
     }
 
-    private function get_by_parameters($parameters, $resource_name)
+    private function by_parameters($resource_name, $parameters, $method)
     {
-        return self::get_query($resource_name,$parameters,"SELECT");
+            return self::get_query($resource_name,$parameters, self::method_to_sql($method));
     }
 
-    private function get_by_uri($uri)
+    private function by_uri($uri)
     {
         $query = $this->query_generator->get_uri_query($uri);
 
@@ -92,5 +77,18 @@ class ResourceController
     private function get_connection()
     {
         return $this->db_connector->get_PDO_object();
+    }
+
+    private function method_to_sql($method)
+    {
+        switch($method)
+        {
+            case 'GET'    : return "SELECT";
+            case 'POST'   : return "INSERT";
+            case 'PUT'    : return "UPDATE";
+            case 'DELETE' : return "DELETE";
+            default       : return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
+        }
+
     }
 }
