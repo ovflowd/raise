@@ -38,9 +38,13 @@ class QueryableController
             $resource =  new QueryableResource($resource_name, $parameters, $method);
             return $resource;
         } catch (Exception $e) {
-            return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
+            return new HTTPStatus(400);
         }
     }
+
+    //PADRONIZAR NO BANCO NOME DE TABELAS E CAMPOS
+    //INSERIR TODOS OS ATRIBUTOS NA TABELA META PROPERTIES
+
 
     private function resource_to_query($resource)
     {
@@ -50,64 +54,42 @@ class QueryableController
     private function SELECT($resource)
     {
         return SQL::SELECT.SQL::BLANK.
-               self::columns_to_sql_format(self::get_columns_names($resource)).SQL::BLANK.
+               $resource->get_all_resource_columns().SQL::BLANK.
                SQL::FROM.SQL::BLANK.
-               self::get_table_name($resource).SQL::BLANK.
+               $resource->get_table_name().SQL::BLANK.
                SQL::WHERE.SQL::BLANK.
-               $resource->parameters_to_sql_format();
+               $resource->get_resource_columns();
     }
 
     private function INSERT($resource)
     {
-        return SQL::INSERT_INTO.SQL::BLANK.self::get_table_name($resource).SQL::BLANK.self::columns_to_sql_format(self::get_columns_names($resource)).SQL::BLANK.SQL::VALUES.SQL::BLANK.$resource->parameters_to_sql_format();
+        return SQL::INSERT_INTO.SQL::BLANK.
+               $resource->get_table_name().SQL::BLANK.
+               $resource->get_all_resource_columns().SQL::BLANK.
+               SQL::VALUES.SQL::BLANK.
+               $resource->get_parameters_values();
     }
 
     private function UPDATE($resource)
     {
-        return SQL::UPDATE.SQL::BLANK.self::get_table_name($resource).SQL::BLANK.SQL::SET.SQL::BLANK.$resource->parameters_to_sql_format().SQL::BLANK.SQL::WHERE.SQL::BLANK."keys_and_values";
+        return SQL::UPDATE.SQL::BLANK.
+               $resource->get_table_name().SQL::BLANK.
+               SQL::SET.SQL::BLANK.
+               $resource->get_parameters_without_id().SQL::BLANK.
+               SQL::WHERE.SQL::BLANK.
+               $resource->get_id_value();
     }
 
     private function DELETE($resource)
     {
-        return SQL::DELETE.SQL::BLANK.SQL::FROM.SQL::BLANK.self::get_table_name($resource).SQL::BLANK.SQL::WHERE.SQL::BLANK."keys_and_values";
+        return SQL::DELETE.SQL::BLANK.
+               SQL::FROM.SQL::BLANK.
+               $resource->get_table_name().SQL::BLANK.
+               SQL::WHERE.SQL::BLANK.
+               $resource->get_id_value();
     }
 
-    private function get_table_name($resource)
-    {
-        $friendly_name     = $resource->get_name();
-        $select_table_name = "SELECT RESOURCE_NAME FROM META_RESOURCE WHERE RESOURCE_FRIENDLY_NAME = '$friendly_name';";
-        $result            =  $this->db_executer->select($select_table_name, $this->db_connector->get_PDO_object());
-        return $result[0]["RESOURCE_NAME"];
-    }
 
-    private function get_columns_names($resource)
-    {
-        $resource_id    = self::get_resource_id($resource);
-        $select_columns = "SELECT META_PROPERTY.PROPERTY_NAME FROM META_PROPERTY WHERE META_PROPERTY.RESOURCE_ID = '$resource_id' ";
-        $result         =  $this->db_executer->select($select_columns, $this->db_connector->get_PDO_object());
-        return $result;
-    }
-
-    private function get_resource_id($resource)
-    {
-        $friendly_name = $resource->get_name();
-        $select_id     = "SELECT META_RESOURCE.RESOURCE_ID FROM META_RESOURCE WHERE RESOURCE_FRIENDLY_NAME = '$friendly_name';";
-        $result        =  $this->db_executer->select($select_id, $this->db_connector->get_PDO_object());
-        return $result[0]["RESOURCE_ID"];
-    }
-
-    private function columns_to_sql_format($columns_array)
-    {
-
-        $sql = "";
-        foreach($columns_array as $column)
-        {
-            $unique_column = array_unique($column);
-            foreach($unique_column as $column_name)
-               $sql =  $sql.$column_name.",";
-        }
-        return rtrim($sql, ",");
-    }
 
 
 }

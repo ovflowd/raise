@@ -55,13 +55,14 @@ class ResourceController
         try {
             return $this->queryable_controller->generate_query($resource_name, $parameters, $method);
         } catch(Exception $e) {
-            return new json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
+            return new HTTPStatus(405);
         }
     }
 
     private function by_parameters($resource_name, $parameters, $method)
     {
-            return self::get_query($resource_name,$parameters, self::method_to_sql($method));
+            $query = self::get_query($resource_name,$parameters, self::method_to_sql($method));
+            return $this->db_executer->execute($query, self::get_connection());
     }
 
     private function by_uri($uri)
@@ -69,9 +70,9 @@ class ResourceController
         $query = $this->query_generator->get_uri_query($uri);
 
         if ($query !== NULL)
-            return $this->db_executer->select($query, self::get_connection());
+            return $this->db_executer->execute($query, self::get_connection());
 
-        return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);
+        return new HTTPStatus(404);
     }
 
     private function get_connection()
@@ -87,7 +88,7 @@ class ResourceController
             case 'POST'   : return "INSERT";
             case 'PUT'    : return "UPDATE";
             case 'DELETE' : return "DELETE";
-            default       : return json_encode(new HTTPStatus(405), JSON_PRETTY_PRINT);
+            default       : return new HTTPStatus(405);
         }
 
     }

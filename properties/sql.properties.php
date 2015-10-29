@@ -10,7 +10,10 @@ class SQL
     const FROM = 'FROM';
     const VALUES = 'VALUES';
     const SET = 'SET';
+    const E = 'AND';
+    const COMA = ',';
     const BLANK = " ";
+
 
     static function SELECT()
     {
