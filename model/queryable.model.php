@@ -87,7 +87,7 @@ class QueryableResource
         $select_columns = "SELECT META_PROPERTY.PROPERTY_NAME FROM META_PROPERTY WHERE UPPER(META_PROPERTY.PROPERTY_FRIENDLY_NAME) = UPPER('$friendly_name') AND META_PROPERTY.RESOURCE_ID = '$id' ";
         $result         =  $this->db_executer->execute($select_columns, $this->db_connector->get_PDO_object());
         if(empty($result))
-            return "ERROR"; //TODO: exception class
+            return null; //TODO: exception class
         return $result[0]["PROPERTY_NAME"];
     }
 
@@ -131,7 +131,8 @@ class QueryableResource
         foreach($this->parameters as $key => $value)
         {
             $column_name = self::get_column_name($key, self::get_resource_id());
-            $sql_columns[$column_name] = $value;
+            if(!is_null($column_name))
+                $sql_columns[$column_name] = $value;
         }
         return $sql_columns;
     }
@@ -164,8 +165,9 @@ class QueryableResource
         foreach($this->parameters as $key => $value)
         {
             $column_name = self::get_column_name($key, self::get_resource_id());
-            if($key !== 'id')
-                $sql_columns[$column_name] = $value;
+            if(!is_null($column_name))
+                if($key !== 'id')
+                    $sql_columns[$column_name] = $value;
         }
         return self::parameters_to_sql_format($sql_columns, SQL::COMA);
     }
@@ -174,7 +176,7 @@ class QueryableResource
     {
         if(!array_key_exists('id', $this->parameters))
         {
-            return new HTTPStatus(400);
+            return new HTTPStatus(400, "Bad request: the id was not specified");
         }
 
         return self::get_column_name('id', self::get_resource_id())." = ".$this->parameters['id'];

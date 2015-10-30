@@ -55,7 +55,8 @@ class ResourceController
         try {
             return $this->queryable_controller->generate_query($resource_name, $parameters, $method);
         } catch(Exception $e) {
-            return new HTTPStatus(405);
+            return new HTTPStatus(404, "Resource not found: it was not possible to create/find a resource named $resource_name
+                                        with parameters $parameters.");
         }
     }
 
@@ -72,7 +73,7 @@ class ResourceController
         if ($query !== NULL)
             return $this->db_executer->execute($query, self::get_connection());
 
-        return new HTTPStatus(404);
+        return new HTTPStatus(404, null);
     }
 
     private function get_connection()
@@ -88,7 +89,7 @@ class ResourceController
             case 'POST'   : return "INSERT";
             case 'PUT'    : return "UPDATE";
             case 'DELETE' : return "DELETE";
-            default       : return new HTTPStatus(405);
+            default       : return new HTTPStatus(405, null);
         }
 
     }

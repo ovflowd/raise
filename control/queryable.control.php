@@ -38,7 +38,8 @@ class QueryableController
             $resource =  new QueryableResource($resource_name, $parameters, $method);
             return $resource;
         } catch (Exception $e) {
-            return new HTTPStatus(400);
+            return new HTTPStatus(400, "Bad request: it was not possible to create/find a resource named: $resource_name
+                                        with parameters: $parameters.");
         }
     }
 

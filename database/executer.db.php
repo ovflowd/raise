@@ -27,7 +27,7 @@ class DatabaseExecuter
 
     private function is_select($query)
     {
-        if(substr($query,0,6) != 'SELECT')
+        if(substr($query,0,6) != SQL::SELECT)
             return false;
         return true;
     }
