@@ -9,6 +9,11 @@ class DatabaseExecuter
         $encode = array();
         $result = $connection->query($query);
 
+        if(!self::is_select($query)) {
+            if(!$result)
+                return false;
+            return true;
+        }
 
         if ($result->rowCount() > 0) {
             while ($row = $result->fetch()) {
@@ -18,5 +23,12 @@ class DatabaseExecuter
 
         $connection = null; //destroying PDO object
         return $encode;
+    }
+
+    private function is_select($query)
+    {
+        if(substr($query,0,6) != 'SELECT')
+            return false;
+        return true;
     }
 }

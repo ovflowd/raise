@@ -167,7 +167,7 @@ class QueryableResource
             if($key !== 'id')
                 $sql_columns[$column_name] = $value;
         }
-        return self::parameters_to_sql_format($sql_columns, SQL::COMA);;
+        return self::parameters_to_sql_format($sql_columns, SQL::COMA);
     }
 
     public function get_id_value()
