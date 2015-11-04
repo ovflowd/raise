@@ -70,9 +70,10 @@ class ResourceController
     {
         $query = $this->query_generator->get_uri_query($uri);
 
-        if ($query !== NULL)
-            return $this->db_executer->execute($query, self::get_connection());
-
+        if ($query !== NULL) {
+               $result = $this->db_executer->execute($query, self::get_connection());
+               return self::to_friendly_result($result);
+        }
         return new HTTPStatus(404, null);
     }
 
@@ -92,5 +93,20 @@ class ResourceController
             default       : return new HTTPStatus(405, null);
         }
 
+    }
+
+    private function to_friendly_result($result)
+    {
+        return $result;
+    }
+
+    private function get_friendly_name($raw_name)
+    {
+
+        $select_column = "SELECT META_PROPERTY.PROPERTY_FRIENDLY_NAME FROM META_PROPERTY WHERE UPPER(META_PROPERTY.PROPERTY_NAME) = UPPER('$raw_name');";
+        $result         =  $this->db_executer->execute($select_column, self::get_connection());
+        if(empty($result))
+            return null; //TODO: exception class
+        return $result[0]["PROPERTY_FRIENDLY_NAME"];
     }
 }

@@ -22,7 +22,7 @@ class QueryGenerator
                  return self::get_associated_resource($uri);
 
             default:
-                return json_encode(new HTTPStatus(400), JSON_PRETTY_PRINT);
+                return new HTTPStatus(400, "Invalid request");
         }
     }
 
@@ -87,4 +87,5 @@ class QueryGenerator
                     return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
         }
     }
+
 }	

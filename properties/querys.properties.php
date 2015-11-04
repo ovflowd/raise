@@ -1,47 +1,82 @@
 <?php
 
-//querys select all <resource>
 function select_all_devices()
 {
-    return "SELECT PK_Id,TE_UDN,FK_Slave_Controller,TE_Friendly_Name,TE_Device_Type FROM DEVICE WHERE BO_Deleted = 0";
+    return "SELECT * FROM DEVICE";
 }
 
-// $select_all_services = ;
+function select_all_services()
+{
+    return "SELECT * FROM SERVICE";
+}
 
-// $select_all_actions = ;
+function select_all_actions()
+{
+    return "SELECT * FROM ACTION";
+}
 
-// $select_all_slave_controllers = ;
+function select_all_slave_controllers()
+{
+    return "SELECT * FROM SLAVER_CONTROLLER";
+}
 
-// $select_all_state_variables = ;
+function select_all_state_variables()
+{
+    return "SELECT * FROM STATE_VARIABLE";
+}
 
-// $select_all_resources = ;
+function select_all_resources()
+{
+    return "SELECT RESOURCE_NAME FROM META_RESOURCE";
+}
 
 
 //querys select by id
 function select_device_by_id($id)
 {
-    return "SELECT PK_Id,TE_UDN,FK_Slave_Controller,TE_Friendly_Name,TE_Device_Type FROM DEVICE WHERE PK_Id
-	 		= '{$id}';";
+    return "SELECT * FROM DEVICE WHERE id = '{$id}';";
 }
 
-// $select_service_by_id = ;
+function select_service_by_id()
+{
+    return "SELECT * FROM SERVICE WHERE id = '{$id}';";
+}
 
-// $select_action_by_id = ;
+function select_action_by_id()
+{
+    return "SELECT * FROM ACTION WHERE id = '{$id}';";
+}
 
-// $select_slave_controller_by_id = ;
+function select_slave_controller_by_id()
+{
+    return "SELECT * FROM SLAVER_CONTROLLER WHERE id = '{$id}';";
+}
 
-// $select_state_variable_by_id = ;
+function select_state_variable_by_id()
+{
+    return "SELECT * FROM STATE_VARIABLE WHERE id = '{$id}';";
+}
 
-// $select_resource_by_id = ;
+function select_resource_by_id()
+{
+    return "SELECT * FROM RESOURCE WHERE id = '{$id}';";
+}
 
 
 //querys select associeted resource
 function select_device_services($device_id)
 {
-    return "SELECT PK_Id, TE_Friendly_Name, TE_Service_Id, TE_Service_Type, TE_Description
-			FROM SERVICE WHERE FK_Device = '{$device_id}';";
+    return "SELECT * FROM SERVICE WHERE DEVICE_ID = '{$device_id}';";
 }
 
-// $select_service_actions = ;
+function select_service_actions($service_id)
+{
+    return "SELECT * FROM ACTION WHERE SERVICE_ID = '{$service_id}';";
+}
 
-// $select_service_state_variables = ;
+function select_service_state_variables($service_id)
+{
+    return "SELECT * FROM STATE_VARIABLE WHERE SERVICE_ID = '{$service_id}';";
+}
+
+

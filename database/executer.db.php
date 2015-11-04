@@ -6,7 +6,7 @@ class DatabaseExecuter
     {
         //var_dump($query);
         //echo"<br>";
-        $encode = array();
+        $final_result = "";
         $result = $connection->query($query);
 
         if(!self::is_select($query)) {
@@ -15,14 +15,11 @@ class DatabaseExecuter
             return true;
         }
 
-        if ($result->rowCount() > 0) {
-            while ($row = $result->fetch()) {
-                $encode[] = $row;
-            }
-        }
+        if ($result->rowCount() > 0)
+           $final_result = $result->fetchAll(PDO::FETCH_ASSOC);
 
         $connection = null; //destroying PDO object
-        return $encode;
+        return $final_result;
     }
 
     private function is_select($query)
