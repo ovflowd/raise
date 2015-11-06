@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="433046094">
-    <data-source source="LOCAL" name="MySQL - uiot@localhost" uuid="073c065f-f030-447f-825e-909ceefda893">
+  <component name="DataSourceManagerImpl" format="xml" hash="1712908422">
+    <data-source source="LOCAL" name="MySQL - uiot@localhost" uuid="d7332bb6-2101-4e6a-90d6-633667e00be1">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

@@ -63,9 +63,9 @@ class QueryGenerator
             case "action":
                     return select_action_by_id($uri[1]);
             case "slave_controller":
-                    return select_slave_by_id($uri[1]);
+                    return select_slave_controller_by_id($uri[1]);
             case "state_variable":
-                    return select_state_var_by_id($uri[1]);
+                    return select_state_variable_by_id($uri[1]);
             case "resource":
                     return select_resource_by_id($uri[1]);								
             default: 
@@ -82,7 +82,7 @@ class QueryGenerator
             case "service":
                     return select_service_actions($uri[1]);
             case "slave_controller":
-                    return select_slave_devices($uri[1]);								
+                    return select_slave_controller_devices($uri[1]);
             default: 
                     return json_encode(new HTTPStatus(404), JSON_PRETTY_PRINT);			
         }
