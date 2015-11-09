@@ -10,8 +10,8 @@ final class SQL
     const FROM = 'FROM';
     const VALUES = 'VALUES';
     const SET = 'SET';
-    const OP_AND = 'AND';
-    const OP_OR = 'OR';
+    const AND_OP = 'AND';
+    const OR_OP = 'OR';
     const LIMIT = 'LIMIT';
     const ORDER_BY = 'ORDER_BY';
     const OFFSET = 'OFFSET';
@@ -20,6 +20,8 @@ final class SQL
     const IS_NOT_NULL = 'IS NOT NULL';
     const COMA = ',';
     const BLANK = " ";
+    const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>'];
+    const LOGIC_OPERATORS = ['OR', 'AND'];
 
 
     static function SELECT()
@@ -72,13 +74,13 @@ final class SQL
 
     static function AND_OP()
     {
-        $sql = "AND";
+        $sql = "AND_OP";
         return constant('self::' . $sql);
     }
 
     static function OR_OP()
     {
-        $sql = "OR";
+        $sql = "OR_OP";
         return constant('self::' . $sql);
     }
 

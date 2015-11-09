@@ -2,6 +2,8 @@
 
 include_once ROOT_REST_DIR . "/database/executer.db.php";
 include_once ROOT_REST_DIR. "/database/connector.db.php";
+include_once ROOT_REST_DIR. "/sql/filter.sql.php";
+include_once ROOT_REST_DIR. "/sql/expression.sql.php";
 
 
 class ResourceController
@@ -27,9 +29,8 @@ class ResourceController
 
     public function execute_request($request)
     {
-        //request to query: TODO
-        //execute query: OK
-        //return json with information:TODO
+        var_dump($request);
+        die();
     }
 
     private function get_connection()

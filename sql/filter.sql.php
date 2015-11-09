@@ -1,4 +1,8 @@
 <?php
+
+include_once ROOT_REST_DIR. "/exceptions/invalid_sql_operator_exception.exc.php";
+include_once ROOT_REST_DIR. "/sql/reserved_words.sql.php";
+
 /**
  * class SQLFilter
  * class that represents filters on SQL instructions
@@ -24,13 +28,13 @@ final class SQLFilter
     {
         self::set_column_name($column_name);
         self::set_operator($operator);
-        self::set_value($value);
+        self::set_value(self::value_to_string($value));
     }
 
     /**
      * method set_column_name
      * sets $column_name value
-     * @param $column_name : string
+     * @param string $column_name
      */
 
     private function set_column_name($column_name)
@@ -41,19 +45,22 @@ final class SQLFilter
     /**
      * method set_operator
      * sets $operator value
-     * @param $operator : string
-
+     * @param string $operator
+     * @throws InvalidSqlOperatorException if param does not represent a sql operator
      */
 
     private function set_operator($operator)
     {
+        if(!in_array($operator, SQL::ARITHMETIC_OPERATORS))
+            throw new InvalidSqlOperatorException("invalid sql operator");
+
         $this->operator = $operator;
     }
 
      /**
      * method set_value
-     * sets $value atributte value
-     * @param $value : mixed
+     * sets $value attribute value
+     * @param string $value
      */
 
     private function set_value($value)
@@ -69,9 +76,9 @@ final class SQLFilter
     /**
      * method value_to_string
      * transforms $value to sql string
-     * @param $value : mixed -> (boolean, float, int, string, array or null)
+     * @param mixed $value : mixed -> (boolean, float, int, string, array or null)
      *
-     * @return $result :  string|float|int
+     * @return string|int|float $result
      */
 
      private function value_to_string($value)
@@ -84,29 +91,31 @@ final class SQLFilter
                 {
                     $foo[] = "'$v'";
                 }
-		else if(is_string($v))
-		{
- 	          $foo[] = $v;
-		}
+		        else if(is_string($v))
+		        {
+ 	                $foo[] = $v;
+		        }
             }
-	    return '('.implode(',', $foo).')';
+	        $result =  '('.implode(',', $foo).')';
         }
         else if(is_string($value))
         {
-          return "'$value'";
+            $result = "'$value'";
         }
         else if(is_null($value))
         {
-          return 'NULL';
+            $result = 'NULL';
         }
         else if(is_bool($value))
         {
-          return $value ? 'TRUE' : 'FALSE';
+            $result = $value ? 'TRUE' : 'FALSE';
         }
         else
         {
-          return $value;
+            $result = $value;
         }
+
+        return $result;
    }
 
 }
