@@ -20,10 +20,5 @@ final class SQLExpression
          $this->filters[] = $logic_operation;
          $this->filters[] = $filter;
     }
-    
-    public function to_sql()
-    {
-	//TODO
-    }	
 			
 }

@@ -7,6 +7,9 @@
 
 final class SQLFilter
 {
+    /**
+    * 	
+    */	
     private $column_name;
     private $operator;
     private $value;
@@ -61,11 +64,6 @@ final class SQLFilter
         $this->value = $value;
     }
 
-   public function to_sql()
-   {
-       return "{$this->column_name} {$this->operator} {$this->value}";
-   }
-
     /**
      * method value_to_string
      * transforms $value to sql string
@@ -86,10 +84,10 @@ final class SQLFilter
                 }
 		else if(is_string($v))
 		{
- 	          $foo[] = $v;
-		}
+ 	          $foo[] = $v;		
+		}	
             }
-	    return '('.implode(',', $foo).')';
+	    return '('.implode(',', $foo).')'; 	
         }
         else if(is_string($value))
         {
@@ -108,6 +106,11 @@ final class SQLFilter
           return $value;
         }
    }
+
+   public function to_sql()
+   {
+       return "{$this->column_name} {$this->operator} {$this->value}";
+   }			
 
 }
 
