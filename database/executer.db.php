@@ -4,8 +4,6 @@ class DatabaseExecuter
 {
     public function execute($query, $connection)
     {
-        //var_dump($query);
-        //echo"<br>";
         $final_result = "";
         $result = $connection->query($query);
 

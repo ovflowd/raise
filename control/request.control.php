@@ -25,7 +25,7 @@ class RequestController
     {
         $request = new Request($request_uri, $request_method, $server_protocol, $script_name);
         if(!self::is_valid($request))
-            $request->set_error_status(new HTTPStatus(400, "Bad request: the request is not supported"));
+            $request->set_error_status(new HTTPStatus(403, null));
 
         return $request;
     }

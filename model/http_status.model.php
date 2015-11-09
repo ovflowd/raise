@@ -44,6 +44,10 @@ class HTTPStatus
                 $this->message = "Bad request";
                 break;
 
+            case 403:
+                $this->message = "Forbidden";
+                break;
+
             case 404:
                 $this->message = "Resource not found";
                 break;
@@ -51,6 +55,7 @@ class HTTPStatus
             case 405:
                 $this->message = "Method not allowed";
                 break;
+
             default:
                 self::set_message("");
                 break;
