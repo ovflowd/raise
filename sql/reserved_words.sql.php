@@ -20,7 +20,7 @@ final class SQL
     const IS_NOT_NULL = 'IS NOT NULL';
     const COMA = ',';
     const BLANK = " ";
-    const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>'];
+    const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>', IN];
     const LOGIC_OPERATORS = ['OR', 'AND'];
 
 

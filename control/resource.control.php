@@ -3,7 +3,7 @@
 include_once ROOT_REST_DIR . "/database/executer.db.php";
 include_once ROOT_REST_DIR. "/database/connector.db.php";
 include_once ROOT_REST_DIR. "/sql/filter.sql.php";
-include_once ROOT_REST_DIR. "/sql/expression.sql.php";
+include_once ROOT_REST_DIR . "/sql/criteria.sql.php";
 
 
 class ResourceController

@@ -5,7 +5,7 @@ include_once ROOT_REST_DIR. "/sql/reserved_words.sql.php";
 
 /**
  * class SQLFilter
- * class that represents filters on SQL instructions
+ * represents filters on SQL instructions
  * example's: name = 'teste', age > 10, salary != 5000
  */
 
