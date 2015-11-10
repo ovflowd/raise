@@ -1,6 +1,7 @@
 <?php
 
 include_once ROOT_REST_DIR. "/exceptions/not_sql_filter_exception.exc.php";
+include_once ROOT_REST_DIR. "/exceptions/invalid_sql_operator_exception.exc.php";
 
 /**
  * class SQLExpression

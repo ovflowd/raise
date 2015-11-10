@@ -1,5 +1,9 @@
 <?php
 
+include_once ROOT_REST_DIR. "/exceptions/invalid_value_exception.sql.php";
+include_once ROOT_REST_DIR. "/exceptions/criteria_not_supported_exception.exc.php";
+
+
 final class SQLInsert extends SQLInstruction
 {
     private $column_values;
