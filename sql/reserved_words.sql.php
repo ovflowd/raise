@@ -5,7 +5,7 @@ final class SQL
     const SELECT = 'SELECT';
     const INSERT_INTO = 'INSERT INTO';
     const UPDATE = 'UPDATE';
-    const DELETE  = 'DELETE';
+    const DELETE  = 'DELETE FROM';
     const WHERE = 'WHERE';
     const FROM = 'FROM';
     const VALUES = 'VALUES';
@@ -20,7 +20,7 @@ final class SQL
     const IS_NOT_NULL = 'IS NOT NULL';
     const COMA = ',';
     const BLANK = " ";
-    const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>', IN];
+    const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>'];
     const LOGIC_OPERATORS = ['OR', 'AND'];
 
 
@@ -92,7 +92,7 @@ final class SQL
 
     static function ORDER_BY()
     {
-        $sql = "ORDER BY";
+        $sql = "ORDER_BY";
         return constant('self::' . $sql);
     }
 
@@ -110,13 +110,25 @@ final class SQL
 
     static function IS_NULL()
     {
-        $sql = "IS NULL";
+        $sql = "IS_NULL";
         return constant('self::' . $sql);
     }
 
     static function IS_NOT_NULL()
     {
-        $sql = "IS NULL";
+        $sql = "IS_NOT_NULL";
+        return constant('self::' . $sql);
+    }
+
+    static function BLANK()
+    {
+        $sql = "BLANK";
+        return constant('self::' . $sql);
+    }
+
+    static function COMA()
+    {
+        $sql = "COMA";
         return constant('self::' . $sql);
     }
 

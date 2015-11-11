@@ -59,7 +59,7 @@ final class SQLCriteria
 
         foreach($this->filters as $filter)
         {
-            $sql .= $filter." ";
+            $sql .= $filter.SQL::BLANK();
         }
 
         return $sql;
