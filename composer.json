@@ -1,14 +1,19 @@
 {
-    "name": "uiot/middleware_mc_srvcl_rest_raise",
-    "description": "middleware_mc_srvcl_rest_raise",
-    "type": "project",
-    "license": "GPL-3.0+",
-    "authors": [
-        {
-            "name": "Caio Melo",
-            "email": "caio.cmsilva@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "uiot/middleware_mc_srvcl_rest_raise",
+  "description": "middleware_mc_srvcl_rest_raise",
+  "type": "project",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Caio Melo",
+      "email": "caio.silva@redes.unb.br"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "classmap": [
+      "UIoT/"
+    ]
+  }
 }
