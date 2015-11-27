@@ -56,8 +56,10 @@ final class SQLCriteria
 
     public function to_sql()
     {
-        $sql = "";
+        if(empty($this->filters))
+            return SQL::ALWAYS_TRUE(); 
 
+        $sql = "";
         foreach ($this->filters as $key => $filter) {
             if($key != 0) //eliminating first logic operator
                 $sql .= $filter . SQL::BLANK();

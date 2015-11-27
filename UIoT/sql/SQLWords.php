@@ -31,6 +31,7 @@ final class SQL
     const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>'];
     const LOGIC_OPERATORS = ['OR', 'AND'];
     const EQUALS_OP = '=';
+    const ALWAYS_TRUE = 1;
 
 
     static function SELECT()
@@ -144,6 +145,12 @@ final class SQL
     static function EQUALS_OP()
     {
         $sql = "EQUALS_OP";
+        return constant('self::' . $sql);
+    }
+
+    static function ALWAYS_TRUE()
+    {
+        $sql = "ALWAYS_TRUE";
         return constant('self::' . $sql);
     }
 

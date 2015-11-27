@@ -50,11 +50,16 @@ class ResourceController
        $table_name  =  $this->get_resource_table_name($request->get_resource());
        $instruction =  $this->get_resource_instruction($request->get_method());
        $columns     =  $this->get_column_names($id);
-       $criteria    =  $this->get_criteria($id, $request->get_parameters());
 
+       if(!empty($request->get_parameters()))
+           $criteria = $this->get_criteria($id, $request->get_parameters());
+       else
+           $criteria = new SQLCriteria();
+
+       $instruction->set_criteria($criteria);
        $instruction->set_entity($table_name);
        $instruction->add_columns($columns);
-       $instruction->set_criteria($criteria);
+
 
         return $instruction;
     }
