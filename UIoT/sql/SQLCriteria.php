@@ -22,9 +22,8 @@ final class SQLCriteria
      *
      */
 
-    public function __construct($filter)
+    public function __construct()
     {
-        $this->filters[] = $filter->to_sql();
     }
 
     /**
@@ -59,8 +58,9 @@ final class SQLCriteria
     {
         $sql = "";
 
-        foreach ($this->filters as $filter) {
-            $sql .= $filter . SQL::BLANK();
+        foreach ($this->filters as $key => $filter) {
+            if($key != 0) //eliminating first logic operator
+                $sql .= $filter . SQL::BLANK();
         }
 
         return $sql;

@@ -17,10 +17,18 @@ final class SQLSelect extends SQLInstruction
         $this->select_columns[] = $column;
     }
 
+    public function add_columns($columns)
+    {
+        if(!is_array($columns))
+             throw new Exception();
+        $this->select_columns = $columns;
+    }
+
     protected function generate_instruction()
     {
         $this->instruction = SQL::SELECT() . SQL::BLANK() .
             $this->select_columns_to_sql() . SQL::BLANK() .
+            SQL::FROM() . SQL::BLANK() .
             $this->get_entity() . SQL::BLANK() .
             SQL::WHERE() . SQL::BLANK() .
             $this->criteria->to_sql();

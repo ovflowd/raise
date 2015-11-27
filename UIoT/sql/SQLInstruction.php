@@ -104,9 +104,7 @@ abstract class SQLInstruction
      * @param string $column
      * @param string|int|float|boolean|null $value
      * @throws InvalidValueException if value is not a string, int, float, bool or null
-     */
-
-    public function set_row_data($column, $value)
+     */public function set_row_data($column, $value)
     {
         if (is_string($value) || is_bool($value) || is_integer($value) || is_float($value) || is_null($value))
             throw new InvalidValueException("Parameter value does not represents a valid type.

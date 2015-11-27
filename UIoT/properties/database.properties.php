@@ -3,19 +3,54 @@
 namespace UIoT\properties;
 
 /**
- * Database configurations
+ * Class DatabaseProperties
+ * contains database information
+ * @package UIoT\properties
  */
 
-DEFINE('DB_HOST', 'localhost');
+class DatabaseProperties
+{
+    const DB_HOST = 'localhost';
+    const DB_USER = 'root';
+    const DB_PASS = '';
+    const DB_NAME = 'uiot';
+    const DB_TYPE = 'mysql';
+    const DB_PORT = '3306';
 
-DEFINE('DB_USER', 'root');
+    static function DB_HOST()
+    {
+        $db = 'DB_HOST';
+        return constant('self::' . $db);
+    }
 
-DEFINE('DB_PASS', '');
+    static function DB_USER()
+    {
+        $db = 'DB_USER';
+        return constant('self::' . $db);
+    }
 
-DEFINE('DB_NAME', 'uiot');
+    static function DB_PASS()
+    {
+        $db = 'DB_PASS';
+        return constant('self::' . $db);
+    }
 
-DEFINE('DB_TYPE', 'mysql');
+    static function DB_NAME()
+    {
+        $db = 'DB_NAME';
+        return constant('self::' . $db);
+    }
 
-DEFINE('DB_PORT', '3306');
+    static function DB_TYPE()
+    {
+        $db = 'DB_TYPE';
+        return constant('self::' . $db);
+    }
 
-$database = array("user" => DB_USER, "pass" => DB_PASS, "name" => DB_NAME, "host" => DB_HOST, "type" => DB_TYPE, "port" => DB_PORT);
+    static function DB_PORT()
+    {
+        $db = 'DB_PORT';
+        return constant('self::' . $db);
+    }
+
+}

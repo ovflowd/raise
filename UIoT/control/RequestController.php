@@ -14,7 +14,7 @@ class RequestController
     var $methods = array("GET", "POST", "PUT", "DELETE");
 
     //TODO: retrieve resources from database
-    var $resources = array("slave_controller", "device", "service", "action", "state_variable", "resource");
+    var $resources = array("slave_controllers", "devices", "services", "actions", "state_variables", "resources");
 
     public function __construct()
     {

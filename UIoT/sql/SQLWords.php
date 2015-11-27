@@ -26,10 +26,11 @@ final class SQL
     const IN = 'IN';
     const IS_NULL = 'IS NULL';
     const IS_NOT_NULL = 'IS NOT NULL';
-    const COMA = ',';
+    const COMMA = ',';
     const BLANK = " ";
     const ARITHMETIC_OPERATORS = ['=', '>', '<', '>=', '<=', '<>', '!=', '!<', '!>'];
     const LOGIC_OPERATORS = ['OR', 'AND'];
+    const EQUALS_OP = '=';
 
 
     static function SELECT()
@@ -134,9 +135,15 @@ final class SQL
         return constant('self::' . $sql);
     }
 
-    static function COMA()
+    static function COMMA()
     {
-        $sql = "COMA";
+        $sql = "COMMA";
+        return constant('self::' . $sql);
+    }
+
+    static function EQUALS_OP()
+    {
+        $sql = "EQUALS_OP";
         return constant('self::' . $sql);
     }
 

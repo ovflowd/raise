@@ -2,6 +2,7 @@
 
 namespace UIoT\database;
 
+use UIoT\properties\DatabaseProperties;
 use Exception;
 use PDO;
 
@@ -19,13 +20,12 @@ final class DatabaseConnector
 
     public function __construct()
     {
-        global $database;
-        self::set_user($database['user']);
-        self::set_pass($database['pass']);
-        self::set_name($database['name']);
-        self::set_host($database['host']);
-        self::set_type($database['type']);
-        self::set_port($database['port']);
+        self::set_user(DatabaseProperties::DB_USER());
+        self::set_pass(DatabaseProperties::DB_PASS());
+        self::set_name(DatabaseProperties::DB_NAME());
+        self::set_host(DatabaseProperties::DB_HOST());
+        self::set_type(DatabaseProperties::DB_TYPE());
+        self::set_port(DatabaseProperties::DB_PORT());
     }
 
     public function get_name()

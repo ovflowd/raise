@@ -10,7 +10,6 @@ use UIoT\control\ResourceController;
 class RequestRouter
 {
     var $resource_controller;
-    var $request_controller;
 
     public function __construct()
     {
