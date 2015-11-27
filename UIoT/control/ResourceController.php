@@ -116,8 +116,9 @@ class ResourceController
     {
 
         $instruction = new SQLSelect();
-        $criteria = new SQLCriteria(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id));
+        $criteria = new SQLCriteria();
         $criteria->add_filter(new SQLFilter('PROP_FRIENDLY_NAME', SQL::EQUALS_OP(), $friendly_name), SQL::AND_OP());
+        $criteria->add_filter(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id), SQL::AND_OP());
         $instruction->set_criteria($criteria);
         $instruction->add_column('PROP_NAME');
         $instruction->set_entity('META_PROPERTIES');

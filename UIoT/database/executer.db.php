@@ -12,7 +12,6 @@ class DatabaseExecuter
         $final_result = "";
         $result = $connection->query($query);
 
-        var_dump($result);
 
         if (!self::is_select($query)) {
             if (!$result)
