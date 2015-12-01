@@ -4,46 +4,80 @@ namespace UIoT\control;
 
 use UIoT\database\DatabaseConnector;
 use UIoT\database\DatabaseExecuter;
+use UIoT\exceptions\InvalidColumnNameException;
+use UIoT\sql\SQLDelete;
 use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLSelect;
+use UIoT\sql\SQLUpdate;
 use UIoT\sql\SQLCriteria;
 use UIoT\sql\SQLFilter;
 use UIoT\sql\SQL;
-use UIoT\sql\SQLUpdate;
-use UIoT\exceptions\InvalidMethodException;
 
+/**
+ * Class ResourceController
+ * @package UIoT\control
+ */
 class ResourceController
 {
+    /**
+     * @var
+     */
     var $db_connector;
+    /**
+     * @var
+     */
     var $db_executer;
 
+    /**
+     * ResourceController constructor.
+     */
     public function __construct()
     {
         self::create_db_executer();
         self::create_db_connector();
     }
 
+    /**
+     *
+     */
     private function create_db_executer()
     {
         $this->db_executer = new DatabaseExecuter();
     }
 
+    /**
+     *
+     */
     private function create_db_connector()
     {
         $this->db_connector = new DatabaseConnector();
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function execute_request($request)
     {
         $resource = $this->create_resource($request);
         return $this->db_executer->execute($resource->get_instruction(), $this->db_connector->get_PDO_object());
     }
 
+    /**
+     * @return mixed
+     */
     private function get_connection()
     {
         return $this->db_connector->get_PDO_object();
     }
 
+    /**
+     * @param $request
+     * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
+     * @throws InvalidColumnNameException
+     * @throws InvalidMethodException
+     * @throws \UIoT\sql\Exception
+     */
     private function create_resource($request)
     {
        $id          =  $this->get_resource_id($request->get_resource());
@@ -64,6 +98,12 @@ class ResourceController
         return $instruction;
     }
 
+    /**
+     * @param $resource
+     * @return mixed
+     * @throws \UIoT\exceptions\InvalidSqlOperatorException
+     * @throws \UIoT\exceptions\NotSqlFilterException
+     */
     private function get_resource_table_name($resource)
     {
         $instruction = new SQLSelect();
@@ -76,6 +116,11 @@ class ResourceController
         return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection())[0]['RSRC_NAME'];
     }
 
+    /**
+     * @param $method
+     * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
+     * @throws InvalidMethodException
+     */
     private function get_resource_instruction($method)
     {
         switch($method)
@@ -93,6 +138,12 @@ class ResourceController
         }
     }
 
+    /**
+     * @param $id
+     * @return array
+     * @throws \UIoT\exceptions\InvalidSqlOperatorException
+     * @throws \UIoT\exceptions\NotSqlFilterException
+     */
     private function get_column_names($id)
     {
         $instruction = new SQLSelect();
@@ -105,6 +156,12 @@ class ResourceController
         return $this->extract_column_names($this->db_executer->execute($instruction->get_instruction(), $this->get_connection()));
     }
 
+    /**
+     * @param $resource_name
+     * @return mixed
+     * @throws \UIoT\exceptions\InvalidSqlOperatorException
+     * @throws \UIoT\exceptions\NotSqlFilterException
+     */
     private function get_resource_id($resource_name)
     {
         $instruction = new SQLSelect();
@@ -117,6 +174,13 @@ class ResourceController
         return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection())[0]['ID'];
     }
 
+    /**
+     * @param $id
+     * @param $friendly_name
+     * @return mixed
+     * @throws \UIoT\exceptions\InvalidSqlOperatorException
+     * @throws \UIoT\exceptions\NotSqlFilterException
+     */
     private function get_column_name($id, $friendly_name)
     {
 
@@ -131,6 +195,14 @@ class ResourceController
         return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection());
     }
 
+    /**
+     * @param $id
+     * @param $parameters
+     * @return SQLCriteria
+     * @throws InvalidColumnNameException
+     * @throws \UIoT\exceptions\InvalidSqlOperatorException
+     * @throws \UIoT\exceptions\NotSqlFilterException
+     */
     private function get_criteria($id, $parameters)
     {
         $criteria = new SQLCriteria();
@@ -147,6 +219,10 @@ class ResourceController
         return $criteria;
     }
 
+    /**
+     * @param $raw_columns_array
+     * @return array
+     */
     private function extract_column_names($raw_columns_array)
     {
         $columns = array();
