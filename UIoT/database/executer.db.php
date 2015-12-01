@@ -7,7 +7,7 @@ use UIoT\sql\SQL;
 
 class DatabaseExecuter
 {
-    public function execute($query, $connection)
+    public function execute($query, PDO $connection)
     {
         $final_result = "";
         $result = $connection->query($query);
