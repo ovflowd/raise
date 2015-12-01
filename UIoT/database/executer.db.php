@@ -14,9 +14,8 @@ class DatabaseExecuter
 
 
         if (!self::is_select($query)) {
-            if (!$result)
-                return false;
-            return true;
+            return (bool) $result;
+
         }
 
         if ($result->rowCount() > 0)
@@ -27,8 +26,6 @@ class DatabaseExecuter
 
     private function is_select($query)
     {
-        if (substr($query, 0, 6) != SQL::SELECT)
-            return false;
-        return true;
+        return !(substr($query, 0, 6) != SQL::SELECT);
     }
 }
