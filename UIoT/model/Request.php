@@ -52,7 +52,8 @@ class Request
 
     private function remove_uri_parameters($uri)
     {
-        $last_uri_element = reset(explode('?', end($uri)));
+        $uri_array = explode('?', end($uri));
+        $last_uri_element = reset($uri_array);
         end($uri);
         $uri[key($uri)] = $last_uri_element;
         return $uri;
@@ -102,7 +103,8 @@ class Request
         if (!strpos($raw_string_parameters, '?') === 0 || strpos($raw_string_parameters, '?') === FALSE) {
             return "";
         }
-        return end(explode('?', $raw_string_parameters));
+        $parameters_array = explode('?', $raw_string_parameters);
+        return end($parameters_array);
     }
 
     private function get_uri_parameters_as_array($string_parameters)

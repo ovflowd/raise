@@ -18,7 +18,6 @@ final class SQLCriteria
     /**
      * method __construct
      * instantiates a new SQLExpression
-     * @param SQLFilter $filter
      *
      */
 
