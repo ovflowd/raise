@@ -7,7 +7,7 @@ use Exception;
 use PDO;
 
 /**
- * Class DatabaseController
+ * Class DatabaseConnector
  */
 final class DatabaseConnector
 {

@@ -4,6 +4,7 @@ namespace UIoT\control;
 
 use UIoT\database\DatabaseConnector;
 use UIoT\database\DatabaseExecuter;
+use UIoT\model\Request;
 use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\exceptions\InvalidMethodException;
 use UIoT\sql\SQLDelete;
@@ -21,11 +22,11 @@ use UIoT\sql\SQL;
 class ResourceController
 {
     /**
-     * @var
+     * @var DatabaseConnector
      */
     var $db_connector;
     /**
-     * @var
+     * @var DatabaseExecuter
      */
     var $db_executer;
 
@@ -77,9 +78,8 @@ class ResourceController
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
      * @throws InvalidColumnNameException
      * @throws InvalidMethodException
-     * @throws \UIoT\sql\Exception
      */
-    private function create_resource($request)
+    private function create_resource(Request $request)
     {
        $id          =  $this->get_resource_id($request->get_resource());
        $table_name  =  $this->get_resource_table_name($request->get_resource());
