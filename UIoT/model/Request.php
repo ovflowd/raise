@@ -61,7 +61,8 @@ class Request
 
     private function remove_script_parameters($uri)
     {
-        for ($i = 0; $i < sizeof($this->script_name); $i++) {
+        $script_size = sizeof($this->script_name);
+        for ($i = 0; $i < $script_size; $i++) {
             if ($uri[$i] == $this->script_name[$i]) {
                 unset($uri[$i]);
             }

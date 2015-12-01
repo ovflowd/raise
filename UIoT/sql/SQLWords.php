@@ -34,121 +34,121 @@ final class SQL
     const ALWAYS_TRUE = 1;
 
 
-    static function SELECT()
+    public static function SELECT()
     {
         $sql = "SELECT";
         return constant('self::' . $sql);
     }
 
-    static function INSERT_INTO()
+    public static function INSERT_INTO()
     {
         $sql = "INSERT INTO";
         return constant('self::' . $sql);
     }
 
-    static function UPDATE()
+    public static function UPDATE()
     {
         $sql = "UPDATE";
         return constant('self::' . $sql);
     }
 
-    static function DELETE()
+    public static function DELETE()
     {
         $sql = "DELETE";
         return constant('self::' . $sql);
     }
 
-    static function WHERE()
+    public static function WHERE()
     {
         $sql = "WHERE";
         return constant('self::' . $sql);
     }
 
-    static function FROM()
+    public static function FROM()
     {
         $sql = "FROM";
         return constant('self::' . $sql);
     }
 
-    static function VALUES()
+    public static function VALUES()
     {
         $sql = "VALUES";
         return constant('self::' . $sql);
     }
 
-    static function SET()
+    public static function SET()
     {
         $sql = "SET";
         return constant('self::' . $sql);
     }
 
-    static function AND_OP()
+    public static function AND_OP()
     {
         $sql = "AND_OP";
         return constant('self::' . $sql);
     }
 
-    static function OR_OP()
+    public static function OR_OP()
     {
         $sql = "OR_OP";
         return constant('self::' . $sql);
     }
 
-    static function LIMIT()
+    public static function LIMIT()
     {
         $sql = "LIMIT";
         return constant('self::' . $sql);
     }
 
-    static function ORDER_BY()
+    public static function ORDER_BY()
     {
         $sql = "ORDER_BY";
         return constant('self::' . $sql);
     }
 
-    static function OFFSET()
+    public static function OFFSET()
     {
         $sql = "OFFSET";
         return constant('self::' . $sql);
     }
 
-    static function IN()
+    public static function IN()
     {
         $sql = "IN";
         return constant('self::' . $sql);
     }
 
-    static function IS_NULL()
+    public static function IS_NULL()
     {
         $sql = "IS_NULL";
         return constant('self::' . $sql);
     }
 
-    static function IS_NOT_NULL()
+    public static function IS_NOT_NULL()
     {
         $sql = "IS_NOT_NULL";
         return constant('self::' . $sql);
     }
 
-    static function BLANK()
+    public static function BLANK()
     {
         $sql = "BLANK";
         return constant('self::' . $sql);
     }
 
-    static function COMMA()
+    public static function COMMA()
     {
         $sql = "COMMA";
         return constant('self::' . $sql);
     }
 
-    static function EQUALS_OP()
+    public static function EQUALS_OP()
     {
         $sql = "EQUALS_OP";
         return constant('self::' . $sql);
     }
 
-    static function ALWAYS_TRUE()
+    public static function ALWAYS_TRUE()
     {
         $sql = "ALWAYS_TRUE";
         return constant('self::' . $sql);

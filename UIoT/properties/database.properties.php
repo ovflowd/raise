@@ -17,37 +17,37 @@ class DatabaseProperties
     const DB_TYPE = 'mysql';
     const DB_PORT = '3306';
 
-    static function DB_HOST()
+    public static function DB_HOST()
     {
         $db = 'DB_HOST';
         return constant('self::' . $db);
     }
 
-    static function DB_USER()
+    public static function DB_USER()
     {
         $db = 'DB_USER';
         return constant('self::' . $db);
     }
 
-    static function DB_PASS()
+    public static function DB_PASS()
     {
         $db = 'DB_PASS';
         return constant('self::' . $db);
     }
 
-    static function DB_NAME()
+    public static function DB_NAME()
     {
         $db = 'DB_NAME';
         return constant('self::' . $db);
     }
 
-    static function DB_TYPE()
+    public static function DB_TYPE()
     {
         $db = 'DB_TYPE';
         return constant('self::' . $db);
     }
 
-    static function DB_PORT()
+    public static function DB_PORT()
     {
         $db = 'DB_PORT';
         return constant('self::' . $db);
