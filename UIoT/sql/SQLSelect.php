@@ -20,7 +20,7 @@ final class SQLSelect extends SQLInstruction
     public function add_columns($columns)
     {
         if(!is_array($columns))
-             throw new Exception();
+             throw new NotArrayException("Columns should be in an array");
         $this->select_columns = $columns;
     }
 
@@ -32,9 +32,6 @@ final class SQLSelect extends SQLInstruction
             $this->get_entity() . SQL::BLANK() .
             SQL::WHERE() . SQL::BLANK() .
             $this->criteria->to_sql();
-
-        //TODO: support to ORDER BY, OFFSET, LIMIT
-        //TODO: support to JOINS
 
     }
 
