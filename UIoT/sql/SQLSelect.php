@@ -2,6 +2,8 @@
 
 namespace UIoT\sql;
 
+use UIoT\exceptions\NotArrayException;
+
 final class SQLSelect extends SQLInstruction
 {
     private $select_columns; //represents an array of columns that should be returned
