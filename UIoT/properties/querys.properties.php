@@ -102,6 +102,6 @@ function select_service_state_variable($srvc_id)
 
 function select_slave_controller_devices($scon_id)
 {
-    return "";
+    return $scon_id;
 }
 
