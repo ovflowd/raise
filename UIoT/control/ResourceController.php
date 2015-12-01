@@ -59,7 +59,7 @@ class ResourceController
      * @param $request
      * @return mixed
      */
-    public function execute_request($request)
+    public function execute_request(Request $request)
     {
         $resource = $this->create_resource($request);
         return $this->db_executer->execute($resource->get_instruction(), $this->db_connector->get_PDO_object());

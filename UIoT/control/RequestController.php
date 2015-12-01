@@ -10,17 +10,12 @@ use UIoT\model\Request;
 class RequestController
 {
 
-    //TODO: retrieve methods from database
     var $methods = array("GET", "POST", "PUT", "DELETE");
 
-    //TODO: retrieve resources from database
     var $resources = array("slave_controllers", "devices", "services", "actions", "state_variables", "resources");
 
     public function __construct()
     {
-        //TODO
-        //self::set_methods();
-        //self::set_resources();
     }
 
     public function create_request($request_uri, $request_method, $server_protocol, $script_name)
@@ -32,22 +27,22 @@ class RequestController
         return $request;
     }
 
-    public function is_valid($request)
+    public function is_valid(Request $request)
     {
         return self::has_valid_method($request) && self::has_valid_resource($request) && self::is_uri_or_parameters_based($request);
     }
 
-    private function has_valid_method($request)
+    private function has_valid_method(Request $request)
     {
         return in_array($request->get_method(), $this->methods);
     }
 
-    private function has_valid_resource($request)
+    private function has_valid_resource(Request $request)
     {
         return in_array($request->get_resource(), $this->resources);
     }
 
-    private function is_uri_or_parameters_based($request)
+    private function is_uri_or_parameters_based(Request $request)
     {
         return !($request->has_parameters() && $request->has_composed_uri());
     }
