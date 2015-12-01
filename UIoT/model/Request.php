@@ -143,10 +143,7 @@ class Request
 
     public function has_parameters()
     {
-        if (self::get_parameters() == NULL)
-            return false;
-
-        return true;
+        return !(self::get_parameters() == NULL);
     }
 
     public function get_parameters()
@@ -166,9 +163,6 @@ class Request
 
     public function has_composed_uri()
     {
-        if (sizeof(self::get_uri()) > 1)
-            return true;
-
-        return false;
+        return sizeof(self::get_uri()) > 1;
     }
 }
