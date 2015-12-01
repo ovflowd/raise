@@ -22,7 +22,6 @@ class DatabaseExecuter
         if ($result->rowCount() > 0)
             $final_result = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        $connection = null; //destroying PDO object
         return $final_result;
     }
 

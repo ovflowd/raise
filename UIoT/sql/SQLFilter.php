@@ -78,6 +78,7 @@ final class SQLFilter
     private function value_to_string($value)
     {
         if (is_array($value)) {
+            $foo = array();
             foreach ($value as $v) {
                 if (is_int($value) || is_float($value)) {
                     $foo[] = "'$v'";

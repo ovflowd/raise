@@ -60,6 +60,7 @@ final class DatabaseConnector
 
     public function get_PDO_object()
     {
+        $conn = $this->get_default_connection();
         try {
             switch (self::get_type()):
                 case 'mysql':
@@ -92,6 +93,14 @@ final class DatabaseConnector
             array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        return $conn;
+    }
+
+    private function get_default_connection()
+    {
+
+        $conn = new PDO("");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     }
 
