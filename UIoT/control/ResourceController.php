@@ -91,10 +91,11 @@ class ResourceController
        else
            $criteria = new SQLCriteria();
 
-       $instruction->set_criteria($criteria);
-       $instruction->set_entity($table_name);
-       $instruction->add_columns($columns);
+        if($instruction instanceof SQLSelect)
+            $instruction->add_columns($columns);
 
+        $instruction->set_criteria($criteria);
+        $instruction->set_entity($table_name);
 
         return $instruction;
     }
