@@ -57,7 +57,7 @@ final class SQLCriteria
     public function to_sql()
     {
         if(empty($this->filters))
-            return SQL::ALWAYS_TRUE(); 
+            return SQL::ALWAYS_TRUE();
 
         $sql = "";
         foreach ($this->filters as $key => $filter) {
