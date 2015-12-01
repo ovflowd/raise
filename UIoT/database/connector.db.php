@@ -3,6 +3,7 @@
 namespace UIoT\database;
 
 use UIoT\properties\DatabaseProperties;
+use UIoT\exceptions\DatabaseConnectionFailedException;
 use Exception;
 use PDO;
 
@@ -68,7 +69,7 @@ final class DatabaseConnector
                     break;
             endswitch;
         } catch (Exception $exception) {
-            return $exception->getMessage();
+            throw new DatabaseConnectionFailedException();
         }
         return $conn;
     }
