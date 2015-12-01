@@ -5,6 +5,7 @@ namespace UIoT\control;
 use UIoT\database\DatabaseConnector;
 use UIoT\database\DatabaseExecuter;
 use UIoT\exceptions\InvalidColumnNameException;
+use UIoT\exceptions\InvalidMethodException;
 use UIoT\sql\SQLDelete;
 use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLSelect;
