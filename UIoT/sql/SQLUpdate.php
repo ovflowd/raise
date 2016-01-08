@@ -3,36 +3,37 @@
 namespace UIoT\sql;
 
 /**
- * class SQLInsert
- * represents a update sql instruction
+ * Class SQLUpdate
+ *
+ * Represent an UPDATE SQLInstruction
+ *
+ * @package UIoT\sql
  */
 final class SQLUpdate extends SQLInstruction
 {
 
     /**
-     * @see sql::SQLInstruction class
+     * Generates an UPDATE SQLInstruction | @see SQLInstruction.php
      */
-
-    protected function generate_instruction()
+    protected function generateInstruction()
     {
-        $this->instruction = SQL::UPDATE() . SQL::BLANK() . $this->get_entity() .
+        $this->instruction = SQL::UPDATE() . SQL::BLANK() . $this->getEntity() .
             SQL::SET() . SQL::BLANK() .
-            $this->columns_values_to_update_format() .
+            $this->columnsValuesToUpdateFormat() .
             SQL::BLANK() . SQL::WHERE() .
-            $this->criteria->to_sql();
+            $this->criteria->toSql();
     }
 
     /**
-     * method columns_values_to_update_format()
-     * create pairs in the form: column = value based on column_values attribute
+     * Create pairs in the format: column = value based on columnValues attribute (@see SQLInstruction.php)
+     *
      * @return string
      */
-
-    private function columns_values_to_update_format()
+    private function columnsValuesToUpdateFormat()
     {
         $set = array();
 
-        foreach ($this->column_values as $column => $value) {
+        foreach ($this->columnValues as $column => $value) {
             $set[] = "{$column} = {$value}";
         }
 

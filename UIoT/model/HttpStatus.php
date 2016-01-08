@@ -3,45 +3,85 @@
 namespace UIoT\model;
 
 /**
- * Class HttpStatus
+ * Class HTTPStatus
+ *
+ * @package UIoT\model
+ * @property int $code
+ * @property string $message
  */
 class HTTPStatus
 {
-    var $code;
-    var $message;
+    /**
+     * @var int HTTP error number/code.
+     */
+    private $code;
 
+    /**
+     * @var string HTTP error message.
+     */
+    private $message;
+
+    /**
+     * HTTPStatus constructor.
+     *
+     * @param int $code
+     * @param string $message
+     */
     public function __construct($code, $message)
     {
-        self::set_code($code);
-        self::set_message($message);
+        self::setCode($code);
+        self::setMessage($message);
     }
 
-    public function get_message()
+    /**
+     * Gets the message attribute. | @see $message
+     *
+     * @return string
+     */
+    public function getMessage()
     {
         return $this->message;
     }
 
-    public function set_message($message)
+    /**
+     * Sets the message attribute. | @see $message
+     *
+     * @param string $message
+     */
+    public function setMessage($message)
     {
         if (is_null($message))
-            self::set_default_msg();
+            self::setDefaultMessage();
         else
             $this->message = $message;
     }
 
-    public function get_code()
+    /**
+     * Gets the code attribute. | @see $code
+     *
+     * @return int
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function set_code($code)
+    /**
+     * Sets the code attribute. | @see $code
+     *
+     * @param int $code
+     */
+    public function setCode($code)
     {
         $this->code = $code;
     }
 
-    private function set_default_msg()
+    /**
+     * Sets the message attribute based on the code attribute | @see $message, $code
+     */
+    private function setDefaultMessage()
     {
-        switch (self::get_code()) {
+        switch (self::getCode()) {
             case 400:
                 $this->message = "Bad request";
                 break;
@@ -59,7 +99,7 @@ class HTTPStatus
                 break;
 
             default:
-                self::set_message("");
+                self::setMessage("");
                 break;
         }
     }

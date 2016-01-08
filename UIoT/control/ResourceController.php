@@ -2,8 +2,11 @@
 
 namespace UIoT\control;
 
+use PDO;
 use UIoT\database\DatabaseConnector;
 use UIoT\database\DatabaseExecuter;
+use UIoT\exceptions\InvalidSqlOperatorException;
+use UIoT\exceptions\NotSqlFilterException;
 use UIoT\model\Request;
 use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\exceptions\InvalidMethodException;
@@ -17,116 +20,129 @@ use UIoT\sql\SQL;
 
 /**
  * Class ResourceController
+ * 
  * @package UIoT\control
+ * @property DatabaseConnector $dbConnector
+ * @property DatabaseExecuter $dbExecuter
  */
 class ResourceController
 {
     /**
      * @var DatabaseConnector
      */
-    var $db_connector;
+    private $dbConnector;
+    
     /**
      * @var DatabaseExecuter
      */
-    var $db_executer;
+    private $dbExecuter;
 
     /**
      * ResourceController constructor.
      */
     public function __construct()
     {
-        self::create_db_executer();
-        self::create_db_connector();
+        self::createDbExecuter();
+        self::createDbConnector();
     }
 
     /**
-     *
+     * Creates a new DatabaseExecuter.
      */
-    private function create_db_executer()
+    private function createDbExecuter()
     {
-        $this->db_executer = new DatabaseExecuter();
+        $this->dbExecuter = new DatabaseExecuter();
     }
 
     /**
-     *
+     * Creates a new DatabaseConnector
      */
-    private function create_db_connector()
+    private function createDbConnector()
     {
-        $this->db_connector = new DatabaseConnector();
+        $this->dbConnector = new DatabaseConnector();
     }
 
     /**
-     * @param $request
-     * @return mixed
+     * Executes a request.
+     * 
+     * @param Request $request
+     * @return bool|string[]
      */
-    public function execute_request(Request $request)
+    public function executeRequest(Request $request)
     {
-        $resource = $this->create_resource($request);
-        return $this->db_executer->execute($resource->get_instruction(), $this->db_connector->get_PDO_object());
+        $resource = $this->executeResource($request);
+        return $this->dbExecuter->execute($resource->getInstruction(), $this->dbConnector->getPdoObject());
     }
 
     /**
-     * @return mixed
+     * Gets connection from dbConnector attribute.
+     * 
+     * @return PDO
      */
-    private function get_connection()
+    private function getConnection()
     {
-        return $this->db_connector->get_PDO_object();
+        return $this->dbConnector->getPdoObject();
     }
 
     /**
-     * @param $request
+     * Executes a resource.
+     * 
+     * @param Request $request
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
      * @throws InvalidColumnNameException
      * @throws InvalidMethodException
      */
-    private function create_resource(Request $request)
+    private function executeResource(Request $request)
     {
-       $id          =  $this->get_resource_id($request->get_resource());
-       $table_name  =  $this->get_resource_table_name($request->get_resource());
-       $instruction =  $this->get_resource_instruction($request->get_method());
-       $columns     =  $this->get_column_names($id);
+        $id = $this->getResourceId($request->getResource());
+        $tableName = $this->getResourceTableName($request->getResource());
+        $instruction = $this->getResourceInstruction($request->getMethod());
+        $columns = $this->getColumnNames($id);
 
-       if(!empty($request->get_parameters()))
-           $criteria = $this->get_criteria($id, $request->get_parameters());
-       else
-           $criteria = new SQLCriteria();
+        if (!empty($request->getParameters()))
+            $criteria = $this->getCriteria($id, $request->getParameters());
+        else
+            $criteria = new SQLCriteria();
 
-        if($instruction instanceof SQLSelect)
-            $instruction->add_columns($columns);
+        if ($instruction instanceof SQLSelect)
+            $instruction->addColumns($columns);
 
-        $instruction->set_criteria($criteria);
-        $instruction->set_entity($table_name);
+        $instruction->setCriteria($criteria);
+        $instruction->setEntity($tableName);
 
         return $instruction;
     }
 
     /**
-     * @param $resource
-     * @return mixed
-     * @throws \UIoT\exceptions\InvalidSqlOperatorException
-     * @throws \UIoT\exceptions\NotSqlFilterException
+     * Gets a resource's table name.
+     * 
+     * @param Resource $resource
+     * @return string
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-    private function get_resource_table_name($resource)
+    private function getResourceTableName($resource)
     {
         $instruction = new SQLSelect();
         $criteria = new SQLCriteria();
-        $criteria->add_filter(new SQLFilter('RSRC_FRIENDLY_NAME', SQL::EQUALS_OP(), $resource), SQL::AND_OP());
-        $instruction->set_criteria($criteria);
-        $instruction->add_column('RSRC_NAME');
-        $instruction->set_entity('META_RESOURCES');
+        $criteria->addFilter(new SQLFilter('RSRC_FRIENDLY_NAME', SQL::EQUALS_OP(), $resource), SQL::AND_OP());
+        $instruction->setCriteria($criteria);
+        $instruction->addColumn('RSRC_NAME');
+        $instruction->setEntity('META_RESOURCES');
 
-        return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection())[0]['RSRC_NAME'];
+        return $this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection())[0]['RSRC_NAME'];
     }
 
     /**
-     * @param $method
+     * Gets a a resource's SQL Instruction (GET, POST, PUT or DELETE).
+     *
+     * @param string $method
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
      * @throws InvalidMethodException
      */
-    private function get_resource_instruction($method)
+    private function getResourceInstruction($method)
     {
-        switch($method)
-        {
+        switch ($method) {
             case 'GET':
                 return new SQLSelect();
             case 'POST':
@@ -141,97 +157,105 @@ class ResourceController
     }
 
     /**
-     * @param $id
-     * @return array
-     * @throws \UIoT\exceptions\InvalidSqlOperatorException
-     * @throws \UIoT\exceptions\NotSqlFilterException
+     * Gets a resource's column names.
+     *
+     * @param int $id
+     * @return string[]
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-    private function get_column_names($id)
+    private function getColumnNames($id)
     {
         $instruction = new SQLSelect();
         $criteria = new SQLCriteria();
-        $criteria->add_filter(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id), SQL::AND_OP());
-        $instruction->set_criteria($criteria);
-        $instruction->add_column('PROP_NAME');
-        $instruction->set_entity('META_PROPERTIES');
+        $criteria->addFilter(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id), SQL::AND_OP());
+        $instruction->setCriteria($criteria);
+        $instruction->addColumn('PROP_NAME');
+        $instruction->setEntity('META_PROPERTIES');
 
-        return $this->extract_column_names($this->db_executer->execute($instruction->get_instruction(), $this->get_connection()));
+        return $this->extractColumnNames($this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection()));
     }
 
     /**
-     * @param $resource_name
-     * @return mixed
-     * @throws \UIoT\exceptions\InvalidSqlOperatorException
-     * @throws \UIoT\exceptions\NotSqlFilterException
+     *  Gets a resource's ID.
+     *
+     * @param string $resourceName
+     * @return string|bool
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-    private function get_resource_id($resource_name)
+    private function getResourceId($resourceName)
     {
         $instruction = new SQLSelect();
         $criteria = new SQLCriteria();
-        $criteria->add_filter(new SQLFilter('RSRC_FRIENDLY_NAME', SQL::EQUALS_OP(), $resource_name), SQL::AND_OP());
-        $instruction->set_criteria($criteria);
-        $instruction->add_column('ID');
-        $instruction->set_entity('META_RESOURCES');
+        $criteria->addFilter(new SQLFilter('RSRC_FRIENDLY_NAME', SQL::EQUALS_OP(), $resourceName), SQL::AND_OP());
+        $instruction->setCriteria($criteria);
+        $instruction->addColumn('ID');
+        $instruction->setEntity('META_RESOURCES');
 
-        return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection())[0]['ID'];
+        return $this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection())[0]['ID'];
     }
 
     /**
-     * @param $id
-     * @param $friendly_name
-     * @return mixed
-     * @throws \UIoT\exceptions\InvalidSqlOperatorException
-     * @throws \UIoT\exceptions\NotSqlFilterException
+     * Gets a column's name.
+     *
+     * @param int $id
+     * @param string $friendlyName
+     * @return string|bool
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-    private function get_column_name($id, $friendly_name)
+    private function getColumnName($id, $friendlyName)
     {
 
         $instruction = new SQLSelect();
         $criteria = new SQLCriteria();
-        $criteria->add_filter(new SQLFilter('PROP_FRIENDLY_NAME', SQL::EQUALS_OP(), $friendly_name), SQL::AND_OP());
-        $criteria->add_filter(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id), SQL::AND_OP());
-        $instruction->set_criteria($criteria);
-        $instruction->add_column('PROP_NAME');
-        $instruction->set_entity('META_PROPERTIES');
+        $criteria->addFilter(new SQLFilter('PROP_FRIENDLY_NAME', SQL::EQUALS_OP(), $friendlyName), SQL::AND_OP());
+        $criteria->addFilter(new SQLFilter('RSRC_ID', SQL::EQUALS_OP(), $id), SQL::AND_OP());
+        $instruction->setCriteria($criteria);
+        $instruction->addColumn('PROP_NAME');
+        $instruction->setEntity('META_PROPERTIES');
 
-        return $this->db_executer->execute($instruction->get_instruction(), $this->get_connection());
+        return $this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection());
     }
 
     /**
-     * @param $id
-     * @param $parameters
+     * Gets a criteria.
+     *
+     * @param int $id
+     * @param string[] $parameters
      * @return SQLCriteria
      * @throws InvalidColumnNameException
-     * @throws \UIoT\exceptions\InvalidSqlOperatorException
-     * @throws \UIoT\exceptions\NotSqlFilterException
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-    private function get_criteria($id, $parameters)
+    private function getCriteria($id, $parameters)
     {
         $criteria = new SQLCriteria();
-        foreach($parameters as $key => $value)
-        {
-            $column = $this->get_column_name($id, $key);
-            if(is_null($column))
+        foreach ($parameters as $key => $value) {
+            $column = $this->getColumnName($id, $key);
+            if (is_null($column))
                 throw new InvalidColumnNameException();
 
             $filter = new SQLFilter($column[0]['PROP_NAME'], SQL::EQUALS_OP(), $value);
-            $criteria->add_filter($filter, SQL::AND_OP());
+            $criteria->addFilter($filter, SQL::AND_OP());
         }
 
         return $criteria;
     }
 
     /**
-     * @param $raw_columns_array
-     * @return array
+     * Gets a the names of all columns in an array.
+     *
+     * @param string[] $rawColumnsArray
+     * @return string[]
      */
-    private function extract_column_names($raw_columns_array)
+    private function extractColumnNames($rawColumnsArray)
     {
         $columns = array();
-        foreach($raw_columns_array as $key => $column_name_array)
-        {
-            foreach($column_name_array as $column_name)
-                $columns[] = $column_name;
+        foreach ($rawColumnsArray as $key => $columnNameArray) {
+            foreach ($columnNameArray as $columnName)
+                $columns[] = $columnName;
         }
         return $columns;
     }

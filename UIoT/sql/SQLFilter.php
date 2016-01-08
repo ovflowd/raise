@@ -4,51 +4,65 @@ namespace UIoT\sql;
 use UIoT\exceptions\InvalidSqlOperatorException;
 
 /**
- * class SQLFilter
- * represents filters on SQL instructions
- * example's: name = 'teste', age > 10, salary != 5000
+ * Class SQLFilter
+ *
+ * Represents filters on SQL instructions.
+ * Examples: name = 'test', age > 10, salary != 5000
+ *
+ * @package UIoT/sql
+ * @property string $columnName
+ * @property string $operator
+ * @property mixed $value
  */
 final class SQLFilter
 {
-    private $column_name;
+    /**
+     * @var
+     */
+    private $columnName;
+
+    /**
+     * @var
+     */
     private $operator;
+
+    /**
+     * @var
+     */
     private $value;
 
     /**
-     * method __construct
-     * instantiates a new SQLFilter
-     * @param $column_name : string
-     * @param $operator : string -> (=, >, <, >=, <=, <>, !=, !<, !>)
-     * @param $value : mixed -> can be (boolean, float, int, string, array or null)
+     * SQLFilter constructor
+     *
+     * @param string $columnName
+     * @param string $operator (=, >, <, >=, <=, <>, !=, !<, !>)
+     * @param mixed $value (boolean, float, int, string, array or null)
      *
      */
-
-    public function __construct($column_name, $operator, $value)
+    public function __construct($columnName, $operator, $value)
     {
-        self::set_column_name($column_name);
-        self::set_operator($operator);
-        self::set_value(self::value_to_string($value));
+        self::setColumnName($columnName);
+        self::setOperator($operator);
+        self::setValue(self::valueToString($value));
     }
 
     /**
-     * method set_column_name
-     * sets $column_name value
-     * @param string $column_name
+     * Sets the column name attribute. | @see $columnName
+     *
+     * @param string $columnName
      */
-
-    private function set_column_name($column_name)
+    private function setColumnName($columnName)
     {
-        $this->column_name = $column_name;
+        $this->columnName = $columnName;
     }
 
     /**
-     * method set_operator
-     * sets $operator value
+     * Sets the operator attribute. | @see $operator
+     *
      * @param string $operator
-     * @throws InvalidSqlOperatorException if param does not represent a sql operator
+     * @throws InvalidSqlOperatorException
      */
-
-    private function set_operator($operator)
+    private function setOperator($operator)
     {
         if (!in_array($operator, SQL::ARITHMETIC_OPERATORS))
             throw new InvalidSqlOperatorException("invalid sql operator");
@@ -57,25 +71,22 @@ final class SQLFilter
     }
 
     /**
-     * method set_value
-     * sets $value attribute value
+     * Sets the value attribute | @see $value
+     *
      * @param string $value
      */
-
-    private function set_value($value)
+    private function setValue($value)
     {
         $this->value = $value;
     }
 
     /**
-     * method value_to_string
-     * transforms $value to sql string
-     * @param mixed $value : mixed -> (boolean, float, int, string, array or null)
+     * Converts the value attribute to a string. | @see $value
      *
-     * @return string|int|float $result
+     * @param mixed $value (boolean, float, int, string, array or null)
+     * @return string|int|float
      */
-
-    private function value_to_string($value)
+    private function valueToString($value)
     {
         if (is_array($value)) {
             $foo = array();
@@ -100,9 +111,14 @@ final class SQLFilter
         return $result;
     }
 
-    public function to_sql()
+    /**
+     * Combines the class attributes to a SQL string.
+     *
+     * @return string
+     */
+    public function toSql()
     {
-        return "{$this->column_name} {$this->operator} {$this->value}";
+        return "{$this->columnName} {$this->operator} {$this->value}";
     }
 
 }

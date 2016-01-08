@@ -3,79 +3,143 @@
 namespace UIoT\view;
 
 use UIoT\control\RequestController;
+use UIoT\model\Request;
 use UIoT\util\RequestRouter;
 
 /**
  * Class RequestInput
+ *
  * @package UIoT\view
+ * @property RequestController $requestControl
+ * @property RequestRouter $requestRouter
  */
 class RequestInput
 {
-    var $request_control;
-    var $request_router;
+    /**
+     * @var RequestController
+     */
+    var $requestControl;
+    /**
+     * @var RequestRouter
+     */
+    var $requestRouter;
 
+    /**
+     * RequestInput constructor.
+     */
     public function __construct()
     {
-        self::set_request_control(new RequestController());
-        self::set_request_router(new RequestRouter());
+        self::setRequestControl(new RequestController());
+        self::setRequestRouter(new RequestRouter());
     }
 
-    private function set_request_control($request_control)
+    /**
+     * Sets the request controller attribute | @see $requestControl
+     *
+     * @param RequestController $requestControl
+     */
+    private function setRequestControl(RequestController $requestControl)
     {
-        $this->request_control = $request_control;
+        $this->requestControl = $requestControl;
     }
 
-    private function set_request_router($request_router)
+    /**
+     * Sets the request router attribute | @see $requestRouter
+     *
+     * @param RequestRouter $requestRouter
+     */
+    private function setRequestRouter(RequestRouter $requestRouter)
     {
-        $this->request_router = $request_router;
+        $this->requestRouter = $requestRouter;
     }
 
+    /**
+     * Starts the Request creation and submission process
+     *
+     * @return array|bool|string
+     */
     public function start()
     {
-        return self::submit_request();
+        return self::submitRequest();
     }
 
-    private function submit_request()
+    /**
+     * Creates and submits a Request | @see Request.php
+     *
+     * @return array|bool|string
+     */
+    private function submitRequest()
     {
-        $request = self::create_request_object();
+        $request = self::createRequestObject();
 
-        if (self::is_valid($request))
-            return $this->request_router->submit_request($request);
+        if (self::isValid($request))
+            return $this->requestRouter->submitRequest($request);
         else
-            return $request->get_error_status();
+            return $request->getErrorStatus();
     }
 
-    private function create_request_object()
+    /**
+     * Creates a Request | @see Request.php
+     *
+     * @return Request
+     */
+    private function createRequestObject()
     {
-        return $this->request_control->create_request(
-            self::get_request_uri(),
-            self::get_request_method(),
-            self::get_request_protocol(),
-            self::get_request_script_name());
+        return $this->requestControl->createRequest(
+            self::getRequestUri(),
+            self::getRequestMethod(),
+            self::getRequestProtocol(),
+            self::getRequestScriptName());
     }
 
-    private function get_request_uri()
+    /**
+     * Gets the request's uri
+     *
+     * @return array
+     */
+    private function getRequestUri()
     {
         return explode('/', $_SERVER['REQUEST_URI']);
     }
 
-    private function get_request_method()
+    /**
+     * Gets the request's method
+     *
+     * @return string
+     */
+    private function getRequestMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    private function get_request_protocol()
+    /**
+     * Gets the request's protocol
+     *
+     * @return string
+     */
+    private function getRequestProtocol()
     {
         return $_SERVER['SERVER_PROTOCOL'];
     }
 
-    private function get_request_script_name()
+    /**
+     * Gets the request's script name
+     *
+     * @return array
+     */
+    private function getRequestScriptName()
     {
         return explode('/', $_SERVER['SCRIPT_NAME']);
     }
 
-    private function is_valid($request)
+    /**
+     * Returns whether or not a request is valid
+     *
+     * @param Request $request
+     * @return bool
+     */
+    private function isValid(Request $request)
     {
-        return (is_a($request, 'UIoT\model\Request') && is_null($request->get_error_status()));
+        return (is_a($request, 'UIoT\model\Request') && is_null($request->getErrorStatus()));
     }
 }

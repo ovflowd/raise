@@ -5,29 +5,31 @@ namespace UIoT\sql;
 
 use UIoT\exceptions\RowDataValueNotSupportedException;
 
+/**
+ * Class SQLDelete
+ *
+ * @package UIoT\sql
+ */
 final class SQLDelete extends SQLInstruction
 {
     /**
-     * method set_row_data
-     * not supported for delete
+     * Sets data into a specified row (Not supported for DELETE).
+     *
      * @param string $column
-     * @param bool|float|int|null|string $value
+     * @param bool|float|int|string|null $value
      * @throws RowDataValueNotSupportedException
      */
-
-    public function set_row_data($column, $value)
+    public function setRowData($column, $value)
     {
-        throw new RowDataValueNotSupportedException("Delete instructions does not support row_data values");
+        throw new RowDataValueNotSupportedException("DELETE instructions do not support row values");
     }
 
     /**
-     * @see sql::SQLInstruction class
+     * Generates a DELETE SQLInstruction | @see SQLInstruction.php
      */
-
-    protected function generate_instruction()
+    protected function generateInstruction()
     {
-        $this->instruction = SQL::DELETE() . SQL::BLANK() . $this->get_entity() .
-            SQL::WHERE() . SQL::BLANK() .
-            $this->criteria->to_sql();
+        $this->instruction = SQL::DELETE() . SQL::BLANK() . $this->getEntity() .
+            SQL::WHERE() . SQL::BLANK() . $this->criteria->toSql();
     }
 }
