@@ -12,6 +12,9 @@ use PDO;
  */
 final class DatabaseConnector
 {
+    /**
+     * @var
+     */
     var $user;
     var $pass;
     var $name;
@@ -130,6 +133,5 @@ final class DatabaseConnector
     {
         $this->pass = (isset($pass) ? $pass : NULL);
     }
-
 
 }
