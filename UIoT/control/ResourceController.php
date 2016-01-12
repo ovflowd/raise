@@ -116,7 +116,7 @@ class ResourceController
     /**
      * Gets a resource's table name.
      * 
-     * @param Resource $resource
+     * @param  string $resource
      * @return string
      * @throws InvalidSqlOperatorException
      * @throws NotSqlFilterException
@@ -180,7 +180,7 @@ class ResourceController
      *  Gets a resource's ID.
      *
      * @param string $resourceName
-     * @return string|bool
+     * @return integer
      * @throws InvalidSqlOperatorException
      * @throws NotSqlFilterException
      */

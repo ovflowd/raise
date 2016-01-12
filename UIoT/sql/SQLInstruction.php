@@ -30,7 +30,7 @@ abstract class SQLInstruction
     protected $criteria;
 
     /**
-     * @var srting Entity of the SQL Instruction
+     * @var string Entity of the SQL Instruction
      */
     protected $entity;
 
