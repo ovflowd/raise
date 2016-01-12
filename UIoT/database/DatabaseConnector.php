@@ -131,7 +131,6 @@ final class DatabaseConnector
      */
     public function getPdoObject()
     {
-       //$conn = $this->getDefaultConnection();
        $conn = null;
         try {
             switch (self::getType()):
@@ -180,19 +179,6 @@ final class DatabaseConnector
             array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
-    }
-
-    /**
-     * Returns the default connection.
-     *
-     * @return PDO
-     */
-    private function getDefaultConnection()
-    {
-
-        $conn = new PDO("");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     }
 
