@@ -2,33 +2,56 @@
 
 namespace UIoT\util;
 use UIoT\control\ResourceController;
+use UIoT\model\Request;
 
 /**
  * Class RequestRouter
+ *
  * @package UIoT\util
+ * @property ResourceController $resourceController
  */
 class RequestRouter
 {
-    var $resource_controller;
+    /**
+     * @var ResourceController
+     */
+    var $resourceController;
 
+    /**
+     * RequestRouter constructor.
+     */
     public function __construct()
     {
-        self::create_resource_controller();
+        self::createResourceController();
     }
 
-    private function create_resource_controller()
+    /**
+     * Creates a new ResourceController object | @see ResourceController.php
+     */
+    private function createResourceController()
     {
-        $this->resource_controller = new ResourceController();
+        $this->resourceController = new ResourceController();
     }
 
-    public function submit_request($request)
+    /**
+     * Executes the received Request | @see Request.php
+     *
+     * @param Request $request
+     * @return array|bool|string
+     */
+    public function submitRequest(Request $request)
     {
-        return self::get_resource_controller()->execute_request($request);
+        return self::getResourceController()->executeRequest($request);
     }
 
-    private function get_resource_controller()
+    /**
+     * Returns the resource controller attribute | @see $resourceController
+     *
+     * @return mixed
+     */
+    private function getResourceController()
     {
-        return $this->resource_controller;
+        return $this->resourceController;
     }
 
 

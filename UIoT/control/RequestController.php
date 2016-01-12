@@ -1,49 +1,96 @@
 <?php
 
 namespace UIoT\control;
+
 use UIoT\model\HTTPStatus;
 use UIoT\model\Request;
 
 /**
  * Class RequestControl
+ *
+ * @package UIoT\control
+ * @property string[] $methods
+ * @property string[] $resources
  */
 class RequestController
 {
 
-    var $methods = array("GET", "POST", "PUT", "DELETE");
+    /**
+     * @var string[] Request methods(Get, Post, Put and Delete).
+     */
+    private $methods = array("GET", "POST", "PUT", "DELETE");
 
-    var $resources = array("slave_controllers", "devices", "services", "actions", "state_variables", "resources");
+    /**
+     * @var string[] Request resources.
+     */
+    private $resources = array("slave_controllers", "devices", "services", "actions", "state_variables", "resources");
 
+    /**
+     * RequestController constructor.
+     */
     public function __construct()
     {
     }
 
-    public function create_request($request_uri, $request_method, $server_protocol, $script_name)
+    /**
+     * Creates a Request object.
+     * 
+     * @param string $requestUri
+     * @param string $requestMethod
+     * @param string $serverProtocol
+     * @param string $scriptName
+     * @return Request
+     */
+    public function createRequest($requestUri, $requestMethod, $serverProtocol, $scriptName)
     {
-        $request = new Request($request_uri, $request_method, $server_protocol, $script_name);
-        if (!self::is_valid($request))
-            $request->set_error_status(new HTTPStatus(403, null));
+        $request = new Request($requestUri, $requestMethod, $serverProtocol, $scriptName);
+        if (!self::isValid($request))
+            $request->setErrorStatus(new HTTPStatus(403, null));
 
         return $request;
     }
 
-    public function is_valid(Request $request)
+    /**
+     * Returns whether or not a request is valid.
+     * 
+     * @param Request $request
+     * @return bool
+     */
+    public function isValid(Request $request)
     {
-        return self::has_valid_method($request) && self::has_valid_resource($request) && self::is_uri_or_parameters_based($request);
+        return self::hasValidMethod($request) && self::hasValidResource($request) && self::isUriOrParametersBased($request);
     }
 
-    private function has_valid_method(Request $request)
+    /**
+     * Returns whether or not a request contains a valid method.
+     * 
+     * @param Request $request
+     * @return bool
+     */
+    private function hasValidMethod(Request $request)
     {
-        return in_array($request->get_method(), $this->methods);
+        return in_array($request->getMethod(), $this->methods);
     }
 
-    private function has_valid_resource(Request $request)
+    /**
+     * Returns whether or not a request has a valid resource.
+     * 
+     * @param Request $request
+     * @return bool
+     */
+    private function hasValidResource(Request $request)
     {
-        return in_array($request->get_resource(), $this->resources);
+        return in_array($request->getResource(), $this->resources);
     }
 
-    private function is_uri_or_parameters_based(Request $request)
+    /**
+     * Returns if a request is uri or parameter based.
+     *
+     * @param Request $request
+     * @return bool
+     */
+    private function isUriOrParametersBased(Request $request)
     {
-        return !($request->has_parameters() && $request->has_composed_uri());
+        return !($request->hasParameters() && $request->hasComposedUri());
     }
 }

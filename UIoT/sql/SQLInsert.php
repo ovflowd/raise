@@ -5,34 +5,36 @@ namespace UIoT\sql;
 use UIoT\exceptions\CriteriaNotSupportedException;
 
 /**
- * class SQLInsert
- * represents a insert sql instruction
+ * Class SQLInsert
+ *
+ * Represents an INSERT SQLInstruction
+ *
+ * @package UIoT/sql
  */
 final class SQLInsert extends SQLInstruction
 {
     /**
-     * method set_criteria
-     * not supported for inserts
-     * @param $criteria
+     * Not supported by INSERT instructions.
+     *
+     * @param SQLCriteria $criteria
      * @throws CriteriaNotSupportedException
      */
-
-    public function set_criteria($criteria)
+    public function setCriteria($criteria)
     {
         throw new CriteriaNotSupportedException("Insert operation does not support criteria objects");
     }
 
     /**
-     * @see sql::SQLInstruction class
+     * Generates a INSERT SQLInstruction | @see SQLInstruction.php
      */
-
-    protected function generate_instruction()
+    protected function generateInstruction()
     {
-        $this->instruction = SQL::INSERT_INTO() . SQL::BLANK() . $this->get_entity() .
-            '(' . $this->get_columns() . ')' . SQL::BLANK() .
+        $this->instruction = SQL::INSERT_INTO() . SQL::BLANK() . $this->getEntity() .
+            '(' . $this->getColumns() . ')' . SQL::BLANK() .
             SQL::VALUES() . SQL::BLANK() .
-            '(' . $this->get_values() . ')' . SQL::BLANK();
+            '(' . $this->getValues() . ')' . SQL::BLANK();
     }
 
 
 }
+

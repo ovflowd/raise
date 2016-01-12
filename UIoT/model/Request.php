@@ -4,165 +4,324 @@ namespace UIoT\model;
 
 /**
  * Class Request
+ *
+ * @package UIoT\model
+ * @property string $uri
+ * @property string $resource
+ * @property string[] $parameters
+ * @property string $method
+ * @property string $protocol
+ * @property string[] $scriptName
+ * @property string $errorStatus
  */
 class Request
 {
-    var $uri;
-    var $resource;
-    var $parameters;
-    var $method;
-    var $protocol;
-    var $script_name;
-    var $error_status;
+    /**
+     * @var string Uniform Resource Identifier.
+     */
+    private $uri;
 
-    public function __construct($uri, $method, $protocol, $script_name)
+    /**
+     * @var string Resource to be requested (actions, services, devices,etc).
+     */
+    private $resource;
+
+    /**
+     * @var string[] Parameters of the request.
+     */
+    private $parameters;
+
+    /**
+     * @var string Request method(Get, Post, Put or Delete).
+     */
+    private $method;
+
+    /**
+     * @var string Communication protocol (HTTP OR HTTPS)
+     */
+    private $protocol;
+
+    /**
+     * @var string[] Name of the script used on the request.
+     */
+    private $scriptName;
+
+    /**
+     * @var string HTTP/HTTPS error (See List of HTTP status codes for reference)
+     */
+    private $errorStatus;
+
+
+    /**
+     * Request constructor.
+     *
+     * @param string $uri
+     * @param string $method
+     * @param string $protocol
+     * @param string[] $scriptName
+     */
+    public function __construct($uri, $method, $protocol, $scriptName)
     {
-        self::set_method($method);
-        self::set_script_name($script_name);
-        self::set_protocol($protocol);
-        self::set_uri(self::prepare_uri($uri));
-        self::set_resource();
-        self::set_parameters($uri);
+        self::setMethod($method);
+        self::setScriptName($scriptName);
+        self::setProtocol($protocol);
+        self::setUri(self::prepareUri($uri));
+        self::setResource();
+        self::setParameters($uri);
     }
 
-    private function set_method($method)
+    /**
+     * Set method attribute. | @see $method
+     *
+     * @param string $method
+     */
+    private function setMethod($method)
     {
         $this->method = $method;
     }
 
-    private function set_script_name($script_name)
+    /**
+     * Set scriptName attribute. | @see $scriptName
+     *
+     * @param string[] $scriptName
+     */
+    private function setScriptName($scriptName)
     {
-        $this->script_name = $script_name;
+        $this->scriptName = $scriptName;
     }
 
-    private function set_protocol($protocol)
+    /**
+     * Set protocol attribute. | @see $protocol
+     *
+     * @param string $protocol
+     */
+    private function setProtocol($protocol)
     {
         $this->protocol = $protocol;
     }
 
-    private function set_uri($uri)
+    /**
+     * Set uri attribute. | @see $uri
+     *
+     * @param string $uri
+     */
+    private function setUri($uri)
     {
         $this->uri = $uri;
     }
 
-    private function prepare_uri($raw_uri)
+    /**
+     * Prepares a uri by removing unnecessary parts.
+     *
+     * @param string $rawUri
+     * @return string[]
+     */
+    private function prepareUri($rawUri)
     {
-        return self::remove_uri_parameters(self::remove_script_parameters($raw_uri));
+        return self::removeUriParameters(self::removeScriptParameters($rawUri));
     }
 
-    private function remove_uri_parameters($uri)
+    /**
+     * Removes a uri's parameters.
+     *
+     * @param string $uri
+     * @return string[]
+     */
+    private function removeUriParameters($uri)
     {
-        $uri_array = explode('?', end($uri));
-        $last_uri_element = reset($uri_array);
+        $uriArray = explode('?', end($uri));
+        $lastUriElement = reset($uriArray);
         end($uri);
-        $uri[key($uri)] = $last_uri_element;
+        $uri[key($uri)] = $lastUriElement;
         return $uri;
     }
 
-    private function remove_script_parameters($uri)
+    /**
+     * Removes a uri's script parameters.
+     *
+     * @param string $uri
+     * @return string[]
+     */
+    private function removeScriptParameters($uri)
     {
-        $script_size = sizeof($this->script_name);
+        $script_size = sizeof($this->scriptName);
         for ($i = 0; $i < $script_size; $i++) {
-            if ($uri[$i] == $this->script_name[$i]) {
+            if ($uri[$i] == $this->scriptName[$i]) {
                 unset($uri[$i]);
+
             }
         }
-
         return array_filter(array_values($uri));
     }
 
-    private function set_resource()
+    /**
+     * Set the resource attribute based on the uri attribute.
+     */
+    private function setResource()
     {
-        if (empty(array_filter(self::get_uri())))
+        if (empty(array_filter(self::getUri())))
             $this->resource = NULL;
         else
-            $this->resource = self::get_uri()[0];
+            $this->resource = self::getUri()[0];
     }
 
-    public function get_uri()
+    /**
+     * Gets the uri attribute. | @see $uri
+     *
+     * @return string
+     */
+    public function getUri()
     {
         return $this->uri;
     }
 
-    private function set_parameters($uri)
+    /**
+     * Sets the parameters attribute using a uri. | @see $parameters
+     *
+     * @param string $uri
+     */
+    private function setParameters($uri)
     {
-        $this->parameters = self::set_parameters_map($uri);
+        $this->parameters = self::setParametersMap($uri);
     }
 
-    private function set_parameters_map($uri)
+    /**
+     * Sets a parameter's map using a uri.
+     *
+     * @param string $uri
+     * @return string[]|null
+     */
+    private function setParametersMap($uri)
     {
-        $string_parameters = self::get_uri_parameters_as_string(end($uri));
+        $stringParameters = self::getUriParametersAsString(end($uri));
 
-        if ($string_parameters !== "")
-            return self::get_uri_parameters_as_array($string_parameters);
+        if ($stringParameters !== "")
+            return self::getUriParametersAsArray($stringParameters);
 
         return NULL;
     }
 
-    private function get_uri_parameters_as_string($raw_string_parameters)
+    /**
+     * Gets a uri's parameters as a string.
+     *
+     * @param string $rawStringParameters
+     * @return string[]
+     */
+    private function getUriParametersAsString($rawStringParameters)
     {
-        if (!strpos($raw_string_parameters, '?') === 0 || strpos($raw_string_parameters, '?') === FALSE) {
+        if (!strpos($rawStringParameters, '?') === 0 || strpos($rawStringParameters, '?') === FALSE) {
             return "";
         }
-        $parameters_array = explode('?', $raw_string_parameters);
-        return end($parameters_array);
+        $parametersArray = explode('?', $rawStringParameters);
+        return end($parametersArray);
     }
 
-    private function get_uri_parameters_as_array($string_parameters)
+    /**
+     * Gets a uri's parameters as an array.
+     *
+     * @param string $stringParameters
+     * @return string[]
+     */
+    private function getUriParametersAsArray($stringParameters)
     {
         $parameters = array();
-        $tmp_array = explode('&', $string_parameters);
+        $tmpArray = explode('&', $stringParameters);
 
-        foreach ($tmp_array as $parameter) {
-            $key_value_parameter = explode("=", $parameter);
-            $parameters[$key_value_parameter[0]] = $key_value_parameter[1];
+        foreach ($tmpArray as $parameter) {
+            $keyValueParameter = explode("=", $parameter);
+            $parameters[$keyValueParameter[0]] = $keyValueParameter[1];
         }
 
         return $parameters;
     }
 
-    public function get_resource()
+    /**
+     * Gets the resource attribute. | @see $resource
+     *
+     * @return string
+     */
+    public function getResource()
     {
         return $this->resource;
     }
 
-    public function get_method()
+    /**
+     * Gets the method attribute. | @see $method
+     *
+     * @return string
+     */
+    public function getMethod()
     {
         return $this->method;
     }
 
-    public function get_protocol()
+    /**
+     * Gets the protocol attribute. | @see $protocol
+     *
+     * @return string
+     */
+    public function getProtocol()
     {
         return $this->protocol;
     }
 
-    public function get_script_name()
+    /**
+     * Gets the scriptName attribute. | @see $scriptName
+     *
+     * @return string
+     */
+    public function getScriptName()
     {
-        return $this->script_name;
+        return $this->scriptName;
     }
 
-    public function has_parameters()
+    /**
+     * Returns whether or not parameters exist.
+     *
+     * @return bool
+     */
+    public function hasParameters()
     {
-        return !(self::get_parameters() == NULL);
+        return !(self::getParameters() == NULL);
     }
 
-    public function get_parameters()
+    /**
+     * Gets the parameters attribute. | @see $parameters
+     *
+     * @return string[]|null
+     */
+    public function getParameters()
     {
         return $this->parameters;
     }
 
-    public function get_error_status()
+    /**
+     * Gets the errorStatus attribute. | @see $errorStatus
+     *
+     * @return string|null
+     */
+    public function getErrorStatus()
     {
-        return $this->error_status;
+        return $this->errorStatus;
     }
 
-    public function set_error_status($http_status)
+    /**
+     * Sets the errorStatus attribute. | @see $errorStatus
+     *
+     * @param string $httpStatus
+     */
+    public function setErrorStatus($httpStatus)
     {
-        $this->error_status = $http_status;
+        $this->errorStatus = $httpStatus;
     }
 
-    public function has_composed_uri()
+    /**
+     * Returns whether or not the uri attribute is composed.
+     *
+     * @return bool
+     */
+    public function hasComposedUri()
     {
-        return sizeof(self::get_uri()) > 1;
+        return sizeof(self::getUri()) > 1;
     }
 }

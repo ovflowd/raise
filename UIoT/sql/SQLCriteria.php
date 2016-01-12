@@ -7,53 +7,55 @@ use UIoT\exceptions\InvalidSqlOperatorException;
 use UIoT\exceptions\NotSqlFilterException;
 
 /**
- * class SQLExpression
- * represents a collection of SQLFilters related by logic operands
- * example: name = 'teste' AND age > 10 OR salary != 5000
+ * Class SQLExpression
+ *
+ * Represents a collection of SQLFilters related by logic operands.
+ * Example: name = 'test' AND age > 10 OR salary != 5000
+ *
+ * @package UIoT\sql
+ * @property array $filters
  */
 final class SQLCriteria
 {
+    /**
+     * @var array (SQLFilter)
+     */
     private $filters;
 
     /**
-     * method __construct
-     * instantiates a new SQLExpression
-     *
+     * SQLCriteria constructor
      */
-
     public function __construct()
     {
     }
 
     /**
-     * method add_filter
-     * adds a SQLFilter on expression linked by logic_operator
+     * Adds a SQLFilter to an expression linked by a logic operation.
+     *
      * @param SQLFilter $filter
-     * @param string $logic_operation
-     * @throws InvalidSqlOperatorException if $logic_operation is not a valid sql operator
-     * @throws NotSqlFilterException if $filter does is not a instance of SQLFilter
+     * @param string $logicOperation
+     * @throws InvalidSqlOperatorException
+     * @throws NotSqlFilterException
      */
-
-    public function add_filter($filter, $logic_operation)
+    public function addFilter($filter, $logicOperation)
     {
         if (!($filter instanceof SQLFilter))
             throw new NotSqlFilterException("parameter is not a instance of SQLFilter");
 
-        if (!in_array($logic_operation, SQL::LOGIC_OPERATORS))
+        if (!in_array($logicOperation, SQL::LOGIC_OPERATORS))
             throw new InvalidSqlOperatorException("parameter is not a valid sql logic operator");
 
-        $this->filters[] = $logic_operation;
-        $this->filters[] = $filter->to_sql();
+        $this->filters[] = $logicOperation;
+        $this->filters[] = $filter->toSql();
     }
 
 
     /**
-     * method to_sql
-     * creates a sql string based on filters
+     * Creates a SQL string based on filters attribute. | @see $filters
+     *
      * @return string $sql
      */
-
-    public function to_sql()
+    public function toSql()
     {
         if(empty($this->filters))
             return SQL::ALWAYS_TRUE();
@@ -68,3 +70,4 @@ final class SQLCriteria
     }
 
 }
+

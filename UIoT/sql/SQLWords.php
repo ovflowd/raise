@@ -4,7 +4,9 @@ namespace UIoT\sql;
 
 /**
  * Class SQL
- * contains sql reserved words
+ *
+ * Contains SQL reserved words
+ *
  * @package UIoT\sql
  */
 

@@ -1,0 +1,47 @@
+<?php
+
+namespace UIoT\database;
+
+use PDO;
+use UIoT\sql\SQL;
+
+/**
+ * Class DatabaseExecuter
+ * @package UIoT\database
+ */
+class DatabaseExecuter
+{
+    /**
+     * Executes a query.
+     *
+     * @param string $query
+     * @param PDO $connection
+     * @return array|bool|string
+     */
+    public function execute($query, PDO $connection)
+    {
+        $finalResult = "";
+        $result = $connection->query($query);
+
+        if (!self::isSelect($query)) {
+            return (bool) $result;
+
+        }
+
+        if ($result->rowCount() > 0)
+            $finalResult = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        return $finalResult;
+    }
+
+    /**
+     * Checks whether or not the query's method is 'SELECT'.
+     *
+     * @param string $query
+     * @return bool
+     */
+    private function isSelect($query)
+    {
+        return !(substr($query, 0, 6) != SQL::SELECT);
+    }
+}

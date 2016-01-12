@@ -4,42 +4,66 @@ namespace UIoT\sql;
 
 use UIoT\exceptions\NotArrayException;
 
+/**
+ * Class SQLSelect
+ *
+ * Represents a SELECT SQLInstruction
+ *
+ * @package UIoT\sql
+ * @property array $selectColumns
+ */
 final class SQLSelect extends SQLInstruction
 {
-    private $select_columns; //represents an array of columns that should be returned
+    /**
+     * @var array column values
+     */
+    private $selectColumns;
 
     /**
-     * method add_column
-     * adds a column in columns attribute
+     * Adds a column to the columns attribute | @see $selectColumns
+     *
      * @param string $column
      */
-
-    public function add_column($column)
+    public function addColumn($column)
     {
-        $this->select_columns[] = $column;
+        $this->selectColumns[] = $column;
     }
 
-    public function add_columns($columns)
+    /**
+     * Sets an array of columns to the columns attribute | @see $selectColumns
+     *
+     * @param array $columns
+     * @throws NotArrayException
+     */
+    public function addColumns($columns)
     {
         if(!is_array($columns))
              throw new NotArrayException("Columns should be in an array");
-        $this->select_columns = $columns;
+        $this->selectColumns = $columns;
     }
 
-    protected function generate_instruction()
+    /**
+     * Generates a SELECT SQLInstruction | @see SQLInstruction.php
+     */
+    protected function generateInstruction()
     {
         $this->instruction = SQL::SELECT() . SQL::BLANK() .
-            $this->select_columns_to_sql() . SQL::BLANK() .
+            $this->selectColumnsToSql() . SQL::BLANK() .
             SQL::FROM() . SQL::BLANK() .
-            $this->get_entity() . SQL::BLANK() .
+            $this->getEntity() . SQL::BLANK() .
             SQL::WHERE() . SQL::BLANK() .
-            $this->criteria->to_sql();
+            $this->criteria->toSql();
 
     }
 
-    public function select_columns_to_sql()
+    /**
+     * Converts the columns attribute to a SQL string
+     *
+     * @return string
+     */
+    public function selectColumnsToSql()
     {
-        return implode(',', $this->select_columns);
+        return implode(',', $this->selectColumns);
     }
 
 }

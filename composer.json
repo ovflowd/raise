@@ -7,6 +7,10 @@
     {
       "name": "Caio Melo",
       "email": "caio.silva@redes.unb.br"
+    },
+    {
+      "name": "Pedro Luiz Salgado",
+      "email": "pedro.luiz@redes.unb.br"
     }
   ],
   "minimum-stability": "dev",

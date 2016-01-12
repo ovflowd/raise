@@ -2,6 +2,9 @@
 
 namespace UIoT\properties;
 
+/**
+ * Pages configurations
+ */
 $welcome_page
     = '<html>
 		 				 <head>
