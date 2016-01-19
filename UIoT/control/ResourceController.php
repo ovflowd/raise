@@ -94,18 +94,20 @@ class ResourceController
      */
     private function executeResource(Request $request)
     {
+
         $id = $this->getResourceId($request->getResource());
         $tableName = $this->getResourceTableName($request->getResource());
         $instruction = $this->getResourceInstruction($request->getMethod());
-        $columns = $this->getColumnNames($id);
 
         if (!empty($request->getParameters()))
             $criteria = $this->getCriteria($id, $request->getParameters());
         else
             $criteria = new SQLCriteria();
 
-        if ($instruction instanceof SQLSelect)
+        if ($instruction instanceof SQLSelect) {
+            $columns = $this->getColumnNames($id);
             $instruction->addColumns($columns);
+        }
 
         $instruction->setCriteria($criteria);
         $instruction->setEntity($tableName);
