@@ -103,5 +103,4 @@ class HTTPStatus
                 break;
         }
     }
-
 }

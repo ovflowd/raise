@@ -20,7 +20,7 @@ use UIoT\sql\SQL;
 
 /**
  * Class ResourceController
- * 
+ *
  * @package UIoT\control
  * @property DatabaseConnector $dbConnector
  * @property DatabaseExecuter $dbExecuter
@@ -31,7 +31,7 @@ class ResourceController
      * @var DatabaseConnector
      */
     private $dbConnector;
-    
+
     /**
      * @var DatabaseExecuter
      */
@@ -64,19 +64,20 @@ class ResourceController
 
     /**
      * Executes a request.
-     * 
+     *
      * @param Request $request
      * @return bool|string[]
      */
     public function executeRequest(Request $request)
     {
         $resource = $this->executeResource($request);
+
         return $this->dbExecuter->execute($resource->getInstruction(), $this->dbConnector->getPdoObject());
     }
 
     /**
      * Gets connection from dbConnector attribute.
-     * 
+     *
      * @return PDO
      */
     private function getConnection()
@@ -86,7 +87,7 @@ class ResourceController
 
     /**
      * Executes a resource.
-     * 
+     *
      * @param Request $request
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
      * @throws InvalidColumnNameException
@@ -97,6 +98,7 @@ class ResourceController
 
         $id = $this->getResourceId($request->getResource());
         $tableName = $this->getResourceTableName($request->getResource());
+
         $instruction = $this->getResourceInstruction($request->getMethod());
 
         if (!empty($request->getParameters()))
@@ -117,7 +119,7 @@ class ResourceController
 
     /**
      * Gets a resource's table name.
-     * 
+     *
      * @param  string $resource
      * @return string
      * @throws InvalidSqlOperatorException

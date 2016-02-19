@@ -3,6 +3,7 @@
 namespace UIoT\database;
 
 use PDO;
+use stdClass;
 use UIoT\sql\SQL;
 
 /**
@@ -20,7 +21,8 @@ class DatabaseExecuter
      */
     public function execute($query, PDO $connection)
     {
-        $finalResult = "";
+        $finalResult = new stdClass();
+
         $result = $connection->query($query);
 
         if (!self::isSelect($query)) {

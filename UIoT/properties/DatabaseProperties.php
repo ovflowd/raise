@@ -17,12 +17,12 @@ class DatabaseProperties
     /**
      * @const DB_USER Database user.
      */
-    const DB_USER = 'root';
+    const DB_USER = 'localroot';
 
     /**
      * @const DB_PASS Database pass.
      */
-    const DB_PASS = '';
+    const DB_PASS = 'latitude';
 
     /**
      * @const DB_NAME Database name.

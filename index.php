@@ -20,10 +20,9 @@
  * @copyright University of Brasília
  */
 
-include_once 'vendor/autoload.php';
+include_once __DIR__ . '/vendor/autoload.php';
 
 use UIoT\view\RequestInput;
 
-$ri = new RequestInput();
-echo json_encode($ri->start(), JSON_PRETTY_PRINT);
+echo json_encode((new RequestInput)->start(), JSON_PRETTY_PRINT);
 

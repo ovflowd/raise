@@ -47,7 +47,7 @@ class RequestRouter
     /**
      * Returns the resource controller attribute | @see $resourceController
      *
-     * @return mixed
+     * @return ResourceController
      */
     private function getResourceController()
     {

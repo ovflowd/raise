@@ -12,25 +12,18 @@ use UIoT\model\Request;
  * @property string[] $methods
  * @property string[] $resources
  */
-class RequestController
+final class RequestController
 {
 
     /**
      * @var string[] Request methods(Get, Post, Put and Delete).
      */
-    private $methods = array("GET", "POST", "PUT", "DELETE");
+    private $methods = array('GET', 'POST', 'PUT', 'DELETE');
 
     /**
      * @var string[] Request resources.
      */
-    private $resources = array("slave_controllers", "devices", "services", "actions", "state_variables", "resources");
-
-    /**
-     * RequestController constructor.
-     */
-    public function __construct()
-    {
-    }
+    private $resources = array('slave_controllers', 'devices', 'services', 'actions', 'state_variables', 'resources');
 
     /**
      * Creates a Request object.
@@ -44,7 +37,8 @@ class RequestController
     public function createRequest($requestUri, $requestMethod, $serverProtocol, $scriptName)
     {
         $request = new Request($requestUri, $requestMethod, $serverProtocol, $scriptName);
-        if (!self::isValid($request))
+
+        if (!self::isValidRequest($request))
             $request->setErrorStatus(new HTTPStatus(403, null));
 
         return $request;
@@ -56,7 +50,7 @@ class RequestController
      * @param Request $request
      * @return bool
      */
-    public function isValid(Request $request)
+    public function isValidRequest(Request $request)
     {
         return self::hasValidMethod($request) && self::hasValidResource($request) && self::isUriOrParametersBased($request);
     }
@@ -74,7 +68,7 @@ class RequestController
 
     /**
      * Returns whether or not a request has a valid resource.
-     * 
+     *
      * @param Request $request
      * @return bool
      */
