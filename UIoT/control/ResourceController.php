@@ -5,18 +5,20 @@ namespace UIoT\control;
 use PDO;
 use UIoT\database\DatabaseConnector;
 use UIoT\database\DatabaseExecuter;
-use UIoT\exceptions\InvalidSqlOperatorException;
-use UIoT\exceptions\NotSqlFilterException;
-use UIoT\model\Request;
 use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\exceptions\InvalidMethodException;
+use UIoT\exceptions\InvalidSqlOperatorException;
+use UIoT\exceptions\NotSqlFilterException;
+use UIoT\model\UIoTRequest;
+use UIoT\sql\SQL;
+use UIoT\sql\SQLCriteria;
 use UIoT\sql\SQLDelete;
+use UIoT\sql\SQLFilter;
 use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLSelect;
 use UIoT\sql\SQLUpdate;
-use UIoT\sql\SQLCriteria;
-use UIoT\sql\SQLFilter;
-use UIoT\sql\SQL;
+use UIoT\util\ExceptionHandler;
+use UIoT\view\RequestInput;
 
 /**
  * Class ResourceController
@@ -65,12 +67,15 @@ class ResourceController
     /**
      * Executes a request.
      *
-     * @param Request $request
+     * @param RequestInput $request
      * @return bool|string[]
      */
-    public function executeRequest(Request $request)
+    public function executeRequest(RequestInput $request)
     {
-        $resource = $this->executeResource($request);
+        if (ExceptionHandler::getInstance()->getRaiseMessage() !== null)
+            return ExceptionHandler::getInstance()->show();
+
+        $resource = $this->executeResource($request->getRequestData());
 
         return $this->dbExecuter->execute($resource->getInstruction(), $this->dbConnector->getPdoObject());
     }
@@ -88,23 +93,23 @@ class ResourceController
     /**
      * Executes a resource.
      *
-     * @param Request $request
+     * @param UIoTRequest $request
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
      * @throws InvalidColumnNameException
      * @throws InvalidMethodException
      */
-    private function executeResource(Request $request)
+    private function executeResource(UIoTRequest $request)
     {
-
         $id = $this->getResourceId($request->getResource());
+
         $tableName = $this->getResourceTableName($request->getResource());
 
         $instruction = $this->getResourceInstruction($request->getMethod());
 
-        if (!empty($request->getParameters()))
-            $criteria = $this->getCriteria($id, $request->getParameters());
-        else
-            $criteria = new SQLCriteria();
+        $criteria = new SQLCriteria();
+
+        if ($request->getRequestValidation()->hasParameters())
+            $criteria = $this->getCriteria($id, $request->getRequestUriData()->getQuery()->getData());
 
         if ($instruction instanceof SQLSelect) {
             $columns = $this->getColumnNames($id);
@@ -211,7 +216,6 @@ class ResourceController
      */
     private function getColumnName($id, $friendlyName)
     {
-
         $instruction = new SQLSelect();
         $criteria = new SQLCriteria();
         $criteria->addFilter(new SQLFilter('PROP_FRIENDLY_NAME', SQL::EQUALS_OP(), $friendlyName), SQL::AND_OP());
@@ -237,11 +241,14 @@ class ResourceController
     {
         $criteria = new SQLCriteria();
         foreach ($parameters as $key => $value) {
+
             $column = $this->getColumnName($id, $key);
+
             if (is_null($column))
                 throw new InvalidColumnNameException();
 
             $filter = new SQLFilter($column[0]['PROP_NAME'], SQL::EQUALS_OP(), $value);
+
             $criteria->addFilter($filter, SQL::AND_OP());
         }
 

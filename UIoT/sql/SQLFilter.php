@@ -1,6 +1,7 @@
 <?php
 
 namespace UIoT\sql;
+
 use UIoT\exceptions\InvalidSqlOperatorException;
 
 /**

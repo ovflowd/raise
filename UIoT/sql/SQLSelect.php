@@ -37,8 +37,8 @@ final class SQLSelect extends SQLInstruction
      */
     public function addColumns($columns)
     {
-        if(!is_array($columns))
-             throw new NotArrayException("Columns should be in an array");
+        if (!is_array($columns))
+            throw new NotArrayException("Columns should be in an array");
         $this->selectColumns = $columns;
     }
 

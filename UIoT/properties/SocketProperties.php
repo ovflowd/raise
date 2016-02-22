@@ -2,9 +2,9 @@
 
 namespace UIoT\properties;
 
-/**
- * Socket configurations
- */
+    /**
+     * Socket configurations
+     */
 
 /**
  * Socket port constant.

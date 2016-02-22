@@ -96,6 +96,7 @@ abstract class SQLInstruction
     public function getInstruction()
     {
         $this->generateInstruction();
+
         return $this->instruction;
     }
 

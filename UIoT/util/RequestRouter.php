@@ -1,8 +1,9 @@
 <?php
 
 namespace UIoT\util;
+
 use UIoT\control\ResourceController;
-use UIoT\model\Request;
+use UIoT\view\RequestInput;
 
 /**
  * Class RequestRouter
@@ -36,10 +37,10 @@ class RequestRouter
     /**
      * Executes the received Request | @see Request.php
      *
-     * @param Request $request
+     * @param RequestInput $request
      * @return array|bool|string
      */
-    public function submitRequest(Request $request)
+    public function submitRequest(RequestInput $request)
     {
         return self::getResourceController()->executeRequest($request);
     }
@@ -53,6 +54,4 @@ class RequestRouter
     {
         return $this->resourceController;
     }
-
-
 }

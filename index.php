@@ -16,13 +16,15 @@
  * @app UIoT Service Layer Manager
  * @author UIoT
  * @developer Caio Melo
+ * @developer Claudio Santoro
  * @developer Pedro Luiz Salgado
  * @copyright University of Brasília
  */
 
 include_once __DIR__ . '/vendor/autoload.php';
 
+use UIoT\util\JsonOutput;
 use UIoT\view\RequestInput;
 
-echo json_encode((new RequestInput)->start(), JSON_PRETTY_PRINT);
+JsonOutput::showJson((new RequestInput)->route());
 

@@ -2,10 +2,10 @@
 
 namespace UIoT\database;
 
-use UIoT\properties\DatabaseProperties;
-use UIoT\exceptions\DatabaseConnectionFailedException;
 use Exception;
 use PDO;
+use UIoT\exceptions\DatabaseConnectionFailedException;
+use UIoT\properties\DatabaseProperties;
 
 /**
  * Class DatabaseConnector
@@ -131,7 +131,7 @@ final class DatabaseConnector
      */
     public function getPdoObject()
     {
-       $conn = null;
+        $conn = null;
         try {
             switch (self::getType()):
                 case 'mysql':

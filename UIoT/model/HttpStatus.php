@@ -2,6 +2,8 @@
 
 namespace UIoT\model;
 
+use stdClass;
+
 /**
  * Class HTTPStatus
  *
@@ -27,33 +29,20 @@ class HTTPStatus
      * @param int $code
      * @param string $message
      */
-    public function __construct($code, $message)
+    public function __construct($code = 200, $message = '')
     {
         self::setCode($code);
+
         self::setMessage($message);
     }
 
-    /**
-     * Gets the message attribute. | @see $message
-     *
-     * @return string
-     */
-    public function getMessage()
+    public function returnStatus()
     {
-        return $this->message;
-    }
+        $responseCodes = new stdClass();
+        $responseCodes->code = $this->getCode();
+        $responseCodes->message = $this->getMessage();
 
-    /**
-     * Sets the message attribute. | @see $message
-     *
-     * @param string $message
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message))
-            self::setDefaultMessage();
-        else
-            $this->message = $message;
+        return $responseCodes;
     }
 
     /**
@@ -70,14 +59,47 @@ class HTTPStatus
      * Sets the code attribute. | @see $code
      *
      * @param int $code
+     *
+     * @return HTTPStatus
      */
-    public function setCode($code)
+    public function setCode($code = 200)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets the message attribute. | @see $message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Sets the message attribute. | @see $message
+     *
+     * @param string $message
+     *
+     * @return HTTPStatus
+     */
+    public function setMessage($message = '')
+    {
+        if (empty($message))
+            self::setDefaultMessage();
+        else
+            $this->message = $message;
+
+        return $this;
     }
 
     /**
      * Sets the message attribute based on the code attribute | @see $message, $code
+     *
+     * @return HTTPStatus
      */
     private function setDefaultMessage()
     {
@@ -99,8 +121,10 @@ class HTTPStatus
                 break;
 
             default:
-                self::setMessage("");
+                $this->message = "";
                 break;
         }
+
+        return $this;
     }
 }

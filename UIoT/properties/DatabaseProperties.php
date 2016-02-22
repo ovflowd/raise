@@ -12,7 +12,7 @@ class DatabaseProperties
     /**
      * @const DB_HOST Database host.
      */
-    const DB_HOST = 'localhost';
+    const DB_HOST = '127.0.0.1';
 
     /**
      * @const DB_USER Database user.
@@ -46,8 +46,7 @@ class DatabaseProperties
      */
     public static function DB_HOST()
     {
-        $db = 'DB_HOST';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_HOST');
     }
 
     /**
@@ -57,8 +56,7 @@ class DatabaseProperties
      */
     public static function DB_USER()
     {
-        $db = 'DB_USER';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_USER');
     }
 
     /**
@@ -68,8 +66,7 @@ class DatabaseProperties
      */
     public static function DB_PASS()
     {
-        $db = 'DB_PASS';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_PASS');
     }
 
     /**
@@ -79,8 +76,7 @@ class DatabaseProperties
      */
     public static function DB_NAME()
     {
-        $db = 'DB_NAME';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_NAME');
     }
 
     /**
@@ -90,8 +86,7 @@ class DatabaseProperties
      */
     public static function DB_TYPE()
     {
-        $db = 'DB_TYPE';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_TYPE');
     }
 
     /**
@@ -101,8 +96,7 @@ class DatabaseProperties
      */
     public static function DB_PORT()
     {
-        $db = 'DB_PORT';
-        return constant('self::' . $db);
+        return constant('self::' . 'DB_PORT');
     }
 
 }

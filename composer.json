@@ -14,7 +14,10 @@
     }
   ],
   "minimum-stability": "dev",
-  "require": {},
+  "require": {
+    "symfony/http-foundation": "^3.0",
+    "jwage/purl": "^0.0.6"
+  },
   "autoload": {
     "classmap": [
       "UIoT/"
