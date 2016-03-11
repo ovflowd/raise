@@ -9,7 +9,6 @@ namespace UIoT\sql;
  *
  * @package UIoT\sql
  */
-
 final class SQL
 {
     const SELECT = 'SELECT';
@@ -23,7 +22,7 @@ final class SQL
     const AND_OP = 'AND';
     const OR_OP = 'OR';
     const LIMIT = 'LIMIT';
-    const ORDER_BY = 'ORDER_BY';
+    const ORDER_BY = 'ORDER BY';
     const OFFSET = 'OFFSET';
     const IN = 'IN';
     const IS_NULL = 'IS NULL';

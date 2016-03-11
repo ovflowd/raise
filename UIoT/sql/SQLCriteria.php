@@ -40,7 +40,7 @@ final class SQLCriteria
     public function addFilter($filter, $logicOperation)
     {
         if (!($filter instanceof SQLFilter))
-            throw new NotSqlFilterException("parameter is not a instance of SQLFilter");
+            throw new NotSqlFilterException("Parameter is not a instance of SQLFilter");
 
         if (!in_array($logicOperation, SQL::LOGIC_OPERATORS))
             throw new InvalidSqlOperatorException("parameter is not a valid sql logic operator");

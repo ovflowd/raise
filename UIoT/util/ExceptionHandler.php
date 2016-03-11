@@ -2,6 +2,7 @@
 
 namespace UIoT\util;
 
+use Exception;
 use UIoT\interfaces\RaiseException;
 use UIoT\model\HTTPStatus;
 use UIoT\model\UIoTSingleton;
@@ -35,11 +36,11 @@ class ExceptionHandler extends UIoTSingleton
     /**
      * Handle Exception
      *
-     * @param RaiseException $exception
+     * @param Exception $exception
      *
      * @return bool
      */
-    public static function handleException(RaiseException $exception)
+    public static function handleException(Exception $exception)
     {
         if ($exception instanceof RaiseException)
             self::getInstance()->setRaiseMessage(new HTTPStatus($exception->getCode(), $exception->getMessage()));

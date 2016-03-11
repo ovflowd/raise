@@ -32,6 +32,9 @@ class DatabaseExecuter
         if (!self::isSelect($query))
             return (bool)$result;
 
+        if(is_bool($result) && !$result)
+            return $result;
+
         if ($result->rowCount() > 0)
             $finalResult = $result->fetchAll(PDO::FETCH_ASSOC);
 
