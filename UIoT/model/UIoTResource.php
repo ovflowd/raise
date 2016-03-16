@@ -121,6 +121,12 @@ class UIoTResource
         return $names;
     }
 
-
+    public function getProperty($friendlyName)
+    {
+        foreach($this->properties as $property) {
+            if ($property->getFriendlyName() === $friendlyName)
+                return $property;
+        }
+    }
 
 }

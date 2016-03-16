@@ -2,8 +2,10 @@
 
 namespace UIoT\sql;
 
+use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\model\UIoTRequest;
 use UIoT\model\UIoTResource;
+use UIoT\metadata\Properties;
 
 
 /**
@@ -47,7 +49,7 @@ class SQLInstructionFactory
 
         if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
         {
-            $criteria = $this->getCriteria($resource->getId(), $request->getRequestUriData()->getQuery()->getData());
+            $criteria = $this->getCriteria($resource, $request->getRequestUriData()->getQuery()->getData());
         }
 
         $instruction->setCriteria($criteria);
@@ -62,17 +64,18 @@ class SQLInstructionFactory
      * @throws InvalidSqlOperatorException
      * @throws NotSqlFilterException
      */
-    private function getCriteria($id, $parameters)
+    private function getCriteria(UIoTResource $resource, $parameters)
     {
         $criteria = new SQLCriteria();
-        foreach ($parameters as $key => $value) {
 
-            $column = $this->getColumnName($id, $key);
+        foreach ($parameters as $friendlyName => $value) {
 
-            if (is_null($column))
+            $columnName = $resource->getProperty($friendlyName)->getName();
+
+            if (is_null($columnName))
                 throw new InvalidColumnNameException();
 
-            $filter = new SQLFilter($column[0][Properties::PROP_NAME()], SQL::EQUALS_OP(), $value);
+            $filter = new SQLFilter($columnName, SQL::EQUALS_OP(), $value);
 
             $criteria->addFilter($filter, SQL::AND_OP());
         }
@@ -86,6 +89,10 @@ class SQLInstructionFactory
         {
             $instruction->addColumns($resource->getColumnNames());
         }
+    }
+
+    private function getColumnName($id, $key) {
+
     }
 
 

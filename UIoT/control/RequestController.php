@@ -51,8 +51,8 @@ final class RequestController
      */
     private function assignRequestCode(RequestInput $request)
     {
-        if (!$request->getRequestData()->getRequestValidation()->isValidRequest($this))
-            throw new InvalidRaiseResourceException;
+        //if (!$request->getRequestData()->getRequestValidation()->isValidRequest($this))
+            //throw new InvalidRaiseResourceException;
     }
 
     /**
