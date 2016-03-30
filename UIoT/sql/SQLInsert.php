@@ -13,15 +13,22 @@ use UIoT\exceptions\CriteriaNotSupportedException;
  */
 final class SQLInsert extends SQLInstruction
 {
-    /**
-     * Not supported by INSERT instructions.
-     *
-     * @param SQLCriteria $criteria
-     * @throws CriteriaNotSupportedException
-     */
-    public function setCriteria($criteria)
+
+    private $values;
+    
+    public function getColumns()
     {
-        throw new CriteriaNotSupportedException("Insert operation does not support criteria objects");
+        return implode(',', $this->columns);
+    }
+
+    private function getSqlValues()
+    {
+        return "'".implode("','", $this->values)."'";
+    }
+
+    public function setValues($values)
+    {
+        $this->values = $values;
     }
 
     /**
@@ -32,7 +39,7 @@ final class SQLInsert extends SQLInstruction
         $this->instruction = SQL::INSERT_INTO() . SQL::BLANK() . $this->getEntity() .
             '(' . $this->getColumns() . ')' . SQL::BLANK() .
             SQL::VALUES() . SQL::BLANK() .
-            '(' . $this->getValues() . ')' . SQL::BLANK();
+            '(' . $this->getSqlValues() . ')' . SQL::BLANK();
     }
 
 

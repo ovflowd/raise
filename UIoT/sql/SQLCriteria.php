@@ -68,6 +68,14 @@ final class SQLCriteria
 
         return $sql;
     }
+    
+    /**
+     *
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
 
 }
 

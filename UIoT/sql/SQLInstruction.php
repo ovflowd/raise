@@ -3,6 +3,7 @@
 namespace UIoT\sql;
 
 use UIoT\exceptions\InvalidValueException;
+use UIoT\exceptions\NotArrayException;
 
 /**
  * Abstract Class SQLInstruction
@@ -40,6 +41,11 @@ abstract class SQLInstruction
     protected $columnValues;
 
     /**
+     *
+     */
+    protected $columns;
+
+    /**
      * Gets the entity attribute. | @see $entity
      *
      * @return string
@@ -63,7 +69,7 @@ abstract class SQLInstruction
      *
      * @return string
      */
-    final public function getColumns()
+    public function getColumns()
     {
         return implode(',', array_keys($this->criteria));
     }
@@ -73,7 +79,7 @@ abstract class SQLInstruction
      *
      * @return string
      */
-    final public function getValues()
+    public function getValues()
     {
         return implode(',', array_values($this->criteria));
     }
@@ -86,6 +92,19 @@ abstract class SQLInstruction
     public function setCriteria($criteria)
     {
         $this->criteria = $criteria;
+    }
+
+    /**
+     * Sets an array of columns to the columns attribute | @see $selectColumns
+     *
+     * @param array $columns
+     * @throws NotArrayException
+     */
+    public function addColumns($columns)
+    {
+        if (!is_array($columns))
+            throw new NotArrayException("Columns should be in an array");
+        $this->columns = $columns;
     }
 
     /**

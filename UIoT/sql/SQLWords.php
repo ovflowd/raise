@@ -43,7 +43,7 @@ final class SQL
 
     public static function INSERT_INTO()
     {
-        $sql = "INSERT INTO";
+        $sql = "INSERT_INTO";
         return constant('self::' . $sql);
     }
 

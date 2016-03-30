@@ -46,10 +46,16 @@ class SQLInstructionFactory
     private function setCriteria(UIoTResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
         $criteria = new SQLCriteria();
+        $values = $request->getRequestUriData()->getQuery()->getData();
+
+        if($instruction instanceof SQLInsert)
+        {
+            $instruction->setValues($values);
+        }
 
         if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
         {
-            $criteria = $this->getCriteria($resource, $request->getRequestUriData()->getQuery()->getData());
+            $criteria = $this->getCriteria($resource, $values);
         }
 
         $instruction->setCriteria($criteria);
@@ -83,16 +89,30 @@ class SQLInstructionFactory
         return $criteria;
     }
 
-    private function addColumns(UIoTResource $resource, SQLInstruction $instruction) {
+    private function addColumns(UIoTResource $resource, SQLInstruction $instruction)
+    {
+        $columns = $resource->getColumnNames();
 
         if ($instruction instanceof SQLSelect)
         {
-            $instruction->addColumns($resource->getColumnNames());
+            $instruction->addColumns($columns);
+        }
+
+        if ($instruction instanceof SQLInsert)
+        {
+            $instruction->addColumns($this->removeColumn("ID", $columns));
         }
     }
 
-    private function getColumnName($id, $key) {
+    private function removeColumn($columnName, $columns)
+    {
+        foreach($columns as $key => $column)
+        {
+            if($column === $columnName)
+                unset($columns[$key]);
+        }
 
+        return $columns;
     }
 
 

@@ -108,7 +108,6 @@ class ResourceController
        return $factory->createInstruction($this->getResourceInfo($request->getResource()), $request);
     }
 
-
     /**
      * @param string
      *

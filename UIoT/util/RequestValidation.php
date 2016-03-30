@@ -67,7 +67,7 @@ final class RequestValidation
      */
     public function isUriOrParametersBased()
     {
-        return !($this->hasParameters() && $this->hasComposedUri());
+        return !($this->hasParameters() && $this->hasValidUrl());
     }
 
     /**
@@ -85,8 +85,8 @@ final class RequestValidation
      *
      * @return bool
      */
-    public function hasComposedUri()
+    public function hasValidUrl()
     {
-        return count($this->requestData->getRequestUriData()->getPath()->getData()) > 2;
+        return count($this->requestData->getRequestUriData()->getPath()->getData()) <= 1;
     }
 }

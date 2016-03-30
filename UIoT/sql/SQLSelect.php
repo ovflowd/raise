@@ -14,10 +14,7 @@ use UIoT\exceptions\NotArrayException;
  */
 final class SQLSelect extends SQLInstruction
 {
-    /**
-     * @var array column values
-     */
-    private $selectColumns;
+
 
     /**
      * Adds a column to the columns attribute | @see $selectColumns
@@ -26,20 +23,7 @@ final class SQLSelect extends SQLInstruction
      */
     public function addColumn($column)
     {
-        $this->selectColumns[] = $column;
-    }
-
-    /**
-     * Sets an array of columns to the columns attribute | @see $selectColumns
-     *
-     * @param array $columns
-     * @throws NotArrayException
-     */
-    public function addColumns($columns)
-    {
-        if (!is_array($columns))
-            throw new NotArrayException("Columns should be in an array");
-        $this->selectColumns = $columns;
+        $this->columns[] = $column;
     }
 
     /**
@@ -63,8 +47,8 @@ final class SQLSelect extends SQLInstruction
      */
     public function selectColumnsToSql()
     {
-        if (!is_null($this->selectColumns))
-            return implode(',', $this->selectColumns);
+        if (!is_null($this->columns))
+            return implode(',', $this->columns);
     }
 
 }
