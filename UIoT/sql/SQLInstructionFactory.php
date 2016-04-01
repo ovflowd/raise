@@ -39,6 +39,7 @@ class SQLInstructionFactory
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource,$instruction);
         $this->setCriteria($resource, $request, $instruction);
+        var_dump($instruction->getInstruction());
         return $instruction->getInstruction();
 
     }
@@ -48,22 +49,21 @@ class SQLInstructionFactory
         $criteria = new SQLCriteria();
         $values = $request->getRequestUriData()->getQuery()->getData();
 
-        if($instruction instanceof SQLInsert)
-        {
+        if ($instruction instanceof SQLInsert)
             $instruction->setValues($values);
-        }
 
-        if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
-        {
+        if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLSelect))
             $criteria = $this->getCriteria($resource, $values);
-        }
+
+        if ($instruction instanceof SQLUpdate)
+            $instruction->setColumnValues(["id" =>  $request->getRequestUriData()->getPath()->getData()[3]]);
 
         $instruction->setCriteria($criteria);
     }
     /**
      * Gets a criteria.
      *
-     * @param int $id
+     * @param UIoTResource $resource
      * @param string[] $parameters
      * @return SQLCriteria
      * @throws InvalidColumnNameException

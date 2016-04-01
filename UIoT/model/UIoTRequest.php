@@ -35,7 +35,7 @@ class UIoTRequest extends Request
     {
         if (null === $this->requestUriData)
             return '';
-
+        
         return $this->getRequestUriData()->getPath()->getData()[2];
     }
 

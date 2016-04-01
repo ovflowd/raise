@@ -150,4 +150,12 @@ abstract class SQLInstruction
         }
     }
 
+    /**
+     *
+     */
+    public function setColumnValues($columnValues)
+    {
+        $this->columnValues = $columnValues;
+    }
+
 }

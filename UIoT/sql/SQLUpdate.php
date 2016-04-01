@@ -17,11 +17,10 @@ final class SQLUpdate extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::UPDATE() . SQL::BLANK() . $this->getEntity() .
-            SQL::SET() . SQL::BLANK() .
-            $this->columnsValuesToUpdateFormat() .
-            SQL::BLANK() . SQL::WHERE() .
-            $this->criteria->toSql();
+        $this->instruction = SQL::UPDATE() . SQL::BLANK() . $this->getEntity() . SQL::BLANK() .
+            SQL::SET() . SQL::BLANK() . $this->criteria->toSql() .
+            SQL::WHERE() . SQL::BLANK() .
+            $this->columnsValuesToUpdateFormat();
     }
 
     /**
