@@ -39,7 +39,6 @@ class SQLInstructionFactory
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource,$instruction);
         $this->setCriteria($resource, $request, $instruction);
-        var_dump($instruction->getInstruction());
         return $instruction->getInstruction();
 
     }
@@ -52,7 +51,7 @@ class SQLInstructionFactory
         if ($instruction instanceof SQLInsert)
             $instruction->setValues($values);
 
-        if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLSelect))
+        if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
             $criteria = $this->getCriteria($resource, $values);
 
         if ($instruction instanceof SQLUpdate)
