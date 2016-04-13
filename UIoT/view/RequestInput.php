@@ -141,4 +141,12 @@ class RequestInput
     {
         return $this->requestRouter->submitRequest($this->requestControl->createRequest($this));
     }
+
+    /**
+     * @return RequestRouter
+     */
+    public function getRequestRouter()
+    {
+        return $this->requestRouter;
+    }
 }

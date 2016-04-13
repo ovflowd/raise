@@ -30,8 +30,6 @@ use UIoT\view\RequestInput;
  * Class ResourceController
  *
  * @package UIoT\control
- * @property DatabaseConnector $dbConnector
- * @property DatabaseExecuter $dbExecuter
  */
 class ResourceController
 {
@@ -89,7 +87,7 @@ class ResourceController
      *
      * @return PDO
      */
-    private function getConnection()
+    public function getConnection()
     {
         return $this->dbConnector->getPdoObject();
     }
@@ -164,5 +162,13 @@ class ResourceController
     {
         $criteria->addFilter($filter, $logicOperator);
         return $criteria;
+    }
+
+    /**
+     * @return DatabaseExecuter
+     */
+    public function getDbExecuter()
+    {
+        return $this->dbExecuter;
     }
 }

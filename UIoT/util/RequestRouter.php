@@ -50,7 +50,7 @@ class RequestRouter
      *
      * @return ResourceController
      */
-    private function getResourceController()
+    public function getResourceController()
     {
         return $this->resourceController;
     }
