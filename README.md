@@ -9,20 +9,20 @@ RAISE is our Abstract Service Layer for UIoT Architecture. Is Dynamic, Abstract,
 ----------------------------------------------------
 
 <b>How to Install</b><br>
-1. Download Composer (http://getcomposer.org)
-2. Download this repository
-3. Install Composer
-4. Use Composer Command in Terminal or CMD (composer install)
-5. Use it.
++ Download Composer (http://getcomposer.org)
++ Download this repository
++ Install Composer
++ Use Composer Command in Terminal or CMD (composer install)
++ Use it.
 
 ----------------------------------------------------
 
 <b>Requisites</b>
-1. RAISE doesn't need a Web Server Package such Apache or Microsoft's IIS. You can use the built-in PHP web server (not recommended for big production environments). Using the following command in RAISE folder: `php -S localhost:DESIRED PORT` the desired port can be eg.: 80;
-2. You need minimal as 124 MB of RAM only for RAISE.
-3. 1x Core in Intelium (i86) or AMD64 Architecture
-4. OS with Linux 3.4+, or Windows XP+, or OS X Lion+
-5. If you want use a Web Server we recommend Apache. You can use LAMP, or XAMPP (as recommendation)
-6. MySQL Community Server 5.5 or higher with InnoDB Engine Able.
-7. 1MB Internet Connection Link
-8. Use our Database Model from UIoT's Big Data Repository
++ RAISE doesn't need a Web Server Package such Apache or Microsoft's IIS. You can use the built-in PHP web server (not recommended for big production environments). Using the following command in RAISE folder: `php -S localhost:DESIRED PORT` the desired port can be eg.: 80;
++ You need minimal as 124 MB of RAM only for RAISE.
++ 1x Core in Intelium (i86) or AMD64 Architecture
++ OS with Linux 3.4+, or Windows XP+, or OS X Lion+
++ If you want use a Web Server we recommend Apache. You can use LAMP, or XAMPP (as recommendation)
++ MySQL Community Server 5.5 or higher with InnoDB Engine Able.
++ 1MB Internet Connection Link
++ Use our Database Model from UIoT's Big Data Repository
