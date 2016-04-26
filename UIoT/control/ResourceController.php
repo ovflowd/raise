@@ -108,7 +108,6 @@ class ResourceController
 
     /**
      * @param string
-     *
      * @return UIoTResource
      */
     private function getResourceInfo($friendlyName)
@@ -126,7 +125,6 @@ class ResourceController
 
     /**
      * @param UIoTResource $resource
-     *
      */
     private function getResourceProperties(UIoTResource $resource)
     {

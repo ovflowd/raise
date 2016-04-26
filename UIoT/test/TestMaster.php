@@ -10,8 +10,11 @@ class TestMaster
 {
     
     public function test(){
+        $tester = new TestTest();
         
-        return results;
+        return $tester->test();
     }
+    
+    
 
 }
