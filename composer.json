@@ -16,7 +16,8 @@
   "minimum-stability": "dev",
   "require": {
     "symfony/http-foundation": "^3.0",
-    "jwage/purl": "^0.0.6"
+    "jwage/purl": "^0.0.6",
+    "phpunit/phpunit": "^5.3"
   },
   "autoload": {
     "classmap": [

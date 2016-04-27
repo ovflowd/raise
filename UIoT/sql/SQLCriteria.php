@@ -10,7 +10,7 @@ use UIoT\exceptions\NotSqlFilterException;
  * Class SQLExpression
  *
  * Represents a collection of SQLFilters related by logic operands.
- * Example: name = 'test' AND age > 10 OR salary != 5000
+ * Example: name = 'tests' AND age > 10 OR salary != 5000
  *
  * @package UIoT\sql
  * @property array $filters

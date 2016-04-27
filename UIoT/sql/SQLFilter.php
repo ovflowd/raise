@@ -8,7 +8,7 @@ use UIoT\exceptions\InvalidSqlOperatorException;
  * Class SQLFilter
  *
  * Represents filters on SQL instructions.
- * Examples: name = 'test', age > 10, salary != 5000
+ * Examples: name = 'tests', age > 10, salary != 5000
  *
  * @package UIoT/sql
  * @property string $columnName

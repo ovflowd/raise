@@ -172,11 +172,11 @@ final class DatabaseConnector
     private function getMySqlConnection()
     {
         $conn = new PDO("mysql:host={$this->host};
-								port={$this->port};
-								dbname={$this->name}",
-            self::getUser(),
-            self::getPass(),
-            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+						port={$this->port};
+						dbname={$this->name}",
+                        self::getUser(),
+                        self::getPass(),
+                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         return $conn;
