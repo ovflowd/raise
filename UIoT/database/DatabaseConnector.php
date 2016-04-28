@@ -64,6 +64,43 @@ final class DatabaseConnector
     }
 
     /**
+     * Returns a PDO Object based on the attributes.
+     *
+     * @return PDO
+     * @throws DatabaseConnectionFailedException
+     */
+    public function getPdoObject()
+    {
+        $conn = null;
+        
+        try {
+            $conn = self::getMySqlConnection();
+        } catch (Exception $exception) {
+            throw new DatabaseConnectionFailedException();
+        }
+        
+        return $conn;
+    }
+
+    /**
+     * Creates and returns a MySQL connection (PDO).
+     *
+     * @return PDO
+     */
+    private function getMySqlConnection()
+    {
+        $conn = new PDO("mysql:host={$this->host};
+						port={$this->port};
+						dbname={$this->name}",
+            self::getUser(),
+            self::getPass(),
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        return $conn;
+    }
+
+    /**
      * Gets the name attribute. | @see $name
      *
      * @return string
@@ -123,26 +160,6 @@ final class DatabaseConnector
         $this->port = (isset($port) ? $port : NULL);
     }
 
-    /**
-     * Returns a PDO Object based on the attributes.
-     *
-     * @return PDO
-     * @throws DatabaseConnectionFailedException
-     */
-    public function getPdoObject()
-    {
-        $conn = null;
-        try {
-            switch (self::getType()):
-                case 'mysql':
-                    $conn = self::getMySqlConnection();
-                    break;
-            endswitch;
-        } catch (Exception $exception) {
-            throw new DatabaseConnectionFailedException();
-        }
-        return $conn;
-    }
 
     /**
      * Gets the type attribute. | @see $type
@@ -162,24 +179,6 @@ final class DatabaseConnector
     public function setType($type)
     {
         $this->type = (isset($type) ? $type : NULL);
-    }
-
-    /**
-     * Creates and returns a MySQL connection (PDO).
-     *
-     * @return PDO
-     */
-    private function getMySqlConnection()
-    {
-        $conn = new PDO("mysql:host={$this->host};
-						port={$this->port};
-						dbname={$this->name}",
-                        self::getUser(),
-                        self::getPass(),
-                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
     }
 
     /**
