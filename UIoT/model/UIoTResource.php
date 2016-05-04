@@ -1,132 +1,35 @@
 <?php
 
-
 namespace UIoT\model;
-use UIoT\metadata\Resources;
 
 
 /**
  * Class UIoTResource
- *
  * @package UIoT\model
- *
- * @property int $id
- * @property string $acronym
- * @property string $name
- * @property string $friendlyName
  */
 class UIoTResource
 {
-    /**
-     * @var int
-     */
-    private $id;
 
     /**
-     * @var string
-     */
-    private $acronym;
-
-    /**
-     * @var string
+     * @var
      */
     private $name;
+
     /**
-     * @var string
+     * @var void
      */
-    private $friendlyName;
-    /**
-     * @var UIoTProperty[]
-     */
-    private $properties;
+    private $columns;
 
     /**
      * UIoTResource constructor.
-     *
-     * @param int $id
-     * @param string $acronym
-     * @param string $name
-     * @param string $friendlyName
+     * @param $name
+     * @param $json
      */
-    public function __construct($id, $acronym, $name, $friendlyName)
+    public function __construct($name, $json)
     {
-        $this->id=$id;
-        $this->acronym=$acronym;
-        $this->name=$name;
-        $this->friendlyName=$friendlyName;
+        $this->name = $name;
+        $this->columns = json_decode($json, true);
     }
 
-    /**
-     * @return string
-     */
-    public function getAcronym()
-    {
-        return $this->acronym;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFriendlyName()
-    {
-        return $this->friendlyName;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return UIoTProperty[]
-     */
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param UIoTProperty $property
-     */
-    public function addProperty(UIoTProperty $property)
-    {
-        $this->properties[] = $property;
-    }
-
-    /**
-     * @param UIoTProperty[] $properties
-     */
-    public function addProperties($properties)
-    {
-        foreach ($properties as $property)
-            $this->addProperty($property);
-    }
-
-    public function getColumnNames()
-    {
-        $names = array();
-        foreach ($this->properties as $property)
-            $names[] = $property->getName();
-        return $names;
-    }
-
-    public function getProperty($friendlyName)
-    {
-        foreach($this->properties as $property) {
-            if ($property->getFriendlyName() === $friendlyName)
-                return $property;
-        }
-    }
 
 }

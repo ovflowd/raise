@@ -82,13 +82,4 @@ final class RequestController
     {
         return $this->resources;
     }
-
-    /**
-     *
-     */
-    private function populateResources()
-    {
-
-
-    }
 }

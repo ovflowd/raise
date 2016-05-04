@@ -3,14 +3,14 @@
 namespace UIoT\model;
 
 /**
- * Class UIoTProperty
+ * Class MetaProperty
  * @package UIoT\model
  *
  * @property int $id
  * @property string $name
  * @property string $friendlyName
  */
-class UIoTProperty
+class MetaProperty
 {
     /**
      * @var int

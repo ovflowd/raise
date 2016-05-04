@@ -12,9 +12,9 @@ use UIoT\exceptions\NotSqlFilterException;
 use UIoT\metadata\Metadata;
 use UIoT\metadata\Resources;
 use UIoT\metadata\Properties;
-use UIoT\model\UIoTProperty;
+use UIoT\model\MetaProperty;
 use UIoT\model\UIoTRequest;
-use UIoT\model\UIoTResource;
+use UIoT\model\MetaResource;
 use UIoT\sql\SQL;
 use UIoT\sql\SQLCriteria;
 use UIoT\sql\SQLDelete;
@@ -108,7 +108,7 @@ class ResourceController
 
     /**
      * @param string
-     * @return UIoTResource
+     * @return MetaResource
      */
     private function getResourceInfo($friendlyName)
     {
@@ -118,15 +118,15 @@ class ResourceController
         $instruction->setCriteria($this->addCriteriaFilter(new SQLCriteria(), new SQLFilter(Resources::RSRC_FRIENDLY_NAME(), SQL::EQUALS_OP(), $friendlyName), SQL::AND_OP()));
 
         $result = current($this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection()));
-        $resource = new UIoTResource($result[Resources::ID()], $result[Resources::RSRC_ACRONYM()], $result[Resources::RSRC_NAME()], $friendlyName);
+        $resource = new MetaResource($result[Resources::ID()], $result[Resources::RSRC_ACRONYM()], $result[Resources::RSRC_NAME()], $friendlyName);
         $this->getResourceProperties($resource);
         return $resource;
     }
 
     /**
-     * @param UIoTResource $resource
+     * @param MetaResource $resource
      */
-    private function getResourceProperties(UIoTResource $resource)
+    private function getResourceProperties(MetaResource $resource)
     {
         $instruction = new SQLSelect();
         $instruction->addColumns([Properties::PROP_ID(), Properties::PROP_NAME(), Properties::PROP_FRIENDLY_NAME()]);
@@ -138,13 +138,13 @@ class ResourceController
 
     /**
      * @param array $rawProperties
-     * @return UIoTProperty[]
+     * @return MetaProperty[]
      */
     private function parseProperties($rawProperties)
     {
         $properties = array();
         foreach ($rawProperties as $rawProperty)
-            $properties[] = new UIoTProperty($rawProperty[Properties::PROP_ID()], $rawProperty[Properties::PROP_NAME()], $rawProperty[Properties::PROP_FRIENDLY_NAME()]);
+            $properties[] = new MetaProperty($rawProperty[Properties::PROP_ID()], $rawProperty[Properties::PROP_NAME()], $rawProperty[Properties::PROP_FRIENDLY_NAME()]);
         return $properties;
     }
 
@@ -168,5 +168,13 @@ class ResourceController
     public function getDbExecuter()
     {
         return $this->dbExecuter;
+    }
+
+    /**
+     *
+     */
+    private function populateResources()
+    {
+
     }
 }
