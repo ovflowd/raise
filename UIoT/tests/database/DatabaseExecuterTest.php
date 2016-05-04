@@ -9,7 +9,7 @@
 class DatabaseExecuterTest extends PHPUnit_Framework_TestCase
 {
     
-    public function testExecute(){
+    public function testExecute() {
         $subject = new \UIoT\database\DatabaseExecuter();
         
         /**possible expected values of databaseExecuter->execute($x,$x)
@@ -18,9 +18,9 @@ class DatabaseExecuterTest extends PHPUnit_Framework_TestCase
         try {
             $finalResult = $subject->execute(null, null);
             
-            assertNotEquals( $finalResult , new stdClass() );
+            assertNotEquals($finalResult, new stdClass());
             
-        }catch (EmtyOrNullRowDataValueException $exception){
+        } catch (EmtyOrNullRowDataValueException $exception) {
             
         }
         
