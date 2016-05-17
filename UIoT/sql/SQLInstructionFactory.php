@@ -19,7 +19,16 @@ class SQLInstructionFactory
      */
     private $methods;
 
-    public function __construct()
+    /**
+     * @var MetaResource[] $resources
+     */
+    private $resources;
+
+    /**
+     * SQLInstructionFactory constructor.
+     * @param MetaResource[] $resources
+     */
+    public function __construct($resources)
     {
         $this->methods = array(
             'GET'    => 'UIoT\sql\SQLSelect',
@@ -27,14 +36,19 @@ class SQLInstructionFactory
             'PUT'    => 'UIoT\sql\SQLUpdate',
             'DELETE' => 'UIoT\sql\SQLDelete',
         );
+        $this->resources = $resources;
+
+
     }
 
     /**
      * @param MetaResource $resource
      * @param UIoTRequest $request
      */
-    public function createInstruction(MetaResource $resource, UIoTRequest $request)
+    public function createInstruction(UIoTRequest $request)
     {
+        $resource = $this->resources[$request->getResource()];
+
         $instruction = new $this->methods[$request->getMethod()];
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource,$instruction);

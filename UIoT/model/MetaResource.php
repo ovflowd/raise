@@ -48,12 +48,13 @@ class MetaResource
      * @param string $name
      * @param string $friendlyName
      */
-    public function __construct($id, $acronym, $name, $friendlyName)
+    public function __construct($id, $acronym, $name, $friendlyName, $properties)
     {
         $this->id=$id;
         $this->acronym=$acronym;
         $this->name=$name;
         $this->friendlyName=$friendlyName;
+        $this->properties = $properties;
     }
 
     /**
