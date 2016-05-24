@@ -8,5 +8,7 @@
  */
 class RequestValidatorTest extends PHPUnit_Framework_TestCase
 {
-
+public function batatar(){
+    
+}
 }
