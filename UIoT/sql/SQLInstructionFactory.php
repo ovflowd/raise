@@ -4,7 +4,7 @@ namespace UIoT\sql;
 
 use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\model\UIoTRequest;
-use UIoT\model\UIoTResource;
+use UIoT\model\MetaResource;
 use UIoT\metadata\Properties;
 
 
@@ -19,7 +19,16 @@ class SQLInstructionFactory
      */
     private $methods;
 
-    public function __construct()
+    /**
+     * @var MetaResource[] $resources
+     */
+    private $resources;
+
+    /**
+     * SQLInstructionFactory constructor.
+     * @param MetaResource[] $resources
+     */
+    public function __construct($resources)
     {
         $this->methods = array(
             'GET'    => 'UIoT\sql\SQLSelect',
@@ -27,14 +36,19 @@ class SQLInstructionFactory
             'PUT'    => 'UIoT\sql\SQLUpdate',
             'DELETE' => 'UIoT\sql\SQLDelete',
         );
+        $this->resources = $resources;
+
+
     }
 
     /**
-     * @param UIoTResource $resource
+     * @param MetaResource $resource
      * @param UIoTRequest $request
      */
-    public function createInstruction(UIoTResource $resource, UIoTRequest $request)
+    public function createInstruction(UIoTRequest $request)
     {
+        $resource = $this->resources[$request->getResource()];
+
         $instruction = new $this->methods[$request->getMethod()];
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource,$instruction);
@@ -43,7 +57,7 @@ class SQLInstructionFactory
 
     }
 
-    private function setCriteria(UIoTResource $resource, UIoTRequest $request, SQLInstruction $instruction)
+    private function setCriteria(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
         $criteria = new SQLCriteria();
         $values = $request->getRequestUriData()->getQuery()->getData();
@@ -62,14 +76,14 @@ class SQLInstructionFactory
     /**
      * Gets a criteria.
      *
-     * @param UIoTResource $resource
+     * @param MetaResource $resource
      * @param string[] $parameters
      * @return SQLCriteria
      * @throws InvalidColumnNameException
      * @throws InvalidSqlOperatorException
      * @throws NotSqlFilterException
      */
-    private function getCriteria(UIoTResource $resource, $parameters)
+    private function getCriteria(MetaResource $resource, $parameters)
     {
         $criteria = new SQLCriteria();
 
@@ -88,7 +102,7 @@ class SQLInstructionFactory
         return $criteria;
     }
 
-    private function addColumns(UIoTResource $resource, SQLInstruction $instruction)
+    private function addColumns(MetaResource $resource, SQLInstruction $instruction)
     {
         $columns = $resource->getColumnNames();
 

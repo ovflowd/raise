@@ -21,7 +21,11 @@
  * @copyright University of Brasília
  */
 
-include_once __DIR__ . '/vendor/autoload.php';
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    throw new RuntimeException('RAISE needs Composer to Work. Please install Composer by clicking <a href="http://getcomposer.org">here</a>.');
+}
+
+require_once(__DIR__ . '/vendor/autoload.php');
 
 use UIoT\util\JsonOutput;
 use UIoT\view\RequestInput;

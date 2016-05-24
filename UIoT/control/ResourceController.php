@@ -12,9 +12,9 @@ use UIoT\exceptions\NotSqlFilterException;
 use UIoT\metadata\Metadata;
 use UIoT\metadata\Resources;
 use UIoT\metadata\Properties;
-use UIoT\model\UIoTProperty;
+use UIoT\model\MetaProperty;
 use UIoT\model\UIoTRequest;
-use UIoT\model\UIoTResource;
+use UIoT\model\MetaResource;
 use UIoT\sql\SQL;
 use UIoT\sql\SQLCriteria;
 use UIoT\sql\SQLDelete;
@@ -44,28 +44,18 @@ class ResourceController
     private $dbExecuter;
 
     /**
+     * @var SQLInstructionFactory
+     */
+    private $factory;
+
+    /**
      * ResourceController constructor.
      */
     public function __construct()
     {
-        self::createDbExecuter();
-        self::createDbConnector();
-    }
-
-    /**
-     * Creates a new DatabaseExecuter.
-     */
-    private function createDbExecuter()
-    {
         $this->dbExecuter = new DatabaseExecuter();
-    }
-
-    /**
-     * Creates a new DatabaseConnector
-     */
-    private function createDbConnector()
-    {
         $this->dbConnector = new DatabaseConnector();
+        $this->factory = new SQLInstructionFactory($this->getResources());
     }
 
     /**
@@ -78,7 +68,7 @@ class ResourceController
     {
         if (ExceptionHandler::getInstance()->getRaiseMessage() !== null)
             return ExceptionHandler::getInstance()->show();
-
+        //$this->getResources();
         return $this->dbExecuter->execute($this->getInstruction($request->getRequestData()), $this->dbConnector->getPdoObject());
     }
 
@@ -102,50 +92,7 @@ class ResourceController
      */
     private function getInstruction(UIoTRequest $request)
     {
-       $factory = new SQLInstructionFactory();
-       return $factory->createInstruction($this->getResourceInfo($request->getResource()), $request);
-    }
-
-    /**
-     * @param string
-     * @return UIoTResource
-     */
-    private function getResourceInfo($friendlyName)
-    {
-        $instruction = new SQLSelect();
-        $instruction->addColumns([Resources::ID(), Resources::RSRC_ACRONYM(), Resources::RSRC_NAME()]);
-        $instruction->setEntity(Metadata::META_RESOURCES());
-        $instruction->setCriteria($this->addCriteriaFilter(new SQLCriteria(), new SQLFilter(Resources::RSRC_FRIENDLY_NAME(), SQL::EQUALS_OP(), $friendlyName), SQL::AND_OP()));
-
-        $result = current($this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection()));
-        $resource = new UIoTResource($result[Resources::ID()], $result[Resources::RSRC_ACRONYM()], $result[Resources::RSRC_NAME()], $friendlyName);
-        $this->getResourceProperties($resource);
-        return $resource;
-    }
-
-    /**
-     * @param UIoTResource $resource
-     */
-    private function getResourceProperties(UIoTResource $resource)
-    {
-        $instruction = new SQLSelect();
-        $instruction->addColumns([Properties::PROP_ID(), Properties::PROP_NAME(), Properties::PROP_FRIENDLY_NAME()]);
-        $instruction->setEntity(Metadata::META_PROPERTIES());
-        $instruction->setCriteria($this->addCriteriaFilter(new SQLCriteria(), new SQLFilter(Properties::RSRC_ID(), SQL::EQUALS_OP(), $resource->getId()), SQL::AND_OP()));
-
-        $resource->addProperties($this->parseProperties(($this->dbExecuter->execute($instruction->getInstruction(), $this->getConnection()))));
-    }
-
-    /**
-     * @param array $rawProperties
-     * @return UIoTProperty[]
-     */
-    private function parseProperties($rawProperties)
-    {
-        $properties = array();
-        foreach ($rawProperties as $rawProperty)
-            $properties[] = new UIoTProperty($rawProperty[Properties::PROP_ID()], $rawProperty[Properties::PROP_NAME()], $rawProperty[Properties::PROP_FRIENDLY_NAME()]);
-        return $properties;
+       return $this->factory->createInstruction($request);
     }
 
     /**
@@ -168,5 +115,31 @@ class ResourceController
     public function getDbExecuter()
     {
         return $this->dbExecuter;
+    }
+
+    /**
+     *
+     */
+    private function getResources()
+    {
+        $resources = array();
+        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_RESOURCES', $this->getConnection());
+        foreach ($queryResult as $resource) {
+            $resources[$resource["RSRC_FRIENDLY_NAME"]] = new MetaResource($resource["ID"], $resource["RSRC_ACRONYM"], $resource["RSRC_NAME"], $resource["RSRC_FRIENDLY_NAME"], $this->getResourceProperties($resource["ID"]));
+        }
+        return $resources;
+    }
+
+    /**
+     *
+     */
+    private function getResourceProperties($id)
+    {
+        $properties = array();
+        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id, $this->getConnection());
+        foreach ($queryResult as $property) {
+            $properties[$property["PROP_FRIENDLY_NAME"]] = new MetaProperty($property["ID"], $property["PROP_NAME"], $property["PROP_FRIENDLY_NAME"]);
+        }
+        return $properties;
     }
 }
