@@ -71,7 +71,7 @@ class UIoTRequest extends Request
      */
     public function setRequestUriData()
     {
-        if ($this->getRequestUri() == '/')
+        if ($this->getRequestUri() == '/raise/')
             throw new InvalidUrlArgumentException;
 
         $this->requestUriData = new Url($this->getRequestUri());

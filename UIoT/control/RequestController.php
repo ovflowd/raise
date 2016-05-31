@@ -2,11 +2,9 @@
 
 namespace UIoT\control;
 
-use Symfony\Component\HttpFoundation\Response;
-use UIoT\exceptions\InvalidRaiseResourceException;
-use UIoT\metadata\Metadata;
-use UIoT\metadata\Resources;
-use UIoT\sql\SQLSelect;
+use UIoT\database\DatabaseExecuter;
+use UIoT\model\UIoTRequest;
+use UIoT\util\ExceptionHandler;
 use UIoT\view\RequestInput;
 
 /**
@@ -29,38 +27,25 @@ final class RequestController
      */
     protected $resources = array();
 
-    /**
-     * Validate Request Data
-     *
-     * @param RequestInput $request
-     *
-     * @return RequestInput
-     */
-    public function createRequest(RequestInput $request)
-    {
-        $this->assignRequestCode($request);
+    private $dbExecuter;
 
-        return $request;
+    public function __construct($dbExecuter)
+    {
+        $this->dbExecuter = $dbExecuter;
     }
 
     /**
-     * Assign Request Code
+     * Executes a request.
      *
      * @param RequestInput $request
-     *
-     * @return Response
-     *
-     * @throws InvalidRaiseResourceException
+     * @return bool|string[]
      */
-    private function assignRequestCode(RequestInput $request)
+    public function createRequest(RequestInput $request)
     {
-        $resourceController = $request->getRequestRouter()->getResourceController();
+        if (ExceptionHandler::getInstance()->getRaiseMessage() !== null)
+            return ExceptionHandler::getInstance()->show();
 
-        foreach (array_values($resourceController->getDbExecuter()->execute("SELECT RSRC_FRIENDLY_NAME FROM META_RESOURCES", $resourceController->getConnection())) as $value)
-            $this->resources[] = $value["RSRC_FRIENDLY_NAME"];
-
-        if (!$request->getRequestData()->getRequestValidation()->isValidRequest($this))
-            throw new InvalidRaiseResourceException;
+        return $request->getRequestData();
     }
 
     /**

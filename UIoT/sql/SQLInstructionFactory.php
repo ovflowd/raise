@@ -22,7 +22,7 @@ class SQLInstructionFactory
     /**
      * @var MetaResource[] $resources
      */
-    private $resources;
+    public $resources;
 
     /**
      * SQLInstructionFactory constructor.
@@ -30,14 +30,14 @@ class SQLInstructionFactory
      */
     public function __construct($resources)
     {
+        $this->resources = $resources;
+
         $this->methods = array(
             'GET'    => 'UIoT\sql\SQLSelect',
             'POST'   => 'UIoT\sql\SQLInsert',
             'PUT'    => 'UIoT\sql\SQLUpdate',
             'DELETE' => 'UIoT\sql\SQLDelete',
         );
-        $this->resources = $resources;
-
 
     }
 
@@ -53,6 +53,7 @@ class SQLInstructionFactory
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource,$instruction);
         $this->setCriteria($resource, $request, $instruction);
+	    //var_dump($instruction->getInstruction());
         return $instruction->getInstruction();
 
     }
@@ -65,7 +66,7 @@ class SQLInstructionFactory
         if ($instruction instanceof SQLInsert)
             $instruction->setValues($values);
 
-        if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
+        //if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
             $criteria = $this->getCriteria($resource, $values);
 
         if ($instruction instanceof SQLUpdate)

@@ -13,6 +13,6 @@ final class InvalidRaiseResourceException extends RaiseException
 {
     public function __construct()
     {
-        parent::__construct('Invalid Resource Requested to Raise', 404);
+        parent::__construct('Invalid Resource Requested to Raise', 400);
     }
 }

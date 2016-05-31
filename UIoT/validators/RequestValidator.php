@@ -2,28 +2,37 @@
 
 namespace UIoT\validators;
 
+use UIoT\exceptions\InvalidRaiseResourceException;
 use UIoT\model\UIoTRequest;
+use UIoT\database\DatabaseExecuter;
 
 class RequestValidator
 {
+
+
+
+    private $resources;
+
+    public function __construct($resources)
+    {
+        $this->resources = $resources;
+    }
+
     /**
      * @param UIoTRequest $request
      * @return boolean
      */
+
     public function validate(UIoTRequest $request){
         $isValid =
-            $this->validateFormat($request) &&
-            $this->validateProtocol($request) &&
-            $this->validateMethod($request) &&
-            $this->validateResource($request) &&
-            $this->validateParameters($request) &&
-            $this->validateValues($request);
-        
-        if($isValid) {
-            return true;
-        } else {
-            return false;
-        }
+            //$this->validateFormat($request) &&
+            //$this->validateProtocol($request) &&
+            //$this->validateMethod($request) &&
+            //$this->validateParameters($request) &&
+            //$this->validateValues($request);
+            $this->validateResource($request);
+
+       return $isValid;
     }
     
     /**
@@ -41,7 +50,10 @@ class RequestValidator
      */
     private function validateResource(UIoTRequest $request)
     {
-        return false;
+       if(!in_array($request->getResource(),$this->getResourcesNames()))
+           throw new InvalidRaiseResourceException();
+
+        return true;
     }
 
     /**
@@ -78,5 +90,29 @@ class RequestValidator
     private function validateProtocol(UIoTRequest $request)
     {
         return false;
+    }
+
+    /**
+     *
+     */
+    private function setResources($resources)
+    {
+        $this->resources = $resources;
+    }
+
+    public function getResources()
+    {
+        return $this->resources;
+    }
+
+    private function getResourcesNames()
+    {
+        $names = array();
+        foreach($this->resources as $resource)
+        {
+            $names[] = $resource->getFriendlyName();
+        }
+
+        return $names;
     }
 }

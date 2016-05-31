@@ -5,11 +5,15 @@ namespace UIoT\view;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UIoT\control\RequestController;
+use UIoT\control\ResourceController;
 use UIoT\model\UIoTRequest;
 use UIoT\model\UIoTResponse;
 use UIoT\util\ExceptionHandler;
-use UIoT\util\RequestRouter;
-
+use UIoT\validators\RequestValidator;
+use UIoT\database\DatabaseExecuter;
+use UIoT\database\DatabaseConnector;
+use UIoT\model\MetaResource;
+use UIoT\model\MetaProperty;
 /**
  * Class RequestInput
  *
@@ -25,12 +29,7 @@ class RequestInput
     /**
      * @var RequestController
      */
-    private $requestControl;
-
-    /**
-     * @var RequestRouter
-     */
-    private $requestRouter;
+    private $requestController;
 
     /**
      * @var UIoTRequest
@@ -42,24 +41,39 @@ class RequestInput
      */
     private $responseData;
 
+    private $requestValidator;
+
+    private $dbExecuter;
+
+    private $dbConnector;
+
+    private $resourceController;
+
     /**
      * RequestInput constructor.
      */
     public function __construct()
     {
+
+        $this->dbExecuter = new DatabaseExecuter();
+
+        $this->dbConnector = new DatabaseConnector();
+
         self::registerExceptionHandler();
 
-        self::setRequestControl(new RequestController());
+        self::setRequestController(new RequestController($this->dbExecuter));
 
-        self::setRequestRouter(new RequestRouter());
+        self::setResourceController($this->getResources());
 
         self::setRequestData(UIoTRequest::createFromGlobals());
-
-        self::getRequestData()->setRequestValidation();
 
         self::getRequestData()->assignRequestData();
 
         self::setResponseData();
+
+        self::setRequestValidator($this->getResources());
+
+
     }
 
     /**
@@ -70,25 +84,21 @@ class RequestInput
         set_exception_handler(array(ExceptionHandler::getInstance(), 'handleException'));
     }
 
+    private function setResourceController($resources)
+    {
+        $this->resourceController = new ResourceController($resources);
+    }
+
     /**
      * Sets the request controller attribute | @see $requestControl
      *
      * @param RequestController $requestControl
      */
-    private function setRequestControl(RequestController $requestControl)
+    private function setRequestController(RequestController $requestControl)
     {
-        $this->requestControl = $requestControl;
+        $this->requestController = $requestControl;
     }
 
-    /**
-     * Sets the request router attribute | @see $requestRouter
-     *
-     * @param RequestRouter $requestRouter
-     */
-    private function setRequestRouter(RequestRouter $requestRouter)
-    {
-        $this->requestRouter = $requestRouter;
-    }
 
     /**
      * Set Current Request Data
@@ -139,14 +149,40 @@ class RequestInput
      */
     public function route()
     {
-        return $this->requestRouter->submitRequest($this->requestControl->createRequest($this));
+        $request = $this->requestController->createRequest($this);
+
+        try {
+            if ($this->requestValidator->validate($request))
+                return $this->resourceController->executeRequest($request);
+
+        } catch(InvalidRaiseResourceException $e) {
+        }
+
     }
 
-    /**
-     * @return RequestRouter
-     */
-    public function getRequestRouter()
+    private function getResources()
     {
-        return $this->requestRouter;
+        $resources = array();
+        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_RESOURCES', $this->dbConnector->getPdoObject());
+        foreach ($queryResult as $resource) {
+            $resources[$resource["RSRC_FRIENDLY_NAME"]] = new MetaResource($resource["ID"], $resource["RSRC_ACRONYM"], $resource["RSRC_NAME"], $resource["RSRC_FRIENDLY_NAME"], $this->getResourceProperties($resource["ID"]));
+        }
+       return $resources;
+    }
+
+    private function getResourceProperties($id)
+    {
+        $properties = array();
+        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id, $this->dbConnector->getPdoObject());
+        foreach ($queryResult as $property) {
+            $properties[$property["PROP_FRIENDLY_NAME"]] = new MetaProperty($property["ID"], $property["PROP_NAME"], $property["PROP_FRIENDLY_NAME"]);
+        }
+        return $properties;
+    }
+
+
+    private function setRequestValidator($resources)
+    {
+        $this->requestValidator =  new RequestValidator($resources);
     }
 }

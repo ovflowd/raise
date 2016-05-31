@@ -30,5 +30,9 @@ require_once(__DIR__ . '/vendor/autoload.php');
 use UIoT\util\JsonOutput;
 use UIoT\view\RequestInput;
 
+
+//$tomate = array("id" => "001", "code" => "200", "message" => "registred succesfully");
+//JsonOutput::showJson($tomate);
+
 JsonOutput::showJson((new RequestInput)->route());
 

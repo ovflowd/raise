@@ -9,13 +9,8 @@ use UIoT\exceptions\InvalidColumnNameException;
 use UIoT\exceptions\InvalidMethodException;
 use UIoT\exceptions\InvalidSqlOperatorException;
 use UIoT\exceptions\NotSqlFilterException;
-use UIoT\metadata\Metadata;
-use UIoT\metadata\Resources;
-use UIoT\metadata\Properties;
-use UIoT\model\MetaProperty;
 use UIoT\model\UIoTRequest;
 use UIoT\model\MetaResource;
-use UIoT\sql\SQL;
 use UIoT\sql\SQLCriteria;
 use UIoT\sql\SQLDelete;
 use UIoT\sql\SQLFilter;
@@ -23,8 +18,7 @@ use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLInstructionFactory;
 use UIoT\sql\SQLSelect;
 use UIoT\sql\SQLUpdate;
-use UIoT\util\ExceptionHandler;
-use UIoT\view\RequestInput;
+
 
 /**
  * Class ResourceController
@@ -50,27 +44,16 @@ class ResourceController
 
     /**
      * ResourceController constructor.
+     * @param MetaResource[] $resources
      */
-    public function __construct()
+    public function __construct($resources)
     {
         $this->dbExecuter = new DatabaseExecuter();
         $this->dbConnector = new DatabaseConnector();
-        $this->factory = new SQLInstructionFactory($this->getResources());
+        $this->factory = new SQLInstructionFactory($resources);
     }
 
-    /**
-     * Executes a request.
-     *
-     * @param RequestInput $request
-     * @return bool|string[]
-     */
-    public function executeRequest(RequestInput $request)
-    {
-        if (ExceptionHandler::getInstance()->getRaiseMessage() !== null)
-            return ExceptionHandler::getInstance()->show();
-        //$this->getResources();
-        return $this->dbExecuter->execute($this->getInstruction($request->getRequestData()), $this->dbConnector->getPdoObject());
-    }
+
 
     /**
      * Gets connection from dbConnector attribute.
@@ -93,6 +76,11 @@ class ResourceController
     private function getInstruction(UIoTRequest $request)
     {
        return $this->factory->createInstruction($request);
+    }
+
+    public function executeRequest(UIoTRequest $request)
+    {
+        return $this->dbExecuter->execute($this->getInstruction($request), $this->dbConnector->getPdoObject());
     }
 
     /**
@@ -120,26 +108,5 @@ class ResourceController
     /**
      *
      */
-    private function getResources()
-    {
-        $resources = array();
-        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_RESOURCES', $this->getConnection());
-        foreach ($queryResult as $resource) {
-            $resources[$resource["RSRC_FRIENDLY_NAME"]] = new MetaResource($resource["ID"], $resource["RSRC_ACRONYM"], $resource["RSRC_NAME"], $resource["RSRC_FRIENDLY_NAME"], $this->getResourceProperties($resource["ID"]));
-        }
-        return $resources;
-    }
 
-    /**
-     *
-     */
-    private function getResourceProperties($id)
-    {
-        $properties = array();
-        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id, $this->getConnection());
-        foreach ($queryResult as $property) {
-            $properties[$property["PROP_FRIENDLY_NAME"]] = new MetaProperty($property["ID"], $property["PROP_NAME"], $property["PROP_FRIENDLY_NAME"]);
-        }
-        return $properties;
-    }
 }
