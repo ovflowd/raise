@@ -56,11 +56,10 @@ class RequestInput
     {
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = new DatabaseHandler();
-
+        $this->requestController = new RequestController($this->databaseManager);
+        $this->resourceController = new ResourceController($this->getResources());
+        $this->requestData = UIoTRequest::createFromGlobals();
         $this->registerExceptionHandler();
-        $this->setRequestController(new RequestController($this->databaseManager));
-        $this->setResourceController($this->getResources());
-        $this->setRequestData(UIoTRequest::createFromGlobals());
         $this->getRequestData()->assignRequest();
         $this->setResponseData();
     }
@@ -71,36 +70,6 @@ class RequestInput
     private function registerExceptionHandler()
     {
         set_exception_handler(array(MessageHandler::getInstance(), 'getMessage'));
-    }
-
-    /**
-     * Se Resource COntroller
-     *
-     * @param $resources
-     */
-    private function setResourceController($resources)
-    {
-        $this->resourceController = new ResourceController($resources);
-    }
-
-    /**
-     * Sets the request controller attribute | @see $requestControl
-     *
-     * @param RequestController $requestControl
-     */
-    private function setRequestController(RequestController $requestControl)
-    {
-        $this->requestController = $requestControl;
-    }
-
-    /**
-     * Set Current Request Data
-     *
-     * @param Request $requestData
-     */
-    private function setRequestData(Request $requestData)
-    {
-        $this->requestData = $requestData;
     }
 
     /**

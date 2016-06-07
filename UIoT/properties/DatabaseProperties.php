@@ -11,7 +11,7 @@ class DatabaseProperties
     /**
      * @const DB_HOST Database host.
      */
-    const DB_HOST = '172.16.6.164';
+    const DB_HOST = 'localhost';
 
     /**
      * @const DB_USER Database user.
@@ -21,7 +21,7 @@ class DatabaseProperties
     /**
      * @const DB_PASS Database pass.
      */
-    const DB_PASS = 'ac41tr1421';
+    const DB_PASS = '';
 
     /**
      * @const DB_NAME Database name.

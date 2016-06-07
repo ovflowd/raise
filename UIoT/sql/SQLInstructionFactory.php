@@ -14,19 +14,14 @@ use UIoT\util\MessageHandler;
 class SQLInstructionFactory
 {
     /**
-     * @var SQLInstruction[]
-     */
-    private $methods = array(
-        'GET' => 'UIoT\sql\SQLSelect',
-        'POST' => 'UIoT\sql\SQLInsert',
-        'PUT' => 'UIoT\sql\SQLUpdate',
-        'DELETE' => 'UIoT\sql\SQLDelete',
-    );
-
-    /**
      * @var MetaResource[] $resources
      */
     private $resources;
+
+    /**
+     * @var SQLInstruction[]
+     */
+    private $methods = array();
 
     /**
      * SQLInstructionFactory constructor.
@@ -36,6 +31,11 @@ class SQLInstructionFactory
     public function __construct($resources)
     {
         $this->resources = $resources;
+        $this->methods = ['GET' => 'UIoT\sql\SQLSelect',
+                          'POST' => 'UIoT\sql\SQLInsert',
+                          'PUT' => 'UIoT\sql\SQLUpdate',
+                          'DELETE' => 'UIoT\sql\SQLDelete'];
+
     }
 
     /**

@@ -14,15 +14,19 @@
  *
  * @project Uniform Internet of Things
  * @app UIoT Service Layer Manager
+ *
  * @author UIoT
+ * @developer Álex Vidigal
  * @developer Caio Melo
  * @developer Claudio Santoro
+ * @developer Lucca Ferri
  * @developer Pedro Luiz Salgado
+ *
  * @copyright University of Brasília
  */
 
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-    throw new RuntimeException('RAISE needs Composer to Work. Please install Composer by clicking <a href="http://getcomposer.org">here</a>.');
+    throw new RuntimeException('UIoT Service Layer Manager requires Composer to run. You can get it <a href="http://gsetcomposer.org">here</a>.');
 }
 
 include_once(__DIR__ . '/vendor/autoload.php');
