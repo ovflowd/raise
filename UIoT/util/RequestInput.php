@@ -1,28 +1,21 @@
 <?php
 
-namespace UIoT\view;
+namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use UIoT\control\RequestController;
 use UIoT\control\ResourceController;
+use UIoT\database\DatabaseHandler;
+use UIoT\database\DatabaseManager;
+use UIoT\messages\InvalidRaiseResourceMessage;
+use UIoT\model\MetaProperty;
+use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
 use UIoT\model\UIoTResponse;
-use UIoT\util\ExceptionHandler;
-use UIoT\validators\RequestValidator;
-use UIoT\database\DatabaseExecuter;
-use UIoT\database\DatabaseConnector;
-use UIoT\model\MetaResource;
-use UIoT\model\MetaProperty;
+
 /**
  * Class RequestInput
- *
- * @package UIoT\view
- *
- * @property RequestController $requestControl
- * @property RequestRouter $requestRouter
- * @property UIoTRequest $requestData
- * @property Response $responseData
+ * @package UIoT\util
  */
 class RequestInput
 {
@@ -41,12 +34,19 @@ class RequestInput
      */
     private $responseData;
 
-    private $requestValidator;
+    /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
 
-    private $dbExecuter;
+    /**
+     * @var DatabaseHandler
+     */
+    private $databaseHandler;
 
-    private $dbConnector;
-
+    /**
+     * @var ResourceController
+     */
     private $resourceController;
 
     /**
@@ -54,26 +54,15 @@ class RequestInput
      */
     public function __construct()
     {
-
-        $this->dbExecuter = new DatabaseExecuter();
-
-        $this->dbConnector = new DatabaseConnector();
+        $this->databaseManager = new DatabaseManager();
+        $this->databaseHandler = new DatabaseHandler();
 
         self::registerExceptionHandler();
-
-        self::setRequestController(new RequestController($this->dbExecuter));
-
+        self::setRequestController(new RequestController($this->databaseManager));
         self::setResourceController($this->getResources());
-
         self::setRequestData(UIoTRequest::createFromGlobals());
-
-        self::getRequestData()->assignRequestData();
-
+        self::getRequestData()->assignRequest();
         self::setResponseData();
-
-        self::setRequestValidator($this->getResources());
-
-
     }
 
     /**
@@ -81,9 +70,12 @@ class RequestInput
      */
     private function registerExceptionHandler()
     {
-        set_exception_handler(array(ExceptionHandler::getInstance(), 'handleException'));
+        set_exception_handler(array(MessageHandler::getInstance(), 'getMessage'));
     }
 
+    /**
+     * @param $resources
+     */
     private function setResourceController($resources)
     {
         $this->resourceController = new ResourceController($resources);
@@ -98,7 +90,6 @@ class RequestInput
     {
         $this->requestController = $requestControl;
     }
-
 
     /**
      * Set Current Request Data
@@ -118,7 +109,6 @@ class RequestInput
     private function setResponseData(Request $requestData = NULL)
     {
         $this->responseData = new UIoTResponse();
-
         $this->responseData->prepare($requestData == NULL ? $this->requestData : $requestData);
     }
 
@@ -143,46 +133,62 @@ class RequestInput
     }
 
     /**
-     * Starts the Request creation and submission process
-     *
-     * @return array|bool|string
+     * @return mixed
+     * @throws InvalidRaiseResourceMessage
      */
     public function route()
     {
         $request = $this->requestController->createRequest($this);
 
-        try {
-            if ($this->requestValidator->validate($request))
-                return $this->resourceController->executeRequest($request);
+        if (!in_array($request->getResource(), $this->getResourceNames()))
+            MessageHandler::getInstance()->endExecution(new InvalidRaiseResourceMessage);
 
-        } catch(InvalidRaiseResourceException $e) {
-        }
-
+        return $this->resourceController->executeRequest($request);
     }
 
+    /**
+     * Get friendly name from getResources array
+     *
+     * @return array
+     */
+    private function getResourceNames()
+    {
+        $names = [];
+        foreach ($this->getResources() as $resource) {
+            $names[] = $resource->getFriendlyName();
+        }
+
+        return $names;
+    }
+
+    /**
+     * @return array
+     */
     private function getResources()
     {
         $resources = array();
-        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_RESOURCES', $this->dbConnector->getPdoObject());
-        foreach ($queryResult as $resource) {
-            $resources[$resource["RSRC_FRIENDLY_NAME"]] = new MetaResource($resource["ID"], $resource["RSRC_ACRONYM"], $resource["RSRC_NAME"], $resource["RSRC_FRIENDLY_NAME"], $this->getResourceProperties($resource["ID"]));
+
+        foreach ($this->databaseManager->execute('SELECT * FROM META_RESOURCES',
+            $this->databaseHandler->getInstance()) as $resource) {
+            $resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM, $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, $this->getResourceProperties($resource->ID));
         }
-       return $resources;
+
+        return $resources;
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     private function getResourceProperties($id)
     {
         $properties = array();
-        $queryResult = $this->dbExecuter->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id, $this->dbConnector->getPdoObject());
-        foreach ($queryResult as $property) {
-            $properties[$property["PROP_FRIENDLY_NAME"]] = new MetaProperty($property["ID"], $property["PROP_NAME"], $property["PROP_FRIENDLY_NAME"]);
+
+        foreach ($this->databaseManager->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id,
+            $this->databaseHandler->getInstance()) as $property) {
+            $properties[$property->PROP_FRIENDLY_NAME] = new MetaProperty($property->ID, $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
         }
+
         return $properties;
-    }
-
-
-    private function setRequestValidator($resources)
-    {
-        $this->requestValidator =  new RequestValidator($resources);
     }
 }

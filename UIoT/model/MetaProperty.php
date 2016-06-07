@@ -5,64 +5,65 @@ namespace UIoT\model;
 /**
  * Class MetaProperty
  * @package UIoT\model
- *
- * @property int $id
- * @property string $name
- * @property string $friendlyName
  */
 class MetaProperty
 {
     /**
-     * @var int
+     * @var int Property Id
      */
-    private $id;
+    private $propertyId;
+
     /**
-     * @var string
+     * @var string Property Name
      */
-    private $name;
+    private $propertyName;
+
     /**
-     * @var string
+     * @var string Property Friendly Name
      */
     private $friendlyName;
 
     /**
      * UIoTProperty constructor.
+     *
      * @param int $id
      * @param string $name
      * @param string $friendlyName
      */
     public function __construct($id, $name, $friendlyName)
     {
-        $this->id=$id;
-        $this->name=$name;
-        $this->friendlyName=$friendlyName;
+        $this->propertyId = $id;
+        $this->propertyName = $name;
+        $this->friendlyName = $friendlyName;
     }
 
     /**
+     * Get Property Id
+     *
      * @return int
      */
-    public function getId()
+    public function getPropertyId()
     {
-        return $this->id;
+        return $this->propertyId;
     }
 
     /**
+     * Get Property Name
+     *
      * @return string
      */
-    public function getName()
+    public function getPropertyName()
     {
-        return $this->name;
+        return $this->propertyName;
     }
 
     /**
+     * Get Property Friendly Name
+     *
      * @return string
      */
     public function getFriendlyName()
     {
         return $this->friendlyName;
     }
-
-
-
-
 }

@@ -1,13 +1,13 @@
- <?php
+<?php
 /**
  * Functions being tested: __construct(), getPdoObject()
  */
 
- use UIoT\database\DatabaseConnector;
- use UIoT\properties\DatabaseProperties;
+use UIoT\database\DatabaseHandler;
+use UIoT\properties\DatabaseProperties;
 
-class DatabaseConnectorTest extends PHPUnit_Framework_TestCase{
-
+class DatabaseConnectorTest extends PHPUnit_Framework_TestCase
+{
 
 
     /**
@@ -15,21 +15,21 @@ class DatabaseConnectorTest extends PHPUnit_Framework_TestCase{
      */
     public function test__construct()
     {
-        $databaseConnector = new DatabaseConnector();
+        $databaseConnector = new DatabaseHandler();
 
-        assertNotEquals( $databaseConnector->getUser() , null );
-        assertNotEquals( $databaseConnector->getPass() , null );
-        assertNotEquals( $databaseConnector->getName() , null );
-        assertNotEquals( $databaseConnector->getHost() , null );
-        assertNotEquals( $databaseConnector->getType() , null );
-        assertNotEquals( $databaseConnector->getPort() , null );
+        assertNotEquals($databaseConnector->getUser(), null);
+        assertNotEquals($databaseConnector->getPass(), null);
+        assertNotEquals($databaseConnector->getName(), null);
+        assertNotEquals($databaseConnector->getHost(), null);
+        assertNotEquals($databaseConnector->getType(), null);
+        assertNotEquals($databaseConnector->getPort(), null);
 
-        assertEquals( $databaseConnector->getUser() , DatabaseProperties::DB_USER() );
-        assertEquals( $databaseConnector->getPass() , DatabaseProperties::DB_PASS() );
-        assertEquals( $databaseConnector->getName() , DatabaseProperties::DB_NAME() );
-        assertEquals( $databaseConnector->getHost() , DatabaseProperties::DB_HOST() );
-        assertEquals( $databaseConnector->getType() , DatabaseProperties::DB_TYPE() );
-        assertEquals( $databaseConnector->getPort() , DatabaseProperties::DB_PORT() );
+        assertEquals($databaseConnector->getUser(), DatabaseProperties::DB_USER);
+        assertEquals($databaseConnector->getPass(), DatabaseProperties::DB_PASS);
+        assertEquals($databaseConnector->getName(), DatabaseProperties::DB_NAME);
+        assertEquals($databaseConnector->getHost(), DatabaseProperties::DB_HOST);
+        assertEquals($databaseConnector->getType(), DatabaseProperties::DB_TYPE);
+        assertEquals($databaseConnector->getPort(), DatabaseProperties::DB_PORT);
 
         return $databaseConnector;
     }
@@ -39,20 +39,20 @@ class DatabaseConnectorTest extends PHPUnit_Framework_TestCase{
      * @param $databaseConnector
      * @internal param DatabaseConnectionFailed $exception
      */
-    public function testGetPdoObject($databaseConnector)
+    public function testGetPdoObject(DatabaseHandler $databaseConnector)
     {
         $pdo = null;
 
         try {
-            $pdo = $databaseConnector->GetPdoObject();
-            assertEquals( get_class($pdo) , "" );
+            $pdo = $databaseConnector->getInstance();
+            assertEquals(get_class($pdo), "");
 
             //TODO replace empty string with the proper PDO class name
-        } catch (\UIoT\exceptions\DatabaseConnectionFailedException $exception) {
-                assert(false);
+        } catch (\UIoT\messages\DatabaseConnectionFailedMessage $exception) {
+            assert(false);
         }
 
-        assertNotEquals( $pdo , null);
+        assertNotEquals($pdo, null);
 
         //TODO further assert proper functioning of produced PDO;
     }
@@ -63,7 +63,7 @@ class DatabaseConnectorTest extends PHPUnit_Framework_TestCase{
     public function setUpDatabaseConnectors()
     {
         $databaseConnectorArray = Array();
-        $databaseConnectorArray->workingCase = new DatabaseConnector();
+        $databaseConnectorArray->workingCase = new DatabaseHandler();
         //TODO fill an array with faulty cases and return;
     }
 

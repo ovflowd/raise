@@ -4,22 +4,18 @@ namespace UIoT\sql;
 
 /**
  * Class SQLUpdate
- *
- * Represent an UPDATE SQLInstruction
- *
  * @package UIoT\sql
  */
 final class SQLUpdate extends SQLInstruction
 {
-
     /**
      * Generates an UPDATE SQLInstruction | @see SQLInstruction.php
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::UPDATE() . SQL::BLANK() . $this->getEntity() . SQL::BLANK() .
-            SQL::SET() . SQL::BLANK() . $this->criteria->toSql() .
-            SQL::WHERE() . SQL::BLANK() .
+        $this->instruction = SQL::UPDATE . SQL::BLANK . $this->getEntity() . SQL::BLANK .
+            SQL::SET . SQL::BLANK . $this->criteria->toSql() .
+            SQL::WHERE . SQL::BLANK .
             $this->columnsValuesToUpdateFormat();
     }
 

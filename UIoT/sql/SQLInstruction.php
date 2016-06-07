@@ -2,8 +2,9 @@
 
 namespace UIoT\sql;
 
-use UIoT\exceptions\InvalidValueException;
-use UIoT\exceptions\NotArrayException;
+use UIoT\messages\InvalidValueMessage;
+use UIoT\messages\NotArrayMessage;
+use UIoT\util\MessageHandler;
 
 /**
  * Abstract Class SQLInstruction
@@ -12,10 +13,6 @@ use UIoT\exceptions\NotArrayException;
  * See more at https://dev.mysql.com/doc/
  *
  * @package UIoT/sql
- * @property string $instruction
- * @property SQLCriteria $criteria
- * @property string $entity
- * @property array $columnValues
  *
  */
 abstract class SQLInstruction
@@ -41,7 +38,7 @@ abstract class SQLInstruction
     protected $columnValues;
 
     /**
-     *
+     * @var
      */
     protected $columns;
 
@@ -98,12 +95,14 @@ abstract class SQLInstruction
      * Sets an array of columns to the columns attribute | @see $selectColumns
      *
      * @param array $columns
-     * @throws NotArrayException
+     * @throws NotArrayMessage
      */
     public function addColumns($columns)
     {
-        if (!is_array($columns))
-            throw new NotArrayException("Columns should be in an array");
+        if (!is_array($columns)) {
+            MessageHandler::getInstance()->endExecution(new NotArrayMessage("Columns should be in an array"));
+        }
+
         $this->columns = $columns;
     }
 
@@ -131,13 +130,13 @@ abstract class SQLInstruction
      *
      * @param string $column
      * @param string|int|float|boolean|null $value
-     * @throws InvalidValueException
+     * @throws InvalidValueMessage
      */
     public function setRowData($column, $value)
     {
         if (is_string($value) || is_bool($value) || is_integer($value) || is_float($value) || is_null($value))
-            throw new InvalidValueException("Parameter value does not represents a valid type.
-                                            Supported types are string, boolean, integer, float and null.");
+            MessageHandler::getInstance()->endExecution(new InvalidValueMessage('Parameter value does not represents a valid type.
+                                            Supported types are string, boolean, integer, float and null.'));
         if (is_string($value)) {
             $value = addslashes($value);
             $this->columnValues[$column] = "'$value'";
@@ -151,11 +150,12 @@ abstract class SQLInstruction
     }
 
     /**
+     * Set Column Values
      *
+     * @param $columnValues
      */
     public function setColumnValues($columnValues)
     {
         $this->columnValues = $columnValues;
     }
-
 }

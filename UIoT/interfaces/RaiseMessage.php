@@ -8,6 +8,6 @@ use Exception;
  * Class RaiseException
  * @package UIoT\interfaces
  */
-abstract class RaiseException extends Exception
+abstract class RaiseMessage extends Exception
 {
 }

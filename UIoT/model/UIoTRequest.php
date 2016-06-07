@@ -4,8 +4,8 @@ namespace UIoT\model;
 
 use Purl\Url;
 use Symfony\Component\HttpFoundation\Request;
-use UIoT\exceptions\InvalidUrlArgumentException;
-use UIoT\util\RequestValidation;
+use UIoT\messages\WelcomeToRaiseMessage;
+use UIoT\util\MessageHandler;
 
 /**
  * Class UIoTRequest
@@ -14,13 +14,6 @@ use UIoT\util\RequestValidation;
  */
 class UIoTRequest extends Request
 {
-    /**
-     * Validate Request
-     *
-     * @var RequestValidation
-     */
-    protected $requestValidation;
-
     /**
      * @var Url
      */
@@ -35,46 +28,31 @@ class UIoTRequest extends Request
     {
         if (null === $this->requestUriData)
             return '';
-        
-        return $this->getRequestUriData()->getPath()->getData()[2];
-    }
 
-    /**
-     * Return Request Validation Class
-     *
-     * @return RequestValidation
-     */
-    public function getRequestValidation()
-    {
-        return $this->requestValidation;
-    }
-
-    /**
-     * Set Request Validation
-     */
-    public function setRequestValidation()
-    {
-        $this->requestValidation = new RequestValidation($this);
+        return $this->getUri()->getPath()->getData()[1];
     }
 
     /**
      * Assign Request Data
      */
-    public function assignRequestData()
+    public function assignRequest()
     {
         if (null === $this->requestUriData)
-            $this->setRequestUriData();
+            $this->setUri();
     }
 
     /**
      * Set Request Uri Data
      */
-    public function setRequestUriData()
+    public function setUri()
     {
-        if ($this->getRequestUri() == '/raise/')
-            throw new InvalidUrlArgumentException;
+        $base = '/' . basename($this->getRequestUri());
 
-        $this->requestUriData = new Url($this->getRequestUri());
+        if ($base == '/') {
+            MessageHandler::getInstance()->endExecution(new WelcomeToRaiseMessage);
+        }
+
+        $this->requestUriData = new Url($base);
     }
 
     /**
@@ -82,7 +60,7 @@ class UIoTRequest extends Request
      *
      * @return Url
      */
-    public function getRequestUriData()
+    public function getUri()
     {
         return $this->requestUriData;
     }

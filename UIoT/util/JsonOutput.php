@@ -14,15 +14,13 @@ final class JsonOutput
      * Show jSON
      *
      * @param null|string|mixed|object|array $value
-     * @param int $exit_code
+     * @return string
      */
-    public static function showJson($value = NULL, $exit_code = 0)
+    public static function showJson($value = null)
     {
         if (null === $value || empty($value))
             $value = new stdClass();
 
-        echo json_encode($value, JSON_PRETTY_PRINT);
-
-        exit($exit_code);
+        return json_encode($value, JSON_PRETTY_PRINT);
     }
 }

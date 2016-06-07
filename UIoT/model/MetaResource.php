@@ -1,19 +1,10 @@
 <?php
 
-
 namespace UIoT\model;
-use UIoT\metadata\Resources;
-
 
 /**
  * Class MetaResource
- *
  * @package UIoT\model
- *
- * @property int $id
- * @property string $acronym
- * @property string $name
- * @property string $friendlyName
  */
 class MetaResource
 {
@@ -31,10 +22,12 @@ class MetaResource
      * @var string
      */
     private $name;
+
     /**
      * @var string
      */
     private $friendlyName;
+
     /**
      * @var MetaProperty[]
      */
@@ -47,13 +40,14 @@ class MetaResource
      * @param string $acronym
      * @param string $name
      * @param string $friendlyName
+     * @param mixed $properties
      */
     public function __construct($id, $acronym, $name, $friendlyName, $properties)
     {
-        $this->id=$id;
-        $this->acronym=$acronym;
-        $this->name=$name;
-        $this->friendlyName=$friendlyName;
+        $this->id = $id;
+        $this->acronym = $acronym;
+        $this->name = $name;
+        $this->friendlyName = $friendlyName;
         $this->properties = $properties;
     }
 
@@ -98,14 +92,6 @@ class MetaResource
     }
 
     /**
-     * @param MetaProperty $property
-     */
-    public function addProperty(MetaProperty $property)
-    {
-        $this->properties[] = $property;
-    }
-
-    /**
      * @param MetaProperty[] $properties
      */
     public function addProperties($properties)
@@ -114,20 +100,36 @@ class MetaResource
             $this->addProperty($property);
     }
 
+    /**
+     * @param MetaProperty $property
+     */
+    public function addProperty(MetaProperty $property)
+    {
+        $this->properties[] = $property;
+    }
+
+    /**
+     * @return array
+     */
     public function getColumnNames()
     {
         $names = array();
         foreach ($this->properties as $property)
-            $names[] = $property->getName();
+            $names[] = $property->getPropertyName();
         return $names;
     }
 
+    /**
+     * @param $friendlyName
+     * @return MetaProperty
+     */
     public function getProperty($friendlyName)
     {
-        foreach($this->properties as $property) {
+        foreach ($this->properties as $property) {
             if ($property->getFriendlyName() === $friendlyName)
                 return $property;
         }
-    }
 
+        return null;
+    }
 }

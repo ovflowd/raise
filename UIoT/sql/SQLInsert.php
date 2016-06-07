@@ -2,30 +2,20 @@
 
 namespace UIoT\sql;
 
-use UIoT\exceptions\CriteriaNotSupportedException;
-
 /**
  * Class SQLInsert
- *
- * Represents an INSERT SQLInstruction
- *
  * @package UIoT/sql
  */
 final class SQLInsert extends SQLInstruction
 {
-
+    /**
+     * @var mixed Values
+     */
     private $values;
-    
-    public function getColumns()
-    {
-        return implode(',', $this->columns);
-    }
 
-    private function getSqlValues()
-    {
-        return "'".implode("','", $this->values)."'";
-    }
-
+    /**
+     * @param $values
+     */
     public function setValues($values)
     {
         $this->values = $values;
@@ -36,12 +26,25 @@ final class SQLInsert extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::INSERT_INTO() . SQL::BLANK() . $this->getEntity() .
-            '(' . $this->getColumns() . ')' . SQL::BLANK() .
-            SQL::VALUES() . SQL::BLANK() .
-            '(' . $this->getSqlValues() . ')' . SQL::BLANK();
+        $this->instruction = SQL::INSERT_INTO . SQL::BLANK . $this->getEntity() .
+            '(' . $this->getColumns() . ')' . SQL::BLANK .
+            SQL::VALUES . SQL::BLANK .
+            '(' . $this->getSqlValues() . ')' . SQL::BLANK;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getColumns()
+    {
+        return implode(',', $this->columns);
+    }
 
+    /**
+     * @return string
+     */
+    private function getSqlValues()
+    {
+        return "'" . implode("','", $this->values) . "'";
+    }
 }
-

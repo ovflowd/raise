@@ -2,7 +2,8 @@
 
 namespace UIoT\sql;
 
-use UIoT\exceptions\InvalidSqlOperatorException;
+use UIoT\messages\InvalidSqlOperatorMessage;
+use UIoT\util\MessageHandler;
 
 /**
  * Class SQLFilter
@@ -11,24 +12,21 @@ use UIoT\exceptions\InvalidSqlOperatorException;
  * Examples: name = 'tests', age > 10, salary != 5000
  *
  * @package UIoT/sql
- * @property string $columnName
- * @property string $operator
- * @property mixed $value
  */
 final class SQLFilter
 {
     /**
-     * @var
+     * @var string
      */
     private $columnName;
 
     /**
-     * @var
+     * @var string
      */
     private $operator;
 
     /**
-     * @var
+     * @var mixed
      */
     private $value;
 
@@ -61,12 +59,13 @@ final class SQLFilter
      * Sets the operator attribute. | @see $operator
      *
      * @param string $operator
-     * @throws InvalidSqlOperatorException
+     * @throws InvalidSqlOperatorMessage
      */
     private function setOperator($operator)
     {
-        if (!in_array($operator, SQL::ARITHMETIC_OPERATORS))
-            throw new InvalidSqlOperatorException("invalid sql operator");
+        if (!in_array($operator, SQL::ARITHMETIC_OPERATORS)) {
+            MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage('invalid sql operator'));
+        }
 
         $this->operator = $operator;
     }
@@ -121,6 +120,4 @@ final class SQLFilter
     {
         return "{$this->columnName} {$this->operator} {$this->value}";
     }
-
 }
-

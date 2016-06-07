@@ -2,20 +2,12 @@
 
 namespace UIoT\sql;
 
-use UIoT\exceptions\NotArrayException;
-
 /**
  * Class SQLSelect
- *
- * Represents a SELECT SQLInstruction
- *
  * @package UIoT\sql
- * @property array $selectColumns
  */
 final class SQLSelect extends SQLInstruction
 {
-
-
     /**
      * Adds a column to the columns attribute | @see $selectColumns
      *
@@ -31,13 +23,12 @@ final class SQLSelect extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::SELECT() . SQL::BLANK() .
-            $this->selectColumnsToSql() . SQL::BLANK() .
-            SQL::FROM() . SQL::BLANK() .
-            $this->getEntity() . SQL::BLANK() .
-            SQL::WHERE() . SQL::BLANK() .
+        $this->instruction = SQL::SELECT . SQL::BLANK .
+            $this->selectColumnsToSql() . SQL::BLANK .
+            SQL::FROM . SQL::BLANK .
+            $this->getEntity() . SQL::BLANK .
+            SQL::WHERE . SQL::BLANK .
             $this->criteria->toSql();
-
     }
 
     /**
@@ -47,8 +38,10 @@ final class SQLSelect extends SQLInstruction
      */
     public function selectColumnsToSql()
     {
-        if (!is_null($this->columns))
+        if (!is_null($this->columns)) {
             return implode(',', $this->columns);
-    }
+        }
 
+        return '';
+    }
 }

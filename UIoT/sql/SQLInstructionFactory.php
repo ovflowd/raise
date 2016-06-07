@@ -2,11 +2,12 @@
 
 namespace UIoT\sql;
 
-use UIoT\exceptions\InvalidColumnNameException;
-use UIoT\model\UIoTRequest;
+use UIoT\messages\InvalidColumnNameMessage;
+use UIoT\messages\InvalidSqlOperatorMessage;
+use UIoT\messages\NotSqlFilterMessage;
 use UIoT\model\MetaResource;
-use UIoT\metadata\Properties;
-
+use UIoT\model\UIoTRequest;
+use UIoT\util\MessageHandler;
 
 /**
  * Class SQLInstructionFactory
@@ -15,119 +16,134 @@ use UIoT\metadata\Properties;
 class SQLInstructionFactory
 {
     /**
-     * @var array
+     * @var SQLInstruction[]
      */
-    private $methods;
+    private $methods = array(
+        'GET' => 'UIoT\sql\SQLSelect',
+        'POST' => 'UIoT\sql\SQLInsert',
+        'PUT' => 'UIoT\sql\SQLUpdate',
+        'DELETE' => 'UIoT\sql\SQLDelete',
+    );
 
     /**
      * @var MetaResource[] $resources
      */
-    public $resources;
+    private $resources;
 
     /**
      * SQLInstructionFactory constructor.
+     *
      * @param MetaResource[] $resources
      */
     public function __construct($resources)
     {
         $this->resources = $resources;
-
-        $this->methods = array(
-            'GET'    => 'UIoT\sql\SQLSelect',
-            'POST'   => 'UIoT\sql\SQLInsert',
-            'PUT'    => 'UIoT\sql\SQLUpdate',
-            'DELETE' => 'UIoT\sql\SQLDelete',
-        );
-
     }
 
     /**
-     * @param MetaResource $resource
+     * Create an Instruction
+     *
      * @param UIoTRequest $request
+     * @return mixed
      */
     public function createInstruction(UIoTRequest $request)
     {
         $resource = $this->resources[$request->getResource()];
-
+        /** @var SQLInstruction $instruction */
         $instruction = new $this->methods[$request->getMethod()];
         $instruction->setEntity($resource->getName());
-        $this->addColumns($resource,$instruction);
+        $this->addColumns($resource, $instruction);
         $this->setCriteria($resource, $request, $instruction);
-	    //var_dump($instruction->getInstruction());
         return $instruction->getInstruction();
-
     }
 
+    /**
+     * Set a Specific Criteria
+     *
+     * @param MetaResource $resource
+     * @param UIoTRequest $request
+     * @param SQLInstruction $instruction
+     * @throws InvalidColumnNameMessage
+     */
     private function setCriteria(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
-        $criteria = new SQLCriteria();
-        $values = $request->getRequestUriData()->getQuery()->getData();
+        $values = $request->getUri()->getQuery()->getData();
 
         if ($instruction instanceof SQLInsert)
             $instruction->setValues($values);
 
         //if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
-            $criteria = $this->getCriteria($resource, $values);
+        $criteria = $this->getCriteria($resource, $values);
 
         if ($instruction instanceof SQLUpdate)
-            $instruction->setColumnValues(["id" =>  $request->getRequestUriData()->getPath()->getData()[3]]);
+            $instruction->setColumnValues(['id' => $request->getUri()->getPath()->getData()[3]]);
 
         $instruction->setCriteria($criteria);
     }
+
     /**
-     * Gets a criteria.
+     * Return a criteria.
      *
      * @param MetaResource $resource
      * @param string[] $parameters
      * @return SQLCriteria
-     * @throws InvalidColumnNameException
-     * @throws InvalidSqlOperatorException
-     * @throws NotSqlFilterException
+     * @throws InvalidColumnNameMessage
+     * @throws InvalidSqlOperatorMessage
+     * @throws NotSqlFilterMessage
      */
     private function getCriteria(MetaResource $resource, $parameters)
     {
         $criteria = new SQLCriteria();
 
         foreach ($parameters as $friendlyName => $value) {
+            $columnName = $resource->getProperty($friendlyName);
 
-            $columnName = $resource->getProperty($friendlyName)->getName();
+            if (null == $columnName) {
+                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage());
+            }
 
-            if (is_null($columnName))
-                throw new InvalidColumnNameException();
-
-            $filter = new SQLFilter($columnName, SQL::EQUALS_OP(), $value);
-
-            $criteria->addFilter($filter, SQL::AND_OP());
+            $filter = new SQLFilter($columnName->getPropertyName(), SQL::EQUALS_OP, $value);
+            $criteria->addFilter($filter, SQL::AND_OP);
         }
 
         return $criteria;
     }
 
+    /**
+     * Add a set of Columns
+     *
+     * @param MetaResource $resource
+     * @param SQLInstruction $instruction
+     * @throws \UIoT\messages\NotArrayMessage
+     */
     private function addColumns(MetaResource $resource, SQLInstruction $instruction)
     {
         $columns = $resource->getColumnNames();
 
-        if ($instruction instanceof SQLSelect)
-        {
+        if ($instruction instanceof SQLSelect) {
             $instruction->addColumns($columns);
         }
 
-        if ($instruction instanceof SQLInsert)
-        {
-            $instruction->addColumns($this->removeColumn("ID", $columns));
+        if ($instruction instanceof SQLInsert) {
+            $instruction->addColumns($this->removeColumn('ID', $columns));
         }
     }
 
+    /**
+     * Remove Column
+     *
+     * @param $columnName
+     * @param $columns
+     * @return mixed
+     */
     private function removeColumn($columnName, $columns)
     {
-        foreach($columns as $key => $column)
-        {
-            if($column === $columnName)
+        foreach ($columns as $key => $column) {
+            if ($column === $columnName) {
                 unset($columns[$key]);
+            }
         }
 
         return $columns;
     }
-
-
 }

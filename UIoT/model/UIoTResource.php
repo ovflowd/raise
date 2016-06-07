@@ -9,7 +9,6 @@ namespace UIoT\model;
  */
 class UIoTResource
 {
-
     /**
      * @var
      */
@@ -30,6 +29,4 @@ class UIoTResource
         $this->name = $name;
         $this->columns = json_decode($json, true);
     }
-
-
 }

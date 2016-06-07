@@ -1,4 +1,5 @@
 <?php
+use UIoT\messages\EmptyOrNullRowDataValueMessage;
 
 /**
  * Created by PhpStorm.
@@ -8,22 +9,26 @@
  */
 class DatabaseExecuterTest extends PHPUnit_Framework_TestCase
 {
-    
-    public function testExecute() {
-        $subject = new \UIoT\database\DatabaseExecuter();
-        
+
+    /**
+     *
+     */
+    public function testExecute()
+    {
+        $subject = new \UIoT\database\DatabaseManager();
+
         /**possible expected values of databaseExecuter->execute($x,$x)
-         * 
+         *
          */
         try {
             $finalResult = $subject->execute(null, null);
-            
+
             assertNotEquals($finalResult, new stdClass());
-            
-        } catch (EmtyOrNullRowDataValueException $exception) {
-            
+
+        } catch (EmptyOrNullRowDataValueMessage $exception) {
+
         }
-        
+
     }
 
 }

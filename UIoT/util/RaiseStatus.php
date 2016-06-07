@@ -1,17 +1,14 @@
 <?php
 
-namespace UIoT\model;
+namespace UIoT\util;
 
 use stdClass;
 
 /**
- * Class HTTPStatus
- *
- * @package UIoT\model
- * @property int $code
- * @property string $message
+ * Class RaiseStatus
+ * @package UIoT\util
  */
-class HTTPStatus
+class RaiseStatus
 {
     /**
      * @var int HTTP error number/code.
@@ -32,11 +29,10 @@ class HTTPStatus
     public function __construct($code = 200, $message = '')
     {
         self::setCode($code);
-
         self::setMessage($message);
     }
 
-    public function returnStatus()
+    public function getStatus()
     {
         $responseCodes = new stdClass();
         $responseCodes->code = $this->getCode();
@@ -59,8 +55,7 @@ class HTTPStatus
      * Sets the code attribute. | @see $code
      *
      * @param int $code
-     *
-     * @return HTTPStatus
+     * @return RaiseStatus
      */
     public function setCode($code = 200)
     {
@@ -83,47 +78,11 @@ class HTTPStatus
      * Sets the message attribute. | @see $message
      *
      * @param string $message
-     *
-     * @return HTTPStatus
+     * @return RaiseStatus
      */
     public function setMessage($message = '')
     {
-        if (empty($message))
-            self::setDefaultMessage();
-        else
-            $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * Sets the message attribute based on the code attribute | @see $message, $code
-     *
-     * @return HTTPStatus
-     */
-    private function setDefaultMessage()
-    {
-        switch (self::getCode()) {
-            case 400:
-                $this->message = "Bad request";
-                break;
-
-            case 403:
-                $this->message = "Forbidden";
-                break;
-
-            case 404:
-                $this->message = "Resource not found";
-                break;
-
-            case 405:
-                $this->message = "Method not allowed";
-                break;
-
-            default:
-                $this->message = "";
-                break;
-        }
+        $this->message = $message;
 
         return $this;
     }

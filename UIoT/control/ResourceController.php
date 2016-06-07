@@ -3,39 +3,28 @@
 namespace UIoT\control;
 
 use PDO;
-use UIoT\database\DatabaseConnector;
-use UIoT\database\DatabaseExecuter;
-use UIoT\exceptions\InvalidColumnNameException;
-use UIoT\exceptions\InvalidMethodException;
-use UIoT\exceptions\InvalidSqlOperatorException;
-use UIoT\exceptions\NotSqlFilterException;
-use UIoT\model\UIoTRequest;
+use UIoT\database\DatabaseHandler;
+use UIoT\database\DatabaseManager;
+use UIoT\messages\InvalidColumnNameMessage;
+use UIoT\messages\InvalidMethodMessage;
 use UIoT\model\MetaResource;
-use UIoT\sql\SQLCriteria;
+use UIoT\model\UIoTRequest;
 use UIoT\sql\SQLDelete;
-use UIoT\sql\SQLFilter;
 use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLInstructionFactory;
 use UIoT\sql\SQLSelect;
 use UIoT\sql\SQLUpdate;
 
-
 /**
  * Class ResourceController
- *
  * @package UIoT\control
  */
 class ResourceController
 {
     /**
-     * @var DatabaseConnector
+     * @var DatabaseManager
      */
-    private $dbConnector;
-
-    /**
-     * @var DatabaseExecuter
-     */
-    private $dbExecuter;
+    private $databaseManager;
 
     /**
      * @var SQLInstructionFactory
@@ -44,16 +33,15 @@ class ResourceController
 
     /**
      * ResourceController constructor.
+     *
      * @param MetaResource[] $resources
      */
     public function __construct($resources)
     {
-        $this->dbExecuter = new DatabaseExecuter();
-        $this->dbConnector = new DatabaseConnector();
+        $this->databaseManager = new DatabaseManager();
+        $this->databaseInstance = new DatabaseHandler();
         $this->factory = new SQLInstructionFactory($resources);
     }
-
-
 
     /**
      * Gets connection from dbConnector attribute.
@@ -62,51 +50,43 @@ class ResourceController
      */
     public function getConnection()
     {
-        return $this->dbConnector->getPdoObject();
+        return $this->databaseInstance->getInstance();
     }
 
     /**
-     * Executes a resource.
+     * Get SQL Instruction
      *
      * @param UIoTRequest $request
      * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
-     * @throws InvalidColumnNameException
-     * @throws InvalidMethodException
+     * @throws InvalidColumnNameMessage
+     * @throws InvalidMethodMessage
      */
     private function getInstruction(UIoTRequest $request)
     {
-       return $this->factory->createInstruction($request);
+        return $this->factory->createInstruction($request);
     }
 
+    /**
+     * Execute the Request
+     *
+     * @param UIoTRequest $request
+     * @return array|bool|int|object|string
+     * @throws \UIoT\messages\DatabaseConnectionFailedMessage
+     * @throws \UIoT\messages\EmptyOrNullRowDataValueMessage
+     */
     public function executeRequest(UIoTRequest $request)
     {
-        return $this->dbExecuter->execute($this->getInstruction($request), $this->dbConnector->getPdoObject());
+        return $this->databaseManager->execute($this->getInstruction($request),
+            $this->databaseInstance->getInstance());
     }
 
     /**
-     * @param SQLCriteria $criteria
-     * @param SQLFilter $filter
-     * @param $logicOperator
-     * @return SQLCriteria
-     * @throws InvalidSqlOperatorException
-     * @throws NotSqlFilterException
-     */
-    private function addCriteriaFilter(SQLCriteria $criteria, SQLFilter $filter, $logicOperator)
-    {
-        $criteria->addFilter($filter, $logicOperator);
-        return $criteria;
-    }
-
-    /**
-     * @return DatabaseExecuter
-     */
-    public function getDbExecuter()
-    {
-        return $this->dbExecuter;
-    }
-
-    /**
+     * Get Database Manager
      *
+     * @return DatabaseManager
      */
-
+    public function getDatabaseManager()
+    {
+        return $this->databaseManager;
+    }
 }

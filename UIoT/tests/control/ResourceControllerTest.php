@@ -1,16 +1,16 @@
 <?php
 
 use UIoT\control\ResourceController;
-use UIoT\database\DatabaseExecuter;
+use UIoT\database\DatabaseManager;
 
 class ResourceControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testCreateDbExecuterClass()
     {
         $resourceController = new ResourceController();
-        $this->assertEquals($resourceController->getDbExecuter(), new DatabaseExecuter());
-        $this->assertNotEquals($resourceController->getDbExecuter(), new stdClass());
-        
+        $this->assertEquals($resourceController->getDatabaseManager(), new DatabaseManager());
+        $this->assertNotEquals($resourceController->getDatabaseManager(), new stdClass());
+
     }
 
     /**
@@ -21,15 +21,13 @@ class ResourceControllerTest extends PHPUnit_Framework_TestCase
         $resourceController = new ResourceController();
         $this->assertEquals($resourceController->getConnection(), new PDO());
         $this->assertEquals($resourceController->getConnection(), new PDO());
-
     }
+
     /**
-     * @
-    */
-    public function createMockPDO(){
-        
+     *
+     */
+    public function createMockPDO()
+    {
+
     }
-
-
-
 }

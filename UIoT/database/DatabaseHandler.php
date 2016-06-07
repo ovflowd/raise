@@ -2,23 +2,15 @@
 
 namespace UIoT\database;
 
-use Exception;
 use PDO;
-use UIoT\exceptions\DatabaseConnectionFailedException;
+use UIoT\messages\DatabaseConnectionFailedMessage;
 use UIoT\properties\DatabaseProperties;
 
 /**
  * Class DatabaseConnector
- *
  * @package UIoT\database
- * @property string $user
- * @property string $pass
- * @property string $name
- * @property string $host
- * @property string $type
- * @property int $port
  */
-final class DatabaseConnector
+final class DatabaseHandler
 {
     /**
      * @var string Database user.
@@ -55,31 +47,23 @@ final class DatabaseConnector
      */
     public function __construct()
     {
-        self::setUser(DatabaseProperties::DB_USER());
-        self::setPass(DatabaseProperties::DB_PASS());
-        self::setName(DatabaseProperties::DB_NAME());
-        self::setHost(DatabaseProperties::DB_HOST());
-        self::setType(DatabaseProperties::DB_TYPE());
-        self::setPort(DatabaseProperties::DB_PORT());
+        self::setUser(DatabaseProperties::DB_USER);
+        self::setPass(DatabaseProperties::DB_PASS);
+        self::setName(DatabaseProperties::DB_NAME);
+        self::setHost(DatabaseProperties::DB_HOST);
+        self::setType(DatabaseProperties::DB_TYPE);
+        self::setPort(DatabaseProperties::DB_PORT);
     }
 
     /**
      * Returns a PDO Object based on the attributes.
      *
      * @return PDO
-     * @throws DatabaseConnectionFailedException
+     * @throws DatabaseConnectionFailedMessage
      */
-    public function getPdoObject()
+    public function getInstance()
     {
-        $conn = null;
-        
-        try {
-            $conn = self::getMySqlConnection();
-        } catch (Exception $exception) {
-            throw new DatabaseConnectionFailedException();
-        }
-        
-        return $conn;
+        return self::getMySqlConnection();
     }
 
     /**
@@ -89,15 +73,7 @@ final class DatabaseConnector
      */
     private function getMySqlConnection()
     {
-        $conn = new PDO("mysql:host={$this->host};
-						port={$this->port};
-						dbname={$this->name}",
-            self::getUser(),
-            self::getPass(),
-            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        return $conn;
+        return new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", self::getUser(), self::getPass(), array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
     }
 
     /**
@@ -117,7 +93,7 @@ final class DatabaseConnector
      */
     public function setName($name)
     {
-        $this->name = (isset($name) ? $name : NULL);
+        $this->name = $name;
     }
 
     /**
@@ -137,7 +113,7 @@ final class DatabaseConnector
      */
     public function setHost($host)
     {
-        $this->host = (isset($host) ? $host : NULL);
+        $this->host = $host;
     }
 
     /**
@@ -157,7 +133,7 @@ final class DatabaseConnector
      */
     public function setPort($port)
     {
-        $this->port = (isset($port) ? $port : NULL);
+        $this->port = $port;
     }
 
 
@@ -178,7 +154,7 @@ final class DatabaseConnector
      */
     public function setType($type)
     {
-        $this->type = (isset($type) ? $type : NULL);
+        $this->type = $type;
     }
 
     /**
@@ -198,7 +174,7 @@ final class DatabaseConnector
      */
     public function setUser($user)
     {
-        $this->user = (isset($user) ? $user : NULL);
+        $this->user = $user;
     }
 
     /**
@@ -218,8 +194,6 @@ final class DatabaseConnector
      */
     public function setPass($pass)
     {
-        $this->pass = (isset($pass) ? $pass : NULL);
+        $this->pass = $pass;
     }
-
-
 }
