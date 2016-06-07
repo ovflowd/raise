@@ -36,10 +36,10 @@ class MessageHandler extends UIoTSingleton
     public function getMessage(Exception $exception)
     {
         if ($exception instanceof RaiseMessage) {
-            self::getInstance()->status = new RaiseStatus($exception->getCode(), $exception->getMessage());
+            $this->getInstance()->status = new RaiseStatus($exception->getCode(), $exception->getMessage());
         }
 
-        return self::getInstance()->show();
+        return $this->getInstance()->show();
     }
 
     /**
@@ -69,7 +69,7 @@ class MessageHandler extends UIoTSingleton
      */
     public function show()
     {
-        if (self::getInstance()->status !== null) {
+        if ($this->getInstance()->status !== null) {
             return self::getInstance()->status->getStatus();
         }
 
