@@ -11,12 +11,12 @@ use stdClass;
 class RaiseStatus
 {
     /**
-     * @var int HTTP error number/code.
+     * @var int Raise Status Code
      */
     private $code;
 
     /**
-     * @var string HTTP error message.
+     * @var string Raise Status Message
      */
     private $message;
 
@@ -32,6 +32,11 @@ class RaiseStatus
         self::setMessage($message);
     }
 
+    /**
+     * Get Raise Status
+     *
+     * @return stdClass
+     */
     public function getStatus()
     {
         $responseCodes = new stdClass();

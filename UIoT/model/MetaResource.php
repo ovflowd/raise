@@ -114,8 +114,11 @@ class MetaResource
     public function getColumnNames()
     {
         $names = array();
-        foreach ($this->properties as $property)
+
+        foreach ($this->properties as $property) {
             $names[] = $property->getPropertyName();
+        }
+
         return $names;
     }
 
@@ -126,8 +129,9 @@ class MetaResource
     public function getProperty($friendlyName)
     {
         foreach ($this->properties as $property) {
-            if ($property->getFriendlyName() === $friendlyName)
+            if ($property->getFriendlyName() === $friendlyName) {
                 return $property;
+            }
         }
 
         return null;

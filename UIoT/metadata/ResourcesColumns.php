@@ -4,7 +4,6 @@ namespace UIoT\metadata;
 
 /**
  * Class Resources
- *
  * @package UIoT\metadata
  */
 final class Resources

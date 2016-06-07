@@ -3,8 +3,6 @@
 namespace UIoT\sql;
 
 use UIoT\messages\InvalidColumnNameMessage;
-use UIoT\messages\InvalidSqlOperatorMessage;
-use UIoT\messages\NotSqlFilterMessage;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
@@ -63,7 +61,6 @@ class SQLInstructionFactory
      * @param MetaResource $resource
      * @param UIoTRequest $request
      * @param SQLInstruction $instruction
-     * @throws InvalidColumnNameMessage
      */
     private function setCriteria(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
@@ -87,9 +84,6 @@ class SQLInstructionFactory
      * @param MetaResource $resource
      * @param string[] $parameters
      * @return SQLCriteria
-     * @throws InvalidColumnNameMessage
-     * @throws InvalidSqlOperatorMessage
-     * @throws NotSqlFilterMessage
      */
     private function getCriteria(MetaResource $resource, $parameters)
     {
@@ -114,7 +108,6 @@ class SQLInstructionFactory
      *
      * @param MetaResource $resource
      * @param SQLInstruction $instruction
-     * @throws \UIoT\messages\NotArrayMessage
      */
     private function addColumns(MetaResource $resource, SQLInstruction $instruction)
     {

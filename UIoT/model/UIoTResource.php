@@ -10,12 +10,12 @@ namespace UIoT\model;
 class UIoTResource
 {
     /**
-     * @var
+     * @var string Name
      */
     private $name;
 
     /**
-     * @var void
+     * @var mixed Columns
      */
     private $columns;
 

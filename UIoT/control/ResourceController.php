@@ -27,6 +27,11 @@ class ResourceController
     private $databaseManager;
 
     /**
+     * @var DatabaseHandler
+     */
+    private $databaseHandler;
+
+    /**
      * @var SQLInstructionFactory
      */
     private $factory;
@@ -39,7 +44,7 @@ class ResourceController
     public function __construct($resources)
     {
         $this->databaseManager = new DatabaseManager();
-        $this->databaseInstance = new DatabaseHandler();
+        $this->databaseHandler = new DatabaseHandler();
         $this->factory = new SQLInstructionFactory($resources);
     }
 
@@ -50,7 +55,7 @@ class ResourceController
      */
     public function getConnection()
     {
-        return $this->databaseInstance->getInstance();
+        return $this->databaseHandler->getInstance();
     }
 
     /**
@@ -77,7 +82,7 @@ class ResourceController
     public function executeRequest(UIoTRequest $request)
     {
         return $this->databaseManager->execute($this->getInstruction($request),
-            $this->databaseInstance->getInstance());
+            $this->databaseHandler->getInstance());
     }
 
     /**

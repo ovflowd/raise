@@ -11,14 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 class UIoTResponse extends Response
 {
     /**
-     * Status Text
-     *
-     * @var string
+     * @var string Status Text
      */
     protected $statusText;
 
     /**
-     * Get Status Text
+     * Return Status Text
      *
      * @return mixed
      */

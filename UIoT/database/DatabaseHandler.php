@@ -3,7 +3,6 @@
 namespace UIoT\database;
 
 use PDO;
-use UIoT\messages\DatabaseConnectionFailedMessage;
 use UIoT\properties\DatabaseProperties;
 
 /**
@@ -59,19 +58,8 @@ final class DatabaseHandler
      * Returns a PDO Object based on the attributes.
      *
      * @return PDO
-     * @throws DatabaseConnectionFailedMessage
      */
     public function getInstance()
-    {
-        return self::getMySqlConnection();
-    }
-
-    /**
-     * Creates and returns a MySQL connection (PDO).
-     *
-     * @return PDO
-     */
-    private function getMySqlConnection()
     {
         return new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", self::getUser(), self::getPass(), array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
     }

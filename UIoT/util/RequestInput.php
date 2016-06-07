@@ -57,12 +57,12 @@ class RequestInput
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = new DatabaseHandler();
 
-        self::registerExceptionHandler();
-        self::setRequestController(new RequestController($this->databaseManager));
-        self::setResourceController($this->getResources());
-        self::setRequestData(UIoTRequest::createFromGlobals());
-        self::getRequestData()->assignRequest();
-        self::setResponseData();
+        $this->registerExceptionHandler();
+        $this->setRequestController(new RequestController($this->databaseManager));
+        $this->setResourceController($this->getResources());
+        $this->setRequestData(UIoTRequest::createFromGlobals());
+        $this->getRequestData()->assignRequest();
+        $this->setResponseData();
     }
 
     /**
@@ -74,6 +74,8 @@ class RequestInput
     }
 
     /**
+     * Se Resource COntroller
+     *
      * @param $resources
      */
     private function setResourceController($resources)
@@ -133,8 +135,9 @@ class RequestInput
     }
 
     /**
+     * Route Raise
+     *
      * @return mixed
-     * @throws InvalidRaiseResourceMessage
      */
     public function route()
     {
@@ -162,6 +165,8 @@ class RequestInput
     }
 
     /**
+     * Get Resources
+     *
      * @return array
      */
     private function getResources()
@@ -177,6 +182,8 @@ class RequestInput
     }
 
     /**
+     * Get Resource Properties
+     *
      * @param $id
      * @return array
      */

@@ -24,10 +24,12 @@ class DatabaseManager
      */
     public function execute($query, PDO $connection)
     {
+        $result = $connection->query($query);
+
         switch (substr($query, 0, 6)) {
             default:
             case SQL::SELECT:
-                return $connection->query($query)->fetchAll(PDO::FETCH_OBJ);
+                return $result->fetchAll(PDO::FETCH_OBJ);
             case SQL::UPDATE:
                 return MessageHandler::getInstance()->getMessage(new ResourceItemUpdatedMessage);
             case SQL::INSERT_INTO:

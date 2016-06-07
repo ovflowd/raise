@@ -4,7 +4,6 @@ namespace UIoT\properties;
 
 /**
  * Class DatabaseProperties
- *
  * @package UIoT\properties
  */
 class DatabaseProperties
