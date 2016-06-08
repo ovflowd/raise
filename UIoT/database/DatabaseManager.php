@@ -28,14 +28,13 @@ class DatabaseManager
 
         switch (substr($query, 0, 6)) {
             default:
-            case SQLWords::SELECT:
+            case SQLWords::getSelect():
                 return $result->fetchAll(PDO::FETCH_OBJ);
-            case SQLWords::UPDATE:
+            case SQLWords::getUpdate():
                 return MessageHandler::getInstance()->getMessage(new ResourceItemUpdatedMessage);
-            case SQLWords::INSERT_INTO:
-            case SQLWords::INSERT:
+            case SQLWords::getInsert():
                 return MessageHandler::getInstance()->getMessage(new ResourceItemAddedMessage);
-            case SQLWords::DELETE:
+            case SQLWords::getDelete():
                 return MessageHandler::getInstance()->getMessage(new ResourceItemDeleteMessage);
         }
     }
