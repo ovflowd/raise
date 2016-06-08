@@ -16,17 +16,17 @@ use UIoT\util\MessageHandler;
 final class SQLFilter
 {
     /**
-     * @var string
+     * @var string Column Name
      */
     private $columnName;
 
     /**
-     * @var string
+     * @var string Operator
      */
     private $operator;
 
     /**
-     * @var mixed
+     * @var mixed Value
      */
     private $value;
 
@@ -36,13 +36,12 @@ final class SQLFilter
      * @param string $columnName
      * @param string $operator (=, >, <, >=, <=, <>, !=, !<, !>)
      * @param mixed $value (boolean, float, int, string, array or null)
-     *
      */
     public function __construct($columnName, $operator, $value)
     {
-        self::setColumnName($columnName);
-        self::setOperator($operator);
-        self::setValue(self::valueToString($value));
+        $this->setColumnName($columnName);
+        $this->setOperator($operator);
+        $this->setValue($this->valueToString($value));
     }
 
     /**
@@ -63,7 +62,7 @@ final class SQLFilter
      */
     private function setOperator($operator)
     {
-        if (!in_array($operator, SQL::ARITHMETIC_OPERATORS)) {
+        if (!in_array($operator, SQLWords::getArithmeticOperators())) {
             MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage('invalid sql operator'));
         }
 

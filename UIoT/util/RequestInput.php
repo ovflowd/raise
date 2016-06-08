@@ -3,7 +3,6 @@
 namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
-use UIoT\control\RequestController;
 use UIoT\control\ResourceController;
 use UIoT\database\DatabaseHandler;
 use UIoT\database\DatabaseManager;
@@ -19,11 +18,6 @@ use UIoT\model\UIoTResponse;
  */
 class RequestInput
 {
-    /**
-     * @var RequestController
-     */
-    private $requestController;
-
     /**
      * @var UIoTRequest
      */
@@ -56,9 +50,9 @@ class RequestInput
     {
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = new DatabaseHandler();
-        $this->requestController = new RequestController($this->databaseManager);
         $this->resourceController = new ResourceController($this->getResources());
         $this->requestData = UIoTRequest::createFromGlobals();
+
         $this->registerExceptionHandler();
         $this->getRequestData()->assignRequest();
         $this->setResponseData();
@@ -110,7 +104,7 @@ class RequestInput
      */
     public function route()
     {
-        $request = $this->requestController->createRequest($this);
+        $request = $this->getRequestData();
 
         if (!in_array($request->getResource(), $this->getResourceNames()))
             MessageHandler::getInstance()->endExecution(new InvalidRaiseResourceMessage);
@@ -153,14 +147,14 @@ class RequestInput
     /**
      * Get Resource Properties
      *
-     * @param $id
+     * @param $resourceId
      * @return array
      */
-    private function getResourceProperties($id)
+    private function getResourceProperties($resourceId)
     {
         $properties = array();
 
-        foreach ($this->databaseManager->execute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID =' . $id,
+        foreach ($this->databaseManager->execute("SELECT * FROM META_PROPERTIES WHERE RSRC_ID = {$resourceId}",
             $this->databaseHandler->getInstance()) as $property) {
             $properties[$property->PROP_FRIENDLY_NAME] = new MetaProperty($property->ID, $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
         }

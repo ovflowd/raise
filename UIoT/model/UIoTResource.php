@@ -10,17 +10,18 @@ namespace UIoT\model;
 class UIoTResource
 {
     /**
-     * @var string Name
+     * @var string Resource Name
      */
     private $name;
 
     /**
-     * @var mixed Columns
+     * @var mixed Resource Columns
      */
     private $columns;
 
     /**
      * UIoTResource constructor.
+     *
      * @param $name
      * @param $json
      */

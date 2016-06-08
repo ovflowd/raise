@@ -8,7 +8,6 @@ use UIoT\util\MessageHandler;
 
 /**
  * Class SQLDelete
- *
  * @package UIoT\sql
  */
 final class SQLDelete extends SQLInstruction
@@ -22,7 +21,7 @@ final class SQLDelete extends SQLInstruction
      */
     public function setRowData($column, $value)
     {
-        MessageHandler::getInstance()->endExecution(new RowDataValueNotSupportedMessage("DELETE instructions do not support row values"));
+        MessageHandler::getInstance()->endExecution(new RowDataValueNotSupportedMessage('DELETE instructions do not support row values'));
     }
 
     /**
@@ -30,7 +29,7 @@ final class SQLDelete extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::DELETE . SQL::BLANK . $this->getEntity() . SQL::BLANK .
-            SQL::WHERE . SQL::BLANK . $this->criteria->toSql();
+        $this->instruction = SQLWords::getDelete() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
+            SQLWords::getWhere() . SQLWords::getBlank() . $this->criteria->toSql();
     }
 }

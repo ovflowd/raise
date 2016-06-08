@@ -23,11 +23,11 @@ final class SQLSelect extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::SELECT . SQL::BLANK .
-            $this->selectColumnsToSql() . SQL::BLANK .
-            SQL::FROM . SQL::BLANK .
-            $this->getEntity() . SQL::BLANK .
-            SQL::WHERE . SQL::BLANK .
+        $this->instruction = SQLWords::getSelect() . SQLWords::getBlank() .
+            $this->selectColumnsToSql() . SQLWords::getBlank() .
+            SQLWords::getFrom() . SQLWords::getBlank() .
+            $this->getEntity() . SQLWords::getBlank() .
+            SQLWords::getWhere() . SQLWords::getBlank() .
             $this->criteria->toSql();
     }
 
@@ -38,10 +38,10 @@ final class SQLSelect extends SQLInstruction
      */
     public function selectColumnsToSql()
     {
-        if (!is_null($this->columns)) {
-            return implode(',', $this->columns);
+        if ($this->columns == null) {
+            return '';
         }
 
-        return '';
+        return implode(',', $this->columns);
     }
 }

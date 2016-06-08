@@ -9,11 +9,6 @@ namespace UIoT\model;
 class UIoTSingleton
 {
     /**
-     * @var UIoTSingleton The reference to *Singleton* instance of this class
-     */
-    protected static $instance;
-
-    /**
      * Protected constructor to prevent creating a new instance of the
      */
     protected function __construct()
@@ -28,9 +23,11 @@ class UIoTSingleton
      */
     public static function getInstance()
     {
-        if (null === static::$instance)
-            static::$instance = new static();
+        static $instance = null;
 
-        return static::$instance;
+        if (null === $instance)
+            $instance = new static();
+
+        return $instance;
     }
 }

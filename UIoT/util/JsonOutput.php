@@ -18,8 +18,9 @@ final class JsonOutput
      */
     public static function showJson($value = null)
     {
-        if (null === $value || empty($value))
+        if (null === $value || empty($value)) {
             $value = new stdClass();
+        }
 
         return json_encode($value, JSON_PRETTY_PRINT);
     }

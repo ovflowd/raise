@@ -14,14 +14,18 @@ use UIoT\util\MessageHandler;
 class SQLInstructionFactory
 {
     /**
-     * @var MetaResource[] $resources
+     * @var MetaResource[] Resources
      */
     private $resources;
 
     /**
-     * @var SQLInstruction[]
+     * @var SQLInstruction[] Instructions
      */
-    private $methods = array();
+    private $methods = [
+        'GET' => 'UIoT\sql\SQLSelect',
+        'POST' => 'UIoT\sql\SQLInsert',
+        'PUT' => 'UIoT\sql\SQLUpdate',
+        'DELETE' => 'UIoT\sql\SQLDelete'];
 
     /**
      * SQLInstructionFactory constructor.
@@ -31,11 +35,6 @@ class SQLInstructionFactory
     public function __construct($resources)
     {
         $this->resources = $resources;
-        $this->methods = ['GET' => 'UIoT\sql\SQLSelect',
-                          'POST' => 'UIoT\sql\SQLInsert',
-                          'PUT' => 'UIoT\sql\SQLUpdate',
-                          'DELETE' => 'UIoT\sql\SQLDelete'];
-
     }
 
     /**
@@ -93,11 +92,10 @@ class SQLInstructionFactory
             $columnName = $resource->getProperty($friendlyName);
 
             if (null == $columnName) {
-                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage());
+                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
             }
 
-            $filter = new SQLFilter($columnName->getPropertyName(), SQL::EQUALS_OP, $value);
-            $criteria->addFilter($filter, SQL::AND_OP);
+            $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
         }
 
         return $criteria;
@@ -115,9 +113,7 @@ class SQLInstructionFactory
 
         if ($instruction instanceof SQLSelect) {
             $instruction->addColumns($columns);
-        }
-
-        if ($instruction instanceof SQLInsert) {
+        } else if ($instruction instanceof SQLInsert) {
             $instruction->addColumns($this->removeColumn('ID', $columns));
         }
     }

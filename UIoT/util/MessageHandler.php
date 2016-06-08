@@ -13,7 +13,7 @@ use UIoT\model\UIoTSingleton;
 class MessageHandler extends UIoTSingleton
 {
     /**
-     * @var RaiseStatus Raise Error Code Message
+     * @var RaiseStatus Raise Code Message
      */
     protected $status;
 
@@ -30,36 +30,36 @@ class MessageHandler extends UIoTSingleton
     /**
      * Handle Message
      *
-     * @param Exception $exception
+     * @param Exception $message
      * @return string
      */
-    public function getMessage(Exception $exception)
+    public function getMessage(Exception $message)
     {
-        if ($exception instanceof RaiseMessage) {
-            $this->getInstance()->status = new RaiseStatus($exception->getCode(), $exception->getMessage());
+        if ($message instanceof RaiseMessage) {
+            $this->getInstance()->status = new RaiseStatus($message->getCode(), $message->getMessage());
         }
 
-        return $this->getInstance()->show();
+        return $this->show();
     }
 
     /**
      * Show Message
      *
-     * @param Exception $exception
+     * @param Exception $message
      */
-    public function showMessage(Exception $exception)
+    public function showMessage(Exception $message)
     {
-        echo JsonOutput::showJson($this->getMessage($exception));
+        echo JsonOutput::showJson($this->getMessage($message));
     }
 
     /**
      * Show Message and End Execution
      *
-     * @param Exception $exception
+     * @param Exception $message
      */
-    public function endExecution(Exception $exception)
+    public function endExecution(Exception $message)
     {
-        die($this->showMessage($exception));
+        die($this->showMessage($message));
     }
 
     /**
@@ -69,10 +69,10 @@ class MessageHandler extends UIoTSingleton
      */
     public function show()
     {
-        if ($this->getInstance()->status !== null) {
-            return self::getInstance()->status->getStatus();
+        if ($this->status == null) {
+            return (new RaiseStatus)->getStatus();
         }
 
-        return (new RaiseStatus())->getStatus();
+        return $this->status->getStatus();
     }
 }

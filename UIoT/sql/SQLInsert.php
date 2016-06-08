@@ -26,13 +26,15 @@ final class SQLInsert extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::INSERT_INTO . SQL::BLANK . $this->getEntity() .
-            '(' . $this->getColumns() . ')' . SQL::BLANK .
-            SQL::VALUES . SQL::BLANK .
-            '(' . $this->getSqlValues() . ')' . SQL::BLANK;
+        $this->instruction = SQLWords::getInsertInto() . SQLWords::getBlank() . $this->getEntity() .
+            '(' . $this->getColumns() . ')' . SQLWords::getBlank() .
+            SQLWords::getValues() . SQLWords::getBlank() .
+            '(' . $this->getSqlValues() . ')' . SQLWords::getBlank();
     }
 
     /**
+     * Return Generated Columns
+     *
      * @return mixed
      */
     public function getColumns()
@@ -41,6 +43,8 @@ final class SQLInsert extends SQLInstruction
     }
 
     /**
+     * Get Prepared SQL Values
+     *
      * @return string
      */
     private function getSqlValues()

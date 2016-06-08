@@ -13,7 +13,6 @@ use UIoT\util\MessageHandler;
  * See more at https://dev.mysql.com/doc/
  *
  * @package UIoT/sql
- *
  */
 abstract class SQLInstruction
 {
@@ -23,9 +22,9 @@ abstract class SQLInstruction
     protected $instruction;
 
     /**
-     * @var SQLCriteria
+     * @var SQLCriteria[]
      */
-    protected $criteria;
+    protected $criteria = [];
 
     /**
      * @var string Entity of the SQL Instruction
@@ -100,7 +99,7 @@ abstract class SQLInstruction
     public function addColumns($columns)
     {
         if (!is_array($columns)) {
-            MessageHandler::getInstance()->endExecution(new NotArrayMessage("Columns should be in an array"));
+            MessageHandler::getInstance()->endExecution(new NotArrayMessage('Columns should be in an array'));
         }
 
         $this->columns = $columns;
@@ -134,9 +133,11 @@ abstract class SQLInstruction
      */
     public function setRowData($column, $value)
     {
-        if (is_string($value) || is_bool($value) || is_integer($value) || is_float($value) || is_null($value))
-            MessageHandler::getInstance()->endExecution(new InvalidValueMessage('Parameter value does not represents a valid type.
-                                            Supported types are string, boolean, integer, float and null.'));
+        if (is_string($value) || is_bool($value) || is_integer($value) || is_float($value) || is_null($value)) {
+            MessageHandler::getInstance()->endExecution(new InvalidValueMessage('Parameter value does not represents a valid type. 
+            Supported types are string, boolean, integer, float and null.'));
+        }
+
         if (is_string($value)) {
             $value = addslashes($value);
             $this->columnValues[$column] = "'$value'";
@@ -145,7 +146,7 @@ abstract class SQLInstruction
         } else if (is_integer($value) || is_float($value)) {
             $this->columnValues[$column] = $value;
         } else {
-            $this->columnValues[$column] = "NULL";
+            $this->columnValues[$column] = 'NULL';
         }
     }
 

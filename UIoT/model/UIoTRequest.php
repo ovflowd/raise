@@ -9,13 +9,12 @@ use UIoT\util\MessageHandler;
 
 /**
  * Class UIoTRequest
- *
  * @package UIoT\model
  */
 class UIoTRequest extends Request
 {
     /**
-     * @var Url
+     * @var Url Raise Request
      */
     protected $requestUriData;
 
@@ -26,8 +25,9 @@ class UIoTRequest extends Request
      */
     public function getResource()
     {
-        if (null === $this->requestUriData)
+        if (null === $this->requestUriData) {
             return '';
+        }
 
         return $this->getUri()->getPath()->getData()[1];
     }
@@ -37,8 +37,9 @@ class UIoTRequest extends Request
      */
     public function assignRequest()
     {
-        if (null === $this->requestUriData)
+        if (null === $this->requestUriData) {
             $this->setUri();
+        }
     }
 
     /**
@@ -46,13 +47,11 @@ class UIoTRequest extends Request
      */
     public function setUri()
     {
-        $base = '/' . basename($this->getRequestUri());
+        $this->requestUriData = new Url($base = '/' . basename($this->getRequestUri()));
 
         if ($base == '/') {
             MessageHandler::getInstance()->endExecution(new WelcomeToRaiseMessage);
         }
-
-        $this->requestUriData = new Url($base);
     }
 
     /**

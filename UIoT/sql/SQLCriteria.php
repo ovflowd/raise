@@ -33,11 +33,11 @@ final class SQLCriteria
     public function addFilter($filter, $logicOperation)
     {
         if (!($filter instanceof SQLFilter)) {
-            MessageHandler::getInstance()->endExecution(new NotSqlFilterMessage("Parameter is not a instance of SQLFilter"));
+            MessageHandler::getInstance()->endExecution(new NotSqlFilterMessage('Parameter is not a instance of SQLFilter'));
         }
 
-        if (!in_array($logicOperation, SQL::LOGIC_OPERATORS)) {
-            MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage("parameter is not a valid sql logic operator"));
+        if (!in_array($logicOperation, SQLWords::getLogicOperators())) {
+            MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage('Parameter is not a valid sql logic operator'));
         }
 
         $this->filters[] = $logicOperation;
@@ -53,14 +53,14 @@ final class SQLCriteria
     public function toSql()
     {
         if (empty($this->filters)) {
-            return SQL::ALWAYS_TRUE;
+            return SQLWords::getAlwaysTrue();
         }
 
         $sql = '';
 
         foreach ($this->filters as $key => $filter) {
             if ($key != 0) {
-                $sql .= $filter . SQL::BLANK;
+                $sql .= $filter . SQLWords::getBlank();
             }
         }
 

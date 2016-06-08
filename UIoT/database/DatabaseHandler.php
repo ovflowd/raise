@@ -3,7 +3,10 @@
 namespace UIoT\database;
 
 use PDO;
+use PDOException;
+use UIoT\messages\DatabaseConnectionFailedMessage;
 use UIoT\properties\DatabaseProperties;
+use UIoT\util\MessageHandler;
 
 /**
  * Class DatabaseConnector
@@ -46,12 +49,12 @@ final class DatabaseHandler
      */
     public function __construct()
     {
-        self::setUser(DatabaseProperties::DB_USER);
-        self::setPass(DatabaseProperties::DB_PASS);
-        self::setName(DatabaseProperties::DB_NAME);
-        self::setHost(DatabaseProperties::DB_HOST);
-        self::setType(DatabaseProperties::DB_TYPE);
-        self::setPort(DatabaseProperties::DB_PORT);
+        $this->setUser(DatabaseProperties::getUser());
+        $this->setPass(DatabaseProperties::getPassword());
+        $this->setName(DatabaseProperties::getName());
+        $this->setHost(DatabaseProperties::getHost());
+        $this->setType(DatabaseProperties::getType());
+        $this->setPort(DatabaseProperties::getPort());
     }
 
     /**
@@ -61,7 +64,13 @@ final class DatabaseHandler
      */
     public function getInstance()
     {
-        return new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", self::getUser(), self::getPass(), array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+        try {
+            return new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
+        } catch (PDOException $e) {
+            MessageHandler::getInstance()->endExecution(new DatabaseConnectionFailedMessage);
+        }
+
+        return null;
     }
 
     /**

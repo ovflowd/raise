@@ -6,7 +6,7 @@ use PDO;
 use UIoT\messages\ResourceItemAddedMessage;
 use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
-use UIoT\sql\SQL;
+use UIoT\sql\SQLWords;
 use UIoT\util\MessageHandler;
 
 /**
@@ -28,14 +28,14 @@ class DatabaseManager
 
         switch (substr($query, 0, 6)) {
             default:
-            case SQL::SELECT:
+            case SQLWords::SELECT:
                 return $result->fetchAll(PDO::FETCH_OBJ);
-            case SQL::UPDATE:
+            case SQLWords::UPDATE:
                 return MessageHandler::getInstance()->getMessage(new ResourceItemUpdatedMessage);
-            case SQL::INSERT_INTO:
-            case SQL::INSERT:
+            case SQLWords::INSERT_INTO:
+            case SQLWords::INSERT:
                 return MessageHandler::getInstance()->getMessage(new ResourceItemAddedMessage);
-            case SQL::DELETE:
+            case SQLWords::DELETE:
                 return MessageHandler::getInstance()->getMessage(new ResourceItemDeleteMessage);
         }
     }

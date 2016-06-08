@@ -13,9 +13,9 @@ final class SQLUpdate extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQL::UPDATE . SQL::BLANK . $this->getEntity() . SQL::BLANK .
-            SQL::SET . SQL::BLANK . $this->criteria->toSql() .
-            SQL::WHERE . SQL::BLANK .
+        $this->instruction = SQLWords::getUpdate() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
+            SQLWords::getSet() . SQLWords::getBlank() . $this->criteria->toSql() .
+            SQLWords::getWhere() . SQLWords::getBlank() .
             $this->columnsValuesToUpdateFormat();
     }
 
