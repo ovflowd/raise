@@ -29,9 +29,19 @@ abstract class SQLWords
     private static $update = 'UPDATE';
 
     /**
+     * @var string Delete
+     */
+    private static $delete = 'DELETE';
+
+    /**
      * @var string Delete From
      */
-    private static $delete = 'DELETE FROM';
+    private static $deleteFrom = 'DELETE FROM';
+
+    /**
+     * @var string Logical-Deleted Column
+     */
+    private static $deletedColumn = 'DELETED';
 
     /**
      * @var string Where
@@ -171,6 +181,39 @@ abstract class SQLWords
     public static function getDelete()
     {
         return self::$delete;
+    }
+
+    /**
+     * Get Delete From
+     *
+     * @return string
+     */
+
+    public static function getDeleteFrom()
+    {
+        return self::$deleteFrom;
+    }
+
+    /**
+     * Get Deleted Column
+     *
+     * @return mixed
+     */
+
+    public static function getDeletedColumn()
+    {
+        return self::$deletedColumn;
+    }
+
+    /**
+     * Get Is Deleted Column
+     *
+     * @return mixed
+     */
+
+    public static function getIsDeletedColumn($state)
+    {
+        return self::$deletedColumn . self::getArithmeticOperators()[0] . $state;
     }
 
     /**

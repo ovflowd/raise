@@ -91,6 +91,9 @@ class SQLInstructionFactory
         foreach ($parameters as $friendlyName => $value) {
             $columnName = $resource->getProperty($friendlyName);
 
+            if($friendlyName == "token")
+                continue;
+
             if (null == $columnName) {
                 MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
             }

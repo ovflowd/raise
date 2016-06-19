@@ -7,6 +7,7 @@ use UIoT\control\ResourceController;
 use UIoT\database\DatabaseHandler;
 use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidRaiseResourceMessage;
+use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\MetaProperty;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
@@ -109,7 +110,23 @@ class RequestInput
         if (!in_array($request->getResource(), $this->getResourceNames()))
             MessageHandler::getInstance()->endExecution(new InvalidRaiseResourceMessage);
 
-        return $this->resourceController->executeRequest($request);
+        //TODO: it's hardcoded at the moment, need a better system, including a better create/validate token system.
+
+        if(!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST" || $this->validateToken($request->query->get("token")))
+            return $this->resourceController->executeRequest($request);
+        else
+            MessageHandler::getInstance()->endExecution(new InvalidTokenMessage);
+    }
+
+    /**
+     * Validate Token from Database
+     *
+     * @param $token
+     * @return bool
+     */
+    public function validateToken($token)
+    {
+        return $token == "raise";
     }
 
     /**

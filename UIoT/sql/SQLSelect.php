@@ -28,7 +28,9 @@ final class SQLSelect extends SQLInstruction
             SQLWords::getFrom() . SQLWords::getBlank() .
             $this->getEntity() . SQLWords::getBlank() .
             SQLWords::getWhere() . SQLWords::getBlank() .
-            $this->criteria->toSql();
+            $this->criteria->toSql() . SQLWords::getBlank() .
+            SQLWords::getAndOp() . SQLWords::getBlank() .
+            SQLWords::getIsDeletedColumn(0);
     }
 
     /**

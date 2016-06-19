@@ -29,7 +29,7 @@ final class SQLDelete extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQLWords::getDelete() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
-            SQLWords::getWhere() . SQLWords::getBlank() . $this->criteria->toSql();
+        $this->instruction = SQLWords::getUpdate() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
+        SQLWords::getSet() . SQLWords::getBlank() . SQLWords::getIsDeletedColumn(1) . SQLWords::getBlank() . SQLWords::getWhere() . SQLWords::getBlank() . $this->criteria->toSql();
     }
 }

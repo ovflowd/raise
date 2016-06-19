@@ -34,4 +34,6 @@ include_once(__DIR__ . '/vendor/autoload.php');
 use UIoT\util\JsonOutput;
 use UIoT\util\RequestInput;
 
+header("Content-Type: application/json");
+
 echo JsonOutput::showJson((new RequestInput)->route());
