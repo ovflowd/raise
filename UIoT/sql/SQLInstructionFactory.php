@@ -89,16 +89,15 @@ class SQLInstructionFactory
         $criteria = new SQLCriteria();
 
         foreach ($parameters as $friendlyName => $value) {
-            $columnName = $resource->getProperty($friendlyName);
+            if($friendlyName != "token") {
+                $columnName = $resource->getProperty($friendlyName);
 
-            if($friendlyName == "token")
-                continue;
+                if (null == $columnName) {
+                    MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
+                }
 
-            if (null == $columnName) {
-                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
+                $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
             }
-
-            $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
         }
 
         return $criteria;

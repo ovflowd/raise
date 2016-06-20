@@ -12,6 +12,7 @@ use UIoT\model\MetaProperty;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
 use UIoT\model\UIoTResponse;
+use UIoT\model\UIoTToken;
 
 /**
  * Class RequestInput
@@ -45,6 +46,11 @@ class RequestInput
     private $resourceController;
 
     /**
+     * @var UIoTToken
+     */
+    private $tokenManager;
+
+    /**
      * RequestInput constructor.
      */
     public function __construct()
@@ -52,6 +58,7 @@ class RequestInput
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = new DatabaseHandler();
         $this->resourceController = new ResourceController($this->getResources());
+        $this->tokenManager = new UIoTToken($this->databaseHandler->getInstance());
         $this->requestData = UIoTRequest::createFromGlobals();
 
         $this->registerExceptionHandler();
