@@ -31,7 +31,7 @@ class UIoTToken
     public function defineToken($deviceId)
     {
         $generateToken = $this->generateRandomToken();
-        $this->getConnection()->query("INSERT INTO devices_tokens VALUES ('{$deviceId}', '{$generateToken}', '0') ON DUPLICATE KEY UPDATE DVC_TOKEN = '{$deviceId}' DVC_TOKEN_EXPIRE='123'");
+        $this->getConnection()->query("INSERT INTO DEVICE_TOKENS VALUES ('{$deviceId}', '{$generateToken}', '0') ON DUPLICATE KEY UPDATE DVC_TOKEN = '{$deviceId}' DVC_TOKEN_EXPIRE='123'");
     }
 
     /**
