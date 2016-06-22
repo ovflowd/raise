@@ -3,6 +3,7 @@
 namespace UIoT\database;
 
 use PDO;
+use UIoT\messages\DatabaseErrorFailedMessage;
 use UIoT\messages\ResourceItemAddedMessage;
 use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
@@ -24,8 +25,12 @@ class DatabaseManager
      */
     public function execute($query, PDO $connection)
     {
-        $result = $connection->query($query);
+        $result = $connection->prepare($query);
+        $execute = $result->execute();
 
+        if(!$execute)
+            MessageHandler::getInstance()->endExecution(new DatabaseErrorFailedMessage);
+        
         switch (substr($query, 0, 6)) {
             default:
             case SQLWords::getSelect():

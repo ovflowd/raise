@@ -132,8 +132,10 @@ class RequestInput
                 MessageHandler::getInstance()->endExecution(new DatabaseErrorFailedMessage);
         }
 
-        if($this->tokenManager->validateCode($request->query->get("token")))
+        if($this->tokenManager->validateCode($request->query->get("token"))) {
+            $this->tokenManager->updateTokenExpire($request->query->get("token"));
             return $this->resourceController->executeRequest($request);
+        }
         else
             MessageHandler::getInstance()->endExecution(new InvalidTokenMessage);
     }

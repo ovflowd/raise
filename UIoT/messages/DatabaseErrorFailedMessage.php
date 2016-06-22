@@ -5,7 +5,7 @@ namespace UIoT\messages;
 use UIoT\interfaces\RaiseMessage;
 
 /**
- * Class DatabaseConnectionFailedMessage
+ * Class DatabaseErrorFailedMessage
  * @package UIoT\messages
  */
 final class DatabaseErrorFailedMessage extends RaiseMessage

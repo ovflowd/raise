@@ -32,20 +32,29 @@ class UIoTToken
      */
     public function validateCode($token)
     {
-        $getTokenStatement = $this->getConnection()->prepare("SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = ? ORDER BY DVC_ID DESC LIMIT 1");
-        $getTokenStatement->bindParam(1, $token);
+        $currentTime = time();
+        $getTokenStatement = $this->getConnection()->prepare("SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1");
+        $getTokenStatement->bindParam(':token', $token);
+        $getTokenStatement->bindParam(':currentTime', $currentTime);
+
         $getTokenStatement->execute();
 
-        if($getTokenStatement->rowCount() > 0) {
-            $device_id = $getTokenStatement->fetch()['DVC_ID'];
-            $getDeviceStatement = $this->getConnection()->prepare("SELECT * FROM DEVICES WHERE ID = ?");
-            $getDeviceStatement->bindParam(1, $device_id);
-            return true;
-        }
-
-        return false;
+        return $getTokenStatement->rowCount() > 0;
     }
 
+    /**
+     * Update Token Expire-Date while it's still valid.
+     *
+     * @param $token
+     */
+    public function updateTokenExpire($token)
+    {
+        $expire = $this->getExpireTime();
+        $setDeviceTokenStatement = $this->getConnection()->prepare("UPDATE DEVICE_TOKENS SET DVC_TOKEN_EXPIRE = :expire WHERE DVC_TOKEN = :token;");
+        $setDeviceTokenStatement->bindParam(':token', $token);
+        $setDeviceTokenStatement->bindParam(':expire', $expire);
+        $setDeviceTokenStatement->execute();
+    }
     /**
      * Define token
      *
@@ -54,12 +63,12 @@ class UIoTToken
      */
     public function defineToken($deviceId)
     {
+        $expire = $this->getExpireTime();
         $generateToken = $this->generateRandomToken();
-        $time = time() + 3600;
         $setDeviceTokenStatement = $this->getConnection()->prepare("INSERT INTO DEVICE_TOKENS VALUES (:device_id, :token, :expire) ON DUPLICATE KEY UPDATE DVC_TOKEN = :token, DVC_TOKEN_EXPIRE = :expire;");
         $setDeviceTokenStatement->bindParam(':device_id', $deviceId);
         $setDeviceTokenStatement->bindParam(':token', $generateToken);
-        $setDeviceTokenStatement->bindParam(':expire', $time);
+        $setDeviceTokenStatement->bindParam(':expire', $expire);
         $setDeviceTokenStatement->execute();
         return $generateToken;
     }
@@ -71,14 +80,26 @@ class UIoTToken
      */
     public function generateRandomToken()
     {
-        return sha1(uniqid(rand(), true)); // TODO: Better token generation??
+        return sha1(uniqid(rand(), true)); // TODO: needs a better token generation.
     }
 
     /**
+     * Get connection from PDO
+     *
      * @return PDO
      */
     public function getConnection()
     {
         return $this->connection;
+    }
+
+    /**
+     * Get token's expiration limit (idle time)
+     *
+     * @return mixed
+     */
+    public function getExpireTime()
+    {
+        return time() + 3600;
     }
 }
