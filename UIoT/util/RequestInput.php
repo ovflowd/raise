@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use UIoT\control\ResourceController;
 use UIoT\database\DatabaseHandler;
 use UIoT\database\DatabaseManager;
+use UIoT\messages\DatabaseErrorFailedMessage;
 use UIoT\messages\InvalidRaiseResourceMessage;
 use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\MetaProperty;
@@ -57,7 +58,7 @@ class RequestInput
     {
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = new DatabaseHandler();
-        $this->resourceController = new ResourceController($this->getResources());
+        $this->resourceController = new ResourceController($this->getResources(), $this->databaseHandler);
         $this->tokenManager = new UIoTToken($this->databaseHandler->getInstance());
         $this->requestData = UIoTRequest::createFromGlobals();
 
@@ -113,27 +114,28 @@ class RequestInput
     public function route()
     {
         $request = $this->getRequestData();
-
+        
         if (!in_array($request->getResource(), $this->getResourceNames()))
             MessageHandler::getInstance()->endExecution(new InvalidRaiseResourceMessage);
 
-        //TODO: it's hardcoded at the moment, need a better system, including a better create/validate token system.
+        // TODO: Refactoring
 
-        if(!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST" || $this->validateToken($request->query->get("token")))
+        if(!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST")
+        {
+            $result = $this->resourceController->executeRequest($request);
+            $id = $this->databaseHandler->getInstance()->lastInsertId();
+            if($id > 0) {
+                $token = $this->tokenManager->defineToken($id);
+                return ["code" => 200, "token" => $token];
+            }
+            else
+                MessageHandler::getInstance()->endExecution(new DatabaseErrorFailedMessage);
+        }
+
+        if($this->tokenManager->validateCode($request->query->get("token")))
             return $this->resourceController->executeRequest($request);
         else
             MessageHandler::getInstance()->endExecution(new InvalidTokenMessage);
-    }
-
-    /**
-     * Validate Token from Database
-     *
-     * @param $token
-     * @return bool
-     */
-    public function validateToken($token)
-    {
-        return $token == "raise";
     }
 
     /**

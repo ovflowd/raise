@@ -43,6 +43,17 @@ class MessageHandler extends UIoTSingleton
     }
 
     /**
+     * @param $code
+     * @param $message
+     * @return RaiseStatus
+     */
+    public function showData($code, $message)
+    {
+        $this->getInstance()->status = new RaiseStatus($code, $message);
+        return $this->show();
+    }
+
+    /**
      * Show Message
      *
      * @param Exception $message

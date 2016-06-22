@@ -41,10 +41,10 @@ class ResourceController
      *
      * @param MetaResource[] $resources
      */
-    public function __construct($resources)
+    public function __construct($resources, $database)
     {
         $this->databaseManager = new DatabaseManager();
-        $this->databaseHandler = new DatabaseHandler();
+        $this->databaseHandler = $database;
         $this->factory = new SQLInstructionFactory($resources);
     }
 

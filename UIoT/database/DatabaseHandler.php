@@ -45,6 +45,11 @@ final class DatabaseHandler
     private $port;
 
     /**
+     * @var PDO Current Connection
+     */
+    private $connection;
+
+    /**
      * DatabaseConnector constructor.
      */
     public function __construct()
@@ -55,6 +60,24 @@ final class DatabaseHandler
         $this->setHost(DatabaseProperties::getHost());
         $this->setType(DatabaseProperties::getType());
         $this->setPort(DatabaseProperties::getPort());
+
+        $this->connect();
+    }
+
+    /**
+     * Make Connection
+     *
+     * @return null|PDO
+     */
+    private function connect()
+    {
+        try {
+            $this->connection = new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
+        } catch (PDOException $e) {
+            MessageHandler::getInstance()->endExecution(new DatabaseConnectionFailedMessage);
+        }
+
+        return null;
     }
 
     /**
@@ -64,13 +87,7 @@ final class DatabaseHandler
      */
     public function getInstance()
     {
-        try {
-            return new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
-        } catch (PDOException $e) {
-            MessageHandler::getInstance()->endExecution(new DatabaseConnectionFailedMessage);
-        }
-
-        return null;
+        return $this->connection;
     }
 
     /**
