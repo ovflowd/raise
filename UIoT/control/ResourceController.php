@@ -41,34 +41,12 @@ class ResourceController
      *
      * @param MetaResource[] $resources
      */
+    
     public function __construct($resources, $database)
     {
         $this->databaseManager = new DatabaseManager();
         $this->databaseHandler = $database;
         $this->factory = new SQLInstructionFactory($resources);
-    }
-
-    /**
-     * Gets connection from dbConnector attribute.
-     *
-     * @return PDO
-     */
-    public function getConnection()
-    {
-        return $this->databaseHandler->getInstance();
-    }
-
-    /**
-     * Get SQL Instruction
-     *
-     * @param UIoTRequest $request
-     * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
-     * @throws InvalidColumnNameMessage
-     * @throws InvalidMethodMessage
-     */
-    private function getInstruction(UIoTRequest $request)
-    {
-        return $this->factory->createInstruction($request);
     }
 
     /**
@@ -86,6 +64,19 @@ class ResourceController
     }
 
     /**
+     * Get SQL Instruction
+     *
+     * @param UIoTRequest $request
+     * @return SQLDelete|SQLInsert|SQLSelect|SQLUpdate
+     * @throws InvalidColumnNameMessage
+     * @throws InvalidMethodMessage
+     */
+    private function getInstruction(UIoTRequest $request)
+    {
+        return $this->factory->createInstruction($request);
+    }
+    
+    /**
      * Get Database Manager
      *
      * @return DatabaseManager
@@ -93,5 +84,15 @@ class ResourceController
     public function getDatabaseManager()
     {
         return $this->databaseManager;
+    }
+
+    /**
+     * Gets connection from dbConnector attribute.
+     *
+     * @return PDO
+     */
+    public function getConnection()
+    {
+        return $this->databaseHandler->getInstance();
     }
 }
