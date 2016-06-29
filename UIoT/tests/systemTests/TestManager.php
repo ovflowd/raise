@@ -3,51 +3,72 @@
 class TestManager
 {
 
-    const HTTP_VERSION = "";
-    const CHARACTER_SET = "";
-    const CONTENT_ENCODING = "";
-    const MEDIA_TYPES = "";
-    const LANGUAGE_TAGS = "";
-
+    const RAISE = "http://raise.uiot.org/";
     private $requests;
 
+    /**
+     * TestManager constructor.
+     */
     public function __construct()
     {
         $testResults = "";
-        $this->generateRequests();
-
+        $this->requests = $this->populateRequests();
         foreach($this->requests as $request){
-            $testResults += $this->testGetRequest($request[request], $request[expected]);
+            $testResults += $this->testGetRequest($request);
         }
-        
         echo $testResults;
     }
 
-
-    private function generateRequests()
+    /**
+     * @return array
+     */
+    private function populateRequests()
     {
-        $requestArray = null;
-
-        $requestArray[1][request] = "";
-        $requestArray[1][expected] = "";
-
+        $requestArray = array(
+            new RequestTestCase(RAISE.""),//Todo. construct requests based on https://github.com/UIoT/uiot_academics/blob/master/docs/documentation/DeviceRequests.pdf
+            new RequestTestCase(RAISE."")
+            // etc
+        );
         return $requestArray;
     }
 
-
-    /*
-     * interfaces raise tests and Httpful lib
-     * todo incomplete.
-     * */
-    private function testGetRequest(String $httpRequest, String $expected)
+    /**
+     * @param RequestTestCase $requestTestCase
+     * @return bool
+     */
+    private function testGetRequest(RequestTestCase $requestTestCase)
     {
-        $response = \Httpful\Request::get($httpRequest)->send();
-
-        if($expected === $response){
+        $response = $this->doGetRequest( $requestTestCase->getRequest() );
+        if( strcmp( $response, $requestTestCase->getExpected() ) === 0 )
+        {
             return true;
-        } else { return false;
         }
+        else
+        {
+            return false;
+        }
+    }
 
+    /**
+     * interfaces raise tests and Httpful lib for method GET
+     * @param $httpGetUri
+     * @return mixed
+     */
+    private function doGetRequest($requestTestCase){
+        return \Httpful\Request::get( $requestTestCase->getUri() )->send();
+    }
+
+    /**
+     * interfaces raise tests and Httpful lib for method POST
+     * @param $httpPostUri
+     * @param $httpPostBody
+     * @return mixed
+     */
+    private function doPostRequest($requestTestCase){
+        return \Httpful\Request::post( $requestTestCase->getUri() )
+            ->body( $requestTestCase->getBody() )//todo check
+            ->sendsJson() //todo check, originally '->sendsXml()'
+            ->send();
     }
 
 }
