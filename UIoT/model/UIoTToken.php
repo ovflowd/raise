@@ -25,7 +25,7 @@ class UIoTToken
     }
 
     /**
-     * Validade Token
+     * Validate Token
      *
      * @param $token
      * @return bool
@@ -40,6 +40,15 @@ class UIoTToken
         $getTokenStatement->execute();
 
         return $getTokenStatement->rowCount() > 0;
+    }
+
+    public function getDeviceIdFromToken($token)
+    {
+        $getToken = $this->getConnection()->prepare("SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token;");
+        $getToken->bindParam(":token", $token);
+        $getToken->execute();
+
+        return $getToken->fetch()['DVC_ID'];
     }
 
     /**

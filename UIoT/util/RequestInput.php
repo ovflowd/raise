@@ -122,22 +122,53 @@ class RequestInput
 
         if(!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST")
         {
-            $result = $this->resourceController->executeRequest($request);
+            $response = $this->resourceController->executeRequest($request);
             $id = $this->databaseHandler->getInstance()->lastInsertId();
             if($id > 0) {
                 $token = $this->tokenManager->defineToken($id);
                 return ["code" => 200, "token" => $token];
+            } else {
+                return $response;
             }
-            else
-                MessageHandler::getInstance()->endExecution(new DatabaseErrorFailedMessage);
         }
+        else if($this->tokenManager->validateCode($request->query->get("token"))) {
 
-        if($this->tokenManager->validateCode($request->query->get("token"))) {
             $this->tokenManager->updateTokenExpire($request->query->get("token"));
-            return $this->resourceController->executeRequest($request);
+
+            if($request->getResource() == "services" && $request->getMethod() == "POST"){
+                $response = $this->resourceController->executeRequest($request);
+                $service_id = $this->databaseHandler->getInstance()->lastInsertId();
+
+                if($service_id > 0) {
+                    $tokenId = $this->tokenManager->getDeviceIdFromToken($request->query->get("token"));
+
+                    $service_name = $request->query->get("name");
+                    $service_type = $request->query->get("type");
+
+                    $add_service_action = $this->databaseHandler->getInstance()->prepare("INSERT INTO actions VALUES (NULL, :act_name, :act_type, '', '0');"); // ACT_NAME, ACT_TYPE, ACT_DATA_TYPE
+                    $add_service_action->bindParam(":act_name", $service_name);
+                    $add_service_action->bindParam(":act_type", $service_type);
+                    $add_service_action->execute();
+
+                    $action_id = $this->databaseHandler->getInstance()->lastInsertId();
+
+                    $add_link_service_action = $this->databaseHandler->getInstance()->prepare("INSERT INTO service_actions VALUES (:srvc_id, :actid, '0');");
+                    $add_link_service_action->bindParam(":srvc_id", $service_id);
+                    $add_link_service_action->bindParam(":actid", $action_id);
+                    $add_link_service_action->execute();
+
+                    return ["code" => 200, "service_id" => $service_id, "device_id" => $tokenId];
+                } else {
+                    return $response;
+                }
+            }
+            else {
+                return $this->resourceController->executeRequest($request);
+            }
         }
-        else
+        else {
             MessageHandler::getInstance()->endExecution(new InvalidTokenMessage);
+        }
     }
 
     /**
