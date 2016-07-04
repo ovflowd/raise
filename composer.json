@@ -57,9 +57,6 @@
     "symfony/http-foundation": "master",
     "jwage/purl": "master"
   },
-  "require-dev": {
-    "phpunit/phpunit": "master"
-  },
   "autoload": {
     "classmap": [
       "UIoT/"
