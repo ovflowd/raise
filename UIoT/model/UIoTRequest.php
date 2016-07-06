@@ -33,6 +33,22 @@ class UIoTRequest extends Request
     }
 
     /**
+     *
+     */
+    public function getParameterColumns()
+    {
+        $columnNames = array();
+
+
+        $parameters = explode("&", explode("?" , $this->getRequestUri())[1]);
+        foreach ($parameters as $parameter) {
+            $columnNames[] = explode("=", $parameter)[0];
+        }
+
+        return $columnNames;
+    }
+
+    /**
      * Assign Request Data
      */
     public function assignRequest()

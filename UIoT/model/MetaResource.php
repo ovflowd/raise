@@ -109,16 +109,19 @@ class MetaResource
     }
 
     /**
+     * @param $selectedColumns
      * @return array
      */
-    public function getColumnNames()
+    public function getColumnNames($selectedColumns)
     {
+        
         $names = array();
 
         foreach ($this->properties as $property) {
-            $names[] = $property->getPropertyName();
+            if (in_array($property->getFriendlyName(), $selectedColumns))
+                $names[] = $property->getPropertyName();
         }
-
+        
         return $names;
     }
 

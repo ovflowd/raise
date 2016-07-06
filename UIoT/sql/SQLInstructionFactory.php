@@ -49,7 +49,7 @@ class SQLInstructionFactory
         /** @var SQLInstruction $instruction */
         $instruction = new $this->methods[$request->getMethod()];
         $instruction->setEntity($resource->getName());
-        $this->addColumns($resource, $instruction);
+        $this->addColumns($resource, $request, $instruction);
         $this->setCriteria($resource, $request, $instruction);
         return $instruction->getInstruction();
     }
@@ -107,34 +107,11 @@ class SQLInstructionFactory
      * Add a set of Columns
      *
      * @param MetaResource $resource
+     * @param UIoTRequest $request
      * @param SQLInstruction $instruction
      */
-    private function addColumns(MetaResource $resource, SQLInstruction $instruction)
+    private function addColumns(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
-        $columns = $resource->getColumnNames();
-
-        if ($instruction instanceof SQLSelect) {
-            $instruction->addColumns($columns);
-        } else if ($instruction instanceof SQLInsert) {
-            $instruction->addColumns($this->removeColumn('ID', $columns));
-        }
-    }
-
-    /**
-     * Remove Column
-     *
-     * @param $columnName
-     * @param $columns
-     * @return mixed
-     */
-    private function removeColumn($columnName, $columns)
-    {
-        foreach ($columns as $key => $column) {
-            if ($column === $columnName) {
-                unset($columns[$key]);
-            }
-        }
-
-        return $columns;
+        $instruction->addColumns($resource->getColumnNames($request->getParameterColumns()));
     }
 }
