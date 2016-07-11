@@ -47,7 +47,8 @@ class SQLInstructionFactory
     {
         $resource = $this->resources[$request->getResource()];
         /** @var SQLInstruction $instruction */
-        $instruction = new $this->methods[$request->getMethod()];
+        $methodType = $this->methods[$request->getMethod()];
+        $instruction = new $methodType;
         $instruction->setEntity($resource->getName());
         $this->addColumns($resource, $request, $instruction);
         $this->setCriteria($resource, $request, $instruction);

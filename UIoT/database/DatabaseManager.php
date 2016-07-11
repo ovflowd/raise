@@ -83,7 +83,7 @@ class DatabaseManager
      */
     public function fetchAll(PDOStatement $query)
     {
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -94,7 +94,7 @@ class DatabaseManager
      */
     public function fetch(PDOStatement $query)
     {
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_OBJ);
     }
 
     /**
@@ -104,7 +104,7 @@ class DatabaseManager
      * @param array $statements
      * @return mixed
      */
-    public function execute($query, array $statements)
+    public function execute($query, array $statements = [])
     {
         return $query->execute($statements);
     }
@@ -116,7 +116,7 @@ class DatabaseManager
      * @param array $statement
      * @return mixed
      */
-    public function fastExecute($query, array $statement)
+    public function fastExecute($query, array $statement = [])
     {
         return $this->execute($this->prepare($query), $statement);
     }
