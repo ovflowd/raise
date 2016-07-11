@@ -89,7 +89,7 @@ class SQLInstructionFactory
         $criteria = new SQLCriteria();
 
         foreach ($parameters as $friendlyName => $value) {
-            if($friendlyName != "token") {
+            if ($friendlyName != "token") {
                 $columnName = $resource->getProperty($friendlyName);
 
                 if (null == $columnName) {

@@ -40,8 +40,8 @@ class ResourceController
      * ResourceController constructor.
      *
      * @param MetaResource[] $resources
+     * @param $database
      */
-    
     public function __construct($resources, $database)
     {
         $this->databaseManager = new DatabaseManager();
@@ -59,8 +59,7 @@ class ResourceController
      */
     public function executeRequest(UIoTRequest $request)
     {
-        return $this->databaseManager->execute($this->getInstruction($request),
-            $this->databaseHandler->getInstance());
+        return $this->databaseManager->action($this->getInstruction($request));
     }
 
     /**
@@ -75,7 +74,7 @@ class ResourceController
     {
         return $this->factory->createInstruction($request);
     }
-    
+
     /**
      * Get Database Manager
      *

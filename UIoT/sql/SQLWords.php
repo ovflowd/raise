@@ -217,6 +217,16 @@ abstract class SQLWords
     }
 
     /**
+     * Get Arithmetic Operators
+     *
+     * @return array
+     */
+    public static function getArithmeticOperators()
+    {
+        return self::$arithmeticOperators;
+    }
+
+    /**
      * Get Where
      *
      * @return string
@@ -354,16 +364,6 @@ abstract class SQLWords
     public static function getBlank()
     {
         return self::$blank;
-    }
-
-    /**
-     * Get Arithmetic Operators
-     *
-     * @return array
-     */
-    public static function getArithmeticOperators()
-    {
-        return self::$arithmeticOperators;
     }
 
     /**

@@ -30,6 +30,6 @@ final class SQLDelete extends SQLInstruction
     protected function generateInstruction()
     {
         $this->instruction = SQLWords::getUpdate() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
-        SQLWords::getSet() . SQLWords::getBlank() . SQLWords::getIsDeletedColumn(1) . SQLWords::getBlank() . SQLWords::getWhere() . SQLWords::getBlank() . $this->criteria->toSql();
+            SQLWords::getSet() . SQLWords::getBlank() . SQLWords::getIsDeletedColumn(1) . SQLWords::getBlank() . SQLWords::getWhere() . SQLWords::getBlank() . $this->criteria->toSql();
     }
 }

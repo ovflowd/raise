@@ -150,7 +150,6 @@ final class DatabaseHandler
         $this->port = $port;
     }
 
-
     /**
      * Gets the type attribute. | @see $type
      *

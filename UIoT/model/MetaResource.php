@@ -114,14 +114,14 @@ class MetaResource
      */
     public function getColumnNames($selectedColumns)
     {
-        
+
         $names = array();
 
         foreach ($this->properties as $property) {
             if (in_array($property->getFriendlyName(), $selectedColumns))
                 $names[] = $property->getPropertyName();
         }
-        
+
         return $names;
     }
 

@@ -2,7 +2,7 @@
 
 namespace UIoT\model;
 
-use PDO;
+use UIoT\database\DatabaseManager;
 
 /**
  * Class UIoTToken
@@ -11,17 +11,18 @@ use PDO;
 class UIoTToken
 {
     /**
-     * @var PDO
+     * @var DatabaseManager
      */
     private $connection;
 
     /**
      * UIoTToken constructor.
-     * @param PDO $connection
+     *
+     * @param DatabaseManager $manager
      */
-    public function __construct(PDO $connection)
+    public function __construct(DatabaseManager $manager)
     {
-        $this->connection = $connection;
+        $this->connection = $manager;
     }
 
     /**
@@ -33,20 +34,23 @@ class UIoTToken
     public function validateCode($token)
     {
         $currentTime = time();
-        $getTokenStatement = $this->getConnection()->prepare("SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1");
-        $getTokenStatement->bindParam(':token', $token);
-        $getTokenStatement->bindParam(':currentTime', $currentTime);
 
-        $getTokenStatement->execute();
+        $getTokenStatement = $this->connection->fastExecute("SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1",
+            [':token' => $token, ':currentTime' => $currentTime]);
 
         return $getTokenStatement->rowCount() > 0;
     }
 
+    /**
+     * Get Device from Token Id
+     *
+     * @param $token
+     * @return mixed
+     */
     public function getDeviceIdFromToken($token)
     {
-        $getToken = $this->getConnection()->prepare("SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token;");
-        $getToken->bindParam(":token", $token);
-        $getToken->execute();
+        $getToken = $this->connection->fastExecute("SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token",
+            [':token' => $token]);
 
         return $getToken->fetch()['DVC_ID'];
     }
@@ -58,12 +62,20 @@ class UIoTToken
      */
     public function updateTokenExpire($token)
     {
-        $expire = $this->getExpireTime();
-        $setDeviceTokenStatement = $this->getConnection()->prepare("UPDATE DEVICE_TOKENS SET DVC_TOKEN_EXPIRE = :expire WHERE DVC_TOKEN = :token;");
-        $setDeviceTokenStatement->bindParam(':token', $token);
-        $setDeviceTokenStatement->bindParam(':expire', $expire);
-        $setDeviceTokenStatement->execute();
+        $this->connection->fastExecute('UPDATE DEVICE_TOKENS SET DVC_TOKEN_EXPIRE = :expire WHERE DVC_TOKEN = :token',
+            [':token' => $token, ':expire' => $this->getExpireTime()]);
     }
+
+    /**
+     * Get token's expiration limit (idle time)
+     *
+     * @return mixed
+     */
+    public function getExpireTime()
+    {
+        return time() + 3600;
+    }
+
     /**
      * Define token
      *
@@ -72,13 +84,11 @@ class UIoTToken
      */
     public function defineToken($deviceId)
     {
-        $expire = $this->getExpireTime();
         $generateToken = $this->generateRandomToken();
-        $setDeviceTokenStatement = $this->getConnection()->prepare("INSERT INTO DEVICE_TOKENS VALUES (:device_id, :token, :expire) ON DUPLICATE KEY UPDATE DVC_TOKEN = :token, DVC_TOKEN_EXPIRE = :expire;");
-        $setDeviceTokenStatement->bindParam(':device_id', $deviceId);
-        $setDeviceTokenStatement->bindParam(':token', $generateToken);
-        $setDeviceTokenStatement->bindParam(':expire', $expire);
-        $setDeviceTokenStatement->execute();
+
+        $this->connection->fastExecute('INSERT INTO DEVICE_TOKENS VALUES (:device_id, :token, :expire) ON DUPLICATE KEY UPDATE DVC_TOKEN = :token, DVC_TOKEN_EXPIRE = :expire',
+            [':device_id' => $deviceId, ':token' => $generateToken, ':expire' => $this->getExpireTime()]);
+
         return $generateToken;
     }
 
@@ -90,25 +100,5 @@ class UIoTToken
     public function generateRandomToken()
     {
         return sha1(uniqid(rand(), true)); // TODO: needs a better token generation.
-    }
-
-    /**
-     * Get connection from PDO
-     *
-     * @return PDO
-     */
-    public function getConnection()
-    {
-        return $this->connection;
-    }
-
-    /**
-     * Get token's expiration limit (idle time)
-     *
-     * @return mixed
-     */
-    public function getExpireTime()
-    {
-        return time() + 3600;
     }
 }
