@@ -118,7 +118,7 @@ class DatabaseManager
             default:
                 return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorInfo()[2]));
             case 'HY000':
-                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(explode("'",$statement->errorInfo()[2])[1]));
+                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(explode("'", $statement->errorInfo()[2])[1]));
         }
     }
 

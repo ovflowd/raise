@@ -3,11 +3,12 @@
 namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
+use UIoT\callbacks\TokenInsertionCallBack;
+use UIoT\callbacks\ValidateTokenCallBack;
 use UIoT\control\ResourceController;
 use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidRaiseResourceMessage;
 use UIoT\messages\InvalidTokenMessage;
-use UIoT\messages\TokenInsertionMessage;
 use UIoT\model\MetaProperty;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
@@ -23,49 +24,70 @@ class RequestInput
     /**
      * @var UIoTRequest
      */
-    private $requestData;
+    private static $requestData;
 
     /**
      * @var UIoTResponse
      */
-    private $responseData;
+    private static $responseData;
 
     /**
      * @var DatabaseManager
      */
-    private $databaseManager;
+    private static $databaseManager;
 
     /**
      * @var ResourceController
      */
-    private $resourceController;
+    private static $resourceController;
 
     /**
      * @var UIoTToken
      */
-    private $tokenManager;
+    private static $tokenManager;
 
     /**
      * RequestInput constructor.
      */
     public function __construct()
     {
-        $this->databaseManager = new DatabaseManager();
-        $this->resourceController = new ResourceController($this->getResources(), $this->databaseManager);
-        $this->tokenManager = new UIoTToken($this->databaseManager);
-        $this->requestData = UIoTRequest::createFromGlobals();
+        self::$databaseManager = new DatabaseManager();
+        self::$resourceController = new ResourceController($this->getResources());
+        self::$tokenManager = new UIoTToken();
+        self::$requestData = UIoTRequest::createFromGlobals();
 
-        $this->registerExceptionHandler();
         $this->getRequestData()->assignRequest();
         $this->setResponseData();
     }
 
     /**
-     * Register Exception Handler
+     * Get Token Manager
+     *
+     * @return UIoTToken
      */
-    private function registerExceptionHandler()
+    public static function getTokenManager()
     {
-        set_exception_handler(array(MessageHandler::getInstance(), 'getResult'));
+        return self::$tokenManager;
+    }
+
+    /**
+     * Get Database Manager
+     *
+     * @return DatabaseManager
+     */
+    public static function getDatabaseManager()
+    {
+        return self::$databaseManager;
+    }
+
+    /**
+     * Get Resource Controller
+     *
+     * @return ResourceController
+     */
+    public static function getResourceController()
+    {
+        return self::$resourceController;
     }
 
     /**
@@ -75,8 +97,8 @@ class RequestInput
      */
     private function setResponseData(Request $requestData = null)
     {
-        $this->responseData = new UIoTResponse();
-        $this->responseData->prepare($requestData == null ? $this->requestData : $requestData);
+        self::$responseData = new UIoTResponse();
+        self::$responseData->prepare($requestData == null ? self::$requestData : $requestData);
     }
 
     /**
@@ -86,7 +108,7 @@ class RequestInput
      */
     public function getRequestData()
     {
-        return $this->requestData;
+        return self::$requestData;
     }
 
     /**
@@ -96,7 +118,7 @@ class RequestInput
      */
     public function getResponseData()
     {
-        return $this->responseData;
+        return self::$responseData;
     }
 
     /**
@@ -112,51 +134,18 @@ class RequestInput
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
-
-        // TODO: Refactoring
-
         if (!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST") {
-
-            $response = $this->resourceController->executeRequest($request);
-            $id = $this->databaseManager->getLastId();
-
-            if ($id > 0) {
-                return MessageHandler::getInstance()->getResult(new TokenInsertionMessage($this->tokenManager->defineToken($id)));
-            }
-
-            return $response;
-
-        } else if ($this->tokenManager->validateCode($request->query->get("token"))) {
-
-            $this->tokenManager->updateTokenExpire($request->query->get("token"));
+            return (new TokenInsertionCallBack($request))->getCallBack();
+        } else if (self::$tokenManager->validateCode($request->query->get("token"))) {
+            self::$tokenManager->updateTokenExpire($request->query->get("token"));
 
             if ($request->getResource() == "services" && $request->getMethod() == "POST") {
-                $response = $this->resourceController->executeRequest($request);
-                $serviceId = $this->databaseManager->getLastId();
-
-                if ($serviceId > 0) {
-                    $tokenId = $this->tokenManager->getDeviceIdFromToken($request->query->get("token"));
-
-                    $serviceName = $request->query->get("name");
-                    $serviceType = $request->query->get("type");
-
-                    $this->databaseManager->fastExecute("INSERT INTO actions VALUES (NULL, :act_name, :act_type, '', '0')",
-                        [':act_name' => $serviceName, ':act_type' => $serviceType]);
-
-                    $actionId = $this->databaseManager->getLastId();
-
-                    $this->databaseManager->fastExecute("INSERT INTO service_actions VALUES (:srvc_id, :act_id, '0')",
-                        [':srvc_id' => $tokenId, ':act_id' => $actionId]);
-
-                    return ["code" => 200, "service_id" => $serviceId, "device_id" => $tokenId];
-                } else {
-                    return $response;
-                }
-            } else {
-                return $this->resourceController->executeRequest($request);
+                return (new ValidateTokenCallBack($request))->getCallBack();
             }
+
+            return self::$resourceController->executeRequest($request);
         } else {
-            MessageHandler::getInstance()->endExecution(new InvalidTokenMessage);
+            return MessageHandler::getInstance()->getMessage(new InvalidTokenMessage);
         }
     }
 
@@ -186,7 +175,7 @@ class RequestInput
     {
         $resources = array();
 
-        foreach ($this->databaseManager->action('SELECT * FROM META_RESOURCES') as $resource) {
+        foreach (self::$databaseManager->action('SELECT * FROM META_RESOURCES') as $resource) {
             $resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM,
                 $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, $this->getResourceProperties($resource->ID));
         }
@@ -204,7 +193,7 @@ class RequestInput
     {
         $properties = array();
 
-        foreach ($this->databaseManager->action('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id', [':resource_id' => $resourceId]) as $property) {
+        foreach (self::$databaseManager->action('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id', [':resource_id' => $resourceId]) as $property) {
             $properties[$property->PROP_FRIENDLY_NAME] = new MetaProperty($property->ID,
                 $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
         }

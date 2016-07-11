@@ -14,7 +14,7 @@ class MessageHandler extends UIoTSingleton
     /**
      * @var RaiseMessage
      */
-    protected $message;
+    protected $message = null;
 
     /**
      * Return ExceptionHandler Singleton

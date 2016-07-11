@@ -13,7 +13,7 @@ final class RequiredArgumentMessage extends RaiseMessage
 {
     /**
      * WelcomeToRaiseMessage constructor.
-     * 
+     *
      * @param string $requiredArgument
      */
     public function __construct($requiredArgument = '')

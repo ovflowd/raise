@@ -2,9 +2,6 @@
 
 namespace UIoT\control;
 
-use PDO;
-use UIoT\database\DatabaseHandler;
-use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidColumnNameMessage;
 use UIoT\messages\InvalidMethodMessage;
 use UIoT\model\MetaResource;
@@ -14,6 +11,7 @@ use UIoT\sql\SQLInsert;
 use UIoT\sql\SQLInstructionFactory;
 use UIoT\sql\SQLSelect;
 use UIoT\sql\SQLUpdate;
+use UIoT\util\RequestInput;
 
 /**
  * Class ResourceController
@@ -21,16 +19,6 @@ use UIoT\sql\SQLUpdate;
  */
 class ResourceController
 {
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * @var DatabaseHandler
-     */
-    private $databaseHandler;
-
     /**
      * @var SQLInstructionFactory
      */
@@ -40,12 +28,9 @@ class ResourceController
      * ResourceController constructor.
      *
      * @param MetaResource[] $resources
-     * @param $database
      */
-    public function __construct($resources, $database)
+    public function __construct($resources)
     {
-        $this->databaseManager = new DatabaseManager();
-        $this->databaseHandler = $database;
         $this->factory = new SQLInstructionFactory($resources);
     }
 
@@ -59,7 +44,7 @@ class ResourceController
      */
     public function executeRequest(UIoTRequest $request)
     {
-        return $this->databaseManager->action($this->getInstruction($request));
+        return RequestInput::getDatabaseManager()->action($this->getInstruction($request));
     }
 
     /**
@@ -73,25 +58,5 @@ class ResourceController
     private function getInstruction(UIoTRequest $request)
     {
         return $this->factory->createInstruction($request);
-    }
-
-    /**
-     * Get Database Manager
-     *
-     * @return DatabaseManager
-     */
-    public function getDatabaseManager()
-    {
-        return $this->databaseManager;
-    }
-
-    /**
-     * Gets connection from dbConnector attribute.
-     *
-     * @return PDO
-     */
-    public function getConnection()
-    {
-        return $this->databaseHandler->getInstance();
     }
 }

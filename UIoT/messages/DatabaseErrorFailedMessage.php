@@ -13,7 +13,7 @@ final class DatabaseErrorFailedMessage extends RaiseMessage
 {
     /**
      * DatabaseErrorFailedMessage constructor.
-     * 
+     *
      * @param string $dataBaseMessage
      */
     public function __construct($dataBaseMessage = '')
