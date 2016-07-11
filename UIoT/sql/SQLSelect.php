@@ -24,7 +24,7 @@ final class SQLSelect extends SQLInstruction
     protected function generateInstruction()
     {
         $this->instruction = SQLWords::getSelect() . SQLWords::getBlank() .
-            $this->selectColumnsToSql() . SQLWords::getBlank() .
+            /*$this->selectColumnsToSql()*/ '*' . SQLWords::getBlank() .
             SQLWords::getFrom() . SQLWords::getBlank() .
             $this->getEntity() . SQLWords::getBlank() .
             SQLWords::getWhere() . SQLWords::getBlank() .
@@ -35,6 +35,7 @@ final class SQLSelect extends SQLInstruction
 
     /**
      * Converts the columns attribute to a SQL string
+     * @TODO: this function is being used in a wrong way
      *
      * @return string
      */
