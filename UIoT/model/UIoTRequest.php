@@ -39,7 +39,6 @@ class UIoTRequest extends Request
     {
         $columnNames = array();
 
-
         $parameters = explode("&", explode("?", $this->getRequestUri())[1]);
         foreach ($parameters as $parameter) {
             $columnNames[] = explode("=", $parameter)[0];

@@ -41,7 +41,7 @@ final class SQLSelect extends SQLInstruction
     public function selectColumnsToSql()
     {
         if ($this->columns == null) {
-            return '';
+            return '*';
         }
 
         return implode(',', $this->columns);

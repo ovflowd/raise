@@ -22,7 +22,7 @@ abstract class SQLInstruction
     protected $instruction;
 
     /**
-     * @var SQLCriteria[]
+     * @var SQLCriteria
      */
     protected $criteria = [];
 
