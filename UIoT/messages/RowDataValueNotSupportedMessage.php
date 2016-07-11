@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class RowDataValueNotSupportedMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class RowDataValueNotSupportedMessage extends RaiseMessage
 {
+    /**
+     * RowDataValueNotSupportedMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid Request Data', 2);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Request Data');
+
+        parent::__construct(2, $message);
     }
 }

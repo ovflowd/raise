@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class DatabaseErrorFailedMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class DatabaseErrorFailedMessage extends RaiseMessage
 {
+    /**
+     * DatabaseErrorFailedMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Failed while operating on the Database', 8);
+        $message = new RaiseMessageContent();
+        $message->addContent('message', 'Failed while operating on the Database');
+
+        parent::__construct(8, $message);
     }
 }

@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class WelcomeToRaiseMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class WelcomeToRaiseMessage extends RaiseMessage
 {
+    /**
+     * WelcomeToRaiseMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Welcome to RAISE', 200);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Welcome to RAISE');
+
+        parent::__construct(200, $message);
     }
 }

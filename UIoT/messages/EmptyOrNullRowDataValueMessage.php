@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class EmptyOrNullRowDataValueMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class EmptyOrNullRowDataValueMessage extends RaiseMessage
 {
+    /**
+     * EmptyOrNullRowDataValueMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Data Server Returned Exception on Gathering Data', 7);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Operator on Database');
+
+        parent::__construct(200, $message);
     }
 }

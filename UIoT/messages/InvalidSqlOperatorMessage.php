@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidSqlOperatorMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidSqlOperatorMessage extends RaiseMessage
 {
+    /**
+     * InvalidSqlOperatorMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid Operator on Database', 200);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Operator on Database');
+
+        parent::__construct(200, $message);
     }
 }

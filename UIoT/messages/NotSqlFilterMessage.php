@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class NotSqlFilterMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class NotSqlFilterMessage extends RaiseMessage
 {
+    /**
+     * NotSqlFilterMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Failed Due Filtering Data', 3);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Failed Due Filtering Data');
+
+        parent::__construct(3, $message);
     }
 }

@@ -2,12 +2,30 @@
 
 namespace UIoT\interfaces;
 
-use Exception;
-
 /**
  * Class RaiseException
  * @package UIoT\interfaces
  */
-abstract class RaiseMessage extends Exception
+interface RaiseMessage
 {
+    /**
+     * Gets message Code
+     *
+     * @return integer
+     */
+    public function getCode();
+
+    /**
+     * Gets message content
+     *
+     * @return array
+     */
+    public function getMessage();
+
+    /**
+     * Generates and returns Json
+     *
+     * @return string
+     */
+    public function generateJson();
 }

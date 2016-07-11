@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidMethodMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidMethodMessage extends RaiseMessage
 {
+    /**
+     * InvalidMethodMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid REST Method', 500);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid REST Method');
+
+        parent::__construct(500, $message);
     }
 }

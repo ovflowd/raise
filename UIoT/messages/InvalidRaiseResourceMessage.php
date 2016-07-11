@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidRaiseResourceMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidRaiseResourceMessage extends RaiseMessage
 {
+    /**
+     * InvalidRaiseResourceMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid Resource Requested to Raise', 400);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Resource Requested to Raise');
+
+        parent::__construct(400, $message);
     }
 }

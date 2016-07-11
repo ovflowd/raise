@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidValueMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidValueMessage extends RaiseMessage
 {
+    /**
+     * InvalidValueMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Data has Invalid Value', 5);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Data has Invalid Value');
+
+        parent::__construct(5, $message);
     }
 }

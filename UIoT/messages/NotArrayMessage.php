@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class NotArrayMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class NotArrayMessage extends RaiseMessage
 {
+    /**
+     * NotArrayMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Failed to Parse Incoming Data', 4);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Failed to Parse Incoming Data');
+
+        parent::__construct(4, $message);
     }
 }

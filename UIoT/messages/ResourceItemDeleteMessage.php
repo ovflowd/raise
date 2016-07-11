@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class ResourceItemDeleteMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class ResourceItemDeleteMessage extends RaiseMessage
 {
+    /**
+     * ResourceItemDeleteMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Resource Item Removed', 200);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Resource Item Removed');
+
+        parent::__construct(200, $message);
     }
 }

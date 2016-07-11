@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidTokenMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidTokenMessage extends RaiseMessage
 {
+    /**
+     * InvalidTokenMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid or expired token', 500);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid or expired token');
+
+        parent::__construct(500, $message);
     }
 }

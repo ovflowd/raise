@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class ResourceItemUpdatedMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class ResourceItemUpdatedMessage extends RaiseMessage
 {
+    /**
+     * ResourceItemUpdatedMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Resource Item Updated', 200);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Resource Item Updated');
+
+        parent::__construct(200, $message);
     }
 }

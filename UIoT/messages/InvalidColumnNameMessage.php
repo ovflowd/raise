@@ -2,7 +2,8 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class InvalidColumnNameMessage
@@ -10,8 +11,14 @@ use UIoT\interfaces\RaiseMessage;
  */
 final class InvalidColumnNameMessage extends RaiseMessage
 {
+    /**
+     * InvalidColumnNameMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid Requested Column', 6);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Requested Column');
+
+        parent::__construct(6, $message);
     }
 }

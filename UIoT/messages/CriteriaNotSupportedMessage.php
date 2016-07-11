@@ -2,16 +2,23 @@
 
 namespace UIoT\messages;
 
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
+use UIoT\model\RaiseMessageContent;
 
 /**
  * Class CriteriaNotSupportedMessage
- * @package UIoT/messages
+ * @package UIoT\messages
  */
 final class CriteriaNotSupportedMessage extends RaiseMessage
 {
+    /**
+     * CriteriaNotSupportedMessage constructor.
+     */
     public function __construct()
     {
-        parent::__construct('Invalid Operation at Data Manipulation', 9);
+        $message = new RaiseMessageContent;
+        $message->addContent('message', 'Invalid Operation at Data Manipulation');
+
+        parent::__construct(9, $message);
     }
 }
