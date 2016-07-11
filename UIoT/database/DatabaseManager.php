@@ -59,9 +59,42 @@ class DatabaseManager
      * @param string $query
      * @return PDOStatement
      */
-    public function query($query)
+    public function prepare($query)
     {
         return static::$databaseInstance->prepare($query);
+    }
+
+    /**
+     * Get Row Count
+     *
+     * @param PDOStatement $query
+     * @return mixed
+     */
+    public function rowCount(PDOStatement $query)
+    {
+        return $query->rowCount();
+    }
+
+    /**
+     * Fetch a query all rows
+     *
+     * @param PDOStatement $query
+     * @return mixed
+     */
+    public function fetchAll(PDOStatement $query)
+    {
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Fetch a query single row
+     *
+     * @param PDOStatement $query
+     * @return mixed
+     */
+    public function fetch(PDOStatement $query)
+    {
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -85,7 +118,7 @@ class DatabaseManager
      */
     public function fastExecute($query, array $statement)
     {
-        return $this->execute($this->query($query), $statement);
+        return $this->execute($this->prepare($query), $statement);
     }
 
     /**
@@ -97,7 +130,7 @@ class DatabaseManager
      */
     public function action($query, array $statements = [])
     {
-        $this->execute($statement = $this->query($query), $statements);
+        $this->execute($statement = $this->prepare($query), $statements);
 
         if ($statement->errorInfo()[0] == null || $statement->errorInfo()[0] == "0000") {
             return $this->actionSwitch($query, $statement);
