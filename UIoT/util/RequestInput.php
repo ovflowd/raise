@@ -145,7 +145,7 @@ class RequestInput
 
             return self::$resourceController->executeRequest($request);
         } else {
-            return MessageHandler::getInstance()->getMessage(new InvalidTokenMessage);
+            return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }
     }
 
