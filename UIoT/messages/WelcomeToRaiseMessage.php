@@ -17,8 +17,9 @@ final class WelcomeToRaiseMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 200);
         $message->addContent('message', 'Welcome to RAISE');
 
-        parent::__construct(200, $message);
+        parent::__construct($message);
     }
 }

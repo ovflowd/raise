@@ -35,7 +35,7 @@ class UIoTToken
     {
         $currentTime = time();
 
-        $getTokenStatement = $this->connection->fastExecute("SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1",
+        $getTokenStatement = $this->connection->fastExecute('SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
             [':token' => $token, ':currentTime' => $currentTime]);
 
         return $getTokenStatement->rowCount() > 0;
@@ -49,7 +49,7 @@ class UIoTToken
      */
     public function getDeviceIdFromToken($token)
     {
-        $getToken = $this->connection->fastExecute("SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token",
+        $getToken = $this->connection->fastExecute('SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token',
             [':token' => $token]);
 
         return $getToken->fetch()['DVC_ID'];

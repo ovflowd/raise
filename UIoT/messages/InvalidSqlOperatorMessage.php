@@ -17,8 +17,9 @@ final class InvalidSqlOperatorMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 200);
         $message->addContent('message', 'Invalid Operator on Database');
 
-        parent::__construct(200, $message);
+        parent::__construct($message);
     }
 }

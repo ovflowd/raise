@@ -17,8 +17,9 @@ final class InvalidValueMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 5);
         $message->addContent('message', 'Data has Invalid Value');
 
-        parent::__construct(5, $message);
+        parent::__construct($message);
     }
 }

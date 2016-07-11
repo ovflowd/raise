@@ -21,6 +21,6 @@ interface RaiseMessageContent
      *
      * @return array
      */
-    public function getContentArray();
+    public function getContent();
 
 }

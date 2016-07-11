@@ -17,8 +17,9 @@ final class ResourceItemDeleteMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 200);
         $message->addContent('message', 'Resource Item Removed');
 
-        parent::__construct(200, $message);
+        parent::__construct($message);
     }
 }

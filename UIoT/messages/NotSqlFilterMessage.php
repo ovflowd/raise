@@ -17,8 +17,9 @@ final class NotSqlFilterMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 3);
         $message->addContent('message', 'Failed Due Filtering Data');
 
-        parent::__construct(3, $message);
+        parent::__construct($message);
     }
 }

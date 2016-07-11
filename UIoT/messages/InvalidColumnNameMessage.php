@@ -17,8 +17,9 @@ final class InvalidColumnNameMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 6);
         $message->addContent('message', 'Invalid Requested Column');
 
-        parent::__construct(6, $message);
+        parent::__construct($message);
     }
 }

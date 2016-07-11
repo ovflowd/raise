@@ -13,12 +13,15 @@ final class DatabaseErrorFailedMessage extends RaiseMessage
 {
     /**
      * DatabaseErrorFailedMessage constructor.
+     * 
+     * @param string $dataBaseMessage
      */
-    public function __construct()
+    public function __construct($dataBaseMessage = '')
     {
         $message = new RaiseMessageContent();
-        $message->addContent('message', 'Failed while operating on the Database');
+        $message->addContent('code', 8);
+        $message->addContent('message', 'Failed while operating on the Database. Result: ' . $dataBaseMessage);
 
-        parent::__construct(8, $message);
+        parent::__construct($message);
     }
 }

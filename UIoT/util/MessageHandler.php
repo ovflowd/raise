@@ -2,8 +2,7 @@
 
 namespace UIoT\util;
 
-use Exception;
-use UIoT\interfaces\RaiseMessage;
+use UIoT\model\RaiseMessage;
 use UIoT\model\UIoTSingleton;
 
 /**
@@ -13,9 +12,9 @@ use UIoT\model\UIoTSingleton;
 class MessageHandler extends UIoTSingleton
 {
     /**
-     * @var RaiseStatus Raise Code Message
+     * @var RaiseMessage
      */
-    protected $status;
+    protected $message;
 
     /**
      * Return ExceptionHandler Singleton
@@ -28,62 +27,48 @@ class MessageHandler extends UIoTSingleton
     }
 
     /**
-     * Handle Message
-     *
-     * @param Exception $message
-     * @return string
-     */
-    public function getMessage(Exception $message)
-    {
-        if ($message instanceof RaiseMessage) {
-            $this->getInstance()->status = new RaiseStatus($message->getCode(), $message->getMessage());
-        }
-
-        return $this->show();
-    }
-
-    /**
-     * @param $code
-     * @param $message
-     * @return RaiseStatus
-     */
-    public function showData($code, $message)
-    {
-        $this->getInstance()->status = new RaiseStatus($code, $message);
-        return $this->show();
-    }
-
-    /**
-     * Show Message
-     *
-     * @param Exception $message
-     */
-    public function showMessage(Exception $message)
-    {
-        echo JsonOutput::showJson($this->getMessage($message));
-    }
-
-    /**
      * Show Message and End Execution
      *
-     * @param Exception $message
+     * @param RaiseMessage $message
      */
-    public function endExecution(Exception $message)
+    public function endExecution(RaiseMessage $message)
     {
         die($this->showMessage($message));
     }
 
     /**
-     * Return Http Message
+     * Show Message
      *
-     * @return RaiseStatus
+     * @param RaiseMessage $message
      */
-    public function show()
+    public function showMessage(RaiseMessage $message)
     {
-        if ($this->status == null) {
-            return (new RaiseStatus)->getStatus();
-        }
+        echo JsonOutput::encode($this->getResult($message));
+    }
 
-        return $this->status->getStatus();
+    /**
+     * Get Message Result
+     *
+     * @param RaiseMessage $message
+     * @return string
+     */
+    public function getResult(RaiseMessage $message)
+    {
+        $this->message = $message;
+
+        return $this->message->getResult();
+    }
+
+    /**
+     * Get Message Class
+     *
+     * @param RaiseMessage $message
+     * @return RaiseMessage
+     */
+    public function getMessage(RaiseMessage $message)
+    {
+        $this->message = $message;
+
+        return $this->message;
     }
 }

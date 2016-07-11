@@ -17,8 +17,9 @@ final class NotArrayMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 4);
         $message->addContent('message', 'Failed to Parse Incoming Data');
 
-        parent::__construct(4, $message);
+        parent::__construct($message);
     }
 }

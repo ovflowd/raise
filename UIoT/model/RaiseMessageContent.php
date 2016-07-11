@@ -2,6 +2,7 @@
 
 namespace UIoT\model;
 
+use stdClass;
 use UIoT\interfaces\RaiseMessageContent as RaiseMessageContentInterface;
 
 /**
@@ -11,9 +12,17 @@ use UIoT\interfaces\RaiseMessageContent as RaiseMessageContentInterface;
 class RaiseMessageContent implements RaiseMessageContentInterface
 {
     /**
-     * @var array of content sets
+     * @var stdClass of content sets
      */
-    protected $content = array();
+    protected $content;
+
+    /**
+     * RaiseMessageContent constructor.
+     */
+    public function __construct()
+    {
+        $this->content = new stdClass;
+    }
 
     /**
      * Add a content set
@@ -23,15 +32,15 @@ class RaiseMessageContent implements RaiseMessageContentInterface
      */
     public function addContent($name, $content)
     {
-        array_push($this->content, array($name => $content));
+        $this->content->{$name} = $content;
     }
 
     /**
      * Generates content array
      *
-     * @return array
+     * @return stdClass
      */
-    public function getContentArray()
+    public function getContent()
     {
         return $this->content;
     }

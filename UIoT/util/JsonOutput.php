@@ -16,7 +16,7 @@ final class JsonOutput
      * @param null|string|mixed|object|array $value
      * @return string
      */
-    public static function showJson($value = null)
+    public static function encode($value = null)
     {
         if (null === $value || empty($value)) {
             $value = new stdClass();

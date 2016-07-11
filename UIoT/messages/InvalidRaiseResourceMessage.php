@@ -17,8 +17,9 @@ final class InvalidRaiseResourceMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 400);
         $message->addContent('message', 'Invalid Resource Requested to Raise');
 
-        parent::__construct(400, $message);
+        parent::__construct($message);
     }
 }

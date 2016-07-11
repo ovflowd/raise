@@ -17,8 +17,9 @@ final class DatabaseConnectionFailedMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 8);
         $message->addContent('message', 'RAISE can\'t Connect on UIoT Data Server');
 
-        parent::__construct(8, $message);
+        parent::__construct($message);
     }
 }

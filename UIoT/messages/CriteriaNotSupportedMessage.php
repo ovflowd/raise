@@ -17,8 +17,9 @@ final class CriteriaNotSupportedMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 9);
         $message->addContent('message', 'Invalid Operation at Data Manipulation');
 
-        parent::__construct(9, $message);
+        parent::__construct($message);
     }
 }

@@ -17,8 +17,9 @@ final class InvalidMethodMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 500);
         $message->addContent('message', 'Invalid REST Method');
 
-        parent::__construct(500, $message);
+        parent::__construct($message);
     }
 }

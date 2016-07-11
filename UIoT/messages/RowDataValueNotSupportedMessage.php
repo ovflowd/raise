@@ -17,8 +17,9 @@ final class RowDataValueNotSupportedMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 2);
         $message->addContent('message', 'Invalid Request Data');
 
-        parent::__construct(2, $message);
+        parent::__construct($message);
     }
 }

@@ -17,8 +17,9 @@ final class InvalidTokenMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
+        $message->addContent('code', 500);
         $message->addContent('message', 'Invalid or expired token');
 
-        parent::__construct(500, $message);
+        parent::__construct($message);
     }
 }

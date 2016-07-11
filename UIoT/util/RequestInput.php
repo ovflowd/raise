@@ -7,6 +7,7 @@ use UIoT\control\ResourceController;
 use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidRaiseResourceMessage;
 use UIoT\messages\InvalidTokenMessage;
+use UIoT\messages\TokenInsertionMessage;
 use UIoT\model\MetaProperty;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
@@ -64,7 +65,7 @@ class RequestInput
      */
     private function registerExceptionHandler()
     {
-        set_exception_handler(array(MessageHandler::getInstance(), 'getMessage'));
+        set_exception_handler(array(MessageHandler::getInstance(), 'getResult'));
     }
 
     /**
@@ -107,8 +108,10 @@ class RequestInput
     {
         $request = $this->getRequestData();
 
-        if (!in_array($request->getResource(), $this->getResourceNames()))
-            MessageHandler::getInstance()->endExecution(new InvalidRaiseResourceMessage);
+        if (!in_array($request->getResource(), $this->getResourceNames())) {
+            return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
+        }
+
 
         // TODO: Refactoring
 
@@ -118,13 +121,11 @@ class RequestInput
             $id = $this->databaseManager->getLastId();
 
             if ($id > 0) {
-                $token = $this->tokenManager->defineToken($id);
-
-                // TODO: Hard Coded (Message System)
-                return ["code" => 200, "token" => $token];
+                return MessageHandler::getInstance()->getResult(new TokenInsertionMessage($this->tokenManager->defineToken($id)));
             }
 
             return $response;
+
         } else if ($this->tokenManager->validateCode($request->query->get("token"))) {
 
             $this->tokenManager->updateTokenExpire($request->query->get("token"));
@@ -164,11 +165,12 @@ class RequestInput
      *
      * @return array
      */
-    private function getResourceNames()
+    public function getResourceNames()
     {
         $names = [];
 
         foreach ($this->getResources() as $resource) {
+            /** @var $resource MetaResource */
             $names[] = $resource->getFriendlyName();
         }
 
@@ -178,9 +180,9 @@ class RequestInput
     /**
      * Get Resources
      *
-     * @return array
+     * @return MetaResource[]
      */
-    private function getResources()
+    public function getResources()
     {
         $resources = array();
 
@@ -196,9 +198,9 @@ class RequestInput
      * Get Resource Properties
      *
      * @param integer $resourceId
-     * @return array
+     * @return MetaProperty[]
      */
-    private function getResourceProperties($resourceId)
+    public function getResourceProperties($resourceId)
     {
         $properties = array();
 

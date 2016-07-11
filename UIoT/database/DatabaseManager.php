@@ -4,6 +4,8 @@ namespace UIoT\database;
 
 use PDO;
 use PDOStatement;
+use UIoT\messages\DatabaseErrorFailedMessage;
+use UIoT\messages\RequiredArgumentMessage;
 use UIoT\messages\ResourceItemAddedMessage;
 use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
@@ -114,7 +116,9 @@ class DatabaseManager
     {
         switch ($statement->errorCode()) {
             default:
-                return 'aaaa';
+                return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorInfo()[2]));
+            case 'HY000':
+                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(explode("'",$statement->errorInfo()[2])[1]));
         }
     }
 
@@ -132,11 +136,11 @@ class DatabaseManager
             case SQLWords::getSelect():
                 return $prepared->fetchAll(PDO::FETCH_OBJ);
             case SQLWords::getUpdate():
-                return MessageHandler::getInstance()->getMessage(new ResourceItemUpdatedMessage);
+                return MessageHandler::getInstance()->getResult(new ResourceItemUpdatedMessage);
             case SQLWords::getInsert():
-                return MessageHandler::getInstance()->getMessage(new ResourceItemAddedMessage);
+                return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage);
             case SQLWords::getDelete():
-                return MessageHandler::getInstance()->getMessage(new ResourceItemDeleteMessage);
+                return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
         }
     }
 }

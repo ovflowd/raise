@@ -2,6 +2,7 @@
 
 namespace UIoT\model;
 
+use stdClass;
 use UIoT\interfaces\RaiseMessage as RaiseMessageInterface;
 
 /**
@@ -11,11 +12,6 @@ use UIoT\interfaces\RaiseMessage as RaiseMessageInterface;
 class RaiseMessage implements RaiseMessageInterface
 {
     /**
-     * @var int Message Code
-     */
-    protected $code = 200;
-
-    /**
      * @var RaiseMessageContent
      */
     protected $content;
@@ -23,42 +19,30 @@ class RaiseMessage implements RaiseMessageInterface
     /**
      * RaiseMessage constructor.
      *
-     * @param integer $code
      * @param RaiseMessageContent $content
      */
-    public function __construct($code, RaiseMessageContent $content)
+    public function __construct(RaiseMessageContent $content)
     {
-        $this->code = $code;
         $this->content = $content;
     }
 
     /**
-     * Gets message Code
+     * Get Message Result Content
      *
-     * @return integer
+     * @return stdClass
      */
-    public function getCode()
+    public function getResult()
     {
-        return $this->code;
+        return $this->content->getContent();
     }
 
     /**
-     * Gets message content
+     * Get Message Content
      *
-     * @return array
+     * @return RaiseMessageContent
      */
-    public function getMessage()
+    public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Generates and returns Json
-     *
-     * @return string
-     */
-    public function generateJson()
-    {
-        return json_encode(array('code' => $this->code, $this->content->getContentArray()));
     }
 }

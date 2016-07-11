@@ -36,4 +36,4 @@ use UIoT\util\RequestInput;
 
 header("Content-Type: application/json");
 
-echo JsonOutput::showJson((new RequestInput)->route());
+echo JsonOutput::encode((new RequestInput)->route());
