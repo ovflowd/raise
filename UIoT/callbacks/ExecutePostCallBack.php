@@ -33,6 +33,8 @@ class ExecutePostCallBack extends CallBack
             }
 
             $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
+        } else {
+            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }
     }
 }

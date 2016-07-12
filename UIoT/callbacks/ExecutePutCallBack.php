@@ -27,6 +27,8 @@ class ExecutePutCallBack extends CallBack
             RequestInput::getTokenManager()->updateTokenExpire($request->query->get("token"));
 
             $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
+        } else {
+            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }
     }
 }
