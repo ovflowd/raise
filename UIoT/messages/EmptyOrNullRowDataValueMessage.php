@@ -17,8 +17,8 @@ final class EmptyOrNullRowDataValueMessage extends RaiseMessage
     public function __construct()
     {
         $message = new RaiseMessageContent;
-        $message->addContent('code', 200);
-        $message->addContent('message', 'Invalid Operator on Database');
+        $message->addContent('code', 404);
+        $message->addContent('message', 'The requested Resource doesn\'t have items stored in database.');
 
         parent::__construct($message);
     }

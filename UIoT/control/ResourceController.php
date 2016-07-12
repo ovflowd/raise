@@ -39,8 +39,6 @@ class ResourceController
      *
      * @param UIoTRequest $request
      * @return array|bool|int|object|string
-     * @throws \UIoT\messages\DatabaseConnectionFailedMessage
-     * @throws \UIoT\messages\EmptyOrNullRowDataValueMessage
      */
     public function executeRequest(UIoTRequest $request)
     {

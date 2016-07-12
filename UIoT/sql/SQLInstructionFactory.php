@@ -66,14 +66,16 @@ class SQLInstructionFactory
     {
         $values = $request->getUri()->getQuery()->getData();
 
-        if ($instruction instanceof SQLInsert)
+        if ($instruction instanceof SQLInsert) {
             $instruction->setValues($values);
+        }
 
         //if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
         $criteria = $this->getCriteria($resource, $values);
 
-        if ($instruction instanceof SQLUpdate)
+        if ($instruction instanceof SQLUpdate) {
             $instruction->setColumnValues(['id' => $request->getUri()->getPath()->getData()[3]]);
+        }
 
         $instruction->setCriteria($criteria);
     }

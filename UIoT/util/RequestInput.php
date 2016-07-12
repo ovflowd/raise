@@ -3,10 +3,11 @@
 namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
+use UIoT\callbacks\InsertActionCallBack;
 use UIoT\callbacks\TokenInsertionCallBack;
-use UIoT\callbacks\ValidateTokenCallBack;
 use UIoT\control\ResourceController;
 use UIoT\database\DatabaseManager;
+use UIoT\messages\EmptyOrNullRowDataValueMessage;
 use UIoT\messages\InvalidRaiseResourceMessage;
 use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\MetaProperty;
@@ -140,10 +141,16 @@ class RequestInput
             self::$tokenManager->updateTokenExpire($request->query->get("token"));
 
             if ($request->getResource() == "services" && $request->getMethod() == "POST") {
-                return (new ValidateTokenCallBack($request))->getCallBack();
+                return (new InsertActionCallBack($request))->getCallBack();
             }
 
-            return self::$resourceController->executeRequest($request);
+            $returnValue = self::$resourceController->executeRequest($request);
+
+            if ($request->getMethod() == "POST" && empty($returnValue)) {
+                return MessageHandler::getInstance()->getResult(new EmptyOrNullRowDataValueMessage);
+            }
+
+            return $returnValue;
         } else {
             return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }
