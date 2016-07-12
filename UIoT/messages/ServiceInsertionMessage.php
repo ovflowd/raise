@@ -24,7 +24,7 @@ final class ServiceInsertionMessage extends RaiseMessage
         $message->addContent('code', 200);
         $message->addContent('device_id', $deviceId);
         $message->addContent('service_id', $serviceId);
-        $message->addContent('action_id', $serviceId);
+        $message->addContent('action_id', $actionId);
 
         parent::__construct($message);
     }
