@@ -207,7 +207,7 @@ class DatabaseManager
                 }
                 return MessageHandler::getInstance()->getResult(new ResourceItemUpdatedMessage);
             case SQLWords::getInsert():
-                return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage);
+                return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage($this->getLastId()));
             case SQLWords::getDelete():
                 return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
         }
