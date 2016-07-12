@@ -20,10 +20,10 @@ class UIoTToken
     {
         $currentTime = time();
 
-        $getTokenStatement = RequestInput::getDatabaseManager()->prepare('SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1');
-        RequestInput::getDatabaseManager()->execute($getTokenStatement, [':token' => $token, ':currentTime' => $currentTime]);
+        $getTokenStatement = RequestInput::getDatabaseManager()->rowCountExecute('SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
+            [':token' => $token, ':currentTime' => $currentTime]);
 
-        return RequestInput::getDatabaseManager()->rowCount($getTokenStatement) > 0;
+        return $getTokenStatement > 0;
     }
 
     /**
@@ -34,10 +34,10 @@ class UIoTToken
      */
     public function getDeviceIdFromToken($token)
     {
-        $getToken = RequestInput::getDatabaseManager()->prepare('SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token');
-        RequestInput::getDatabaseManager()->execute($getToken, [':token' => $token]);
+        $getToken = RequestInput::getDatabaseManager()->fetchExecute('SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token',
+            [':token' => $token]);
 
-        return RequestInput::getDatabaseManager()->fetch($getToken)['DVC_ID'];
+        return $getToken['DVC_ID'];
     }
 
     /**

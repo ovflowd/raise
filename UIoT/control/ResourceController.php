@@ -42,9 +42,7 @@ class ResourceController
      */
     public function executeRequest(UIoTRequest $request)
     {
-        $table = RequestInput::getDatabaseManager()->action($this->getInstruction($request));
-
-        return RequestInput::getDatabaseManager()->nameToFriendlyName($table, RequestInput::getResources()[$request->getResource()]);
+        return RequestInput::getDatabaseManager()->action($this->getInstruction($request));
     }
 
     /**

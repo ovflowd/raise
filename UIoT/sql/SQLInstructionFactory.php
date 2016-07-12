@@ -68,16 +68,15 @@ class SQLInstructionFactory
 
         if ($instruction instanceof SQLInsert) {
             $instruction->setValues($values);
+            $values = $this->removeColumnByKey('id', $values);
         }
-
-        //if ($request->getRequestValidation()->hasParameters() && !($instruction instanceof SQLInsert))
-        $criteria = $this->getCriteria($resource, $values);
 
         if ($instruction instanceof SQLUpdate) {
-            $instruction->setColumnValues(['id' => $request->getUri()->getPath()->getData()[3]]);
+            $instruction->setColumnValues(['id' => $request->getUri()->query->get('id')]);
+            $values = $this->removeColumnByKey('id', $values);
         }
 
-        $instruction->setCriteria($criteria);
+        $instruction->setCriteria($this->getCriteria($resource, $this->removeColumnByKey('token', $values)));
     }
 
     /**
@@ -117,8 +116,46 @@ class SQLInstructionFactory
     {
         if ($instruction instanceof SQLSelect) {
             $instruction->addColumns($resource->getColumnNames());
+        } elseif ($instruction instanceof SQLUpdate) {
+            $instruction->addColumns($this->removeColumn('ID', $resource->getColumnNames()));
         } else {
             $instruction->addColumns($resource->getColumnNamesByQuery($request->getParameterColumns()));
         }
+    }
+
+    /**
+     * Remove Column
+     *
+     * @param $columnName
+     * @param $columns
+     * @return mixed
+     */
+    private function removeColumn($columnName, $columns)
+    {
+        foreach ($columns as $key => $column) {
+            if ($column == $columnName) {
+                unset($columns[$key]);
+            }
+        }
+
+        return $columns;
+    }
+
+    /**
+     * Remove Column by a key
+     *
+     * @param $columnName
+     * @param $columns
+     * @return mixed
+     */
+    private function removeColumnByKey($columnName, $columns)
+    {
+        foreach ($columns as $key => $column) {
+            if ($key == $columnName) {
+                unset($columns[$columnName]);
+            }
+        }
+
+        return $columns;
     }
 }

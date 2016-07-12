@@ -13,6 +13,7 @@ use UIoT\messages\ResourceItemUpdatedMessage;
 use UIoT\model\MetaResource;
 use UIoT\sql\SQLWords;
 use UIoT\util\MessageHandler;
+use UIoT\util\RequestInput;
 
 /**
  * Class DatabaseManager
@@ -124,6 +125,34 @@ class DatabaseManager
     }
 
     /**
+     * Prepare, Execute and Fetch a Query
+     *
+     * @param string $query
+     * @param array $statements
+     * @return array
+     */
+    public function fetchExecute($query, array $statements = [])
+    {
+        $this->execute($statement = $this->prepare($query), $statements);
+
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Prepare, Execute and Counts number of Rows from a Query
+     *
+     * @param string $query
+     * @param array $statements
+     * @return array
+     */
+    public function rowCountExecute($query, array $statements = [])
+    {
+        $this->execute($statement = $this->prepare($query), $statements);
+
+        return $statement->rowCount();
+    }
+
+    /**
      * Does an UIoT action query
      *
      * @param $query
@@ -169,7 +198,8 @@ class DatabaseManager
         switch (substr($query, 0, 6)) {
             default:
             case SQLWords::getSelect():
-                return $prepared->fetchAll(PDO::FETCH_OBJ);
+                return RequestInput::getDatabaseManager()->nameToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ),
+                    RequestInput::getResources()[RequestInput::getRequestData()->getResource()]);
             case SQLWords::getUpdate():
                 return MessageHandler::getInstance()->getResult(new ResourceItemUpdatedMessage);
             case SQLWords::getInsert():

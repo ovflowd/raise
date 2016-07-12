@@ -51,10 +51,10 @@ class RequestInput
      */
     public function __construct()
     {
+        self::$requestData = UIoTRequest::createFromGlobals();
         self::$databaseManager = new DatabaseManager();
         self::$resourceController = new ResourceController(self::getResources());
         self::$tokenManager = new UIoTToken();
-        self::$requestData = UIoTRequest::createFromGlobals();
 
         $this->getRequestData()->assignRequest();
         $this->setResponseData();
@@ -106,7 +106,7 @@ class RequestInput
      *
      * @return UIoTRequest
      */
-    public function getRequestData()
+    public static function getRequestData()
     {
         return self::$requestData;
     }
@@ -116,7 +116,7 @@ class RequestInput
      *
      * @return UIoTResponse
      */
-    public function getResponseData()
+    public static function getResponseData()
     {
         return self::$responseData;
     }
@@ -172,7 +172,7 @@ class RequestInput
     {
         $resources = array();
 
-        foreach (self::$databaseManager->action('SELECT * FROM META_RESOURCES') as $resource) {
+        foreach (self::$databaseManager->fetchExecute('SELECT * FROM META_RESOURCES') as $resource) {
             $resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM,
                 $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, self::getResourceProperties($resource->ID));
         }
@@ -190,7 +190,7 @@ class RequestInput
     {
         $properties = array();
 
-        foreach (self::$databaseManager->action('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id', [':resource_id' => $resourceId]) as $property) {
+        foreach (self::$databaseManager->fetchExecute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id', [':resource_id' => $resourceId]) as $property) {
             $properties[$property->PROP_FRIENDLY_NAME] = new MetaProperty($property->ID,
                 $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
         }
