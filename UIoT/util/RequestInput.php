@@ -132,7 +132,7 @@ class RequestInput
     {
         $request = $this->getRequestData();
 
-        if (!in_array(self::getResource()->getFriendlyName(), $this->getResourceNames())) {
+        if (!in_array($request->getResource(), $this->getResourceNames())) {
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
