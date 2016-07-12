@@ -52,7 +52,7 @@ class RequestInput
     public function __construct()
     {
         self::$databaseManager = new DatabaseManager();
-        self::$resourceController = new ResourceController($this->getResources());
+        self::$resourceController = new ResourceController(self::getResources());
         self::$tokenManager = new UIoTToken();
         self::$requestData = UIoTRequest::createFromGlobals();
 
@@ -168,13 +168,13 @@ class RequestInput
      *
      * @return MetaResource[]
      */
-    public function getResources()
+    public static function getResources()
     {
         $resources = array();
 
         foreach (self::$databaseManager->action('SELECT * FROM META_RESOURCES') as $resource) {
             $resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM,
-                $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, $this->getResourceProperties($resource->ID));
+                $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, self::getResourceProperties($resource->ID));
         }
 
         return $resources;
@@ -186,7 +186,7 @@ class RequestInput
      * @param integer $resourceId
      * @return MetaProperty[]
      */
-    public function getResourceProperties($resourceId)
+    public static function getResourceProperties($resourceId)
     {
         $properties = array();
 

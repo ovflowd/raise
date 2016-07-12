@@ -4,11 +4,13 @@ namespace UIoT\database;
 
 use PDO;
 use PDOStatement;
+use stdClass;
 use UIoT\messages\DatabaseErrorFailedMessage;
 use UIoT\messages\RequiredArgumentMessage;
 use UIoT\messages\ResourceItemAddedMessage;
 use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
+use UIoT\model\MetaResource;
 use UIoT\sql\SQLWords;
 use UIoT\util\MessageHandler;
 
@@ -175,5 +177,27 @@ class DatabaseManager
             case SQLWords::getDelete():
                 return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
         }
+    }
+
+    /**
+     * Change the Table with Properties Names to Friendly Names
+     *
+     * @param object[]|array $tableObject
+     * @param MetaResource $resource
+     * @return object
+     */
+    public function nameToFriendlyName($tableObject, $resource)
+    {
+        $newTable = array();
+        $resourceProperties = $resource->getColumnFriendlyNames();
+
+        foreach ($tableObject as $index => $rowObjects) {
+            $newTable[$index] = new stdClass();
+            foreach ($rowObjects as $key => $value) {
+                $newTable[$index]->{$resourceProperties[$key]} = $value;
+            }
+        }
+
+        return $newTable;
     }
 }

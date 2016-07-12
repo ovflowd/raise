@@ -140,6 +140,20 @@ class MetaResource
     }
 
     /**
+     * @return array
+     */
+    public function getColumnFriendlyNames()
+    {
+        $names = array();
+
+        foreach ($this->properties as $property) {
+            $names[$property->getPropertyName()] = $property->getFriendlyName();
+        }
+
+        return $names;
+    }
+
+    /**
      * @param $friendlyName
      * @return MetaProperty
      */
