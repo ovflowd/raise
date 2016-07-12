@@ -30,9 +30,9 @@ class ExecutePostCallBack extends CallBack
 
             if ($request->getResource() == "services") {
                 $this->callBackResult = (new ActionInsertionCallBack($request))->getCallBack();
+            } else {
+                $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
             }
-
-            $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
         } else {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }
