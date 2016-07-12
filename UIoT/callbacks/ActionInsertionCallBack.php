@@ -9,13 +9,13 @@ use UIoT\util\MessageHandler;
 use UIoT\util\RequestInput;
 
 /**
- * Class InsertActionCallBack
+ * Class ActionInsertionCallBack
  * @package UIoT\callbacks
  */
-class InsertActionCallBack extends CallBack
+class ActionInsertionCallBack extends CallBack
 {
     /**
-     * InsertActionCallBack constructor.
+     * ActionInsertionCallBack constructor.
      *
      * @param UIoTRequest $request
      */

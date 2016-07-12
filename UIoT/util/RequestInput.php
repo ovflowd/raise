@@ -3,13 +3,12 @@
 namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
-use UIoT\callbacks\InsertActionCallBack;
-use UIoT\callbacks\TokenInsertionCallBack;
+use UIoT\callbacks\ExecuteGetCallBack;
+use UIoT\callbacks\ExecutePostCallBack;
+use UIoT\callbacks\ExecutePutCallBack;
 use UIoT\control\ResourceController;
 use UIoT\database\DatabaseManager;
-use UIoT\messages\EmptyOrNullRowDataValueMessage;
 use UIoT\messages\InvalidRaiseResourceMessage;
-use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\MetaProperty;
 use UIoT\model\MetaResource;
 use UIoT\model\UIoTRequest;
@@ -135,24 +134,15 @@ class RequestInput
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
-        if (!$request->query->has("token") && $request->getResource() == "devices" && $request->getMethod() == "POST") {
-            return (new TokenInsertionCallBack($request))->getCallBack();
-        } else if (self::$tokenManager->validateCode($request->query->get("token"))) {
-            self::$tokenManager->updateTokenExpire($request->query->get("token"));
-
-            if ($request->getResource() == "services" && $request->getMethod() == "POST") {
-                return (new InsertActionCallBack($request))->getCallBack();
-            }
-
-            $returnValue = self::$resourceController->executeRequest($request);
-
-            if ($request->getMethod() == "POST" && empty($returnValue)) {
-                return MessageHandler::getInstance()->getResult(new EmptyOrNullRowDataValueMessage);
-            }
-
-            return $returnValue;
-        } else {
-            return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
+        switch ($request->getMethod()) {
+            case "POST":
+                return (new ExecutePostCallBack($request))->getCallBack();
+            case "PUT":
+                return (new ExecutePutCallBack($request))->getCallBack();
+            case "GET":
+                return (new ExecuteGetCallBack($request))->getCallBack();
+            default:
+                return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
     }
 
