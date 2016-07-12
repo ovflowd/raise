@@ -25,7 +25,7 @@ class ActionInsertionCallBack extends CallBack
         $serviceId = RequestInput::getDatabaseManager()->getLastId();
 
         if ($serviceId > 0) {
-            $tokenId = RequestInput::getTokenManager()->getDeviceIdFromToken($request->query->get("token"));
+            $tokenId = RequestInput::getTokenManager()->getDeviceIdFromToken($request->query->get('token'));
 
             $serviceName = $request->query->get("name");
             $serviceType = $request->query->get("type");

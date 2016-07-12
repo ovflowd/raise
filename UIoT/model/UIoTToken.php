@@ -37,7 +37,7 @@ class UIoTToken
         $getToken = RequestInput::getDatabaseManager()->fetchExecute('SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token',
             [':token' => $token]);
 
-        return $getToken['DVC_ID'];
+        return $getToken->DVC_ID;
     }
 
     /**
