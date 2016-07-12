@@ -201,6 +201,9 @@ class DatabaseManager
                 return RequestInput::getDatabaseManager()->nameToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ),
                     RequestInput::getResources()[RequestInput::getRequestData()->getResource()]);
             case SQLWords::getUpdate():
+                if (strpos($query, 'SET DELETED=1') !== false) {
+                    return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
+                }
                 return MessageHandler::getInstance()->getResult(new ResourceItemUpdatedMessage);
             case SQLWords::getInsert():
                 return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage);

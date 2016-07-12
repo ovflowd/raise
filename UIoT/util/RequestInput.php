@@ -3,6 +3,7 @@
 namespace UIoT\util;
 
 use Symfony\Component\HttpFoundation\Request;
+use UIoT\callbacks\ExecuteDeleteCallBack;
 use UIoT\callbacks\ExecuteGetCallBack;
 use UIoT\callbacks\ExecutePostCallBack;
 use UIoT\callbacks\ExecutePutCallBack;
@@ -141,6 +142,8 @@ class RequestInput
                 return (new ExecutePutCallBack($request))->getCallBack();
             case "GET":
                 return (new ExecuteGetCallBack($request))->getCallBack();
+            case "DELETE":
+                return (new ExecuteDeleteCallBack($request))->getCallBack();
             default:
                 return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
