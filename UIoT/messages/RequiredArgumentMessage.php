@@ -19,8 +19,8 @@ final class RequiredArgumentMessage extends RaiseMessage
     public function __construct($requiredArgument = '')
     {
         $message = new RaiseMessageContent;
-        $message->addContent('code', 666);
-        $message->addContent('message', 'A required argument need be inserted: ' . $requiredArgument);
+        $message->addContent('code', 403);
+        $message->addContent('message', "A required argument called {$requiredArgument} need to be inserted.");
 
         parent::__construct($message);
     }

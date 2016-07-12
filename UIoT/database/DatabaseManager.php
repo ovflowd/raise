@@ -4,13 +4,12 @@ namespace UIoT\database;
 
 use PDO;
 use PDOStatement;
-use stdClass;
 use UIoT\messages\DatabaseErrorFailedMessage;
+use UIoT\messages\EmptyArgumentsMessage;
 use UIoT\messages\RequiredArgumentMessage;
 use UIoT\messages\ResourceItemAddedMessage;
 use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
-use UIoT\model\MetaResource;
 use UIoT\sql\SQLWords;
 use UIoT\util\MessageHandler;
 use UIoT\util\RequestInput;
@@ -180,9 +179,12 @@ class DatabaseManager
     {
         switch ($statement->errorCode()) {
             default:
-                return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorInfo()[2]));
+                return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorCode(), $statement->errorInfo()[2]));
             case 'HY000':
-                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(explode("'", $statement->errorInfo()[2])[1]));
+                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(
+                    RequestInput::getResource()->getPropertiesFriendlyNames()[explode("'", $statement->errorInfo()[2])[1]]));
+            case '21S01':
+                return MessageHandler::getInstance()->getResult(new EmptyArgumentsMessage(RequestInput::getResource()->getId()));
         }
     }
 
@@ -198,8 +200,7 @@ class DatabaseManager
         switch (substr($query, 0, 6)) {
             default:
             case SQLWords::getSelect():
-                return RequestInput::getDatabaseManager()->nameToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ),
-                    RequestInput::getResources()[RequestInput::getRequestData()->getResource()]);
+                return RequestInput::nameToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ));
             case SQLWords::getUpdate():
                 if (strpos($query, 'SET DELETED=1') !== false) {
                     return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
@@ -210,27 +211,5 @@ class DatabaseManager
             case SQLWords::getDelete():
                 return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
         }
-    }
-
-    /**
-     * Change the Table with Properties Names to Friendly Names
-     *
-     * @param object[]|array $tableObject
-     * @param MetaResource $resource
-     * @return object
-     */
-    public function nameToFriendlyName($tableObject, $resource)
-    {
-        $newTable = array();
-        $resourceProperties = $resource->getColumnFriendlyNames();
-
-        foreach ($tableObject as $index => $rowObjects) {
-            $newTable[$index] = new stdClass();
-            foreach ($rowObjects as $key => $value) {
-                $newTable[$index]->{$resourceProperties[$key]} = $value;
-            }
-        }
-
-        return $newTable;
     }
 }

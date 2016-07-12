@@ -67,8 +67,9 @@ class SQLInstructionFactory
         $values = $request->getUri()->getQuery()->getData();
 
         if ($instruction instanceof SQLInsert) {
-            $instruction->setValues($values);
             $values = $this->removeColumnByKey('id', $values);
+            $values = $this->removeColumnByKey('token', $values);
+            $instruction->setValues($values);
         }
 
         if ($instruction instanceof SQLUpdate) {
@@ -91,15 +92,13 @@ class SQLInstructionFactory
         $criteria = new SQLCriteria();
 
         foreach ($parameters as $friendlyName => $value) {
-            if ($friendlyName != "token") {
-                $columnName = $resource->getProperty($friendlyName);
+            $columnName = $resource->getProperty($friendlyName);
 
-                if (null == $columnName) {
-                    MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
-                }
-
-                $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
+            if (null == $columnName) {
+                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
             }
+
+            $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
         }
 
         return $criteria;
@@ -115,9 +114,9 @@ class SQLInstructionFactory
     private function addColumns(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
         if ($instruction instanceof SQLSelect) {
-            $instruction->addColumns($resource->getColumnNames());
+            $instruction->addColumns($resource->getPropertiesNames());
         } elseif ($instruction instanceof SQLUpdate) {
-            $instruction->addColumns($this->removeColumn('ID', $resource->getColumnNames()));
+            $instruction->addColumns($this->removeColumn('ID', $resource->getPropertiesNames()));
         } else {
             $instruction->addColumns($resource->getColumnNamesByQuery($request->getParameterColumns()));
         }

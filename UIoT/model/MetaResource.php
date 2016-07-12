@@ -128,7 +128,7 @@ class MetaResource
     /**
      * @return array
      */
-    public function getColumnNames()
+    public function getPropertiesNames()
     {
         $names = array();
 
@@ -142,7 +142,7 @@ class MetaResource
     /**
      * @return array
      */
-    public function getColumnFriendlyNames()
+    public function getPropertiesFriendlyNames()
     {
         $names = array();
 

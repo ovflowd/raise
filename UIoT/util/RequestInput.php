@@ -2,6 +2,7 @@
 
 namespace UIoT\util;
 
+use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use UIoT\callbacks\ExecuteDeleteCallBack;
 use UIoT\callbacks\ExecuteGetCallBack;
@@ -131,7 +132,7 @@ class RequestInput
     {
         $request = $this->getRequestData();
 
-        if (!in_array($request->getResource(), $this->getResourceNames())) {
+        if (!in_array(self::getResource()->getFriendlyName(), $this->getResourceNames())) {
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
@@ -199,5 +200,36 @@ class RequestInput
         }
 
         return $properties;
+    }
+
+    /**
+     * Change the Table with Properties Names to Friendly Names
+     *
+     * @param object[]|array $tableObject
+     * @return object
+     */
+    public static function nameToFriendlyName($tableObject)
+    {
+        $newTable = array();
+        $resourceProperties = self::getResource()->getPropertiesFriendlyNames();
+
+        foreach ($tableObject as $index => $rowObjects) {
+            $newTable[$index] = new stdClass();
+            foreach ($rowObjects as $key => $value) {
+                $newTable[$index]->{$resourceProperties[$key]} = $value;
+            }
+        }
+
+        return $newTable;
+    }
+
+    /**
+     * Get Resource
+     *
+     * @return MetaResource
+     */
+    public static function getResource()
+    {
+        return self::getResources()[self::getRequestData()->getResource()];
     }
 }
