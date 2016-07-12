@@ -30,7 +30,7 @@ class ServiceInsertionCallBack extends CallBack
             $serviceName = $request->query->get('name');
             $serviceType = $request->query->get('type');
 
-            RequestInput::getDatabaseManager()->fastExecute("INSERT INTO actions VALUES (NULL, :act_name, :act_type, '', '0')",
+            RequestInput::getDatabaseManager()->fastExecute("INSERT INTO actions (ACT_NAME, ACT_TYPE, ACT_DATA_TYPE, DELETED) VALUES (:act_name, :act_type, '', 0)",
                 [':act_name' => $serviceName, ':act_type' => $serviceType]);
 
             $actionId = RequestInput::getDatabaseManager()->getLastId();
