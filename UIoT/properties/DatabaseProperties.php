@@ -11,7 +11,7 @@ class DatabaseProperties
     /**
      * @const DB_HOST Database host.
      */
-    private static $dbHost = 'localhost';
+    private static $dbHost = '172.16.6.164';
 
     /**
      * @const DB_USER Database user.
@@ -21,7 +21,7 @@ class DatabaseProperties
     /**
      * @const DB_PASS Database pass.
      */
-    private static $dbPassword = '';
+    private static $dbPassword = 'ac41tr1421';
 
     /**
      * @const DB_NAME Database name.

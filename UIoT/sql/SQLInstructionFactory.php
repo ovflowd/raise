@@ -115,6 +115,10 @@ class SQLInstructionFactory
      */
     private function addColumns(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
-        $instruction->addColumns($resource->getColumnNames($request->getParameterColumns()));
+        if ($instruction instanceof SQLSelect) {
+            $instruction->addColumns($resource->getColumnNames());
+        } else {
+            $instruction->addColumns($resource->getColumnNamesByQuery($request->getParameterColumns()));
+        }
     }
 }

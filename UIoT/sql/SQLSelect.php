@@ -19,8 +19,22 @@ final class SQLSelect extends SQLInstruction
     }
 
     /**
+     * Generates a SELECT SQLInstruction | @see SQLInstruction.php
+     */
+    protected function generateInstruction()
+    {
+        $this->instruction = SQLWords::getSelect() . SQLWords::getBlank() .
+            $this->selectColumnsToSql() . SQLWords::getBlank() .
+            SQLWords::getFrom() . SQLWords::getBlank() .
+            $this->getEntity() . SQLWords::getBlank() .
+            SQLWords::getWhere() . SQLWords::getBlank() .
+            $this->criteria->toSql() . SQLWords::getBlank() .
+            SQLWords::getAndOp() . SQLWords::getBlank() .
+            SQLWords::getIsDeletedColumn(0);
+    }
+
+    /**
      * Converts the columns attribute to a SQL string
-     * @TODO: this function is being used in a wrong way
      *
      * @return string
      */
@@ -31,21 +45,5 @@ final class SQLSelect extends SQLInstruction
         }
 
         return implode(',', $this->columns);
-    }
-
-    /**
-     * Generates a SELECT SQLInstruction | @see SQLInstruction.php
-     */
-    protected function generateInstruction()
-    {
-        $this->instruction = SQLWords::getSelect() . SQLWords::getBlank() .
-            /*$this->selectColumnsToSql()*/
-            '*' . SQLWords::getBlank() .
-            SQLWords::getFrom() . SQLWords::getBlank() .
-            $this->getEntity() . SQLWords::getBlank() .
-            SQLWords::getWhere() . SQLWords::getBlank() .
-            $this->criteria->toSql() . SQLWords::getBlank() .
-            SQLWords::getAndOp() . SQLWords::getBlank() .
-            SQLWords::getIsDeletedColumn(0);
     }
 }
