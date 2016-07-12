@@ -6,23 +6,25 @@ use UIoT\model\RaiseMessage;
 use UIoT\model\RaiseMessageContent;
 
 /**
- * Class ActionReceiveMessage
+ * Class ServiceInsertionMessage
  * @package UIoT\messages
  */
-final class ActionReceiveMessage extends RaiseMessage
+final class ServiceInsertionMessage extends RaiseMessage
 {
     /**
-     * ActionReceiveMessage constructor.
+     * ServiceInsertionMessage constructor.
      *
+     * @param string $actionId
      * @param string $serviceId
      * @param string $deviceId
      */
-    public function __construct($serviceId = '', $deviceId = '')
+    public function __construct($actionId = '', $serviceId = '', $deviceId = '')
     {
         $message = new RaiseMessageContent;
         $message->addContent('code', 200);
-        $message->addContent('service_id', $serviceId);
         $message->addContent('device_id', $deviceId);
+        $message->addContent('service_id', $serviceId);
+        $message->addContent('action_id', $serviceId);
 
         parent::__construct($message);
     }

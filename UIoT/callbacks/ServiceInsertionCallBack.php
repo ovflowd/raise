@@ -2,20 +2,20 @@
 
 namespace UIoT\callbacks;
 
-use UIoT\messages\ActionReceiveMessage;
+use UIoT\messages\ServiceInsertionMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
 use UIoT\util\RequestInput;
 
 /**
- * Class ActionInsertionCallBack
+ * Class ServiceInsertionCallBack
  * @package UIoT\callbacks
  */
-class ActionInsertionCallBack extends CallBack
+class ServiceInsertionCallBack extends CallBack
 {
     /**
-     * ActionInsertionCallBack constructor.
+     * ServiceInsertionCallBack constructor.
      *
      * @param UIoTRequest $request
      */
@@ -27,8 +27,8 @@ class ActionInsertionCallBack extends CallBack
         if ($serviceId > 0) {
             $tokenId = RequestInput::getTokenManager()->getDeviceIdFromToken($request->query->get('token'));
 
-            $serviceName = $request->query->get("name");
-            $serviceType = $request->query->get("type");
+            $serviceName = $request->query->get('name');
+            $serviceType = $request->query->get('type');
 
             RequestInput::getDatabaseManager()->fastExecute("INSERT INTO actions VALUES (NULL, :act_name, :act_type, '', '0')",
                 [':act_name' => $serviceName, ':act_type' => $serviceType]);
@@ -38,7 +38,7 @@ class ActionInsertionCallBack extends CallBack
             RequestInput::getDatabaseManager()->fastExecute("INSERT INTO service_actions VALUES (:srvc_id, :act_id, '0')",
                 [':srvc_id' => $tokenId, ':act_id' => $actionId]);
 
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new ActionReceiveMessage($serviceId, $tokenId));
+            $this->callBackResult = MessageHandler::getInstance()->getResult(new ServiceInsertionMessage($actionId, $serviceId, $tokenId));
         } else {
             $this->callBackResult = $response;
         }

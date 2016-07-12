@@ -29,7 +29,7 @@ class ExecutePostCallBack extends CallBack
             RequestInput::getTokenManager()->updateTokenExpire($request->query->get("token"));
 
             if ($request->getResource() == "services") {
-                $this->callBackResult = (new ActionInsertionCallBack($request))->getCallBack();
+                $this->callBackResult = (new ServiceInsertionCallBack($request))->getCallBack();
             } else {
                 $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
             }
