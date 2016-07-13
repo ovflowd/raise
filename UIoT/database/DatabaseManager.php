@@ -46,27 +46,6 @@ class DatabaseManager
     }
 
     /**
-     * Get Last Inserted Id
-     *
-     * @return string
-     */
-    public function getLastId()
-    {
-        return static::$databaseInstance->lastInsertId();
-    }
-
-    /**
-     * Prepares a query
-     *
-     * @param string $query
-     * @return PDOStatement
-     */
-    public function prepare($query)
-    {
-        return static::$databaseInstance->prepare($query);
-    }
-
-    /**
      * Get Row Count
      *
      * @param PDOStatement $query
@@ -100,6 +79,18 @@ class DatabaseManager
     }
 
     /**
+     * Prepares a Query and Execute it
+     *
+     * @param string $query
+     * @param array $statement
+     * @return mixed
+     */
+    public function fastExecute($query, array $statement = [])
+    {
+        return $this->execute($this->prepare($query), $statement);
+    }
+
+    /**
      * Executes a Query
      *
      * @param PDOStatement $query
@@ -112,15 +103,14 @@ class DatabaseManager
     }
 
     /**
-     * Prepares a Query and Execute it
+     * Prepares a query
      *
      * @param string $query
-     * @param array $statement
-     * @return mixed
+     * @return PDOStatement
      */
-    public function fastExecute($query, array $statement = [])
+    public function prepare($query)
     {
-        return $this->execute($this->prepare($query), $statement);
+        return static::$databaseInstance->prepare($query);
     }
 
     /**
@@ -170,25 +160,6 @@ class DatabaseManager
     }
 
     /**
-     * UIoT action error solution handler
-     *
-     * @param PDOStatement $statement
-     * @return string
-     */
-    private function actionError($statement)
-    {
-        switch ($statement->errorCode()) {
-            default:
-                return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorCode(), $statement->errorInfo()[2]));
-            case 'HY000':
-                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(
-                    RequestInput::getResource()->getPropertiesFriendlyNames()[explode("'", $statement->errorInfo()[2])[1]]));
-            case '21S01':
-                return MessageHandler::getInstance()->getResult(new EmptyArgumentsMessage(RequestInput::getResource()->getId()));
-        }
-    }
-
-    /**
      * UIoT action solution handler
      *
      * @param string $query
@@ -200,7 +171,7 @@ class DatabaseManager
         switch (substr($query, 0, 6)) {
             default:
             case SQLWords::getSelect():
-                return RequestInput::nameToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ));
+                return RequestInput::getResourceManager()->propertiesToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ));
             case SQLWords::getUpdate():
                 if (strpos($query, 'SET DELETED=1') !== false) {
                     return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
@@ -210,6 +181,37 @@ class DatabaseManager
                 return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage($this->getLastId()));
             case SQLWords::getDelete():
                 return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
+        }
+    }
+
+    /**
+     * Get Last Inserted Id
+     *
+     * @return string
+     */
+    public function getLastId()
+    {
+        return static::$databaseInstance->lastInsertId();
+    }
+
+    /**
+     * UIoT action error solution handler
+     *
+     * @param PDOStatement $statement
+     * @return string
+     */
+    private function actionError($statement)
+    {
+        switch ($statement->errorCode()) {
+            default:
+                return MessageHandler::getInstance()->getResult(new DatabaseErrorFailedMessage($statement->errorCode(),
+                    $statement->errorInfo()[2]));
+            case 'HY000':
+                return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(
+                    RequestInput::getRequest()->getResource()->getPropertiesFriendlyNames()[explode("'",
+                        $statement->errorInfo()[2])[1]]));
+            case '21S01':
+                return MessageHandler::getInstance()->getResult(new EmptyArgumentsMessage(RequestInput::getRequest()->getResource()->getId()));
         }
     }
 }

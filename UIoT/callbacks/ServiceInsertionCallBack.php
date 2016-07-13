@@ -21,7 +21,7 @@ class ServiceInsertionCallBack extends CallBack
      */
     public function __construct($request)
     {
-        $response = RequestInput::getResourceController()->executeRequest($request);
+        $response = RequestInput::getRequest()->executeRequest();
         $serviceId = RequestInput::getDatabaseManager()->getLastId();
 
         if ($serviceId > 0) {
@@ -38,7 +38,8 @@ class ServiceInsertionCallBack extends CallBack
             RequestInput::getDatabaseManager()->fastExecute('INSERT INTO SERVICE_ACTIONS (SRVC_ID, ACT_ID) VALUES (:srvc_id, :act_id)',
                 [':srvc_id' => $tokenId, ':act_id' => $actionId]);
 
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new ServiceInsertionMessage($actionId, $serviceId, $tokenId));
+            $this->callBackResult = MessageHandler::getInstance()->getResult(new ServiceInsertionMessage($actionId,
+                $serviceId, $tokenId));
         } else {
             $this->callBackResult = $response;
         }

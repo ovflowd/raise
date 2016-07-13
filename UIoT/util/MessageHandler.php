@@ -19,7 +19,7 @@ class MessageHandler extends UIoTSingleton
     /**
      * Return ExceptionHandler Singleton
      *
-     * @return MessageHandler
+     * @return MessageHandler|UIoTSingleton
      */
     public static function getInstance()
     {

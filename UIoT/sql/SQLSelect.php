@@ -24,6 +24,7 @@ final class SQLSelect extends SQLInstruction
             SQLWords::getWhere() .
             SQLWords::getBlank() .
             $this->criteria->toSql() .
+            SQLWords::getBlank() .
             SQLWords::getAndOp() .
             SQLWords::getBlank() .
             SQLWords::getIsDeletedColumn(0);
@@ -36,10 +37,20 @@ final class SQLSelect extends SQLInstruction
      */
     protected function configureColumns()
     {
-        if ($this->columns == null) {
-            return '*';
+        if ($this->properties == null) {
+            return SQLWords::getAsterisk();
         }
 
-        return implode(', ', $this->columns);
+        return implode(SQLWords::getComma() . SQLWords::getBlank(), $this->properties);
+    }
+
+    /**
+     * Configure Columns Values and Return It
+     *
+     * @return string
+     */
+    protected function configureValues()
+    {
+        return '';
     }
 }

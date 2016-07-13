@@ -72,7 +72,8 @@ final class DatabaseHandler
     private function connect()
     {
         try {
-            $this->connection = new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
+            $this->connection = new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user,
+                $this->pass);
         } catch (PDOException $e) {
             MessageHandler::getInstance()->endExecution(new DatabaseConnectionFailedMessage);
         }

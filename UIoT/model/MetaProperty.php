@@ -26,15 +26,25 @@ class MetaProperty
     /**
      * UIoTProperty constructor.
      *
-     * @param int $id
-     * @param string $name
+     * @param int $propId
+     * @param string $propName
      * @param string $friendlyName
      */
-    public function __construct($id, $name, $friendlyName)
+    public function __construct($propId, $propName, $friendlyName)
     {
-        $this->propertyId = $id;
-        $this->propertyName = $name;
+        $this->propertyId = $propId;
+        $this->propertyName = $propName;
         $this->friendlyName = $friendlyName;
+    }
+
+    /**
+     * Get Property Name
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->propertyName;
     }
 
     /**
@@ -42,7 +52,7 @@ class MetaProperty
      *
      * @return int
      */
-    public function getPropertyId()
+    public function getId()
     {
         return $this->propertyId;
     }
@@ -52,7 +62,7 @@ class MetaProperty
      *
      * @return string
      */
-    public function getPropertyName()
+    public function getName()
     {
         return $this->propertyName;
     }

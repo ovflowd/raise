@@ -129,6 +129,16 @@ abstract class SQLWords
     private static $equalsOp = '=';
 
     /**
+     * @var string Asterisk Operator
+     */
+    private static $asterisk = '*';
+
+    /**
+     * @var string Quotes Operator
+     */
+    private static $quotes = '\'';
+
+    /**
      * @var int Always True
      */
     private static $alwaysTrue = 1;
@@ -425,5 +435,25 @@ abstract class SQLWords
     public static function getParenthesisEnd()
     {
         return self::$parenthesisEnd;
+    }
+
+    /**
+     * Get Asterisk Operator
+     *
+     * @return string
+     */
+    public static function getAsterisk()
+    {
+        return self::$asterisk;
+    }
+
+    /**
+     * Get Quotes Symbol
+     *
+     * @return string
+     */
+    public static function getQuotes()
+    {
+        return self::$quotes;
     }
 }

@@ -35,10 +35,22 @@ final class SQLUpdate extends SQLInstruction
     {
         $columnSet = array();
 
-        foreach ($this->columns as $column => $value) {
-            $columnSet[] = "{$value} = {$column}";
+        foreach ($this->properties as $column => $value) {
+            $columnSet[] = $value . SQLWords::getBlank() .
+                SQLWords::getEqualsOp() .
+                SQLWords::getBlank() . $column;
         }
 
-        return implode(', ', $columnSet);
+        return implode(SQLWords::getComma() . SQLWords::getBlank(), $columnSet);
+    }
+
+    /**
+     * Configure Columns Values and Return It
+     *
+     * @return string
+     */
+    protected function configureValues()
+    {
+        return '';
     }
 }

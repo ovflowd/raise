@@ -25,8 +25,9 @@ class UIoTSingleton
     {
         static $instance = null;
 
-        if (null === $instance)
+        if (null === $instance) {
             $instance = new static();
+        }
 
         return $instance;
     }

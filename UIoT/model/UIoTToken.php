@@ -20,7 +20,8 @@ class UIoTToken
     {
         $currentTime = time();
 
-        $getTokenStatement = RequestInput::getDatabaseManager()->rowCountExecute('SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
+        $getTokenStatement = RequestInput::getDatabaseManager()->rowCountExecute(
+            'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
             [':token' => $token, ':currentTime' => $currentTime]);
 
         return $getTokenStatement > 0;
@@ -35,7 +36,7 @@ class UIoTToken
     public function getDeviceIdFromToken($token)
     {
         $getToken = RequestInput::getDatabaseManager()->fetchExecute('SELECT (DVC_ID) FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token',
-            [':token' => $token]);
+            [':token' => $token])[0];
 
         return $getToken->DVC_ID;
     }
@@ -71,7 +72,8 @@ class UIoTToken
     {
         $generateToken = $this->generateRandomToken();
 
-        RequestInput::getDatabaseManager()->fastExecute('INSERT INTO DEVICE_TOKENS VALUES (:device_id, :token, :expire) ON DUPLICATE KEY UPDATE DVC_TOKEN = :token, DVC_TOKEN_EXPIRE = :expire',
+        RequestInput::getDatabaseManager()->fastExecute(
+            'INSERT INTO DEVICE_TOKENS VALUES (:device_id, :token, :expire) ON DUPLICATE KEY UPDATE DVC_TOKEN = :token, DVC_TOKEN_EXPIRE = :expire',
             [':device_id' => $deviceId, ':token' => $generateToken, ':expire' => $this->getExpireTime()]);
 
         return $generateToken;

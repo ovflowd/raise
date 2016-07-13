@@ -17,7 +17,7 @@ final class SQLInsert extends SQLInstruction
             SQLWords::getBlank() .
             $this->getEntity() .
             SQLWords::getParenthesisBegin() .
-            $this->getColumns() .
+            $this->getProperties() .
             SQLWords::getParenthesisEnd() .
             SQLWords::getBlank() .
             SQLWords::getValues() .
@@ -35,6 +35,23 @@ final class SQLInsert extends SQLInstruction
      */
     protected function configureValues()
     {
-        return "'" . implode("','", $this->values) . "'";
+        return
+            SQLWords::getQuotes() .
+            implode(SQLWords::getQuotes() .
+                SQLWords::getComma() .
+                SQLWords::getBlank() .
+                SQLWords::getQuotes(),
+                $this->values) .
+            SQLWords::getQuotes();
+    }
+
+    /**
+     * Configure Columns and Return It
+     *
+     * @return string
+     */
+    protected function configureColumns()
+    {
+        return '';
     }
 }

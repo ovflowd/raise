@@ -21,17 +21,17 @@ class ExecutePostCallBack extends CallBack
      */
     public function __construct($request)
     {
-        if ($request->getResource() == "devices") {
+        if ($request->getResource()->getFriendlyName() == 'devices') {
             $this->callBackResult = (new TokenInsertionCallBack($request))->getCallBack();
-        } elseif (!$request->query->has("token")) {
+        } elseif (!$request->query->has('token')) {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get("token"))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get("token"));
+        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
+            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
 
-            if ($request->getResource() == "services") {
+            if ($request->getResource()->getFriendlyName() == 'services') {
                 $this->callBackResult = (new ServiceInsertionCallBack($request))->getCallBack();
             } else {
-                $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
+                $this->callBackResult = RequestInput::getRequest()->executeRequest();
             }
         } else {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);

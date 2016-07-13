@@ -9,65 +9,151 @@ namespace UIoT\model;
 class MetaResource
 {
     /**
-     * @var int
+     * @var int Resource Id
      */
-    private $id;
+    private $resourceId;
 
     /**
-     * @var string
+     * @var string Resource Acronym
      */
-    private $acronym;
+    private $resourceAcronym;
 
     /**
-     * @var string
+     * @var string Resource Name
      */
-    private $name;
+    private $resourceName;
 
     /**
-     * @var string
+     * @var string Resource Friendly Name
      */
     private $friendlyName;
 
     /**
-     * @var MetaProperty[]
+     * @var MetaProperty[] Resource Properties
      */
-    private $properties;
+    private $resourceProperties = [];
 
     /**
-     * UIoTResource constructor.
+     * Create a new UIoT Resource
      *
-     * @param int $id
+     * @param int $resId
      * @param string $acronym
-     * @param string $name
+     * @param string $resName
      * @param string $friendlyName
-     * @param mixed $properties
      */
-    public function __construct($id, $acronym, $name, $friendlyName, $properties)
+    public function __construct($resId, $acronym, $resName, $friendlyName)
     {
-        $this->id = $id;
-        $this->acronym = $acronym;
-        $this->name = $name;
+        $this->resourceId = $resId;
+        $this->resourceAcronym = $acronym;
+        $this->resourceName = $resName;
         $this->friendlyName = $friendlyName;
-        $this->properties = $properties;
     }
 
     /**
+     * Get Resource Acronym
+     *
      * @return string
      */
     public function getAcronym()
     {
-        return $this->acronym;
+        return $this->resourceAcronym;
     }
 
     /**
+     * Get Resource Name
+     *
      * @return string
      */
     public function getName()
     {
-        return $this->name;
+        return $this->resourceName;
     }
 
     /**
+     * Get Resource Id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->resourceId;
+    }
+
+    /**
+     * Add a set of properties to a Resource
+     *
+     * @param MetaProperty[] $properties
+     */
+    public function addProperties($properties)
+    {
+        foreach ($properties as $property) {
+            $this->addProperty($property);
+        }
+    }
+
+    /**
+     * Add a single Property to a Resource
+     *
+     * @param MetaProperty $property
+     */
+    public function addProperty(MetaProperty $property)
+    {
+        $this->resourceProperties[$property->getName()] = $property;
+    }
+
+    /**
+     * Get a set of Properties filtered by an array of Friendly Names
+     *
+     * @param string[] $namesArray
+     * @return MetaProperty[]
+     */
+    public function getPropertiesByNames(array $namesArray)
+    {
+        return array_filter($this->getProperties(), function ($property) use ($namesArray) {
+            /** @var $property MetaProperty */
+            return in_array($property->getFriendlyName(), array_keys($namesArray));
+        });
+    }
+
+    /**
+     * Get Resource Properties
+     *
+     * @return MetaProperty[]
+     */
+    public function getProperties()
+    {
+        return $this->resourceProperties;
+    }
+
+    /**
+     * Get an array containing all Properties Names
+     *
+     * @return string[]
+     */
+    public function getPropertiesNames()
+    {
+        return array_map(function ($property) {
+            /** @var $property MetaProperty */
+            return $property->getName();
+        }, $this->getProperties());
+    }
+
+    /**
+     * Get an array containing all Properties Friendly Names
+     *
+     * @return string[]
+     */
+    public function getPropertiesFriendlyNames()
+    {
+        return array_map(function ($property) {
+            /** @var $property MetaProperty */
+            return $property->getFriendlyName();
+        }, $this->getProperties());
+    }
+
+    /**
+     * Get Resource Friendly Name
+     *
      * @return string
      */
     public function getFriendlyName()
@@ -76,95 +162,16 @@ class MetaResource
     }
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return MetaProperty[]
-     */
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param MetaProperty[] $properties
-     */
-    public function addProperties($properties)
-    {
-        foreach ($properties as $property)
-            $this->addProperty($property);
-    }
-
-    /**
-     * @param MetaProperty $property
-     */
-    public function addProperty(MetaProperty $property)
-    {
-        $this->properties[] = $property;
-    }
-
-    /**
-     * @param $selectedColumns
-     * @return array
-     */
-    public function getColumnNamesByQuery($selectedColumns)
-    {
-        $names = array();
-
-        foreach ($this->properties as $property) {
-            if (in_array($property->getFriendlyName(), $selectedColumns)) {
-                $names[] = $property->getPropertyName();
-            }
-        }
-
-        return $names;
-    }
-
-    /**
-     * @return array
-     */
-    public function getPropertiesNames()
-    {
-        $names = array();
-
-        foreach ($this->properties as $property) {
-            $names[] = $property->getPropertyName();
-        }
-
-        return $names;
-    }
-
-    /**
-     * @return array
-     */
-    public function getPropertiesFriendlyNames()
-    {
-        $names = array();
-
-        foreach ($this->properties as $property) {
-            $names[$property->getPropertyName()] = $property->getFriendlyName();
-        }
-
-        return $names;
-    }
-
-    /**
-     * @param $friendlyName
+     * Get a specific Resource Property by a Friendly Name
+     *
+     * @param string $friendlyName
      * @return MetaProperty
      */
     public function getProperty($friendlyName)
     {
-        foreach ($this->properties as $property) {
-            if ($property->getFriendlyName() === $friendlyName) {
-                return $property;
-            }
-        }
-
-        return null;
+        return reset(array_filter($this->getProperties(), function ($property) use ($friendlyName) {
+            /** @var $property MetaProperty */
+            return $property->getFriendlyName() === $friendlyName;
+        }));
     }
 }

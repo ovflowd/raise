@@ -23,19 +23,19 @@ class ExecuteGetCallBack extends CallBack
      */
     public function __construct($request)
     {
-        if (!$request->query->has("token")) {
+        if (!$request->query->has('token')) {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get("token"))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get("token"));
+        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
+            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
 
-            $returnValue = RequestInput::getResourceController()->executeRequest($request);
+            $returnValue = RequestInput::getRequest()->executeRequest();
 
-            if ($request->getResource() == "arguments" && empty($returnValue)) {
+            if ($request->getResource()->getFriendlyName() == 'arguments' && empty($returnValue)) {
                 $this->callBackResult = MessageHandler::getInstance()->getResult(new UnexistentArgumentMessage);
             } elseif (empty($returnValue)) {
                 $this->callBackResult = MessageHandler::getInstance()->getResult(new EmptyOrNullRowDataValueMessage);
             } else {
-                $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
+                $this->callBackResult = $returnValue;
             }
         } else {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);

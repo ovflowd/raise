@@ -4,8 +4,9 @@ namespace UIoT\model;
 
 use Purl\Url;
 use Symfony\Component\HttpFoundation\Request;
-use UIoT\messages\WelcomeToRaiseMessage;
-use UIoT\util\MessageHandler;
+use UIoT\sql\SQLInstruction;
+use UIoT\sql\SQLInstructionFactory;
+use UIoT\util\RequestInput;
 
 /**
  * Class UIoTRequest
@@ -14,68 +15,72 @@ use UIoT\util\MessageHandler;
 class UIoTRequest extends Request
 {
     /**
-     * @var Url Raise Request
+     * @var Url RAISE Request
      */
-    protected $requestUriData;
+    protected $requestUri;
+
+    /**
+     * @var SQLInstructionFactory UIoT SQL Factory
+     */
+    protected $factory;
+
+    /**
+     * Creates a UIoTRequest by Global Headers and Parameters
+     *
+     * @return UIoTRequest|Request
+     */
+    public static function createFromGlobals()
+    {
+        return parent::createFromGlobals();
+    }
+
+    /**
+     * Execute the Request
+     *
+     * @return mixed
+     */
+    public function executeRequest()
+    {
+        return RequestInput::getDatabaseManager()->action($this->getInstruction());
+    }
+
+    /**
+     * Get SQL Instruction
+     *
+     * @return SQLInstruction
+     */
+    private function getInstruction()
+    {
+        return $this->factory->createInstruction($this);
+    }
 
     /**
      * Gets the resource attribute. | @see $resource
      *
-     * @return string
+     * @return MetaResource
      */
     public function getResource()
     {
-        if (null === $this->requestUriData) {
-            return '';
+        if (array_key_exists($this->getInstance()->getPath()->getData()[1],
+            RequestInput::getResourceManager()->getResources())) {
+            return RequestInput::getResourceManager()->getResources()[$this->getInstance()->getPath()->getData()[1]];
         }
 
-        return $this->getUri()->getPath()->getData()[1];
+        return null;
     }
 
     /**
-     *
-     */
-    public function getParameterColumns()
-    {
-        $columnNames = array();
-
-        $parameters = explode("&", explode("?", $this->getRequestUri())[1]);
-        foreach ($parameters as $parameter) {
-            $columnNames[] = explode("=", $parameter)[0];
-        }
-
-        return $columnNames;
-    }
-
-    /**
-     * Assign Request Data
-     */
-    public function assignRequest()
-    {
-        if (null === $this->requestUriData) {
-            $this->setUri();
-        }
-    }
-
-    /**
-     * Set Request Uri Data
-     */
-    public function setUri()
-    {
-        $this->requestUriData = new Url($base = '/' . basename($this->getRequestUri()));
-
-        if ($base == '/') {
-            MessageHandler::getInstance()->endExecution(new WelcomeToRaiseMessage);
-        }
-    }
-
-    /**
-     * Get Request URI Data
+     * Get UIoTRequest Instance
      *
      * @return Url
      */
-    public function getUri()
+    public function getInstance()
     {
-        return $this->requestUriData;
+        if (null === $this->requestUri) {
+            $this->requestUri = new Url($this->getHttpHost() . '/' . basename($this->getRequestUri()));
+            $this->factory = new SQLInstructionFactory();
+        }
+
+        return $this->requestUri;
     }
 }

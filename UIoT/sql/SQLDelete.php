@@ -26,4 +26,24 @@ final class SQLDelete extends SQLInstruction
             SQLWords::getBlank() .
             $this->criteria->toSql();
     }
+
+    /**
+     * Configure Columns Values and Return It
+     *
+     * @return string
+     */
+    protected function configureValues()
+    {
+        return '';
+    }
+
+    /**
+     * Configure Columns and Return It
+     *
+     * @return string
+     */
+    protected function configureColumns()
+    {
+        return '';
+    }
 }

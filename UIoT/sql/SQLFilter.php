@@ -92,19 +92,27 @@ final class SQLFilter
             foreach ($value as $v) {
                 if (is_int($value) || is_float($value)) {
                     $foo[] = "'$v'";
-                } else if (is_string($v)) {
-                    $foo[] = $v;
+                } else {
+                    if (is_string($v)) {
+                        $foo[] = $v;
+                    }
                 }
             }
             $result = '(' . implode(',', $foo) . ')';
-        } else if (is_string($value)) {
-            $result = "'$value'";
-        } else if (is_null($value)) {
-            $result = 'NULL';
-        } else if (is_bool($value)) {
-            $result = $value ? 'TRUE' : 'FALSE';
         } else {
-            $result = $value;
+            if (is_string($value)) {
+                $result = "'$value'";
+            } else {
+                if (is_null($value)) {
+                    $result = 'NULL';
+                } else {
+                    if (is_bool($value)) {
+                        $result = $value ? 'TRUE' : 'FALSE';
+                    } else {
+                        $result = $value;
+                    }
+                }
+            }
         }
 
         return $result;

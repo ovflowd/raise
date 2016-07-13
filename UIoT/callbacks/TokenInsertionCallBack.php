@@ -21,7 +21,7 @@ class TokenInsertionCallBack extends CallBack
      */
     public function __construct($request)
     {
-        $response = RequestInput::getResourceController()->executeRequest($request);
+        $response = RequestInput::getRequest()->executeRequest();
         $tokenId = RequestInput::getDatabaseManager()->getLastId();
 
         if ($tokenId > 0) {

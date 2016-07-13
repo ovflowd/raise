@@ -36,7 +36,7 @@ class RaiseMessageContent implements RaiseMessageContentInterface
     }
 
     /**
-     * Generates content array
+     * Generates content object
      *
      * @return stdClass
      */

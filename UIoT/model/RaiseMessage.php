@@ -12,7 +12,7 @@ use UIoT\interfaces\RaiseMessage as RaiseMessageInterface;
 class RaiseMessage implements RaiseMessageInterface
 {
     /**
-     * @var RaiseMessageContent
+     * @var RaiseMessageContent Message from RAISE
      */
     protected $content;
 

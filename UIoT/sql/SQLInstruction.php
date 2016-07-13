@@ -3,6 +3,7 @@
 namespace UIoT\sql;
 
 use UIoT\messages\NotArrayMessage;
+use UIoT\model\MetaProperty;
 
 /**
  * Abstract Class SQLInstruction
@@ -30,9 +31,9 @@ abstract class SQLInstruction
     protected $entity;
 
     /**
-     * @var array SQL columns
+     * @var MetaProperty[] SQL columns
      */
-    protected $columns = [];
+    protected $properties = [];
 
     /**
      * @var array SQL column values
@@ -63,20 +64,20 @@ abstract class SQLInstruction
      *
      * @return mixed
      */
-    public function getColumns()
+    public function getProperties()
     {
-        return implode(',', $this->columns);
+        return implode(SQLWords::getComma() . SQLWords::getBlank(), $this->properties);
     }
 
     /**
      * Sets an array of columns to the columns attribute | @see $selectColumns
      *
-     * @param array $columns
+     * @param MetaProperty[] $properties
      * @throws NotArrayMessage
      */
-    public function setColumns($columns)
+    public function setProperties($properties)
     {
-        $this->columns = $columns;
+        $this->properties = $properties;
     }
 
     /**
@@ -133,18 +134,12 @@ abstract class SQLInstruction
      *
      * @return string
      */
-    protected function configureValues()
-    {
-        return '';
-    }
+    protected abstract function configureValues();
 
     /**
      * Configure Columns and Return It
      *
      * @return string
      */
-    protected function configureColumns()
-    {
-        return '';
-    }
+    protected abstract function configureColumns();
 }

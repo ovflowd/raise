@@ -2,18 +2,15 @@
 
 namespace UIoT\util;
 
-use stdClass;
-use Symfony\Component\HttpFoundation\Request;
 use UIoT\callbacks\ExecuteDeleteCallBack;
 use UIoT\callbacks\ExecuteGetCallBack;
 use UIoT\callbacks\ExecutePostCallBack;
 use UIoT\callbacks\ExecutePutCallBack;
-use UIoT\control\ResourceController;
 use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidRaiseResourceMessage;
-use UIoT\model\MetaProperty;
-use UIoT\model\MetaResource;
+use UIoT\messages\WelcomeToRaiseMessage;
 use UIoT\model\UIoTRequest;
+use UIoT\model\UIoTResource;
 use UIoT\model\UIoTResponse;
 use UIoT\model\UIoTToken;
 
@@ -26,12 +23,12 @@ class RequestInput
     /**
      * @var UIoTRequest
      */
-    private static $requestData;
+    private static $request;
 
     /**
      * @var UIoTResponse
      */
-    private static $responseData;
+    private static $response;
 
     /**
      * @var DatabaseManager
@@ -39,9 +36,9 @@ class RequestInput
     private static $databaseManager;
 
     /**
-     * @var ResourceController
+     * @var UIoTResource
      */
-    private static $resourceController;
+    private static $resourceManager;
 
     /**
      * @var UIoTToken
@@ -53,13 +50,53 @@ class RequestInput
      */
     public function __construct()
     {
-        self::$requestData = UIoTRequest::createFromGlobals();
-        self::$databaseManager = new DatabaseManager();
-        self::$resourceController = new ResourceController(self::getResources());
+
+        $this->setDatabaseManager(new DatabaseManager);
+        $this->setResourceManager(new UIoTResource);
+
+        $this->setRequest()->getInstance();
+
         self::$tokenManager = new UIoTToken();
 
-        $this->getRequestData()->assignRequest();
-        $this->setResponseData();
+        $this->setResponse();
+    }
+
+    /**
+     * Instantiate Database Manager
+     *
+     * @param DatabaseManager $databaseManager
+     */
+    protected function setDatabaseManager(DatabaseManager $databaseManager)
+    {
+        self::$databaseManager = $databaseManager;
+    }
+
+    /**
+     * Set Resource Manager
+     *
+     * @param UIoTResource $resource
+     */
+    protected function setResourceManager(UIoTResource $resource)
+    {
+        self::$resourceManager = $resource;
+    }
+
+    /**
+     * Set UIoTRequest Data
+     *
+     * @return UIoTRequest
+     */
+    protected function setRequest()
+    {
+        return self::$request = UIoTRequest::createFromGlobals();
+    }
+
+    /**
+     * Set Response based on his Request
+     */
+    protected function setResponse()
+    {
+        return self::$response = new UIoTResponse();
     }
 
     /**
@@ -83,44 +120,13 @@ class RequestInput
     }
 
     /**
-     * Get Resource Controller
-     *
-     * @return ResourceController
-     */
-    public static function getResourceController()
-    {
-        return self::$resourceController;
-    }
-
-    /**
-     * Set Response based on his Request
-     *
-     * @param Request $requestData
-     */
-    private function setResponseData(Request $requestData = null)
-    {
-        self::$responseData = new UIoTResponse();
-        self::$responseData->prepare($requestData == null ? self::$requestData : $requestData);
-    }
-
-    /**
-     * Get Request Data
-     *
-     * @return UIoTRequest
-     */
-    public static function getRequestData()
-    {
-        return self::$requestData;
-    }
-
-    /**
      * Get Response Data
      *
      * @return UIoTResponse
      */
-    public static function getResponseData()
+    public static function getResponse()
     {
-        return self::$responseData;
+        return self::$response;
     }
 
     /**
@@ -130,106 +136,43 @@ class RequestInput
      */
     public function route()
     {
-        $request = $this->getRequestData();
-
-        if (!in_array($request->getResource(), $this->getResourceNames())) {
+        if ($this->getRequest()->getInstance()->getPath()->getPath() == '/') {
+            MessageHandler::getInstance()->endExecution(new WelcomeToRaiseMessage);
+        } elseif (!in_array($this->getRequest()->getResource(), self::getResourceManager()->getResources())) {
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
-        switch ($request->getMethod()) {
+        switch ($this->getRequest()->getMethod()) {
             case "POST":
-                return (new ExecutePostCallBack($request))->getCallBack();
+                return (new ExecutePostCallBack($this->getRequest()))->getCallBack();
             case "PUT":
-                return (new ExecutePutCallBack($request))->getCallBack();
+                return (new ExecutePutCallBack($this->getRequest()))->getCallBack();
             case "GET":
-                return (new ExecuteGetCallBack($request))->getCallBack();
+                return (new ExecuteGetCallBack($this->getRequest()))->getCallBack();
             case "DELETE":
-                return (new ExecuteDeleteCallBack($request))->getCallBack();
+                return (new ExecuteDeleteCallBack($this->getRequest()))->getCallBack();
             default:
                 return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
     }
 
     /**
-     * Get friendly name from getResources array
+     * Get Request Data
      *
-     * @return array
+     * @return UIoTRequest
      */
-    public function getResourceNames()
+    public static function getRequest()
     {
-        $names = [];
-
-        foreach ($this->getResources() as $resource) {
-            /** @var $resource MetaResource */
-            $names[] = $resource->getFriendlyName();
-        }
-
-        return $names;
+        return self::$request;
     }
 
     /**
-     * Get Resources
+     * Get UIoT Resource Manager
      *
-     * @return MetaResource[]
+     * @return UIoTResource
      */
-    public static function getResources()
+    public static function getResourceManager()
     {
-        $resources = array();
-
-        foreach (self::$databaseManager->fetchExecute('SELECT * FROM META_RESOURCES') as $resource) {
-            $resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM,
-                $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME, self::getResourceProperties($resource->ID));
-        }
-
-        return $resources;
-    }
-
-    /**
-     * Get Resource Properties
-     *
-     * @param integer $resourceId
-     * @return MetaProperty[]
-     */
-    public static function getResourceProperties($resourceId)
-    {
-        $properties = array();
-
-        foreach (self::$databaseManager->fetchExecute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id', [':resource_id' => $resourceId]) as $property) {
-            $properties[$property->PROP_FRIENDLY_NAME] = new MetaProperty($property->ID,
-                $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
-        }
-
-        return $properties;
-    }
-
-    /**
-     * Change the Table with Properties Names to Friendly Names
-     *
-     * @param object[]|array $tableObject
-     * @return object
-     */
-    public static function nameToFriendlyName($tableObject)
-    {
-        $newTable = array();
-        $resourceProperties = self::getResource()->getPropertiesFriendlyNames();
-
-        foreach ($tableObject as $index => $rowObjects) {
-            $newTable[$index] = new stdClass();
-            foreach ($rowObjects as $key => $value) {
-                $newTable[$index]->{$resourceProperties[$key]} = $value;
-            }
-        }
-
-        return $newTable;
-    }
-
-    /**
-     * Get Resource
-     *
-     * @return MetaResource
-     */
-    public static function getResource()
-    {
-        return self::getResources()[self::getRequestData()->getResource()];
+        return self::$resourceManager;
     }
 }

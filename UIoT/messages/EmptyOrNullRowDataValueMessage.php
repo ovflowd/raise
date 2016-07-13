@@ -18,7 +18,8 @@ final class EmptyOrNullRowDataValueMessage extends RaiseMessage
     {
         $message = new RaiseMessageContent;
         $message->addContent('code', 404);
-        $message->addContent('message', 'The requested Resource doesn\'t have items stored in database with the matching criteria.');
+        $message->addContent('message',
+            'The requested Resource doesn\'t have items stored in database with the matching criteria.');
 
         parent::__construct($message);
     }

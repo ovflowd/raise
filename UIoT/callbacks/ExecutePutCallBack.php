@@ -21,12 +21,12 @@ class ExecutePutCallBack extends CallBack
      */
     public function __construct($request)
     {
-        if (!$request->query->has("token")) {
+        if (!$request->query->has('token')) {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get("token"))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get("token"));
+        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
+            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
 
-            $this->callBackResult = RequestInput::getResourceController()->executeRequest($request);
+            $this->callBackResult = RequestInput::getRequest()->executeRequest();
         } else {
             $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
         }

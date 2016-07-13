@@ -21,7 +21,8 @@ final class DatabaseErrorFailedMessage extends RaiseMessage
     {
         $message = new RaiseMessageContent();
         $message->addContent('code', 8);
-        $message->addContent('message', "[{$errorCode}] Failed while operating on the Database. Result: {$dataBaseMessage}");
+        $message->addContent('message',
+            "[{$errorCode}] Failed while operating on the Database. Result: {$dataBaseMessage}");
 
         parent::__construct($message);
     }

@@ -11,7 +11,7 @@ use stdClass;
 final class JsonOutput
 {
     /**
-     * Show jSON
+     * Encode in jSON format
      *
      * @param null|string|mixed|object|array $value
      * @return string
