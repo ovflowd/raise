@@ -1,15 +1,16 @@
 <?php
 
-namespace UIoT\model;
+namespace UIoT\managers;
 
 use stdClass;
-use UIoT\util\RequestInput;
+use UIoT\model\MetaProperty;
+use UIoT\model\MetaResource;
 
 /**
- * Class ResourceController
- * @package UIoT\util
+ * Class ResourceManager
+ * @package UIoT\managers
  */
-class UIoTResource
+class ResourceManager
 {
     /**
      * @var MetaResource[] UIoT Resources
@@ -30,7 +31,7 @@ class UIoTResource
      */
     private function setResources()
     {
-        foreach (RequestInput::getDatabaseManager()->fetchExecute('SELECT * FROM META_RESOURCES') as $resource) {
+        foreach (RequestManager::getDatabaseManager()->fetchExecute('SELECT * FROM META_RESOURCES') as $resource) {
             $this->resources[$resource->RSRC_FRIENDLY_NAME] = new MetaResource($resource->ID, $resource->RSRC_ACRONYM,
                 $resource->RSRC_NAME, $resource->RSRC_FRIENDLY_NAME);
         }
@@ -66,7 +67,7 @@ class UIoTResource
     {
         $properties = array();
 
-        foreach (RequestInput::getDatabaseManager()->fetchExecute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id',
+        foreach (RequestManager::getDatabaseManager()->fetchExecute('SELECT * FROM META_PROPERTIES WHERE RSRC_ID = :resource_id',
             [':resource_id' => $resource->getId()]) as $property) {
             $properties[] = new MetaProperty($property->ID,
                 $property->PROP_NAME, $property->PROP_FRIENDLY_NAME);
@@ -84,7 +85,7 @@ class UIoTResource
     public function propertiesToFriendlyName($tableObject)
     {
         $newTable = array();
-        $resourceProperties = RequestInput::getRequest()->getResource()->getProperties();
+        $resourceProperties = RequestManager::getRequest()->getResource()->getProperties();
 
         foreach ($tableObject as $index => $rowObjects) {
             $newTable[$index] = new stdClass();

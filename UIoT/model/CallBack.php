@@ -11,17 +11,13 @@ use UIoT\interfaces\CallBack as CallBackInterface;
 class CallBack implements CallBackInterface
 {
     /**
-     * @var mixed CallBack result
-     */
-    protected $callBackResult;
-
-    /**
      * Get a CallBack result
      *
+     * @param UIoTRequest $request
      * @return mixed
      */
-    public function getCallBack()
+    public static function getCallBack(UIoTRequest $request)
     {
-        return $this->callBackResult;
+        return '';
     }
 }

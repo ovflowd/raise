@@ -2,11 +2,11 @@
 
 namespace UIoT\callbacks;
 
+use UIoT\managers\RequestManager;
 use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class ExecutePutCallBack
@@ -15,20 +15,17 @@ use UIoT\util\RequestInput;
 class ExecutePutCallBack extends CallBack
 {
     /**
-     * ExecutePutCallBack constructor.
+     * Get a CallBack result
      *
      * @param UIoTRequest $request
+     * @return mixed
      */
-    public function __construct($request)
+    public static function getCallBack(UIoTRequest $request)
     {
-        if (!$request->query->has('token')) {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
-
-            $this->callBackResult = RequestInput::getRequest()->executeRequest();
-        } else {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
+        if (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+            return RequestManager::getRequest()->executeRequest();
         }
+
+        return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
     }
 }

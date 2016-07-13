@@ -2,11 +2,11 @@
 
 namespace UIoT\callbacks;
 
+use UIoT\managers\RequestManager;
 use UIoT\messages\InvalidTokenMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class ExecutePostCallBack
@@ -15,26 +15,23 @@ use UIoT\util\RequestInput;
 class ExecutePostCallBack extends CallBack
 {
     /**
-     * ExecutePostCallBack constructor.
+     * Get a CallBack result
      *
      * @param UIoTRequest $request
+     * @return mixed
      */
-    public function __construct($request)
+    public static function getCallBack(UIoTRequest $request)
     {
         if ($request->getResource()->getFriendlyName() == 'devices') {
-            $this->callBackResult = (new TokenInsertionCallBack($request))->getCallBack();
-        } elseif (!$request->query->has('token')) {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
-
+            return TokenInsertionCallBack::getCallBack($request);
+        } elseif (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
             if ($request->getResource()->getFriendlyName() == 'services') {
-                $this->callBackResult = (new ServiceInsertionCallBack($request))->getCallBack();
-            } else {
-                $this->callBackResult = RequestInput::getRequest()->executeRequest();
+                return ServiceInsertionCallBack::getCallBack($request);
             }
-        } else {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
+
+            return RequestManager::getRequest()->executeRequest();
         }
+
+        return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace UIoT\util;
+namespace UIoT\managers;
 
 use UIoT\callbacks\ExecuteDeleteCallBack;
 use UIoT\callbacks\ExecuteGetCallBack;
@@ -10,15 +10,15 @@ use UIoT\database\DatabaseManager;
 use UIoT\messages\InvalidRaiseResourceMessage;
 use UIoT\messages\WelcomeToRaiseMessage;
 use UIoT\model\UIoTRequest;
-use UIoT\model\UIoTResource;
 use UIoT\model\UIoTResponse;
 use UIoT\model\UIoTToken;
+use UIoT\util\MessageHandler;
 
 /**
- * Class RequestInput
- * @package UIoT\util
+ * Class RequestManager
+ * @package UIoT\managers
  */
-class RequestInput
+class RequestManager
 {
     /**
      * @var UIoTRequest
@@ -36,7 +36,7 @@ class RequestInput
     private static $databaseManager;
 
     /**
-     * @var UIoTResource
+     * @var ResourceManager
      */
     private static $resourceManager;
 
@@ -52,7 +52,7 @@ class RequestInput
     {
 
         $this->setDatabaseManager(new DatabaseManager);
-        $this->setResourceManager(new UIoTResource);
+        $this->setResourceManager(new ResourceManager);
 
         $this->setRequest()->getInstance();
 
@@ -74,9 +74,9 @@ class RequestInput
     /**
      * Set Resource Manager
      *
-     * @param UIoTResource $resource
+     * @param ResourceManager $resource
      */
-    protected function setResourceManager(UIoTResource $resource)
+    protected function setResourceManager(ResourceManager $resource)
     {
         self::$resourceManager = $resource;
     }
@@ -130,29 +130,27 @@ class RequestInput
     }
 
     /**
-     * Route Raise
+     * Route RAISE
      *
      * @return mixed
      */
     public function route()
     {
         if ($this->getRequest()->getInstance()->getPath()->getPath() == '/') {
-            MessageHandler::getInstance()->endExecution(new WelcomeToRaiseMessage);
+            return MessageHandler::getInstance()->getResult(new WelcomeToRaiseMessage);
         } elseif (!in_array($this->getRequest()->getResource(), self::getResourceManager()->getResources())) {
             return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
         }
 
         switch ($this->getRequest()->getMethod()) {
             case "POST":
-                return (new ExecutePostCallBack($this->getRequest()))->getCallBack();
+                return ExecutePostCallBack::getCallBack($this->getRequest());
             case "PUT":
-                return (new ExecutePutCallBack($this->getRequest()))->getCallBack();
-            case "GET":
-                return (new ExecuteGetCallBack($this->getRequest()))->getCallBack();
+                return ExecutePutCallBack::getCallBack($this->getRequest());
             case "DELETE":
-                return (new ExecuteDeleteCallBack($this->getRequest()))->getCallBack();
+                return ExecuteDeleteCallBack::getCallBack($this->getRequest());
             default:
-                return MessageHandler::getInstance()->getResult(new InvalidRaiseResourceMessage);
+                return ExecuteGetCallBack::getCallBack($this->getRequest());
         }
     }
 
@@ -169,7 +167,7 @@ class RequestInput
     /**
      * Get UIoT Resource Manager
      *
-     * @return UIoTResource
+     * @return ResourceManager
      */
     public static function getResourceManager()
     {

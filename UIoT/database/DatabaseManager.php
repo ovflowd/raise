@@ -4,6 +4,7 @@ namespace UIoT\database;
 
 use PDO;
 use PDOStatement;
+use UIoT\managers\RequestManager;
 use UIoT\messages\DatabaseErrorFailedMessage;
 use UIoT\messages\EmptyArgumentsMessage;
 use UIoT\messages\RequiredArgumentMessage;
@@ -12,7 +13,6 @@ use UIoT\messages\ResourceItemDeleteMessage;
 use UIoT\messages\ResourceItemUpdatedMessage;
 use UIoT\sql\SQLWords;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class DatabaseManager
@@ -170,17 +170,12 @@ class DatabaseManager
     {
         switch (substr($query, 0, 6)) {
             default:
-            case SQLWords::getSelect():
-                return RequestInput::getResourceManager()->propertiesToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ));
+                return RequestManager::getResourceManager()->propertiesToFriendlyName($prepared->fetchAll(PDO::FETCH_OBJ));
             case SQLWords::getUpdate():
-                if (strpos($query, 'SET DELETED=1') !== false) {
-                    return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
-                }
-                return MessageHandler::getInstance()->getResult(new ResourceItemUpdatedMessage);
+                return MessageHandler::getInstance()->getResult(strpos($query,
+                    'SET DELETED') !== false ? new ResourceItemDeleteMessage : new ResourceItemUpdatedMessage);
             case SQLWords::getInsert():
                 return MessageHandler::getInstance()->getResult(new ResourceItemAddedMessage($this->getLastId()));
-            case SQLWords::getDelete():
-                return MessageHandler::getInstance()->getResult(new ResourceItemDeleteMessage);
         }
     }
 
@@ -208,10 +203,10 @@ class DatabaseManager
                     $statement->errorInfo()[2]));
             case 'HY000':
                 return MessageHandler::getInstance()->getResult(new RequiredArgumentMessage(
-                    RequestInput::getRequest()->getResource()->getPropertiesFriendlyNames()[explode("'",
+                    RequestManager::getRequest()->getResource()->getPropertiesFriendlyNames()[explode("'",
                         $statement->errorInfo()[2])[1]]));
             case '21S01':
-                return MessageHandler::getInstance()->getResult(new EmptyArgumentsMessage(RequestInput::getRequest()->getResource()->getId()));
+                return MessageHandler::getInstance()->getResult(new EmptyArgumentsMessage(RequestManager::getRequest()->getResource()->getId()));
         }
     }
 }

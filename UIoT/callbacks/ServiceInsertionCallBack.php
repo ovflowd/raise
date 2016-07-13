@@ -2,11 +2,11 @@
 
 namespace UIoT\callbacks;
 
+use UIoT\managers\RequestManager;
 use UIoT\messages\ServiceInsertionMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class ServiceInsertionCallBack
@@ -15,33 +15,31 @@ use UIoT\util\RequestInput;
 class ServiceInsertionCallBack extends CallBack
 {
     /**
-     * ServiceInsertionCallBack constructor.
+     * Get a CallBack result
      *
      * @param UIoTRequest $request
+     * @return mixed
      */
-    public function __construct($request)
+    public static function getCallBack(UIoTRequest $request)
     {
-        $response = RequestInput::getRequest()->executeRequest();
-        $serviceId = RequestInput::getDatabaseManager()->getLastId();
+        $response = RequestManager::getRequest()->executeRequest();
+        $serviceId = RequestManager::getDatabaseManager()->getLastId();
 
         if ($serviceId > 0) {
-            $tokenId = RequestInput::getTokenManager()->getDeviceIdFromToken($request->query->get('token'));
+            $deviceId = RequestManager::getTokenManager()->getDeviceIdFromToken($request->query->get('token'));
 
-            $serviceName = $request->query->get('name');
-            $serviceType = $request->query->get('type');
+            RequestManager::getDatabaseManager()->fastExecute('INSERT INTO ACTIONS (ACT_NAME, ACT_TYPE) VALUES (:act_name, :act_type)',
+                [':act_name' => $request->query->get('name'), ':act_type' => $request->query->get('type')]);
 
-            RequestInput::getDatabaseManager()->fastExecute('INSERT INTO ACTIONS (ACT_NAME, ACT_TYPE) VALUES (:act_name, :act_type)',
-                [':act_name' => $serviceName, ':act_type' => $serviceType]);
+            $actionId = RequestManager::getDatabaseManager()->getLastId();
 
-            $actionId = RequestInput::getDatabaseManager()->getLastId();
+            RequestManager::getDatabaseManager()->fastExecute('INSERT INTO SERVICE_ACTIONS (SRVC_ID, ACT_ID) VALUES (:srvc_id, :act_id)',
+                [':srvc_id' => $deviceId, ':act_id' => $actionId]);
 
-            RequestInput::getDatabaseManager()->fastExecute('INSERT INTO SERVICE_ACTIONS (SRVC_ID, ACT_ID) VALUES (:srvc_id, :act_id)',
-                [':srvc_id' => $tokenId, ':act_id' => $actionId]);
-
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new ServiceInsertionMessage($actionId,
-                $serviceId, $tokenId));
-        } else {
-            $this->callBackResult = $response;
+            return MessageHandler::getInstance()->getResult(new ServiceInsertionMessage($actionId, $serviceId,
+                $deviceId));
         }
+
+        return $response;
     }
 }

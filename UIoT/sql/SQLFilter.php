@@ -63,7 +63,7 @@ final class SQLFilter
     private function setOperator($operator)
     {
         if (!in_array($operator, SQLWords::getArithmeticOperators())) {
-            MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage('invalid sql operator'));
+            MessageHandler::getInstance()->endExecution(new InvalidSqlOperatorMessage('Invalid SQL Operator'));
         }
 
         $this->operator = $operator;
@@ -89,33 +89,15 @@ final class SQLFilter
     {
         if (is_array($value)) {
             $foo = array();
+
             foreach ($value as $v) {
-                if (is_int($value) || is_float($value)) {
-                    $foo[] = "'$v'";
-                } else {
-                    if (is_string($v)) {
-                        $foo[] = $v;
-                    }
-                }
+                $foo[] = (string)$v;
             }
-            $result = '(' . implode(',', $foo) . ')';
-        } else {
-            if (is_string($value)) {
-                $result = "'$value'";
-            } else {
-                if (is_null($value)) {
-                    $result = 'NULL';
-                } else {
-                    if (is_bool($value)) {
-                        $result = $value ? 'TRUE' : 'FALSE';
-                    } else {
-                        $result = $value;
-                    }
-                }
-            }
+
+            return '(' . implode(', ', $foo) . ')';
         }
 
-        return $result;
+        return (string)$value;
     }
 
     /**

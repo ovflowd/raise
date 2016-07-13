@@ -2,11 +2,11 @@
 
 namespace UIoT\callbacks;
 
+use UIoT\managers\RequestManager;
 use UIoT\messages\TokenInsertionMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class TokenInsertionCallBack
@@ -15,19 +15,20 @@ use UIoT\util\RequestInput;
 class TokenInsertionCallBack extends CallBack
 {
     /**
-     * TokenInsertionCallBack constructor.
+     * Get a CallBack result
      *
      * @param UIoTRequest $request
+     * @return mixed
      */
-    public function __construct($request)
+    public static function getCallBack(UIoTRequest $request)
     {
-        $response = RequestInput::getRequest()->executeRequest();
-        $tokenId = RequestInput::getDatabaseManager()->getLastId();
+        $response = RequestManager::getRequest()->executeRequest();
+        $tokenId = RequestManager::getDatabaseManager()->getLastId();
 
         if ($tokenId > 0) {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new TokenInsertionMessage(RequestInput::getTokenManager()->defineToken($tokenId)));
-        } else {
-            $this->callBackResult = $response;
+            return MessageHandler::getInstance()->getResult(new TokenInsertionMessage(RequestManager::getTokenManager()->defineToken($tokenId)));
         }
+
+        return $response;
     }
 }

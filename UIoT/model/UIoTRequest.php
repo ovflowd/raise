@@ -4,9 +4,9 @@ namespace UIoT\model;
 
 use Purl\Url;
 use Symfony\Component\HttpFoundation\Request;
+use UIoT\managers\RequestManager;
 use UIoT\sql\SQLInstruction;
 use UIoT\sql\SQLInstructionFactory;
-use UIoT\util\RequestInput;
 
 /**
  * Class UIoTRequest
@@ -41,7 +41,7 @@ class UIoTRequest extends Request
      */
     public function executeRequest()
     {
-        return RequestInput::getDatabaseManager()->action($this->getInstruction());
+        return RequestManager::getDatabaseManager()->action($this->getInstruction());
     }
 
     /**
@@ -62,8 +62,8 @@ class UIoTRequest extends Request
     public function getResource()
     {
         if (array_key_exists($this->getInstance()->getPath()->getData()[1],
-            RequestInput::getResourceManager()->getResources())) {
-            return RequestInput::getResourceManager()->getResources()[$this->getInstance()->getPath()->getData()[1]];
+            RequestManager::getResourceManager()->getResources())) {
+            return RequestManager::getResourceManager()->getResources()[$this->getInstance()->getPath()->getData()[1]];
         }
 
         return null;

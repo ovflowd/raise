@@ -3,7 +3,7 @@
 namespace UIoT\model;
 
 use Symfony\Component\HttpFoundation\Response;
-use UIoT\util\RequestInput;
+use UIoT\managers\RequestManager;
 
 /**
  * Class UIoTResponse
@@ -27,7 +27,7 @@ class UIoTResponse extends Response
     {
         parent::__construct($content, $status, $headers);
 
-        $this->prepare(RequestInput::getRequest());
+        $this->prepare(RequestManager::getRequest());
     }
 
     /**

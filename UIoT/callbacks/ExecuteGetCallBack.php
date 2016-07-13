@@ -2,13 +2,12 @@
 
 namespace UIoT\callbacks;
 
+use UIoT\managers\RequestManager;
 use UIoT\messages\EmptyOrNullRowDataValueMessage;
 use UIoT\messages\InvalidTokenMessage;
-use UIoT\messages\UnexistentArgumentMessage;
 use UIoT\model\CallBack;
 use UIoT\model\UIoTRequest;
 use UIoT\util\MessageHandler;
-use UIoT\util\RequestInput;
 
 /**
  * Class ExecuteSelectCallBack
@@ -17,28 +16,23 @@ use UIoT\util\RequestInput;
 class ExecuteGetCallBack extends CallBack
 {
     /**
-     * ExecuteSelectCallBack constructor.
+     * Get a CallBack result
      *
      * @param UIoTRequest $request
+     * @return mixed
      */
-    public function __construct($request)
+    public static function getCallBack(UIoTRequest $request)
     {
-        if (!$request->query->has('token')) {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
-        } elseif (RequestInput::getTokenManager()->validateCode($request->query->get('token'))) {
-            RequestInput::getTokenManager()->updateTokenExpire($request->query->get('token'));
+        if (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+            $returnValue = RequestManager::getRequest()->executeRequest();
 
-            $returnValue = RequestInput::getRequest()->executeRequest();
-
-            if ($request->getResource()->getFriendlyName() == 'arguments' && empty($returnValue)) {
-                $this->callBackResult = MessageHandler::getInstance()->getResult(new UnexistentArgumentMessage);
-            } elseif (empty($returnValue)) {
-                $this->callBackResult = MessageHandler::getInstance()->getResult(new EmptyOrNullRowDataValueMessage);
-            } else {
-                $this->callBackResult = $returnValue;
+            if (empty($returnValue)) {
+                return MessageHandler::getInstance()->getResult(new EmptyOrNullRowDataValueMessage);
             }
-        } else {
-            $this->callBackResult = MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
+
+            return $returnValue;
         }
+
+        return MessageHandler::getInstance()->getResult(new InvalidTokenMessage);
     }
 }

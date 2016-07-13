@@ -26,14 +26,14 @@
  */
 
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-    throw new RuntimeException('UIoT Service Layer Manager requires Composer to run. You can get it <a href="http://gsetcomposer.org">here</a>.');
+    die('UIoT Service Layer Manager requires Composer to run. You can get it <a href="http://gsetcomposer.org">here</a>.');
 }
 
 include_once(__DIR__ . '/vendor/autoload.php');
 
+use UIoT\managers\RequestManager;
 use UIoT\util\JsonOutput;
-use UIoT\util\RequestInput;
 
 header("Content-Type: application/json");
 
-echo JsonOutput::encode((new RequestInput)->route());
+echo JsonOutput::encode((new RequestManager)->route());
