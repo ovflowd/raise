@@ -2,9 +2,7 @@
 
 namespace UIoT\sql;
 
-use UIoT\messages\InvalidValueMessage;
 use UIoT\messages\NotArrayMessage;
-use UIoT\util\MessageHandler;
 
 /**
  * Abstract Class SQLInstruction
@@ -24,7 +22,7 @@ abstract class SQLInstruction
     /**
      * @var SQLCriteria
      */
-    protected $criteria = [];
+    protected $criteria;
 
     /**
      * @var string Entity of the SQL Instruction
@@ -32,14 +30,14 @@ abstract class SQLInstruction
     protected $entity;
 
     /**
-     * @var array SQL column values
+     * @var array SQL columns
      */
-    protected $columnValues;
+    protected $columns = [];
 
     /**
-     * @var
+     * @var array SQL column values
      */
-    protected $columns;
+    protected $values = [];
 
     /**
      * Gets the entity attribute. | @see $entity
@@ -61,23 +59,44 @@ abstract class SQLInstruction
     }
 
     /**
-     * Returns a string with all columns names separated by ','
+     * Return Generated Columns
      *
-     * @return string
+     * @return mixed
      */
     public function getColumns()
     {
-        return implode(',', array_keys($this->criteria));
+        return implode(',', $this->columns);
     }
 
     /**
-     * Returns a string with all values names separated by ','
+     * Sets an array of columns to the columns attribute | @see $selectColumns
      *
-     * @return string
+     * @param array $columns
+     * @throws NotArrayMessage
+     */
+    public function setColumns($columns)
+    {
+        $this->columns = $columns;
+    }
+
+    /**
+     * Get Columns Values
+     *
+     * @return array
      */
     public function getValues()
     {
-        return implode(',', array_values($this->criteria));
+        return $this->values;
+    }
+
+    /**
+     * Set Columns Values
+     *
+     * @param array $values
+     */
+    public function setValues($values)
+    {
+        $this->values = $values;
     }
 
     /**
@@ -88,21 +107,6 @@ abstract class SQLInstruction
     public function setCriteria($criteria)
     {
         $this->criteria = $criteria;
-    }
-
-    /**
-     * Sets an array of columns to the columns attribute | @see $selectColumns
-     *
-     * @param array $columns
-     * @throws NotArrayMessage
-     */
-    public function addColumns($columns)
-    {
-        if (!is_array($columns)) {
-            MessageHandler::getInstance()->endExecution(new NotArrayMessage('Columns should be in an array'));
-        }
-
-        $this->columns = $columns;
     }
 
     /**
@@ -125,38 +129,22 @@ abstract class SQLInstruction
     abstract protected function generateInstruction();
 
     /**
-     * Sets a value into a row.
+     * Configure Columns Values and Return It
      *
-     * @param string $column
-     * @param string|int|float|boolean|null $value
-     * @throws InvalidValueMessage
+     * @return string
      */
-    public function setRowData($column, $value)
+    protected function configureValues()
     {
-        if (is_string($value) || is_bool($value) || is_integer($value) || is_float($value) || is_null($value)) {
-            MessageHandler::getInstance()->endExecution(new InvalidValueMessage('Parameter value does not represents a valid type. 
-            Supported types are string, boolean, integer, float and null.'));
-        }
-
-        if (is_string($value)) {
-            $value = addslashes($value);
-            $this->columnValues[$column] = "'$value'";
-        } else if (is_bool($value)) {
-            $this->columnValues[$column] = $value ? 'TRUE' : 'FALSE';
-        } else if (is_integer($value) || is_float($value)) {
-            $this->columnValues[$column] = $value;
-        } else {
-            $this->columnValues[$column] = 'NULL';
-        }
+        return '';
     }
 
     /**
-     * Set Column Values
+     * Configure Columns and Return It
      *
-     * @param $columnValues
+     * @return string
      */
-    public function setColumnValues($columnValues)
+    protected function configureColumns()
     {
-        $this->columnValues = $columnValues;
+        return '';
     }
 }

@@ -9,45 +9,31 @@ namespace UIoT\sql;
 final class SQLInsert extends SQLInstruction
 {
     /**
-     * @var mixed Values
-     */
-    private $values;
-
-    /**
-     * @param $values
-     */
-    public function setValues($values)
-    {
-        $this->values = $values;
-    }
-
-    /**
      * Generates a INSERT SQLInstruction | @see SQLInstruction.php
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQLWords::getInsertInto() . SQLWords::getBlank() . $this->getEntity() .
-            '(' . $this->getColumns() . ')' . SQLWords::getBlank() .
-            SQLWords::getValues() . SQLWords::getBlank() .
-            '(' . $this->getSqlValues() . ')' . SQLWords::getBlank();
+        $this->instruction = SQLWords::getInsertInto() .
+            SQLWords::getBlank() .
+            $this->getEntity() .
+            SQLWords::getParenthesisBegin() .
+            $this->getColumns() .
+            SQLWords::getParenthesisEnd() .
+            SQLWords::getBlank() .
+            SQLWords::getValues() .
+            SQLWords::getBlank() .
+            SQLWords::getParenthesisBegin() .
+            $this->configureValues() .
+            SQLWords::getParenthesisEnd() .
+            SQLWords::getBlank();
     }
 
     /**
-     * Return Generated Columns
-     *
-     * @return mixed
-     */
-    public function getColumns()
-    {
-        return implode(',', $this->columns);
-    }
-
-    /**
-     * Get Prepared SQL Values
+     * Configure Columns Values and Return It
      *
      * @return string
      */
-    private function getSqlValues()
+    protected function configureValues()
     {
         return "'" . implode("','", $this->values) . "'";
     }

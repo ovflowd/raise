@@ -50,7 +50,7 @@ class SQLInstructionFactory
         $methodType = $this->methods[$request->getMethod()];
         $instruction = new $methodType;
         $instruction->setEntity($resource->getName());
-        $this->addColumns($resource, $request, $instruction);
+        $this->setColumns($resource, $request, $instruction);
         $this->setCriteria($resource, $request, $instruction);
         return $instruction->getInstruction();
     }
@@ -64,20 +64,23 @@ class SQLInstructionFactory
      */
     private function setCriteria(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
-        $values = $request->getUri()->getQuery()->getData();
+        $columns = $request->getUri()->getQuery()->getData();
+        $columns = $this->removeColumnByKey('token', $columns);
+        $criteria = $this->getCriteria($resource, $columns);
 
         if ($instruction instanceof SQLInsert) {
-            $values = $this->removeColumnByKey('id', $values);
-            $values = $this->removeColumnByKey('token', $values);
-            $instruction->setValues($values);
+            $columns = $this->removeColumnByKey('id', $columns);
+            $instruction->setValues($columns);
+            $criteria = $this->getCriteria($resource, $columns);
+        } elseif ($instruction instanceof SQLUpdate) {
+            $criteria = $this->getCriteria($resource, ['id' => $request->getUri()->getQuery()->get('id')]);
+        } elseif ($instruction instanceof SQLSelect) {
+            $criteria = $this->getCriteria($resource, $columns);
+        } elseif ($instruction instanceof SQLDelete) {
+            $criteria = $this->getCriteria($resource, $columns);
         }
 
-        if ($instruction instanceof SQLUpdate) {
-            $instruction->setColumnValues(['id' => $request->getUri()->query->get('id')]);
-            $values = $this->removeColumnByKey('id', $values);
-        }
-
-        $instruction->setCriteria($this->getCriteria($resource, $this->removeColumnByKey('token', $values)));
+        $instruction->setCriteria($criteria);
     }
 
     /**
@@ -91,14 +94,14 @@ class SQLInstructionFactory
     {
         $criteria = new SQLCriteria();
 
-        foreach ($parameters as $friendlyName => $value) {
-            $columnName = $resource->getProperty($friendlyName);
+        foreach ($parameters as $name => $value) {
+            $metaProperty = $resource->getProperty($name);
 
-            if (null == $columnName) {
-                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage);
+            if (null == $metaProperty) {
+                MessageHandler::getInstance()->endExecution(new InvalidColumnNameMessage($name));
             }
 
-            $criteria->addFilter(new SQLFilter($columnName->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
+            $criteria->addFilter(new SQLFilter($metaProperty->getPropertyName(), SQLWords::getEqualsOp(), $value), SQLWords::getAndOp());
         }
 
         return $criteria;
@@ -111,14 +114,18 @@ class SQLInstructionFactory
      * @param UIoTRequest $request
      * @param SQLInstruction $instruction
      */
-    private function addColumns(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
+    private function setColumns(MetaResource $resource, UIoTRequest $request, SQLInstruction $instruction)
     {
         if ($instruction instanceof SQLSelect) {
-            $instruction->addColumns($resource->getPropertiesNames());
+            $instruction->setColumns($resource->getPropertiesNames());
         } elseif ($instruction instanceof SQLUpdate) {
-            $instruction->addColumns($this->removeColumn('ID', $resource->getPropertiesNames()));
+            $instruction->setColumns($this->removeColumn('ID',
+                $resource->getColumnNamesByQuery($request->getParameterColumns())));
+        } elseif ($instruction instanceof SQLInsert) {
+            $instruction->setColumns($this->removeColumn('ID',
+                $resource->getColumnNamesByQuery($request->getParameterColumns())));
         } else {
-            $instruction->addColumns($resource->getColumnNamesByQuery($request->getParameterColumns()));
+            $instruction->setColumns($resource->getColumnNamesByQuery($request->getParameterColumns()));
         }
     }
 
@@ -127,17 +134,13 @@ class SQLInstructionFactory
      *
      * @param $columnName
      * @param $columns
-     * @return mixed
+     * @return array
      */
     private function removeColumn($columnName, $columns)
     {
-        foreach ($columns as $key => $column) {
-            if ($column == $columnName) {
-                unset($columns[$key]);
-            }
-        }
-
-        return $columns;
+        return array_filter($columns, function ($column) use ($columnName) {
+            return strcasecmp($column, $columnName) !== 0;
+        });
     }
 
     /**
@@ -145,16 +148,10 @@ class SQLInstructionFactory
      *
      * @param $columnName
      * @param $columns
-     * @return mixed
+     * @return array
      */
     private function removeColumnByKey($columnName, $columns)
     {
-        foreach ($columns as $key => $column) {
-            if ($key == $columnName) {
-                unset($columns[$columnName]);
-            }
-        }
-
-        return $columns;
+        return array_diff_key($columns, [$columnName => '']);
     }
 }

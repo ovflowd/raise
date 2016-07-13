@@ -9,41 +9,37 @@ namespace UIoT\sql;
 final class SQLSelect extends SQLInstruction
 {
     /**
-     * Adds a column to the columns attribute | @see $selectColumns
-     *
-     * @param string $column
-     */
-    public function addColumn($column)
-    {
-        $this->columns[] = $column;
-    }
-
-    /**
      * Generates a SELECT SQLInstruction | @see SQLInstruction.php
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQLWords::getSelect() . SQLWords::getBlank() .
-            $this->selectColumnsToSql() . SQLWords::getBlank() .
-            SQLWords::getFrom() . SQLWords::getBlank() .
-            $this->getEntity() . SQLWords::getBlank() .
-            SQLWords::getWhere() . SQLWords::getBlank() .
-            $this->criteria->toSql() . SQLWords::getBlank() .
-            SQLWords::getAndOp() . SQLWords::getBlank() .
+        $this->instruction = SQLWords::getSelect() .
+            SQLWords::getBlank() .
+            $this->configureColumns() .
+            SQLWords::getBlank() .
+            SQLWords::getFrom() .
+            SQLWords::getBlank() .
+            $this->getEntity() .
+            SQLWords::getBlank() .
+            SQLWords::getWhere() .
+            SQLWords::getBlank() .
+            $this->criteria->toSql() .
+            SQLWords::getAndOp() .
+            SQLWords::getBlank() .
             SQLWords::getIsDeletedColumn(0);
     }
 
     /**
-     * Converts the columns attribute to a SQL string
+     * Configure Columns and Return It
      *
      * @return string
      */
-    public function selectColumnsToSql()
+    protected function configureColumns()
     {
         if ($this->columns == null) {
             return '*';
         }
 
-        return implode(',', $this->columns);
+        return implode(', ', $this->columns);
     }
 }

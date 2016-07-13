@@ -13,25 +13,32 @@ final class SQLUpdate extends SQLInstruction
      */
     protected function generateInstruction()
     {
-        $this->instruction = SQLWords::getUpdate() . SQLWords::getBlank() . $this->getEntity() . SQLWords::getBlank() .
-            SQLWords::getSet() . SQLWords::getBlank() . $this->criteria->toSql() .
-            SQLWords::getWhere() . SQLWords::getBlank() .
-            $this->columnsValuesToUpdateFormat();
+        $this->instruction = SQLWords::getUpdate() .
+            SQLWords::getBlank() .
+            $this->getEntity() .
+            SQLWords::getBlank() .
+            SQLWords::getSet() .
+            SQLWords::getBlank() .
+            $this->configureColumns() .
+            SQLWords::getBlank() .
+            SQLWords::getWhere() .
+            SQLWords::getBlank() .
+            $this->criteria->toSql();
     }
 
     /**
-     * Create pairs in the format: column = value based on columnValues attribute (@see SQLInstruction.php)
+     * Configure Columns and Return It
      *
      * @return string
      */
-    private function columnsValuesToUpdateFormat()
+    protected function configureColumns()
     {
-        $set = array();
+        $columnSet = array();
 
-        foreach ($this->columnValues as $column => $value) {
-            $set[] = "{$column} = {$value}";
+        foreach ($this->columns as $column => $value) {
+            $columnSet[] = "{$value} = {$column}";
         }
 
-        return implode(',', $set);
+        return implode(', ', $columnSet);
     }
 }

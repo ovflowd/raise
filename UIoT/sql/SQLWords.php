@@ -134,6 +134,16 @@ abstract class SQLWords
     private static $alwaysTrue = 1;
 
     /**
+     * @var string Start Parenthesis
+     */
+    private static $parenthesisBegin = '(';
+
+    /**
+     * @var string End Parenthesis
+     */
+    private static $parenthesisEnd = ')';
+
+    /**
      * Get Select
      *
      * @return string
@@ -208,12 +218,23 @@ abstract class SQLWords
     /**
      * Get Is Deleted Column
      *
+     * @param int $state
      * @return mixed
      */
 
     public static function getIsDeletedColumn($state)
     {
-        return self::$deletedColumn . self::getArithmeticOperators()[0] . $state;
+        return self::$deletedColumn . self::getBlank() . self::getArithmeticOperators()[0] . self::getBlank() . $state;
+    }
+
+    /**
+     * Get Blank
+     *
+     * @return string
+     */
+    public static function getBlank()
+    {
+        return self::$blank;
     }
 
     /**
@@ -357,16 +378,6 @@ abstract class SQLWords
     }
 
     /**
-     * Get Blank
-     *
-     * @return string
-     */
-    public static function getBlank()
-    {
-        return self::$blank;
-    }
-
-    /**
      * Get Logic Operators
      *
      * @return array
@@ -394,5 +405,25 @@ abstract class SQLWords
     public static function getAlwaysTrue()
     {
         return self::$alwaysTrue;
+    }
+
+    /**
+     * Get Begin Parenthesis
+     *
+     * @return string
+     */
+    public static function getParenthesisBegin()
+    {
+        return self::$parenthesisBegin;
+    }
+
+    /**
+     * Get End Parenthesis
+     *
+     * @return string
+     */
+    public static function getParenthesisEnd()
+    {
+        return self::$parenthesisEnd;
     }
 }
