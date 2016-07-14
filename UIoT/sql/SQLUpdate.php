@@ -33,15 +33,12 @@ final class SQLUpdate extends SQLInstruction
      */
     protected function configureColumns()
     {
-        $columnSet = array();
-
         foreach ($this->properties as $column => $value) {
-            $columnSet[] = $value . SQLWords::getBlank() .
-                SQLWords::getEqualsOp() .
-                SQLWords::getBlank() . $column;
+            $this->properties[$column] = $column . SQLWords::getBlank() . SQLWords::getEqualsOp() .
+            SQLWords::getBlank() . is_numeric($value) ? $value : SQLWords::getQuotes() . $value . SQLWords::getQuotes();
         }
 
-        return implode(SQLWords::getComma() . SQLWords::getBlank(), $columnSet);
+        return implode(SQLWords::getComma() . SQLWords::getBlank(), $this->properties);
     }
 
     /**

@@ -31,20 +31,6 @@ class UIoTToken
     }
 
     /**
-     * Check if Token Exists or Not
-     *
-     * @param string $token Token Identification
-     * @return bool If token exists or not
-     */
-    public function tokenExists($token)
-    {
-        return (RequestManager::getDatabaseManager()->rowCountExecute(
-                'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token ORDER BY DVC_ID DESC LIMIT 1',
-                [':token' => $token]) > 0
-        );
-    }
-
-    /**
      * Update Token Expire-Date while it's still valid.
      *
      * @param string $token Token Identification
@@ -63,6 +49,20 @@ class UIoTToken
     public function getExpireTime()
     {
         return time() + 3600;
+    }
+
+    /**
+     * Check if Token Exists or Not
+     *
+     * @param string $token Token Identification
+     * @return bool If token exists or not
+     */
+    public function tokenExists($token)
+    {
+        return (RequestManager::getDatabaseManager()->rowCountExecute(
+                'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token ORDER BY DVC_ID DESC LIMIT 1',
+                [':token' => $token]) > 0
+        );
     }
 
     /**

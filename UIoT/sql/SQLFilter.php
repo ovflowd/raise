@@ -87,17 +87,7 @@ final class SQLFilter
      */
     private function valueToString($value)
     {
-        if (is_array($value)) {
-            $foo = array();
-
-            foreach ($value as $v) {
-                $foo[] = (string)$v;
-            }
-
-            return '(' . implode(', ', $foo) . ')';
-        }
-
-        return (string)$value;
+        return is_numeric($value) ? $value : SQLWords::getQuotes() . $value . SQLWords::getQuotes();
     }
 
     /**

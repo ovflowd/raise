@@ -41,6 +41,7 @@ class UIoTRequest extends Request
      */
     public function executeRequest()
     {
+        die($this->getInstruction());
         return RequestManager::getDatabaseManager()->action($this->getInstruction());
     }
 

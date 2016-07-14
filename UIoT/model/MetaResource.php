@@ -109,10 +109,25 @@ class MetaResource
      */
     public function getPropertiesByNames(array $namesArray)
     {
-        return array_filter($this->getProperties(), function ($property) use ($namesArray) {
+        foreach (array_keys($namesArray) as $propertyName) {
+            $namesArray[$propertyName] = $this->getProperty($propertyName);
+        }
+
+        return $namesArray;
+    }
+
+    /**
+     * Get a specific Resource Property by a Friendly Name
+     *
+     * @param string $friendlyName
+     * @return MetaProperty
+     */
+    public function getProperty($friendlyName)
+    {
+        return reset(array_filter($this->getProperties(), function ($property) use ($friendlyName) {
             /** @var $property MetaProperty */
-            return in_array($property->getFriendlyName(), array_keys($namesArray));
-        });
+            return $property->getFriendlyName() == $friendlyName;
+        }));
     }
 
     /**
@@ -159,19 +174,5 @@ class MetaResource
     public function getFriendlyName()
     {
         return $this->friendlyName;
-    }
-
-    /**
-     * Get a specific Resource Property by a Friendly Name
-     *
-     * @param string $friendlyName
-     * @return MetaProperty
-     */
-    public function getProperty($friendlyName)
-    {
-        return reset(array_filter($this->getProperties(), function ($property) use ($friendlyName) {
-            /** @var $property MetaProperty */
-            return $property->getFriendlyName() === $friendlyName;
-        }));
     }
 }
