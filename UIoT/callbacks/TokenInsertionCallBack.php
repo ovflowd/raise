@@ -23,10 +23,11 @@ class TokenInsertionCallBack extends CallBack
     public static function getCallBack(UIoTRequest $request)
     {
         $response = RequestManager::getRequest()->executeRequest();
-        $tokenId = RequestManager::getDatabaseManager()->getLastId();
+        $deviceId = RequestManager::getDatabaseManager()->getLastId();
 
-        if ($tokenId > 0) {
-            return MessageHandler::getInstance()->getResult(new TokenInsertionMessage(RequestManager::getTokenManager()->defineToken($tokenId)));
+        if ($deviceId > 0) {
+            return MessageHandler::getInstance()->getResult(new TokenInsertionMessage(RequestManager::getTokenManager()->defineToken($deviceId),
+                $deviceId));
         }
 
         return $response;

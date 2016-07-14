@@ -22,6 +22,7 @@ final class ServiceInsertionMessage extends RaiseMessage
     {
         $message = new RaiseMessageContent;
         $message->addContent('code', 200);
+        $message->addContent('message', 'Resource Item Added');
         $message->addContent('device_id', $deviceId);
         $message->addContent('service_id', $serviceId);
         $message->addContent('action_id', $actionId);

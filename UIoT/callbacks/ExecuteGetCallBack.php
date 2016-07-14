@@ -23,7 +23,7 @@ class ExecuteGetCallBack extends CallBack
      */
     public static function getCallBack(UIoTRequest $request)
     {
-        if (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+        if (RequestManager::getTokenManager()->validateToken($request->query->get('token'))) {
             $returnValue = RequestManager::getRequest()->executeRequest();
 
             if (empty($returnValue)) {

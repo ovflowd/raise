@@ -24,7 +24,7 @@ class ExecutePostCallBack extends CallBack
     {
         if ($request->getResource()->getFriendlyName() == 'devices') {
             return TokenInsertionCallBack::getCallBack($request);
-        } elseif (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+        } elseif (RequestManager::getTokenManager()->validateToken($request->query->get('token'))) {
             if ($request->getResource()->getFriendlyName() == 'services') {
                 return ServiceInsertionCallBack::getCallBack($request);
             }

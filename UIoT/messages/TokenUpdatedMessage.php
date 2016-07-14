@@ -6,23 +6,21 @@ use UIoT\model\RaiseMessage;
 use UIoT\model\RaiseMessageContent;
 
 /**
- * Class TokenInsertionMessage
+ * Class TokenUpdatedMessage
  * @package UIoT\messages
  */
-final class TokenInsertionMessage extends RaiseMessage
+final class TokenUpdatedMessage extends RaiseMessage
 {
     /**
-     * TokenInsertionMessage constructor.
+     * TokenUpdatedMessage constructor.
      *
      * @param string $tokenHash
-     * @param string $resourceItemId
      */
-    public function __construct($tokenHash = '', $resourceItemId = '')
+    public function __construct($tokenHash = '')
     {
         $message = new RaiseMessageContent;
         $message->addContent('code', 200);
-        $message->addContent('message', 'Resource Item Added');
-        $message->addContent('item_id', $resourceItemId);
+        $message->addContent('message', 'Resource Item Updated');
         $message->addContent('token', $tokenHash);
 
         parent::__construct($message);

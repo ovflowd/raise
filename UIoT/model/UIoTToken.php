@@ -13,27 +13,37 @@ class UIoTToken
     /**
      * Validate Token
      *
-     * @param $token
-     * @return bool
+     * @param string $token Token Identification
+     * @return bool If Token is valid or not
      */
-    public function validateCode($token)
+    public function validateToken($token)
     {
-        if (RequestManager::getDatabaseManager()->rowCountExecute(
+        RequestManager::getTokenManager()->updateTokenExpire($token);
+
+        return (RequestManager::getDatabaseManager()->rowCountExecute(
                 'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
                 [':token' => $token, ':currentTime' => time()]) > 0
-        ) {
-            RequestManager::getTokenManager()->updateTokenExpire($token);
+        );
+    }
 
-            return true;
-        }
-
-        return false;
+    /**
+     * Check if Token Exists or Not
+     *
+     * @param string $token Token Identification
+     * @return bool If token exists or not
+     */
+    public function tokenExists($token)
+    {
+        return (RequestManager::getDatabaseManager()->rowCountExecute(
+                'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token ORDER BY DVC_ID DESC LIMIT 1',
+                [':token' => $token]) > 0
+        );
     }
 
     /**
      * Update Token Expire-Date while it's still valid.
      *
-     * @param $token
+     * @param string $token Token Identification
      */
     public function updateTokenExpire($token)
     {
@@ -54,8 +64,8 @@ class UIoTToken
     /**
      * Get Device from Token Id
      *
-     * @param $token
-     * @return mixed
+     * @param string $token Token Identification
+     * @return int Device Id
      */
     public function getDeviceIdFromToken($token)
     {
@@ -68,8 +78,8 @@ class UIoTToken
     /**
      * Define token
      *
-     * @param $deviceId
-     * @return mixed
+     * @param int $deviceId
+     * @return string Generated Token
      */
     public function defineToken($deviceId)
     {

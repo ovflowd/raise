@@ -22,7 +22,7 @@ class ExecuteDeleteCallBack extends CallBack
      */
     public static function getCallBack(UIoTRequest $request)
     {
-        if (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+        if (RequestManager::getTokenManager()->validateToken($request->query->get('token'))) {
             return RequestManager::getRequest()->executeRequest();
         }
 

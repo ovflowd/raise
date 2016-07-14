@@ -22,7 +22,9 @@ class ExecutePutCallBack extends CallBack
      */
     public static function getCallBack(UIoTRequest $request)
     {
-        if (RequestManager::getTokenManager()->validateCode($request->query->get('token'))) {
+        if ($request->getResource()->getFriendlyName() == 'devices' && !empty($request->query->get('token')) && !empty($request->query->get('id'))) {
+            return TokenUpdateCallBack::getCallBack($request);
+        } elseif (RequestManager::getTokenManager()->validateToken($request->query->get('token'))) {
             return RequestManager::getRequest()->executeRequest();
         }
 
