@@ -18,12 +18,16 @@ class UIoTToken
      */
     public function validateToken($token)
     {
-        RequestManager::getTokenManager()->updateTokenExpire($token);
-
-        return (RequestManager::getDatabaseManager()->rowCountExecute(
+        if (RequestManager::getDatabaseManager()->rowCountExecute(
                 'SELECT * FROM DEVICE_TOKENS WHERE DVC_TOKEN = :token AND DVC_TOKEN_EXPIRE > :currentTime ORDER BY DVC_ID DESC LIMIT 1',
                 [':token' => $token, ':currentTime' => time()]) > 0
-        );
+        ) {
+            RequestManager::getTokenManager()->updateTokenExpire($token);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
