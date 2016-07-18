@@ -17,20 +17,40 @@
  * @copyright University of Brasília
  */
 
-namespace UIoT\Interfaces;
+namespace UIoT\Models;
+
+use UIoT\Interfaces\TokenInterface;
 
 /**
- * Interface TokenInterface
- *
- * The RAISE Tokens are the Identification of a Communication
- * between RAISE and a `client`
- *
- * Necessary the Token identifies a Device or a Client
- *
- * @package UIoT\Interfaces
+ * Class TokenModel
+ * @package UIoT\Models
  */
-interface TokenInterface
+class TokenModel implements TokenInterface
 {
+    /**
+     * The unique identification for the device which
+     * owns the token.
+     *
+     * @var int
+     */
+    public $DVC_ID;
+
+    /**
+     * Contains the SHA1 hash of the token.
+     * Max length is 24.
+     *
+     * @var string
+     */
+    public $DVC_TOKEN;
+
+    /**
+     * Contains date at which the token will expire.
+     * this variable is measured in seconds.
+     *
+     * @var int
+     */
+    public $DVC_TOKEN_EXPIRE;
+
     /**
      * Returns the Token hash.
      *
@@ -42,7 +62,10 @@ interface TokenInterface
      *
      * @return string
      */
-    public function getHash();
+    public function getHash()
+    {
+        return $this->DVC_TOKEN;
+    }
 
     /**
      * This method updates the token hash, but is only used for Database Commit's.
@@ -54,7 +77,10 @@ interface TokenInterface
      * @param string $tokenHash
      * @return void
      */
-    public function updateHash($tokenHash = '');
+    public function updateHash($tokenHash = '')
+    {
+        $this->DVC_TOKEN = $tokenHash;
+    }
 
     /**
      * This method exists to increase or decrease the expiration time in seconds
@@ -66,7 +92,10 @@ interface TokenInterface
      * @param int $insertionAmount
      * @return void
      */
-    public function updateExpiration($insertionAmount = 0);
+    public function updateExpiration($insertionAmount = 0)
+    {
+        $this->DVC_TOKEN_EXPIRE += $insertionAmount;
+    }
 
     /**
      * Returns the Token Expiration Time
@@ -76,7 +105,10 @@ interface TokenInterface
      *
      * @return int
      */
-    public function getExpiration();
+    public function getExpiration()
+    {
+        return $this->DVC_TOKEN_EXPIRE;
+    }
 
     /**
      * Return the DeviceId or ClientId related for this Token Model.
@@ -88,5 +120,8 @@ interface TokenInterface
      *
      * @return int
      */
-    public function getIdentification();
+    public function getIdentification()
+    {
+        return $this->DVC_ID;
+    }
 }

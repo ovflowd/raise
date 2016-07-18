@@ -25,5 +25,50 @@ namespace UIoT\Mappers;
  */
 class Time
 {
+    /**
+     * Create a new Instance of Time if does'nt exists
+     *
+     * This method does the Singleton Routine Pattern
+     * to get the instance of Json class.
+     *
+     * @return Time
+     */
+    public static function getInstance()
+    {
+        static $instance = null;
 
+        if (null === $instance) {
+            $instance = new static();
+        }
+
+        return $instance;
+    }
+
+    /**
+     * Returns the current time
+     * based in the UNIX timestamp
+     *
+     * @return int
+     */
+    public function getTime()
+    {
+        return time();
+    }
+
+    /**
+     * Compare times with precision of seconds
+     * by checking which time is lower than other
+     *
+     * If the first time is lower than the second the
+     * result will be false, in other ways the result
+     * will be true
+     *
+     * @param int $timeOne first Time to be compared
+     * @param int $timeTwo second Time to be compared
+     * @return bool If FirstTime is equal or higher than SecondTime
+     */
+    public function compareTimes($timeOne, $timeTwo)
+    {
+        return $timeOne >= $timeTwo;
+    }
 }

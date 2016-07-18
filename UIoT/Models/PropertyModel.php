@@ -32,28 +32,28 @@ class PropertyModel implements PropertyInterface
      *
      * @var int
      */
-    private $ID;
+    public $ID;
 
     /**
      * Property linked Resource Unique Identification
      *
      * @var int
      */
-    private $RSRC_ID;
+    public $RSRC_ID;
 
     /**
      * Property Internal Database Name
      *
      * @var string
      */
-    private $PROP_NAME;
+    public $PROP_NAME;
 
     /**
      * Property Public Friendly Name
      *
      * @var string
      */
-    private $PROP_FRIENDLY_NAME;
+    public $PROP_FRIENDLY_NAME;
 
     /**
      * Return the unique Database Property Identification <ID>

@@ -39,7 +39,7 @@ class SecuritySettingsModel implements SettingsInterface
      *
      * @var int
      */
-    private $tokenExpirationTime = 3600;
+    public $tokenExpirationTime = 3600;
 
     /**
      * Token Expiration Update Time
@@ -49,7 +49,7 @@ class SecuritySettingsModel implements SettingsInterface
      *
      * @var int
      */
-    private $tokenUpdateTime = 3600;
+    public $tokenUpdateTime = 3600;
 
     /**
      * This method returns a specific variable from the Setting Block

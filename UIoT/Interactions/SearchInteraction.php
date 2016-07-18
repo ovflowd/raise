@@ -17,18 +17,15 @@
  * @copyright University of Brasília
  */
 
-namespace UIoT\Handlers;
+namespace UIoT\Interactions;
 
-use Symfony\Component\HttpFoundation\Request;
+use UIoT\Models\InteractionModel;
 
 /**
- * Class RequestHandler
- * @package UIoT\Handlers
+ * Class SearchInteraction
+ * @package UIoT\Interactions
  */
-class RequestHandler extends Request
+class SearchInteraction extends InteractionModel
 {
-    public function getResource()
-    {
-        return $this->getBasePath();
-    }
+
 }

@@ -33,21 +33,21 @@ class MessageModel implements MessageInterface
      *
      * @var string
      */
-    private $ID;
+    public $ID;
 
     /**
      * RAISE Message Code
      *
      * @var int
      */
-    private $code;
+    public $code;
 
     /**
      * RAISE Message Description
      *
      * @var string
      */
-    private $message;
+    public $message;
 
     /**
      * Return the Message Identifier

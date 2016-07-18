@@ -97,9 +97,11 @@ final class Json
      */
     public function convert($jsonObject, $modelInstance)
     {
+        $className = get_class($modelInstance);
+
         return is_array($jsonObject) ?
-            $this->getMapper()->mapArray($jsonObject, array(), new ${get_class($modelInstance)}()) :
-            $this->getMapper()->map((object)$jsonObject, new ${get_class($modelInstance)}());
+            $this->getMapper()->mapArray($jsonObject, array(), new $className()) :
+            $this->getMapper()->map($jsonObject, new $className());
     }
 
     /**

@@ -33,28 +33,28 @@ class ResourceModel implements ResourceInterface
      *
      * @var int
      */
-    private $ID;
+    public $ID;
 
     /**
      * Resource Unique Acronym
      *
      * @var string
      */
-    private $RSRC_ACRONYM;
+    public $RSRC_ACRONYM;
 
     /**
      * Resource Internal Name
      *
      * @var string
      */
-    private $RSRC_NAME;
+    public $RSRC_NAME;
 
     /**
      * Resource Friendly Name
      *
      * @var string
      */
-    private $RSRC_FRIENDLY_NAME;
+    public $RSRC_FRIENDLY_NAME;
 
     /**
      * Resource Properties

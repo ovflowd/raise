@@ -22,7 +22,7 @@ namespace UIoT\Interfaces;
 /**
  * Interface InteractionInterface
  *
- * A Interaction is literally an Interaction that a `client`
+ * A Interactions is literally an Interactions that a `client`
  * does in RAISE.
  *
  * @package UIoT\Interfaces
@@ -30,7 +30,7 @@ namespace UIoT\Interfaces;
 interface InteractionInterface
 {
     /**
-     * Does the Interaction Business Logic
+     * Does the Interactions Business Logic
      * and stores in an internal Variable;
      *
      * Necessary the business logic and logical operations

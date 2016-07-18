@@ -29,14 +29,14 @@ use UIoT\Interfaces\MessageInterface;
 class InteractionModel implements InteractionInterface
 {
     /**
-     * The Result of the Business Logic from the Interaction Model
+     * The Result of the Business Logic from the Interactions Model
      *
      * @var MessageInterface
      */
-    private $interactionResult;
+    public $interactionResult;
 
     /**
-     * Does the Interaction Business Logic
+     * Does the Interactions Business Logic
      * and stores in an internal Variable;
      *
      * Necessary the business logic and logical operations

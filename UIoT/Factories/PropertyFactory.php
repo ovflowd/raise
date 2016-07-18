@@ -21,6 +21,10 @@ namespace UIoT\Factories;
 
 use Interfaces\FactoryInterface;
 use UIoT\Interfaces\PropertyInterface;
+use UIoT\Managers\DatabaseManager;
+use UIoT\Mappers\Constants;
+use UIoT\Mappers\Json;
+use UIoT\Models\PropertyModel;
 
 /**
  * Class PropertyFactory
@@ -49,7 +53,12 @@ class PropertyFactory implements FactoryInterface
      */
     public function __construct($resourceId = 0)
     {
-        $this->resourceProperties = array();
+        $raiseProperties = Json::getInstance()->convert(DatabaseManager::getInstance()->fetchAll(
+            Constants::getInstance()->get('specificPropertiesQuery'), [
+            ':RSRC_ID' => $resourceId
+        ]), new PropertyModel);
+
+        $this->addSet($raiseProperties);
     }
 
     /**

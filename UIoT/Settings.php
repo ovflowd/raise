@@ -17,22 +17,22 @@
  * @copyright University of Brasília
  */
 
-use UIoT\Managers\SettingsManager as S;
+use UIoT\Managers\SettingsManager as Settings;
 use UIoT\Models\Settings\DatabaseSettingsModel;
 use UIoT\Models\Settings\SecuritySettingsModel;
 
 /* RAISE Security Settings Block */
-S::getInstance()->addItem(new SecuritySettingsModel, [
+Settings::getInstance()->addItem(new SecuritySettingsModel, [
     'tokenExpirationTime' => 3600,
     'tokenUpdateTime' => 3600
 ]);
 
 /* RAISE Database Settings Block */
-S::getInstance()->addItem(new DatabaseSettingsModel, [
-    'hostName' => 'localhost',
+Settings::getInstance()->addItem(new DatabaseSettingsModel, [
+    'hostName' => '172.16.9.69',
     'hostPort' => 3306,
-    'connUser' => 'root',
-    'connPass' => '',
+    'connUser' => 'raise',
+    'connPass' => 'ac41tr1421',
     'connDataBase' => 'UIOT'
 ]);
 

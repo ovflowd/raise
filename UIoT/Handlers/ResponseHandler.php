@@ -19,11 +19,13 @@
 
 namespace UIoT\Handlers;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Class ResponseHandler
  * @package UIoT\Handlers
  */
-class ResponseHandler
+class ResponseHandler extends Response
 {
 
 }

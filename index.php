@@ -39,7 +39,7 @@
 use UIoT\Managers\RaiseManager;
 
 if (!file_exists(__DIR__ . '/UIoT/Vendor/autoload.php')) {
-    die('RAISE needs PHP Composers. Get it through <a href="http://getcomposer.org">here</a>.');
+    die('<h2>RAISe needs PHP Composer.</h2>Get it through <a href="http://getcomposer.org">here</a>.');
 }
 
 /* include settings files */
@@ -48,4 +48,6 @@ if (!file_exists(__DIR__ . '/UIoT/Vendor/autoload.php')) {
 (require_once __DIR__ . '/UIoT/Constants.php');
 
 /* start environment */
-(new RaiseManager());
+$manager = (new RaiseManager());
+
+

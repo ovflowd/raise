@@ -21,6 +21,10 @@ namespace UIoT\Factories;
 
 use Interfaces\FactoryInterface;
 use UIoT\Interfaces\ResourceInterface;
+use UIoT\Managers\DatabaseManager;
+use UIoT\Mappers\Constants;
+use UIoT\Mappers\Json;
+use UIoT\Models\ResourceModel;
 
 /**
  * Class ResourceFactory
@@ -46,7 +50,10 @@ class ResourceFactory implements FactoryInterface
      */
     public function __construct()
     {
-        $this->resourceItems = array();
+        $raiseResources = Json::getInstance()->convert(DatabaseManager::getInstance()->fetchAll(
+            Constants::getInstance()->get('metaResourcesQuery')), new ResourceModel);
+
+        $this->addSet($raiseResources);
     }
 
     /**

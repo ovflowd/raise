@@ -60,7 +60,7 @@ class SettingsManager
      */
     public function addItem($itemInstance, array $itemProperties)
     {
-        $this->getFactory()->add(Json::getInstance()->convert($itemProperties, $itemInstance));
+        $this->getFactory()->add(Json::getInstance()->convert((object)$itemProperties, $itemInstance));
     }
 
     /**

@@ -20,6 +20,7 @@
 namespace UIoT\Handlers;
 
 use PDO;
+use PDOException;
 use UIoT\Managers\SettingsManager;
 use UIoT\Models\Settings\DatabaseSettingsModel;
 
@@ -59,11 +60,18 @@ class DatabaseHandler
      */
     public function connect()
     {
-        $this->databaseInstance = new PDO(
-            "mysql:host={$this->databaseSettings->__get('hostName')};" .
-            "port={$this->databaseSettings->__get('hostPort')};" .
-            "dbname={$this->databaseSettings->__get('connDataBase')}",
-            $this->databaseSettings->__get('connUser'), $this->databaseSettings->__get('connPass'));
+        if ($this->databaseInstance === null) {
+            try {
+                $this->databaseInstance = new PDO(
+                    "mysql:host={$this->databaseSettings->__get('hostName')};" .
+                    "port={$this->databaseSettings->__get('hostPort')};" .
+                    "dbname={$this->databaseSettings->__get('connDataBase')}",
+                    $this->databaseSettings->__get('connUser'), $this->databaseSettings->__get('connPass')
+                );
+            } catch (PDOException $e) {
+                die ("<h2>RAISe failed to connect to Database.</h2><b>Details:</b> {$e}");
+            }
+        }
     }
 
     /**

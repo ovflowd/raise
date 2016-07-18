@@ -36,35 +36,35 @@ class DatabaseSettingsModel implements SettingsInterface
      *
      * @var string
      */
-    private $hostName = 'localhost';
+    public $hostName = 'localhost';
 
     /**
      * Connection Port for MySQL
      *
      * @var int
      */
-    private $hostPort = 3306;
+    public $hostPort = 3306;
 
     /**
      * Connection User Name for MySQL
      *
      * @var string
      */
-    private $connUser = 'root';
+    public $connUser = 'root';
 
     /**
      * Connection User Password for MySQL
      *
      * @var string
      */
-    private $connPass = '';
+    public $connPass = '';
 
     /**
      * Connection Data Base for MySQL
      *
      * @var string
      */
-    private $connDataBase = 'UIOT';
+    public $connDataBase = 'UIOT';
 
     /**
      * This method returns a specific variable from the Setting Block

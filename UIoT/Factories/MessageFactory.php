@@ -46,8 +46,8 @@ class MessageFactory implements FactoryInterface
     private $raiseMessages = array();
 
     /**
-     * Normally a RAISE Factory does'nt have any parameters
-     * The Factory normally will do his business logic in a black box.
+     * Normally a RAISE Factory does not have any parameters
+     * The Factory normally will do its business logic in a black box.
      * In other words, the Factory will request the necessary data to work
      * through the RAISE Managers
      */
