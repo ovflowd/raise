@@ -21,30 +21,50 @@ namespace UIoT\Models;
 
 use UIoT\Interfaces\InteractionInterface;
 use UIoT\Interfaces\MessageInterface;
+use UIoT\Managers\RaiseManager;
+use UIoT\Managers\TokenManager;
 
 /**
  * Class InteractionModel
  * @package UIoT\Models
  */
-class InteractionModel implements InteractionInterface
+abstract class InteractionModel implements InteractionInterface
 {
     /**
-     * The Result of the Business Logic from the Interactions Model
+     * The Message Result of the Interaction Process
+     * @note the Message can be null if the Response is a set of Data
      *
      * @var MessageInterface
      */
-    public $interactionResult;
+    protected $interactionMessage;
 
     /**
-     * Does the Interactions Business Logic
-     * and stores in an internal Variable;
+     * The Content Data of the Interaction Process
+     * @note the Data can be empty if the Response isn't a Data Set
+     * @note necessary if isn't empty need be an array of Data
      *
-     * Necessary the business logic and logical operations
-     * happens in this method.
+     * @var array
      */
-    public function __construct()
+    protected $interactionData;
+
+    /**
+     * The HTTP Method related to the Interaction
+     *
+     * @var string
+     */
+    protected $interactionMethod;
+
+    /**
+     * Reset's the internal Message variable
+     * and set the HTTP Method desired for the
+     * correspondent Interaction
+     *
+     * @param string $httpMethod Interaction HTTP Method
+     */
+    public function __construct($httpMethod)
     {
-        $this->interactionResult = '';
+        $this->interactionMethod = $httpMethod;
+        $this->interactionMessage = null;
     }
 
     /**
@@ -52,10 +72,89 @@ class InteractionModel implements InteractionInterface
      * Necessary is a MessageInterface the result.
      * Since the Interactions returns the Message Results
      *
+     * @return MessageInterface
+     */
+    public function getMessage()
+    {
+        return $this->interactionMessage;
+    }
+
+    /**
+     * Get Interaction Response Data Set
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->interactionData;
+    }
+
+    /**
+     * Set the Response Data Set of an Interaction Process
+     *
+     * @param array $interactionData
+     */
+    public function setData(array $interactionData)
+    {
+        $this->interactionData = $interactionData;
+    }
+
+    /**
+     * Method that executes the Business Logic
+     * and does all Controlling operations.
+     *
+     * @note Interaction is similar as a Controller
+     *
+     * @return void
+     */
+    public abstract function executeProcess();
+
+    /**
+     * Used to Return the HTTP Method that the Interaction
+     * is related. The Methods can be POST, PUT, GET, DELETE
+     *
      * @return string
      */
-    public function __toString()
+    public function getMethod()
     {
-        return $this->interactionResult->__toString();
+        return $this->interactionMethod;
+    }
+
+    /**
+     * Used to return the result of the business logic
+     * Necessary is a MessageInterface the result.
+     * Since the Interactions returns the Message Results
+     *
+     * @param string $messageInterface Message Interface to be Set
+     * @param array $templateEngine Template Engine Fields
+     * @return void
+     */
+    public function setMessage($messageInterface, array $templateEngine = array())
+    {
+        $this->interactionMessage = RaiseManager::getInstance()->getFactory('messageFactory')->get($messageInterface,
+            $templateEngine);
+    }
+
+    /**
+     * Check if the Token given by the `client` is valid or not.
+     * If the `client` does'nt sent a token in query string also
+     * the validation will return 0 (zero).
+     *
+     * If the Token isn't anymore valid (expired) will return -1
+     * If is valid will return 1 (one)
+     *
+     * @return int (-1 : Expired, 0 : Invalid, 1 : Valid)
+     */
+    protected function checkToken()
+    {
+        $token = RaiseManager::getInstance()->getHandler('requestHandler')->getRequest()->query->get('token');
+
+        if (TokenManager::getInstance()->setToken($token) === false) {
+            return 0;
+        } elseif (TokenManager::getInstance()->checkToken() === false) {
+            return -1;
+        }
+
+        return 1;
     }
 }

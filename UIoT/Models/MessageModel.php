@@ -19,14 +19,14 @@
 
 namespace UIoT\Models;
 
+use stdClass;
 use UIoT\Interfaces\MessageInterface;
-use UIoT\Mappers\Json;
 
 /**
  * Class MessageModel
  * @package UIoT\Models
  */
-class MessageModel implements MessageInterface
+final class MessageModel implements MessageInterface
 {
     /**
      * RAISe Message Identifier
@@ -131,15 +131,21 @@ class MessageModel implements MessageInterface
     }
 
     /**
-     * Returns jSON Encoded of the Message
+     * Return the MessageInterface Public Values
      *
-     * The `JsonEncoder` class does the Encoding from the Object
-     * to a jSON
-     *
-     * @return string
+     * @return object
      */
-    public function __toString()
+    public function __getResult()
     {
-        return Json::getInstance()->encode($this);
+        $message = new stdClass();
+
+        foreach ($this as $property => $value) {
+            if ($property == 'ID') {
+                continue;
+            }
+            $message->{$property} = $value;
+        }
+
+        return $message;
     }
 }

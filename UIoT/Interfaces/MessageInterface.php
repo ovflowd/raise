@@ -96,12 +96,9 @@ interface MessageInterface
     public function __set($propertyName, $propertyValue);
 
     /**
-     * Returns jSON Encoded of the Message
+     * Return the MessageInterface Public Values
      *
-     * The `JsonEncoder` class does the Encoding from the Object
-     * to a jSON
-     *
-     * @return string
+     * @return object
      */
-    public function __toString();
+    public function __getResult();
 }

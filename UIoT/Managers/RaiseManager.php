@@ -19,9 +19,8 @@
 
 namespace UIoT\Managers;
 
-use Symfony\Component\HttpFoundation\Request;
+use Interfaces\FactoryInterface;
 use UIoT\Factories\InstructionFactory;
-use UIoT\Factories\InteractionFactory;
 use UIoT\Factories\MessageFactory;
 use UIoT\Factories\ResourceFactory;
 use UIoT\Handlers\RequestHandler;
@@ -59,133 +58,99 @@ class RaiseManager
     private $instructionFactory;
 
     /**
-     * @var InteractionFactory
-     */
-    private $interactionFactory;
-
-    /**
      * Instantiate all RAISe Components
      */
-    public function __construct()
+    protected function __construct()
     {
-        $this->setRequestHandler(RequestHandler::createFromGlobals());
-        $this->setResourceFactory(new ResourceFactory);
-        $this->setMessageFactory(new MessageFactory);
-        $this->setInstructionFactory(new InstructionFactory);
-        $this->setInteractionFactory(new InteractionFactory);
+        $this->getFactory('messageFactory', new MessageFactory);
+        $this->getHandler('requestHandler', new RequestHandler);
+        $this->getHandler('responseHandler', new ResponseHandler);
+        $this->getFactory('resourceFactory', new ResourceFactory);
+        $this->getFactory('instructionFactory', new InstructionFactory);
     }
 
     /**
-     * @return RequestHandler
+     * Get a RAISe Factory or Handler
+     *
+     * @param string $raiseComponent RAISe Component Name
+     * @param FactoryInterface|null $classToInstantiate Factory to Instantiate if Necessary
+     * @return FactoryInterface
      */
-    public function getRequestHandler()
+    public function getFactory($raiseComponent, FactoryInterface $classToInstantiate = null)
     {
-        return $this->requestHandler;
+        if (null === $this->{$raiseComponent}) {
+            $this->{$raiseComponent} = $classToInstantiate;
+        }
+
+        return $this->{$raiseComponent};
     }
 
     /**
-     * @param RequestHandler|Request $requestHandler
+     * Get a RAISe Factory or Handler
+     *
+     * @param string $raiseComponent RAISe Component Name
+     * @param ResponseHandler|RequestHandler $classToInstantiate Class to Instantiate if Necessary
+     * @return RequestHandler|ResponseHandler
+     */
+    public function getHandler($raiseComponent, $classToInstantiate = null)
+    {
+        if (null === $this->{$raiseComponent}) {
+            if ($classToInstantiate instanceof RequestHandler || $classToInstantiate instanceof ResponseHandler) {
+                $this->{$raiseComponent} = $classToInstantiate;
+            }
+        }
+
+        return $this->{$raiseComponent};
+    }
+
+    /**
+     * Execute's RAISe Management Engine
+     *
+     * @return string
+     */
+    public static function startRaise()
+    {
+        /* first instantiate RaiseManager and after this
+            execute RAISe Interaction */
+        self::getInstance()->executeInteraction();
+
+        /* set HTTP Headers from HTTP Response Interface */
+        self::getInstance()->getHandler('responseHandler')->getResponse()->sendHeaders();
+
+        /* get HTTP Response Interface Content */
+        return self::getInstance()->getHandler('responseHandler')->getResponse()->getContent();
+    }
+
+    /**
+     * Execute's RAISe Interaction Procedures
+     */
+    public function executeInteraction()
+    {
+        /* check if Request is to DocumentRoot, if yes Welcome Message is triggered */
+        if ($this->getHandler('requestHandler')->getRequest()->getRequestUri() == '/') {
+            $this->getHandler('responseHandler')->setMessage($this->getFactory('messageFactory')->get('WelcomeToRaise'));
+
+            return;
+        }
+
+        /* in other way executes the Interaction */
+        $this->getHandler('responseHandler')->executeInteraction(InteractionManager::getInstance()->getByMethod(
+            $this->getHandler('requestHandler')->getRequest()->getMethod()));
+    }
+
+    /**
+     * Get RAISe Manager Instance
+     *
      * @return RaiseManager
      */
-    public function setRequestHandler($requestHandler)
+    public static function getInstance()
     {
-        $this->requestHandler = $requestHandler;
+        static $instance = null;
 
-        return $this;
-    }
+        if (null === $instance) {
+            $instance = new static();
+        }
 
-    /**
-     * @return ResponseHandler
-     */
-    public function getResponseHandler()
-    {
-        return $this->responseHandler;
-    }
-
-    /**
-     * @param ResponseHandler $responseHandler
-     * @return RaiseManager
-     */
-    public function setResponseHandler($responseHandler)
-    {
-        $this->responseHandler = $responseHandler;
-
-        return $this;
-    }
-
-    /**
-     * @return ResourceFactory
-     */
-    public function getResourceFactory()
-    {
-        return $this->resourceFactory;
-    }
-
-    /**
-     * @param ResourceFactory $resourceFactory
-     * @return RaiseManager
-     */
-    public function setResourceFactory($resourceFactory)
-    {
-        $this->resourceFactory = $resourceFactory;
-
-        return $this;
-    }
-
-    /**
-     * @return MessageFactory
-     */
-    public function getMessageFactory()
-    {
-        return $this->messageFactory;
-    }
-
-    /**
-     * @param MessageFactory $messageFactory
-     * @return RaiseManager
-     */
-    public function setMessageFactory($messageFactory)
-    {
-        $this->messageFactory = $messageFactory;
-
-        return $this;
-    }
-
-    /**
-     * @return InstructionFactory
-     */
-    public function getInstructionFactory()
-    {
-        return $this->instructionFactory;
-    }
-
-    /**
-     * @param InstructionFactory $instructionFactory
-     * @return RaiseManager
-     */
-    public function setInstructionFactory($instructionFactory)
-    {
-        $this->instructionFactory = $instructionFactory;
-
-        return $this;
-    }
-
-    /**
-     * @return InteractionFactory
-     */
-    public function getInteractionFactory()
-    {
-        return $this->interactionFactory;
-    }
-
-    /**
-     * @param InteractionFactory $interactionFactory
-     * @return RaiseManager
-     */
-    public function setInteractionFactory($interactionFactory)
-    {
-        $this->interactionFactory = $interactionFactory;
-
-        return $this;
+        return $instance;
     }
 }

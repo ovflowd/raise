@@ -20,6 +20,7 @@
 namespace UIoT\Factories;
 
 use Interfaces\FactoryInterface;
+use stdClass;
 use UIoT\Interfaces\MessageInterface;
 use UIoT\Managers\DatabaseManager;
 use UIoT\Mappers\Constants;
@@ -53,10 +54,26 @@ class MessageFactory implements FactoryInterface
      */
     public function __construct()
     {
-        $raiseMessages = Json::getInstance()->convert(DatabaseManager::getInstance()->fetchAll(
-            Constants::getInstance()->get('raiseMessagesQuery')), new MessageModel);
+        $raiseMessages = Json::getInstance()->convert($this->collectData(DatabaseManager::getInstance()->fetchAll(
+            Constants::getInstance()->get('raiseMessagesQuery'))), new MessageModel);
 
         $this->addSet($raiseMessages);
+    }
+
+    private function collectData(array $databaseResponse)
+    {
+        $messageDataSet = array();
+
+        foreach ($databaseResponse as $key => $messageSet) {
+            if (!array_key_exists($messageSet->ID, $messageDataSet)) {
+                $messageDataSet[$messageSet->ID] = new stdClass();
+                $messageDataSet[$messageSet->ID]->ID = $messageSet->ID;
+            }
+
+            $messageDataSet[$messageSet->ID]->{$messageSet->NAME} = $messageSet->VALUE;
+        }
+
+        return $messageDataSet;
     }
 
     /**

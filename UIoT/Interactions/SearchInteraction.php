@@ -27,5 +27,33 @@ use UIoT\Models\InteractionModel;
  */
 class SearchInteraction extends InteractionModel
 {
+    /**
+     * Does the Interactions Business Logic
+     * and stores in an internal Variable;
+     *
+     * Necessary the business logic and logical operations
+     * happens in this method.
+     *
+     * @param string $httpMethod Interaction HTTP Method
+     * @note SearchInteraction uses HTTP Get Method
+     */
+    public function __construct($httpMethod)
+    {
+        parent::__construct($httpMethod);
+    }
 
+    /**
+     * Method that executes the Business Logic
+     * and does all Controlling operations.
+     *
+     * @note Interaction is similar as a Controller
+     *
+     * @return void
+     */
+    public function executeProcess()
+    {
+        if ($this->checkToken() !== 1) {
+            $this->setMessage('InvalidToken');
+        }
+    }
 }

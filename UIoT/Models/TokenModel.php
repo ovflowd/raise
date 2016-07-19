@@ -25,7 +25,7 @@ use UIoT\Interfaces\TokenInterface;
  * Class TokenModel
  * @package UIoT\Models
  */
-class TokenModel implements TokenInterface
+final class TokenModel implements TokenInterface
 {
     /**
      * The unique identification for the device which

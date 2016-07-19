@@ -35,15 +35,50 @@ interface InteractionInterface
      *
      * Necessary the business logic and logical operations
      * happens in this method.
+     *
+     * @param string $httpMethod Interaction HTTP Method
      */
-    public function __construct();
+    public function __construct($httpMethod);
 
     /**
      * Used to return the result of the business logic
      * Necessary is a MessageInterface the result.
      * Since the Interactions returns the Message Results
      *
+     * @return MessageInterface
+     */
+    public function getMessage();
+
+    /**
+     * Used to return the result of the business logic
+     * Necessary is a MessageInterface the result.
+     * Since the Interactions returns the Message Results
+     *
+     * @param string $messageInterface Message Interface to be Set
+     * @param array $templateEngine Template Engine Fields
+     * @return void
+     */
+    public function setMessage($messageInterface, array $templateEngine = array());
+
+    /**
+     * Used to Return the HTTP Method that the Interaction
+     * is related. The Methods can be POST, PUT, GET, DELETE
+     *
      * @return string
      */
-    public function __toString();
+    public function getMethod();
+
+    /**
+     * Set the Response Data Set of an Interaction Process
+     *
+     * @param array $interactionData
+     */
+    public function setData(array $interactionData);
+
+    /**
+     * Get Interaction Response Data Set
+     *
+     * @return array
+     */
+    public function getData();
 }

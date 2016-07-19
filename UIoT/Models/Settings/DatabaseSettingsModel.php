@@ -29,7 +29,7 @@ use UIoT\Interfaces\SettingsInterface;
  *
  * @package UIoT\Models\Settings
  */
-class DatabaseSettingsModel implements SettingsInterface
+final class DatabaseSettingsModel implements SettingsInterface
 {
     /**
      * Connection Host for MySQL

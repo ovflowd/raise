@@ -55,18 +55,6 @@ class TokenManager
     }
 
     /**
-     * Return the TokenModel of the Session
-     *
-     * @warning the value maybe can be null
-     *
-     * @return TokenModel
-     */
-    public function getToken()
-    {
-        return $this->sessionToken;
-    }
-
-    /**
      * Set the Token for the Session by a token hash identifier
      * This method populates the TokenModel and return a boolean
      * saying if the Token exists or not
@@ -79,7 +67,9 @@ class TokenManager
         if (DatabaseManager::getInstance()->rowCount(Constants::getInstance()->get('specificTokenDetailsQuery'), [
                 ':DVC_TOKEN' => $tokenHash
             ]) == 0
-        ) return false;
+        ) {
+            return false;
+        }
 
         $this->sessionToken = Json::getInstance()->convert(DatabaseManager::getInstance()->fetch(
             Constants::getInstance()->get('specificTokenDetailsQuery'), [
@@ -110,9 +100,22 @@ class TokenManager
      */
     public function checkToken()
     {
-        if ($this->getToken() === null)
+        if ($this->getToken() === null) {
             return false;
+        }
 
         return Time::getInstance()->compareTimes($this->getToken()->getExpiration(), Time::getInstance()->getTime());
+    }
+
+    /**
+     * Return the TokenModel of the Session
+     *
+     * @warning the value maybe can be null
+     *
+     * @return TokenModel
+     */
+    public function getToken()
+    {
+        return $this->sessionToken;
     }
 }

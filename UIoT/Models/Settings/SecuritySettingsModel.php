@@ -29,7 +29,7 @@ use UIoT\Interfaces\SettingsInterface;
  *
  * @package UIoT\Models\Settings
  */
-class SecuritySettingsModel implements SettingsInterface
+final class SecuritySettingsModel implements SettingsInterface
 {
     /**
      * Token Expiration Time

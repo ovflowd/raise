@@ -46,8 +46,7 @@ if (!file_exists(__DIR__ . '/UIoT/Vendor/autoload.php')) {
 (require_once __DIR__ . '/UIoT/Vendor/autoload.php');
 (require_once __DIR__ . '/UIoT/Settings.php');
 (require_once __DIR__ . '/UIoT/Constants.php');
+(require_once __DIR__ . '/UIoT/Register.php');
 
 /* start environment */
-$manager = (new RaiseManager());
-
-
+echo RaiseManager::startRaise();

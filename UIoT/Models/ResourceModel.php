@@ -26,7 +26,7 @@ use UIoT\Interfaces\ResourceInterface;
  * Class ResourceModel
  * @package UIoT\Models
  */
-class ResourceModel implements ResourceInterface
+final class ResourceModel implements ResourceInterface
 {
     /**
      * Resource Unique Identifier
@@ -63,7 +63,7 @@ class ResourceModel implements ResourceInterface
      *
      * @var PropertyFactory
      */
-    private $resourceProperties;
+    protected $resourceProperties;
 
     /**
      * Return the Resource Shorthand tag identifier <RSRC_ACRONYM>

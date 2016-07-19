@@ -17,22 +17,14 @@
  * @copyright University of Brasília
  */
 
-use UIoT\Managers\SettingsManager as Settings;
-use UIoT\Models\Settings\DatabaseSettingsModel;
-use UIoT\Models\Settings\SecuritySettingsModel;
+use UIoT\Managers\InteractionManager as Interaction;
 
-/* RAISE Security Settings Block */
-Settings::getInstance()->addItem(new SecuritySettingsModel, [
-    'tokenExpirationTime' => 3600,
-    'tokenUpdateTime' => 3600
-]);
+/* File Used to Register RAISe Interactions */
+/* Only GENERIC Interactions MUST be Added Here */
 
-/* RAISE Database Settings Block */
-Settings::getInstance()->addItem(new DatabaseSettingsModel, [
-    'hostName' => '127.0.0.1',
-    'hostPort' => 3306,
-    'connUser' => 'raise',
-    'connPass' => 'ac41tr1421',
-    'connDataBase' => 'UIOT'
-]);
-
+/**
+ * Add Search Interaction
+ *
+ * used to search Resource Items
+ */
+Interaction::getInstance()->add('SearchInteraction', 'GET');

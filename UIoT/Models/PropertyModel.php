@@ -25,7 +25,7 @@ use UIoT\Interfaces\PropertyInterface;
  * Class PropertyModel
  * @package UIoT\Models
  */
-class PropertyModel implements PropertyInterface
+final class PropertyModel implements PropertyInterface
 {
     /**
      * Property Unique Identification
