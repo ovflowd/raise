@@ -22,7 +22,8 @@ use UIoT\Mappers\Constants;
 /* Generic Queries */
 
 /**
- * Add Meta Resources SELECT Query
+ * Select UIoT Resources Details
+ * @see \UIoT\Models\ResourceModel
  */
 Constants::getInstance()->add('metaResourcesQuery',
     'SELECT META_RESOURCES.ID, 
@@ -32,7 +33,8 @@ Constants::getInstance()->add('metaResourcesQuery',
      FROM META_RESOURCES');
 
 /**
- * Add Meta Properties SELECT Query
+ * Select UIoT Properties Details
+ * @see \UIoT\Models\PropertyModel
  */
 Constants::getInstance()->add('metaPropertiesQuery',
     'SELECT META_PROPERTIES.ID, 
@@ -42,7 +44,8 @@ Constants::getInstance()->add('metaPropertiesQuery',
      FROM META_PROPERTIES');
 
 /**
- * Add RAISE Messages SELECT Query
+ * Select RAISe Messages Details
+ * @see \UIoT\Models\MessageModel
  */
 Constants::getInstance()->add('raiseMessagesQuery',
     'SELECT MESSAGES.ID, 
@@ -51,7 +54,8 @@ Constants::getInstance()->add('raiseMessagesQuery',
      FROM MESSAGES');
 
 /**
- * Add RAISE Get Token Details SELECT Query
+ * Get a specific RAISe Token Details
+ * @see \UIoT\Models\TokenModel
  */
 Constants::getInstance()->add('tokenDetailsQuery',
     'SELECT DEVICE_TOKENS.DVC_ID, 
@@ -60,7 +64,9 @@ Constants::getInstance()->add('tokenDetailsQuery',
      FROM DEVICE_TOKENS');
 
 /**
- * Add RAISE Create new Token INSERT Query
+ * Insert RAISe Token
+ * @see \UIoT\Models\TokenModel
+ *
  * @var int DVC_ID
  * @var string DVC_TOKEN
  * @var int DVC_TOKEN_EXPIRE
@@ -73,6 +79,8 @@ Constants::getInstance()->add('addTokenQuery',
 
 /**
  * Get Specific Token Details
+ * @see \UIoT\Models\TokenModel
+ *
  * @var string DVC_TOKEN
  */
 Constants::getInstance()->add('specificTokenDetailsQuery',
@@ -81,9 +89,25 @@ Constants::getInstance()->add('specificTokenDetailsQuery',
 
 /**
  * Get Specific Properties
+ * @see \UIoT\Models\PropertyModel
+ *
  * @var int RSRC_ID
  */
 Constants::getInstance()->add('specificPropertiesQuery',
     Constants::getInstance()->get('metaPropertiesQuery') .
     ' WHERE META_PROPERTIES.RSRC_ID = :RSRC_ID');
+
+/**
+ * Update RAISe existent Token
+ * @see \UIoT\Models\TokenModel
+ *
+ * @var string DVC_TOKEN
+ * @var int DVC_TOKEN_EXPIRE
+ * @var string OLD_DVC_TOKEN
+ */
+Constants::getInstance()->add('updateTokenQuery',
+    'UPDATE DEVICE_TOKENS 
+      SET DEVICE_TOKENS.DVC_TOKEN = :DVC_TOKEN, 
+      DEVICE_TOKENS.DVC_TOKEN_EXPIRE = :DVC_TOKEN_EXPIRE 
+     WHERE DEVICE_TOKENS.DVC_TOKEN = :OLD_DVC_TOKEN');
 

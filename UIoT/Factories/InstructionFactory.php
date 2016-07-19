@@ -46,7 +46,7 @@ class InstructionFactory implements FactoryInterface
      */
     public function __construct()
     {
-        // TODO: Implement __construct() method.
+        $this->instructionBuilder = new MySqlBuilder;
     }
 
     /**

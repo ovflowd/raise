@@ -60,23 +60,36 @@ class TokenManager
      * saying if the Token exists or not
      *
      * @param string $tokenHash Token Identifier
-     * @return bool If the Token does'nt exists return false, if exists return true
      */
     public function setToken($tokenHash = '')
     {
-        if (DatabaseManager::getInstance()->rowCount(Constants::getInstance()->get('specificTokenDetailsQuery'), [
+        if (($tokenDetails = DatabaseManager::getInstance()->fetch(
+                Constants::getInstance()->get('specificTokenDetailsQuery'), [
                 ':DVC_TOKEN' => $tokenHash
-            ]) == 0
+            ])) != null
         ) {
-            return false;
+            $this->sessionToken = Json::getInstance()->convert($tokenDetails, new TokenModel);
         }
+    }
 
-        $this->sessionToken = Json::getInstance()->convert(DatabaseManager::getInstance()->fetch(
-            Constants::getInstance()->get('specificTokenDetailsQuery'), [
-            ':DVC_TOKEN' => $tokenHash
-        ]), new TokenModel);
-
-        return true;
+    /**
+     * Update the Session Token with the Default new Entries
+     * Updating in the Database and in the Model
+     *
+     * @note this is used for Update Token Requests, since
+     * each Device has an unique Token. The hash changes but the
+     * Token continues attributed to this Device.
+     */
+    public function updateToken()
+    {
+        if ($this->sessionToken !== null) {
+            DatabaseManager::getInstance()->query(Constants::getInstance()->get('updateTokenQuery'), [
+                ':DVC_TOKEN' => ($newHash = Security::getInstance()->generateSha1()),
+                ':OLD_DVC_TOKEN' => $this->sessionToken->updateHash($newHash),
+                ':DVC_TOKEN_EXPIRE' => $this->sessionToken->updateExpiration(
+                    SettingsManager::getInstance()->getItem('security')->__get('tokenUpdateTime'))
+            ]);
+        }
     }
 
     /**
@@ -89,22 +102,26 @@ class TokenManager
         DatabaseManager::getInstance()->query(Constants::getInstance()->get('addTokenQuery'), [
             ':DVC_ID' => $deviceId,
             ':DVC_TOKEN' => Security::getInstance()->generateSha1(),
-            ':DVC_TOKEN_EXPIRE' => Time::getInstance()->getTime()
+            ':DVC_TOKEN_EXPIRE' => Time::getInstance()->getTime() +
+                SettingsManager::getInstance()->getItem('security')->__get('tokenExpirationTime')
         ]);
     }
 
     /**
      * Check if the Token of the Session is Valid
+     * If the `client` does'nt sent a token in query string also
+     * the validation will return 0 (zero).
      *
-     * @return bool If the Token is Valid
+     * If the Token isn't anymore valid (expired) will return -1
+     * If is valid will return 1 (one)
+     *
+     * @return int (-1 : Expired, 0 : Invalid, 1 : Valid)
      */
     public function checkToken()
     {
-        if ($this->getToken() === null) {
-            return false;
-        }
-
-        return Time::getInstance()->compareTimes($this->getToken()->getExpiration(), Time::getInstance()->getTime());
+        return $this->getToken() === null || $this->getToken()->getHash() === null ? 0 :
+            Time::getInstance()->compareTimes($this->getToken()->getExpiration(), Time::getInstance()->getTime())
+                ? 1 : -1;
     }
 
     /**

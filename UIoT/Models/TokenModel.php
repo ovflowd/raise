@@ -75,11 +75,15 @@ final class TokenModel implements TokenInterface
      * <DEVICE_TOKENS> or <CLIENTS_TOKENS>.
      *
      * @param string $tokenHash
-     * @return void
+     * @return string Old Hash
      */
     public function updateHash($tokenHash = '')
     {
+        $oldHash = $this->DVC_TOKEN;
+
         $this->DVC_TOKEN = $tokenHash;
+
+        return $oldHash;
     }
 
     /**
@@ -90,11 +94,13 @@ final class TokenModel implements TokenInterface
      * <DEVICE_TOKENS> or <CLIENTS_TOKENS>.
      *
      * @param int $insertionAmount
-     * @return void
+     * @return int New Expiration Time
      */
     public function updateExpiration($insertionAmount = 0)
     {
         $this->DVC_TOKEN_EXPIRE += $insertionAmount;
+
+        return $this->DVC_TOKEN_EXPIRE;
     }
 
     /**

@@ -147,14 +147,26 @@ abstract class InteractionModel implements InteractionInterface
      */
     protected function checkToken()
     {
-        $token = RaiseManager::getInstance()->getHandler('requestHandler')->getRequest()->query->get('token');
-
-        if (TokenManager::getInstance()->setToken($token) === false) {
-            return 0;
-        } elseif (TokenManager::getInstance()->checkToken() === false) {
-            return -1;
+        if (TokenManager::getInstance()->getToken() === null) {
+            TokenManager::getInstance()->setToken(RaiseManager::getInstance()
+                ->getHandler('requestHandler')->getRequest()->query->get('token'));
         }
 
-        return 1;
+        return TokenManager::getInstance()->checkToken();
+    }
+
+    /**
+     * This method checks if the Resource given in the HTTP Request
+     * is the same of the Resource given in the method argument.
+     *
+     * @note this is useful for Specific Interactions that works
+     * with specific Resources and Methods
+     *
+     * @param string $expectedResource
+     * @return bool If Resource is the expected Resource
+     */
+    protected function checkResource($expectedResource = '')
+    {
+        return RaiseManager::getInstance()->getHandler('requestHandler')->getResource() == $expectedResource;
     }
 }
