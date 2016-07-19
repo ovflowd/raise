@@ -20,7 +20,6 @@
 namespace UIoT\Factories;
 
 use Interfaces\FactoryInterface;
-use stdClass;
 use UIoT\Interfaces\MessageInterface;
 use UIoT\Managers\DatabaseManager;
 use UIoT\Mappers\Constants;
@@ -60,20 +59,21 @@ class MessageFactory implements FactoryInterface
         $this->addSet($raiseMessages);
     }
 
+    /**
+     * This method Collects the Data from the MySQL Response
+     * and create an unified object for each item through
+     * the MySQL GROUP BY and GROUP_CONCAT functions.
+     *
+     * @param array $databaseResponse Database Fetch Array
+     * @return array Combined Objects
+     */
     private function collectData(array $databaseResponse)
     {
-        $messageDataSet = array();
-
-        foreach ($databaseResponse as $key => $messageSet) {
-            if (!array_key_exists($messageSet->ID, $messageDataSet)) {
-                $messageDataSet[$messageSet->ID] = new stdClass();
-                $messageDataSet[$messageSet->ID]->ID = $messageSet->ID;
-            }
-
-            $messageDataSet[$messageSet->ID]->{$messageSet->NAME} = $messageSet->VALUE;
-        }
-
-        return $messageDataSet;
+        return array_map(function ($messageSet) {
+            $newValue = (object)array_combine(explode(',', $messageSet->_NAME), explode(',', $messageSet->_VALUE));
+            $newValue->ID = $messageSet->ID;
+            return $newValue;
+        }, $databaseResponse);
     }
 
     /**

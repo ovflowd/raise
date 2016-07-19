@@ -49,9 +49,9 @@ Constants::getInstance()->add('metaPropertiesQuery',
  */
 Constants::getInstance()->add('raiseMessagesQuery',
     'SELECT MESSAGES.ID, 
-      MESSAGES.NAME, 
-      MESSAGES.VALUE 
-     FROM MESSAGES');
+      GROUP_CONCAT(MESSAGES.NAME) _NAME, 
+      GROUP_CONCAT(MESSAGES.VALUE) _VALUE 
+     FROM MESSAGES GROUP BY MESSAGES.ID');
 
 /**
  * Get a specific RAISe Token Details
