@@ -19,7 +19,7 @@
 
 namespace UIoT\Interfaces;
 
-use Factories\PropertyFactory;
+use UIoT\Factories\PropertyFactory;
 
 /**
  * Interface ResourceInterface

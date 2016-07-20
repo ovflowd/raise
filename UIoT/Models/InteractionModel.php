@@ -21,6 +21,7 @@ namespace UIoT\Models;
 
 use UIoT\Interfaces\InteractionInterface;
 use UIoT\Interfaces\MessageInterface;
+use UIoT\Managers\InstructionManager;
 use UIoT\Managers\RaiseManager;
 use UIoT\Managers\TokenManager;
 
@@ -131,7 +132,7 @@ abstract class InteractionModel implements InteractionInterface
      */
     public function setMessage($messageInterface, array $templateEngine = array())
     {
-        $this->interactionMessage = RaiseManager::getInstance()->getFactory('messageFactory')->get($messageInterface,
+        $this->interactionMessage = is_object($messageInterface) ? $messageInterface : RaiseManager::getInstance()->getFactory('messageFactory')->get($messageInterface,
             $templateEngine);
     }
 
@@ -167,6 +168,26 @@ abstract class InteractionModel implements InteractionInterface
      */
     protected function checkResource($expectedResource = '')
     {
-        return RaiseManager::getInstance()->getHandler('requestHandler')->getResource() == $expectedResource;
+        return $this->getResource() == $expectedResource;
+    }
+
+    /**
+     * Get the Requested Resource to RAISe
+     *
+     * @return string
+     */
+    protected function getResource()
+    {
+        return RaiseManager::getInstance()->getHandler('requestHandler')->getResource();
+    }
+
+    /**
+     * Get the RAISe Instruction Manager
+     *
+     * @return InstructionManager
+     */
+    protected function getInstruction()
+    {
+        return InstructionManager::getInstance();
     }
 }

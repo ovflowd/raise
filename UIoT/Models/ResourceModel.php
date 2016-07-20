@@ -19,7 +19,7 @@
 
 namespace UIoT\Models;
 
-use UIOT\Factories\PropertyFactory;
+use UIoT\Factories\PropertyFactory;
 use UIoT\Interfaces\ResourceInterface;
 
 /**

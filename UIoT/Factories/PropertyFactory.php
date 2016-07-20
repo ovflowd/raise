@@ -97,6 +97,10 @@ class PropertyFactory implements FactoryInterface
         if (!array_key_exists($item->getFriendlyName(), $this->resourceProperties)) {
             $this->resourceProperties[$item->getFriendlyName()] = $item;
         }
+
+        if (!array_key_exists($item->getInternalName(), $this->resourceProperties)) {
+            $this->resourceProperties[$item->getInternalName()] = $item;
+        }
     }
 
     /**
@@ -111,7 +115,7 @@ class PropertyFactory implements FactoryInterface
      *
      * Necessary the return need be an object or array of objects.
      *
-     * @param string $item Property Friendly Name
+     * @param string $item Property Friendly Name or Internal Name
      * @param array $templateEngine
      * @return PropertyInterface|PropertyInterface[]
      */

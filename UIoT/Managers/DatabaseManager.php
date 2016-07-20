@@ -74,7 +74,7 @@ class DatabaseManager
      * @param array $preparedStatements Array with Prepared Statements
      * @return PDOStatement Executed Statement
      */
-    public function query($queryString, array $preparedStatements)
+    public function query($queryString, array $preparedStatements = array())
     {
         $statement = $this->getHandler()->getConnection()->prepare($queryString);
         $statement->execute($preparedStatements);

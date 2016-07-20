@@ -94,17 +94,21 @@ class TokenManager
 
     /**
      * Insert a Token in the Database
+     * And get the Created Token
      *
      * @param int $deviceId Device Identification
+     * @return string
      */
     public function createToken($deviceId = 0)
     {
         DatabaseManager::getInstance()->query(Constants::getInstance()->get('addTokenQuery'), [
             ':DVC_ID' => $deviceId,
-            ':DVC_TOKEN' => Security::getInstance()->generateSha1(),
+            ':DVC_TOKEN' => $tokenHash = Security::getInstance()->generateSha1(),
             ':DVC_TOKEN_EXPIRE' => Time::getInstance()->getTime() +
                 SettingsManager::getInstance()->getItem('security')->__get('tokenExpirationTime')
         ]);
+
+        return $tokenHash;
     }
 
     /**

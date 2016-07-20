@@ -28,3 +28,10 @@ use UIoT\Managers\InteractionManager as Interaction;
  * used to search Resource Items
  */
 Interaction::getInstance()->add('SearchInteraction', 'GET');
+
+/**
+ * Add Insert Interaction
+ *
+ * used to Insert Resource Items
+ */
+Interaction::getInstance()->add('InsertInteraction', 'POST');
