@@ -163,7 +163,15 @@ class InstructionFactory implements FactoryInterface
         $newArray = array();
 
         foreach (array_diff_key($this->queryString->all(), $valuesToRemove) as $property => $value) {
-            $newArray[$this->resourceModel->getProperties()->get($property)->getInternalName()] = $value;
+            $item = $this->resourceModel->getProperties()->get($property);
+
+            if (!is_object($item)) {
+                RaiseManager::getInstance()->getHandler('responseHandler')->endExecution(RaiseManager::getInstance()->getFactory('messageFactory')->get('UnexistentArgument', [
+                    'argument' => $property
+                ]));
+            }
+
+            $newArray[$item->getInternalName()] = $value;
         }
 
         return $newArray;
@@ -180,7 +188,13 @@ class InstructionFactory implements FactoryInterface
             default:
                 return $this->setType()->setColumns($this->getProperties());
             case 'POST':
-                return $this->setType()->setValues($this->getValues(['token' => '', 'id' => '']));
+                $values = $this->getValues(['token' => '', 'id' => '']);
+
+                if (empty(array_filter($values))) {
+                    RaiseManager::getInstance()->getHandler('responseHandler')->endExecution(RaiseManager::getInstance()->getFactory('messageFactory')->get('EmptyArguments'));
+                }
+
+                return $this->setType()->setValues($values);
             case 'PUT':
                 return $this->setType()->setValues($this->getValues(['token' => '', 'id' => '']));
             case 'DELETE':

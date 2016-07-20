@@ -69,6 +69,8 @@ class RequestHandler
      */
     public function getResource()
     {
-        return strstr(str_replace('/', '', $this->getRequest()->getRequestUri()), '?', true);
+        $resourceString = str_replace('/', '', $this->getRequest()->getRequestUri());
+        
+        return strpos($resourceString, '?') !== false ? strstr($resourceString, '?', true) : $resourceString;
     }
 }

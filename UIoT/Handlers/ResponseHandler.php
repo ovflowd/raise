@@ -70,6 +70,22 @@ class ResponseHandler
     }
 
     /**
+     * End Execution By Error Code
+     *
+     * @param MessageInterface $message
+     */
+    public function endExecution(MessageInterface $message)
+    {
+        $this->setMessage($message);
+
+        $this->getResponse()->sendHeaders();
+
+        echo $this->getResponse()->getContent();
+
+        exit();
+    }
+
+    /**
      * Used to set the HTTP Response Content
      * as an RAISe Message (object)
      *
