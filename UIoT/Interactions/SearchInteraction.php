@@ -25,7 +25,7 @@ use UIoT\Models\InteractionModel;
  * Class SearchInteraction
  * @package UIoT\Interactions
  */
-class SearchInteraction extends InteractionModel
+final class SearchInteraction extends InteractionModel
 {
     /**
      * Does the Interactions Business Logic
@@ -50,10 +50,23 @@ class SearchInteraction extends InteractionModel
      *
      * @return void
      */
-    public function executeProcess()
+    public function execute()
     {
         if ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
         }
+    }
+
+    /**
+     * Method that prepares the Business Logic
+     * checking if all checks passes
+     *
+     * Return if passed or not.
+     *
+     * @return bool
+     */
+    public function prepare()
+    {
+        return true;
     }
 }

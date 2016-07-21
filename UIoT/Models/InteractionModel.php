@@ -19,8 +19,8 @@
 
 namespace UIoT\Models;
 
+use Symfony\Component\HttpFoundation\Request;
 use UIoT\Interfaces\InteractionInterface;
-use UIoT\Interfaces\MessageInterface;
 use UIoT\Managers\InstructionManager;
 use UIoT\Managers\RaiseManager;
 use UIoT\Managers\TokenManager;
@@ -31,14 +31,6 @@ use UIoT\Managers\TokenManager;
  */
 abstract class InteractionModel implements InteractionInterface
 {
-    /**
-     * The Message Result of the Interaction Process
-     * @note the Message can be null if the Response is a set of Data
-     *
-     * @var MessageInterface
-     */
-    protected $interactionMessage;
-
     /**
      * The Content Data of the Interaction Process
      * @note the Data can be empty if the Response isn't a Data Set
@@ -65,19 +57,6 @@ abstract class InteractionModel implements InteractionInterface
     public function __construct($httpMethod)
     {
         $this->interactionMethod = $httpMethod;
-        $this->interactionMessage = null;
-    }
-
-    /**
-     * Used to return the result of the business logic
-     * Necessary is a MessageInterface the result.
-     * Since the Interactions returns the Message Results
-     *
-     * @return MessageInterface
-     */
-    public function getMessage()
-    {
-        return $this->interactionMessage;
     }
 
     /**
@@ -108,7 +87,17 @@ abstract class InteractionModel implements InteractionInterface
      *
      * @return void
      */
-    public abstract function executeProcess();
+    public abstract function execute();
+
+    /**
+     * Method that prepares the Business Logic
+     * checking if all checks passes
+     *
+     * Return if passed or not.
+     *
+     * @return bool
+     */
+    public abstract function prepare();
 
     /**
      * Used to Return the HTTP Method that the Interaction
@@ -126,14 +115,23 @@ abstract class InteractionModel implements InteractionInterface
      * Necessary is a MessageInterface the result.
      * Since the Interactions returns the Message Results
      *
-     * @param string $messageInterface Message Interface to be Set
+     * @param string $message Message Interface to be Set
      * @param array $templateEngine Template Engine Fields
      * @return void
      */
-    public function setMessage($messageInterface, array $templateEngine = array())
+    public function setMessage($message, array $templateEngine = array())
     {
-        $this->interactionMessage = is_object($messageInterface) ? $messageInterface : RaiseManager::getInstance()->getFactory('messageFactory')->get($messageInterface,
-            $templateEngine);
+        RaiseManager::getHandler('response')->setMessage($message, $templateEngine);
+    }
+
+    /**
+     * Get the HTTP Request Interface
+     *
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return RaiseManager::getHandler('request')->getRequest();
     }
 
     /**
@@ -149,8 +147,7 @@ abstract class InteractionModel implements InteractionInterface
     protected function checkToken()
     {
         if (TokenManager::getInstance()->getToken() === null) {
-            TokenManager::getInstance()->setToken(RaiseManager::getInstance()
-                ->getHandler('requestHandler')->getRequest()->query->get('token'));
+            TokenManager::getInstance()->setToken(RaiseManager::getHandler('request')->getRequest()->query->get('token'));
         }
 
         return TokenManager::getInstance()->checkToken();
@@ -168,17 +165,17 @@ abstract class InteractionModel implements InteractionInterface
      */
     protected function checkResource($expectedResource = '')
     {
-        return $this->getResource() == $expectedResource;
+        return $this->getResource()->getFriendlyName() == $expectedResource;
     }
 
     /**
      * Get the Requested Resource to RAISe
      *
-     * @return string
+     * @return ResourceModel
      */
     protected function getResource()
     {
-        return RaiseManager::getInstance()->getHandler('requestHandler')->getResource();
+        return RaiseManager::getHandler('request')->getResource();
     }
 
     /**

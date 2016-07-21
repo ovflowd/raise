@@ -19,8 +19,8 @@
 
 namespace UIoT\Factories;
 
-use Interfaces\FactoryInterface;
 use NilPortugues\Sql\QueryBuilder\Builder\MySqlBuilder;
+use NilPortugues\Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
 use NilPortugues\Sql\QueryBuilder\Manipulation\Insert;
 use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
 use NilPortugues\Sql\QueryBuilder\Manipulation\Update;
@@ -29,12 +29,13 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use UIoT\Interfaces\PropertyInterface;
 use UIoT\Interfaces\ResourceInterface;
 use UIoT\Managers\RaiseManager;
+use UIoT\Models\FactoryModel;
 
 /**
  * Class InstructionFactory
  * @package UIoT\Factories
  */
-class InstructionFactory implements FactoryInterface
+class InstructionFactory extends FactoryModel
 {
     /**
      * MySQL Instruction Builder Instance
@@ -44,24 +45,37 @@ class InstructionFactory implements FactoryInterface
      *
      * @var MySqlBuilder
      */
-    private $instructionBuilder;
+    private $builder;
 
     /**
+     * The Query Type is matched
+     * by the HTTP Request Method
+     *
      * @var string
      */
-    private $queryType;
+    private $type;
 
     /**
+     * This property contains the HTTP
+     * Request Query String following the
+     * IETF RFC 3986
+     *
+     * @see https://tools.ietf.org/html/rfc3986
+     *
      * @var ParameterBag
      */
-    private $queryString;
+    private $query;
 
     /**
+     * The Resource Model of the Requested RAISe Resource
+     *
      * @var ResourceInterface|ResourceInterface[]
      */
-    private $resourceModel;
+    private $resource;
 
     /**
+     * Contains the Manipulations of the SQL Builder
+     *
      * @var Select|Insert|Update
      */
     private $instruction;
@@ -74,7 +88,7 @@ class InstructionFactory implements FactoryInterface
      */
     public function __construct()
     {
-        $this->instructionBuilder = new MySqlBuilder;
+        $this->builder = new MySqlBuilder;
     }
 
     /**
@@ -85,20 +99,7 @@ class InstructionFactory implements FactoryInterface
      */
     public function getInstruction()
     {
-        return $this->instructionBuilder->write($this->execute());
-    }
-
-    /**
-     * Get SQL Instruction Prepared Statements
-     * Arguments to be used in Prepared Statement
-     *
-     * @return array
-     */
-    public function getStatement()
-    {
-        $this->execute();
-
-        return $this->instructionBuilder->getValues();
+        return $this->builder->write($this->execute());
     }
 
     /**
@@ -110,10 +111,9 @@ class InstructionFactory implements FactoryInterface
     private function execute()
     {
         if ($this->instruction === null) {
-            $this->queryType = RaiseManager::getInstance()->getHandler('requestHandler')->getRequest()->getMethod();
-            $this->queryString = RaiseManager::getInstance()->getHandler('requestHandler')->getRequest()->query;
-            $this->resourceModel = RaiseManager::getInstance()->getFactory('resourceFactory')->get(
-                RaiseManager::getInstance()->getHandler('requestHandler')->getResource());
+            $this->type = RaiseManager::getHandler('request')->getRequest()->getMethod();
+            $this->query = RaiseManager::getHandler('request')->getRequest()->query;
+            $this->resource = RaiseManager::getHandler('request')->getResource();
             $this->instruction = $this->setCriteria();
         }
 
@@ -121,20 +121,69 @@ class InstructionFactory implements FactoryInterface
     }
 
     /**
+     * Set the Criteria of the SQL Instruction
+     *
+     * @return Select|Insert|Update SQL Instruction
+     */
+    private function setCriteria()
+    {
+        switch ($this->type) {
+            case 'GET':
+                return $this->getCriteria($this->setColumns()->where(), $this->getValues());
+            case 'POST':
+                return $this->setColumns();
+            default:
+                return $this->getCriteria($this->setColumns()->where(), ['ID' => $this->query->get('id')]);
+        }
+    }
+
+    /**
+     * Applies a Criteria in the SQL Instruction
+     *
+     * @param Where $where Where Operator
+     * @param array $criteria SQL Criteria
+     * @return Where|Insert|Update|Select Final Operator
+     */
+    private function getCriteria(Where $where, array $criteria)
+    {
+        foreach ($criteria as $property => $value) {
+            $where->equals($property, $value);
+        }
+
+        return $where;
+    }
+
+    /**
+     * Set the Columns or the Values of the SQL Instruction
+     *
+     * @return Select|Insert|Update|AbstractBaseQuery SQL Instruction
+     */
+    private function setColumns()
+    {
+        switch ($this->type) {
+            CASE 'GET':
+                return $this->setType()->setColumns($this->getProperties());
+            case 'DELETE':
+                return $this->setType()->setValues(['DELETED' => 1]);
+            default:
+                return $this->setType()->setValues($this->getValues(['token' => '', 'id' => '']));
+        }
+    }
+
+    /**
      * Set SQL Instruction Statement Type
      *
-     * @return Select|Insert|Update
+     * @return Select|Insert|Update|AbstractBaseQuery
      */
     private function setType()
     {
-        switch ($this->queryType) {
-            default:
-                return $this->instructionBuilder->select()->setTable($this->resourceModel->getInternalName());
+        switch ($this->type) {
+            case 'GET':
+                return $this->builder->select()->setTable($this->resource->getInternalName());
             case 'POST':
-                return $this->instructionBuilder->insert()->setTable($this->resourceModel->getInternalName());
-            case 'PUT':
-            case 'DELETE':
-                return $this->instructionBuilder->update()->setTable($this->resourceModel->getInternalName());
+                return $this->builder->insert()->setTable($this->resource->getInternalName());
+            default:
+                return $this->builder->update()->setTable($this->resource->getInternalName());
         }
     }
 
@@ -148,7 +197,7 @@ class InstructionFactory implements FactoryInterface
         return array_map(function ($property) {
             /** @var $property PropertyInterface */
             return $property->getInternalName();
-        }, $this->resourceModel->getProperties()->getAll());
+        }, $this->resource->getProperties()->getAll());
     }
 
     /**
@@ -160,148 +209,25 @@ class InstructionFactory implements FactoryInterface
      */
     private function getValues(array $valuesToRemove = array())
     {
-        $newArray = array();
+        $values = array();
 
-        foreach (array_diff_key($this->queryString->all(), $valuesToRemove) as $property => $value) {
-            $item = $this->resourceModel->getProperties()->get($property);
-
-            if (!is_object($item)) {
-                RaiseManager::getInstance()->getHandler('responseHandler')->endExecution(RaiseManager::getInstance()->getFactory('messageFactory')->get('UnexistentArgument', [
-                    'argument' => $property
-                ]));
-            }
-
-            $newArray[$item->getInternalName()] = $value;
+        foreach (array_diff_key($this->query->all(), $valuesToRemove) as $property => $value) {
+            $values[$this->resource->getProperties()->get($property)->getInternalName()] = $value;
         }
 
-        return $newArray;
+        return $values;
     }
 
     /**
-     * Set the Columns or the Values of the SQL Instruction
+     * Get SQL Instruction Prepared Statements
+     * Arguments to be used in Prepared Statement
      *
-     * @return Select|Insert|Update SQL Instruction
+     * @return array
      */
-    private function setColumns()
+    public function getStatement()
     {
-        switch ($this->queryType) {
-            default:
-                return $this->setType()->setColumns($this->getProperties());
-            case 'POST':
-                $values = $this->getValues(['token' => '', 'id' => '']);
+        $this->execute();
 
-                if (empty(array_filter($values))) {
-                    RaiseManager::getInstance()->getHandler('responseHandler')->endExecution(RaiseManager::getInstance()->getFactory('messageFactory')->get('EmptyArguments'));
-                }
-
-                return $this->setType()->setValues($values);
-            case 'PUT':
-                return $this->setType()->setValues($this->getValues(['token' => '', 'id' => '']));
-            case 'DELETE':
-                return $this->setType()->setValues(['DELETED' => 1]);
-        }
-    }
-
-    /**
-     * Applies a Criteria in the SQL Instruction
-     *
-     * @param Where $where Where Operator
-     * @param array $criteria SQL Criteria
-     * @return Where Final Operator
-     */
-    private function getCriteria(Where $where, array $criteria)
-    {
-        foreach ($criteria as $property => $value) {
-            $where->equals($property, $value);
-        }
-
-        return $where;
-    }
-
-    /**
-     * Set the Criteria of the SQL Instruction
-     *
-     * @return Select|Insert|Update SQL Instruction
-     */
-    private function setCriteria()
-    {
-        switch ($this->queryType) {
-            default:
-                return $this->getCriteria($this->setColumns()->where(), $this->getValues());
-            case 'POST':
-                return $this->setColumns();
-            case 'PUT':
-            case 'DELETE':
-                return $this->getCriteria($this->setColumns()->where(), ['ID' => $this->queryString->get('id')]);
-        }
-    }
-
-    /**
-     * Add a RAISE Model in the Factory Data
-     *
-     * Necessary the parameter must be an object.
-     * And normally the Factory will in the constructor
-     * add the items.
-     *
-     * @note The objects need be a RAISE Model
-     * @deprecated Method not used
-     *
-     * @param object $item
-     * @return void
-     */
-    public function add($item)
-    {
-        // Unused Method
-    }
-
-    /**
-     * Add a set of RAISE Models in the Factory Data
-     *
-     * Necessary the parameter must be an array of objects.
-     * And normally the Factory will in the constructor
-     * add the items.
-     *
-     * @note The objects need be a RAISE Model
-     * @deprecated Method not used
-     *
-     * @param object[] $items
-     * @return void
-     */
-    public function addSet(array $items)
-    {
-        // Unused Method
-    }
-
-    /**
-     * This method returns an item by his identifier.
-     * Normally the Factory will receive the string,
-     * and route (do) the search in his Data with a specific
-     * rule from the Factory.
-     *
-     * The templateEngine variable is useful when the Router need
-     * optional parameters. In the case of MessageFactory, the templateEngine
-     * parameter is used to populate variables into values passed by parameter.
-     *
-     * Necessary the return need be an object or array of objects.
-     * @deprecated Method not used
-     *
-     * @param string $item
-     * @param array $templateEngine
-     * @return object|object[]
-     */
-    public function get($item, array $templateEngine = array())
-    {
-        // Unused Method
-    }
-
-    /**
-     * This method returns all set of Data stored in the Factory
-     * @deprecated Method not used
-     *
-     * @return object[]|object
-     */
-    public function getAll()
-    {
-        // Unused Method
+        return $this->builder->getValues();
     }
 }

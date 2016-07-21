@@ -30,77 +30,65 @@ use UIoT\Handlers\ResponseHandler;
  * Class RaiseManager
  * @package UIoT\Managers
  */
-class RaiseManager
+final class RaiseManager
 {
     /**
+     * RAISe Request Handler
+     *
      * @var RequestHandler
      */
-    private $requestHandler;
+    protected static $request;
 
     /**
+     * RAISe Response Handler
+     *
      * @var ResponseHandler
      */
-    private $responseHandler;
+    protected static $response;
 
     /**
+     * RAISe Resource Factory
+     *
      * @var ResourceFactory
      */
-    private $resourceFactory;
+    protected static $resource;
 
     /**
+     * RAISe Message Factory
+     *
      * @var MessageFactory
      */
-    private $messageFactory;
+    protected static $message;
 
     /**
+     * RAISe Instruction Factory
+     *
      * @var InstructionFactory
      */
-    private $instructionFactory;
+    protected static $instruction;
 
     /**
      * Instantiate all RAISe Components
      */
-    protected function __construct()
+    public function __construct()
     {
-        $this->getFactory('messageFactory', new MessageFactory);
-        $this->getHandler('requestHandler', new RequestHandler);
-        $this->getHandler('responseHandler', new ResponseHandler);
-        $this->getFactory('resourceFactory', new ResourceFactory);
-        $this->getFactory('instructionFactory', new InstructionFactory);
+        self::getFactory('message', new MessageFactory);
+        self::getFactory('resource', new ResourceFactory);
+        self::getHandler('request', new RequestHandler);
+        self::getHandler('response', new ResponseHandler);
+        self::getFactory('instruction', new InstructionFactory);
     }
 
     /**
      * Get a RAISe Factory or Handler
      *
      * @param string $raiseComponent RAISe Component Name
-     * @param FactoryInterface|null $classToInstantiate Factory to Instantiate if Necessary
-     * @return FactoryInterface
+     * @param FactoryInterface $classToInstantiate Factory to Instantiate if Necessary
+     * @return InstructionFactory|MessageFactory|ResourceFactory
      */
-    public function getFactory($raiseComponent, FactoryInterface $classToInstantiate = null)
+    public static function getFactory($raiseComponent, FactoryInterface $classToInstantiate = null)
     {
-        if (null === $this->{$raiseComponent}) {
-            $this->{$raiseComponent} = $classToInstantiate;
-        }
-
-        return $this->{$raiseComponent};
-    }
-
-    /**
-     * Get a RAISe Factory or Handler
-     *
-     * @param string $raiseComponent RAISe Component Name
-     * @param ResponseHandler|RequestHandler $classToInstantiate Class to Instantiate if Necessary
-     * @return RequestHandler|ResponseHandler
-     */
-    public function getHandler($raiseComponent, $classToInstantiate = null)
-    {
-        if (null === $this->{$raiseComponent}) {
-            if ($classToInstantiate instanceof RequestHandler || $classToInstantiate instanceof ResponseHandler) {
-                $this->{$raiseComponent} = $classToInstantiate;
-            }
-        }
-
-        return $this->{$raiseComponent};
+        return null === self::${$raiseComponent} ? self::${$raiseComponent} = $classToInstantiate : self::${$raiseComponent};
     }
 
     /**
@@ -110,47 +98,42 @@ class RaiseManager
      */
     public static function startRaise()
     {
-        /* first instantiate RaiseManager and after this
-            execute RAISe Interaction */
-        self::getInstance()->executeInteraction();
+        /* Set RAISe Resource */
+        self::getHandler('request')->setResource();
 
-        /* set HTTP Headers from HTTP Response Interface */
-        self::getInstance()->getHandler('responseHandler')->getResponse()->sendHeaders();
+        /* Executes Requested Generic RAISe Interaction */
+        self::executeInteraction();
 
-        /* get HTTP Response Interface Content */
-        return self::getInstance()->getHandler('responseHandler')->getResponse()->getContent();
+        /* Send RAISe Message Back to Client */
+        return self::getHandler('response')->sendResponse();
+    }
+
+    /**
+     * Get a RAISe Factory or Handler
+     *
+     * @param string $raiseComponent RAISe Component Name
+     * @param ResponseHandler|RequestHandler $classToInstantiate Class to Instantiate if Necessary
+     * @return RequestHandler|ResponseHandler
+     */
+    public static function getHandler($raiseComponent, $classToInstantiate = null)
+    {
+        return null === self::${$raiseComponent} &&
+        ($classToInstantiate instanceof RequestHandler || $classToInstantiate instanceof ResponseHandler) ?
+            self::${$raiseComponent} = $classToInstantiate : self::${$raiseComponent};
     }
 
     /**
      * Execute's RAISe Interaction Procedures
      */
-    public function executeInteraction()
+    public static function executeInteraction()
     {
         /* check if Request is to DocumentRoot, if yes Welcome Message is triggered */
-        if ($this->getHandler('requestHandler')->getRequest()->getRequestUri() == '/') {
-            $this->getHandler('responseHandler')->setMessage($this->getFactory('messageFactory')->get('WelcomeToRaise'));
-
-            return;
+        if (self::getHandler('request')->getRequest()->getRequestUri() == '/') {
+            self::getHandler('response')->setMessage('WelcomeToRaise');
         }
 
         /* in other way executes the Interaction */
-        $this->getHandler('responseHandler')->executeInteraction(InteractionManager::getInstance()->getByMethod(
-            $this->getHandler('requestHandler')->getRequest()->getMethod()));
-    }
-
-    /**
-     * Get RAISe Manager Instance
-     *
-     * @return RaiseManager
-     */
-    public static function getInstance()
-    {
-        static $instance = null;
-
-        if (null === $instance) {
-            $instance = new static();
-        }
-
-        return $instance;
+        self::getHandler('response')->executeInteraction(InteractionManager::getInstance()->getByMethod(
+            self::getHandler('request')->getRequest()->getMethod()));
     }
 }

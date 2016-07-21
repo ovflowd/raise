@@ -81,7 +81,7 @@ class PropertyFactory implements FactoryInterface
     }
 
     /**
-     * Add a RAISE Model in the Factory Data
+     * Add a RAISE Resource Property Model in the Factory Data
      *
      * Necessary the parameter must be an object.
      * And normally the Factory will in the constructor
@@ -97,10 +97,6 @@ class PropertyFactory implements FactoryInterface
         if (!array_key_exists($item->getFriendlyName(), $this->resourceProperties)) {
             $this->resourceProperties[$item->getFriendlyName()] = $item;
         }
-
-        if (!array_key_exists($item->getInternalName(), $this->resourceProperties)) {
-            $this->resourceProperties[$item->getInternalName()] = $item;
-        }
     }
 
     /**
@@ -115,14 +111,28 @@ class PropertyFactory implements FactoryInterface
      *
      * Necessary the return need be an object or array of objects.
      *
-     * @param string $item Property Friendly Name or Internal Name
+     * @param string $item Property Friendly Name
      * @param array $templateEngine
      * @return PropertyInterface|PropertyInterface[]
      */
     public function get($item, array $templateEngine = array())
     {
-        return array_key_exists($item, $this->resourceProperties) ?
-            $this->resourceProperties[$item] : null;
+        return $this->resourceProperties[$item];
+    }
+
+    /**
+     * Get an array set of Properties which matches
+     * a certain Optionality Criteria
+     *
+     * @param bool $optional Property Optionality
+     * @return PropertyModel[] Properties with Desired Optionality
+     */
+    public function getByOptionality($optional = false)
+    {
+        return array_filter($this->getAll(), function ($property) use ($optional) {
+            /** @var $property PropertyInterface */
+            return $property->getOptionality() == $optional;
+        });
     }
 
     /**

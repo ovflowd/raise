@@ -19,7 +19,6 @@
 
 namespace UIoT\Models;
 
-use stdClass;
 use UIoT\Interfaces\MessageInterface;
 
 /**
@@ -137,15 +136,6 @@ final class MessageModel implements MessageInterface
      */
     public function __getResult()
     {
-        $message = new stdClass();
-
-        foreach ($this as $property => $value) {
-            if ($property == 'ID') {
-                continue;
-            }
-            $message->{$property} = $value;
-        }
-
-        return $message;
+        return (object)array_diff_key((array)$this, ['ID' => '']);
     }
 }

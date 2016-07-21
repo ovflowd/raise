@@ -90,7 +90,7 @@ class DatabaseManager
     public function getHandler()
     {
         if (null === $this->databaseHandler) {
-            $this->databaseHandler = new DatabaseHandler();
+            $this->databaseHandler = new DatabaseHandler;
             $this->databaseHandler->connect();
         }
 

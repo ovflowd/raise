@@ -84,4 +84,15 @@ interface PropertyInterface
      * @return string
      */
     public function getFriendlyName();
+
+    /**
+     * Get the Property Optionality
+     * That means if the Property its an optional property
+     * or a required property.
+     *
+     * true if is optional, false if isn't
+     *
+     * @return boolean
+     */
+    public function getOptionality();
 }

@@ -19,7 +19,7 @@
 
 namespace UIoT\Models\Settings;
 
-use UIoT\Interfaces\SettingsInterface;
+use UIoT\Models\SettingsModel;
 
 /**
  * Class SecuritySettingsModel
@@ -29,7 +29,7 @@ use UIoT\Interfaces\SettingsInterface;
  *
  * @package UIoT\Models\Settings
  */
-final class SecuritySettingsModel implements SettingsInterface
+final class SecuritySettingsModel extends SettingsModel
 {
     /**
      * Token Expiration Time
@@ -50,19 +50,6 @@ final class SecuritySettingsModel implements SettingsInterface
      * @var int
      */
     public $tokenUpdateTime = 3600;
-
-    /**
-     * This method returns a specific variable from the Setting Block
-     * Settings blocks are static file Models created manually, and
-     * can't be changed.
-     *
-     * @param string $variableName Variable that want to Get
-     * @return mixed
-     */
-    public function __get($variableName)
-    {
-        return $this->{$variableName};
-    }
 
     /**
      * This method returns the unique identification of the Block Name

@@ -70,9 +70,9 @@ class MessageFactory implements FactoryInterface
     private function collectData(array $databaseResponse)
     {
         return array_map(function ($messageSet) {
-            $newValue = (object)array_combine(explode(',', $messageSet->_NAME), explode(',', $messageSet->_VALUE));
-            $newValue->ID = $messageSet->ID;
-            return $newValue;
+            $class = (object)array_combine(explode(',', $messageSet->_NAME), explode(',', $messageSet->_VALUE));
+            $class->ID = $messageSet->ID;
+            return $class;
         }, $databaseResponse);
     }
 

@@ -56,6 +56,13 @@ final class PropertyModel implements PropertyInterface
     public $PROP_FRIENDLY_NAME;
 
     /**
+     * Property Optionality
+     *
+     * @var int
+     */
+    public $PROP_OPTIONAL;
+
+    /**
      * Return the unique Database Property Identification <ID>
      *
      * The Property Id does'nt have any relations with other tables.
@@ -117,5 +124,19 @@ final class PropertyModel implements PropertyInterface
     public function getFriendlyName()
     {
         return $this->PROP_FRIENDLY_NAME;
+    }
+
+    /**
+     * Get the Property Optionality
+     * That means if the Property its an optional property
+     * or a required property.
+     *
+     * true if is optional, false if isn't
+     *
+     * @return boolean
+     */
+    public function getOptionality()
+    {
+        return $this->PROP_OPTIONAL == '1';
     }
 }

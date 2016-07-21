@@ -51,22 +51,45 @@ class InsertInteraction extends InteractionModel
      *
      * @return void
      */
-    public function executeProcess()
+    public function execute()
     {
-        if ($this->checkToken() !== 1 && !$this->checkResource('devices')) {
+        if ($this->checkResource('devices')) {
+            $this->getInstruction()->execute();
+            $this->setMessage('TokenInsertion', [
+                'item_id' => $last = $this->getInstruction()->getInsertId(),
+                'token' => TokenManager::getInstance()->createToken($last)
+            ]);
+        } elseif ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
-        } elseif ($this->checkResource('devices')) {
-            $message = $this->getInstruction()->execute();
-
-            if ($message === null) {
-                $this->setMessage('TokenInsertion', [
-                    'item_id' => $this->getInstruction()->getInsertId(),
-                    'token' => TokenManager::getInstance()->createToken($this->getInstruction()->getInsertId())
-                ]);
-            } else {
-                $this->setMessage($message);
-            }
-
         }
+    }
+
+    /**
+     * Method that prepares the Business Logic
+     * checking if all checks passes
+     *
+     * Return if passed or not.
+     *
+     * @return bool
+     */
+    public function prepare()
+    {
+        $unexistent = array_diff_key($this->getRequest()->query->all(),
+            $this->getResource()->getProperties()->getAll());
+
+        if (!empty($unexistent)) {
+            $this->setMessage('UnexistentArgument', ['argument' => reset(array_keys($unexistent))]);
+            return false;
+        }
+
+        $optional = array_diff(array_keys($this->getResource()->getProperties()->getByOptionality()),
+            array_keys($this->getRequest()->query->all()));
+
+        if (!empty($optional)) {
+            $this->setMessage('RequiredArgument', ['argument' => reset($optional)]);
+            return false;
+        }
+
+        return true;
     }
 }

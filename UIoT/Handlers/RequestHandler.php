@@ -19,7 +19,10 @@
 
 namespace UIoT\Handlers;
 
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
+use UIoT\Managers\RaiseManager;
+use UIoT\Models\ResourceModel;
 
 /**
  * Class RequestHandler
@@ -35,6 +38,13 @@ class RequestHandler
     private $httpRequest;
 
     /**
+     * RAISe Requested Resource
+     *
+     * @var ResourceModel
+     */
+    private $requestedResource;
+
+    /**
      * Instantiate the Symfony HTTP Request Interface
      * by Apache's (or used web server) globals parameters
      *
@@ -42,13 +52,15 @@ class RequestHandler
      */
     public function __construct()
     {
+        /* set the Symfony's HTTP Request */
         $this->httpRequest = Request::createFromGlobals();
 
         /* check if RAISe is being executed in Document Root, if not terminate execution. */
         if (!empty($this->getRequest()->getBasePath())) {
-            die('<h2>RAISe need to be executed in your server\'s Document Root</h2>
-                    This happens because <b>RAISe</b> is an Application Service Server');
+            throw new InvalidArgumentException('<h2>RAISe need to be executed in your server\'s Document Root</h2>');
         }
+
+        $this->setResource();
     }
 
     /**
@@ -62,15 +74,35 @@ class RequestHandler
     }
 
     /**
-     * Return the Requested RAISe Resource Friendly Name
-     * Getting it by the HTTP Request
+     * Set RAISe Requested Resource
+     * Resource Model by the HTTP Request Requested Uri
      *
-     * @return string RAISe Resource Name
+     * @note A string manipulation is applied since php's
+     * function strstr will return null if the desired match
+     * isn't present.
+     */
+    public function setResource()
+    {
+        /* get resource string from requested url */
+        $resourceString = str_replace('/', '', $this->getRequest()->getRequestUri());
+
+        /* stores resource model applying the string manipulation */
+        $this->requestedResource = RaiseManager::getFactory('resource')->get(strpos($resourceString,
+            '?') !== false ? strstr($resourceString, '?', true) : $resourceString);
+    }
+
+    /**
+     * Get RAISe Requested Resource
+     *
+     * @note only one Resource can be requested
+     * by a single HTTP Request. The Requested
+     * resource is the Resource that will be used
+     * during the instance of this Request
+     *
+     * @return ResourceModel
      */
     public function getResource()
     {
-        $resourceString = str_replace('/', '', $this->getRequest()->getRequestUri());
-        
-        return strpos($resourceString, '?') !== false ? strstr($resourceString, '?', true) : $resourceString;
+        return $this->requestedResource;
     }
 }

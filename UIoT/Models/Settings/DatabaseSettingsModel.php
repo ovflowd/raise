@@ -19,7 +19,7 @@
 
 namespace UIoT\Models\Settings;
 
-use UIoT\Interfaces\SettingsInterface;
+use UIoT\Models\SettingsModel;
 
 /**
  * Class DatabaseSettingsModel
@@ -29,7 +29,7 @@ use UIoT\Interfaces\SettingsInterface;
  *
  * @package UIoT\Models\Settings
  */
-final class DatabaseSettingsModel implements SettingsInterface
+final class DatabaseSettingsModel extends SettingsModel
 {
     /**
      * Connection Host for MySQL
@@ -65,19 +65,6 @@ final class DatabaseSettingsModel implements SettingsInterface
      * @var string
      */
     public $connDataBase = 'UIOT';
-
-    /**
-     * This method returns a specific variable from the Setting Block
-     * Settings blocks are static file Models created manually, and
-     * can't be changed.
-     *
-     * @param string $variableName Variable that want to Get
-     * @return mixed
-     */
-    public function __get($variableName)
-    {
-        return $this->{$variableName};
-    }
 
     /**
      * This method returns the unique identification of the Block Name

@@ -45,20 +45,11 @@ interface InteractionInterface
      * Necessary is a MessageInterface the result.
      * Since the Interactions returns the Message Results
      *
-     * @return MessageInterface
-     */
-    public function getMessage();
-
-    /**
-     * Used to return the result of the business logic
-     * Necessary is a MessageInterface the result.
-     * Since the Interactions returns the Message Results
-     *
-     * @param string $messageInterface Message Interface to be Set
+     * @param string $message Message Interface to be Set
      * @param array $templateEngine Template Engine Fields
      * @return void
      */
-    public function setMessage($messageInterface, array $templateEngine = array());
+    public function setMessage($message, array $templateEngine = array());
 
     /**
      * Used to Return the HTTP Method that the Interaction

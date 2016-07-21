@@ -21,7 +21,7 @@ namespace UIoT\Handlers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use UIoT\Interfaces\MessageInterface;
+use UIoT\Managers\RaiseManager;
 use UIoT\Models\InteractionModel;
 
 /**
@@ -38,6 +38,13 @@ class ResponseHandler
     private $httpResponse;
 
     /**
+     * If Message was Defined
+     *
+     * @var bool
+     */
+    private $messageDefined = false;
+
+    /**
      * Instantiate Symfony HTTP Foundation's JsonResponse
      * using Symfony's HTTP Foundation Request
      *
@@ -45,7 +52,7 @@ class ResponseHandler
      */
     public function __construct()
     {
-        $this->httpResponse = new JsonResponse();
+        $this->httpResponse = new JsonResponse;
         $this->httpResponse->prepare(Request::createFromGlobals());
         $this->httpResponse->setEncodingOptions(JSON_PRETTY_PRINT);
     }
@@ -59,41 +66,27 @@ class ResponseHandler
      */
     public function executeInteraction(InteractionModel $interaction)
     {
-        /* executes the Interaction process */
-        $interaction->executeProcess();
+        /* Executes the Interaction process */
+        if (!$interaction->prepare()) {
+            return;
+        }
 
-        if ($interaction->getMessage() !== null) {
-            $this->setMessage($interaction->getMessage());
-        } elseif ($interaction->getData() !== null) {
+        $interaction->execute();
+
+        if ($interaction->getData() !== null) {
             $this->setData($interaction->getData());
         }
     }
 
     /**
-     * End Execution By Error Code
-     *
-     * @param MessageInterface $message
-     */
-    public function endExecution(MessageInterface $message)
-    {
-        $this->setMessage($message);
-
-        $this->getResponse()->sendHeaders();
-
-        echo $this->getResponse()->getContent();
-
-        exit();
-    }
-
-    /**
      * Used to set the HTTP Response Content
-     * as an RAISe Message (object)
+     * as an jSON Data Set (array)
      *
-     * @param MessageInterface $message
+     * @param array $raiseData
      */
-    public function setMessage(MessageInterface $message)
+    public function setData(array $raiseData)
     {
-        $this->getResponse()->setData($message->__getResult());
+        $this->getResponse()->setData($raiseData);
     }
 
     /**
@@ -108,12 +101,33 @@ class ResponseHandler
 
     /**
      * Used to set the HTTP Response Content
-     * as an jSON Data Set (array)
+     * as an RAISe Message (object)
      *
-     * @param array $raiseData
+     * @param string $message Message Name
+     * @param array $templateEngine
      */
-    public function setData(array $raiseData)
+    public function setMessage($message, array $templateEngine = array())
     {
-        $this->getResponse()->setData($raiseData);
+        if (!$this->messageDefined) {
+            $this->getResponse()->setData(RaiseManager::getFactory('message')->get($message,
+                $templateEngine)->__getResult());
+            $this->messageDefined = true;
+        }
+    }
+
+    /**
+     * Get the HTTP Response Interface Result
+     * by Applying the HTTP Headers
+     * and retrieving the jSON encoded content
+     *
+     * @return string
+     */
+    public function sendResponse()
+    {
+        /* Set HTTP Headers from HTTP Response Interface */
+        $this->getResponse()->sendHeaders();
+
+        /* Get HTTP Response Interface Content */
+        return $this->getResponse()->getContent();
     }
 }

@@ -49,4 +49,4 @@ if (!file_exists(__DIR__ . '/UIoT/Vendor/autoload.php')) {
 (require_once __DIR__ . '/UIoT/Register.php');
 
 /* start environment */
-echo RaiseManager::startRaise();
+echo (new RaiseManager)->startRaise();

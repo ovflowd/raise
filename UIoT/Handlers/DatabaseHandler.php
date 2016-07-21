@@ -69,7 +69,7 @@ class DatabaseHandler
                     $this->databaseSettings->__get('connUser'), $this->databaseSettings->__get('connPass')
                 );
             } catch (PDOException $e) {
-                die ("<h2>RAISe failed to connect to Database.</h2><b>Details:</b> {$e}");
+                die ('<h2>RAISe failed to connect to Database.</h2>');
             }
         }
     }
