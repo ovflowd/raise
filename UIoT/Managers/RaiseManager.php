@@ -19,12 +19,12 @@
 
 namespace UIoT\Managers;
 
-use Interfaces\FactoryInterface;
 use UIoT\Factories\InstructionFactory;
 use UIoT\Factories\MessageFactory;
 use UIoT\Factories\ResourceFactory;
 use UIoT\Handlers\RequestHandler;
 use UIoT\Handlers\ResponseHandler;
+use UIoT\Interfaces\FactoryInterface;
 
 /**
  * Class RaiseManager

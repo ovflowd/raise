@@ -19,11 +19,11 @@
 
 namespace UIoT\Factories;
 
-use Interfaces\FactoryInterface;
 use UIoT\Interfaces\PropertyInterface;
 use UIoT\Managers\DatabaseManager;
 use UIoT\Mappers\Constants;
 use UIoT\Mappers\Json;
+use UIoT\Models\FactoryModel;
 use UIoT\Models\PropertyModel;
 
 /**
@@ -34,7 +34,7 @@ use UIoT\Models\PropertyModel;
  *
  * @package Factories
  */
-class PropertyFactory implements FactoryInterface
+class PropertyFactory extends FactoryModel
 {
     /**
      * Resource Properties

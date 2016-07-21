@@ -19,7 +19,7 @@
 
 namespace UIoT\Models;
 
-use Interfaces\FactoryInterface;
+use UIoT\Interfaces\FactoryInterface;
 
 /**
  * Class FactoryModel

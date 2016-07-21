@@ -19,14 +19,14 @@
 
 namespace UIoT\Factories;
 
-use Interfaces\FactoryInterface;
 use UIoT\Interfaces\SettingsInterface;
+use UIoT\Models\FactoryModel;
 
 /**
  * Class SettingsFactory
  * @package UIoT\Factories
  */
-class SettingsFactory implements FactoryInterface
+class SettingsFactory extends FactoryModel
 {
     /**
      * Settings Factory Settings Models Blocks

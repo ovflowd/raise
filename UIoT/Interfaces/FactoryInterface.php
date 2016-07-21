@@ -17,7 +17,7 @@
  * @copyright University of Brasília
  */
 
-namespace Interfaces;
+namespace UIoT\Interfaces;
 
 /**
  * Interface FactoryInterface
@@ -25,7 +25,7 @@ namespace Interfaces;
  * Default Interface for RAISE Factories
  * The Factory can also have other optional|custom methods.
  *
- * @package Interfaces
+ * @package UIoT\Interfaces
  */
 interface FactoryInterface
 {

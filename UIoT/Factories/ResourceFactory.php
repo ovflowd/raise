@@ -19,11 +19,11 @@
 
 namespace UIoT\Factories;
 
-use Interfaces\FactoryInterface;
 use UIoT\Interfaces\ResourceInterface;
 use UIoT\Managers\DatabaseManager;
 use UIoT\Mappers\Constants;
 use UIoT\Mappers\Json;
+use UIoT\Models\FactoryModel;
 use UIoT\Models\ResourceModel;
 
 /**
@@ -33,7 +33,7 @@ use UIoT\Models\ResourceModel;
  *
  * @package Factories
  */
-class ResourceFactory implements FactoryInterface
+class ResourceFactory extends FactoryModel
 {
     /**
      * Resource Items from the Factory

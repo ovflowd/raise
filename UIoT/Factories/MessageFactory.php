@@ -19,11 +19,11 @@
 
 namespace UIoT\Factories;
 
-use Interfaces\FactoryInterface;
 use UIoT\Interfaces\MessageInterface;
 use UIoT\Managers\DatabaseManager;
 use UIoT\Mappers\Constants;
 use UIoT\Mappers\Json;
+use UIoT\Models\FactoryModel;
 use UIoT\Models\MessageModel;
 
 /**
@@ -34,7 +34,7 @@ use UIoT\Models\MessageModel;
  *
  * @package UIoT\Factories
  */
-class MessageFactory implements FactoryInterface
+class MessageFactory extends FactoryModel
 {
     /**
      * Raise Message Model Data Set
