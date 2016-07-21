@@ -19,29 +19,17 @@
 
 namespace UIoT\Interactions;
 
+use UIoT\Managers\DatabaseManager;
+use UIoT\Managers\TokenManager;
+use UIoT\Mappers\Constants;
 use UIoT\Models\InteractionModel;
 
 /**
- * Class SearchInteraction
+ * Class InsertServiceInteraction
  * @package UIoT\Interactions
  */
-final class SearchInteraction extends InteractionModel
+class InsertServiceInteraction extends InteractionModel
 {
-    /**
-     * Does the Interactions Business Logic
-     * and stores in an internal Variable;
-     *
-     * Necessary the business logic and logical operations
-     * happens in this method.
-     *
-     * @param string $httpMethod Interaction HTTP Method
-     * @note SearchInteraction uses HTTP Get Method
-     */
-    public function __construct($httpMethod)
-    {
-        parent::__construct($httpMethod);
-    }
-
     /**
      * Method that executes the Business Logic
      * and does all Controlling operations.
@@ -52,12 +40,26 @@ final class SearchInteraction extends InteractionModel
      */
     public function execute()
     {
-        if ($this->checkToken() !== 1) {
-            $this->setMessage('InvalidToken');
-        } else {
-            $this->getInstruction()->execute();
-            $this->setData($this->getInstruction()->getValues());
-        }
+        $serviceId = $this->getInstruction()->getInsertId();
+        $deviceId = TokenManager::getInstance()->getToken()->getIdentification();
+
+        DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceAction'), [
+            ':ACT_NAME' => $this->getRequest()->query->get('name'),
+            ':ACT_TYPE' => $this->getRequest()->query->get('type')
+        ]);
+
+        $actionId = DatabaseManager::getInstance()->getHandler()->getConnection()->lastInsertId();
+
+        DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceActionRelation'), [
+            ':SRVC_ID' => $serviceId,
+            ':ACT_ID' => $actionId
+        ]);
+
+        $this->setMessage('ServiceInsertion', [
+            'device_id' => $deviceId,
+            'service_id' => $serviceId,
+            'action_id' => $actionId
+        ]);
     }
 
     /**
@@ -70,6 +72,7 @@ final class SearchInteraction extends InteractionModel
      */
     public function prepare()
     {
+        $this->getInstruction()->execute();
         return true;
     }
 }

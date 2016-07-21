@@ -76,6 +76,28 @@ Constants::getInstance()->add('addTokenQuery',
     'INSERT INTO DEVICE_TOKENS (DVC_ID, DVC_TOKEN, DVC_TOKEN_EXPIRE) 
       VALUES (:DVC_ID, :DVC_TOKEN, :DVC_TOKEN_EXPIRE)');
 
+/**
+ * Insert Action by Add Service
+ * @see \UIoT\Models\ResourceModel
+ *
+ * @var string ACT_NAME
+ * @var string ACT_TYPE
+ */
+Constants::getInstance()->add('addServiceAction',
+    'INSERT INTO ACTIONS (ACT_NAME, ACT_TYPE) 
+      VALUES (:ACT_NAME, :ACT_TYPE)');
+
+/**
+ * Insert Service Action
+ * @see \UIoT\Models\ResourceModel
+ *
+ * @var int SRVC_ID
+ * @var int ACT_ID
+ */
+Constants::getInstance()->add('addServiceActionRelation',
+    'INSERT INTO SERVICE_ACTIONS (SRVC_ID, ACT_ID) 
+      VALUES (:SRVC_ID, :ACT_ID)');
+
 /* Specific Queries */
 
 /**

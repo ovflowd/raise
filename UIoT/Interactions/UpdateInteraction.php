@@ -19,29 +19,15 @@
 
 namespace UIoT\Interactions;
 
+use UIoT\Managers\InteractionManager;
 use UIoT\Models\InteractionModel;
 
 /**
- * Class SearchInteraction
+ * Class UpdateInteraction
  * @package UIoT\Interactions
  */
-final class SearchInteraction extends InteractionModel
+class UpdateInteraction extends InteractionModel
 {
-    /**
-     * Does the Interactions Business Logic
-     * and stores in an internal Variable;
-     *
-     * Necessary the business logic and logical operations
-     * happens in this method.
-     *
-     * @param string $httpMethod Interaction HTTP Method
-     * @note SearchInteraction uses HTTP Get Method
-     */
-    public function __construct($httpMethod)
-    {
-        parent::__construct($httpMethod);
-    }
-
     /**
      * Method that executes the Business Logic
      * and does all Controlling operations.
@@ -52,11 +38,12 @@ final class SearchInteraction extends InteractionModel
      */
     public function execute()
     {
-        if ($this->checkToken() !== 1) {
+        if ($this->checkToken() === -1 && $this->checkResource('devices')) {
+            InteractionManager::getInstance()->execute('UpdateTokenInteraction');
+        } elseif ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
         } else {
-            $this->getInstruction()->execute();
-            $this->setData($this->getInstruction()->getValues());
+            $this->setMessage('ResourceItemUpdated');
         }
     }
 
@@ -70,6 +57,15 @@ final class SearchInteraction extends InteractionModel
      */
     public function prepare()
     {
+        if (empty($this->getRequest()->query->get('id'))) {
+            $this->setMessage('RequiredArgument', [
+                'argument' => 'id'
+            ]);
+            return false;
+        } elseif ($this->checkToken() === 1) {
+            $this->getInstruction()->execute();
+        }
+
         return true;
     }
 }

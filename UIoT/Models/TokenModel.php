@@ -98,7 +98,7 @@ final class TokenModel implements TokenInterface
      */
     public function updateExpiration($insertionAmount = 0)
     {
-        $this->DVC_TOKEN_EXPIRE += $insertionAmount;
+        $this->DVC_TOKEN_EXPIRE = $insertionAmount;
 
         return $this->DVC_TOKEN_EXPIRE;
     }

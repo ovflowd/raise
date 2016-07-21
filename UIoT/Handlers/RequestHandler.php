@@ -84,7 +84,7 @@ class RequestHandler
     public function setResource()
     {
         /* get resource string from requested url */
-        $resourceString = str_replace('/', '', $this->getRequest()->getRequestUri());
+        $resourceString = strtolower(str_replace('/', '', $this->getRequest()->getRequestUri()));
 
         /* stores resource model applying the string manipulation */
         $this->requestedResource = RaiseManager::getFactory('resource')->get(strpos($resourceString,

@@ -35,3 +35,17 @@ Interaction::getInstance()->add('SearchInteraction', 'GET');
  * used to Insert Resource Items
  */
 Interaction::getInstance()->add('InsertInteraction', 'POST');
+
+/**
+ * Add Update Interaction
+ *
+ * used to Update Resource Items
+ */
+Interaction::getInstance()->add('UpdateInteraction', 'PUT');
+
+/**
+ * Add Remove Interaction
+ *
+ * used to Remove Resource Items
+ */
+Interaction::getInstance()->add('RemoveInteraction', 'DELETE');

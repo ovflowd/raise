@@ -79,6 +79,22 @@ class InteractionManager
     }
 
     /**
+     * Prepare's and Execute's an Interaction
+     * after that Return It
+     *
+     * @param string $interactionName
+     * @return InteractionModel
+     */
+    public function execute($interactionName)
+    {
+        $interaction = $this->get($interactionName);
+        $interaction->prepare();
+        $interaction->execute();
+
+        return $interaction;
+    }
+
+    /**
      * Get a specific RAISe Interaction
      *
      * @param string $interactionName

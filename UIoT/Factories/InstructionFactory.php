@@ -127,30 +127,18 @@ class InstructionFactory extends FactoryModel
      */
     private function setCriteria()
     {
+        $columns = $this->setColumns();
+
         switch ($this->type) {
             case 'GET':
-                return $this->getCriteria($this->setColumns()->where(), $this->getValues());
+                $this->getCriteria($columns->where(), $this->getValues(['token' => '']));
+                return $columns;
             case 'POST':
                 return $this->setColumns();
             default:
-                return $this->getCriteria($this->setColumns()->where(), ['ID' => $this->query->get('id')]);
+                $this->getCriteria($columns->where(), ['ID' => $this->query->get('id')]);
+                return $columns;
         }
-    }
-
-    /**
-     * Applies a Criteria in the SQL Instruction
-     *
-     * @param Where $where Where Operator
-     * @param array $criteria SQL Criteria
-     * @return Where|Insert|Update|Select Final Operator
-     */
-    private function getCriteria(Where $where, array $criteria)
-    {
-        foreach ($criteria as $property => $value) {
-            $where->equals($property, $value);
-        }
-
-        return $where;
     }
 
     /**
@@ -160,13 +148,18 @@ class InstructionFactory extends FactoryModel
      */
     private function setColumns()
     {
+        $type = $this->setType();
+
         switch ($this->type) {
             CASE 'GET':
-                return $this->setType()->setColumns($this->getProperties());
+                $type->setColumns($this->getProperties());
+                return $type;
             case 'DELETE':
-                return $this->setType()->setValues(['DELETED' => 1]);
+                $type->setValues(['DELETED' => 1]);
+                return $type;
             default:
-                return $this->setType()->setValues($this->getValues(['token' => '', 'id' => '']));
+                $type->setValues($this->getValues(['token' => '', 'id' => '']));
+                return $type;
         }
     }
 
@@ -216,6 +209,24 @@ class InstructionFactory extends FactoryModel
         }
 
         return $values;
+    }
+
+    /**
+     * Applies a Criteria in the SQL Instruction
+     *
+     * @param Where $where Where Operator
+     * @param array $criteria SQL Criteria
+     * @return Where Final Operator
+     */
+    private function getCriteria(Where $where, array $criteria)
+    {
+        foreach ($criteria as $property => $value) {
+            $where->equals($property, $value);
+        }
+
+        $where->equals('DELETED', 0);
+
+        return $where;
     }
 
     /**

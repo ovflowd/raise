@@ -86,7 +86,7 @@ class TokenManager
             DatabaseManager::getInstance()->query(Constants::getInstance()->get('updateTokenQuery'), [
                 ':DVC_TOKEN' => ($newHash = Security::getInstance()->generateSha1()),
                 ':OLD_DVC_TOKEN' => $this->sessionToken->updateHash($newHash),
-                ':DVC_TOKEN_EXPIRE' => $this->sessionToken->updateExpiration(
+                ':DVC_TOKEN_EXPIRE' => $this->sessionToken->updateExpiration(Time::getInstance()->getTime() +
                     SettingsManager::getInstance()->getItem('security')->__get('tokenUpdateTime'))
             ]);
         }
@@ -123,9 +123,9 @@ class TokenManager
      */
     public function checkToken()
     {
-        return $this->getToken() === null || $this->getToken()->getHash() === null ? 0 :
-            Time::getInstance()->compareTimes($this->getToken()->getExpiration(), Time::getInstance()->getTime())
-                ? 1 : -1;
+        return ($this->getToken() == null ? 0 :
+            (Time::getInstance()->compareTimes($this->getToken()->getExpiration(), Time::getInstance()->getTime())
+                ? 1 : -1));
     }
 
     /**

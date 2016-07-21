@@ -19,29 +19,15 @@
 
 namespace UIoT\Interactions;
 
+use UIoT\Managers\TokenManager;
 use UIoT\Models\InteractionModel;
 
 /**
- * Class SearchInteraction
+ * Class InsertTokenInteraction
  * @package UIoT\Interactions
  */
-final class SearchInteraction extends InteractionModel
+class InsertTokenInteraction extends InteractionModel
 {
-    /**
-     * Does the Interactions Business Logic
-     * and stores in an internal Variable;
-     *
-     * Necessary the business logic and logical operations
-     * happens in this method.
-     *
-     * @param string $httpMethod Interaction HTTP Method
-     * @note SearchInteraction uses HTTP Get Method
-     */
-    public function __construct($httpMethod)
-    {
-        parent::__construct($httpMethod);
-    }
-
     /**
      * Method that executes the Business Logic
      * and does all Controlling operations.
@@ -52,12 +38,10 @@ final class SearchInteraction extends InteractionModel
      */
     public function execute()
     {
-        if ($this->checkToken() !== 1) {
-            $this->setMessage('InvalidToken');
-        } else {
-            $this->getInstruction()->execute();
-            $this->setData($this->getInstruction()->getValues());
-        }
+        $this->setMessage('TokenInsertion', [
+            'item_id' => $last = $this->getInstruction()->getInsertId(),
+            'token' => TokenManager::getInstance()->createToken($last)
+        ]);
     }
 
     /**
@@ -70,6 +54,7 @@ final class SearchInteraction extends InteractionModel
      */
     public function prepare()
     {
+        $this->getInstruction()->execute();
         return true;
     }
 }

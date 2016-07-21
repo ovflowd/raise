@@ -92,6 +92,20 @@ final class RaiseManager
     }
 
     /**
+     * Get a RAISe Factory or Handler
+     *
+     * @param string $raiseComponent RAISe Component Name
+     * @param ResponseHandler|RequestHandler $classToInstantiate Class to Instantiate if Necessary
+     * @return RequestHandler|ResponseHandler
+     */
+    public static function getHandler($raiseComponent, $classToInstantiate = null)
+    {
+        return null === self::${$raiseComponent} &&
+        ($classToInstantiate instanceof RequestHandler || $classToInstantiate instanceof ResponseHandler) ?
+            self::${$raiseComponent} = $classToInstantiate : self::${$raiseComponent};
+    }
+
+    /**
      * Execute's RAISe Management Engine
      *
      * @return string
@@ -109,20 +123,6 @@ final class RaiseManager
     }
 
     /**
-     * Get a RAISe Factory or Handler
-     *
-     * @param string $raiseComponent RAISe Component Name
-     * @param ResponseHandler|RequestHandler $classToInstantiate Class to Instantiate if Necessary
-     * @return RequestHandler|ResponseHandler
-     */
-    public static function getHandler($raiseComponent, $classToInstantiate = null)
-    {
-        return null === self::${$raiseComponent} &&
-        ($classToInstantiate instanceof RequestHandler || $classToInstantiate instanceof ResponseHandler) ?
-            self::${$raiseComponent} = $classToInstantiate : self::${$raiseComponent};
-    }
-
-    /**
      * Execute's RAISe Interaction Procedures
      */
     public static function executeInteraction()
@@ -130,6 +130,13 @@ final class RaiseManager
         /* check if Request is to DocumentRoot, if yes Welcome Message is triggered */
         if (self::getHandler('request')->getRequest()->getRequestUri() == '/') {
             self::getHandler('response')->setMessage('WelcomeToRaise');
+            return;
+        }
+
+        /* If Resource does'nt exists. Stop here */
+        if (self::getHandler('request')->getResource() === null) {
+            self::getHandler('response')->setMessage('InvalidRaiseResource');
+            return;
         }
 
         /* in other way executes the Interaction */

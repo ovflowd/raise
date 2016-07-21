@@ -19,7 +19,7 @@
 
 namespace UIoT\Interactions;
 
-use UIoT\Managers\TokenManager;
+use UIoT\Managers\InteractionManager;
 use UIoT\Models\InteractionModel;
 
 /**
@@ -54,13 +54,16 @@ class InsertInteraction extends InteractionModel
     public function execute()
     {
         if ($this->checkResource('devices')) {
-            $this->getInstruction()->execute();
-            $this->setMessage('TokenInsertion', [
-                'item_id' => $last = $this->getInstruction()->getInsertId(),
-                'token' => TokenManager::getInstance()->createToken($last)
-            ]);
+            InteractionManager::getInstance()->execute('InsertTokenInteraction');
         } elseif ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
+        } elseif ($this->checkResource('services')) {
+            InteractionManager::getInstance()->execute('InsertServiceInteraction');
+        } else {
+            $this->getInstruction()->execute();
+            $this->setMessage('ResourceItemAdded', [
+                'item_id' => $this->getInstruction()->getInsertId()
+            ]);
         }
     }
 
@@ -74,8 +77,8 @@ class InsertInteraction extends InteractionModel
      */
     public function prepare()
     {
-        $unexistent = array_diff_key($this->getRequest()->query->all(),
-            $this->getResource()->getProperties()->getAll());
+        $unexistent = array_diff_key(array_diff_key($this->getRequest()->query->all(),
+            $this->getResource()->getProperties()->getAll()), ['token' => '']);
 
         if (!empty($unexistent)) {
             $this->setMessage('UnexistentArgument', ['argument' => reset(array_keys($unexistent))]);

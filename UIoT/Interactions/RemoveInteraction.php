@@ -22,26 +22,11 @@ namespace UIoT\Interactions;
 use UIoT\Models\InteractionModel;
 
 /**
- * Class SearchInteraction
+ * Class RemoveInteraction
  * @package UIoT\Interactions
  */
-final class SearchInteraction extends InteractionModel
+class RemoveInteraction extends InteractionModel
 {
-    /**
-     * Does the Interactions Business Logic
-     * and stores in an internal Variable;
-     *
-     * Necessary the business logic and logical operations
-     * happens in this method.
-     *
-     * @param string $httpMethod Interaction HTTP Method
-     * @note SearchInteraction uses HTTP Get Method
-     */
-    public function __construct($httpMethod)
-    {
-        parent::__construct($httpMethod);
-    }
-
     /**
      * Method that executes the Business Logic
      * and does all Controlling operations.
@@ -55,8 +40,7 @@ final class SearchInteraction extends InteractionModel
         if ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
         } else {
-            $this->getInstruction()->execute();
-            $this->setData($this->getInstruction()->getValues());
+            $this->setMessage('ResourceItemDeleted');
         }
     }
 
@@ -70,6 +54,15 @@ final class SearchInteraction extends InteractionModel
      */
     public function prepare()
     {
+        if (empty($this->getRequest()->query->get('id'))) {
+            $this->setMessage('RequiredArgument', [
+                'argument' => 'id'
+            ]);
+            return false;
+        } elseif ($this->checkToken() === 1) {
+            $this->getInstruction()->execute();
+        }
+
         return true;
     }
 }
