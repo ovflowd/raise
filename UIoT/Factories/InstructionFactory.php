@@ -151,7 +151,7 @@ class InstructionFactory extends FactoryModel
         $type = $this->setType();
 
         switch ($this->type) {
-            CASE 'GET':
+            case 'GET':
                 $type->setColumns($this->getProperties());
                 return $type;
             case 'DELETE':
