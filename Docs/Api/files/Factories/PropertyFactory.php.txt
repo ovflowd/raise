@@ -2,7 +2,7 @@
 
 /**
  * UIoT Service Layer
- * @version alpha
+ * @version beta
  *                          88
  *                          ""              ,d
  *                                          88

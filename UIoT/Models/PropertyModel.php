@@ -2,7 +2,7 @@
 
 /**
  * UIoT Service Layer
- * @version alpha
+ * @version beta
  *                          88
  *                          ""              ,d
  *                                          88
@@ -137,6 +137,6 @@ final class PropertyModel implements PropertyInterface
      */
     public function getOptionality()
     {
-        return $this->PROP_OPTIONAL == '1';
+        return $this->PROP_OPTIONAL;
     }
 }

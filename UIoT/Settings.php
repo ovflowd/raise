@@ -2,7 +2,7 @@
 
 /**
  * UIoT Service Layer
- * @version alpha
+ * @version beta
  *                          88
  *                          ""              ,d
  *                                          88
@@ -31,8 +31,8 @@ Settings::getInstance()->addItem(new SecuritySettingsModel, [
 Settings::getInstance()->addItem(new DatabaseSettingsModel, [
     'hostName' => 'localhost',
     'hostPort' => 3306,
-    'connUser' => 'raise',
-    'connPass' => 'ac41tr1421',
+    'connUser' => 'root',
+    'connPass' => '',
     'connDataBase' => 'UIOT'
 ]);
 
