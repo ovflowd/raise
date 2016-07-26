@@ -39,7 +39,6 @@ class InsertTokenInteraction extends InteractionModel
     public function execute()
     {
         $this->setMessage('TokenInsertion', [
-            'item_id' => $last = $this->getInstruction()->getInsertId(),
             'token' => TokenManager::getInstance()->createToken($last)
         ]);
     }

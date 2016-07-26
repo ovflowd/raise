@@ -19,7 +19,6 @@
 
 namespace UIoT\Handlers;
 
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use UIoT\Managers\RaiseManager;
 use UIoT\Models\ResourceModel;
@@ -57,7 +56,7 @@ class RequestHandler
 
         /* check if RAISe is being executed in Document Root, if not terminate execution. */
         if (!empty($this->getRequest()->getBasePath())) {
-            throw new InvalidArgumentException('<h2>RAISe need to be executed in your server\'s Document Root</h2>');
+            die('<h2>RAISe need to be executed in your server\'s Document Root</h2>');
         }
 
         $this->setResource();

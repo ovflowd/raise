@@ -38,11 +38,11 @@ class UpdateTokenInteraction extends InteractionModel
      */
     public function execute()
     {
-        if (!empty($this->getRequest()->query->get('id'))) {
+        if ($this->prepare()) {
             TokenManager::getInstance()->updateToken();
-            $this->setMessage('TokenUpdated', [
-                'token' => TokenManager::getInstance()->getToken()->getHash()
-            ]);
+            $this->setMessage('TokenUpdated', ['token' => TokenManager::getInstance()->getToken()->getHash()]);
+        } else {
+            $this->setMessage('InvalidValue');
         }
     }
 
@@ -56,6 +56,14 @@ class UpdateTokenInteraction extends InteractionModel
      */
     public function prepare()
     {
+        $optional = array_diff(array_keys($this->getResource()->getProperties()->getByOptionality()),
+            array_keys($this->getRequest()->query->all()));
+
+        if (!empty($optional)) {
+            $this->setMessage('RequiredArgument', ['argument' => reset($optional)]);
+            return false;
+        }
+
         return true;
     }
 }

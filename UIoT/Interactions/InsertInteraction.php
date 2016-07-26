@@ -61,9 +61,7 @@ class InsertInteraction extends InteractionModel
             InteractionManager::getInstance()->execute('InsertServiceInteraction');
         } else {
             $this->getInstruction()->execute();
-            $this->setMessage('ResourceItemAdded', [
-                'item_id' => $this->getInstruction()->getInsertId()
-            ]);
+            $this->setMessage('ResourceItemAdded', ['item_id' => $this->getInstruction()->getInsertId()]);
         }
     }
 
