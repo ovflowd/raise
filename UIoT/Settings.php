@@ -29,10 +29,10 @@ Settings::getInstance()->addItem(new SecuritySettingsModel, [
 
 /* RAISE Database Settings Block */
 Settings::getInstance()->addItem(new DatabaseSettingsModel, [
-    'hostName' => '172.16.6.164',
+    'hostName' => 'localhost',
     'hostPort' => 3306,
     'connUser' => 'root',
-    'connPass' => 'ac41tr1421',
+    'connPass' => '',
     'connDataBase' => 'UIOT'
 ]);
 
