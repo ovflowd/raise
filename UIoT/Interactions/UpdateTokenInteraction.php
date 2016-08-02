@@ -56,14 +56,10 @@ class UpdateTokenInteraction extends InteractionModel
      */
     public function prepare()
     {
-        $optional = array_diff(array_keys($this->getResource()->getProperties()->getByOptionality()),
-            array_keys($this->getRequest()->query->all()));
-
-        if (!empty($optional)) {
-            $this->setMessage('RequiredArgument', ['argument' => reset($optional)]);
-            return false;
+        if (($required = $this->checkArguments()) !== true) {
+            $this->setMessage('RequiredArgument', ['argument' => $required]);
         }
 
-        return true;
+        return $required === true;
     }
 }

@@ -91,6 +91,24 @@ class RequestHandler
     }
 
     /**
+     * this method checks if the Request contains in his
+     * Query String invalid parameters for the Requested Resource
+     * parameters are the Properties from a Resource.
+     *
+     * Return the invalid argument (parameter) if exists
+     * if not return true
+     *
+     * @return string|bool
+     */
+    public function checkInvalidParameters()
+    {
+        $invalid = array_diff_key(array_diff_key($this->getRequest()->query->all(),
+            $this->getResource()->getProperties()->getAll()), ['token' => '']);
+
+        return !empty($invalid) ? reset(array_keys($invalid)) : true;
+    }
+
+    /**
      * Get RAISe Requested Resource
      *
      * @note only one Resource can be requested

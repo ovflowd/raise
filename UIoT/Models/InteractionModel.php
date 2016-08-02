@@ -125,16 +125,6 @@ abstract class InteractionModel implements InteractionInterface
     }
 
     /**
-     * Get the HTTP Request Interface
-     *
-     * @return Request
-     */
-    public function getRequest()
-    {
-        return RaiseManager::getHandler('request')->getRequest();
-    }
-
-    /**
      * Check if the Token given by the `client` is valid or not.
      * If the `client` does'nt sent a token in query string also
      * the validation will return 0 (zero).
@@ -154,6 +144,51 @@ abstract class InteractionModel implements InteractionInterface
     }
 
     /**
+     * this method checks if the Request's Query String
+     * contains all the required Resource Properties (aka arguments)
+     * to execute an interaction with it.
+     *
+     * An optional set of Parameters can be used to complete the Parameters List
+     * or to substitute it
+     *
+     * Return the name of the required property if exists
+     * if not return true
+     *
+     * @param array $optionalArguments
+     * @param bool $onlyOptional
+     * @return bool|string
+     */
+    protected function checkArguments(array $optionalArguments = array(), $onlyOptional = false)
+    {
+        $arguments = $onlyOptional ? $optionalArguments :
+            array_keys($this->getResource()->getProperties()->getByOptionality() + array_flip($optionalArguments));
+
+        $optional = array_diff($arguments, array_keys($this->getRequest()->query->all()));
+
+        return !empty($optional) ? reset($optional) : true;
+    }
+
+    /**
+     * Get the Requested Resource to RAISe
+     *
+     * @return ResourceModel
+     */
+    protected function getResource()
+    {
+        return RaiseManager::getHandler('request')->getResource();
+    }
+
+    /**
+     * Get the HTTP Request Interface
+     *
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return RaiseManager::getHandler('request')->getRequest();
+    }
+
+    /**
      * This method checks if the Resource given in the HTTP Request
      * is the same of the Resource given in the method argument.
      *
@@ -166,16 +201,6 @@ abstract class InteractionModel implements InteractionInterface
     protected function checkResource($expectedResource = '')
     {
         return $this->getResource()->getFriendlyName() == $expectedResource;
-    }
-
-    /**
-     * Get the Requested Resource to RAISe
-     *
-     * @return ResourceModel
-     */
-    protected function getResource()
-    {
-        return RaiseManager::getHandler('request')->getResource();
     }
 
     /**

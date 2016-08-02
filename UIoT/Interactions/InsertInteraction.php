@@ -20,6 +20,7 @@
 namespace UIoT\Interactions;
 
 use UIoT\Managers\InteractionManager;
+use UIoT\Managers\RaiseManager;
 use UIoT\Models\InteractionModel;
 
 /**
@@ -75,22 +76,14 @@ class InsertInteraction extends InteractionModel
      */
     public function prepare()
     {
-        $unexistent = array_diff_key(array_diff_key($this->getRequest()->query->all(),
-            $this->getResource()->getProperties()->getAll()), ['token' => '']);
-
-        if (!empty($unexistent)) {
-            $this->setMessage('UnexistentArgument', ['argument' => reset(array_keys($unexistent))]);
-            return false;
+        if (($invalid = RaiseManager::getHandler('request')->checkInvalidParameters()) !== true) {
+            $this->setMessage('UnexistentArgument', ['argument' => $invalid]);
         }
 
-        $optional = array_diff(array_keys($this->getResource()->getProperties()->getByOptionality()),
-            array_keys($this->getRequest()->query->all()));
-
-        if (!empty($optional)) {
-            $this->setMessage('RequiredArgument', ['argument' => reset($optional)]);
-            return false;
+        if (($required = $this->checkArguments()) !== true) {
+            $this->setMessage('RequiredArgument', ['argument' => $required]);
         }
 
-        return true;
+        return ($required && $invalid);
     }
 }

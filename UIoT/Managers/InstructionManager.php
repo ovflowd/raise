@@ -79,13 +79,16 @@ final class InstructionManager
                 $this->response = $this->statement->fetchAll(PDO::FETCH_OBJ);
                 break;
             case 'POST':
-                $this->lastInsertId = DatabaseManager::getInstance()->getHandler()->getConnection()->lastInsertId();
+                $this->lastInsertId = DatabaseManager::getInstance()->getLastInsertId();
                 break;
         }
     }
 
     /**
-     * Get SQL Query Last Insert Id
+     * Get SQL Instruction Last Insert Id
+     *
+     * @note this variable will not update while other
+     * SQL Operations happens in the Database, so is safe call anytime
      *
      * @return int
      */

@@ -20,7 +20,6 @@
 namespace UIoT\Interactions;
 
 use UIoT\Managers\DatabaseManager;
-use UIoT\Managers\TokenManager;
 use UIoT\Mappers\Constants;
 use UIoT\Models\InteractionModel;
 
@@ -40,26 +39,16 @@ class InsertServiceInteraction extends InteractionModel
      */
     public function execute()
     {
-        $serviceId = $this->getInstruction()->getInsertId();
-        $deviceId = TokenManager::getInstance()->getToken()->getIdentification();
-
         DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceAction'), [
             ':ACT_NAME' => $this->getRequest()->query->get('name'),
             ':ACT_TYPE' => $this->getRequest()->query->get('type')
         ]);
 
-        $actionId = DatabaseManager::getInstance()->getHandler()->getConnection()->lastInsertId();
+        $this->setMessage('ServiceInsertion',
+            ['action_id' => $actionId = DatabaseManager::getInstance()->getLastInsertId()]);
 
-        DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceActionRelation'), [
-            ':SRVC_ID' => $serviceId,
-            ':ACT_ID' => $actionId
-        ]);
-
-        $this->setMessage('ServiceInsertion', [
-            'device_id' => $deviceId,
-            'service_id' => $serviceId,
-            'action_id' => $actionId
-        ]);
+        DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceActionRelation'),
+            [':SRVC_ID' => $this->getInstruction()->getInsertId(), ':ACT_ID' => $actionId]);
     }
 
     /**
@@ -73,6 +62,7 @@ class InsertServiceInteraction extends InteractionModel
     public function prepare()
     {
         $this->getInstruction()->execute();
+
         return true;
     }
 }

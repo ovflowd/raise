@@ -40,6 +40,7 @@ class RemoveInteraction extends InteractionModel
         if ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
         } else {
+            $this->getInstruction()->execute();
             $this->setMessage('ResourceItemDeleted');
         }
     }
@@ -54,15 +55,10 @@ class RemoveInteraction extends InteractionModel
      */
     public function prepare()
     {
-        if (empty($this->getRequest()->query->get('id'))) {
-            $this->setMessage('RequiredArgument', [
-                'argument' => 'id'
-            ]);
-            return false;
-        } elseif ($this->checkToken() === 1) {
-            $this->getInstruction()->execute();
+        if (($result = $this->checkArguments(['id'], true)) !== true) {
+            $this->setMessage('RequiredArgument', ['argument' => 'id']);
         }
 
-        return true;
+        return $result === true;
     }
 }

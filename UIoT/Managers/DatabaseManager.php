@@ -98,6 +98,17 @@ class DatabaseManager
     }
 
     /**
+     * Get the Last Inserted Id
+     * By the last Resource Inserted in the Database
+     *
+     * @return string
+     */
+    public function getLastInsertId()
+    {
+        return $this->getHandler()->getConnection()->lastInsertId();
+    }
+
+    /**
      * Prepares, Executes a MySQL Query
      * returning a set of rows if exists.
      * Uses PHP's PDO Engine
