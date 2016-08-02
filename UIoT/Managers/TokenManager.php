@@ -63,10 +63,8 @@ class TokenManager
      */
     public function setToken($tokenHash = '')
     {
-        if (($tokenDetails = DatabaseManager::getInstance()->fetch(
-                Constants::getInstance()->get('specificTokenDetailsQuery'), [
-                ':DVC_TOKEN' => $tokenHash
-            ])) != null
+        if (($tokenDetails = DatabaseManager::getInstance()->fetch(Constants::getInstance()->get('specificTokenDetailsQuery'),
+                [':DVC_TOKEN' => $tokenHash])) != null
         ) {
             $this->sessionToken = Json::getInstance()->convert($tokenDetails, new TokenModel);
         }

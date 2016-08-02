@@ -38,12 +38,8 @@ class UpdateTokenInteraction extends InteractionModel
      */
     public function execute()
     {
-        if ($this->prepare()) {
-            TokenManager::getInstance()->updateToken();
-            $this->setMessage('TokenUpdated', ['token' => TokenManager::getInstance()->getToken()->getHash()]);
-        } else {
-            $this->setMessage('InvalidValue');
-        }
+        TokenManager::getInstance()->updateToken();
+        $this->setMessage('TokenUpdated', ['token' => TokenManager::getInstance()->getToken()->getHash()]);
     }
 
     /**
