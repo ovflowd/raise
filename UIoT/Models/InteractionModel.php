@@ -137,7 +137,7 @@ abstract class InteractionModel implements InteractionInterface
     protected function checkToken()
     {
         if (TokenManager::getInstance()->getToken() === null) {
-            TokenManager::getInstance()->setToken($this->getRequest()->query->get('token'));
+            TokenManager::getInstance()->setToken(RaiseManager::getHandler('request')->getRequest()->query->get('token'));
         }
 
         return TokenManager::getInstance()->checkToken();

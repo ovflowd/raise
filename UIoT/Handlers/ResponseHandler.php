@@ -38,6 +38,13 @@ class ResponseHandler
     private $httpResponse;
 
     /**
+     * If Message was Defined
+     *
+     * @var bool
+     */
+    private $messageDefined = false;
+
+    /**
      * Instantiate Symfony HTTP Foundation's JsonResponse
      * using Symfony's HTTP Foundation Request
      *
@@ -59,13 +66,12 @@ class ResponseHandler
      */
     public function executeInteraction(InteractionModel $interaction)
     {
-        /* By default Message is Invalid Token */
-        $this->setMessage('InvalidToken');
-
         /* Executes the Interaction process */
-        if ($interaction->prepare()) {
-            $interaction->execute();
+        if (!$interaction->prepare()) {
+            return;
         }
+
+        $interaction->execute();
 
         if ($interaction->getData() !== null) {
             $this->setData($interaction->getData());
@@ -102,8 +108,11 @@ class ResponseHandler
      */
     public function setMessage($message, array $templateEngine = array())
     {
-        $this->getResponse()->setData(RaiseManager::getFactory('message')->get($message,
-            $templateEngine)->__getResult());
+        if (!$this->messageDefined) {
+            $this->getResponse()->setData(RaiseManager::getFactory('message')->get($message,
+                $templateEngine)->__getResult());
+            $this->messageDefined = true;
+        }
     }
 
     /**
