@@ -44,8 +44,10 @@ class InsertServiceInteraction extends InteractionModel
             ':ACT_TYPE' => $this->getRequest()->query->get('type')
         ]);
 
-        $this->setMessage('ServiceInsertion',
-            ['action_id' => $actionId = DatabaseManager::getInstance()->getLastInsertId()]);
+        $this->setMessage('ServiceInsertion', [
+            'item_id' => $this->getInstruction()->getInsertId(),
+            'action_id' => $actionId = DatabaseManager::getInstance()->getLastInsertId()
+        ]);
 
         DatabaseManager::getInstance()->query(Constants::getInstance()->get('addServiceActionRelation'),
             [':SRVC_ID' => $this->getInstruction()->getInsertId(), ':ACT_ID' => $actionId]);
