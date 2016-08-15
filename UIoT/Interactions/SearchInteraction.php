@@ -19,6 +19,7 @@
 
 namespace UIoT\Interactions;
 
+use UIoT\Managers\RaiseManager;
 use UIoT\Models\InteractionModel;
 
 /**
@@ -70,6 +71,10 @@ final class SearchInteraction extends InteractionModel
      */
     public function prepare()
     {
-        return true;
+        if (($invalid = RaiseManager::getHandler('request')->checkInvalidParameters()) !== true) {
+            $this->setMessage('UnexistentArgument', ['argument' => $invalid]);
+        }
+
+        return $invalid === true;
     }
 }
