@@ -156,7 +156,8 @@ abstract class InteractionModel implements InteractionInterface
      *
      * @param array $optionalArguments
      * @param bool $onlyOptional
-     * @return bool|string
+     *
+     * @return string|bool
      */
     protected function checkArguments(array $optionalArguments = array(), $onlyOptional = false)
     {
@@ -165,7 +166,7 @@ abstract class InteractionModel implements InteractionInterface
 
         $optional = array_diff($arguments, array_keys($this->getRequest()->query->all()));
 
-        return !empty($optional) ? reset($optional) : true;
+        return !empty($optional) ? implode(';', $optional) : true;
     }
 
     /**

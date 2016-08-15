@@ -38,7 +38,7 @@ class UpdateInteraction extends InteractionModel
      */
     public function execute()
     {
-        if ($this->checkToken() === -1 && $this->checkResource('devices')) {
+        if ($this->checkResource('devices')) {
             InteractionManager::getInstance()->execute('UpdateTokenInteraction');
         } elseif ($this->checkToken() !== 1) {
             $this->setMessage('InvalidToken');
@@ -58,10 +58,10 @@ class UpdateInteraction extends InteractionModel
      */
     public function prepare()
     {
-        if (($result = $this->checkArguments(['id'], true)) !== true) {
+        if (($result = $this->checkArguments(['id'], true)) !== true && !$this->checkResource('devices')) {
             $this->setMessage('RequiredArgument', ['argument' => 'id']);
         }
 
-        return $result === true;
+        return $result === true || $this->checkResource('devices');
     }
 }

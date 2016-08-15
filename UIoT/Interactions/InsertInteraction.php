@@ -84,6 +84,6 @@ class InsertInteraction extends InteractionModel
             $this->setMessage('RequiredArgument', ['argument' => $required]);
         }
 
-        return ($required && $invalid);
+        return ($required === true && $invalid === true);
     }
 }

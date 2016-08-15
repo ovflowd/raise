@@ -54,7 +54,5 @@ class InsertTokenInteraction extends InteractionModel
     public function prepare()
     {
         $this->getInstruction()->execute();
-
-        return true;
     }
 }
