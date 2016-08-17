@@ -1,0 +1,239 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.3.0"
+  title: UIOT RAISE API
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /device/list:
+    # This is a HTTP operation
+    get:
+      description:
+       Get registered devices.
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: name
+          in: query
+          description: device name
+          required: false
+          type: string
+          format: text
+
+        -
+          name: processor
+          in: query
+          description: device processor name
+          required: false
+          type: string
+          format: text
+
+        -
+          name: channel
+          in: query
+          description: device communication channel id
+          required: false
+          type: number
+          format: int
+
+        -
+          name: host
+          in: query
+          description: device host name (for example - ip, domain...)
+          required: false
+          type: string
+          format: text
+
+        -
+          name: tag
+          in: query
+          description: device tag
+          required: false
+          type: string
+          format: text
+
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Devices
+            type: object
+            properties:
+              code:
+                type: integer
+              devices:
+                type: array
+                items:
+                    $ref: '#/definitions/Device'
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+
+  /device/register/:
+     
+    post:
+      tags:
+        - device
+      description: Register a device
+      parameters:
+        - name: device
+          in: body
+          required: true
+          description: device attributes
+          schema:
+           $ref: '#/definitions/Device'
+
+      responses:
+        200:
+          description: OK
+          schema:
+           $ref: '#/definitions/TokenResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse' 
+        400:
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbbiden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorResponse'    
+
+  /service/register/:
+     
+    post:
+      tags:
+        - service
+      description: Register an array of services
+      parameters:
+        - name: services
+          in: body
+          required: true
+          description: an array of services to be registered
+          schema:
+          type: array
+          items:
+           $ref: '#/definitions/Service'
+
+      responses:
+        200:
+          description: OK
+          schema:
+           $ref: '#/definitions/TokenResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse' 
+        400:
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbbiden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorResponse' 
+
+
+
+definitions:
+  Device:
+    type: object
+    properties:
+      name:
+        type: string
+      chipset:
+        type: string
+      mac:
+        type: string
+      serial:
+        type: string
+      processor:
+        type: string
+      channel:
+        type: integer #transformar em um enum
+      
+          
+        
+  Service:
+    type: object
+    properties:
+      name:
+        type: string
+      return:
+        type: string  #transformar em um enum
+      params:
+        type: array
+        items:
+           $ref: '#/definitions/Parameter'
+  
+  Parameter:
+    type: object
+    properties:
+      name: 
+        type: string
+      type: 
+        type: string #transformar em um enum
+
+  ErrorResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+  
+  TokenResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      token:
+        type: string
+        
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+        
