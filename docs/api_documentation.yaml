@@ -11,17 +11,17 @@ info:
 # Describe your paths here
 paths:
   # This is a path endpoint. Change it.
-  /device/list:
+  /client/list:
     # This is a HTTP operation
     get:
       description:
-       Get registered devices.
+       Get registered clients.
       parameters:
         # An example parameter that is in query and is required
         -
           name: name
           in: query
-          description: device name
+          description: client name
           required: false
           type: string
           format: text
@@ -29,7 +29,7 @@ paths:
         -
           name: processor
           in: query
-          description: device processor name
+          description: client processor name
           required: false
           type: string
           format: text
@@ -37,7 +37,7 @@ paths:
         -
           name: channel
           in: query
-          description: device communication channel id
+          description: client communication channel id
           required: false
           type: number
           format: int
@@ -45,7 +45,7 @@ paths:
         -
           name: host
           in: query
-          description: device host name (for example - ip, domain...)
+          description: client host name (for example - ip, domain...)
           required: false
           type: string
           format: text
@@ -53,7 +53,7 @@ paths:
         -
           name: tag
           in: query
-          description: device tag
+          description: client tag
           required: false
           type: string
           format: text
@@ -62,15 +62,15 @@ paths:
         200:
           description: Successful response
           schema:
-            title: Devices
+            title: clients
             type: object
             properties:
               code:
                 type: integer
-              devices:
+              clients:
                 type: array
                 items:
-                    $ref: '#/definitions/Device'
+                    $ref: '#/definitions/client'
         401:
           description: Invalid or expired token
           schema:
@@ -81,19 +81,19 @@ paths:
             $ref: '#/definitions/ErrorResponse'
 
 
-  /device/register/:
+  /client/register/:
      
     post:
       tags:
-        - device
-      description: Register a device
+        - client
+      description: Register a client
       parameters:
-        - name: device
+        - name: client
           in: body
           required: true
-          description: device attributes
+          description: client attributes
           schema:
-           $ref: '#/definitions/Device'
+           $ref: '#/definitions/client'
 
       responses:
         200:
@@ -124,6 +124,11 @@ paths:
         - service
       description: Register an array of services
       parameters:
+        - name: token 
+          required: true
+          description: client token
+          type: string
+          
         - name: services
           in: body
           required: true
@@ -154,11 +159,53 @@ paths:
           description: Unprocessable Entity
           schema:
             $ref: '#/definitions/ErrorResponse' 
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/ErrorResponse'    
 
+  /service/send/:
+    
+    post:
+      tags:
+        - service
+      description: Send service temporal information  
+      parameters:
+        - name: token
+          in: body
+          required: true
+          description: client token 
+          schema:
+          type: string
+          
+        - name: services
+          required: true
+          description: Send captured data
+          type: array
+          items:
+           $ref: '#/definitions/ServiceVal'
+
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbbiden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'  
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/ErrorResponse'    
+     
+    
 
 
 definitions:
-  Device:
+  Client:
     type: object
     properties:
       name:
@@ -187,6 +234,16 @@ definitions:
         type: array
         items:
            $ref: '#/definitions/Parameter'
+           
+  ServiceVal:
+    type: object
+    properties:
+      service_id:
+        type: int
+      params:
+        type: array
+        items:
+           $ref: '#/definitions/Parameter'         
   
   Parameter:
     type: object
@@ -213,8 +270,25 @@ definitions:
         type: string
       token:
         type: string
+  
+  ServiceResponse:
+    type: object
+    properties:
+      code:
+        type: int
+      services: 
+        type: array
+        items:
+            $ref: '#/definitions/RegisterService'   
+           
         
-          
+  RegisterService:
+    type: object
+    properties:
+      name:
+        type: string
+      service_id:
+        type: int
     
     
     
