@@ -79,6 +79,125 @@ paths:
           description: Forbidden
           schema:
             $ref: '#/definitions/ErrorResponse'
+            
+            
+            
+  /client/list_service_values:
+    # This is a HTTP operation
+    post:
+      description:
+       Get a list containing the information that was provided by a device.
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: token
+          in: body
+          description: client token
+          required: true
+          type: string
+          format: text
+        
+        -
+          name: start_date
+          in: body
+          description: In the case of a search between a time interval, this is the starting date
+          required: false
+          type: timestamp
+          format: date
+          
+        -
+          name: end_date
+          in: body
+          description: In the case of a search between a time interval, this is the ending date
+          required: false
+          type: timestamp
+          format: date
+          
+        -
+          name: limit
+          in: body
+          description: Limits the ammount of records for request. Used mainly to prevent memory issues. 
+          required: true
+          type: integer
+          format: integer
+          
+        -
+          name: order
+          in: body
+          description: Bool. 0 for asc and 1 for desc.
+          required: true
+          type: bool
+          format: bool
+
+        -
+          name: name
+          in: body
+          description: client name
+          required: false
+          type: string
+          format: text
+
+        -
+          name: processor
+          in: body
+          description: client processor name
+          required: false
+          type: string
+          format: text
+
+        -
+          name: channel
+          in: body
+          description: client communication channel id
+          required: false
+          type: number
+          format: int
+
+        -
+          name: host
+          in: body
+          description: client host name (for example - ip, domain...)
+          required: false
+          type: string
+          format: text
+
+        -
+          name: tag
+          in: body
+          description: client tag
+          required: false
+          type: string
+          format: text
+
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: clients
+            type: object
+            properties:
+              code:
+                type: integer
+              values:
+                type: array
+                items:
+                    $ref: '#/definitions/Service_values_list'
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        400:
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/ErrorResponse'
 
 
   /client/register/:
@@ -222,6 +341,15 @@ definitions:
         type: integer #transformar em um enum
       
           
+          
+  Service_values_list:
+    type: object
+    properties:
+      service:
+        type: string
+      value:
+        type: string
+          
         
   Service:
     type: object
@@ -288,26 +416,4 @@ definitions:
       name:
         type: string
       service_id:
-        type: int
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-        
-        
-        
+        type: in
