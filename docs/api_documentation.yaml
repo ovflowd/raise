@@ -1,6 +1,3 @@
-# Example YAML to get you started quickly.
-# Be aware that YAML has indentation based scoping.
-# Code completion support is available so start typing for available options.
 swagger: '2.0'
 
 # This is your document metadata
@@ -11,7 +8,7 @@ info:
 # Describe your paths here
 paths:
   # This is a path endpoint. Change it.
-  /client/list:
+  /client/list/:
     # This is a HTTP operation
     get:
       description: Get registered clients
@@ -70,7 +67,7 @@ paths:
               clients:
                 type: array
                 items:
-                    $ref: '#/definitions/client'
+                    $ref: '#/definitions/Client'
         401:
           description: Invalid or expired token
           schema:
@@ -82,9 +79,12 @@ paths:
             
             
             
-  /client/list_service_values:
+  /client/list_service_values/:
     # This is a HTTP operation
-    post:
+    get:
+      tags:
+        - client
+        - service
       description:
        Get a list containing the information that was provided by a device.
       parameters:
@@ -205,6 +205,7 @@ paths:
     post:
       tags:
         - client
+        - register
       description: Register a client
       parameters:
         - name: client
@@ -212,7 +213,7 @@ paths:
           required: true
           description: client attributes
           schema:
-           $ref: '#/definitions/client'
+           $ref: '#/definitions/Client'
 
       responses:
         200:
@@ -241,6 +242,7 @@ paths:
     post:
       tags:
         - service
+        - register
       description: Register an array of services
       parameters:
         - name: token 
@@ -256,6 +258,11 @@ paths:
           type: array
           items:
            $ref: '#/definitions/Service'
+        
+        - name: type
+          required: true
+          description: indicates if service actuates on environment
+          type: boolean
 
       responses:
         200:
@@ -283,7 +290,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'    
 
-  /service/send/:
+  /service/send_values/:
     
     post:
       tags:
@@ -320,11 +327,12 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'    
             
-  /service/list_services/:
+  /service/list/:
     
-    post:
+    get:
       tags:
         - service
+        - list
       description: Lists services accessible by the device
       parameters:
         - name: token
@@ -362,562 +370,17 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'    
             
-  /service/list_log/:
+  /log/list/:
     
-    post:
+    get:
       tags:
         - log
         - list
       description: Returns a list containing the headers log stored on the server.
       parameters:
-        - name: token
-          in: body
-          required: true
-          description: client token
-          schema:
-          type: string
-        
-        -
-          name: start_date
-          in: body
-          description: In the case of a search between a time interval, this is the starting date
-          required: true
-          type: timestamp
-          format: date
-          
-        -
-          name: end_date
-          in: body
-          description: In the case of a search between a time interval, this is the ending date
-          required: true
-          type: timestamp
-          format: date
-          
-        -
-          name: limit
-          in: body
-          description: Limits the amount of records for request. Used to prevent memory issues. 
-          required: true
-          type: integer
-          format: integer
-          
-        -
-          name: order
-          in: body
-          description: Bool. 0 for asc and 1 for desc.
-          required: false
-          type: bool
-          format: bool
-        
-      
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: services
-            type: object
-            properties:
-              code:
-                type: integer
-              values:
-                type: array
-                items:
-                  $ref: '#/definitions/logs'
-                      
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-    ##
-    
-
-definitions:
-  Client:
-    type: object
-    properties:
-      name:
-        type: string
-      chipset:
-        type: string
-      mac:
-        type: string
-      serial:
-        type: string
-      processor:
-        type: string
-      channel:
-        type: integer #transformar em um enum
-      
-          
-          
-  Service_values_list:
-    type: object
-    properties:
-      id:
-        type: int
-      service:
-        type: string
-      value:
-        type: string
-          
-          
-  logs:
-    type: object
-    properties:
-      id:
-        type: int
-      header_code:
-        type: int
-      message:
-        type: string
-        
-  Service:
-    type: object
-    properties:
-      name:
-        type: string
-      return:
-        type: string  #transformar em um enum
-      params:
-        type: array
-        items:
-           $ref: '#/definitions/Parameter'
-           
-  ServiceVal:
-    type: object
-    properties:
-      service_id:
-        type: int
-      params:
-        type: array
-        items:
-           $ref: '#/definitions/Parameter'         
-  
-  Parameter:
-    type: object
-    properties:
-      name: 
-        type: string
-      type: 
-        type: string #transformar em um enum
-
-  ErrorResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-      message:
-        type: string
-  
-  TokenResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-      message:
-        type: string
-      token:
-        type: string
-  
-  ServiceResponse:
-    type: object
-    properties:
-      code:
-        type: int
-      services: 
-        type: array
-        items:
-            $ref: '#/definitions/RegisterService'   
-           
-        
-  RegisterService:
-    type: object
-    properties:
-      name:
-        type: string
-      service_id:
-type: int# Example YAML to get you started quickly.
-# Be aware that YAML has indentation based scoping.
-# Code completion support is available so start typing for available options.
-swagger: '2.0'
-
-# This is your document metadata
-info:
-  version: "0.3.0"
-  title: UIOT RAISE API
-
-# Describe your paths here
-paths:
-  # This is a path endpoint. Change it.
-  /client/list:
-    # This is a HTTP operation
-    get:
-      description: Get registered clients
-      
-      parameters:
-        # An example parameter that is in query and is required
-        -
-          name: name
-          in: query
-          description: client name
-          required: false
-          type: string
-          format: text
-
-        -
-          name: processor
-          in: query
-          description: client processor name
-          required: false
-          type: string
-          format: text
-
-        -
-          name: channel
-          in: query
-          description: client communication channel id
-          required: false
-          type: number
-          format: int
-
-        -
-          name: host
-          in: query
-          description: client host name (for example - ip, domain...)
-          required: false
-          type: string
-          format: text
-
-        -
-          name: tag
-          in: query
-          description: client tag
-          required: false
-          type: string
-          format: text
-
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: clients
-            type: object
-            properties:
-              code:
-                type: integer
-              clients:
-                type: array
-                items:
-                    $ref: '#/definitions/client'
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        403:
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-            
-            
-            
-  /client/list_service_values:
-    # This is a HTTP operation
-    post:
-      description:
-       Get a list containing the information that was provided by a device.
-      parameters:
-        # An example parameter that is in query and is required
-        -
+        - 
           name: token
           in: body
-          description: client token
-          required: true
-          type: string
-          format: text
-        
-        -
-          name: start_date
-          in: body
-          description: In the case of a search between a time interval, this is the starting date
-          required: false
-          type: timestamp
-          format: date
-          
-        -
-          name: end_date
-          in: body
-          description: In the case of a search between a time interval, this is the ending date
-          required: false
-          type: timestamp
-          format: date
-          
-        -
-          name: limit
-          in: body
-          description: Limits the amount of records for request. Used to prevent memory issues. 
-          required: true
-          type: integer
-          format: integer
-          
-        -
-          name: order
-          in: body
-          description: Bool. 0 for asc and 1 for desc.
-          required: true
-          type: bool
-          format: bool
-
-        -
-          name: name
-          in: body
-          description: client name
-          required: false
-          type: string
-          format: text
-
-        -
-          name: processor
-          in: body
-          description: client processor name
-          required: false
-          type: string
-          format: text
-
-        -
-          name: channel
-          in: body
-          description: client communication channel id
-          required: false
-          type: number
-          format: int
-
-        -
-          name: host
-          in: body
-          description: client host name (for example - ip, domain...)
-          required: false
-          type: string
-          format: text
-
-        -
-          name: tag
-          in: body
-          description: client tag
-          required: false
-          type: string
-          format: text
-
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: clients
-            type: object
-            properties:
-              code:
-                type: integer
-              values:
-                type: array
-                items:
-                    $ref: '#/definitions/Service_values_list'
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        403:
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        400:
-          description: Invalid parameters
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-
-
-  /client/register/:
-     
-    post:
-      tags:
-        - client
-      description: Register a client
-      parameters:
-        - name: client
-          in: body
-          required: true
-          description: client attributes
-          schema:
-           $ref: '#/definitions/client'
-
-      responses:
-        200:
-          description: OK
-          schema:
-           $ref: '#/definitions/TokenResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse' 
-        400:
-          description: Invalid parameters
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-
-  /service/register/:
-     
-    post:
-      tags:
-        - service
-      description: Register an array of services
-      parameters:
-        - name: token 
-          required: true
-          description: client token
-          type: string
-          
-        - name: services
-          in: body
-          required: true
-          description: an array of services to be registered
-          schema:
-          type: array
-          items:
-           $ref: '#/definitions/Service'
-
-      responses:
-        200:
-          description: OK
-          schema:
-           $ref: '#/definitions/TokenResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse' 
-        400:
-          description: Invalid parameters
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/ErrorResponse' 
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-
-  /service/send/:
-    
-    post:
-      tags:
-        - service
-      description: Send service temporal information  
-      parameters:
-        - name: token
-          in: body
-          required: true
-          description: client token 
-          schema:
-          type: string
-          
-        - name: services
-          required: true
-          description: Send captured data
-          type: array
-          items:
-           $ref: '#/definitions/ServiceVal'
-
-      responses:
-        200:
-          description: OK
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-            
-  /service/list_services/:
-    
-    post:
-      tags:
-        - service
-      description: Lists services accessible by the device
-      parameters:
-        - name: token
-          in: body
-          required: true
-          description: client token
-          schema:
-          type: string
-      
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: services
-            type: object
-            properties:
-              code:
-                type: integer
-              values:
-                type: array
-                items:
-                  service:
-                  type: string
-                      
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-            
-  /service/list_log/:
-    
-    post:
-      tags:
-        - log
-        - list
-      description: Returns a list containing the headers log stored on the server.
-      parameters:
-        - name: token
-          in: body
           required: true
           description: client token
           schema:
@@ -982,10 +445,11 @@ paths:
           description: Invalid or expired token
           schema:
             $ref: '#/definitions/ErrorResponse'    
-    ##
+    
     
 
 definitions:
+  
   Client:
     type: object
     properties:
@@ -1008,7 +472,7 @@ definitions:
     type: object
     properties:
       id:
-        type: int
+        type: integer
       service:
         type: string
       value:
@@ -1019,9 +483,9 @@ definitions:
     type: object
     properties:
       id:
-        type: int
+        type: integer
       header_code:
-        type: int
+        type: integer
       message:
         type: string
         
@@ -1041,7 +505,7 @@ definitions:
     type: object
     properties:
       service_id:
-        type: int
+        type: integer
       params:
         type: array
         items:
@@ -1077,7 +541,7 @@ definitions:
     type: object
     properties:
       code:
-        type: int
+        type: integer
       services: 
         type: array
         items:
@@ -1090,4 +554,4 @@ definitions:
       name:
         type: string
       service_id:
-type: int
+        type: integer
