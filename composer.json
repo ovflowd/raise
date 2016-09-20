@@ -1,5 +1,5 @@
 {
-  "name": "UIoT/uiot_raise",
+  "name": "uiot/uiot_raise",
   "description": "UIoT's Service Layer Implementation",
   "minimum-stability": "beta",
   "license": "MIT",
