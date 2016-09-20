@@ -1,5 +1,5 @@
 {
-  "name": "UIoT/middleware_mc_srvcl_rest_raise",
+  "name": "UIoT/uiot_raise",
   "description": "UIoT's Service Layer Implementation",
   "minimum-stability": "beta",
   "license": "MIT",
