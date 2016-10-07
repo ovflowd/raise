@@ -1,5 +1,4 @@
 <?php
-
 /**
  * UIoT Service Layer
  * @version alpha
@@ -18,62 +17,88 @@
  * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html (will be removed later)
  */
 
+
+require "path/to/error/dictionary.php";
 class DatabaseParser
 {
-    protected $userName;
-    protected $password;
-    protected $dbName;
-    protected $serverAddress;
-    protected $bucket;
+    private $userName;
+    private $password;
+    private $dbName;
+    private $serverAddress;
 
-    public function __construct($UserName, $Password, $DbName, $serverAddress)
+    private function connect($UserName, $Password, $bucket, $serverAddress)
     {
-        $cluster = new CouchbaseCluster("couchbase://127.0.0.1");
-        $bucket = $cluster->openBucket("default");
+        $cluster = new CouchbaseCluster($serverAddress);
+        $bucket = $cluster->openBucket($bucket);
+        return $bucket;
     }
 
     //Method for performing a insert query on the database.
     //return string
     private function insert($resquestObj)
     {
-        $result = $bucket->upsert('u:' . $resquestObj->name, $resquestObj->params);
-        $response = json_encode(array(
-            'code' => 200,
-            'message' => $resquestObj->message
-        ));
-        echo $response;
+        try
+        {
+            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
+            $result = $bucket->upsert('u:' . $resquestObj->name, $resquestObj->params);
+            $response = json_encode(array(
+                'code' => 200,
+                'message' => $resquestObj->message
+            ));
+            return $response;
+        }
+        catch(Exception $e)
+        {
+            Dictionary::trowMessage($e);
+        }
     }
 
     //Method for performing a update query on the database.
     //return string
     private function update($resquestObj)
     {
-        $doc = $resquestObj->name;
-        foreach ($resquestObj->params as $param => $paramValue)
+        try
         {
-            array_push($doc->$key, $paramValue);
+            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
+            $doc = $resquestObj->name;
+            foreach ($resquestObj->params as $param => $paramValue)
+            {
+                array_push($doc->$key, $paramValue);
+            }
+            $bucket->replace("u:" . $resquestObj->name, $doc);
+            $response = json_encode(array(
+                'code' => 200,
+                'message' => $resquestObj->message
+            ));
+            return $response;
         }
-        $bucket->replace("u:" . $resquestObj->name, $doc);
-        $response = json_encode(array(
-            'code' => 200,
-            'message' => $resquestObj->message
-        ));
-        echo $response;
+        catch(Exception $e)
+        {
+            Dictionary::trowMessage($e);
+        }
     }
 
     //Method for performing a select query on the database.
     //return string
     private function select($resquestObj)
     {
-        foreach ($resquestObj->params as $key => $param)
+        try
         {
-            $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `default` WHERE " . key . " =" . $param);
+            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
+            foreach ($resquestObj->params as $key => $param)
+            {
+                $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `default` WHERE " . key . " =" . $param);
+            }
+            $rows = $bucket->query($query);
+            $response = json_encode(array(
+                'code' => 200,
+                $resquestObj->message => json_encode($rows)
+            ));
+            return $response;
         }
-        $rows = $bucket->query($query);
-        $response = json_encode(array(
-            'code' => 200,
-            $resquestObj->message => json_encode($rows)
-        ));
-        echo $response;
+        catch(Exception $e)
+        {
+            Dictionary::trowMessage($e);
+        }
     }
 }
