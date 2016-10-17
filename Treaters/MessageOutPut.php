@@ -8,7 +8,11 @@ for Couchbase message use messageCouch(),
 
 */
 
+namespace Raise\Treaters;
+
 include_once '../Models/Message.php';
+
+
 
 class MessageController {
 

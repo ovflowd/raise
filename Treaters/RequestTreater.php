@@ -2,43 +2,49 @@
 
 namespace Raise\Treaters;
 
-use Raise\model\Request;
+include ('Models/Request.php');
+include ('Treaters/MessageOutPut.php');
+
+use Raise\Models\Request;
+use Raise\Treaters\MessageController;
 
 class RequestTreater
 {
 
 		private $requestInfo = array('protocol' => 'SERVER_PROTOCOL',
-									'method' =>'REQUEST_METHOD',
-									'path' =>'PATH_INFO',
-									'query' =>'QUERY_STRING',
-									'sender' => 'REMOTE_ADDRESS');
+					     'method' =>'REQUEST_METHOD',
+					     'path' =>'PATH_INFO',
+					     'query' =>'QUERY_STRING',
+					     'sender' => 'REMOTE_ADDRESS');
 
 		private $codes = array("protocol" => 505, "method" => 405, "path" => 400, "query" => 400, "remote" => 403);
 
 		public function __construct()
-		{}
+		{
+
+		}
 
 
 		public function execute()
 		{
 			$request = $this->create();
 		    if(!$request->isValid())
-		    		return new ErrorMessage($request->getResponseCode());
+		    		return (new MessageController)->messageHttp($request->getReponseCode());
 
-		    return new SecurityManager()->validate($request);
+		    return (new SecurityManager())->validate($request);
 		}
 
 		public function create() {
-			$request = new Request();
+			$request = new Request($_SERVER['REQUEST_METHOD'],$_SERVER['SERVER_PROTOCOL'],$_SERVER['SERVER_ADDR'],$_SERVER['REMOTE_ADDR'],$_SERVER['REQUEST_URI'],$_SERVER['QUERY_STRING'],file_get_contents('php://input'));
 
 			foreach($requestInfo as $key => $info) {
-				$this->validate($_SERVER[$info], $key, $request));
+				$this->validate($_SERVER[$info], $key, $request);
 			}
 
 			return $request;
 		}
 
-		private function validate($information, $category, &$request)
+		private function validate($information, $category, $request)
 		{
 				if(!$this->$category($information))
 				{
@@ -73,18 +79,20 @@ class RequestTreater
 			return in_array($sener, self::VALID_SENDERS);
 		}
 
+		private function body($body) {
 
-		if(!isValidBody(file_get_contents('php://input')))
-		{
-			$request->setResponseCode(422);
-			$request->setValid(false);
-			return $request;
+			if(!$this->isValidBody($body))
+			{
+				$request->setResponseCode(422);
+				$request->setValid(false);
+				return $request;
+			}
+
+
+				$request->setValid(true);
+				$request->setResponseCode(200);
+				return $request;
 		}
-
-
-			$request->setValid(true);
-			$request->setResponseCode(200);
-			return $request;
-		}
+	
 
 }
