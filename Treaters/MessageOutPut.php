@@ -1,6 +1,19 @@
 <?php
-
-/*
+/**
+ * UIoT Service Layer
+ * @version alpha
+ *                          88
+ *                          ""              ,d
+ *                                          88
+ *              88       88 88  ,adPPYba, MM88MMM
+ *              88       88 88 a8"     "8a  88
+ *              88       88 88 8b       d8  88
+ *              "8a,   ,a88 88 "8a,   ,a8"  88,
+ *               `"YbbdP'Y8 88  `"YbbdP"'   "Y888
+ *
+ * @author Universal Internet of Things
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @copyright University of Brasília
 
 If you need a http message use messageHttp(), this method get a http code and create a object message
 
@@ -14,7 +27,7 @@ include_once '../Models/Message.php';
 
 
 
-class MessageController {
+class MessageOutPut {
 
 	public function messageHttp($code) {
 		
@@ -30,7 +43,7 @@ class MessageController {
 			$result = $myBucket->query($query);//save a result of search 
 
 			foreach ($result->rows as $row) {
-				$message_out=$row->metadata; //get a message object				
+				$message_out=$row->metadata; //get a message object			
 			}
 
 			$message = new Message($message_out->codHttp, $message_out->codCouch, $message_out->message); //create a message model
@@ -39,7 +52,8 @@ class MessageController {
 		    printf("(code: %d)", $e->getCode());
 		}
 
-		return $message; //return a message object --> object(Message)#10 (3) { ["codeHttp"]=> string(3) "200" ["codeCouch"]=> string(2) "00" ["message"]=> string(10) "OK, Sucess" } 
+		return $message->message_out(); //return a message object --> object(stdClass)#11 (2) { ["codeHttp"]=> string(3) "200" ["message"]=> string(10) "OK, Sucess" } 
+		
 
 	}
 
@@ -65,8 +79,8 @@ class MessageController {
 		} catch (CouchbaseException $e) {
 		    printf("(code: %d)", $e->getCode());
 		}
-
-		return $Message;
+		
+		return $message->message_out();
 
 	}
 
