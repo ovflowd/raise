@@ -8,7 +8,7 @@ class Request{
         private $protocol;
         private $server_ip;
         private $remote_ip;
-        private $resource;
+        private $path;
         private $params;
         private $isValid;
 		private $body;
@@ -19,9 +19,9 @@ class Request{
         $this->protocol = $protocol;
         $this->server_ip = $serverAddress;
         $this->remote_ip = $clientAddress;
-        $this->setResource($path);
+        $this->setPath($path);
         $this->setParams($queryString);
-        $this->body = $body;
+        $this->body = json_decode($body, true);
         $this->reponse = 200; //default value for request reponse
         $this->isValid = true;
     }
@@ -58,14 +58,13 @@ class Request{
             return $this->remote_ip;
     }
 
-    public function setResource($resource){
-    	$s = explode("?", $resource); //divide path from query string
-		$r = explode("/", $s[0]); // separate path into array
-		$this->resource = $r[2];		
+    public function setPath($path){
+    	$s = explode("?", $path); //divide path from query string
+		$this->path = explode("/", $s[0]); // separate path into array		
 	}
 
-    public function getResource(){
-        return $this->resource;
+    public function getpath(){
+        return $this->path;
     }
     
 	public function setParams($paramsString)

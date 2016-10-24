@@ -18,7 +18,8 @@
  */
 
 
-require "path/to/error/dictionary.php";
+include_once ("Treaters/MessageOutPut.php");
+
 class DatabaseParser
 {
     private $userName;
@@ -49,7 +50,7 @@ class DatabaseParser
         }
         catch(Exception $e)
         {
-            Dictionary::trowMessage($e);
+            //Dictionary::trowMessage($e);
         }
     }
 
@@ -74,7 +75,7 @@ class DatabaseParser
         }
         catch(Exception $e)
         {
-            Dictionary::trowMessage($e);
+            //Dictionary::trowMessage($e);
         }
     }
 
@@ -98,7 +99,7 @@ class DatabaseParser
         }
         catch(Exception $e)
         {
-            Dictionary::trowMessage($e);
+            //Dictionary::trowMessage($e);
         }
     }
 }

@@ -1,42 +1,53 @@
 <?php
+
+namespace Raise\Controllers;
+
+include("Database/DatabaseParser.php");
+include_once("Treaters/MessageOutPut.php"); 
+
+use Raise\Treaters\MessageOutPut;
+
 class SecurityController 
 {
 	
-	public funtion validate(Request request)
-	{
+	public function validate($request)
+	{	
 			//extract the request body as associative array
-			$bodyArray = json_decode(request->getBody(), true);
+			$bodyArray = $request->getBody();
+			
 			
 			//checks if the client has send a large number of requests
-                        if($this->isFload($bodyArray))
-                        {
-                        	$this->updateContext($bodyArray, 429);
-				return new ErrorMessage(429); //HTTP code 429 -> too many requests       
-                        }	
+            if($this->isFload($bodyArray))
+            {
+                $this->updateContext($bodyArray, 429);
+				return (new MessageOutPut())->messageHttp(429); //HTTP code 429 -> too many requests       
+            }	
 				
 			//checks if the request token is valid	
 			if(!$this->isValidToken($bodyArray["token"])) 
 			{
 				
 				$this->updateContext($bodyArray, 401);				
-				//ErrorMessage class is being develop by service team
-				return new ErrorMessage(401); // HTTP code 401 -> unauthorized
+				//MessageOutPut()->messageHttp class is being develop by service team
+				return (new MessageOutPut())->messageHttp(401); // HTTP code 401 -> unauthorized
 			}			
 			//checks if the client has pemission to do requested services
 			if(!$this->hasPermission($bodyArray))
 			{	
 				$this->updateContext($bodyArray, 403);
-				return new ErrorMessage(403); //HTTP code 403 -> forbidden
+				return (new MessageOutPut())->messageHttp(403); //HTTP code 403 -> forbidden
 		
 			}
 			
 			
 			$this->updateContext($bodyArray, 200);
-			
-			//call request treater
-			new RequestTreater->execute($bodyArray);	
+				
+			//call database parser to perform action in DB
+
+			return "";
 			
 	}
+
 	private function isFload($body) 
 	{
 		//consult the database to verify if 

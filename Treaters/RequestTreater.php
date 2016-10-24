@@ -3,10 +3,12 @@
 namespace Raise\Treaters;
 
 include ('Models/Request.php');
-include ('Treaters/MessageOutPut.php');
+include_once ('Treaters/MessageOutPut.php');
+include ('Controllers/SecurityController.php');
 
 use Raise\Models\Request;
 use Raise\Treaters\MessageController;
+use Raise\Controllers\SecurityController;
 
 class RequestTreater
 {
@@ -28,10 +30,12 @@ class RequestTreater
 		public function execute()
 		{
 			$request = $this->create();
+		
 		    if(!$request->isValid())
 		    		return (new MessageController)->messageHttp($request->getReponseCode());
-
-		    return (new SecurityManager())->validate($request);
+		    
+		    $a = new SecurityController();
+		    return $a->validate($request);
 		}
 
 		public function create() {
@@ -41,6 +45,7 @@ class RequestTreater
 				$this->validate($_SERVER[$info], $key, $request);
 			}
 
+			//echo json_encode($request);	
 			return $request;
 		}
 
@@ -76,7 +81,7 @@ class RequestTreater
 
 		private function sender($sender)
 		{
-			return in_array($sener, self::VALID_SENDERS);
+			return in_array($sender, self::VALID_SENDERS);
 		}
 
 		private function body($body) {
