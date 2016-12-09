@@ -1,6 +1,6 @@
 <?php
 
-namespace Raise\Models;	
+namespace Raise\Models;
 
 class Request{
 
@@ -13,7 +13,7 @@ class Request{
         private $isValid;
 		private $body;
 		private $response;
-  
+
 	public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body){
         $this->method = $method;
         $this->protocol = $protocol;
@@ -60,13 +60,13 @@ class Request{
 
     public function setPath($path){
     	$s = explode("?", $path); //divide path from query string
-		$this->path = explode("/", $s[0]); // separate path into array		
+		$this->path = explode("/", $s[0]); // separate path into array
 	}
 
     public function getpath(){
         return $this->path;
     }
-    
+
 	public function setParams($paramsString)
 	{
     	parse_str($paramsString, $paramsArray);
@@ -89,7 +89,12 @@ class Request{
 
 		$this->isValid = $validate;
 	}
-	
+
+  public function setResponseCode($code)
+  {
+    $this->response = $code;
+  }
+
 	public function getReponseCode() {
 		return $this->response;
 	}

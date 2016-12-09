@@ -16,44 +16,40 @@
  * @copyright University of Brasília
  * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html (will be removed later)
  */
-
-
 include_once ("Treaters/MessageOutPut.php");
-
+use Raise\Treaters\MessageOutPut;
 class DatabaseParser
 {
-    private $userName;
-    private $password;
-    private $dbName;
-    private $serverAddress;
-
-    private function connect($UserName, $Password, $bucket, $serverAddress)
+    private $userName = NULL;
+    private $password = NULL;
+    private $serverAddress = "127.0.0.1:8091";
+    private function connect($bucket, $serverAddress)
     {
         $cluster = new CouchbaseCluster($serverAddress);
         $bucket = $cluster->openBucket($bucket);
         return $bucket;
     }
-
     //Method for performing a insert query on the database.
     //return string
-    private function insert($resquestObj)
+    public function insert($resquestObj)
     {
         try
         {
-            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
-            $result = $bucket->upsert('u:' . $resquestObj->name, $resquestObj->params);
+            $bucket = $this->connect($resquestObj->bucket, $this->serverAddress);
+            $token = bin2hex(openssl_random_pseudo_bytes(16));
+            $result = $bucket->upsert($token, $resquestObj->parameters);
             $response = json_encode(array(
                 'code' => 200,
-                'message' => $resquestObj->message
+                'message' => (new MessageOutPut())->messageHttp(200)->message,
+                'token' => $result->cas
             ));
             return $response;
         }
-        catch(Exception $e)
+        catch(CouchbaseException $e)
         {
-            //Dictionary::trowMessage($e);
+            return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
-
     //Method for performing a update query on the database.
     //return string
     private function update($resquestObj)
@@ -73,33 +69,42 @@ class DatabaseParser
             ));
             return $response;
         }
-        catch(Exception $e)
+        catch(CouchbaseException $e)
         {
-            //Dictionary::trowMessage($e);
+            return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
-
     //Method for performing a select query on the database.
     //return string
-    private function select($resquestObj)
+    public function select($requestObj)
     {
         try
         {
-            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
-            foreach ($resquestObj->params as $key => $param)
+            $bucket = $this->connect($requestObj->bucket, $this->serverAddress);
+            $queryStr = "SELECT * FROM `teste` WHERE";
+            foreach ($requestObj->parameters as $key => $parameter)
             {
-                $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `default` WHERE " . key . " =" . $param);
+                $queryStr = $queryStr . " " . $key . "=\$$key" . "AND ";
             }
-            $rows = $bucket->query($query);
+            $queryStr = substr($queryStr, 0, -4);
+            $query = \CouchbaseN1qlQuery::fromString($queryStr);
+            $query->namedParams($requestObj->parameters);
+            $result = $bucket->query($query);
+            $responseRows = array();
+            foreach ($result->rows as $row)
+            {
+                $bucket = $requestObj->bucket;
+                $responseRows[] = $row->$bucket;
+            }
             $response = json_encode(array(
                 'code' => 200,
-                $resquestObj->message => json_encode($rows)
+                'values' => json_encode($responseRows)
             ));
             return $response;
         }
-        catch(Exception $e)
+        catch(CouchbaseException $e)
         {
-            //Dictionary::trowMessage($e);
+            return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
 }
