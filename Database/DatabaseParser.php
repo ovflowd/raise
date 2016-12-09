@@ -20,87 +20,99 @@ include_once ("Treaters/MessageOutPut.php");
 use Raise\Treaters\MessageOutPut;
 class DatabaseParser
 {
-    private $userName = NULL;
-    private $password = NULL;
     private $serverAddress = "127.0.0.1:8091";
+    private $serverBucket = "metadata";
+    private $bucket;
+
+    public function __construct($serverObject)
+    {
+        $this->bucket = $this->connect($serverObject->bucket, $this->serverAddress);
+    }
+
+    public function getBucket()
+    {
+        return $this->bucket;
+    }
+
+    private function response($responseRows = NULL)
+    {
+        if ($responseRows === NULL)
+        {
+            $response = json_encode(array(
+                'code' => 200,
+                'message' => (new MessageOutPut())->messageHttp(200)->message,
+                'token' => $result->cas
+            ));
+        }
+        else
+        {
+            $response = json_encode(array(
+                'code' => 200,
+                'values' => json_encode($responseRows)
+            ));
+        }
+        return $response;
+    }
+
+    private function parseResult($result, $request)
+    {
+        $responseRows = array();
+        foreach ($result->rows as $row)
+        {
+            $bucket = $request->bucket;
+            $responseRows[] = $row->$bucket;
+        }
+        return $responseRows;
+    }
+
     private function connect($bucket, $serverAddress)
     {
         $cluster = new CouchbaseCluster($serverAddress);
         $bucket = $cluster->openBucket($bucket);
         return $bucket;
     }
+
     //Method for performing a insert query on the database.
     //return string
     public function insert($resquestObj)
     {
         try
         {
-            $bucket = $this->connect($resquestObj->bucket, $this->serverAddress);
-            $token = bin2hex(openssl_random_pseudo_bytes(16));
-            $result = $bucket->upsert($token, $resquestObj->parameters);
-            $response = json_encode(array(
-                'code' => 200,
-                'message' => (new MessageOutPut())->messageHttp(200)->message,
-                'token' => $result->cas
-            ));
-            return $response;
+            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
+            return $this->response();
         }
         catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
+
     //Method for performing a update query on the database.
     //return string
     private function update($resquestObj)
     {
         try
         {
-            $bucket = connect($UserName, $Password, $resquestObj->bucket, $resquestObj->serverAddress);
-            $doc = $resquestObj->name;
-            foreach ($resquestObj->params as $param => $paramValue)
-            {
-                array_push($doc->$key, $paramValue);
-            }
-            $bucket->replace("u:" . $resquestObj->name, $doc);
-            $response = json_encode(array(
-                'code' => 200,
-                'message' => $resquestObj->message
-            ));
-            return $response;
+            $doc = $resquestObj->id;
+            $doc->$key = $resquestObj->parameters;
+            $bucket->replace($resquestObj->id, $doc);
+            return $this->response($responseRows);
         }
         catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
+
     //Method for performing a select query on the database.
     //return string
     public function select($requestObj)
     {
         try
         {
-            $bucket = $this->connect($requestObj->bucket, $this->serverAddress);
-            $queryStr = "SELECT * FROM `teste` WHERE";
-            foreach ($requestObj->parameters as $key => $parameter)
-            {
-                $queryStr = $queryStr . " " . $key . "=\$$key" . "AND ";
-            }
-            $queryStr = substr($queryStr, 0, -4);
-            $query = \CouchbaseN1qlQuery::fromString($queryStr);
+            $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->parameters);
-            $result = $bucket->query($query);
-            $responseRows = array();
-            foreach ($result->rows as $row)
-            {
-                $bucket = $requestObj->bucket;
-                $responseRows[] = $row->$bucket;
-            }
-            $response = json_encode(array(
-                'code' => 200,
-                'values' => json_encode($responseRows)
-            ));
-            return $response;
+            return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
         }
         catch(CouchbaseException $e)
         {
