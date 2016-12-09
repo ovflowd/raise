@@ -41,8 +41,7 @@ class DatabaseParser
                 'code' => 200,
                 'message' => (new MessageOutPut())->messageHttp(200)->message
             ));
-        }
-        else
+        } else
         {
             $response = json_encode(array(
                 'code' => 200,
@@ -78,8 +77,7 @@ class DatabaseParser
         {
             $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
             return $this->response($result);
-        }
-        catch(CouchbaseException $e)
+        } catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
@@ -94,8 +92,7 @@ class DatabaseParser
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->parameters);
             return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
-        }
-        catch(CouchbaseException $e)
+        } catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }

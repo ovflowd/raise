@@ -11,10 +11,10 @@ class Request{
         private $path;
         private $params;
         private $isValid;
-		private $body;
-		private $response;
+        private $body;
+        private $response;
 
-	public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body){
+    public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body){
         $this->method = $method;
         $this->protocol = $protocol;
         $this->server_ip = $serverAddress;
@@ -35,7 +35,7 @@ class Request{
     }
 
     public function setProtocol($protocol){
-           $this->protocol = $protocol;
+            $this->protocol = $protocol;
     }
 
     public function getProtocol(){
@@ -59,44 +59,44 @@ class Request{
     }
 
     public function setPath($path){
-    	$s = explode("?", $path); //divide path from query string
-		$this->path = explode("/", $s[0]); // separate path into array
-	}
+        $s = explode("?", $path); //divide path from query string
+        $this->path = explode("/", $s[0]); // separate path into array
+    }
 
     public function getpath(){
         return $this->path;
     }
 
-	public function setParams($paramsString)
-	{
-    	parse_str($paramsString, $paramsArray);
-   		$this->params = $paramsArray;
-	}
-
-    public function getParameters(){
-         return $this->params;
+    public function setParams($paramsString)
+    {
+        parse_str($paramsString, $paramsArray);
+            $this->params = $paramsArray;
     }
 
-	public function getBody() {
-		return $this->body;
-	}
+    public function getParameters(){
+            return $this->params;
+    }
 
-	public function isValid() {
-	  	return $this->isValid;
-	}
+    public function getBody() {
+        return $this->body;
+    }
 
-	public function setValid($validate) {
+    public function isValid() {
+            return $this->isValid;
+    }
 
-		$this->isValid = $validate;
-	}
+    public function setValid($validate) {
 
-  public function setResponseCode($code)
-  {
+        $this->isValid = $validate;
+    }
+
+    public function setResponseCode($code)
+    {
     $this->response = $code;
-  }
+    }
 
-	public function getReponseCode() {
-		return $this->response;
-	}
+    public function getReponseCode() {
+        return $this->response;
+    }
 
 }
