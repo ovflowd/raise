@@ -14,8 +14,8 @@
  * @author Universal Internet of Things
  * @license MIT <https://opensource.org/licenses/MIT>
  * @copyright University of Brasília
- If you need a http message use messageHttp(), this method get a http code and create a object message
- for Couchbase message use messageCouch(),
+ * If you need a http message use messageHttp(), this method get a http code and create a object message
+ * for Couchbase message use messageCouch(),
  */
 namespace Raise\Treaters;
 include_once 'Models/Message.php';
