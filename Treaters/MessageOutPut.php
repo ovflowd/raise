@@ -41,8 +41,7 @@ class MessageOutPut
 
             $message = new \Message($message_out->codHttp, $message_out->codCouch, $message_out->message); //create a message model
 
-        }
-        catch(CouchbaseException $e)
+        } catch(CouchbaseException $e)
         { //
             printf("(code: %d)", $e->getCode());
         }
@@ -66,8 +65,7 @@ class MessageOutPut
                 $message_out = $row->metadata;
             }
             $message = new Message($message_out->codHttp, $message_out->codCouch, $message_out->message);
-        }
-        catch(CouchbaseException $e)
+        } catch(CouchbaseException $e)
         {
             printf("(code: %d)", $e->getCode());
         }

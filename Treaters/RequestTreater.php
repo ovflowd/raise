@@ -31,7 +31,9 @@ class RequestTreater
 
         $this->validate($request);
 
-        if (!$request->isValid()) return (new MessageController)->messageHttp($request->getReponseCode());
+        if (!$request->isValid()) {
+            return (new MessageController)->messageHttp($request->getReponseCode());
+        }
 
         $a = new SecurityController();
         if ($a->validate($request) === true)
@@ -39,8 +41,7 @@ class RequestTreater
             $generator = new \QueryGenerator();
             $response = $generator->generate($request);
             return $response;
-        }
-        else
+        } else
         {
 
             return $a->validate($request);
