@@ -39,8 +39,7 @@ class DatabaseParser
         {
             $response = json_encode(array(
                 'code' => 200,
-                'message' => (new MessageOutPut())->messageHttp(200)->message,
-                'token' => $result->cas
+                'message' => (new MessageOutPut())->messageHttp(200)->message
             ));
         }
         else
@@ -78,24 +77,7 @@ class DatabaseParser
         try
         {
             $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
-            return $this->response();
-        }
-        catch(CouchbaseException $e)
-        {
-            return (new MessageOutPut())->messageHttp($e->getCode());
-        }
-    }
-
-    //Method for performing a update query on the database.
-    //return string
-    private function update($resquestObj)
-    {
-        try
-        {
-            $doc = $resquestObj->id;
-            $doc->$key = $resquestObj->parameters;
-            $bucket->replace($resquestObj->id, $doc);
-            return $this->response($responseRows);
+            return $this->response($result);
         }
         catch(CouchbaseException $e)
         {
