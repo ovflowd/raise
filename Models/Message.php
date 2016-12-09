@@ -19,44 +19,44 @@
 
 class Message {
 
-	var $code_http;
-	var $code_cb;
-	var $message;
+    var $code_http;
+    var $code_cb;
+    var $message;
 
-	public function __construct($codeHttp, $codeCb, $message) {
-		self::set_code_http($codeHttp);
-		self::set_code_cb($codeCb);
-		self::set_message($message);
-	}
+    public function __construct($codeHttp, $codeCb, $message) {
+        self::set_code_http($codeHttp);
+        self::set_code_cb($codeCb);
+        self::set_message($message);
+    }
 
-	public function set_code_http($code) {
-		$this->code_http = $code;
-	}
+    public function set_code_http($code) {
+        $this->code_http = $code;
+    }
 
-	public function get_code_http() {
-		return $this->code_http;
-	}
+    public function get_code_http() {
+        return $this->code_http;
+    }
 
-	public function set_code_cb($code) {
-		$this->code_cb = $code;
-	}
+    public function set_code_cb($code) {
+        $this->code_cb = $code;
+    }
 
-	public function get_code_cb() {
-		return $this->code_cb;
-	}
+    public function get_code_cb() {
+        return $this->code_cb;
+    }
 
-	public function set_message($message) {
-		$this->message = $message;
-	}
+    public function set_message($message) {
+        $this->message = $message;
+    }
 
-	public function get_message() {
-		return $this->message;
-	}
+    public function get_message() {
+        return $this->message;
+    }
 
-	public function message_out() {
-		$messageOut = (object) array('codeHttp' => $this->get_code_http(), 'message' => $this->get_message());
-		return $messageOut;
-	}
+    public function message_out() {
+        $messageOut = (object) array('codeHttp' => $this->get_code_http(), 'message' => $this->get_message());
+        return $messageOut;
+    }
 
 
 }

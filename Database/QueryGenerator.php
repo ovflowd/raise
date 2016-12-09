@@ -11,8 +11,7 @@ Class QueryGenerator
             $parser = new DatabaseParser($this->parseGet($request));
             $this->buildQuery($request);
             $result = $parser->select($this->parseGet($request));
-        }
-        elseif ($request->getMethod() == "POST")
+        } elseif ($request->getMethod() == "POST")
         {
             $parser = new DatabaseParser($this->parseGet($request));
             $result = $parser->insert($this->parseGet($request));
@@ -34,12 +33,12 @@ Class QueryGenerator
 
     private function parsePath($request)
     {
-      $path = $request->getpath();
-      $method = $path[2];
-      $request->bucket = "teste";
-      $request->class = $method;
-      $request->parsedPath = $path;
-      return $request;
+        $path = $request->getpath();
+        $method = $path[2];
+        $request->bucket = "teste";
+        $request->class = $method;
+        $request->parsedPath = $path;
+        return $request;
     }
 
     private function parsePost($request)
@@ -58,8 +57,7 @@ Class QueryGenerator
             if ($param % 2 !== 0 && !in_array($param,array(0,1,2)))
             {
                 $parameters[$value] = "";
-            }
-            elseif(!in_array($param,array(0,1,2)))
+            } elseif(!in_array($param,array(0,1,2)))
             {
                 $parameters[$request->parsedPath[$param - 1]] = $value;
             }
