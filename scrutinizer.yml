@@ -1,0 +1,4 @@
+filter:
+    paths: ["/*"]
+    excluded_paths:
+        - "Docs/"
