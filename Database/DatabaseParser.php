@@ -21,12 +21,11 @@ use Raise\Treaters\MessageOutPut;
 class DatabaseParser
 {
     private $serverAddress = "127.0.0.1:8091";
-    private $serverBucket = "metadata";
     private $bucket;
 
-    public function __construct($serverObject)
+    public function __construct($resquestObj)
     {
-        $this->bucket = $this->connect($serverObject->bucket, $this->serverAddress);
+        $this->bucket = $this->connect($resquestObj->bucket, $this->serverAddress);
     }
 
     public function getBucket()
