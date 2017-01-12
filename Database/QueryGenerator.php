@@ -65,9 +65,5 @@ Class QueryGenerator
         {
           return FALSE;
         }
-
-
     }
-
-
 }
