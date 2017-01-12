@@ -54,7 +54,7 @@ Class QueryGenerator
 
     private function parsePath($request)
     {
-        $path = $request->getpath();
+        $path = $request->getPath();
         $method = $path[2];
         if (!empty($method))
         {

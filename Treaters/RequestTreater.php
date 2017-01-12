@@ -61,7 +61,7 @@ class RequestTreater
         $request->setResponseCode(200);
         $request->setValid(true);
 
-        $bucket = $request->getpath()[2];
+        $bucket = $request->getPath()[2];
         $request->bucket = $bucket;
 
         $database = (new DatabaseParser($request))->getBucket();
@@ -81,9 +81,9 @@ class RequestTreater
         switch($request->getMethod()) {
             case 'GET':
                 $query->namedParams(array('bucket' => $bucket, 'docNme' => 'get_clients_list_required'));
-                $parameters = $database->query($query)->rows[0]->docValues;
+                $parameters = $database->query($query)->rows[0]->docValues[0];
 
-                if(!empty(array_diff($request->getParameters(), (array)$parameters))) {
+                if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
                     $request->setResponseCode(400);
                     $request->setValid(false);
 
@@ -92,9 +92,9 @@ class RequestTreater
             break;
             case 'POST':
                 $query->namedParams(array('bucket' => $bucket, 'docNme' => 'post_clients_register_required'));
-                $parameters = $database->query($query)->rows[0]->docValues;
+                $parameters = $database->query($query)->rows[0]->docValues[0];
 
-                if($request->getParameters() != (array)$parameters) {
+                if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
                     $request->setResponseCode(400);
                     $request->setValid(false);
 

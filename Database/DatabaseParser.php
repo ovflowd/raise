@@ -78,7 +78,7 @@ class DatabaseParser
     {
         try
         {
-            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
+            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->getBody());
             return $this->response($result);
         } catch(CouchbaseException $e)
         {
