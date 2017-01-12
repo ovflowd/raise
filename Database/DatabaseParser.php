@@ -78,9 +78,9 @@ class DatabaseParser
     {
         try
         {
-            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
+            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)), $resquestObj->getBody());
             return $this->response($result);
-        } catch(CouchbaseException $e)
+        } catch (CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
@@ -96,10 +96,10 @@ class DatabaseParser
 
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
-            return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
-        } catch(CouchbaseException $e)
+            return $this->response($this->parseResult($this->getBucket()->query($query), $requestObj));
+        } catch (CouchbaseException $e)
         {
-            var_dump($e);exit;
+            var_dump($e); exit;
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
