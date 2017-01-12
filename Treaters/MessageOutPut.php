@@ -19,12 +19,13 @@
  */
 namespace Raise\Treaters;
 include_once 'Models/Message.php';
+include_once ("Config/Config.php");
 class MessageOutPut
 {
     public function messageHttp($code)
     {
         $message_out;
-        $myCluster = new \CouchbaseCluster('127.0.0.1:8091');
+        $myCluster = new \CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
         try
         { //create a conction with database
@@ -51,7 +52,7 @@ class MessageOutPut
     public function messageCouch($code)
     {
         $message_out;
-        $myCluster = new CouchbaseCluster('127.0.0.1:8091');
+        $myCluster = new CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
         try
         {
