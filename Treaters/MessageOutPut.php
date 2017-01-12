@@ -46,7 +46,7 @@ class MessageOutPut
         { //
             printf("(code: %d)", $e->getCode());
         }
-        return $message->message_out(); //return a message object --> object(stdClass)#11 (2) { ["codeHttp"]=> string(3) "200" ["message"]=> string(10) "OK, Sucess" }
+        return json_encode($message->message_out(), JSON_PRETTY_PRINT); //return a message object --> object(stdClass)#11 (2) { ["codeHttp"]=> string(3) "200" ["message"]=> string(10) "OK, Sucess" }
 
     }
     public function messageCouch($code)
