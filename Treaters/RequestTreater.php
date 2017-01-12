@@ -8,7 +8,7 @@ include_once ('Database/QueryGenerator.php');
 include_once ('Database/DatabaseParser.php');
 
 use Raise\Models\Request;
-use Raise\Treaters\MessageController;
+use Raise\Treaters\MessageOutPut;
 use Raise\Controllers\SecurityController;
 use \DatabaseParser;
 
@@ -36,7 +36,7 @@ class RequestTreater
         $this->validate($request);
 
         if (!$request->isValid()) {
-            return (new MessageController)->messageHttp($request->getReponseCode());
+            return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
 
         $a = new SecurityController();
@@ -61,11 +61,15 @@ class RequestTreater
         $request->setResponseCode(200);
         $request->setValid(true);
 
-        $database = new DatabaseParser($bucket = $request->getpath()[2])->getBucket();
+        $bucket = $request->getPath()[2];
+        $request->bucket = $bucket;
+
+        $database = (new DatabaseParser($request))->getBucket();
 
         $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `bucket` = $bucket');
+        $query->namedParams(array('bucket' => $bucket));
 
-        if($database->query($query, array('bucket' => $bucket))->$1 <= 0) {
+        if($database->query($query)->rows[0]->{"$1"} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
 
@@ -76,9 +80,10 @@ class RequestTreater
 
         switch($request->getMethod()) {
             case 'GET':
-                $parameters = $database->query($query, array('bucket' => $bucket, 'docNme' => 'get_clients_list_required'))->docValues;
+                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'get_clients_list_required'));
+                $parameters = $database->query($query)->rows[0]->docValues[0];
 
-                if(!empty(array_diff($request->getParameters(), $parameters))) {
+                if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
                     $request->setResponseCode(400);
                     $request->setValid(false);
 
@@ -86,9 +91,10 @@ class RequestTreater
                 }
             break;
             case 'POST':
-                $parameters = $database->query($query, array('bucket' => $bucket, 'docNme' => 'post_clients_register_required'))->docValues;
+                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'post_clients_register_required'));
+                $parameters = $database->query($query)->rows[0]->docValues[0];
 
-                if($request->getParameters() != $parameters) {
+                if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
                     $request->setResponseCode(400);
                     $request->setValid(false);
 

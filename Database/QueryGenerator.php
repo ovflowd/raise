@@ -37,12 +37,12 @@ Class QueryGenerator
 
         if(count($request->getParameters())>0)
         {
-            $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
-            foreach ($request->getParameters() as $key => $parameter)
-            {
-                $queryStr = $queryStr . " " . $key . "=\$$key" . "AND ";
-            }
-            $request->string = substr($queryStr, 0, -4);
+          $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
+          foreach ($request->getParameters() as $key => $parameter)
+          {
+              $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+          }
+          $request->string = substr($queryStr, 0, -4);
         }
         else
         {
@@ -54,7 +54,7 @@ Class QueryGenerator
 
     private function parsePath($request)
     {
-        $path = $request->getpath();
+        $path = $request->getPath();
         $method = $path[2];
         if (!empty($method))
         {
@@ -65,9 +65,5 @@ Class QueryGenerator
         {
             return FALSE;
         }
-
-
     }
-
-
 }
