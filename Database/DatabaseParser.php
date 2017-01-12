@@ -90,16 +90,13 @@ class DatabaseParser
     //return string
     public function select($requestObj)
     {
-
         try
         {
-
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
-            var_dump($e);exit;
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
