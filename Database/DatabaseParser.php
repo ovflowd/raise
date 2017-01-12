@@ -38,18 +38,16 @@ class DatabaseParser
 
     private function response($responseRows = NULL)
     {
-        if ($responseRows === NULL)
+
+        if (isset($responseRows->cas))
         {
-            $response = json_encode(array(
-                'code' => 200,
-                'message' => (new MessageOutPut())->messageHttp(200)->message
-            ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+            $response = (new MessageOutPut())->messageHttp(200);
         } else
         {
-            $response = json_encode(array(
+            $response = array(
                 'code' => 200,
                 'values' => $responseRows
-            ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+            );
         }
         return $response;
     }
