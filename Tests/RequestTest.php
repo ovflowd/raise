@@ -17,10 +17,11 @@ class RequestTester
 	public function testInsertClient()
 	{
 		$url = "http://{$this->raise_ip}/client/register";
-		$body = json_encode(array("name" => "renato", "chipset" => "arm", 
+		$body = json_encode(array("name" => "renato", 
+				  "chipset" => "arm", 
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
-			      "processador" => "amd-64",
+			      "processor" => "amd-64",
 			      "channel" => "olfato"));	
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "INSERTING CLIENT...." . "<br>";
@@ -30,10 +31,12 @@ class RequestTester
 	public function testInsertClientWithoutChannel()
 	{
 		$url = "http://{$this->raise_ip}/client/register";
+		
 		$body = json_encode(array("name" => "renato", "chipset" => "arm", 
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
-			      "processador" => "amd-64");	
+			      "processor" => "amd-64"));
+
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo json_decode($response)->codeHttp == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
 		echo $response; 
