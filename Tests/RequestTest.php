@@ -4,7 +4,7 @@ include('httpful.phar');
 
 class RequestTester
 {
-	private $raise_ip = '172.16.9.65/uiot_raise';
+	private $raise_ip = '172.16.4.151/RAISe';
 
 	public function testListAllClients()
 	{
@@ -12,5 +12,18 @@ class RequestTester
 		$response = \Httpful\Request::get($url)->send();
 		echo "All clients response: ". '<br>';
 		echo $response;
+	}
+
+	public function testInsertClient()
+	{
+		$url = "http://{$this->raise_ip}/client/register";
+		$body = json_encode(array("name" => "renato", "chipset" => "arm", 
+			      "mac" => "0a:00:27:00:00:00",
+			      "serial" => "7ARET90OIPUU",
+			      "processador" => "amd-64",
+			      "channel" => "olfato"));	
+		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+		echo "INSERTING CLIENT...." . "<br>";
+		echo $response; 
 	}	
 }  
