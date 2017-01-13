@@ -27,7 +27,7 @@ Class QueryGenerator
         }
         else
         {
-            return json_encode(array('code'=>200,'message'=>'Welcome to RAISE!'));
+            return array('code'=>200,'message'=>'Welcome to RAISE!');
         }
 
     }
