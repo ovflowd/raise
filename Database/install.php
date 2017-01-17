@@ -23,23 +23,23 @@ class Install
         'Responses  => 0'
     );
 
-    public function setFields($name, $quota)
+    private function setFields($name, $quota)
     {
         $this->postfields['name'] = $name;
         $this->postfields['ramQuotaMB'] = $quota;
     }
 
-    public function getFields()
+    private function getFields()
     {
         return $this->postfields;
     }
 
-    public function getBuckets()
+    private function getBuckets()
     {
         return $this->buckets;
     }
 
-    public function setBuckets($memory)
+    private function setBuckets($memory)
     {
         $buckets = $this->getBuckets();
         $buckets['Metadata'] = floor((($memory / 100) * 2.5));
@@ -79,7 +79,7 @@ class Install
     private function createBucket($postfields)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456"); // your couchbase username and password here.
+        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456");
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default/buckets");
         curl_setopt($ch, CURLOPT_POST, 1);
