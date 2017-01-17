@@ -3,9 +3,6 @@ class Install
 {
     private $memory;
 
-    const username = "admin";
-    const password = "123456";
-
     private $postfields = array(
         'authType' => 'sasl',
         'bucketType' => 'membase',
