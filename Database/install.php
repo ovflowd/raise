@@ -1,4 +1,24 @@
 <?php
+/**
+ * UIoT Service Layer
+ * @version alpha
+ *                          88
+ *                          ""              ,d
+ *                                          88
+ *              88       88 88  ,adPPYba, MM88MMM
+ *              88       88 88 a8"     "8a  88
+ *              88       88 88 8b       d8  88
+ *              "8a,   ,a88 88 "8a,   ,a8"  88,
+ *               `"YbbdP'Y8 88  `"YbbdP"'   "Y888
+ *
+ * @author Universal Internet of Things
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @copyright University of Brasília
+ *
+ * This script will install all the required couchbase buckets that RAISe needs to work properly.
+ * IMPORTANT: this requires the cURL extension to work.
+ */
+
 class Install
 {
     private $memory;
@@ -79,7 +99,7 @@ class Install
     private function createBucket($postfields)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456");
+        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456"); // your couchbase username and password here.
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default/buckets");
         curl_setopt($ch, CURLOPT_POST, 1);
