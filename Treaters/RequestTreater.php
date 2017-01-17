@@ -1,13 +1,17 @@
 <?php
 namespace Raise\Treaters;
-include ('Models/Request.php');
+
+include_once ('Models/Request.php');
 include_once ('Treaters/MessageOutPut.php');
-include ('Controllers/SecurityController.php');
+include_once ('Controllers/SecurityController.php');
 include_once ('Database/QueryGenerator.php');
+include_once ('Database/DatabaseParser.php');
 
 use Raise\Models\Request;
-use Raise\Treaters\MessageController;
+use Raise\Treaters\MessageOutPut;
 use Raise\Controllers\SecurityController;
+use \DatabaseParser;
+
 class RequestTreater
 {
     private $requestInfo = array(
@@ -32,7 +36,7 @@ class RequestTreater
         $this->validate($request);
 
         if (!$request->isValid()) {
-            return (new MessageController)->messageHttp($request->getReponseCode());
+            return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
 
         $a = new SecurityController();
@@ -56,6 +60,48 @@ class RequestTreater
     {
         $request->setResponseCode(200);
         $request->setValid(true);
+
+        $bucket = $request->getPath()[2];
+        $request->bucket = $bucket;
+
+        $database = (new DatabaseParser($request))->getBucket();
+
+        $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `bucket` = $bucket');
+        $query->namedParams(array('bucket' => $bucket));
+
+        if($database->query($query)->rows[0]->{"$1"} <= 0) {
+            $request->setResponseCode(422);
+            $request->setValid(false);
+
+            return;
+        }
+
+        $query = \CouchbaseN1qlQuery::fromString('SELECT docValues FROM metadata WHERE `bucket` = $bucket AND `docNme` = $docNme');
+
+        switch($request->getMethod()) {
+            case 'GET':
+                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'get_clients_list_required'));
+                $parameters = $database->query($query)->rows[0]->docValues[0];
+
+                if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
+                    $request->setResponseCode(400);
+                    $request->setValid(false);
+
+                    return;
+                }
+            break;
+            case 'POST':
+                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'post_clients_register_required'));
+                $parameters = $database->query($query)->rows[0]->docValues[0];
+
+                if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
+                    $request->setResponseCode(400);
+                    $request->setValid(false);
+
+                    return;
+                }
+            break;
+        }
     }
     private function protocol($protocol)
     {

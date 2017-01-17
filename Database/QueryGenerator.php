@@ -4,38 +4,67 @@ include_once ('Database/DatabaseParser.php');
 
 Class QueryGenerator
 {
+
     public function generate($request)
     {
-        if ($request->getMethod() == "GET")
+        if ($this->parsePath($request) !== FALSE)
         {
+<<<<<<< HEAD
             $parser = new DatabaseParser($this->parseGet($request));
             $request = $this->buildQuery($request);
             vr_dump($request);exit;
             $result = $parser->select($this->parseGet($request));
         } elseif ($request->getMethod() == "POST")
+=======
+
+            $parser = new DatabaseParser($this->parsePath($request));
+
+            if ($request->getMethod() == "GET")
+            {
+
+                $request = $this->buildQuery($request);
+                $result = $parser->select($request);
+
+            } elseif ($request->getMethod() == "POST")
+            {
+                $result = $parser->insert($request);
+            }
+
+            return $result;
+        }
+        else
+>>>>>>> refs/remotes/origin/development
         {
-            $parser = new DatabaseParser($this->parseGet($request));
-            $result = $parser->insert($this->parseGet($request));
+            return array('code'=>200,'message'=>'Welcome to RAISE!');
         }
 
-        return $result;
     }
 
     private function buildQuery($request)
     {
-        $queryStr = "SELECT * FROM `teste` WHERE";
-        foreach ($request->parameters as $key => $parameter)
+
+        if(count($request->getParameters())>0)
         {
-            $queryStr = $queryStr . " " . $key . "=\$$key" . "AND ";
+          $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
+          foreach ($request->getParameters() as $key => $parameter)
+          {
+              $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+          }
+          $request->string = substr($queryStr, 0, -4);
         }
-        $request->string = substr($queryStr, 0, -4);
+        else
+        {
+        $request->string = "SELECT * FROM `".$request->bucket."`";
+        }
+
         return $request;
     }
 
     private function parsePath($request)
     {
-        $path = $request->getpath();
+        $path = $request->getPath();
         $method = $path[2];
+<<<<<<< HEAD
         $request->bucket = "metadata";
         $request->class = $method;
         $request->parsedPath = $path;
@@ -54,16 +83,16 @@ Class QueryGenerator
         $this->parsePath($request);
         $parameters = array();
         foreach ($request->parsedPath as $param => $value)
+=======
+        if (!empty($method))
+>>>>>>> refs/remotes/origin/development
         {
-            if ($param % 2 !== 0 && !in_array($param,array(0,1,2)))
-            {
-                $parameters[$value] = "";
-            } elseif(!in_array($param,array(0,1,2)))
-            {
-                $parameters[$request->parsedPath[$param - 1]] = $value;
-            }
+            $request->bucket = $method;
+            return $request;
         }
-        $request->parameters = $parameters;
-        return $request;
+        else
+        {
+            return FALSE;
+        }
     }
 }

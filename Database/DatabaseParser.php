@@ -17,14 +17,17 @@
  * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html (will be removed later)
  */
 include_once ("Treaters/MessageOutPut.php");
+include_once ("Config/Config.php");
 use Raise\Treaters\MessageOutPut;
+use Raise\Treaters\Config;
 class DatabaseParser
 {
-    private $serverAddress = "127.0.0.1:8091";
+    private $serverAddress;
     private $bucket;
 
     public function __construct($resquestObj)
     {
+        $this->serverAddress = DB_ADDRESS;
         $this->bucket = $this->connect($resquestObj->bucket, $this->serverAddress);
     }
 
@@ -35,18 +38,16 @@ class DatabaseParser
 
     private function response($responseRows = NULL)
     {
-        if ($responseRows === NULL)
+
+        if (isset($responseRows->cas))
         {
-            $response = json_encode(array(
-                'code' => 200,
-                'message' => (new MessageOutPut())->messageHttp(200)->message
-            ));
+            $response = (new MessageOutPut())->messageHttp(200);
         } else
         {
-            $response = json_encode(array(
+            $response = array(
                 'code' => 200,
-                'values' => json_encode($responseRows)
-            ));
+                'values' => $responseRows
+            );
         }
         return $response;
     }
@@ -75,7 +76,7 @@ class DatabaseParser
     {
         try
         {
-            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->parameters);
+            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->getBody());
             return $this->response($result);
         } catch(CouchbaseException $e)
         {
@@ -90,7 +91,7 @@ class DatabaseParser
         try
         {
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
-            $query->namedParams($requestObj->parameters);
+            $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {

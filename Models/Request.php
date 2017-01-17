@@ -63,7 +63,7 @@ class Request{
         $this->path = explode("/", $s[0]); // separate path into array
     }
 
-    public function getpath(){
+    public function getPath(){
         return $this->path;
     }
 
