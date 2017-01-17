@@ -94,7 +94,8 @@ class DatabaseParser
             return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
-            return (new MessageOutPut())->messageHttp($e->getCode());
+            var_dump($e->getCode());exit;
+            return (new MessageOutPut())->messageHttp($e);
         }
     }
 }

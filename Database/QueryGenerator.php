@@ -9,7 +9,8 @@ Class QueryGenerator
         if ($request->getMethod() == "GET")
         {
             $parser = new DatabaseParser($this->parseGet($request));
-            $this->buildQuery($request);
+            $request = $this->buildQuery($request);
+            vr_dump($request);exit;
             $result = $parser->select($this->parseGet($request));
         } elseif ($request->getMethod() == "POST")
         {
@@ -35,7 +36,7 @@ Class QueryGenerator
     {
         $path = $request->getpath();
         $method = $path[2];
-        $request->bucket = "teste";
+        $request->bucket = "metadata";
         $request->class = $method;
         $request->parsedPath = $path;
         return $request;
