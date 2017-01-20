@@ -4,7 +4,7 @@ include('httpful.phar');
 
 class RequestTester
 {
-	private $raise_ip = '172.16.4.151/RAISe';
+	private $raise_ip = '192.168.1.100/uiot_raise';
 
 	public function testListAllClients()
 	{
@@ -18,24 +18,24 @@ class RequestTester
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		$body = json_encode(array("name" => "renato", 
-				  "chipset" => "arm", 
+		$body = json_encode(array("name" => "renato",
+				  "chipset" => "arm",
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64",
-			      "channel" => "olfato"));	
+			      "channel" => "olfato"));
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "Complete client insertion: " . "<br>";
 		echo $response;
+		return $response;
 	}
 
 	public function testInsertClientWithoutChannel()
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		
-		$body = json_encode(array("name" => "renato", "chipset" => "arm", 
+		$body = json_encode(array("name" => "renato", "chipset" => "arm",
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64"));
@@ -45,4 +45,14 @@ class RequestTester
 		echo json_decode($response)->codeHttp == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
 		echo $response;
 	}
+
+
+	public function testAutoRegister()
+	{
+			$response = $this->testInsertClient();
+			$token = $response->getToken();
+			$serv_response = $this->registerServices($token);
+			$this->sendData($serv_response, 10);
+	}
+
 }
