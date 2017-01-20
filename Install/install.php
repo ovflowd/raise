@@ -18,17 +18,15 @@
  * This script will install all the required couchbase buckets that RAISe needs to work properly.
  * IMPORTANT: this requires the cURL extension to work.
  */
-
 class Install
 {
     private $username = "admin"; //your couchbase username
     private $password = "123456"; // your couchbase password
-    
+
     private function getCredentials()
     {
-        return $this->$username.":".$this->password;   
+        return $this->username.":".$this->password;
     }
-
     private $postfields = array(
         'authType' => 'sasl',
         'bucketType' => 'membase',
@@ -39,7 +37,6 @@ class Install
         'replicaNumber' => 1,
         'threadsNumber' => 3
     );
-
     private $buckets = array(
         'Metadata' => 0,
         'Registration' => 0,
@@ -48,23 +45,19 @@ class Install
         'Update' => 0,
         'Responses  => 0'
     );
-
     private function setFields($name, $quota)
     {
         $this->postfields['name'] = $name;
         $this->postfields['ramQuotaMB'] = $quota;
     }
-
     private function getFields()
     {
         return $this->postfields;
     }
-
     private function getBuckets()
     {
         return $this->buckets;
     }
-
     private function setBuckets($memory)
     {
         $buckets = $this->getBuckets();
@@ -76,7 +69,6 @@ class Install
         $buckets['Responses'] = floor((($memory / 100) * 25));
         $this->buckets = $buckets;
     }
-
     public function getServerInfo()
     {
         $ch = curl_init();
@@ -90,7 +82,6 @@ class Install
         $this->setBuckets(JSON_decode($server_output)->memoryQuota);
         $this->createBuckets();
     }
-
     private function createBuckets()
     {
         $buckets = $this->getBuckets();
@@ -101,7 +92,6 @@ class Install
         }
         echo "Buckets created successfully";
     }
-
     private function createBucket($postfields)
     {
         $ch = curl_init();
@@ -115,8 +105,6 @@ class Install
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_close($ch);
     }
-
 }
-
 $install = new Install;
 $install->getServerInfo();
