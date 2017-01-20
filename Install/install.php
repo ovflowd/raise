@@ -18,10 +18,15 @@
  * This script will install all the required couchbase buckets that RAISe needs to work properly.
  * IMPORTANT: this requires the cURL extension to work.
  */
-
 class Install
 {
-    private $memory;
+    private $username = ""; //your couchbase username
+    private $password = ""; // your couchbase password
+
+    private function getCredentials()
+    {
+        return $this->username.":".$this->password;
+    }
 
     private $postfields = array(
         'authType' => 'sasl',
@@ -74,7 +79,7 @@ class Install
     public function getServerInfo()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456"); // your couchbase username and password here.
+        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials());
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -99,7 +104,7 @@ class Install
     private function createBucket($postfields)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, "admin:123456"); // your couchbase username and password here.
+        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials());
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default/buckets");
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -109,7 +114,6 @@ class Install
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_close($ch);
     }
-
 }
 
 $install = new Install;
