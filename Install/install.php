@@ -79,7 +79,7 @@ class Install
     public function getServerInfo()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials()); // your couchbase username and password here.
+        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials());
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -104,7 +104,7 @@ class Install
     private function createBucket($postfields)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials()); // your couchbase username and password here.
+        curl_setopt($ch, CURLOPT_USERPWD, $this->getCredentials());
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_URL, "http://localhost:8091/pools/default/buckets");
         curl_setopt($ch, CURLOPT_POST, 1);
