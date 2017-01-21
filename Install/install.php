@@ -20,8 +20,8 @@
  */
 class Install
 {
-    private $username = ""; //your couchbase username
-    private $password = ""; // your couchbase password
+    private $username = "iury_adm"; //your couchbase username
+    private $password = "123456"; // your couchbase password
 
     private function getCredentials()
     {
@@ -40,12 +40,12 @@ class Install
     );
 
     private $buckets = array(
-        'Metadata' => 0,
-        'Registration' => 0,
-        'Services' => 0,
-        'Token' => 0,
-        'Update' => 0,
-        'Responses  => 0'
+        'metadata' => 0,
+        'client' => 0,
+        'service' => 0,
+        'token' => 0,
+        'data' => 0,
+        'responses  => 0'
     );
 
     private function setFields($name, $quota)
@@ -67,12 +67,12 @@ class Install
     private function setBuckets($memory)
     {
         $buckets = $this->getBuckets();
-        $buckets['Metadata'] = floor((($memory / 100) * 2.5));
-        $buckets['Registration'] = floor((($memory / 100) * 17.5));
-        $buckets['Services'] = floor((($memory / 100) * 17.5));
-        $buckets['Token'] = floor((($memory / 100) * 12.5));
-        $buckets['Update'] = floor((($memory / 100) * 25));
-        $buckets['Responses'] = floor((($memory / 100) * 25));
+        $buckets['metadata'] = floor((($memory / 100) * 2.5));
+        $buckets['client'] = floor((($memory / 100) * 17.5));
+        $buckets['service'] = floor((($memory / 100) * 17.5));
+        $buckets['token'] = floor((($memory / 100) * 12.5));
+        $buckets['data'] = floor((($memory / 100) * 25));
+        $buckets['response'] = floor((($memory / 100) * 25));
         $this->buckets = $buckets;
     }
 
