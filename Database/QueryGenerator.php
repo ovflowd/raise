@@ -1,48 +1,38 @@
 <?php
-
 include_once ('Database/DatabaseParser.php');
-
 Class QueryGenerator
 {
-
     public function generate($request)
     {
         if ($this->parsePath($request) !== FALSE)
         {
-<<<<<<< HEAD
-            $parser = new DatabaseParser($this->parseGet($request));
-            $request = $this->buildQuery($request);
-            vr_dump($request);exit;
-            $result = $parser->select($this->parseGet($request));
-        } elseif ($request->getMethod() == "POST")
-=======
-
             $parser = new DatabaseParser($this->parsePath($request));
-
             if ($request->getMethod() == "GET")
             {
-
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
-
             } elseif ($request->getMethod() == "POST")
             {
+
+                $this->parseService($request);exit;
                 $result = $parser->insert($request);
             }
-
             return $result;
         }
         else
->>>>>>> refs/remotes/origin/development
         {
             return array('code'=>200,'message'=>'Welcome to RAISE!');
         }
+    }
 
+
+    private function generateToken()
+    {
+       return bin2hex(openssl_random_pseudo_bytes(16));
     }
 
     private function buildQuery($request)
     {
-
         if(count($request->getParameters())>0)
         {
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
@@ -56,38 +46,49 @@ Class QueryGenerator
         {
         $request->string = "SELECT * FROM `".$request->bucket."`";
         }
-
         return $request;
+    }
+
+    public function parseService($request)
+    {
+
+      if($request->getPath()[2] === "service" && $request->getPath()[3] == "register")
+      {
+        $request->bucket = "client";
+
+        $parser = new DatabaseParser($request);
+
+        $token = $request->getBody()['token'];
+        var_dump($request->getBody());exit;
+        $request->string = 'SELECT * FROM `token` WHERE `token` = $token';
+        $request->setParameters(array('token'=>$token));
+        var_dump($request->getParameters());exit;
+        $result = $parser->select($request);
+        return $result;
+
+      }
     }
 
     private function parsePath($request)
     {
         $path = $request->getPath();
         $method = $path[2];
-<<<<<<< HEAD
-        $request->bucket = "metadata";
-        $request->class = $method;
-        $request->parsedPath = $path;
-        return $request;
-    }
-
-    private function parsePost($request)
-    {
-        $this->parsePath($request);
-        $request->parameters = $_POST;
-        return $request;
-    }
-
-    private function parseGet($request)
-    {
-        $this->parsePath($request);
-        $parameters = array();
-        foreach ($request->parsedPath as $param => $value)
-=======
         if (!empty($method))
->>>>>>> refs/remotes/origin/development
         {
-            $request->bucket = $method;
+
+          if($request->getPath()[2] === "client" && $request->getPath()[3] == "register")
+          {
+            $request->token = $this->generateToken();
+            $tokenIni = round(microtime(true) *1000);
+            $tokenFim = $tokenIni + 7200000;
+            $request->treatedBody = json_encode(array_merge($request->getBody(),array('token'=>$request->token,'time_ini'=>$tokenIni,'time_fim'=>$tokenFim)));
+          }
+          else
+          {
+
+            $request->treatedBody = $request->getBody();
+          }
+
             return $request;
         }
         else

@@ -25,14 +25,20 @@ class DatabaseParser
     private $serverAddress;
     private $bucket;
 
-    public function __construct($resquestObj)
+    public function __construct($requestObj)
     {
         $this->serverAddress = DB_ADDRESS;
-        $this->bucket = $this->connect($resquestObj->bucket, $this->serverAddress);
+        $this->bucket = $this->connect($requestObj->bucket, $this->serverAddress);
     }
 
-    public function getBucket()
+
+    public function getBucket($bucket = NULL)
     {
+        if($bucket !== NULL)
+        {
+          $cluster = new CouchbaseCluster($this->serverAddress);
+          return $cluster->openBucket($bucket);
+        }
         return $this->bucket;
     }
 
@@ -42,6 +48,10 @@ class DatabaseParser
         if (isset($responseRows->cas))
         {
             $response = (new MessageOutPut())->messageHttp(200);
+            if($responseRows->method === "client")
+            {
+              $response->token = $responseRows->token;
+            }
         } else
         {
             $response = array(
@@ -72,17 +82,23 @@ class DatabaseParser
 
     //Method for performing a insert query on the database.
     //return string
-    public function insert($resquestObj)
+    public function insert($requestObj)
     {
+
         try
         {
-            $result = $this->getBucket()->upsert(bin2hex(openssl_random_pseudo_bytes(16)) , $resquestObj->getBody());
-            return $this->response($result);
+              $result = $this->getBucket()->upsert($requestObj->token, $requestObj->treatedBody);
+              $result->token = $requestObj->token;
+              $result->method = $requestObj->getPath()[2];
+              return $this->response($result);
+
         } catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
+
+
 
     //Method for performing a select query on the database.
     //return string
@@ -95,7 +111,6 @@ class DatabaseParser
             return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
-            var_dump($e->getCode());exit;
             return (new MessageOutPut())->messageHttp($e);
         }
     }
