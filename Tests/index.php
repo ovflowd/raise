@@ -6,6 +6,5 @@ include 'RequestTest.php';
 $tester = new RequestTester();
 
 $tester->testInsertClient();
-$tester->testInsertClientwithoutChannel();
+//$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
-
