@@ -73,6 +73,11 @@ class Request{
             $this->params = $paramsArray;
     }
 
+    public function setParameters($params){
+             $this->params = $params;
+             return $this->params;
+    }
+
     public function getParameters(){
             return $this->params;
     }

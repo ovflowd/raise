@@ -14,7 +14,7 @@
  * @author Universal Internet of Things
  * @license MIT <https://opensource.org/licenses/MIT>
  * @copyright University of Brasília
- * 
+ *
 */
 
 class Message {
@@ -53,7 +53,7 @@ class Message {
     }
 
     public function message_out() {
-        $messageOut = (object) array('codeHttp' => $this->get_code_http(), 'message' => $this->get_message());
+        $messageOut = (object) array('code' => $this->get_code_http(), 'message' => $this->get_message());
         return $messageOut;
     }
 

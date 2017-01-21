@@ -51,23 +51,45 @@ class RequestTreater
             return $a->validate($request);
         }
     }
+
     public function create()
     {
         $request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['SERVER_PROTOCOL'], $_SERVER['SERVER_ADDR'], $_SERVER['REMOTE_ADDR'], $_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING'], file_get_contents('php://input'));
         return $request;
     }
+
     private function validate($request)
     {
         $request->setResponseCode(200);
         $request->setValid(true);
 
+        $AllowedBuckets = array(
+
+          'client',
+          'data',
+          'service'
+        );
+
         $bucket = $request->getPath()[2];
+        if(!in_array($bucket,$AllowedBuckets))
+        {
+          $request->setResponseCode(403);
+          $request->setValid(false);
+          return;
+        }
+
         $request->bucket = $bucket;
+        $method = strtolower($request->getMethod());
+        if($method == "service")
+        {
+          $request->bucket = "client";
+        }
 
         $database = (new DatabaseParser($request))->getBucket();
 
-        $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `bucket` = $bucket');
-        $query->namedParams(array('bucket' => $bucket));
+        $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
+
+        $query->namedParams(array('bucket' => $bucket,'method'=>$method));
 
         if($database->query($query)->rows[0]->{"$1"} <= 0) {
             $request->setResponseCode(422);
@@ -76,12 +98,12 @@ class RequestTreater
             return;
         }
 
-        $query = \CouchbaseN1qlQuery::fromString('SELECT docValues FROM metadata WHERE `bucket` = $bucket AND `docNme` = $docNme');
+        $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
 
         switch($request->getMethod()) {
             case 'GET':
-                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'get_clients_list_required'));
-                $parameters = $database->query($query)->rows[0]->docValues[0];
+                $query->namedParams(array('bucket' => $bucket, 'method' => $method));
+                $parameters = $database->query($query)->rows[0]->input[0];
 
                 if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
                     $request->setResponseCode(400);
@@ -89,10 +111,11 @@ class RequestTreater
 
                     return;
                 }
+
             break;
             case 'POST':
-                $query->namedParams(array('bucket' => $bucket, 'docNme' => 'post_clients_register_required'));
-                $parameters = $database->query($query)->rows[0]->docValues[0];
+                $query->namedParams(array('bucket' => $bucket, 'method' => $method));
+                $parameters = $database->query($query)->rows[0]->input[0];
 
                 if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
                     $request->setResponseCode(400);
@@ -103,6 +126,7 @@ class RequestTreater
             break;
         }
     }
+
     private function protocol($protocol)
     {
         return in_array($protocol, self::VALID_PROTOCOLS);
