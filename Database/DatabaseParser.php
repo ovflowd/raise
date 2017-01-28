@@ -50,7 +50,7 @@ class DatabaseParser
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->method === "client")
             {
-              $response->token = $responseRows->token;
+              $response->tokenId = $responseRows->token;
             }
         } else
         {
@@ -87,7 +87,7 @@ class DatabaseParser
 
         try
         {
-              $result = $this->getBucket()->upsert($requestObj->token, $requestObj->treatedBody);
+              $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()[2];
               return $this->response($result);
@@ -108,7 +108,7 @@ class DatabaseParser
         {
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
-            return $this->response($this->parseResult($this->getBucket()->query($query) , $requestObj));
+            return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e);

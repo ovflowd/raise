@@ -5,7 +5,7 @@ include('httpful.phar');
 class RequestTester
 {
 
-	private $raise_ip = '192.168.1.100/uiot_raise';
+	private $raise_ip = 'localhost/RAISe';
 
 
 	public function testListAllClients()
@@ -25,10 +25,28 @@ class RequestTester
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64",
-			      "channel" => "olfato"));
+			      "channel" => "olfato",
+						"timestamp" => round(microtime(true) *1000)
+						));
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "Complete client insertion: " . "<br>";
+		echo $response;
+		return $response;
+	}
+
+	public function registerServices($token)
+	{
+		$url = "http://{$this->raise_ip}/service/register";
+
+		$body = json_encode(array(
+					"services" => array('pressure'=>"string","temperature"=>"string"),
+						"timestamp" => round(microtime(true) *1000),
+						'tokenId' => $token
+						));
+
+		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+		echo "Complete service insertion: " . "<br>";
 		echo $response;
 		return $response;
 	}
@@ -44,7 +62,7 @@ class RequestTester
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "Client without channel: ";
-		echo json_decode($response)->codeHttp == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
+		echo json_decode($response)->code == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
 		echo $response;
 	}
 
@@ -52,9 +70,9 @@ class RequestTester
 	public function testAutoRegister()
 	{
 			$response = $this->testInsertClient();
-			$token = $response->getToken();
+			$token = json_decode($response->body)->tokenId;
+			sleep(1); //necessário devido ao delay do couchbase )=
 			$serv_response = $this->registerServices($token);
-			$this->sendData($serv_response, 10);
 	}
 
 }

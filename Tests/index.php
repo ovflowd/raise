@@ -5,6 +5,7 @@ include 'RequestTest.php';
 
 $tester = new RequestTester();
 
-$tester->testInsertClient();
+//$tester->testInsertClient();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
+$tester->testAutoRegister();
