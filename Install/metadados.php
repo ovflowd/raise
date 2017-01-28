@@ -90,19 +90,6 @@ class CouchBaseInterfacer{
 		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
 		}
 
-		$myBucket = $myCluster->openBucket('service');
-
-
-		// Before issuing a N1QL Query, ensure that there is
-		// is actually a primary index.
-		try {
-		    // Do not override default name, fail if it is exists already, and wait for completion
-		    $myBucket->manager()->createN1qlPrimaryIndex('', false, false);
-
-		} catch (CouchbaseException $e) {
-		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
-		}
-
 		$myBucket = $myCluster->openBucket('token');
 
 		// Before issuing a N1QL Query, ensure that there is
@@ -130,7 +117,7 @@ class CouchBaseInterfacer{
 			"bucket"=>"data",
 			"input"=>[array(
 				"code"=> 0,
-		  	"token"=>"string",
+		  	"tokenId"=>"string",
 		  	"start_date"=>"string",
 		  	"end_date"=>"string",
 		  	"limit"=>"string",
@@ -157,7 +144,7 @@ class CouchBaseInterfacer{
 			"method"=>"post",
 			"bucket"=>"data",
 			"input"=>[array(
-				"token"=>"string",
+				"tokenId"=>"string",
 				"timestamp"=>"string",
 				"services"=>[array(
 					"service_id"=> 0,
@@ -216,7 +203,7 @@ class CouchBaseInterfacer{
 			"output"=>[array(
 				"code"=> 0,
 				"message"=> "string",
-				"token"=> "string",
+				"tokenId"=> "string",
 			)]
 		));
 
@@ -226,7 +213,7 @@ class CouchBaseInterfacer{
 			"method"=>"get",
 			"bucket"=>"service",
 			"input"=>[array(
-				"token"=> "string"
+				"tokenId"=> "string"
 			)],
 			"output"=>[array(
 				"code"=> 0,
@@ -244,7 +231,7 @@ class CouchBaseInterfacer{
 			"method"=>"post",
 			"bucket"=>"service",
 			"input"=>[array(
-				"token"=>"string",
+				"tokenId"=>"string",
 				"timestamp"=>"string",
 				"services"=>[array(
 					"name"=> "string",
@@ -270,7 +257,7 @@ class CouchBaseInterfacer{
 			"method"=>"get",
 			"bucket"=>"log",
 			"input"=>[array(
-				"token"=> "string",
+				"tokenId"=> "string",
 		  	"start_date"=>"string",
 				"end_date"=>"string",
 				"limit"=>"string",
@@ -530,7 +517,7 @@ $couchbase = new CouchBaseInterfacer(); //creat a object Couchbase
 
 $itensAdd=0;
 
-$cluster='127.0.0.1:8091';
+$cluster='127.0.0.1:8091';// enter couchbase ip
 
 $couchbase->conchBaseInsertKey($cluster);
 
