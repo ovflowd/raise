@@ -5,7 +5,7 @@ include('httpful.phar');
 class RequestTester
 {
 
-	private $raise_ip = 'localhost/RAISe';
+	private $raise_ip = 'localhost/uiot_raise';
 
 
 	public function testListAllClients()

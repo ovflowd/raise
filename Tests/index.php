@@ -3,6 +3,8 @@
 ini_set('display_errors', 1);
 include 'RequestTest.php';
 
+echo "Teste AutoRegister RAISe;";
+
 $tester = new RequestTester();
 
 //$tester->testInsertClient();
