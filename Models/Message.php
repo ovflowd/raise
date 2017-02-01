@@ -17,10 +17,15 @@
  *
 */
 
+/**
+*Class Message
+*/
 class Message
 {
   /**
-  *@var string  $code_http  HTTP code of response message.
+  *HTTP code of response message
+  *
+  *@var string  $code_http
   */
 
   var $code_http;
