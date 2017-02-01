@@ -70,8 +70,9 @@ class RequestTreater
           'service'
         );
 
+
         $bucket = $request->getPath()[2];
-        if(!in_array($bucket,$AllowedBuckets))
+        if(!in_array($AllowedBuckets,$bucket))
         {
           $request->setResponseCode(403);
           $request->setValid(false);
@@ -80,10 +81,6 @@ class RequestTreater
 
         $request->bucket = $bucket;
         $method = strtolower($request->getMethod());
-        if($method == "service")
-        {
-          $request->bucket = "client";
-        }
 
         $database = (new DatabaseParser($request))->getBucket();
 
