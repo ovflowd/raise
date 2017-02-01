@@ -9,8 +9,9 @@ parameters:
     required: true
     description: client token
     type: string
+#ALLOWED TAGS: Client, service & data
 paths:
-  /client/list/:
+  /client/:
     get:
       description: Get registered clients
       parameters:
@@ -60,13 +61,44 @@ paths:
           description: Forbidden
           schema:
             $ref: '#/definitions/ErrorResponse'
-  /client/list_service_values/:
-    get:
+  /client/register/:
+    post:
       tags:
         - client
+      description: Register a client
+      parameters:
+        - name: client
+          in: body
+          required: true
+          description: client attributes
+          schema:
+            $ref: '#/definitions/Client'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse' 
+        400:
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbbiden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/ErrorResponse'    
+  /service/:
+    get:
+      tags:
         - service
-      description:
-       Get a list containing the information that was provided by a device.
+      description: Get registered services
       parameters:
         - $ref: '#/parameters/auth-token'
         - name: start_date
@@ -143,45 +175,10 @@ paths:
           description: Invalid parameters
           schema:
             $ref: '#/definitions/ErrorResponse'
-  /client/register/:
-    post:
-      tags:
-        - client
-        - register
-      description: Register a client
-      parameters:
-        - name: client
-          in: body
-          required: true
-          description: client attributes
-          schema:
-            $ref: '#/definitions/Client'
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/TokenResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse' 
-        400:
-          description: Invalid parameters
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
   /service/register/:
     post:
       tags:
         - service
-        - register
       description: Register an array of services
       parameters:
         - $ref: '#/parameters/auth-token'
@@ -223,123 +220,82 @@ paths:
           description: Invalid or expired token
           schema:
             $ref: '#/definitions/ErrorResponse'    
-  /service/send_values/:
-    post:
+  /data/:
+    get:
       tags:
-        - service
-      description: Send service temporal information  
+        - data
+      description: Get registered data
       parameters:
-        - $ref: '#/parameters/auth-token'
-        - name: services
-          in: body
-          required: true
-          description: Send captured data
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ServiceVal'
+         - $ref: '#/parameters/auth-token'
+         - name: code
+           in: query
+           description: The code of the data
+           required: false
+           type: integer 
+         - name: start_date
+           in: query
+           description: In the case of a search between a time interval, this is the starting date
+           required: false
+           type: string #timestamp
+         - name: end_date
+           in: query
+           description: In the case of a search between a time interval, this is the ending date
+           required: false
+           type: string
+         - name: limit
+           in: query
+           description: Limits the amount of records for request. Used to prevent memory issues. 
+           required: false
+           type: number
+         - name: order
+           in: query
+           description: Bool. 0 for asc and 1 for desc. 
+           required: false
+           type: boolean
+         - name: name
+           in: query
+           description: data name
+           required: false
+           type: string
+         - name: processor
+           in: query
+           description: data processor
+           required: false
+           type: string
+         - name: channel
+           in: query
+           description: data channel
+           required: false
+           type: string
+         - name: host
+           in: query
+           description: data host
+           required: false
+           type: string
+         - name: tag
+           in: query
+           description: tag host
+           required: false
+           type: string
       responses:
         200:
           description: OK
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/ErrorResponse'
         403:
-          description: Forbbiden
+          description: Forbidden
           schema:
             $ref: '#/definitions/ErrorResponse'
         429:
           description: Too many requests
           schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-  /service/list/:
-    get:
-      tags:
-        - service
-        - list
-      description: Lists services accessible by the device
-      parameters:
-        - $ref: '#/parameters/auth-token'
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: services
-            type: object
-            properties:
-              code:
-                type: integer
-              values:
-                type: array
-                items:
-                  $ref: '#/definitions/logs'
-        403:
-          description: Forbbiden
+            $ref: '#/definitions/ErrorResponse'
+        400:
+          description: Invalid parameters
           schema:
             $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
-  /log/list/:
-    get:
-      tags:
-        - log
-        - list
-      description: Returns a list containing the headers log stored on the server.
-      parameters:
-        - $ref: '#/parameters/auth-token'
-        - name: start_date
-          in: query
-          description: In the case of a search between a time interval, this is the starting date
-          required: true
-          type: string #timestamp
-        - name: end_date
-          in: query
-          description: In the case of a search between a time interval, this is the ending date
-          required: true
-          type: string #timestamp
-        - name: limit
-          in: query
-          description: Limits the amount of records for request. Used to prevent memory issues. 
-          required: true
-          type: number
-        - name: order
-          in: query
-          description: Bool. 0 for asc and 1 for desc.
-          required: false
-          type: boolean
-      responses:
-        200:
-          description: Successful response
-          schema:
-            title: services
-            type: object
-            properties:
-              code:
-                type: integer
-              values:
-                type: array
-                items:
-                  $ref: '#/definitions/logs'
-                      
-        403:
-          description: Forbbiden
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        429:
-          description: Too many requests
-          schema:
-            $ref: '#/definitions/ErrorResponse'  
-        401:
-          description: Invalid or expired token
-          schema:
-            $ref: '#/definitions/ErrorResponse'    
 definitions:
   Client:
     type: object
@@ -365,15 +321,31 @@ definitions:
         type: string
       value:
         type: string
-  logs:
+  Data:
     type: object
     properties:
-      id:
+      code:
         type: integer
-      header_code:
-        type: integer
-      message:
+      tokenId:
         type: string
+      start_date:
+        type: string
+      end_date:
+        type: string
+      limit:
+        type: integer
+      tag: 
+        type: string
+      host:
+        type: string
+      channel:
+        type: string
+      processor:
+        type: string
+      name: 
+        type: string
+      order:
+        type: boolean
   Service:
     type: object
     properties:
@@ -385,15 +357,6 @@ definitions:
         type: array
         items:
            $ref: '#/definitions/Parameter'
-  ServiceVal:
-    type: object
-    properties:
-      service_id:
-        type: integer
-      params:
-        type: array
-        items:
-           $ref: '#/definitions/Parameter'         
   Parameter:
     type: object
     properties:
