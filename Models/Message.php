@@ -23,9 +23,7 @@
 class Message
 {
   /**
-  *HTTP code of response message
-  *
-  *@var string  $code_http
+  *@var string  $code_http  HTTP code of response message
   */
 
   var $code_http;
