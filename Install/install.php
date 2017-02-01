@@ -23,8 +23,8 @@
 
 class Install
 {
-    private $username = ""; //your couchbase username
-    private $password = ""; // your couchbase password
+    private $username = "iury_adm"; //your couchbase username
+    private $password = "123456"; // your couchbase password
 
     private function getCredentials()
     {

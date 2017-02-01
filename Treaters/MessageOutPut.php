@@ -71,5 +71,5 @@ class MessageOutPut
             printf("(code: %d)", $e->getCode());
         }
         return $message->message_out();
-    }
+  }
 }
