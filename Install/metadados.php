@@ -20,7 +20,16 @@
  */
 
 class CouchBaseInterfacer{
-	// Method for insert data error in metadata bucket.
+
+	/**
+	*Method for insert data message response in metadata bucket.
+	*
+	*@param string	$code_http	HTTP code.
+	*@param string	$code_cb		Couchbase error code.
+	*@param	string	$message		Message response.
+	*@param string	$cluster		IP Couchbase server.
+	*/
+
 	public function metadataInsert(string $cod_http, string $cod_cb, string $message, string $cluster){
 
 		$metadata = uniqId("", true);
@@ -33,13 +42,18 @@ class CouchBaseInterfacer{
 			"message"=>$message)
 		);
 	}
-	// Method for created primary index on all buckets.
+
+	/**
+	*Method for created primary index on all buckets.
+	*
+	*@param string	$cluster		IP Couchbase server.
+	*/
+
 	public function conchBaseInsertKey(string $cluster){
 
 		$myCluster = new CouchbaseCluster($cluster);
 
 		$myBucket = $myCluster->openBucket('client');
-
 
 		// Before issuing a N1QL Query, ensure that there is
 		// is actually a primary index.
@@ -53,7 +67,6 @@ class CouchBaseInterfacer{
 
 		$myBucket = $myCluster->openBucket('data');
 
-
 		// Before issuing a N1QL Query, ensure that there is
 		// is actually a primary index.
 		try {
@@ -65,8 +78,6 @@ class CouchBaseInterfacer{
 		}
 
 		$myBucket = $myCluster->openBucket('metadata');
-
-
 		// Before issuing a N1QL Query, ensure that there is
 		// is actually a primary index.
 		try {
@@ -77,9 +88,7 @@ class CouchBaseInterfacer{
 		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
 		}
 
-
 		$myBucket = $myCluster->openBucket('response');
-
 		// Before issuing a N1QL Query, ensure that there is
 		// is actually a primary index.
 		try {
@@ -103,9 +112,15 @@ class CouchBaseInterfacer{
 		}
 
 	}
-	// Method for insert documents on metadata bucket.
-	public function metadataInsertDocs(string $cluster){
 
+	/**
+	*Method for insert documents on metadata bucket.
+	*
+	*@param string	$cluster		IP Couchbase server.
+	*/
+
+	public function metadataInsertDocs(string $cluster)
+	{
 		$myCluster = new CouchbaseCluster($cluster);
 
 		$myBucket = $myCluster->openBucket('metadata');
@@ -274,6 +289,11 @@ class CouchBaseInterfacer{
 		));
 	}
 }
+
+/**
+*
+*	@var array	$metadosCodHttpCb	Should contain all message response.
+*/
 
 $metadosCodHttpCb = array(
 	array("codHttp"=> "200",
@@ -515,8 +535,10 @@ $metadosCodHttpCb = array(
 
 $couchbase = new CouchBaseInterfacer(); //creat a object Couchbase
 
-$itensAdd=0;
-
+/**
+*
+*	@var string	$cluster	Should contain a IP adress couchbase server.
+*/
 $cluster='127.0.0.1:8091';// enter couchbase ip
 
 $couchbase->conchBaseInsertKey($cluster);
@@ -525,14 +547,8 @@ $couchbase->metadataInsertDocs($cluster);
 
 for ($i = 0; $i < count($metadosCodHttpCb); $i++) //
 {
-	$couchbase->metadataInsert($metadosCodHttpCb[$i]["codHttp"],$metadosCodHttpCb[$i]["codCouch"], $metadosCodHttpCb[$i]["message"], $cluster); //get a message object
-	$itensAdd++;
+	$couchbase->metadataInsert($metadosCodHttpCb[$i]["codHttp"],
+															$metadosCodHttpCb[$i]["codCouch"],
+															$metadosCodHttpCb[$i]["message"],
+															$cluster); //get a message object
 }
-
-if ($itensAdd == 59) {
-	echo "Buckets created successfully";
-}else{
-	echo "There not were added all items. Contact your system administrator.<b>";
-}
-
-?>
