@@ -121,9 +121,8 @@ class RequestTreater
           'service'
         );
 
-
         $bucket = $request->getPath()[2];
-        if(!in_array($AllowedBuckets,$bucket))
+        if(!in_array($bucket,$AllowedBuckets))
         {
           $request->setResponseCode(403);
           $request->setValid(false);
