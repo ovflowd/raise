@@ -34,7 +34,7 @@
                         "description": "client processor name",
                         "required": true,
                         "type": "string"
-                    },
+                    }, 
                     {
                         "name": "channel",
                         "in": "query",
