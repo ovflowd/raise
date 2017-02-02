@@ -575,6 +575,19 @@
             }
         },
         "Data": {
+            "required": [
+                "code",
+                "tokenId",
+                "start_date",
+                "end_date",
+                "limit",
+                "tag",
+                "host",
+                "channel",
+                "processor",
+                "name",
+                "order"
+            ],
             "type": "object",
             "properties": {
                 "code": {
