@@ -63,6 +63,10 @@ class RequestTreater
         "remote" => 403
     );
 
+    private $protocols = array(
+      "HTTP/1.0", "HTTP/1.1", "HTTPS/1.0", "HTTPs/1.1"
+    );
+
     /**
     *Create a request and validate parameters
     *
@@ -94,9 +98,9 @@ class RequestTreater
     }
 
     /**
-    *Create Request
+    *Create Request Object
     *
-    *@return $request Object
+    *@return $request Object request
     */
 
     public function create()
@@ -106,7 +110,10 @@ class RequestTreater
     }
 
     /**
+    *Request object validation
     *
+    *@param object  $request  Request object
+    *@return boolean          Validation value
     */
 
     private function validate($request)
@@ -174,19 +181,49 @@ class RequestTreater
         }
     }
 
+    /**
+    *Comparate protocol name in private array $protocols
+    *
+    *@param string  $protocol Request protocol for validation
+    *@return boolean          request validation protocol value
+    */
+
     private function protocol($protocol)
     {
         return in_array($protocol, self::VALID_PROTOCOLS);
     }
+
+    /**
+    *Comparate method name in private array $methods for validation
+    *
+    *@param string  $method Request method for validation
+    *@return boolean        Request validation method valeu
+    */
+
     private function method($method)
     {
         return in_array($method, self::VALID_METHODS);
     }
 
+    /**
+    *Comparate sender name in privare array $senders for validation
+    *
+    *@param string  $sender Request sender for validation
+    *@return  boolean       Request validation sender
+    */
+
     private function sender($sender)
     {
         return in_array($sender, self::VALID_SENDERS);
     }
+
+    /**
+    *Validate request body
+    *
+    *@param string  $body Request body for validation
+    *@return  object      Request object
+    */
+
     private function body($body)
     {
         if (!$this->isValidBody($body))

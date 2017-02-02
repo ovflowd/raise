@@ -18,8 +18,10 @@
  */
 include_once ("Treaters/MessageOutPut.php");
 include_once ("Config/Config.php");
+
 use Raise\Treaters\MessageOutPut;
 use Raise\Treaters\Config;
+
 class DatabaseParser
 {
     private $serverAddress;
@@ -84,7 +86,6 @@ class DatabaseParser
     //return string
     public function insert($requestObj)
     {
-
         try
         {
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
@@ -97,8 +98,6 @@ class DatabaseParser
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     }
-
-
 
     //Method for performing a select query on the database.
     //return string

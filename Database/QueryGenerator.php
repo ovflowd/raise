@@ -1,5 +1,23 @@
 <?php
+/**
+ * UIoT Service Layer
+ * @version alpha
+ *                          88
+ *                          ""              ,d
+ *                                          88
+ *              88       88 88  ,adPPYba, MM88MMM
+ *              88       88 88 a8"     "8a  88
+ *              88       88 88 8b       d8  88
+ *              "8a,   ,a88 88 "8a,   ,a8"  88,
+ *               `"YbbdP'Y8 88  `"YbbdP"'   "Y888
+ *
+ * @author Universal Internet of Things
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @copyright University of Brasília
+ */
+
 include_once ('Database/DatabaseParser.php');
+
 Class QueryGenerator
 {
     public function generate($request)
@@ -8,7 +26,6 @@ Class QueryGenerator
         $parsedPath = $this->parsePath($request);
         if ($parsedPath !== FALSE)
         {
-
             $parser = new DatabaseParser($parsedPath);
             if ($request->getMethod() == "GET")
             {
@@ -25,7 +42,6 @@ Class QueryGenerator
             return array('code'=>200,'message'=>'Welcome to RAISE!');
         }
     }
-
 
     private function generateToken()
     {
@@ -76,17 +92,31 @@ Class QueryGenerator
           {
             $request->bucket = "token";
             $parser = new DatabaseParser($request);
+
+            //Select Client on Token bucket
             $token = $request->getBody()['tokenId'];
             $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
             $request->setParameters(array('token'=>$token));
             $result = $parser->select($request);
+            //End select
+
+            //validate token
+
+            //if
+
+            //end validate
+
+            //create Client
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]),true);
+            unset($requestBody["time_ini"]);
+            unset($requestBody["time_fim"]);
             $request->bucket = "client";
             $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
             $request->token = $requestBody['tokenId'];
             unset($requestBody['tokenId']);
             return $request;
+            //end create
           }
           else
           {
