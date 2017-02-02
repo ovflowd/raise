@@ -65,7 +65,8 @@
                             "type": "object",
                             "properties": {
                                 "code": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "required": true
                                 },
                                 "clients": {
                                     "type": "array",
