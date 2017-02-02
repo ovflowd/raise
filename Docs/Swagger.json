@@ -80,13 +80,13 @@
                     "401": {
                         "description": "Invalid or expired token",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error401"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     }
                 }
@@ -460,7 +460,7 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "example": "Client1"
+                    "example": "Arduino Master"
                 },
                 "chipset": {
                     "type": "string",
@@ -472,7 +472,7 @@
                 },
                 "serial": {
                     "type": "string",
-                    "example": 0
+                    "example": "C210"
                 },
                 "processor": {
                     "type": "string",
@@ -574,6 +574,57 @@
                 "type": {
                     "type": "string",
                     "example": "float"
+                }
+            }
+        },
+        "Error401": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 401
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unauthorized"
+                }
+            }
+        },
+        "Error403": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 403
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Forbidden"
+                }
+            }
+        },
+        "Error422": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 422
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unprocessable Entity"
                 }
             }
         },
