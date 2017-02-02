@@ -123,25 +123,25 @@
                     "400": {
                         "description": "Invalid parameters",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error400"
                         }
                     },
                     "403": {
                         "description": "Forbbiden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error422"
                         }
                     },
                     "429": {
                         "description": "Too many requests",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error429"
                         }
                     }
                 }
@@ -424,7 +424,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Data"
+                        }
                     },
                     "400": {
                         "description": "Invalid parameters",
@@ -442,6 +445,54 @@
                         "description": "Forbidden",
                         "schema": {
                             "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        },
+        "/data/register/": {
+            "post": {
+                "tags": [
+                    "data"
+                ],
+                "description": "Register some data",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth-token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbbiden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/Error422"
                         }
                     },
                     "429": {
@@ -667,23 +718,6 @@
                 "message": {
                     "type": "string",
                     "example": "Too many requests"
-                }
-            }
-        },
-        "ErrorResponse": {
-            "required": [
-                "code",
-                "message"
-            ],
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 0
-                },
-                "message": {
-                    "type": "string",
-                    "example": "Mensagem de erro"
                 }
             }
         },
