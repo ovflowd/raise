@@ -65,7 +65,8 @@
                             "type": "object",
                             "properties": {
                                 "code": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "example": 0
                                 },
                                 "clients": {
                                     "type": "array",
@@ -458,22 +459,28 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Client1"
                 },
                 "chipset": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "SEGA's System 16"
                 },
                 "mac": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "FF:FF:FF:FF:FF:FF"
                 },
                 "serial": {
-                    "type": "string"
+                    "type": "string",
+                    "example": 0
                 },
                 "processor": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Intel"
                 },
                 "channel": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 }
             }
         },
@@ -543,7 +550,8 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Send temperature"
                 },
                 "return": {
                     "type": "string"
@@ -560,10 +568,12 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Temp"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "float"
                 }
             }
         },
@@ -580,7 +590,7 @@
                 },
                 "message": {
                     "type": "string",
-                    "example": "Deu certo"
+                    "example": "Mensagem de erro"
                 }
             }
         },
@@ -593,13 +603,16 @@
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Token received"
                 },
                 "token": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/**/"
                 }
             }
         }
