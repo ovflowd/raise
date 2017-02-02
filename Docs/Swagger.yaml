@@ -46,11 +46,13 @@ paths:
         200:
           description: Successful response
           schema:
+            required: ["code", "clients"]
             title: clients
             type: object
             properties:
               code:
                 type: integer
+                example: 0
               clients:
                 type: array
                 items:
@@ -58,11 +60,11 @@ paths:
         401:
           description: Invalid or expired token
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error401'
         403:
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error403'
   /client/register/:
     post:
       tags:
@@ -83,19 +85,19 @@ paths:
         429:
           description: Too many requests
           schema:
-            $ref: '#/definitions/ErrorResponse' 
+            $ref: '#/definitions/Error429' 
         400:
           description: Invalid parameters
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error400'
         403:
           description: Forbbiden
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error403'
         422:
           description: Unprocessable Entity
           schema:
-            $ref: '#/definitions/ErrorResponse'    
+            $ref: '#/definitions/Error422'    
   /service/:
     get:
       tags:
@@ -152,6 +154,7 @@ paths:
         200:
           description: Successful response
           schema:
+            required: ["code", "values"]
             title: clients
             type: object
             properties:
@@ -164,19 +167,19 @@ paths:
         401:
           description: Invalid or expired token
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error401'
         403:
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error403'
         429:
           description: Too many requests
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error429'
         400:
           description: Invalid parameters
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error400'
   /service/register/:
     post:
       tags:
@@ -205,23 +208,23 @@ paths:
         429:
           description: Too many requests
           schema:
-            $ref: '#/definitions/ErrorResponse' 
+            $ref: '#/definitions/Error429' 
         400:
           description: Invalid parameters
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error400'
         403:
           description: Forbbiden
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error403'
         422:
           description: Unprocessable Entity
           schema:
-            $ref: '#/definitions/ErrorResponse' 
+            $ref: '#/definitions/Error422' 
         401:
           description: Invalid or expired token
           schema:
-            $ref: '#/definitions/ErrorResponse'    
+            $ref: '#/definitions/Error401'    
   /data/:
     get:
       tags:
@@ -282,22 +285,64 @@ paths:
       responses:
         200:
           description: OK
+          schema:
+            $ref: '#/definitions/Data'
         401:
           description: Invalid or expired token
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error401'
         403:
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error403'
         429:
           description: Too many requests
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error429'
         400:
           description: Invalid parameters
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: '#/definitions/Error400'
+  /data/register/:
+    post:
+      tags: 
+        - data
+      description: Register some data 
+      parameters:
+        - name: data
+          in: body
+          required: true
+          description: an array of data to be registered
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Data'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        429:
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/Error429' 
+        400:
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/Error400'
+        403:
+          description: Forbbiden
+          schema:
+            $ref: '#/definitions/Error403'
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/Error422' 
+        401:
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/Error401'    
+
 definitions:
   Client:
     required: ["name","chipset", "mac", "serial", "processor", "channel"]
@@ -305,16 +350,22 @@ definitions:
     properties:
       name:
         type: string
+        example: Arduino Master
       chipset:
         type: string
+        example: SEGA's System 16
       mac:
         type: string
+        example: FF:FF:FF:FF:FF:FF
       serial:
         type: string
+        example: C210
       processor:
         type: string
+        example: Intel
       channel:
         type: integer #transformar em um enum
+        example: 0
   Service_values_list:
     required: ["id", "service", "value"]
     type: object
@@ -330,24 +381,34 @@ definitions:
     properties:
       code:
         type: integer
+        example: 0
       tokenId:
         type: string
+        example: /**/
       start_date:
         type: string
+        example: 04/08/1997
       end_date:
         type: string
+        example: 20/04/2018
       limit:
         type: integer
+        example: 50
       tag: 
         type: string
+        example: Chip
       host:
         type: string
+        example: /**/
       channel:
         type: string
+        example: WiFi
       processor:
         type: string
+        example: Intel I3
       name: 
         type: string
+        example: /**/
       order:
         type: boolean
   Service:
@@ -356,8 +417,10 @@ definitions:
     properties:
       name:
         type: string
+        example: Send temperature
       return:
         type: string  #transformar em um enum
+        example: 273K
       params:
         type: array
         items:
@@ -367,26 +430,73 @@ definitions:
     properties:
       name: 
         type: string
+        example: Temp
       type: 
         type: string #transformar em um enum
-  ErrorResponse:
+        example: float
+  Error400:
     required: ["code", "message"]
     type: object
     properties:
       code:
         type: integer
+        example: 400
       message:
         type: string
+        example: Invalid Parameters
+  Error401:
+    required: ["code", "message"]
+    type: object
+    properties:
+      code:
+        type: integer
+        example: 401
+      message:
+        type: string
+        example: Unauthorized
+  Error403:
+    required: ["code", "message"]
+    type: object
+    properties:
+      code:
+        type: integer
+        example: 403
+      message:
+        type: string
+        example: Forbidden
+  Error422:
+    required: ["code", "message"]
+    type: object
+    properties:
+      code:
+        type: integer
+        example: 422
+      message:
+        type: string
+        example: Unprocessable Entity
+  Error429:
+    required: ["code", "message"]
+    type: object
+    properties:
+      code:
+        type: integer
+        example: 429
+      message: 
+        type: string
+        example: Too many requests
   TokenResponse:
     required: ["code", "message", "token"]
     type: object
     properties:
       code:
         type: integer
+        example: 0
       message:
         type: string
+        example: Token received
       token:
         type: string
+        example: /**/
 #  ServiceResponse: ## Not Used
 #    type: object
 #    properties:
