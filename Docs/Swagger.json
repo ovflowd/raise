@@ -450,7 +450,12 @@
         "Client": {
             "type": "object",
             "required": [
-                "name"
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel"
             ],
             "properties": {
                 "name": {
