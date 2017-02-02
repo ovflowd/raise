@@ -583,6 +583,11 @@
             }
         },
         "TokenResponse": {
+            "required": [
+                "code",
+                "message",
+                "token"
+            ],
             "type": "object",
             "properties": {
                 "code": {
