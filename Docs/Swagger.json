@@ -465,6 +465,18 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth-token"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "description": "an array of services to be registered",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Data"
+                            }
+                        }
                     }
                 ],
                 "responses": {
