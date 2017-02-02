@@ -454,24 +454,19 @@
                     "type": "string"
                 },
                 "chipset": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                 },
                 "mac": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                 },
                 "serial": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                 },
                 "processor": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                 },
                 "channel": {
-                    "type": "integer",
-                    "required": true
+                    "type": "integer"
                 }
             }
         },
