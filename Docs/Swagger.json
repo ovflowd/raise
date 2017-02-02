@@ -478,6 +478,11 @@
             }
         },
         "Service_values_list": {
+            "required": [
+                "id",
+                "service",
+                "value"
+            ],
             "type": "object",
             "properties": {
                 "id": {
@@ -530,6 +535,11 @@
             }
         },
         "Service": {
+            "required": [
+                "name",
+                "return",
+                "params"
+            ],
             "type": "object",
             "properties": {
                 "name": {
