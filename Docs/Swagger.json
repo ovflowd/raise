@@ -449,9 +449,6 @@
     "definitions": {
         "Client": {
             "type": "object",
-            "required": [
-                "serial"
-            ],
             "properties": {
                 "name": {
                     "type": "string",
