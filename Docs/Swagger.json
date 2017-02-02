@@ -568,6 +568,10 @@
             }
         },
         "ErrorResponse": {
+            "required": [
+                "code",
+                "message"
+            ],
             "type": "object",
             "properties": {
                 "code": {
