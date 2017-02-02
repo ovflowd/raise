@@ -467,7 +467,7 @@
                         "name": "data",
                         "in": "body",
                         "required": true,
-                        "description": "an array of services to be registered",
+                        "description": "an array of data to be registered",
                         "schema": {
                             "type": "array",
                             "items": {
