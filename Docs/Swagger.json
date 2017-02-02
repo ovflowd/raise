@@ -469,7 +469,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponse"
+                        }
                     },
                     "400": {
                         "description": "Invalid parameters",
@@ -566,34 +569,44 @@
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 },
                 "tokenId": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/**/"
                 },
                 "start_date": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "04/08/1997"
                 },
                 "end_date": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "20/04/2018"
                 },
                 "limit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 50
                 },
                 "tag": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Chip"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/**/"
                 },
                 "channel": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "WiFi"
                 },
                 "processor": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Intel I3"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/**/"
                 },
                 "order": {
                     "type": "boolean"
@@ -613,7 +626,8 @@
                     "example": "Send temperature"
                 },
                 "return": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "273K"
                 },
                 "params": {
                     "type": "array",
