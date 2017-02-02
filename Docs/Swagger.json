@@ -16,44 +16,44 @@
     "paths": {
         "/client/": {
             "get": {
-              "tags": [
-                  "client"
-              ],
+                "tags": [
+                    "client"
+                ],
                 "description": "Get registered clients",
                 "parameters": [
                     {
                         "name": "name",
                         "in": "query",
                         "description": "client name",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "processor",
                         "in": "query",
                         "description": "client processor name",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "channel",
                         "in": "query",
                         "description": "client communication channel id",
-                        "required": false,
+                        "required": true,
                         "type": "number"
                     },
                     {
                         "name": "host",
                         "in": "query",
                         "description": "client host name (for example - ip, domain...)",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "tag",
                         "in": "query",
                         "description": "client tag",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -61,11 +61,16 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
+                            "required": [
+                                "code",
+                                "clients"
+                            ],
                             "title": "clients",
                             "type": "object",
                             "properties": {
                                 "code": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "example": 0
                                 },
                                 "clients": {
                                     "type": "array",
@@ -79,13 +84,13 @@
                     "401": {
                         "description": "Invalid or expired token",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error401"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     }
                 }
@@ -156,14 +161,14 @@
                         "name": "start_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the starting date",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "end_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the ending date",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
@@ -184,35 +189,35 @@
                         "name": "name",
                         "in": "query",
                         "description": "client name",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "processor",
                         "in": "query",
                         "description": "client processor name",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "channel",
                         "in": "query",
                         "description": "client communication channel id",
-                        "required": false,
+                        "required": true,
                         "type": "number"
                     },
                     {
                         "name": "host",
                         "in": "query",
                         "description": "client host name (for example - ip, domain...)",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "tag",
                         "in": "query",
                         "description": "client tag",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -220,6 +225,10 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
+                            "required": [
+                                "code",
+                                "values"
+                            ],
                             "title": "clients",
                             "type": "object",
                             "properties": {
@@ -238,25 +247,25 @@
                     "400": {
                         "description": "Invalid parameters",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error400"
                         }
                     },
                     "401": {
                         "description": "Invalid or expired token",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error401"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     },
                     "429": {
                         "description": "Too many requests",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error429"
                         }
                     }
                 }
@@ -302,31 +311,31 @@
                     "400": {
                         "description": "Invalid parameters",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error400"
                         }
                     },
                     "401": {
                         "description": "Invalid or expired token",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error401"
                         }
                     },
                     "403": {
                         "description": "Forbbiden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error422"
                         }
                     },
                     "429": {
                         "description": "Too many requests",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error429"
                         }
                     }
                 }
@@ -346,70 +355,70 @@
                         "name": "code",
                         "in": "query",
                         "description": "The code of the data",
-                        "required": false,
+                        "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "start_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the starting date",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "end_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the ending date",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "limit",
                         "in": "query",
                         "description": "Limits the amount of records for request. Used to prevent memory issues.",
-                        "required": false,
+                        "required": true,
                         "type": "number"
                     },
                     {
                         "name": "order",
                         "in": "query",
                         "description": "Bool. 0 for asc and 1 for desc.",
-                        "required": false,
+                        "required": true,
                         "type": "boolean"
                     },
                     {
                         "name": "name",
                         "in": "query",
                         "description": "data name",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "processor",
                         "in": "query",
                         "description": "data processor",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "channel",
                         "in": "query",
                         "description": "data channel",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "host",
                         "in": "query",
                         "description": "data host",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "tag",
                         "in": "query",
                         "description": "tag host",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -420,25 +429,25 @@
                     "400": {
                         "description": "Invalid parameters",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error400"
                         }
                     },
                     "401": {
                         "description": "Invalid or expired token",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error401"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     },
                     "429": {
                         "description": "Too many requests",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error429"
                         }
                     }
                 }
@@ -447,29 +456,48 @@
     },
     "definitions": {
         "Client": {
+            "required": [
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel"
+            ],
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Arduino Master"
                 },
                 "chipset": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "SEGA's System 16"
                 },
                 "mac": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "FF:FF:FF:FF:FF:FF"
                 },
                 "serial": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "C210"
                 },
                 "processor": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Intel"
                 },
                 "channel": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 }
             }
         },
         "Service_values_list": {
+            "required": [
+                "id",
+                "service",
+                "value"
+            ],
             "type": "object",
             "properties": {
                 "id": {
@@ -522,10 +550,16 @@
             }
         },
         "Service": {
+            "required": [
+                "name",
+                "return",
+                "params"
+            ],
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Send temperature"
                 },
                 "return": {
                     "type": "string"
@@ -542,35 +576,136 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Temp"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "float"
+                }
+            }
+        },
+        "Error400": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Invalid Parameters"
+                }
+            }
+        },
+        "Error401": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 401
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unauthorized"
+                }
+            }
+        },
+        "Error403": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 403
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Forbidden"
+                }
+            }
+        },
+        "Error422": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 422
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unprocessable Entity"
+                }
+            }
+        },
+        "Error429": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 429
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Too many requests"
                 }
             }
         },
         "ErrorResponse": {
+            "required": [
+                "code",
+                "message"
+            ],
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Mensagem de erro"
                 }
             }
         },
         "TokenResponse": {
+            "required": [
+                "code",
+                "message",
+                "token"
+            ],
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Token received"
                 },
                 "token": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/**/"
                 }
             }
         }
