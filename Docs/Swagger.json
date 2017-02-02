@@ -34,7 +34,7 @@
                         "description": "client processor name",
                         "required": true,
                         "type": "string"
-                    }, 
+                    },
                     {
                         "name": "channel",
                         "in": "query",
@@ -576,6 +576,7 @@
         },
         "Data": {
             "required": [
+                "service_id",
                 "code",
                 "tokenId",
                 "time_stamp",
@@ -586,6 +587,10 @@
             ],
             "type": "object",
             "properties": {
+                "service_id": {
+                    "type": "integer",
+                    "example": 15
+                },
                 "code": {
                     "type": "integer",
                     "example": 0
