@@ -18,27 +18,27 @@ paths:
         - name: name
           in: query
           description: client name
-          required: false
+          required: true
           type: string
         - name: processor
           in: query
           description: client processor name
-          required: false
+          required: true
           type: string
         - name: channel
           in: query
           description: client communication channel id
-          required: false
+          required: true
           type: number
         - name: host
           in: query
           description: client host name (for example - ip, domain...)
-          required: false
+          required: true
           type: string
         - name: tag
           in: query
           description: client tag
-          required: false
+          required: true
           type: string
       responses:
         200:
@@ -104,12 +104,12 @@ paths:
         - name: start_date
           in: query
           description: In the case of a search between a time interval, this is the starting date
-          required: false
+          required: true
           type: string #timestamp
         - name: end_date
           in: query
           description: In the case of a search between a time interval, this is the ending date
-          required: false
+          required: true
           type: string
         - name: limit
           in: query
@@ -124,27 +124,27 @@ paths:
         - name: name
           in: query
           description: client name
-          required: false
+          required: true
           type: string
         - name: processor
           in: query
           description: client processor name
-          required: false
+          required: true
           type: string
         - name: channel
           in: query
           description: client communication channel id
-          required: false
+          required: true
           type: number
         - name: host
           in: query
           description: client host name (for example - ip, domain...)
-          required: false
+          required: true
           type: string
         - name: tag
           in: query
           description: client tag
-          required: false
+          required: true
           type: string
       responses:
         200:
@@ -230,52 +230,52 @@ paths:
          - name: code
            in: query
            description: The code of the data
-           required: false
+           required: true
            type: integer 
          - name: start_date
            in: query
            description: In the case of a search between a time interval, this is the starting date
-           required: false
+           required: true
            type: string #timestamp
          - name: end_date
            in: query
            description: In the case of a search between a time interval, this is the ending date
-           required: false
+           required: true
            type: string
          - name: limit
            in: query
            description: Limits the amount of records for request. Used to prevent memory issues. 
-           required: false
+           required: true
            type: number
          - name: order
            in: query
            description: Bool. 0 for asc and 1 for desc. 
-           required: false
+           required: true
            type: boolean
          - name: name
            in: query
            description: data name
-           required: false
+           required: true
            type: string
          - name: processor
            in: query
            description: data processor
-           required: false
+           required: true
            type: string
          - name: channel
            in: query
            description: data channel
-           required: false
+           required: true
            type: string
          - name: host
            in: query
            description: data host
-           required: false
+           required: true
            type: string
          - name: tag
            in: query
            description: tag host
-           required: false
+           required: true
            type: string
       responses:
         200:
