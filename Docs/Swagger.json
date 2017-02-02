@@ -578,15 +578,11 @@
             "required": [
                 "code",
                 "tokenId",
-                "start_date",
-                "end_date",
-                "limit",
+                "time_stamp",
                 "tag",
                 "host",
                 "channel",
-                "processor",
-                "name",
-                "order"
+                "processor"
             ],
             "type": "object",
             "properties": {
@@ -596,19 +592,11 @@
                 },
                 "tokenId": {
                     "type": "string",
-                    "example": "/**/"
+                    "example": "TCOCT2STQTCD3FRX"
                 },
-                "start_date": {
+                "time_stamp": {
                     "type": "string",
-                    "example": "04/08/1997"
-                },
-                "end_date": {
-                    "type": "string",
-                    "example": "20/04/2018"
-                },
-                "limit": {
-                    "type": "integer",
-                    "example": 50
+                    "example": 19595
                 },
                 "tag": {
                     "type": "string",
@@ -616,7 +604,7 @@
                 },
                 "host": {
                     "type": "string",
-                    "example": "/**/"
+                    "example": "127.0.0.1"
                 },
                 "channel": {
                     "type": "string",
@@ -625,13 +613,6 @@
                 "processor": {
                     "type": "string",
                     "example": "Intel I3"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "/**/"
-                },
-                "order": {
-                    "type": "boolean"
                 }
             }
         },
@@ -771,11 +752,11 @@
                 },
                 "message": {
                     "type": "string",
-                    "example": "Token received"
+                    "example": "Success"
                 },
                 "token": {
                     "type": "string",
-                    "example": "/**/"
+                    "example": "87ZKY5SYFCG4A871"
                 }
             }
         }
