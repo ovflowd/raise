@@ -447,6 +447,14 @@
     },
     "definitions": {
         "Client": {
+            "required": [
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel"
+            ],
             "type": "object",
             "properties": {
                 "name": {
