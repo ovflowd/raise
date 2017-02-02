@@ -13,6 +13,8 @@ parameters:
 paths:
   /client/:
     get:
+      tags:
+        - client
       description: Get registered clients
       parameters:
         - name: name
