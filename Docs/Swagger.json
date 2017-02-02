@@ -61,6 +61,10 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
+                            "required": [
+                                "code",
+                                "clients"
+                            ],
                             "title": "clients",
                             "type": "object",
                             "properties": {
@@ -221,6 +225,10 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
+                            "required": [
+                                "code",
+                                "values"
+                            ],
                             "title": "clients",
                             "type": "object",
                             "properties": {
