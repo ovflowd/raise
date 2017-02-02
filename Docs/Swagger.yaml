@@ -300,6 +300,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
 definitions:
   Client:
+    required: ["name","chipset", "mac", "serial", "processor", "channel"]
     type: object
     properties:
       name:
@@ -315,6 +316,7 @@ definitions:
       channel:
         type: integer #transformar em um enum
   Service_values_list:
+    required: ["id", "service", "value"]
     type: object
     properties:
       id:
@@ -349,6 +351,7 @@ definitions:
       order:
         type: boolean
   Service:
+    required: ["name", "return", "params"] 
     type: object
     properties:
       name:
@@ -367,6 +370,7 @@ definitions:
       type: 
         type: string #transformar em um enum
   ErrorResponse:
+    required: ["code", "message"]
     type: object
     properties:
       code:
@@ -374,6 +378,7 @@ definitions:
       message:
         type: string
   TokenResponse:
+    required: ["code", "message", "token"]
     type: object
     properties:
       code:
