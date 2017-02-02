@@ -21,50 +21,69 @@ namespace Raise\Models;
 /**
 *Class Request
 */
+
 class Request{
 
         /**
-        *@var
+        *@var string  $method    Request method
         */
+
         private $method;
+
         /**
-        *@var
+        *@var string  $protocol  Request protocol
         */
+
         private $protocol;
+
         /**
-        *@var
+        *@var string  $server_ip Address IP server request
         */
+
         private $server_ip;
+
         /**
-        *@var
+        *@var string $remote_ip  Address IP clinte request
         */
+
         private $remote_ip;
+
         /**
-        *@var
+        *@var string  $path      Path request
         */
+
         private $path;
+
         /**
-        *@var
+        *@var string  $params    Request parameters
         */
+
         private $params;
+
         /**
-        *@var
+        *@var boolean $isValid   Request validation
         */
+
         private $isValid;
+
         /**
-        *@var
+        *@var string  $body      Body request
         */
+
         private $body;
+
         /**
-        *@var
+        *@var string $response   Code request response
         */
+
         private $response;
 
     /**
     *Construct Object request
     */
 
-    public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body){
+    public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body)
+    {
         $this->method = $method;
         $this->protocol = $protocol;
         $this->server_ip = $serverAddress;
@@ -78,10 +97,13 @@ class Request{
 
     /**
     *Set a method on request object
+    *
+    *@param string $method Request method
     */
 
-    public function setMethod($method){
-            $this->method = $method;
+    public function setMethod($method)
+    {
+        $this->method = $method;
     }
 
     /**
@@ -90,153 +112,188 @@ class Request{
     *@return  string  request method
     */
 
-    public function getMethod(){
-            return $this->method;
+    public function getMethod()
+    {
+        return $this->method;
     }
 
     /**
     *Set protocol request object
+    *
+    *@param string $protocol  Request protocol
     */
 
-    public function setProtocol($protocol){
-            $this->protocol = $protocol;
+    public function setProtocol($protocol)
+    {
+        $this->protocol = $protocol;
     }
 
     /**
-    *Get protocol request object
+    *Get protocol from request object
     *
     *@return string protocol request object
     */
 
-    public function getProtocol(){
-            return $this->protocol;
+    public function getProtocol()
+    {
+        return $this->protocol;
     }
 
     /**
     *Set address IP SERVER_PROTOCOL
+    *
+    *@param string $server_ip Address IP server
     */
 
-    public function setServer_IP($server_ip){
-            $this->server_ip = $server_ip;
+    public function setServer_IP($server_ip)
+    {
+        $this->server_ip = $server_ip;
     }
 
     /**
-    *Get address IP Server request object
+    *Get address IP Server from request object
     *
     *@return string IP server request object
     */
 
-    public function getServer_IP(){
-            return $this->server_ip;
+    public function getServer_IP()
+    {
+        return $this->server_ip;
     }
 
     /**
-    *Set Remote IP request object
-    */
-
-    public function setRemote_IP($Remote_ip){
-            $this->remote_ip = $remote_ip;
-    }
-
-    /**
-    *Get Remote IP request object
+    *Set client address IP on request object
     *
-    *@return string remote IP request object
+    *@param string $Remote_ip Client address IP
     */
 
-    public function getRemote_IP(){
-            return $this->remote_ip;
+    public function setRemote_IP($Remote_ip)
+    {
+        $this->remote_ip = $remote_ip;
     }
 
     /**
-    *Set path on request object
+    *Get Remote IP from request object
+    *
+    *@return string Client address IP request object
     */
 
-    public function setPath($path){
+    public function getRemote_IP()
+    {
+        return $this->remote_ip;
+    }
+
+    /**
+    *Set path from query string on request object
+    *
+    *@param query string $path  request path query string
+    */
+
+    public function setPath($path)
+    {
         $s = explode("?", $path); //divide path from query string
         $this->path = explode("/", $s[0]); // separate path into array
     }
 
     /**
-    *Get
+    *Get path from request object
     *
-    *@return
+    *@return string path from request object
     */
 
-    public function getPath(){
+    public function getPath()
+    {
         return $this->path;
     }
 
     /**
-    *Set
+    *Set parameters from string on request object
+    *
+    *@param string $paramsString Parameters not standardized
     */
 
     public function setParams($paramsString)
     {
         parse_str($paramsString, $paramsArray);
-            $this->params = $paramsArray;
-    }
-
-
-    /**
-    *Set
-    */
-
-    public function setParameters($params){
-             $this->params = $params;
-             return $this->params;
+        $this->params = $paramsArray;
     }
 
     /**
-    *Get
+    *Set and get parameters on request object
     *
-    *@return
+    *@param  string $params request parameters
+    *@return string parameters from request object
     */
 
-    public function getParameters(){
-            return $this->params;
+    public function setParameters($params)
+    {
+         $this->params = $params;
+         return $this->params;
     }
 
     /**
-    *Get
+    *Get parameters from request object
     *
-    *@return
+    *@return string request object parameters
     */
 
-    public function getBody() {
+    public function getParameters()
+    {
+        return $this->params;
+    }
+
+    /**
+    *Get a body from request object
+    *
+    *@return string request object body
+    */
+
+    public function getBody()
+    {
         return $this->body;
     }
 
-    public function isValid() {
-            return $this->isValid;
+    /**
+    *Get a information of validation of request object
+    *
+    *@return boolean request object validation
+    */
+
+    public function isValid()
+    {
+        return $this->isValid;
     }
 
     /**
-    *Set
+    *Set validation on request object
+    *
+    *@param boolean $validade Validation status value
     */
 
-    public function setValid($validate) {
-
+    public function setValid($validate)
+    {
         $this->isValid = $validate;
     }
 
     /**
-    *Set
+    *Set code of reponse message
+    *
+    *@param string  $code Code of response messsage
     */
 
     public function setResponseCode($code)
     {
-    $this->response = $code;
+        $this->response = $code;
     }
 
     /**
-    *Get
+    *Get response code from request object
     *
-    *@return string 
+    *@return string request object response code
     */
 
-    public function getReponseCode() {
+    public function getReponseCode()
+    {
         return $this->response;
     }
-
 }
