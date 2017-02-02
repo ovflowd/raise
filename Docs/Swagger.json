@@ -451,8 +451,7 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                 },
                 "chipset": {
                     "type": "string",
