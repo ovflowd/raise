@@ -464,9 +464,6 @@
                 "description": "Register some data",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/auth-token"
-                    },
-                    {
                         "name": "data",
                         "in": "body",
                         "required": true,
