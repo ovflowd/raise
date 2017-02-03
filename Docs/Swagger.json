@@ -564,13 +564,16 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 15
                 },
                 "service": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Get temperature"
                 },
                 "value": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "273K"
                 }
             }
         },
@@ -579,21 +582,17 @@
                 "service_id",
                 "code",
                 "tokenId",
-                "time_stamp",
-                "tag",
-                "host",
-                "channel",
-                "processor"
+                "time_stamp"
             ],
             "type": "object",
             "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
                 "service_id": {
                     "type": "integer",
                     "example": 15
-                },
-                "code": {
-                    "type": "integer",
-                    "example": 0
                 },
                 "tokenId": {
                     "type": "string",
@@ -603,21 +602,16 @@
                     "type": "string",
                     "example": 19595
                 },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    },
+                    "example": null
+                },
                 "tag": {
                     "type": "string",
                     "example": "Chip"
-                },
-                "host": {
-                    "type": "string",
-                    "example": "127.0.0.1"
-                },
-                "channel": {
-                    "type": "string",
-                    "example": "WiFi"
-                },
-                "processor": {
-                    "type": "string",
-                    "example": "Intel I3"
                 }
             }
         },
