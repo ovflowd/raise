@@ -16,7 +16,9 @@
  * @copyright University of Brasília
  */
 
+include_once ("Treaters/MessageOutPut.php");
 include_once ('Database/DatabaseParser.php');
+use Raise\Treaters\MessageOutPut;
 
 Class QueryGenerator
 {
@@ -24,7 +26,7 @@ Class QueryGenerator
     {
 
         $parsedPath = $this->parsePath($request);
-        if ($parsedPath !== FALSE)
+        if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE)
         {
             $parser = new DatabaseParser($parsedPath);
             if ($request->getMethod() == "GET")
@@ -36,6 +38,10 @@ Class QueryGenerator
                 $result = $parser->insert($request);
             }
             return $result;
+        }
+        elseif($parsedPath->isValid() === FALSE)
+        {
+          return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
         else
         {
@@ -65,6 +71,38 @@ Class QueryGenerator
         }
 
         return $request;
+    }
+
+    private function validateToken($result,$request)
+    {
+
+      if(isset($result['values'][0]))
+      {
+        unset($request->string);
+        $requestBody = json_decode(json_encode($result['values'][0]),true);
+        if($requestBody["time_fim"] > round(microtime(true) *1000))
+        {
+          unset($requestBody["time_ini"]);
+          unset($requestBody["time_fim"]);
+          $request->bucket = "client";
+          $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
+          $request->token = $requestBody['tokenId'];
+          unset($requestBody['tokenId']);
+        }
+        else
+        {
+          $request->setResponseCode(401);
+          $request->setValid(false);
+        }
+      }
+      else
+      {
+        $request->setResponseCode(401);
+        $request->setValid(false);
+      }
+
+      return $request;
+
     }
 
     private function parsePath($request)
@@ -98,24 +136,11 @@ Class QueryGenerator
             $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
             $request->setParameters(array('token'=>$token));
             $result = $parser->select($request);
+            $request = $this->validateToken($result,$request);
             //End select
 
-            //validate token
-
-            //if
-
-            //end validate
-
             //create Client
-            unset($request->string);
-            $requestBody = json_decode(json_encode($result['values'][0]),true);
-            unset($requestBody["time_ini"]);
-            unset($requestBody["time_fim"]);
-            $request->bucket = "client";
-            $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
-            $request->token = $requestBody['tokenId'];
-            unset($requestBody['tokenId']);
-            return $request;
+
             //end create
           }
           else
