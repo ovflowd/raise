@@ -169,7 +169,7 @@ class RequestTreater
             break;
             case 'POST':
                 $query->namedParams(array('bucket' => $bucket, 'method' => $method));
-                $parameters = $database->query($query)->rows[0]->input[0];
+                $parameters = $database->query($query)->rows[0]->input;
 
                 if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
                     $request->setResponseCode(400);

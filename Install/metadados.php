@@ -21,49 +21,49 @@
 
 class CouchBaseInterfacer{
 
-		/**
-		*Method for insert data message response in metadata bucket.
-		*
-		*@param string	$code_http	HTTP code.
-		*@param string	$code_cb		Couchbase error code.
-		*@param	string	$message		Message response.
-		*@param string	$cluster		IP Couchbase server.
-		*/
+	/**
+	*Method for insert data message response in metadata bucket.
+	*
+	*@param string	$code_http	HTTP code.
+	*@param string	$code_cb		Couchbase error code.
+	*@param	string	$message		Message response.
+	*@param string	$cluster		IP Couchbase server.
+	*/
 
-		public function metadataInsert(string $cod_http, string $cod_cb, string $message, string $cluster)
-		{
-				$metadata = uniqId("", true);
-				$myCluster = new CouchbaseCluster($cluster);
-				$myBucket = $myCluster->openBucket('metadata');
-				$result = $myBucket->insert($metadata, array(
-																		"codHttp"=>$cod_http,
-																		"codCouch"=>$cod_cb,
-																		"message"=>$message)
-																	);
-		}
+	public function metadataInsert(string $cod_http, string $cod_cb, string $message, string $cluster){
 
-		/**
-		*Method for created primary index on all buckets.
-		*
-		*@param string	$cluster		IP Couchbase server.
-		*/
+		$metadata = uniqId("", true);
 
-		public function conchBaseInsertKey(string $cluster)
-		{
+		$myCluster = new CouchbaseCluster($cluster);
+		$myBucket = $myCluster->openBucket('metadata');
+		$result = $myBucket->insert($metadata, array(
+			"codHttp"=>$cod_http,
+			"codCouch"=>$cod_cb,
+			"message"=>$message)
+		);
+	}
 
-				$myCluster = new CouchbaseCluster($cluster);
+	/**
+	*Method for created primary index on all buckets.
+	*
+	*@param string	$cluster		IP Couchbase server.
+	*/
 
-				$myBucket = $myCluster->openBucket('client');
+	public function conchBaseInsertKey(string $cluster){
 
-				// Before issuing a N1QL Query, ensure that there is
-				// is actually a primary index.
-				try {
+		$myCluster = new CouchbaseCluster($cluster);
+
+		$myBucket = $myCluster->openBucket('client');
+
+		// Before issuing a N1QL Query, ensure that there is
+		// is actually a primary index.
+		try {
 		    // Do not override default name, fail if it is exists already, and wait for completion
-		    		$myBucket->manager()->createN1qlPrimaryIndex('', false, false);
+		    $myBucket->manager()->createN1qlPrimaryIndex('', false, false);
 
-				} catch (CouchbaseException $e) {
+		} catch (CouchbaseException $e) {
 		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
-				}
+		}
 
 		$myBucket = $myCluster->openBucket('data');
 
@@ -130,7 +130,7 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($get_data, array(
 			"method"=>"get",
 			"bucket"=>"data",
-			"input"=>[array(
+			"input"=>array(
 				"code"=> 0,
 		  	"tokenId"=>"string",
 		  	"start_date"=>"string",
@@ -142,15 +142,15 @@ class CouchBaseInterfacer{
 		  	"channel"=>"string",
 		  	"host"=>"string",
 		  	"tag"=>"string"
-		  )],
-			"output"=>[array(
+		  ),
+			"output"=>array(
 				"code"=> 0,
 				"values"=>[array(
 					"id"=> 0,
 					"service"=> "string",
 					"value"=> "string"
 		  	)]
-		  )]
+		  )
 		));
 
 		$post_data = "post_data";
@@ -158,7 +158,7 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($post_data, array(
 			"method"=>"post",
 			"bucket"=>"data",
-			"input"=>[array(
+			"input"=>array(
 				"tokenId"=>"string",
 				"timestamp"=>"string",
 				"services"=>[array(
@@ -169,11 +169,11 @@ class CouchBaseInterfacer{
 		      	"type"=> "string"
 		      )]
 				)]
-			)],
-			"output"=>[array(
+			),
+			"output"=>array(
 				"code"=> 0,
 				"message"=> "string"
-			)]
+			)
 		));
 
 		$get_clients = "get_clients";
@@ -181,14 +181,14 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($get_clients, array(
 			"method"=>"get",
 			"bucket"=>"client",
-			"input"=>[array(
+			"input"=>array(
 				"name"=> "string",
 			  "processor"=> "string",
 			  "channel"=> "double",
 			  "host"=> "string",
 			  "tag"=> "string"
-			)],
-			"output"=>[array(
+			),
+			"output"=>array(
 				"code"=> 0,
 				"clients"=>[array(
 					"name"=>"string",
@@ -198,7 +198,7 @@ class CouchBaseInterfacer{
         	"processor"=>"string",
         	"channel"=>0
 				)]
-			)]
+			)
 		));
 
 		$post_clients = "post_clients";
@@ -206,7 +206,7 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($post_clients, array(
 			"method"=>"post",
 			"bucket"=>"client",
-			"input"=>[array(
+			"input"=>array(
 				"name"=> "string",
 				"chipset"=> "string",
 				"mac"=> "string",
@@ -214,12 +214,12 @@ class CouchBaseInterfacer{
 				"processor"=> "string",
 				"channel"=> 0,
 				"timestamp"=> "string"
-			)],
-			"output"=>[array(
+			),
+			"output"=>array(
 				"code"=> 0,
 				"message"=> "string",
 				"tokenId"=> "string",
-			)]
+			)
 		));
 
 		$get_service= "get_service";
@@ -227,17 +227,17 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($get_service, array(
 			"method"=>"get",
 			"bucket"=>"service",
-			"input"=>[array(
+			"input"=>array(
 				"tokenId"=> "string"
-			)],
-			"output"=>[array(
+			),
+			"output"=>array(
 				"code"=> 0,
 		  	"values"=> [array(
 			  	"id"=> 0,
 			  	"header_code"=> 0,
 			  	"message"=> "string"
 				)]
-		  )]
+		  )
   	));
 
 		$post_service= "post_service";
@@ -245,7 +245,7 @@ class CouchBaseInterfacer{
 		$result = $myBucket->insert($post_service, array(
 			"method"=>"post",
 			"bucket"=>"service",
-			"input"=>[array(
+			"input"=>array(
 				"tokenId"=>"string",
 				"timestamp"=>"string",
 				"services"=>[array(
@@ -256,36 +256,14 @@ class CouchBaseInterfacer{
 		  			"type"=> "string"
 		      )]
 		   	)]
-			)],
-			"output"=>[array(
+			),
+			"output"=>array(
 				"code"=>0,
 				"services"=>[array(
 					"id"=> "string",
 		  		"name"=> "string"
 		   	)]
-			)]
-		));
-
-		$get_log= "get_log";
-
-		$result = $myBucket->insert($get_log, array(
-			"method"=>"get",
-			"bucket"=>"log",
-			"input"=>[array(
-				"tokenId"=> "string",
-		  	"start_date"=>"string",
-				"end_date"=>"string",
-				"limit"=>"string",
-				"order"=>"boolean"
-			)],
-			"output"=>[array(
-				"code"=> 0,
-		  	"values"=> [array(
-		    	"id"=> 0,
-		    	"header_code"=> 0,
-		    	"message"=> "string"
-		  	)]
-		  )]
+			)
 		));
 	}
 }
