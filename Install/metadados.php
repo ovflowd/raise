@@ -21,49 +21,49 @@
 
 class CouchBaseInterfacer{
 
-	/**
-	*Method for insert data message response in metadata bucket.
-	*
-	*@param string	$code_http	HTTP code.
-	*@param string	$code_cb		Couchbase error code.
-	*@param	string	$message		Message response.
-	*@param string	$cluster		IP Couchbase server.
-	*/
+		/**
+		*Method for insert data message response in metadata bucket.
+		*
+		*@param string	$code_http	HTTP code.
+		*@param string	$code_cb		Couchbase error code.
+		*@param	string	$message		Message response.
+		*@param string	$cluster		IP Couchbase server.
+		*/
 
-	public function metadataInsert(string $cod_http, string $cod_cb, string $message, string $cluster){
-
-		$metadata = uniqId("", true);
-
-		$myCluster = new CouchbaseCluster($cluster);
-		$myBucket = $myCluster->openBucket('metadata');
-		$result = $myBucket->insert($metadata, array(
-			"codHttp"=>$cod_http,
-			"codCouch"=>$cod_cb,
-			"message"=>$message)
-		);
-	}
-
-	/**
-	*Method for created primary index on all buckets.
-	*
-	*@param string	$cluster		IP Couchbase server.
-	*/
-
-	public function conchBaseInsertKey(string $cluster){
-
-		$myCluster = new CouchbaseCluster($cluster);
-
-		$myBucket = $myCluster->openBucket('client');
-
-		// Before issuing a N1QL Query, ensure that there is
-		// is actually a primary index.
-		try {
-		    // Do not override default name, fail if it is exists already, and wait for completion
-		    $myBucket->manager()->createN1qlPrimaryIndex('', false, false);
-
-		} catch (CouchbaseException $e) {
-		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
+		public function metadataInsert(string $cod_http, string $cod_cb, string $message, string $cluster)
+		{
+				$metadata = uniqId("", true);
+				$myCluster = new CouchbaseCluster($cluster);
+				$myBucket = $myCluster->openBucket('metadata');
+				$result = $myBucket->insert($metadata, array(
+																		"codHttp"=>$cod_http,
+																		"codCouch"=>$cod_cb,
+																		"message"=>$message)
+																	);
 		}
+
+		/**
+		*Method for created primary index on all buckets.
+		*
+		*@param string	$cluster		IP Couchbase server.
+		*/
+
+		public function conchBaseInsertKey(string $cluster)
+		{
+
+				$myCluster = new CouchbaseCluster($cluster);
+
+				$myBucket = $myCluster->openBucket('client');
+
+				// Before issuing a N1QL Query, ensure that there is
+				// is actually a primary index.
+				try {
+		    // Do not override default name, fail if it is exists already, and wait for completion
+		    		$myBucket->manager()->createN1qlPrimaryIndex('', false, false);
+
+				} catch (CouchbaseException $e) {
+		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
+				}
 
 		$myBucket = $myCluster->openBucket('data');
 
