@@ -123,25 +123,25 @@
                     "400": {
                         "description": "Invalid parameters",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error400"
                         }
                     },
                     "403": {
                         "description": "Forbbiden",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error403"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error422"
                         }
                     },
                     "429": {
                         "description": "Too many requests",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/Error429"
                         }
                     }
                 }
@@ -424,7 +424,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Data"
+                        }
                     },
                     "400": {
                         "description": "Invalid parameters",
@@ -452,6 +455,66 @@
                     }
                 }
             }
+        },
+        "/data/register/": {
+            "post": {
+                "tags": [
+                    "data"
+                ],
+                "description": "Register some data",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "description": "an array of data to be registered",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Data"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbbiden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/Error422"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -468,11 +531,11 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "example": "Arduino Master"
+                    "example": "Raspberry PI"
                 },
                 "chipset": {
                     "type": "string",
-                    "example": "SEGA's System 16"
+                    "example": "AMD 790FX"
                 },
                 "mac": {
                     "type": "string",
@@ -484,11 +547,11 @@
                 },
                 "processor": {
                     "type": "string",
-                    "example": "Intel"
+                    "example": "Intel I3"
                 },
                 "channel": {
-                    "type": "integer",
-                    "example": 0
+                    "type": "string",
+                    "example": "Ethernet"
                 }
             }
         },
@@ -501,51 +564,54 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 15
                 },
                 "service": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Get temperature"
                 },
                 "value": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "273K"
                 }
             }
         },
         "Data": {
+            "required": [
+                "service_id",
+                "code",
+                "tokenId",
+                "time_stamp"
+            ],
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 200
+                },
+                "service_id": {
+                    "type": "integer",
+                    "example": 15
                 },
                 "tokenId": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "TCOCT2STQTCD3FRX"
                 },
-                "start_date": {
-                    "type": "string"
+                "time_stamp": {
+                    "type": "string",
+                    "example": 19595
                 },
-                "end_date": {
-                    "type": "string"
-                },
-                "limit": {
-                    "type": "integer"
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    },
+                    "example": null
                 },
                 "tag": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "channel": {
-                    "type": "string"
-                },
-                "processor": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "order": {
-                    "type": "boolean"
+                    "type": "string",
+                    "example": "Chip"
                 }
             }
         },
@@ -562,7 +628,8 @@
                     "example": "Send temperature"
                 },
                 "return": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "273K"
                 },
                 "params": {
                     "type": "array",
@@ -670,23 +737,6 @@
                 }
             }
         },
-        "ErrorResponse": {
-            "required": [
-                "code",
-                "message"
-            ],
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 0
-                },
-                "message": {
-                    "type": "string",
-                    "example": "Mensagem de erro"
-                }
-            }
-        },
         "TokenResponse": {
             "required": [
                 "code",
@@ -701,11 +751,11 @@
                 },
                 "message": {
                     "type": "string",
-                    "example": "Token received"
+                    "example": "Success"
                 },
                 "token": {
                     "type": "string",
-                    "example": "/**/"
+                    "example": "87ZKY5SYFCG4A871"
                 }
             }
         }
