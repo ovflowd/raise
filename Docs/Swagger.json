@@ -375,7 +375,7 @@
                     {
                         "name": "limit",
                         "in": "query",
-                        "description": "Limits the amount of records for request. Used to prevent memory issues.",
+                        "description": "Limits the amount of records for request",
                         "required": true,
                         "type": "number"
                     },
