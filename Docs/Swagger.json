@@ -229,7 +229,7 @@
                                 "code",
                                 "values"
                             ],
-                            "title": "clients",
+                            "title": "Service",
                             "type": "object",
                             "properties": {
                                 "code": {
@@ -558,8 +558,8 @@
         "Service_values_list": {
             "required": [
                 "id",
-                "service",
-                "value"
+                "header_code",
+                "message"
             ],
             "type": "object",
             "properties": {
@@ -567,11 +567,11 @@
                     "type": "integer",
                     "example": 15
                 },
-                "service": {
+                "header_code": {
                     "type": "string",
                     "example": "Get temperature"
                 },
-                "value": {
+                "message": {
                     "type": "string",
                     "example": "273K"
                 }
