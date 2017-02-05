@@ -579,28 +579,19 @@
         },
         "Data": {
             "required": [
-                "service_id",
-                "code",
-                "tokenId",
-                "time_stamp"
+                "id",
+                "service",
+                "values"
             ],
             "type": "object",
             "properties": {
-                "code": {
+                "id": {
                     "type": "integer",
                     "example": 200
                 },
-                "service_id": {
+                "service": {
                     "type": "integer",
                     "example": 15
-                },
-                "tokenId": {
-                    "type": "string",
-                    "example": "TCOCT2STQTCD3FRX"
-                },
-                "time_stamp": {
-                    "type": "string",
-                    "example": 19595
                 },
                 "values": {
                     "type": "array",
