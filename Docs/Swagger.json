@@ -161,21 +161,21 @@
                         "name": "limit",
                         "in": "query",
                         "description": "Limits the amount of records for request. Used to prevent memory issues.",
-                        "required": true,
+                        "required": false,
                         "type": "number"
                     },
                     {
                         "name": "order",
                         "in": "query",
                         "description": "Bool. 0 for asc and 1 for desc.",
-                        "required": true,
+                        "required": false,
                         "type": "boolean"
                     },
                     {
                         "name": "name",
                         "in": "query",
                         "description": "client name",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -378,7 +378,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Data"
+                            "required": [
+                                "code",
+                                "services"
+                            ],
+                            "title": "Service",
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 200
+                                },
+                                "services": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Data"
+                                    }
+                                }
+                            }
                         }
                     },
                     "400": {
@@ -509,16 +526,11 @@
         },
         "Data": {
             "required": [
-                "code",
                 "service_id",
                 "values"
             ],
             "type": "object",
             "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 200
-                },
                 "service_id": {
                     "type": "integer",
                     "example": 15
@@ -539,12 +551,12 @@
             "type": "object",
             "properties": {
                 "value1": {
-                    "type": "string",
+                    "type": "integer",
                     "example": 35
                 },
                 "value2": {
-                    "type": "string",
-                    "example": "Umidade 12%"
+                    "type": "integer",
+                    "example": 12
                 }
             }
         },
