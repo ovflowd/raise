@@ -311,73 +311,66 @@
                         "$ref": "#/parameters/auth-token"
                     },
                     {
-                        "name": "code",
-                        "in": "query",
-                        "description": "The code of the data",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
                         "name": "start_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the starting date",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "end_date",
                         "in": "query",
                         "description": "In the case of a search between a time interval, this is the ending date",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "limit",
                         "in": "query",
                         "description": "Limits the amount of records for request",
-                        "required": true,
+                        "required": false,
                         "type": "number"
                     },
                     {
                         "name": "order",
                         "in": "query",
                         "description": "Bool. 0 for asc and 1 for desc.",
-                        "required": true,
+                        "required": false,
                         "type": "boolean"
                     },
                     {
                         "name": "name",
                         "in": "query",
                         "description": "data name",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "processor",
                         "in": "query",
                         "description": "data processor",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "channel",
                         "in": "query",
                         "description": "data channel",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "host",
                         "in": "query",
                         "description": "data host",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "tag",
                         "in": "query",
                         "description": "tag host",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -514,37 +507,15 @@
                 }
             }
         },
-        "Service_values_list": {
-            "required": [
-                "id",
-                "header_code",
-                "message"
-            ],
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 15
-                },
-                "header_code": {
-                    "type": "string",
-                    "example": "Get temperature"
-                },
-                "message": {
-                    "type": "string",
-                    "example": "273K"
-                }
-            }
-        },
         "Data": {
             "required": [
-                "id",
+                "code",
                 "service_id",
-                "services"
+                "values"
             ],
             "type": "object",
             "properties": {
-                "id": {
+                "code": {
                     "type": "integer",
                     "example": 200
                 },
@@ -552,10 +523,10 @@
                     "type": "integer",
                     "example": 15
                 },
-                "services": {
+                "values": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Services"
+                        "$ref": "#/definitions/DataValues"
                     }
                 },
                 "tag": {
@@ -564,7 +535,21 @@
                 }
             }
         },
+        "DataValues": {
+            "type": "object",
+            "properties": {
+                "value1": {
+                    "type": "string",
+                    "example": 35
+                },
+                "value2": {
+                    "type": "string",
+                    "example": "Umidade 12%"
+                }
+            }
+        },
         "Services": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "integer",
@@ -711,8 +696,7 @@
         "TokenResponse": {
             "required": [
                 "code",
-                "message",
-                "token"
+                "message"
             ],
             "type": "object",
             "properties": {
@@ -723,10 +707,6 @@
                 "message": {
                     "type": "string",
                     "example": "Success"
-                },
-                "token": {
-                    "type": "string",
-                    "example": "87ZKY5SYFCG4A871"
                 }
             }
         }
