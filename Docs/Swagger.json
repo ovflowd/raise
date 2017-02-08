@@ -158,20 +158,6 @@
                         "$ref": "#/parameters/auth-token"
                     },
                     {
-                        "name": "start_date",
-                        "in": "query",
-                        "description": "In the case of a search between a time interval, this is the starting date",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "end_date",
-                        "in": "query",
-                        "description": "In the case of a search between a time interval, this is the ending date",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
                         "name": "limit",
                         "in": "query",
                         "description": "Limits the amount of records for request. Used to prevent memory issues.",
@@ -189,34 +175,6 @@
                         "name": "name",
                         "in": "query",
                         "description": "client name",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "processor",
-                        "in": "query",
-                        "description": "client processor name",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "channel",
-                        "in": "query",
-                        "description": "client communication channel id",
-                        "required": true,
-                        "type": "number"
-                    },
-                    {
-                        "name": "host",
-                        "in": "query",
-                        "description": "client host name (for example - ip, domain...)",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "tag",
-                        "in": "query",
-                        "description": "client tag",
                         "required": true,
                         "type": "string"
                     }
