@@ -580,8 +580,8 @@
         "Data": {
             "required": [
                 "id",
-                "service",
-                "values"
+                "service_id",
+                "services"
             ],
             "type": "object",
             "properties": {
@@ -589,19 +589,41 @@
                     "type": "integer",
                     "example": 200
                 },
-                "service": {
+                "service_id": {
                     "type": "integer",
                     "example": 15
                 },
-                "values": {
+                "services": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Parameter"
+                        "$ref": "#/definitions/Services"
                     }
                 },
                 "tag": {
                     "type": "string",
                     "example": "Chip"
+                }
+            }
+        },
+        "Services": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Get temp"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }
+                },
+                "return_type": {
+                    "type": "string",
+                    "example": "float"
                 }
             }
         },
