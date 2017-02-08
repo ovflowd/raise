@@ -550,6 +550,12 @@
         },
         "Services": {
             "type": "object",
+            "required": [
+                "id",
+                "name",
+                "parameters",
+                "return_type"
+            ],
             "properties": {
                 "id": {
                     "type": "integer",
@@ -568,30 +574,6 @@
                 "return_type": {
                     "type": "string",
                     "example": "float"
-                }
-            }
-        },
-        "Service": {
-            "required": [
-                "name",
-                "return",
-                "params"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "Send temperature"
-                },
-                "return": {
-                    "type": "string",
-                    "example": "273K"
-                },
-                "params": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Parameter"
-                    }
                 }
             }
         },
@@ -702,7 +684,7 @@
             "properties": {
                 "code": {
                     "type": "integer",
-                    "example": 0
+                    "example": 200
                 },
                 "message": {
                     "type": "string",
