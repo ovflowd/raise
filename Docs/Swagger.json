@@ -70,7 +70,7 @@
                             "properties": {
                                 "code": {
                                     "type": "integer",
-                                    "example": 0
+                                    "example": 200
                                 },
                                 "clients": {
                                     "type": "array",
