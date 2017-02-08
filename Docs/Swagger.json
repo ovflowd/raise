@@ -248,7 +248,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Service"
+                                "$ref": "#/definitions/Services"
                             }
                         }
                     },
