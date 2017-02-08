@@ -227,7 +227,7 @@
                         "schema": {
                             "required": [
                                 "code",
-                                "values"
+                                "services"
                             ],
                             "title": "Service",
                             "type": "object",
@@ -235,10 +235,10 @@
                                 "code": {
                                     "type": "integer"
                                 },
-                                "values": {
+                                "services": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/Service_values_list"
+                                        "$ref": "#/definitions/Services"
                                     }
                                 }
                             }
