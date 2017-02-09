@@ -26,14 +26,15 @@ Class QueryGenerator
     {
 
         $parsedPath = $this->parsePath($request);
+
         if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE)
         {
             $parser = new DatabaseParser($parsedPath);
-            if ($request->getMethod() == "GET")
+            if ($request->getMethod() == "get")
             {
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
-            } elseif ($request->getMethod() == "POST")
+            } elseif ($request->getMethod() == "post")
             {
                 $result = $parser->insert($request);
             }
@@ -108,11 +109,11 @@ Class QueryGenerator
     private function parsePath($request)
     {
         $path = $request->getPath();
-        $method = $path[2];
+        $method = $path['method'];
         if (!empty($method))
         {
 
-          if($request->getPath()[2] === "client" && $request->getPath()[3] == "register")
+          if($request->getPath()['bucket'] === "client" && $request->getPath()['method'] == "register")
           {
 
             $request->bucket = "token";
@@ -126,7 +127,7 @@ Class QueryGenerator
             $request->treatedBody = $request->getBody();
 
           }
-          elseif ($request->getPath()[2] === "service" && $request->getPath()[3] == "register")
+          elseif ($request->getPath()['bucket'] === "service" && $request->getPath()["method"] == "register")
           {
             $request->bucket = "token";
             $parser = new DatabaseParser($request);

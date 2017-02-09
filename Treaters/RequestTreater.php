@@ -15,20 +15,16 @@
  * @license MIT <https://opensource.org/licenses/MIT>
  * @copyright University of Brasília
  */
-
 namespace Raise\Treaters;
-
 include_once ('Models/Request.php');
 include_once ('Treaters/MessageOutPut.php');
 include_once ('Controllers/SecurityController.php');
 include_once ('Database/QueryGenerator.php');
 include_once ('Database/DatabaseParser.php');
-
 use Raise\Models\Request;
 use Raise\Treaters\MessageOutPut;
 use Raise\Controllers\SecurityController;
 use \DatabaseParser;
-
 /**
 *Class RequestTreater
 *
@@ -38,7 +34,6 @@ use \DatabaseParser;
 *@package Database\QueryGenerator
 *@package Database\DatabaseParser
 */
-
 class RequestTreater
 {
     /**
@@ -51,7 +46,6 @@ class RequestTreater
         'query' => 'QUERY_STRING',
         'sender' => 'REMOTE_ADDRESS'
     );
-
     /**
     *@var array $code error code for validate info
     */
@@ -67,33 +61,32 @@ class RequestTreater
       "HTTP/1.0", "HTTP/1.1", "HTTPS/1.0", "HTTPs/1.1"
     );
 
+    private $AllowedBuckets = array(
+      'client','data','service'
+    );
+
     /**
     *Create a request and validate parameters
     *
     *@return $response Message exception response
     *@return $a        Valid request
     */
-
     public function execute()
     {
         $request = $this->create();
-
         $this->validate($request);
-
         if (!$request->isValid()) {
             return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
-
-        $a = new SecurityController();
-        if ($a->validate($request) === true)
+        $security = new SecurityController();
+        if ($security->validate($request) === true)
         {
             $generator = new \QueryGenerator();
             $response = $generator->generate($request);
             return $response;
         } else
         {
-
-            return $a->validate($request);
+            return $security->validate($request);
         }
     }
 
@@ -102,10 +95,10 @@ class RequestTreater
     *
     *@return $request Object request
     */
-
     public function create()
     {
         $request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['SERVER_PROTOCOL'], $_SERVER['SERVER_ADDR'], $_SERVER['REMOTE_ADDR'], $_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING'], file_get_contents('php://input'));
+        var_dump(self::VALID_PROTOCOLS);
         return $request;
     }
 
@@ -115,70 +108,76 @@ class RequestTreater
     *@param object  $request  Request object
     *@return boolean          Validation value
     */
-
     private function validate($request)
     {
-        $request->setResponseCode(200);
-        $request->setValid(true);
+        if($this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request))
+        {
+          $request->setResponseCode(200);
+          $request->setValid(true);
+          return;
+        }
+        return;
+    }
 
-        $AllowedBuckets = array(
-
-          'client',
-          'data',
-          'service'
-        );
-
-        $bucket = $request->getPath()[2];
-        if(!in_array($bucket,$AllowedBuckets))
+    private function validationBucket($request)
+    {
+        if(!in_array($request->getPath()['bucket'],$this->AllowedBuckets))
         {
           $request->setResponseCode(403);
           $request->setValid(false);
-          return;
+          return false;
         }
+        return true;
+    }
 
-        $request->bucket = $bucket;
-        $method = strtolower($request->getMethod());
-
+    private function validationMethod($request)
+    {
         $database = (new DatabaseParser($request))->getBucket();
+        $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
+        $query->namedParams(array('bucket' => $request->getPath()['bucket'],'method'=>$request->getMethod()));
+        $parameters = $database->query($query)->rows[0]->input;
 
+        switch($request->getMethod()) {
+            case 'get':
+                return $this->validationMethodGet($request, $parameters);
+            break;
+            case 'post':
+                return $this->validationMethodPost($request, $parameters);
+            break;
+        }
+    }
+
+    private function validationMethodGet($request, $parameters)
+    {
+        if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
+            $request->setResponseCode(400);
+            $request->setValid(false);
+            return false;
+        }
+        return true;
+    }
+
+    private function validationMethodPost($request, $parameters)
+    {
+        if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
+            $request->setResponseCode(400);
+            $request->setValid(false);
+            return false;
+        }
+        return true;
+    }
+
+    private function validateMethodMoreBucket($request)
+    {
+        $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
-
-        $query->namedParams(array('bucket' => $bucket,'method'=>$method));
-
+        $query->namedParams(array('bucket' => $request->getPath()['bucket'],'method'=>$request->getMethod()));
         if($database->query($query)->rows[0]->{"$1"} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
-
-            return;
+            return false;
         }
-
-        $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
-
-        switch($request->getMethod()) {
-            case 'GET':
-                $query->namedParams(array('bucket' => $bucket, 'method' => $method));
-                $parameters = $database->query($query)->rows[0]->input[0];
-
-                if(!empty(array_diff(array_keys($request->getParameters()), array_keys((array)$parameters)))) {
-                    $request->setResponseCode(400);
-                    $request->setValid(false);
-
-                    return;
-                }
-
-            break;
-            case 'POST':
-                $query->namedParams(array('bucket' => $bucket, 'method' => $method));
-                $parameters = $database->query($query)->rows[0]->input;
-
-                if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
-                    $request->setResponseCode(400);
-                    $request->setValid(false);
-
-                    return;
-                }
-            break;
-        }
+        return true;
     }
 
     /**
@@ -187,43 +186,36 @@ class RequestTreater
     *@param string  $protocol Request protocol for validation
     *@return boolean          request validation protocol value
     */
-
     private function protocol($protocol)
     {
         return in_array($protocol, self::VALID_PROTOCOLS);
     }
-
     /**
     *Comparate method name in private array $methods for validation
     *
     *@param string  $method Request method for validation
     *@return boolean        Request validation method valeu
     */
-
     private function method($method)
     {
         return in_array($method, self::VALID_METHODS);
     }
-
     /**
     *Comparate sender name in privare array $senders for validation
     *
     *@param string  $sender Request sender for validation
     *@return  boolean       Request validation sender
     */
-
     private function sender($sender)
     {
         return in_array($sender, self::VALID_SENDERS);
     }
-
     /**
     *Validate request body
     *
     *@param string  $body Request body for validation
     *@return  object      Request object
     */
-
     private function body($body)
     {
         if (!$this->isValidBody($body))

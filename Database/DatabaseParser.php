@@ -30,7 +30,7 @@ class DatabaseParser
     public function __construct($requestObj)
     {
         $this->serverAddress = DB_ADDRESS;
-        $this->bucket = $this->connect($requestObj->bucket, $this->serverAddress);
+        $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);
     }
 
 
@@ -90,7 +90,7 @@ class DatabaseParser
         {
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               $result->token = $requestObj->token;
-              $result->method = $requestObj->getPath()[2];
+              $result->method = $requestObj->getPath()['method'];
               return $this->response($result);
 
         } catch(CouchbaseException $e)

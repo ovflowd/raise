@@ -84,7 +84,7 @@ class Request{
 
     public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body)
     {
-        $this->method = $method;
+        $this->method = strtolower($method);
         $this->protocol = $protocol;
         $this->server_ip = $serverAddress;
         $this->remote_ip = $clientAddress;
@@ -93,6 +93,8 @@ class Request{
         $this->body = json_decode($body, true);
         $this->reponse = 200; //default value for request reponse
         $this->isValid = true;
+
+        $this->bucket = $this->getPath()['bucket'];
     }
 
     /**
@@ -191,8 +193,9 @@ class Request{
 
     public function setPath($path)
     {
-        $s = explode("?", $path); //divide path from query string
-        $this->path = explode("/", $s[0]); // separate path into array
+        $stringPath = explode("?", $path); //divide path from query string
+        $arrayPath = explode("/", $stringPath[0]); // separate path into array
+        $this->path = array("address" => $arrayPath[1], "bucket" => $arrayPath[2], "method" =>$arrayPath[3]); //change keys valeus
     }
 
     /**

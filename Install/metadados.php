@@ -260,7 +260,7 @@ class CouchBaseInterfacer{
 			"output"=>array(
 				"code"=>0,
 				"services"=>[array(
-					"id"=> "string",
+					"service_id"=> "string",
 		  		"name"=> "string"
 		   	)]
 			)
