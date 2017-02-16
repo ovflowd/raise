@@ -109,7 +109,7 @@
                         "required": true,
                         "description": "client attributes",
                         "schema": {
-                            "$ref": "#/definitions/Client"
+                            "$ref": "#/definitions/ClientRegister"
                         }
                     }
                 ],
@@ -117,7 +117,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TokenResponse"
+                            "$ref": "#/definitions/TokenResponseClient"
                         }
                     },
                     "400": {
@@ -484,14 +484,15 @@
         }
     },
     "definitions": {
-        "Client": {
+        "ClientRegister": {
             "required": [
                 "name",
                 "chipset",
                 "mac",
                 "serial",
                 "processor",
-                "channel"
+                "channel",
+                "client_time"
             ],
             "type": "object",
             "properties": {
@@ -518,6 +519,57 @@
                 "channel": {
                     "type": "string",
                     "example": "Ethernet"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                }
+            }
+        },
+        "Client": {
+            "required": [
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel",
+                "client_time",
+                "server_time"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Raspberry PI"
+                },
+                "chipset": {
+                    "type": "string",
+                    "example": "AMD 790FX"
+                },
+                "mac": {
+                    "type": "string",
+                    "example": "FF:FF:FF:FF:FF:FF"
+                },
+                "serial": {
+                    "type": "string",
+                    "example": "C210"
+                },
+                "processor": {
+                    "type": "string",
+                    "example": "Intel I3"
+                },
+                "channel": {
+                    "type": "string",
+                    "example": "Ethernet"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
                 }
             }
         },
@@ -525,7 +577,8 @@
             "required": [
                 "token",
                 "service_id",
-                "values"
+                "values",
+                "client_time"
             ],
             "type": "object",
             "properties": {
@@ -546,13 +599,19 @@
                 "tag": {
                     "type": "string",
                     "example": "Chip"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
                 }
             }
         },
         "Data": {
             "required": [
                 "service_id",
-                "values"
+                "values",
+                "client_time",
+                "server_time"
             ],
             "type": "object",
             "properties": {
@@ -569,6 +628,14 @@
                 "tag": {
                     "type": "string",
                     "example": "Chip"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
                 }
             }
         },
@@ -591,7 +658,8 @@
                 "token",
                 "name",
                 "parameters",
-                "return_type"
+                "return_type",
+                "client_time"
             ],
             "properties": {
                 "token": {
@@ -611,6 +679,10 @@
                 "return_type": {
                     "type": "string",
                     "example": "float"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
                 }
             }
         },
@@ -619,7 +691,9 @@
             "required": [
                 "name",
                 "parameters",
-                "return_type"
+                "return_type",
+                "client_time",
+                "server_time"
             ],
             "properties": {
                 "name": {
@@ -635,6 +709,14 @@
                 "return_type": {
                     "type": "string",
                     "example": "float"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
                 }
             }
         },
@@ -740,8 +822,8 @@
             "type": "object",
             "required": [
                 "code",
-                "message",
-                "token"
+                "id",
+                "message"
             ],
             "properties": {
                 "code": {
@@ -755,20 +837,16 @@
                 "message": {
                     "type": "string",
                     "example": "Success"
-                },
-                "token": {
-                    "type": "string",
-                    "example": "A158SADDSADDSADF"
                 }
             }
         },
-        "TokenResponse": {
+        "TokenResponseClient": {
+            "type": "object",
             "required": [
                 "code",
                 "message",
                 "token"
             ],
-            "type": "object",
             "properties": {
                 "code": {
                     "type": "integer",
@@ -780,7 +858,24 @@
                 },
                 "token": {
                     "type": "string",
-                    "example": "A158SADDSADDSADF"
+                    "example": "AAFFAAFFAAFFAAFF"
+                }
+            }
+        },
+        "TokenResponse": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
                 }
             }
         }
