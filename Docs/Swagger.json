@@ -238,9 +238,6 @@
                 "description": "Register an array of services",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/auth-token"
-                    },
-                    {
                         "name": "services",
                         "in": "body",
                         "required": true,
@@ -248,7 +245,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Services"
+                                "$ref": "#/definitions/ServicesRegister"
                             }
                         }
                     },
@@ -264,7 +261,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TokenResponse"
+                            "$ref": "#/definitions/TokenResponseRegister"
                         }
                     },
                     "400": {
@@ -440,7 +437,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Data"
+                                "$ref": "#/definitions/DataRegister"
                             }
                         }
                     }
@@ -524,6 +521,34 @@
                 }
             }
         },
+        "DataRegister": {
+            "required": [
+                "token",
+                "service_id",
+                "values"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "AAFFAAFFAAFFAAFF"
+                },
+                "service_id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataValues"
+                    }
+                },
+                "tag": {
+                    "type": "string",
+                    "example": "Chip"
+                }
+            }
+        },
         "Data": {
             "required": [
                 "service_id",
@@ -560,19 +585,43 @@
                 }
             }
         },
-        "Services": {
+        "ServicesRegister": {
             "type": "object",
             "required": [
-                "id",
+                "token",
                 "name",
                 "parameters",
                 "return_type"
             ],
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 15
+                "token": {
+                    "type": "string",
+                    "example": "AAFFAAFFAAFFAAFF"
                 },
+                "name": {
+                    "type": "string",
+                    "example": "Get temp"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }
+                },
+                "return_type": {
+                    "type": "string",
+                    "example": "float"
+                }
+            }
+        },
+        "Services": {
+            "type": "object",
+            "required": [
+                "name",
+                "parameters",
+                "return_type"
+            ],
+            "properties": {
                 "name": {
                     "type": "string",
                     "example": "Get temp"
@@ -687,10 +736,37 @@
                 }
             }
         },
+        "TokenResponseRegister": {
+            "type": "object",
+            "required": [
+                "code",
+                "message",
+                "token"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
+                },
+                "token": {
+                    "type": "string",
+                    "example": "A158SADDSADDSADF"
+                }
+            }
+        },
         "TokenResponse": {
             "required": [
                 "code",
-                "message"
+                "message",
+                "token"
             ],
             "type": "object",
             "properties": {
@@ -701,6 +777,10 @@
                 "message": {
                     "type": "string",
                     "example": "Success"
+                },
+                "token": {
+                    "type": "string",
+                    "example": "A158SADDSADDSADF"
                 }
             }
         }
