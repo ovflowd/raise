@@ -50,10 +50,10 @@ class DatabaseParser
         if (isset($responseRows->cas))
         {
             
-             var_dump($responseRows->method );exit;
+             var_dump($responseRows->bucket );exit;
             
             $response = (new MessageOutPut())->messageHttp(200);
-            if($responseRows->method === "client")
+            if($responseRows->bucket === "client")
             {
               $response->tokenId = $responseRows->token;
             }
