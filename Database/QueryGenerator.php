@@ -91,6 +91,7 @@ Class QueryGenerator
           {
               $i++;
               $service['service_id'] = $i;
+              var_dump($service);exit;
               $services['services'] = $service;
           }
           
