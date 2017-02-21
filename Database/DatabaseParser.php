@@ -50,7 +50,7 @@ class DatabaseParser
         if (isset($responseRows->cas))
         {
             
-             var_dump((array)$this->getBucket());exit;
+             var_dump((array)$this->getBucket()['CouchbaseBucketname']);exit;
             
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
