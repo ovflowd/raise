@@ -82,6 +82,9 @@ Class QueryGenerator
           unset($requestBody["time_ini"]);
           unset($requestBody["time_fim"]);
           $request->bucket = "client";
+          
+          var_dump($request->getBody());exit;
+          
           $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
           $request->token = $requestBody['tokenId'];
           unset($requestBody['tokenId']);
