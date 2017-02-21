@@ -112,6 +112,10 @@ class Message
 
   public function message_out()
   {
+    if($this->get_code_http() === 0)
+    {
+        $this->set_code_http(200);
+    }
     $messageOut = (object) array('code' => $this->get_code_http(), 'message' => $this->get_message());
     http_response_code($this->get_code_http());
     return $messageOut;
