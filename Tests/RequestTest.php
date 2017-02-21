@@ -50,6 +50,12 @@ class RequestTester
 		echo $response;
 		return $response;
 	}
+	
+	public function post_data($token)
+	{
+	    
+	}
+	
 
 	public function testInsertClientWithoutChannel()
 	{
