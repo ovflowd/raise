@@ -50,13 +50,13 @@ class DatabaseParser
         if (isset($responseRows->cas))
         {
 
-            var_dump($responseRows->bucket . $responseRows->method);
+            
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
             {
               $response->tokenId = $responseRows->token;
             }
-            elseif ($responseRows->bucket == "service" && $responseRows->method == "register") 
+            elseif ($responseRows->request->getPath()['bucket'] == "service" && $responseRows->method == "register") 
             {
                 var_dump($response->request->treatedBody());exit();
                 //$response->services[]
