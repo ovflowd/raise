@@ -57,7 +57,7 @@ class DatabaseParser
                 if($responseRows->request->service == true)
                 {
                     $response->services = array();
-                    var_dump($responseRows->request->treatedBody['services']);exit;
+                    var_dump($responseRows->request->treatedBody);exit;
                     foreach($responseRows->request->treatedBody['services'] as $key=>$service)
                     {
                         $response->services[] = array('service_id' => $key, 'service_name' => $service['service_name']);
