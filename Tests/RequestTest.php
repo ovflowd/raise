@@ -70,6 +70,7 @@ class RequestTester
 	public function testAutoRegister()
 	{
 			$response = $this->testInsertClient();
+			var_dump($response);exit;
 			$token = json_decode($response->body)->tokenId;
 			//$token = "BatatossauroTraps";
 			sleep(1); //necessário devido ao delay do couchbase )=
