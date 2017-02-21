@@ -94,6 +94,7 @@ class DatabaseParser
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
+              $result->request = $requestObj;
               return $this->response($result);
 
         } catch(CouchbaseException $e)
