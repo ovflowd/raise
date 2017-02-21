@@ -55,6 +55,12 @@ class DatabaseParser
             {
               $response->tokenId = $responseRows->token;
             }
+            elseif ($responseRows->bucket == "service" && $responseRows->method == "register") 
+            {
+                var_dump($response->request->treatedBody());exit();
+                //$response->services[]
+            }
+            
         } else
         {
             $response = array(
