@@ -100,7 +100,7 @@ class RequestTreater
         $request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['SERVER_PROTOCOL'], $_SERVER['SERVER_ADDR'], $_SERVER['REMOTE_ADDR'], $_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING'], file_get_contents('php://input'));
         return $request;
     }
-
+    
     /**
     *Request object validation
     *
@@ -120,6 +120,9 @@ class RequestTreater
 
     private function validationBucket($request)
     {
+        
+        var_dump($reques->getPath());exit;
+        
         if(!in_array($request->getPath()['bucket'],$this->AllowedBuckets))
         {
           $request->setResponseCode(403);
