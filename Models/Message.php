@@ -114,6 +114,7 @@ class Message
   {
     if($this->get_code_http() === 0)
     {
+        exit('BEM LOCO');
         $this->set_code_http(200);
     }
     $messageOut = (object) array('code' => $this->get_code_http(), 'message' => $this->get_message());
