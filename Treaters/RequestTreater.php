@@ -121,7 +121,7 @@ class RequestTreater
     private function validationBucket($request)
     {
         
-        var_dump($reques->getPath());exit;
+        var_dump($request->getPath());exit;
         
         if(!in_array($request->getPath()['bucket'],$this->AllowedBuckets))
         {
