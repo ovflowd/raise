@@ -278,6 +278,10 @@ $metadosCodHttpCb = array(
 	"codCouch"=> "00",
 	"message"=> "Success"
 	),
+	array("codHttp"=> "0",
+	"codCouch"=> "",
+	"message"=> "Welcome to RAISe!"
+	),
 	array("codHttp"=> "201",
 	"codCouch"=> "",
 	"message"=> "Created"
