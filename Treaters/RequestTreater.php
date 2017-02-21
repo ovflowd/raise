@@ -111,7 +111,7 @@ class RequestTreater
     {
         if($this->emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request))
         {
-          $request->setResponseCode(200);
+          $request->setResponseCode(247);
           $request->setValid(true);
           return;
         }
