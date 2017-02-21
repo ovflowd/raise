@@ -49,6 +49,9 @@ class DatabaseParser
 
         if (isset($responseRows->cas))
         {
+            
+             var_dump($response);exit;
+            
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->method === "client")
             {
@@ -62,7 +65,7 @@ class DatabaseParser
             );
         }
         
-        var_dump($response);exit;
+       
         
         return $response;
     }
