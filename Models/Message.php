@@ -117,6 +117,7 @@ class Message
         exit('BEM LOCO');
         $this->set_code_http(200);
     }
+    exit('BEM LOCO');
     $messageOut = (object) array('code' => $this->get_code_http(), 'message' => $this->get_message());
     http_response_code($this->get_code_http());
     return $messageOut;
