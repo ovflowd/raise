@@ -88,7 +88,8 @@ Class QueryGenerator
           foreach($request->getBody()['services'] as $key => $service)
           {
               $i++;
-              var_dump($service);exit;
+              $service['service_id'] = $i;
+              $services['services'] = $service;
           }
           
           $services['tokenId'] =  $request->getBody()['tokenId'];
