@@ -89,7 +89,7 @@ Class QueryGenerator
               $services[] = array('service_id' => $key, 'service_name' => $key, 'service_type' => $service);
           }
           $request->getBody()['services'] =  $services;
-          var_dump($request->getBody()['services']);exit;
+          var_dump($services);exit;
           
           
           $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
