@@ -294,10 +294,6 @@ $metadosCodHttpCb = array(
 	"codCouch"=> "",
 	"message"=> "No Content"
 	),
-	array("codHttp"=> "247",
-	"codCouch"=> "",
-	"message"=> "Welcome to RAISe!"
-	),
 	array("codHttp"=> "205",
 	"codCouch"=> "",
 	"message"=> "Reset Content"
