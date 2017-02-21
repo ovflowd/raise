@@ -109,7 +109,7 @@ class RequestTreater
     */
     private function validate($request)
     {
-        if(emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request))
+        if($this->emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request))
         {
           $request->setResponseCode(200);
           $request->setValid(true);
@@ -120,7 +120,7 @@ class RequestTreater
     
     private function emptyValidation($request)
     {
-        if(1==1)
+        if($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null)
         {
             $request->setResponseCode(403);
             $request->setValid(false);
