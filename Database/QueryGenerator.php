@@ -149,9 +149,6 @@ Class QueryGenerator
             $request->setParameters(array('token'=>$token));
             $result = $parser->select($request);
             $request = $this->validateToken($result,$request);
-            
-            var_dump($request);exit;
-            
             //End select
 
             //create Client
