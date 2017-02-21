@@ -54,14 +54,14 @@ class DatabaseParser
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
             {
+                if($responseRows->request->service == true)
+                {
+                    echo "lokasso";
+                }
                 var_dump($responseRows->request);
               $response->tokenId = $responseRows->token;
             }
-            elseif ($responseRows->request->service == true && $responseRows->method == "register") 
-            {
-                var_dump($response->request->treatedBody());exit();
-                //$response->services[]
-            }
+
             
         } else
         {
