@@ -87,11 +87,13 @@ Class QueryGenerator
           $services = array();
           $i = 0;
           
+          var_dump($request->getBody()['services']);exit;
+          
           foreach($request->getBody()['services'] as $key => $service)
           {
               $i++;
               $service['service_id'] = $i;
-                var_dump($services);exit;
+                var_dump($service);exit;
               $services['services'] = $service;
           }
           
