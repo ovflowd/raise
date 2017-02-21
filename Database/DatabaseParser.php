@@ -54,6 +54,7 @@ class DatabaseParser
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
             {
+                var_dump($responseRows->request);
               $response->tokenId = $responseRows->token;
             }
             elseif ($responseRows->request->service == true && $responseRows->method == "register") 
