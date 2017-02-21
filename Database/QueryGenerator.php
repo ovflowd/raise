@@ -46,7 +46,7 @@ Class QueryGenerator
         }
         else
         {
-            return array('code'=>200,'message'=>'Welcome to RAISE!');
+            return array('code'=>200,'message'=>'Welcome to RAISE! XD');
         }
     }
 
