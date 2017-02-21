@@ -56,7 +56,7 @@ class DatabaseParser
             {
                 if($responseRows->request->service == true)
                 {
-                    var_dump($responseRows->request->treatedBody;
+                    var_dump($responseRows->request->treatedBody);
                 }
               $response->tokenId = $responseRows->token;
             }
