@@ -292,6 +292,10 @@ $metadosCodHttpCb = array(
 	),
 	array("codHttp"=> "204",
 	"codCouch"=> "",
+	"message"=> "No Content!"
+	),
+	array("codHttp"=> "247",
+	"codCouch"=> "",
 	"message"=> "Welcome to RAISe!"
 	),
 	array("codHttp"=> "205",
