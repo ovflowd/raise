@@ -50,7 +50,7 @@ class DatabaseParser
         if (isset($responseRows->cas))
         {
             
-             var_dump($responseRows->bucket );exit;
+             var_dump($responseRows);exit;
             
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
