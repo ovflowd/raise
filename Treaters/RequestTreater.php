@@ -111,7 +111,7 @@ class RequestTreater
     {
         if($this->emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request))
         {
-          $request->setResponseCode(247);
+          $request->setResponseCode(200);
           $request->setValid(true);
           return;
         }
@@ -122,7 +122,7 @@ class RequestTreater
     {
         if($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null)
         {
-            $request->setResponseCode(204);
+            $request->setResponseCode(247);
             $request->setValid(false);
             return false;
         }
