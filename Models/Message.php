@@ -112,6 +112,7 @@ class Message
 
   public function message_out()
   {
+      exit($this->get_code_http());
     if($this->get_code_http() === 0)
     {
         exit('BEM LOCO');
