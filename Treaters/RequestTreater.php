@@ -122,7 +122,7 @@ class RequestTreater
     {
         if($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null)
         {
-            $request->setResponseCode(0);
+            $request->setResponseCode(32132);
             $request->setValid(false);
             return false;
         }
