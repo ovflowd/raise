@@ -124,7 +124,6 @@ class RequestTreater
         {
             $request->setResponseCode(0);
             $request->setValid(false);
-            $request->set_message('uehueheuh');
             return false;
         }
         return true;
