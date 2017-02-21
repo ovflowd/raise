@@ -91,20 +91,14 @@ Class QueryGenerator
           {
               $i++;
               $service['service_id'] = $i;
-              var_dump($service);exit;
-              $services['services'] = $service;
+              $services['services'][] = $service;
           }
           
-          var_dump($services);exit;
-          
+
           $services['tokenId'] =  $request->getBody()['tokenId'];
           $services['timestamp'] = $request->getBody()['timestamp'];
 
-
-
           $request->treatedBody = json_encode(array_merge($services,$requestBody));
-          
-        
           
           $request->token = $requestBody['tokenId'];
           unset($requestBody['tokenId']);
