@@ -87,7 +87,7 @@ Class QueryGenerator
           $services = array();
           $i = 0;
           
-          var_dump($request->getBody()['services']);exit;
+          var_dump($request->getBody()['services'][0]);exit;
           
           foreach($request->getBody()['services'] as $key => $service)
           {
