@@ -120,7 +120,7 @@ class RequestTreater
     
     private function emptyValidation($request)
     {
-        if($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null)
+        if($request->getPath()['bucket'] === null)
         {
             $request->setResponseCode(403);
             $request->setValid(false);
