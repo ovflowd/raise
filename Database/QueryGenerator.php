@@ -90,7 +90,7 @@ Class QueryGenerator
           }
           $request->getBody()['services'] =  $services;
           
-          var_dump($services);exit;
+          var_dump($request->getBody()['services']);exit;
           
           $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
           $request->token = $requestBody['tokenId'];
