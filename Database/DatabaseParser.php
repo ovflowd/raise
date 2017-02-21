@@ -49,10 +49,9 @@ class DatabaseParser
 
         if (isset($responseRows->cas))
         {
-            var_dump($responseRows->bucket);exit;
-            
+
             $response = (new MessageOutPut())->messageHttp(200);
-            if($responseRows->bucket === "token")
+            if($responseRows->bucket === "client")
             {
               $response->tokenId = $responseRows->token;
             }
