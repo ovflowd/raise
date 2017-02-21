@@ -116,9 +116,6 @@ Class QueryGenerator
             $request->token = $this->generateToken();
             $tokenIni = round(microtime(true) *1000);
             $tokenFim = $tokenIni + 7200000; //millisecons
-            
-            var_dump($request->getBody);exit;
-            
             $request->treatedBody = json_encode(array_merge($request->getBody(),array('tokenId'=>$request->token,'time_ini'=>$tokenIni,'time_fim'=>$tokenFim)));
             $parser = new DatabaseParser($request);
             $parser->insert($request);
