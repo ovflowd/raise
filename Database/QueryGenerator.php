@@ -83,14 +83,12 @@ Class QueryGenerator
           unset($requestBody["time_fim"]);
           $request->bucket = "client";
           
-          var_dump($request->getBody()['services']);exit;
-          
           $services = array();
           $i = 0;
           foreach($request->getBody()['services'] as $key => $service)
           {
               $i++;
-              $services['services'][] = array('service_id' => $i, 'service_name' => $key, 'service_type' => $service);
+              var_dump($service);exit;
           }
           
           $services['tokenId'] =  $request->getBody()['tokenId'];
