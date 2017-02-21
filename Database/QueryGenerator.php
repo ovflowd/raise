@@ -83,6 +83,8 @@ Class QueryGenerator
           unset($requestBody["time_fim"]);
           $request->bucket = "client";
           
+          var_dump($request->getBody()['services']);exit;
+          
           $services = array();
           $i = 0;
           foreach($request->getBody()['services'] as $key => $service)
