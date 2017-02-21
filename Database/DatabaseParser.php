@@ -60,7 +60,7 @@ class DatabaseParser
                   
                     foreach(json_decode($responseRows->request->treatedBody)->services as $key=>$service)
                     {
-                        $response->services[] = array('service_id' => $key, 'service_name' => $service['service_name']);
+                        //$response->services[] = array('service_id' => $key, 'service_name' => $service['service_name']);
                     }
                 }
               $response->tokenId = $responseRows->token;
