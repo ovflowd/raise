@@ -58,7 +58,6 @@ class DatabaseParser
                 {
                     echo "lokasso";
                 }
-                var_dump($responseRows->request);
               $response->tokenId = $responseRows->token;
             }
 
