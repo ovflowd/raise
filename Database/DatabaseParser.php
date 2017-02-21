@@ -61,6 +61,9 @@ class DatabaseParser
                 'values' => $responseRows
             );
         }
+        
+        var_dump($response);exit;
+        
         return $response;
     }
 
