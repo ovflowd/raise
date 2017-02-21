@@ -52,7 +52,7 @@ class DatabaseParser
             
             $array = (array)$this->getBucket();
             
-             var_dump($array[1]);exit;
+             var_dump($array['name']);exit;
             
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
