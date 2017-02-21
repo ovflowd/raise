@@ -113,7 +113,7 @@ class Message
   public function message_out()
   {
       
-    if($this->get_code_http() == (int) 0)
+    if($this->get_code_http() === intval(0))
     {
         exit('BEM LOCO');
         $this->set_code_http(200);
