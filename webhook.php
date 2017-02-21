@@ -1,4 +1,4 @@
 <?php
 
-$output = shell_exec("cd /srv/www/git-repo/; git pull origin {$BRANCH};");
+$output = shell_exec("cd /var/www/RAISe/; git pull");
     echo "<pre>$output</pre>";
