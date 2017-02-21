@@ -82,7 +82,7 @@ Class QueryGenerator
           unset($requestBody["time_ini"]);
           unset($requestBody["time_fim"]);
           $request->bucket = "client";
-          
+          var_dump($request->getBody()['services']);exit;
           $services = array();
           foreach($request->getBody()['services'] as $key => $service)
           {
@@ -90,7 +90,7 @@ Class QueryGenerator
           }
           $request->getBody()['services'] =  $services;
           
-          var_dump($request->getBody()['services']);exit;
+          
           
           $request->treatedBody = json_encode(array_merge($request->getBody(),$requestBody));
           $request->token = $requestBody['tokenId'];
