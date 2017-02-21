@@ -97,11 +97,11 @@ Class QueryGenerator
           $services['tokenId'] =  $request->getBody()['tokenId'];
           $services['timestamp'] = $request->getBody()['timestamp'];
 
-
+  var_dump($services);exit;
 
           $request->treatedBody = json_encode(array_merge($services,$requestBody));
           
-          var_dump($request->treatedBody);exit;
+        
           
           $request->token = $requestBody['tokenId'];
           unset($requestBody['tokenId']);
