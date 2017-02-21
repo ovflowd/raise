@@ -56,7 +56,7 @@ class DatabaseParser
             {
               $response->tokenId = $responseRows->token;
             }
-            elseif ($responseRows->service == true && $responseRows->method == "register") 
+            elseif ($responseRows->request->service == true && $responseRows->method == "register") 
             {
                 var_dump($response->request->treatedBody());exit();
                 //$response->services[]
