@@ -44,10 +44,6 @@ Class QueryGenerator
         {
           return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
-        else
-        {
-            return array('code'=>200,'message'=>'Welcome to RAISE! XD');
-        }
     }
 
     private function generateToken()
