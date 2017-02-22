@@ -89,8 +89,9 @@ Class QueryGenerator
     
           foreach($request->getBody()['services'] as $key => $service)
           {
-              $i++;
+              
               $service['service_id'] = $i;
+              $i++;
               $services['services'][] = $service;
           }
           
