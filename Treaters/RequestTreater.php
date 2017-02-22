@@ -70,7 +70,6 @@ class aa93
      */
     public function execute()
     {
-        var_dump('desgraça');exit;
         
         $request = $this->create();
         $this->validate($request);
