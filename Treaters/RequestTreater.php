@@ -158,7 +158,7 @@ class RequestTreater
             break;
         }
         } else {
-            var_dump($this->validateDataInsertion($request));
+            $this->validateDataInsertion($request);
         }
     }
 
