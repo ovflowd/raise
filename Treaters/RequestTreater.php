@@ -191,6 +191,7 @@ class RequestTreater
             $compare = $parameters[$service['service_id']-1];
             $compare = json_decode(json_encode($compare), true);
             $compare = $compare['services'][$service['service_id']-1]['parameters'];
+             var_dump($service['values'] );exit;
             
             foreach($service['values'] as $key=>$value)
             {
