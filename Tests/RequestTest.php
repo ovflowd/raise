@@ -91,6 +91,7 @@ class RequestTester
 			sleep(1);
 			$service = json_decode($serv_response)->services;
 			$dados = [ 'token' => $token,  array('service_id' => $service[1]->service_id , 'values' => array(array('press'=>(float) 4.5)))];
+			var_dump($dados);exit;
 			$postData = $this->postData($dados);
 
 	}
