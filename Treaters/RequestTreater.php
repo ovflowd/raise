@@ -185,10 +185,8 @@ class RequestTreater
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         $query->namedParams(array('token' => $token));
         $parameters = $database->query($query)->rows;
-        
-        $parameters[0]->token->time_fim = 56432132165864632132132132;
 
-        if ($parameters[0]->token->time_fim > round(microtime(true) * 1000)) {
+        if (564321321658646321321321321178983651231 > round(microtime(true) * 1000)) {
             $request->setResponseCode(401);
             $request->setValid(false);
         }
