@@ -31,7 +31,7 @@ use DatabaseParser;
 /**
  *Class RequestTreater.
  */
-class eb51
+class RequestTreater
 {
     /**
      *@var array
@@ -176,6 +176,7 @@ class eb51
 
     private function validateDataInsertion($request)
     {
+         var_dump($request);exit();   
     }
 
     private function validationMethodPost($request, $parameters)
