@@ -90,7 +90,7 @@ class RequestTester
 			$serv_response = $this->registerServices($token);
 			sleep(1);
 			$service = json_decode($serv_response)->services;
-			var_dump($service[0]['service_id']);
+			var_dump($service[0]->service_id);
 	}
 
 }
