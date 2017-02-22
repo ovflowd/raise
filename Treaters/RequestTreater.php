@@ -70,7 +70,7 @@ class aa93
      */
     public function execute()
     {
-        return array('lixo'=>'lixo');
+        var_dump('desgraça');exit;
         
         $request = $this->create();
         $this->validate($request);
