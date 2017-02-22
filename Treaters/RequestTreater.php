@@ -180,7 +180,7 @@ class RequestTreater
          $services = $request->getBody()[0];
          foreach($services as $service)
          {
-             var_dump($service);
+             var_dump($service);exit;
          }
     }
 
