@@ -188,9 +188,11 @@ class RequestTreater
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
-            $compare = json_decode(json_encode($compare), true);
-            var_dump($compare);exit;
             $compare = $parameters[$service['service_id']];
+            var_dump($compare);exit;
+            $compare = json_decode(json_encode($compare), true);
+            
+            
            
             
             $compare = $compare['services'][$service['service_id']]['parameters'];
