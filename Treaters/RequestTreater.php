@@ -184,7 +184,7 @@ class RequestTreater
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
             
-            var_dump($parameters[0]);exit;
+            var_dump($parameters[0]->token);exit;
          
          foreach($services as $service)
          {
