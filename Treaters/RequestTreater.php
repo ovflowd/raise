@@ -184,7 +184,7 @@ class RequestTreater
              $service['values'];
              
             $database = (new DatabaseParser($request))->getBucket();
-            $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token AND');
+            $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
              
