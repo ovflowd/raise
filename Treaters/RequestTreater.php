@@ -203,6 +203,8 @@ class RequestTreater
                     
                     if(gettype($val) !== $compare[$key])
                     {
+                        $request->setResponseCode(400);
+                        $request->setValid(false);
                        return false;
                     }
                 }
