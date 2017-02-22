@@ -194,7 +194,7 @@ class RequestTreater
             
             foreach($service['values'] as $key=>$value)
             {
-                var_dump($key);exit;
+                var_dump($value);exit;
             }
              
              
