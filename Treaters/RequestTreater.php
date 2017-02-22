@@ -197,6 +197,8 @@ class RequestTreater
             {
                 foreach($value as $key=>$val)
                 {
+                    var_dump(gettype($val));exit;
+                    
                     if(gettype($val) == $compare[$key])
                     {
                         echo "crepe";exit;
