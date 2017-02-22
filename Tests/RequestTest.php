@@ -83,7 +83,6 @@ class RequestTester
 	public function testAutoRegister()
 	{
 			$response = $this->testInsertClient();
-			var_dump($response->body);exit;
 			$token = json_decode($response->body)->tokenId;
 			echo "<br><br>";
 			//$token = "BatatossauroTraps";
