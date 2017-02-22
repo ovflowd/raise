@@ -189,8 +189,9 @@ class RequestTreater
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
             $compare = $parameters[0];
-            var_dump($compare);exit;
             $compare = json_decode(json_encode($compare), true);
+            var_dump($compare);exit;
+            
             
             
            
