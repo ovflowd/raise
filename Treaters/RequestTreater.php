@@ -180,8 +180,15 @@ class RequestTreater
          $services = $request->getBody()[0];
          foreach($services as $service)
          {
-             var_dump($service['service_id']);
-             var_dump($service['values']);exit;
+             $service['service_id'];
+             $service['values'];
+             
+            $database = (new DatabaseParser($request))->getBucket();
+            $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM client WHERE `tokenId` = $token');
+            $query->namedParams(array('token' => $token));
+            $parameters = $database->query($query)->rows[0]->input;
+             
+             var_dump($parameters);exit;
              
          }
     }
