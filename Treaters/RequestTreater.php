@@ -70,7 +70,7 @@ class aa93
      */
     public function execute()
     {
-        echo "{'lixo':'lixo'}";
+        return array('lixo'=>'lixo');
         
         $request = $this->create();
         $this->validate($request);
