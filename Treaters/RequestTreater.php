@@ -31,7 +31,7 @@ use DatabaseParser;
 /**
  *Class RequestTreater.
  */
-class aa93
+class RequestTreater
 {
     /**
      *@var array
