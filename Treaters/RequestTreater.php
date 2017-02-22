@@ -176,6 +176,8 @@ class RequestTreater
 
     private function validateDataInsertion($request)
     {
+        
+         var_dump($request);exit;
          foreach($request[0] as $service)
          {
              var_dump($service);
