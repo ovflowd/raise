@@ -201,8 +201,6 @@ class RequestTreater
                 foreach($value as $key=>$val)
                 {
                     
-                    var_dump($compare[$key]);exit;
-                    
                     if(gettype($val) !== $compare[$key])
                     {
                         echo "loop";exit;
