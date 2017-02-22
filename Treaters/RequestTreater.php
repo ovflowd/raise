@@ -189,7 +189,7 @@ class RequestTreater
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
             $compare = $parameters[$service['service_id']-1];
-            var_dump($compare);exit;
+            var_dump(array_keys($compare));exit;
              
              
              
