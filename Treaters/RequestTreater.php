@@ -203,7 +203,6 @@ class RequestTreater
                     
                     if(gettype($val) !== $compare[$key])
                     {
-                        echo "loop";exit;
                        return false;
                     }
                 }
