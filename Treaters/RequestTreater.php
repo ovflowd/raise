@@ -190,7 +190,12 @@ class RequestTreater
             $parameters = $database->query($query)->rows;
             $compare = $parameters[$service['service_id']-1];
             $compare = json_decode(json_encode($compare), true);
-             var_dump($compare['services'][$service['service_id']-1]['parameters']); echo "shithead";
+            $compare = $compare['services'][$service['service_id']-1]['parameters'];
+            
+            foreach($service['values'] as $key=>$value)
+            {
+                var_dump($value);exit;
+            }
              
              
              
