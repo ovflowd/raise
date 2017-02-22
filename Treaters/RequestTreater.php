@@ -78,6 +78,9 @@ class aa93
         $security = new SecurityController();
         if ($security->validate($request) === true) {
             $generator = new \QueryGenerator();
+            
+            exit('aqui');
+            
             $response = $generator->generate($request);
 
             return $response;
