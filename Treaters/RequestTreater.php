@@ -198,9 +198,9 @@ class RequestTreater
                 foreach($value as $key=>$val)
                 {
                     
-                    if(gettype($val) == $compare[$key])
+                    if(gettype($val) !== $compare[$key])
                     {
-                        echo "crepe";exit;
+                       return false;
                     }
                 }
             }
@@ -209,6 +209,8 @@ class RequestTreater
              
              
          }
+         return true;
+         
     }
 
     private function validationMethodPost($request, $parameters)
