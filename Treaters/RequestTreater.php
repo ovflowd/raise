@@ -31,7 +31,7 @@ use DatabaseParser;
 /**
  *Class RequestTreater.
  */
-class RequestTreater
+class aa93
 {
     /**
      *@var array
@@ -176,53 +176,45 @@ class RequestTreater
 
     private function validateDataInsertion($request)
     {
-         $token = $request->getBody()['token'];
-         $services = $request->getBody()[0];
-         
-             $database = (new DatabaseParser($request))->getBucket();
-            $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
-            $query->namedParams(array('token' => $token));
-            $parameters = $database->query($query)->rows;
-            
-            var_dump($parameters[0]->token->time_fim);exit;
-         
-         foreach($services as $service)
-         {
-             $service['service_id'];
-             $service['values'];
-             
+        $token = $request->getBody()['token'];
+        $services = $request->getBody()[0];
+
+        $database = (new DatabaseParser($request))->getBucket();
+        $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+        $query->namedParams(array('token' => $token));
+        $parameters = $database->query($query)->rows;
+
+        if ($parameters[0]->token->time_fim > round(microtime(true) * 1000)) {
+            $request->setResponseCode(401);
+            $request->setValid(false);
+        }
+
+        foreach ($services as $service) {
+            $service['service_id'];
+            $service['values'];
+
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
-            
-      
-            
+
             $compare = $parameters[0];
             $compare = json_decode(json_encode($compare), true);
             $compare = $compare['services'][$service['service_id']]['parameters'];
-                  
-            
-            foreach($service['values'] as $value)
-            {
-                foreach($value as $key=>$val)
-                {
-                    
-                    if(gettype($val) !== $compare[$key])
-                    {
+
+            foreach ($service['values'] as $value) {
+                foreach ($value as $key => $val) {
+                    if (gettype($val) !== $compare[$key]) {
                         $request->setResponseCode(400);
                         $request->setValid(false);
-                       return false;
+
+                        return false;
                     }
                 }
             }
-             
-             
-             
-             
-         }
-         return true;
-         
+        }
+
+        return true;
     }
 
     private function validationMethodPost($request, $parameters)
