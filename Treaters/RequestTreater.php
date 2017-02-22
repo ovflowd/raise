@@ -19,14 +19,7 @@
 
 namespace Raise\Treaters;
 
-include_once 'Models/Request.php';
-include_once 'Treaters/MessageOutPut.php';
-include_once 'Controllers/SecurityController.php';
-include_once 'Database/QueryGenerator.php';
-include_once 'Database/DatabaseParser.php';
-use Raise\Models\Request;
-use Raise\Controllers\SecurityController;
-use DatabaseParser;
+
 
 /**
  *Class RequestTreater.
