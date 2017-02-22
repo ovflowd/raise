@@ -2,6 +2,8 @@
 
 namespace Raise;
 
+echo "hue";exit;
+
 include('Treaters/RequestTreater.php');
 
 use Raise\Treaters\RequestTreater;
