@@ -189,6 +189,7 @@ class RequestTreater
         if (564321321658646321321321321178983651231 > round(microtime(true) * 1000)) {
             $request->setResponseCode(401);
             $request->setValid(false);
+            return false;
         }
 
         foreach ($services as $service) {
