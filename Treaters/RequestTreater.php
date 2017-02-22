@@ -70,7 +70,7 @@ class aa93
      */
     public function execute()
     {
-        echo "break";exit;
+        return "break";exit;
         
         $request = $this->create();
         $this->validate($request);
