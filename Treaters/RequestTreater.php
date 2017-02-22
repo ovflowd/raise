@@ -70,7 +70,7 @@ class aa93
      */
     public function execute()
     {
-        return "break";exit;
+        echo "{'lixo':'lixo'}";
         
         $request = $this->create();
         $this->validate($request);
