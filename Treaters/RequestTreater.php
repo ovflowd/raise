@@ -158,7 +158,7 @@ class RequestTreater
             break;
         }
         } else {
-            $this->validateDataInsertion($request);
+            return $this->validateDataInsertion($request);
         }
     }
 
