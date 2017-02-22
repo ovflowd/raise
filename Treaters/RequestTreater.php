@@ -178,10 +178,11 @@ class RequestTreater
     {
          $token = $request->getBody()['token'];
          $services = $request->getBody()[0];
-            var_dump($request->getBody());exit;
+            
          foreach($services as $service)
          {
-             var_dump($service);
+             var_dump($service['service_id']);
+             var_dump($service['values']);
          }
     }
 
