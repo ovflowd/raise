@@ -189,12 +189,13 @@ class RequestTreater
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
             
-            var_dump($parameters);exit;
+      
             
             $compare = $parameters[0];
             $compare = json_decode(json_encode($compare), true);
 
             $compare = $compare['services'][$service['service_id']]['parameters'];
+                  var_dump($compare);exit;
             
             foreach($service['values'] as $value)
             {
