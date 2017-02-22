@@ -178,6 +178,7 @@ class RequestTreater
     {
          $token = $request->getBody()['token'];
          $services = $request->getBody()[0];
+         
          foreach($services as $service)
          {
              $service['service_id'];
@@ -187,8 +188,10 @@ class RequestTreater
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
+            $compare = $parameters[$service['service_id']-1];
+            var_dump($compare);exit;
              
-             var_dump($parameters);exit;
+             
              
          }
     }
