@@ -160,7 +160,7 @@ Class QueryGenerator
           }
           elseif ($request->getPath()['bucket'] === "data" && $request->getPath()["method"] == "register")
           {
-              return $request;
+              var_dump($request->getBody());
           }
           else
           {
