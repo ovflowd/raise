@@ -157,6 +157,10 @@ Class QueryGenerator
 
             //end create
           }
+          elseif ($request->getPath()['bucket'] === "data" && $request->getPath()["method"] == "register")
+          {
+          var_dump($request->getBody());exit;
+          }
           else
           {
             $request->token = $this->generateToken();
