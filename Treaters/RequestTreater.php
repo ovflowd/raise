@@ -179,6 +179,13 @@ class RequestTreater
          $token = $request->getBody()['token'];
          $services = $request->getBody()[0];
          
+             $database = (new DatabaseParser($request))->getBucket();
+            $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+            $query->namedParams(array('token' => $token));
+            $parameters = $database->query($query)->rows;
+            
+            var_dump($parameters);exit;
+         
          foreach($services as $service)
          {
              $service['service_id'];
