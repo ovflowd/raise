@@ -2,6 +2,9 @@
 
 namespace Raise;
 
+ var_dump('desgraça');exit;
+ 
+ 
 include('Treaters/RequestTreater.php');
 
 use Raise\Treaters\RequestTreater;
