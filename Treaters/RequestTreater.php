@@ -196,7 +196,7 @@ class RequestTreater
             {
                 foreach($value as $key=>$val)
                 {
-                    $type = $compare[$key]; exit;
+                    var_dump($compare[$key]);exit;
                 }
             }
              
