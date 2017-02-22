@@ -70,7 +70,6 @@ class aa93
      */
     public function execute()
     {
-        exit('aqui');
         
         $request = $this->create();
         $this->validate($request);
