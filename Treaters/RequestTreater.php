@@ -186,7 +186,7 @@ class RequestTreater
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
-            $parameters = $database->query($query);
+            $parameters = $database->query($query)->rows;
              
              var_dump($parameters);exit;
              
