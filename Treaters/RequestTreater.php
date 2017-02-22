@@ -167,8 +167,14 @@ class RequestTreater
         return true;
     }
 
+    private function validateDataInsertion($request,$parameters)
+    {
+        
+    }
+
     private function validationMethodPost($request, $parameters)
     {
+        
         if(!empty(array_diff(array_keys((array)$parameters), array_keys($request->getBody())))) {
             $request->setResponseCode(400);
             $request->setValid(false);
