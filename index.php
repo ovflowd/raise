@@ -2,8 +2,6 @@
 
 namespace Raise;
 
-echo "porra";
-
 include('Treaters/RequestTreater.php');
 
 use Raise\Treaters\RequestTreater;
