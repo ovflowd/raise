@@ -190,7 +190,7 @@ class RequestTreater
             $parameters = $database->query($query)->rows;
             $compare = json_decode(json_encode($compare[0]), true);
             $compare = $parameters[$service['service_id']];
-            var_dump($parameters);exit;
+            var_dump($compare);exit;
             
             $compare = $compare['services'][$service['service_id']]['parameters'];
             var_dump($compare);exit;
