@@ -176,8 +176,9 @@ class RequestTreater
 
     private function validateDataInsertion($request)
     {
-        
-         var_dump($request->getBody());exit;
+         $token = $request->getBody()['token'];
+         $services = $request->getBody()[0];
+         
          foreach($request[0] as $service)
          {
              var_dump($service);
