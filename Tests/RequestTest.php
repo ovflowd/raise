@@ -51,11 +51,11 @@ class RequestTester
 		return $response;
 	}
 	
-	public function postData($token,$data)
+	public function postData($data)
 	{
 		$url = "http://{$this->raise_ip}/data/register";
 
-		$body = json_encode(array($data,'tokenId'=>$token));
+		$body = json_encode($data);
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "Complete data insertion: " . "<br>";
