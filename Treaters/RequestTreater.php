@@ -189,7 +189,11 @@ class RequestTreater
             $query->namedParams(array('token' => $token));
             $parameters = $database->query($query)->rows;
             $compare = $parameters[$service['service_id']-1];
-            var_dump(json_decode(json_encode($compare), true));exit;
+            $compare = json_decode(json_encode($compare), true);
+            if($compare == $service['values'])
+            {
+                echo "crepe";
+            }
              
              
              
