@@ -40,7 +40,7 @@ class RequestTester
 		$url = "http://{$this->raise_ip}/service/register";
 
 		$body = json_encode(array(
-					"services" => array(array('name'=>'temperature','parameters'=>array('temp'=>'vagabond') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'double') , 'return_type' => 'float')),
+					"services" => array(array('name'=>'temperature','parameters'=>array('temp'=>'vagabond') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('batata'=>'double') , 'return_type' => 'float')),
 						"timestamp" => round(microtime(true) *1000),
 						'tokenId' => $token
 						));
