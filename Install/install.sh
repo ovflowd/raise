@@ -38,7 +38,7 @@ function create_cluster()
 				read -p "Please input the desired password for couchbase: " password
 
 				cd /opt/couchbase/bin/;
-				#./couchbase-cli cluster-init -c 127.0.0.1:8091 -u $username -p $password --cluster-name='raise' --cluster-ramsize=$((memory+0));
+				./couchbase-cli cluster-init -c 127.0.0.1:8091 -u $username -p $password --cluster-name='raise' --cluster-ramsize=$((memory+0));
 				install_sdk;
 				break;
 
@@ -54,8 +54,8 @@ function create_cluster()
 function install_couchbase()
 {
 	sudo apt-get install libssl-dev;
-	#sudo wget "https://packages.couchbase.com/releases/4.6.0-DP/couchbase-server-enterprise_4.6.0-DP-ubuntu14.04_amd64.deb";
-	#sudo dpkg -i couchbase-server-enterprise_4.6.0-DP-ubuntu14.04_amd64.deb;
+	sudo wget "https://packages.couchbase.com/releases/4.6.0-DP/couchbase-server-enterprise_4.6.0-DP-ubuntu14.04_amd64.deb";
+	sudo dpkg -i couchbase-server-enterprise_4.6.0-DP-ubuntu14.04_amd64.deb;
 	create_cluster;
 }
 
