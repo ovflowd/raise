@@ -9,12 +9,8 @@ function install_sdk()
 	sudo pecl install pcs-1.3.3
 	sudo pecl install couchbase
 	sudo apt-get install php-curl
-	cd /var/www
-	sudo git init
-	sudo git remote add origin https://github.com/UIoT/RAISe.git
-	sudo git pull origin development
-	cd Install
-	sudo php move.php
+	cd /var/www ; sudo git init ; sudo git remote add origin https://github.com/UIoT/RAISe.git ; sudo git pull origin development
+	cd /var/www/Install; sudo php move.php
 	sudo service apache2 restart
 	sleep 20 &
 	PID=$!
