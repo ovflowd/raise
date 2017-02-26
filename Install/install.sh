@@ -15,6 +15,9 @@ function install_sdk()
 	sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
 	sudo pecl install pcs-1.3.3
 	sudo pecl install couchbase
+	sudo apt-get install php-curl
+	sudo php move.php
+	sudo service apache2 restart
 }
 
 function create_cluster()
