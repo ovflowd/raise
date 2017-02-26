@@ -32,6 +32,7 @@ function install_sdk()
 	do
 	  printf "\b${sp:i++%${#sp}:1}"
 	done
+	sudo nano /var/www/Install/install.php
 	sudo php install.php
 	
 }
