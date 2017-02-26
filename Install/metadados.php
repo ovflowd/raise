@@ -519,7 +519,7 @@ $couchbase = new CouchBaseInterfacer(); //creat a object Couchbase
 */
 $cluster='127.0.0.1:8091';// enter couchbase ip
 
-$couchbase->conchBaseInsertKey($cluster);
+@$couchbase->conchBaseInsertKey($cluster);
 
 $couchbase->metadataInsertDocs($cluster);
 
@@ -530,3 +530,4 @@ for ($i = 0; $i < count($metadosCodHttpCb); $i++) //
 															$metadosCodHttpCb[$i]["message"],
 															$cluster); //get a message object
 }
+echo 'RAISe installed sucessfully!';
