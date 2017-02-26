@@ -9,8 +9,8 @@ function install_sdk()
 	sudo pecl install pcs-1.3.3
 	sudo pecl install couchbase
 	sudo apt-get install php-curl
-	cd /var/www ; sudo git init ; sudo git remote add origin https://github.com/UIoT/RAISe.git ; sudo git pull origin development
-	cd /var/www/Install; sudo php move.php
+	cd /var/www/html ; sudo git init ; sudo git remote add origin https://github.com/UIoT/RAISe.git ; sudo git pull origin development
+	cd /var/www/html/Install; sudo php move.php
 	sudo service apache2 restart
 	sleep 20 &
 	PID=$!
@@ -21,8 +21,8 @@ function install_sdk()
 	do
 	  printf "\b${sp:i++%${#sp}:1}"
 	done
-	sudo nano /var/www/Install/install.php
-	sudo php /var/www/Install/install.php
+	sudo nano /var/www/html/Install/install.php
+	sudo php /var/www/html/Install/install.php
 	
 }
 
