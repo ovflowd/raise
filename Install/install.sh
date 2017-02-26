@@ -64,13 +64,14 @@ function install_couchbase()
 
 function install_prerequisites()
 {
+	sudo apt-get update
 	sudo apt-get install git;
 	sudo apt-get install apache2;
-	sudo apt-get install php-pear;
-	sudo apt-get install python-software-properties
-	sudo ppa-purge ppa:ondrej/php-7.0
-	sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
+	sudo apt-get install php7.0
 	sudo apt-get install php7.0-dev
+	wget http://pear.php.net/go-pear.phar
+	sudo php go-pear.phar
+	sudo apt-get install python-software-properties
 	sudo service apache2 restart
 	install_couchbase;
 
