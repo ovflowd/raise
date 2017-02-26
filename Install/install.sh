@@ -23,6 +23,15 @@ function install_sdk()
 	cd Install
 	sudo php move.php
 	sudo service apache2 restart
+	sleep 20 &
+	PID=$!
+	i=1
+	sp="/-\|"
+	echo -n ' '
+	while [ -d /proc/$PID ]
+	do
+	  printf "\b${sp:i++%${#sp}:1}"
+	done
 	sudo php install.php
 	
 }
