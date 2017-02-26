@@ -2,13 +2,6 @@ cat uiot.txt
 
 function install_sdk()
 {
-	sudo apt-get install php-pear;
-	sudo apt-get install python-software-properties
-	sudo ppa-purge ppa:ondrej/php-7.0
-	sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
-	sudo apt-get install php7.0-dev
-	sudo service apache2 restart
-
 	sudo wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-2-amd64.deb
 	sudo dpkg -i couchbase-release-1.0-2-amd64.deb
 	sudo apt-get update
@@ -73,7 +66,12 @@ function install_prerequisites()
 {
 	sudo apt-get install git;
 	sudo apt-get install apache2;
-	sudo apt-get install php;
+	sudo apt-get install php-pear;
+	sudo apt-get install python-software-properties
+	sudo ppa-purge ppa:ondrej/php-7.0
+	sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
+	sudo apt-get install php7.0-dev
+	sudo service apache2 restart
 	install_couchbase;
 
 }
