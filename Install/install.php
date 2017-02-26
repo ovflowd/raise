@@ -128,7 +128,7 @@ class Install
         $bucketsInfo = $this->getBucketsInfo();
         foreach($bucketsInfo as $key=>$info)
         {
-          $status[] = $info->nodes[0]->status;
+          @$status[] = $info->nodes[0]->status;
         }
 
         if (count(array_unique($status)) === 1 && end($status) === 'healthy')
