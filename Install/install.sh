@@ -11,7 +11,12 @@ function install_sdk()
 	sudo apt-get install php-curl
 	cd /var/www/html ; sudo git init ; sudo git remote add origin https://github.com/UIoT/RAISe.git ; sudo git pull origin development
 	cd /var/www/html/Install; sudo php move.php
-	sudo service apache2 restart
+	sudo apt install php libapache2-mod-php
+    sudo apt install php7.0-mbstring
+    sudo a2dismod mpm_event
+    sudo a2enmod mpm_prefork
+    sudo service apache2 restart
+
 	sleep 20 &
 	PID=$!
 	i=1
