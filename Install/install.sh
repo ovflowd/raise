@@ -48,7 +48,7 @@ function create_cluster()
 
 
 		else
-				echo "Memory must be higher than 512";
+				echo "Memory must be higher than 512MB";
 		fi
 
 	done
