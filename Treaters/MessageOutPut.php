@@ -36,10 +36,11 @@ class MessageOutPut
     *@return  Object  Response message with HTTP code and message
     */
 
+
     public function messageHttp($code)
     {
         $message_out;
-        $myCluster = new \CouchbaseCluster(DB_ADDRESS);
+        $myCluster = new CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
         try
         { //create a conction with database
