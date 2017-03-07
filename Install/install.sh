@@ -15,7 +15,7 @@ function install_sdk()
     sudo a2dismod mpm_event
     sudo a2enmod mpm_prefork
     sudo service apache2 restart
-    	cd /var/www/html/Install; sudo php move.php
+    cd /var/www/html/Install; sudo php move.php
 
 	sleep 5 &
 	PID=$!
