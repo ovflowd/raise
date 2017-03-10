@@ -22,38 +22,55 @@
                 "description": "Get registered clients",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/auth-token"
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the starting date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the ending date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "name",
                         "in": "query",
                         "description": "client name",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "processor",
                         "in": "query",
                         "description": "client processor name",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "channel",
                         "in": "query",
-                        "description": "client communication channel id",
-                        "required": true,
-                        "type": "number"
+                        "description": "Channel label, as in WiFi, etc",
+                        "required": false,
+                        "type": "string"
                     },
                     {
                         "name": "host",
                         "in": "query",
                         "description": "client host name (for example - ip, domain...)",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "tag",
                         "in": "query",
                         "description": "client tag",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
