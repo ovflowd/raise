@@ -179,19 +179,19 @@
                         "in": "query",
                         "description": "Limits the amount of records for request. Used to prevent memory issues.",
                         "required": false,
-                        "type": "number"
+                        "type": "boolean"
                     },
                     {
                         "name": "order",
                         "in": "query",
-                        "description": "Bool. 0 for asc and 1 for desc.",
+                        "description": "Bool.",
                         "required": false,
                         "type": "boolean"
                     },
                     {
                         "name": "name",
                         "in": "query",
-                        "description": "client name",
+                        "description": "Service name",
                         "required": false,
                         "type": "string"
                     }
@@ -343,12 +343,12 @@
                         "in": "query",
                         "description": "Limits the amount of records for request",
                         "required": false,
-                        "type": "number"
+                        "type": "boolean"
                     },
                     {
                         "name": "order",
                         "in": "query",
-                        "description": "Bool. 0 for asc and 1 for desc.",
+                        "description": "Bool.",
                         "required": false,
                         "type": "boolean"
                     },
@@ -356,20 +356,6 @@
                         "name": "name",
                         "in": "query",
                         "description": "data name",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "processor",
-                        "in": "query",
-                        "description": "data processor",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "channel",
-                        "in": "query",
-                        "description": "data channel",
                         "required": false,
                         "type": "string"
                     },
