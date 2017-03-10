@@ -179,7 +179,7 @@
                         "in": "query",
                         "description": "Limits the amount of records for request. Used to prevent memory issues.",
                         "required": false,
-                        "type": "boolean"
+                        "type": "integer"
                     },
                     {
                         "name": "order",
@@ -343,7 +343,7 @@
                         "in": "query",
                         "description": "Limits the amount of records for request",
                         "required": false,
-                        "type": "boolean"
+                        "type": "integer"
                     },
                     {
                         "name": "order",
