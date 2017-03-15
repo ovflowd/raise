@@ -13,7 +13,7 @@ class RequestTester
 		$url = "http://{$this->raise_ip}/client/list";
 		$response = \Httpful\Request::get($url)->send();
 		echo "All clients response: ". '<br>';
-		echo $response;
+		echo $response; 
 	}
 
 	public function testInsertClient()
