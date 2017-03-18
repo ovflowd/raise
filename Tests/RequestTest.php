@@ -5,7 +5,7 @@ include('httpful.phar');
 class RequestTester
 {
 
-	private $raise_ip = 'localhost/index.php';
+	private $raise_ip = 'localhost';
 
 
 	public function testListAllClients()
