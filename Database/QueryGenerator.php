@@ -162,6 +162,9 @@ Class QueryGenerator
           {
               $request->token = $request->getBody()['token'];
               $request->treatedBody = json_encode($request->getBody()[0]);
+              
+              var_dump($request->treatedBody);exit;
+              
               return $request;
           }
           else
