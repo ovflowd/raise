@@ -135,9 +135,6 @@ class RequestTreater
     private function validationBucket($request)
     {
         if (!in_array($request->getPath()['bucket'], $this->AllowedBuckets)) {
-            
-            var_dump($request->getPath()['bucket']);exit;
-            
             $request->setResponseCode(403);
             $request->setValid(false);
 
