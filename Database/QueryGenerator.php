@@ -59,16 +59,33 @@ Class QueryGenerator
           $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter)
           {
-              if(is_numeric($parameter))
+              
+              if($parameter == "service_id" && $request->bucket == "data")
+              {
+                  $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
+              }
+              elseif($request->bucket == "data")
+              {
+                  $key = "data_values." . $key;
+                  $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+              }
+              else
+              {
+                  $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+              }
+              
+             if(is_numeric($parameter))
               {
                   $typeVerification[$key] = (int) $parameter;
                   $request->setParameters($typeVerification);
               }
               
-              $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+              
           }
           
           $request->string = substr($queryStr, 0, -4);
+          var_dump($request->string);
+          
         }
         else
         {
