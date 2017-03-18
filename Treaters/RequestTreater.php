@@ -161,7 +161,7 @@ class RequestTreater
             break;
         }
         } else {
-            if($request->getMethod() == "get")
+            if($request->getMethod() !== "get")
             {
                return $this->validateDataInsertion($request); 
             }
