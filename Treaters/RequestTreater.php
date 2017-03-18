@@ -161,7 +161,7 @@ class RequestTreater
             break;
         }
         } else {
-            if($request->getMethod() !== "get")
+            if($request->getMethod() === "post")
             {
                return $this->validateDataInsertion($request); 
             }
@@ -212,6 +212,10 @@ class RequestTreater
             foreach ($service['values'] as $value) {
                 foreach ($value as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
+                        
+                        var_dump($val);
+                        var_dump($compare[$key]);exit;
+                        
                         $request->setResponseCode(400);
                         $request->setValid(false);
 
