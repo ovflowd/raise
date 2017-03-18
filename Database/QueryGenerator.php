@@ -92,8 +92,6 @@ Class QueryGenerator
         $request->string = "SELECT * FROM `".$request->bucket."`";
         }
         
-        var_dump($request->string);exit;
-        
 
         return $request;
     }
@@ -154,6 +152,14 @@ Class QueryGenerator
         $method = $path['method'];
         if (!empty($method))
         {
+            
+            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] == "list")
+            {
+                $request->setResponseCode(403);
+                $request->setValid(false);
+                return $request;
+            }
+
 
           if($request->getPath()['bucket'] === "client" && $request->getPath()['method'] == "register")
           {
