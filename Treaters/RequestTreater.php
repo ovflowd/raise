@@ -207,7 +207,7 @@ class RequestTreater
             $compare = $compare['services'][$service['service_id']]['parameters'];
 
             //var_dump($service);
-            var_dump(json_decode(json_encode($compare), true));exit;
+            var_dump($parameters);exit;
 
                 foreach ($service['data_values'] as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
