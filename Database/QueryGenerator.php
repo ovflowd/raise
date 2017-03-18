@@ -60,7 +60,7 @@ Class QueryGenerator
           foreach ($request->getParameters() as $key => $parameter)
           {
               
-              if($parameter == "service_id" && $request->bucket == "data")
+              if($key == "service_id" && $request->bucket == "data")
               {
                   $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
               }
