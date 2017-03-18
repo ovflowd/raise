@@ -60,24 +60,24 @@ Class QueryGenerator
           foreach ($request->getParameters() as $key => $parameter)
           {
               
-              if($key == "service_id" && $request->bucket == "data")
-              {
-                  $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
-              }
-              elseif($request->bucket == "data")
+              if($request->bucket == "data")
               {
                   $chave = "data_values." . $key;
-                  $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
               }
               else
               {
-                  $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+                 $chave = $key;
               }
               
              if(is_numeric($parameter))
               {
                   $typeVerification[$key] = (int) $parameter;
                   $request->setParameters($typeVerification);
+                  $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
+              }
+              else
+              {
+                 $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . "AND ";  
               }
               
               
