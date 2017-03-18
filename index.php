@@ -4,9 +4,6 @@ namespace Raise;
 
 include('Treaters/RequestTreater.php');
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 use Raise\Treaters\RequestTreater;
 
 $t = new RequestTreater();
