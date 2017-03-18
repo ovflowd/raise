@@ -127,7 +127,7 @@ class RequestTreater
           var_dump($request->getPath()['method']);exit;;
         
         
-        if ($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null) {
+        if ($request->getPath()['bucket'] === null || empty($request->getPath()['bucket'])  && empty($request->getPath()['address']) && $request->getPath()['method'] == null || empty($request->getPath()['method'])) {
             $request->setResponseCode(202);
             $request->setValid(false);
 
