@@ -153,7 +153,7 @@ Class QueryGenerator
         if (!empty($method))
         {
             
-            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] == "list")
+            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
             {
                 $request->setResponseCode(403);
                 $request->setValid(false);
