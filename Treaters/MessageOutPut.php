@@ -40,7 +40,7 @@ class MessageOutPut
     public function messageHttp($code)
     {
         $message_out;
-        $myCluster = new CouchbaseCluster(DB_ADDRESS);
+        $myCluster = new \CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
         try
         { //create a conction with database
@@ -75,11 +75,11 @@ class MessageOutPut
     public function messageCouch($code)
     {
         $message_out;
-        $myCluster = new CouchbaseCluster(DB_ADDRESS);
+        $myCluster = new \CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
         try
         {
-            $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `metadata` WHERE codCouch=\$p");
+            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM `metadata` WHERE codCouch=\$p");
             $query->namedParams(array(
                 "p" => $code
             ));
