@@ -213,7 +213,7 @@ class RequestTreater
                 foreach ($value as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
                         
-                        var_dump($val);
+                        var_dump(gettype($val));
                         var_dump($compare[$key]);exit;
                         
                         $request->setResponseCode(400);
