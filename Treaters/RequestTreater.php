@@ -212,7 +212,7 @@ class RequestTreater
             }
             
             //var_dump($service);
-            var_dump($parameters[0]);exit;
+            //var_dump($parameters[0]);exit;
 
                 foreach ($service['data_values'] as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
