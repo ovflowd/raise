@@ -66,6 +66,8 @@ Class QueryGenerator
         {
         $request->string = "SELECT * FROM `".$request->bucket."`";
         }
+        
+        var_dump($request->getParameters());exit;
 
         //var_dump($request->string);exit;
 
