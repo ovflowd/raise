@@ -122,7 +122,6 @@ class DatabaseParser
         try
         {
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
-            var_dump($requestObj->getParameters());exit;
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
