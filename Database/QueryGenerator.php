@@ -58,7 +58,7 @@ Class QueryGenerator
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
           foreach ($request->getParameters() as $key => $parameter)
           {
-              $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
+              $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
           }
           $request->string = substr($queryStr, 0, -4);
         }
