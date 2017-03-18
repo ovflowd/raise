@@ -56,10 +56,17 @@ Class QueryGenerator
         if(count($request->getParameters())>0)
         {
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
+          $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter)
           {
+              if(is_numeric($parameter))
+              {
+                  $typeVerification[$key] = (int) $parameter;
+              }
+              
               $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
           }
+          $request->setParameters($typeVerification);
           $request->string = substr($queryStr, 0, -4);
         }
         else
