@@ -124,7 +124,7 @@ class RequestTreater
         
         var_dump($request->getPath()['bucket']);
          var_dump($request->getPath()['address']);
-          var_dump($request->getPath()['method']);break;
+          var_dump($request->getPath()['method']);exit;;
         
         
         if ($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null) {
