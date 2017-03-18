@@ -122,6 +122,11 @@ class RequestTreater
     private function emptyValidation($request)
     {
         
+        var_dump($request->getPath()['bucket']);
+         var_dump($request->getPath()['address']);
+          var_dump($request->getPath()['method']);break;
+        
+        
         if ($request->getPath()['bucket'] === null && empty($request->getPath()['address']) && $request->getPath()['method'] == null) {
             $request->setResponseCode(202);
             $request->setValid(false);
