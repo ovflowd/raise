@@ -209,8 +209,7 @@ class RequestTreater
             $compare = json_decode(json_encode($compare), true);
             $compare = $compare['services'][$service['service_id']]['parameters'];
 
-            foreach ($service['values'] as $value) {
-                foreach ($value as $key => $val) {
+                foreach ($service['values'] as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
                         
                         $request->setResponseCode(400);
@@ -220,7 +219,7 @@ class RequestTreater
                     }
                 }
             }
-        }
+        
 
         return true;
     }
