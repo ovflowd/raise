@@ -195,7 +195,7 @@ class Request{
     {
         $stringPath = explode("?", $path); //divide path from query string
         $arrayPath = explode("/", $stringPath[0]); // separate path into array
-        $this->path = array("address" => $arrayPath[1], "bucket" => $arrayPath[2], "method" =>$arrayPath[3]); //change keys valeus
+        $this->path = array("address" => $arrayPath[0], "bucket" => $arrayPath[1], "method" =>$arrayPath[2]); //change keys valeus
         
         var_dump($arrayPath);exit;
         
