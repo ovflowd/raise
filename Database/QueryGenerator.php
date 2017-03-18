@@ -62,11 +62,12 @@ Class QueryGenerator
               if(is_numeric($parameter))
               {
                   $typeVerification[$key] = (int) $parameter;
+                  $request->setParameters($typeVerification);
               }
               
               $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
           }
-          $request->setParameters($typeVerification);
+          
           $request->string = substr($queryStr, 0, -4);
         }
         else
