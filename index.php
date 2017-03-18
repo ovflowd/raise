@@ -4,6 +4,8 @@ namespace Raise;
 
 include('Treaters/RequestTreater.php');
 
+error_reporting (1);
+
 use Raise\Treaters\RequestTreater;
 
 $t = new RequestTreater();
