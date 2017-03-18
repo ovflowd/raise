@@ -67,7 +67,7 @@ Class QueryGenerator
               elseif($request->bucket == "data")
               {
                   $chave = "data_values." . $key;
-                  $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . "AND ";
+                  $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
               }
               else
               {
