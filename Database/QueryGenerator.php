@@ -65,7 +65,7 @@ Class QueryGenerator
                   $request->setParameters($typeVerification);
               }
               
-              $queryStr = $queryStr . " " . $key . " = \$$key" . "AND ";
+              $queryStr = $queryStr . " " . $key . " LIKE \$$key" . "AND ";
           }
           
           $request->string = substr($queryStr, 0, -4);
