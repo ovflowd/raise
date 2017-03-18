@@ -198,7 +198,7 @@ class RequestTreater
 
         foreach ($services as $service) {
             $service['service_id'];
-            $service['values'];
+            $service['data'];
 
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
@@ -209,7 +209,7 @@ class RequestTreater
             $compare = json_decode(json_encode($compare), true);
             $compare = $compare['services'][$service['service_id']]['parameters'];
 
-                foreach ($service['values'] as $key => $val) {
+                foreach ($service['data'] as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
                         
                         $request->setResponseCode(400);
