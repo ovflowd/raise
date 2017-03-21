@@ -1,7 +1,9 @@
 <h1><img src="http://i.imgur.com/TaFqVtT.png"/><sup><sup>RAISe</sup></sup></h1>
 <br>
 
-[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License: CC BY-NC 4.0](http://i.imgur.com/GShlrY0.png)](http://creativecommons.org/licenses/by-nc/4.0/)
+[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+
 
 <b>UIoT RAISE</b><br>
 
