@@ -9,6 +9,7 @@ function install_sdk()
 	sudo pecl install pcs-1.3.3
 	sudo pecl install couchbase
 	sudo apt-get install php-curl
+	sudo apt-get install git
 	cd /var/www/html ; sudo rm index.html ; sudo git init ; sudo git remote add origin https://github.com/UIoT/RAISe.git ; sudo git pull origin development
 	sudo apt install php libapache2-mod-php
     sudo apt install php7.0-mbstring
