@@ -257,6 +257,7 @@ Class QueryGenerator
                 echo $request->treatedBody.'<br>';
                 echo $request->bucket;
                 $request->bucket = "service";
+                echo $request->'<br>'.bucket;
                 //End select
                 //create Client
                 //end create
