@@ -237,7 +237,7 @@ Class QueryGenerator
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim
-                ))); 
+                )));
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 $request->bucket = "client";
@@ -255,21 +255,10 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                 
-                $services = array();
-                $i = 0;
-                
-                foreach ($request->getBody() ['services'] as $key => $service) 
-                {
-                    $service['service_id'] = $i;
-                    $i++;
-                    $services['services'][] = $service; 
-                }
-                $request->bucket = "service";
-                $request->treatedBody = json_encode(array_merge($oldBody, $services));
+                $request = $this->validateToken($result, $request, "service");
                 //End select
-                //create Client 
-                //end create 
+                //create Client
+                //end create
                 
             }
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
