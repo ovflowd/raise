@@ -46,7 +46,6 @@ class DatabaseParser
 
     private function response($responseRows = NULL)
     {
-        var_dump($responseRows);
         if (isset($responseRows->cas))
         {
             $response = (new MessageOutPut())->messageHttp(200);
@@ -67,6 +66,7 @@ class DatabaseParser
             
         } else
         {
+            echo 'entrou';
             $response = array(
                 'code' => 200,
                 'values' => $responseRows
