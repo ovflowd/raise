@@ -247,9 +247,8 @@ Class QueryGenerator
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request, "service");
                  
-                
-                $request->bucket = "client";
-                $request->treatedBody = json_encode($request->getBody());   
+                //$request->bucket = "client";
+                //$request->treatedBody = json_encode($request->getBody());   
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
             {
