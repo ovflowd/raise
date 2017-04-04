@@ -56,11 +56,12 @@ Class QueryGenerator
     {
         if(count($request->getParameters())>0 || !(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters()) ))
         {
+          echo "wrong".'<br>';
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
           $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter) 
           {
-              
+                  
               if($request->bucket == "data" && $key !== "service_id")
               {
                   $chave = "data_values." . $key;
