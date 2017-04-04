@@ -43,6 +43,8 @@ Class QueryGenerator
         }
         elseif($parsedPath->isValid() === FALSE)
         {
+            
+            echo "not false and is GET".'<br>';
           return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
     }
