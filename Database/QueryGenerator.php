@@ -157,11 +157,14 @@ Class QueryGenerator
             
             if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
             {
+            
+                $request->bucket = "token";
+                $parser = new DatabaseParser($request);
                 $token = $request->getParameters()['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $request->setParameters(array('token'=>$token));
+                //$request->setParameters(array('token'=>$token));
                 $result = $parser->select($request);
-                $request = $this->validateToken($result,$request);
+                //$request = $this->validateToken($result,$request);
               
               
                 $request->setResponseCode(403);
