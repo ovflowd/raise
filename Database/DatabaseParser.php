@@ -40,7 +40,7 @@ class DatabaseParser
         {
           $cluster = new CouchbaseCluster($this->serverAddress);
           var_dump($cluster->openBucket($bucket)->query(\CouchbaseN1qlQuery::fromString("SELECT * from client"+
-          +"where name = 4c9adfb96a364c6805b28f90a342b65c")));
+          +"where name = '4c9adfb96a364c6805b28f90a342b65c'")));
           return $cluster->openBucket($bucket);
         }
         return $this->bucket;
