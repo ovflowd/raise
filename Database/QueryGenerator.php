@@ -36,8 +36,6 @@ Class QueryGenerator
             }
             elseif ($request->getMethod() == "post") 
             {
-                echo $request->bucket.'<br>';
-                echo $request->treatedBody.'<br>'; 
                 $result = $parser->insert($request);
             }
             return $result;
@@ -258,7 +256,6 @@ Class QueryGenerator
                 
                 $request = $this->validateToken($result, $request, "service");
                 //$request->bucket = "service";
-                
                 //End select 
                 //create Client
                 //end create
