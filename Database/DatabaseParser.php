@@ -67,6 +67,7 @@ class DatabaseParser
             
         } else
         {
+            echo "hey".'<br>';
             $response = array(
                 'code' => 200,
                 'values' => $responseRows
