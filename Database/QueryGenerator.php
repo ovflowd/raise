@@ -54,6 +54,11 @@ Class QueryGenerator
 
     private function buildQuery($request)
     {
+        if (!(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters()) ))
+        {
+            echo "here".'<br>';
+        }
+        
         if(count($request->getParameters())>0 && !(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters()) ))
         {
           echo "wrong".'<br>';
