@@ -155,7 +155,7 @@ Class QueryGenerator
         {
             
             if (!in_array("tokenId", $request->getParameters())){
-                var_dumo($request->getParameters());
+                var_dump($request->getParameters());
                 echo "not here"; 
             }
             
