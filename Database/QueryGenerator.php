@@ -131,7 +131,7 @@ Class QueryGenerator
             $request->setResponseCode(401);
             $request->setValid(false);
         }
-        echo ($request->responseCode);
+        echo $request->responseCode;
         return $request;
     }
     
