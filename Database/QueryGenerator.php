@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request, $nextBucket) 
+    private function validateToken($result, $request) 
     { 
         
         if (isset($result['values'][0])) 
@@ -118,11 +118,11 @@ Class QueryGenerator
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
-                if ($nextBucket === "client"){
+                //if ($nextBucket === "client"){
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
-                } else if ($nextBucket === "service"){
-                    $request->treatedBody = json_encode($services);
-                }   
+                //} else if ($nextBucket === "service"){
+                //    $request->treatedBody = json_encode($services);
+                //}   
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
             } 
@@ -252,9 +252,8 @@ Class QueryGenerator
                 $request->setParameters(array(
                     'token' => $token 
                 )); 
-                $result = $parser->select($request);  
-                $request = $this->validateToken($result, $request, "service"); 
-                $request->bucket = "service";   
+                $result = $parser->select($request);
+                $request = $this->validateToken($result, $request, "service");
                 //End select
                 //create Client
                 //end create
