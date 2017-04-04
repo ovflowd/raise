@@ -55,11 +55,11 @@ Class QueryGenerator
 
     private function buildQuery($request)
     {
-        if(count($request->getParameters())>0 )
+        if(count($request->getParameters())>0 && !(array_key_exists("token",$request->getParameters()) && ))
         {
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
           $typeVerification = array();
-          foreach ($request->getParameters() as $key => $parameter) 
+          foreach ($request->getParameters() as $key => $parameter ) 
           {
                   
               if($request->bucket == "data" && $key !== "service_id")
