@@ -122,7 +122,7 @@ class CouchBaseInterfacer{
 		} catch (CouchbaseException $e) {
 		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
 		}
-    
+     
 	}
 
 	/**
