@@ -158,7 +158,7 @@ Class QueryGenerator
                 {
                     $request->setResponseCode(200);
                     $request->setValid(true);
-                    echo($request->treatedBody); 
+                    echo $request->treatedBody; 
                     $request->bucket = "data";
                 }
                 else
