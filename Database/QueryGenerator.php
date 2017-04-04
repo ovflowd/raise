@@ -244,7 +244,7 @@ Class QueryGenerator
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
             {
-                $oldBody = $request->getBody();
+                $oldBody = $request->getBody(); 
                 $request->bucket = "token";
                 $parser = new DatabaseParser($request);
                 //Select Client on Token bucket
@@ -254,7 +254,7 @@ Class QueryGenerator
                     'token' => $token 
                 ));  
                 $result = $parser->select($request);
-                $request = $this->validateToken($result, $request);
+                //$request = $this->validateToken($result, $request);
                 //$request->bucket = "service";
                 //End select 
                 //create Client
