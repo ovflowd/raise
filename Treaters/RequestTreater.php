@@ -127,7 +127,7 @@ class RequestTreater
 
             return false;
         }
-
+        echo "Empty validated";
         return true;
     }
 
