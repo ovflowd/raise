@@ -163,7 +163,7 @@ Class QueryGenerator
         
                 $token = $request->getParameters()['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                //$request->setParameters(array('token'=>$token));
+                $request->setParameters(array('token'=>$token));
                 $result = $parser->select($request);
                 var_dump($result);
                 //$request = $this->validateToken($result,$request);
