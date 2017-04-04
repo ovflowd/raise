@@ -31,7 +31,6 @@ Class QueryGenerator
             
             if ($request->getMethod() == "get")  
             {
-                echo "here";  
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             }
