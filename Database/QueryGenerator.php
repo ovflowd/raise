@@ -268,7 +268,7 @@ Class QueryGenerator
                 
                 $request->treatedBody = json_encode(array_merge($oldBody, $services));
                 //End select
-                //create Client
+                //create Client 
                 //end create
                 
             }
