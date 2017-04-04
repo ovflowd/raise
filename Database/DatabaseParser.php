@@ -49,7 +49,7 @@ class DatabaseParser
         if (isset($responseRows->cas))
         { 
             $response = (new MessageOutPut())->messageHttp(200);
-            if($responseRows->bucket === "client" || $responseRows->bucket === "service" )
+            if($responseRows->bucket === "client" || $responseRows->bucket === "service")
             {
                 if(isset($responseRows->request->service))
                 {
@@ -118,6 +118,7 @@ class DatabaseParser
         try 
         {  
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
+            echo '<br>'.$requestObj->string.'<br>';
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
