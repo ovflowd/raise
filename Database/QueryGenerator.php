@@ -101,7 +101,6 @@ Class QueryGenerator
         {
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]) , true);
-            
             if ($requestBody["time_fim"] > round(microtime(true) * 1000)) 
             {
                 unset($requestBody["time_ini"]);
