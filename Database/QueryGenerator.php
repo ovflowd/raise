@@ -54,15 +54,8 @@ Class QueryGenerator
 
     private function buildQuery($request)
     {
-        if(count($request->getParameters())>0)
+        if(count($request->getParameters())>0 && !(count($request->getParameters()) === 1 && array_key_exists("token",$request->getParameters())))
         {
-          if (!(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters())))
-          {
-              echo count($request->getParameters()).'<br>';
-              var_dump($request->getParameters());
-              echo array_key_exists("tokenId", $request->getParameters());
-              echo "right".'<br>';
-          }
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
           $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter) 
