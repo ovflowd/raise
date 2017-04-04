@@ -252,9 +252,9 @@ Class QueryGenerator
                 $request->setParameters(array(
                     'token' => $token 
                 )); 
-                $result = $parser->select($request);
+                $result = $parser->select($request); 
                 $request = $this->validateToken($result, $request, "service"); 
-                $request->bucket = "service";
+                $request->bucket = "service";   
                 //End select
                 //create Client
                 //end create
