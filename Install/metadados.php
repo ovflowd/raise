@@ -112,7 +112,7 @@ class CouchBaseInterfacer{
 		}
     
         $myBucket = $myCluster->openBucket('service');
-
+ 
 		// Before issuing a N1QL Query, ensure that there is
 		// is actually a primary index.
 		try {
