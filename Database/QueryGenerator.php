@@ -33,7 +33,6 @@ Class QueryGenerator
             if ($request->getMethod() == "get")
             {
                 
-            echo "not false and is GET".'<br>';
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             } elseif ($request->getMethod() == "post")
