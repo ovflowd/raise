@@ -239,7 +239,6 @@ Class QueryGenerator
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 
-                $request->bucket = "client";
                 $request->treatedBody = json_encode($request->getBody());   
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
