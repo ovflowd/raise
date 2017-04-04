@@ -154,12 +154,8 @@ Class QueryGenerator
         if (!empty($method))
         {
             
-            if (!array_key_exists("tokenId", $request->getParameters())){
-                var_dump($request->getParameters()); 
-                echo "not here"; 
-            }
-            
-            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
+            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register" &&
+                        !array_key_exists("tokenId", $request->getParameters()) )
             {
                 $request->setResponseCode(403);
                 $request->setValid(false);
