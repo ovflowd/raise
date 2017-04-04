@@ -95,7 +95,7 @@ Class QueryGenerator
     }
     
     private function validateToken($result, $request) 
-    {
+    { 
         
         if (isset($result['values'][0])) 
         {
