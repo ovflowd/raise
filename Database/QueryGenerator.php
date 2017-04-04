@@ -83,12 +83,9 @@ Class QueryGenerator
                 }
             }
             
-            if (array_key_exists("tokenId", $request->getParameters())){
-                echo 'um';
-            } else {
-                echo 'dois';
+            if (count($request->getParameters()) === 1){
+                echo 'um'.'<br>';
             }
-            
             $request->string = substr($queryStr, 0, -4);
             echo $queryStr.'<br>'; 
         }
