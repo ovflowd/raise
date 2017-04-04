@@ -38,8 +38,8 @@ class DatabaseParser
     {
         if($bucket !== NULL)
         {
-          echo '<br>'."entrou".'<br>';
           $cluster = new CouchbaseCluster($this->serverAddress);
+          var_dump($cluster);
           return $cluster->openBucket($bucket);
         }
         return $this->bucket;
