@@ -265,7 +265,7 @@ Class QueryGenerator
                     $i++;
                     $services['services'][] = $service; 
                 }
-                
+                $request->bucket = "service";
                 $request->treatedBody = json_encode(array_merge($oldBody, $services));
                 //End select
                 //create Client 
