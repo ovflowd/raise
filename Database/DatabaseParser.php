@@ -99,6 +99,7 @@ class DatabaseParser
     {
         try
         {
+              echo '<br>'.'is here';
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               var_dump($result);
               $result->token = $requestObj->token;
