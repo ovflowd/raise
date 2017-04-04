@@ -36,6 +36,7 @@ Class QueryGenerator
             }
             elseif ($request->getMethod() == "post") 
             {
+                echo "here";
                 $result = $parser->insert($request);
             }
             return $result;
@@ -254,7 +255,7 @@ Class QueryGenerator
                     'token' => $token 
                 ));  
                 $result = $parser->select($request);
-                $request = $this->validateToken($result, $request);
+                $request = $this->validateToken($result, $request); 
                 //$request->bucket = "service";
                 //End select 
                 //create Client
