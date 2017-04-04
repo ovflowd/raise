@@ -104,7 +104,7 @@ Class QueryGenerator
         {
           unset($requestBody["time_ini"]);
           unset($requestBody["time_fim"]);
-          $request->bucket = "service";
+          $request->bucket = "client";
           $request->service = true;
           
           $services = array();
