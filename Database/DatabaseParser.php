@@ -106,7 +106,6 @@ class DatabaseParser
               $result->request = $requestObj;
                   
               if ($requestObj->bucket == "service"){
-                  echo '<br>'.$this->response($result).'<br>';  
               }
               return $this->response($result); 
         } catch(CouchbaseException $e)
