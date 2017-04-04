@@ -151,7 +151,7 @@ Class QueryGenerator
         if (!empty($method))
         {
             
-        if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
+        if($request->getPath()['bucket'] === "data" && $request->getPath()["method"] !== "register")
             {
                 
                 $request->bucket = "token";
