@@ -227,7 +227,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
-                echo '<br>'."is here";
+                echo "is here";
                 $request->bucket = "token";
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
