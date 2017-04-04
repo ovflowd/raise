@@ -60,7 +60,7 @@ Class QueryGenerator
           $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter)
           {
-              
+              v
               if($request->bucket == "data" && $key !== "service_id")
               {
                   $chave = "data_values." . $key;
@@ -154,9 +154,14 @@ Class QueryGenerator
         if (!empty($method))
         {
             
-            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register" &&
-                        !array_key_exists("tokenId", $request->getParameters()) )
+            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register" && )
             {
+                $token = $request->getBody()['tokenId'];
+                $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
+                $request->setParameters(array('token'=>$token));
+                $result = $parser->select($request);
+                $request = $this->validateToken($result,$request);
+           
                 $request->setResponseCode(403);
                 $request->setValid(false);
                 return $request;
