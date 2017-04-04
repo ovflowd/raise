@@ -38,7 +38,6 @@ Class QueryGenerator
                 
                 $result = $parser->select($request);
             
-                echo "voltou";
             } elseif ($request->getMethod() == "post")
             {
                 $result = $parser->insert($request);
