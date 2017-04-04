@@ -168,6 +168,7 @@ Class QueryGenerator
                 $request = $this->validateToken($result,$request);
               
                 var_dump ($request);
+                var_dump ($result);
                 $request->setResponseCode(403);
                 $request->setValid(false);
                 return $request;
