@@ -86,8 +86,8 @@ Class QueryGenerator
                 echo 'hey';
                 $request->string = substr($queryStr, 0, -9);    
             }
-            $request->string = substr($queryStr, 0, -4);
             
+            $request->string = substr($queryStr, 0, -4);
             echo $queryStr.'<br>'; 
         }
         else
