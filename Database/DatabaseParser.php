@@ -124,7 +124,6 @@ class DatabaseParser
             $query->namedParams($requestObj->getParameters());
             
             var_dump($this->getBucket($requestObj->bucket)->query($query) );
-            var_dump($requestObj);
             
             
             var_dump($this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj)));
