@@ -57,6 +57,8 @@ Class QueryGenerator
         if (!(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters()) ))
         {
             echo "here".'<br>';
+        } else {
+            echo "not here".'<br>';
         }
         
         if(count($request->getParameters())>0  && !(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters())))
