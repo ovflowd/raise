@@ -58,7 +58,7 @@ Class QueryGenerator
         {
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
           $typeVerification = array();
-          foreach ($request->getParameters() as $key => $parameter)
+          foreach ($request->getParameters() as $key => $parameter) 
           {
               
               if($request->bucket == "data" && $key !== "service_id")
