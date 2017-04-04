@@ -181,14 +181,14 @@ Class QueryGenerator
             //    
             //    if ($result["code"] === 200 && count($result["values"]) > 0) 
             //    {
-                    $request->setResponseCode(200);
-                    $request->setValid(true);
+            //        $request->setResponseCode(200);
+            //        $request->setValid(true);
             //        $request->bucket = "service";
             //    }
             //    else
             //    {
-            //          $request->setResponseCode(403);
-            //          $request->setValid(false);
+                      $request->setResponseCode(403);
+                      $request->setValid(false);
             //    }
             }
             
