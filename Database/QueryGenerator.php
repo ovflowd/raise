@@ -82,10 +82,10 @@ Class QueryGenerator
                     $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
                 }
             }
-            echo $queryStr.'<br>'; 
             if (count($request->getParameters()) === 1 && array_key_exists($request->getParameters(), "tokenId")){
                 $request->string = substr($queryStr, 0, -9);    
             }
+            echo $queryStr.'<br>'; 
             $request->string = substr($queryStr, 0, -4);
         }
         else
