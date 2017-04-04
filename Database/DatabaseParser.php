@@ -133,6 +133,8 @@ class DatabaseParser
             
             echo '<br>'."continua3".'<br>';
             var_dump($this->getBucket($requestObj->bucket)->query($query));
+            
+            echo "passa".'<br>';
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
