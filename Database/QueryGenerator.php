@@ -91,7 +91,7 @@ Class QueryGenerator
         }
         else
         {
-            echo '<br>'."certo"
+            echo '<br>'."certo";
             $request->string = "SELECT * FROM `".$request->bucket."`";
         }
         return $request;
