@@ -175,7 +175,6 @@ class RequestTreater
 
             return false;
         }
-        echo "Returning true";
         return true;
     }
 
