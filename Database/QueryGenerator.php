@@ -227,6 +227,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
+                echo '<br>'."is here";
                 $request->bucket = "token";
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
@@ -250,7 +251,7 @@ Class QueryGenerator
                 $token = $request->getBody() ['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
                 $request->setParameters(array(
-                    'token' => $token
+                    'token' => $token 
                 )); 
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request, "service");
