@@ -227,7 +227,6 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
-                
                 $request->bucket = "token";
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
@@ -241,7 +240,6 @@ Class QueryGenerator
                 $parser->insert($request);
                 $request->bucket = "client";
                 $request->treatedBody = $request->getBody();
-                echo $request->treatedBody;
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
             {
