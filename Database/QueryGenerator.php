@@ -29,8 +29,9 @@ Class QueryGenerator
         {
             $parser = new DatabaseParser($parsedPath);
             
-            if ($request->getMethod() == "get") 
+            if ($request->getMethod() == "get")  
             {
+                echo "here"; 
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             }
