@@ -43,8 +43,6 @@ Class QueryGenerator
         }
         elseif($parsedPath->isValid() === FALSE)
         {
-            
-            echo "not valid path".'<br>';
           return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
     }
