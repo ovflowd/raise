@@ -61,11 +61,7 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                if ($request->bucket == "client" && $key == "token")
-                {
-                    $chave = "tokenId";      
-                }
-                else if ($request->bucket == "data" && $key !== "service_id") 
+                if ($request->bucket == "data" && $key !== "service_id") 
                 {
                     $chave = "data_values." . $key;
                 }
@@ -82,7 +78,9 @@ Class QueryGenerator
                 }
                 else
                 {
-                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
+                    if ($key == "token"){
+                        $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
+                    }
                 }
             }
             $request->string = substr($queryStr, 0, -4);
