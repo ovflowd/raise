@@ -36,6 +36,7 @@ class DatabaseParser
 
     public function getBucket($bucket = NULL)
     {
+        echo "entrou";
         if($bucket !== NULL)
         {
           $cluster = new CouchbaseCluster($this->serverAddress);
