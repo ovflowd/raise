@@ -119,6 +119,9 @@ class DatabaseParser
     {
         try 
         { 
+            if (strpos($requestObj->string, "tokenId")){
+                echo ($requestObj->string);
+            }
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
