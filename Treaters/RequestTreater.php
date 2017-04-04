@@ -168,7 +168,6 @@ class RequestTreater
         if (!empty(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
             $request->setResponseCode(400);
             $request->setValid(false);
-
             return false;
         }
         
