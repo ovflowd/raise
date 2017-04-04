@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request) 
+    private function validateToken($result, $request, $nextBucket) 
     { 
         
         if (isset($result['values'][0])) 
