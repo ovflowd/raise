@@ -165,7 +165,7 @@ Class QueryGenerator
                 if ($result["code"] === 200 && count($result["values"]) > 0){
                     $request->setResponseCode(200);
                     $request->setValid(true);
-                    $request->bucket = "service";    
+                    $request->bucket = "data";    
                 } else {
                     $request->setResponseCode(403);
                     $request->setValid(false);
