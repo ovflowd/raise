@@ -100,7 +100,7 @@ class DatabaseParser
     {
         try
         {
-              $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
+              $result = $this->getBucket($requestObj->bucket)->insert($requestObj->token, $requestObj->treatedBody);
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
@@ -118,7 +118,7 @@ class DatabaseParser
     public function select($requestObj)
     {
         try 
-        { 
+        {  
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
