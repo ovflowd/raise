@@ -119,7 +119,7 @@ class DatabaseParser
     {
         try
         {
-            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM DATA");
+            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM data");
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
