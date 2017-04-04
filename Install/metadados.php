@@ -110,7 +110,19 @@ class CouchBaseInterfacer{
 		} catch (CouchbaseException $e) {
 		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
 		}
+    
+        $myBucket = $myCluster->openBucket('service');
 
+		// Before issuing a N1QL Query, ensure that there is
+		// is actually a primary index.
+		try {
+		    // Do not override default name, fail if it is exists already, and wait for completion
+		    $myBucket->manager()->createN1qlPrimaryIndex('', false, false);
+
+		} catch (CouchbaseException $e) {
+		    printf("Couldn't create index. Maybe it already exists? (code: %d)\n", $e->getCode());
+		}
+    
 	}
 
 	/**
