@@ -59,7 +59,6 @@ Class QueryGenerator
             $queryStr = "SELECT * FROM `" . $request->bucket . "` WHERE";
             $typeVerification = array();
             
-            var_dump($request->getParameters());
             foreach ($request->getParameters() as $key => $parameter) 
             {
                 if ($request->bucket == "client" && $key == "token")
