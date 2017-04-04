@@ -154,8 +154,8 @@ Class QueryGenerator
         if (!empty($method))
         {
             
-            if (!in_array("tokenId", $request->getParameters())){
-                var_dump($request->getParameters());
+            if (!array_key_exists("tokenId", $request->getParameters())){
+                var_dump($request->getParameters()); 
                 echo "not here"; 
             }
             
