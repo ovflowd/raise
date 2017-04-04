@@ -171,9 +171,9 @@ class RequestTreater
             {
                 return true;
             }
-            else 
+            else  
             {
-                 $request->setResponseCode(400);
+                $request->setResponseCode(400);
                 $request->setValid(false);
                 return false;  
             }
