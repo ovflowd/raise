@@ -87,7 +87,7 @@ Class QueryGenerator
                 echo 'um'.'<br>'; 
             }
             $request->string = substr($queryStr, 0, -4);
-            echo $queryStr.'<br>'; 
+            echo $request->string.'<br>'; 
         }
         else
         {
