@@ -166,7 +166,7 @@ class RequestTreater
     private function validationMethodGet($request, $parameters)
     {
         if (!empty(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
-            echo (array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)));
+            var_dump(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)));
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;
