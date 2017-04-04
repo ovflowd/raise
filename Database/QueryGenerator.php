@@ -122,7 +122,7 @@ Class QueryGenerator
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
                 //} else if ($nextBucket === "service"){
                 //    $request->treatedBody = json_encode($services);
-                 //}   
+                //}   
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
             } 
@@ -254,6 +254,7 @@ Class QueryGenerator
                 )); 
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request, "service");
+                $request->bucket = "service";
                 //End select
                 //create Client
                 //end create
