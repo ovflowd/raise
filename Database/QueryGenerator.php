@@ -83,7 +83,7 @@ Class QueryGenerator
                 }
             }
             if (count($request->getParameters()) === 1 && in_array("tokenId", $request->getParameters())){
-                echo 'hey';
+                echo 'hey'; 
                 $request->string = substr($queryStr, 0, -9);    
             }
             
