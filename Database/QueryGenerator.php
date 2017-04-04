@@ -59,6 +59,7 @@ Class QueryGenerator
             $queryStr = "SELECT * FROM `" . $request->bucket . "` WHERE";
             $typeVerification = array();
             
+            var_dump($request->getParameters());
             foreach ($request->getParameters() as $key => $parameter) 
             {
                 echo $key.'<br>';
