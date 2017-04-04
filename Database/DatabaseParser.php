@@ -85,7 +85,6 @@ class DatabaseParser
             $bucket = $request->bucket;
             $responseRows[] = $row->$bucket;
         }
-        var_dump($responseRows);
         return $responseRows;
     }
 
