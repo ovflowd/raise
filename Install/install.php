@@ -18,14 +18,18 @@
  * This script will install all the required couchbase buckets that RAISe needs to work properly.
  * IMPORTANT: this requires the cURL extension to work.
  */
+ 
+include_once ("Config/Config.php");
+
+use Raise\Treaters\Config;
 
 //include "metadados.php";
 
 class Install
 {
     //please change the following credentials to the ones you just configured.
-    private $username = ""; //your couchbase username
-    private $password = ""; // your couchbase password
+    private $username = DB_USER; //your couchbase username
+    private $password = DB_PASSWORD; // your couchbase password
 
     private function getCredentials()
     {
