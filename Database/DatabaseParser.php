@@ -16,7 +16,7 @@
  * @copyright University of Brasília
  * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html (will be removed later)
  */
-include_once ("Treaters/MessageOutPut.php"); 
+include_once ("Treaters/MessageOutPut.php");  
 include_once ("/opt/RAISe/Config/Config.php");
 
 use Raise\Treaters\MessageOutPut;
