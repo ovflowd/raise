@@ -120,7 +120,7 @@ class DatabaseParser
         try 
         { 
             if (strpos($requestObj->string, "service")){
-                echo $requestObj->string; 
+                echo $requestObj->string.'<br>'; 
             }
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
