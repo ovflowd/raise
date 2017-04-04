@@ -215,6 +215,7 @@ Class QueryGenerator
                    $request->setResponseCode(200);
                     $request->setValid(true);
                     $request->bucket = "service";
+                    $request->setParameters($oldParameters);
                 }
                 else
                 {
