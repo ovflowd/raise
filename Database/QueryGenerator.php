@@ -167,7 +167,7 @@ Class QueryGenerator
                 $request = $this->validateToken($result,$request);
                 
                 echo "Entrou".'<br>';
-                echo $result;
+                echo $result["code"];
                 if ($result->code === 200){
                     $request->setResponseCode(200);
                     $request->setValid(true);
