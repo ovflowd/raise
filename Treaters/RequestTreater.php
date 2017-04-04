@@ -169,7 +169,7 @@ class RequestTreater
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;  
-        } else if(count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
+        } else if(count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) === 1) {
             
         }
         return true;
