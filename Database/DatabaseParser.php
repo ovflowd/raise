@@ -122,9 +122,7 @@ class DatabaseParser
         {
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
-            var_dump($this->getBucket($requestObj->bucket));
             echo '<br>'."fim".'<br>';
-            var_dump($this->getBucket($requestObj->bucket)->query($query));
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
