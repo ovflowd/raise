@@ -62,6 +62,9 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
+                if ($key === ""){
+                    $queryStr = substr($queryStr, 0, -4);
+                }
                 if ($request->bucket == "data" && $key !== "service_id") 
                 {
                     $chave = "data_values." . $key;
