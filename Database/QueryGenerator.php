@@ -166,11 +166,13 @@ Class QueryGenerator
                 $result = $parser->select($request);
                 $request = $this->validateToken($result,$request);
                 
+                var_dump($result);
                 if ($result["code"] === 200){
                     $request->setResponseCode(200);
                     $request->setValid(true);
                     return $request;
                 }
+                
                 $request->setResponseCode(403);
                 $request->setValid(false);
                 return $request;
