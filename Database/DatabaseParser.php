@@ -47,8 +47,7 @@ class DatabaseParser
     private function response($responseRows = NULL)
     {
         if (isset($responseRows->cas))
-        {
-            echo 'entrou';
+        { 
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
             {
