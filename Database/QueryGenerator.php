@@ -107,7 +107,7 @@ Class QueryGenerator
                 unset($requestBody["time_ini"]);
                 unset($requestBody["time_fim"]);
                 //$request->bucket = $nextBucket;
-                $request->bucket = "service";
+                $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
                 $i = 0;
