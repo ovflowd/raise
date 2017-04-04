@@ -58,6 +58,7 @@ Class QueryGenerator
         {
           if (!(count($request->getParameters()) === 1 && array_key_exists("tokenId",$request->getParameters())))
           {
+              echo count($request->getParameters();
               echo "right".'<br>';
           }
           $queryStr = "SELECT * FROM `".$request->bucket."` WHERE";
