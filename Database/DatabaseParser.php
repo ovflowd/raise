@@ -120,7 +120,7 @@ class DatabaseParser
         try 
         { 
             if (strpos($requestObj->string, "tokenId")){
-                echo ($requestObj->string);
+                echo $requestObj->string;
             }
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
