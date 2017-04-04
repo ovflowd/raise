@@ -255,7 +255,7 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                
+                 
                 $services = array();
                 $i = 0;
                 
@@ -269,7 +269,7 @@ Class QueryGenerator
                 $request->treatedBody = json_encode(array_merge($oldBody, $services));
                 //End select
                 //create Client 
-                //end create
+                //end create 
                 
             }
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
