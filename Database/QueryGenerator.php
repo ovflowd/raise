@@ -160,12 +160,12 @@ Class QueryGenerator
             
                 $request->bucket = "token";
                 $parser = new DatabaseParser($request);
+        
                 $token = $request->getParameters()['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
                 //$request->setParameters(array('token'=>$token));
                 $result = $parser->select($request);
                 //$request = $this->validateToken($result,$request);
-              
               
                 $request->setResponseCode(403);
                 $request->setValid(false);
