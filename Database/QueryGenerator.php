@@ -131,6 +131,7 @@ Class QueryGenerator
             $request->setResponseCode(401);
             $request->setValid(false);
         }
+        echo ($request->setResponseCode);
         return $request;
     }
     
@@ -152,6 +153,7 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
+                $request = $this->validateToken($result, $request);
                 
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
