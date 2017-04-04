@@ -113,7 +113,7 @@ class DatabaseParser
         }
     }
 
-    //Method for performing a select query on the database.
+    //Method for performing a select query on the database. 
     //return string
     public function select($requestObj)
     {
