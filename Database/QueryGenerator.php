@@ -37,6 +37,7 @@ Class QueryGenerator
             elseif ($request->getMethod() == "post") 
             {
                 echo $request->bucket.'<br>';
+                echo $request->treatedBody.'<br>';
                 $result = $parser->insert($request);
             }
             return $result;
