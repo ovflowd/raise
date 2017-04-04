@@ -252,7 +252,6 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                
                 $request = $this->validateToken($result, $request);
                 $request->treatedBody = $oldBody;  
                 //End select
