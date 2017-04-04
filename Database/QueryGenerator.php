@@ -255,7 +255,18 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                $request = $this->validateToken($result, $request, "service");
+                
+                $services = array();
+                $i = 0;
+                
+                foreach ($request->getBody() ['services'] as $key => $service) 
+                {
+                    $service['service_id'] = $i;
+                    $i++;
+                    $services['services'][] = $service; 
+                }
+                
+                $request->treatedBody(array_merge($oldBody, $services));
                 //End select
                 //create Client
                 //end create
