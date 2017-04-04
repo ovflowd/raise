@@ -82,6 +82,12 @@ Class QueryGenerator
                     $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
                 }
             }
+            
+            if (in_array("tokenId", $request->getParameters())){
+                echo 'um';
+            } else {
+                echo 'dois';
+            }
             if (count($request->getParameters()) === 1 && in_array("tokenId", $request->getParameters())){
                 echo 'hey'; 
                 $request->string = substr($queryStr, 0, -9);    
