@@ -49,7 +49,7 @@ class DatabaseParser
         if (isset($responseRows->cas))
         { 
             $response = (new MessageOutPut())->messageHttp(200);
-            if($responseRows->bucket === "service")
+            if($responseRows->bucket === "client")
             {
                 if(isset($responseRows->request->service))
                 {
