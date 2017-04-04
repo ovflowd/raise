@@ -125,7 +125,7 @@ Class QueryGenerator
                 }   
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
-            }
+            } 
             else
             {
                 $request->setResponseCode(401);
