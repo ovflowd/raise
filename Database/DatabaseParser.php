@@ -123,7 +123,7 @@ class DatabaseParser
                 echo $requestObj->string.'<br>';
                 $requestObj->string = "SELECT * FROM `service` where service_id = 1";
             } 
-            echo '<br>'$requestObj->string.'<br>';
+            echo '<br>'.$requestObj->string.'<br>';
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
