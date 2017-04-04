@@ -258,7 +258,7 @@ Class QueryGenerator
                 //End select
                 //create Client
                 //end create
-                
+                 
             }
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
