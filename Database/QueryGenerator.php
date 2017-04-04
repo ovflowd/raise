@@ -18,7 +18,7 @@
 include_once ("Treaters/MessageOutPut.php");
 include_once ('Database/DatabaseParser.php');
 use Raise\Treaters\MessageOutPut;
-Class QueryGenerator 
+Class QueryGenerator
 {
     
     public function generate($request) 
@@ -54,14 +54,18 @@ Class QueryGenerator
     private function buildQuery($request) 
     {
         
-        if (count($request->getParameters()) > 0 ) 
+        if (count($request->getParameters()) > 0) 
         {
             $queryStr = "SELECT * FROM `" . $request->bucket . "` WHERE";
             $typeVerification = array();
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                if ($request->bucket == "data" && $key !== "service_id") 
+                if ($request->bucket == "client" && $key == "token")
+                {
+                    $chave = "tokenId";      
+                }
+                else if ($request->bucket == "data" && $key !== "service_id") 
                 {
                     $chave = "data_values." . $key;
                 }
@@ -69,7 +73,7 @@ Class QueryGenerator
                 {
                     $chave = $key; 
                 }
-                
+                 
                 if (is_numeric($parameter)) 
                 {
                     $typeVerification[$key] = (int)$parameter;
@@ -77,9 +81,9 @@ Class QueryGenerator
                     $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
                 }
                 else
-                { 
-                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . "AND ";    
-                }  
+                {
+                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
+                }
             }
             $request->string = substr($queryStr, 0, -4);
         }
