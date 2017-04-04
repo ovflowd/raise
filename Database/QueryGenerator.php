@@ -159,7 +159,6 @@ Class QueryGenerator
                 {
                     $request->setResponseCode(200);
                     $request->setValid(true);
-                    var_dump($request); 
                     $request->bucket = "data";
                 }
                 else
