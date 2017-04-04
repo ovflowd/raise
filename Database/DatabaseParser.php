@@ -42,8 +42,6 @@ class DatabaseParser
           $cluster = new CouchbaseCluster($this->serverAddress);
           return $cluster->openBucket($bucket);
         }
-        
-          echo '<br>'."no else".'<br>';
         return $this->bucket;
     }
 
