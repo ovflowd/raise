@@ -121,7 +121,7 @@ class DatabaseParser
         { 
             if (strpos($requestObj->string, "service")){
                 echo $requestObj->string.'<br>';
-                $requestObj->string = "SELECT * FROM `service` where service_id = 1";
+                $requestObj->string = "SELECT * FROM `service` where service_id = 0";
             } 
             echo '<br>'.$requestObj->string.'<br>';
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
