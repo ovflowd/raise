@@ -124,7 +124,6 @@ Class QueryGenerator
                 } else if ($nextBucket === "service"){
                     $request->treatedBody = json_encode($requestBody);
                 } 
-                
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
             }
@@ -213,7 +212,6 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                $request = $this->validateToken($result, $request);
                 
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
