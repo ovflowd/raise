@@ -238,6 +238,7 @@ Class QueryGenerator
                 )));
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
+                
                 $request->bucket = "client";
                 $request->treatedBody = json_encode($request->getBody());   
             }
