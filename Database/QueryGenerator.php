@@ -83,6 +83,9 @@ Class QueryGenerator
                 }
             }
             echo $queryStr.'<br>'; 
+            if (count($request->getParameters()) === 1 && array_key_exists($request->getParameters(), "tokenId")){
+                $request->string = substr($queryStr, 0, -9);    
+            }
             $request->string = substr($queryStr, 0, -4);
         }
         else
