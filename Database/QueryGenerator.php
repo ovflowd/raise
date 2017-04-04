@@ -86,11 +86,14 @@ Class QueryGenerator
           }
           
           $request->string = substr($queryStr, 0, -4);
+            
         }
         else
         {
             $request->string = "SELECT * FROM `".$request->bucket."`";
         }
+        
+        echo $request->string;
         return $request;
     }
 
