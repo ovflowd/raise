@@ -81,9 +81,7 @@ Class QueryGenerator
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
                 }  
             }
-            if ($key !== "token" && $key !== "tokenId"){
-                $request->string = substr($queryStr, 0, -4);
-            }
+            $request->string = substr($queryStr, 0, -4);
         }
         else
         {
