@@ -105,8 +105,7 @@ class DatabaseParser
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
               $result->request = $requestObj;
-             
-              var_dump($result);     
+                  
               return $this->response($result); 
         } catch(CouchbaseException $e)
         {
