@@ -124,6 +124,7 @@ class DatabaseParser
             echo "Aqui".'<br>';
             $query->namedParams($requestObj->getParameters());
             var_dump($query);
+            $this->getBucket($requestObj->bucket)->query($query);
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
