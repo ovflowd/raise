@@ -166,7 +166,10 @@ class RequestTreater
     private function validationMethodGet($request, $parameters)
     {
         if (!empty(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
-            array_key_exists(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)), "tokenId");
+            if (!array_key_exists(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)), "tokenId"))
+            {
+                
+            }
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;
