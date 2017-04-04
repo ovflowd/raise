@@ -79,7 +79,10 @@ Class QueryGenerator
                 }
                 else
                 {
-                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
+                    if ($request->bucket == "client" && $key == "token")
+                    {
+                        $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";      
+                    }
                 }
             }
             $request->string = substr($queryStr, 0, -4);
