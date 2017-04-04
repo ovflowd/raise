@@ -8,5 +8,4 @@ $tester = new RequestTester();
 //$tester->testInsertClient(); 
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
-//$tester->testAutoRegister();
-echo Hey;
+$tester->testAutoRegister();
