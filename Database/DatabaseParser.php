@@ -119,7 +119,7 @@ class DatabaseParser
     {
         try
         { 
-            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM client where tokenId LIKE 'das'");
+            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM client where tokenId LIKE '4c9adfb96a364c6805b28f90a342b65c'");
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
