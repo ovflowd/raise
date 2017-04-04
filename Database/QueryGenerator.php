@@ -88,6 +88,7 @@ Class QueryGenerator
         {
             $request->string = "SELECT * FROM `" . $request->bucket . "`";
         }
+        echo ($request->string);
         return $request;
     }
     
