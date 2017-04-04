@@ -55,7 +55,8 @@ Class QueryGenerator
     private function buildQuery($request) 
     {
         
-        if (count($request->getParameters()) > 0) 
+        if (count($request->getParameters()) > 0 &&
+            !count($request->getParameters()) === 1 ) 
         {
             $queryStr = "SELECT * FROM `" . $request->bucket . "` WHERE";
             $typeVerification = array();
