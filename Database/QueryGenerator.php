@@ -256,6 +256,7 @@ Class QueryGenerator
                 $request = $this->validateToken($result, $request, "service");
                 echo $request->treatedBody.'<br>';
                 echo $request->bucket;
+                //$request->bucket = "service";
                 echo '<br>'.$request->bucket;
                 //End select 
                 //create Client
