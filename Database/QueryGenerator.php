@@ -37,7 +37,7 @@ Class QueryGenerator
             elseif ($request->getMethod() == "post") 
             {
                 echo $request->bucket.'<br>';
-                echo $request->treatedBody.'<br>';
+                echo $request->treatedBody.'<br>'; 
                 $result = $parser->insert($request);
             }
             return $result;
@@ -241,7 +241,7 @@ Class QueryGenerator
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 $request->bucket = "client";
-                $request->treatedBody = $request->getBody();   
+                $request->treatedBody = json_encode($request->getBody());   
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
             {
