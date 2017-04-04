@@ -106,9 +106,7 @@ class DatabaseParser
               $result->bucket = $requestObj->bucket;
               $result->request = $requestObj;
               
-              $response = $this->response($result);
-              echo '<br>'.$response.'<br>'/
-              return $response; 
+              return $this->response($result); 
         } catch(CouchbaseException $e)
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
