@@ -9,3 +9,4 @@ $tester = new RequestTester();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 //$tester->testAutoRegister();
+echo Hey;
