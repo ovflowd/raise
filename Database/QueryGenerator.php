@@ -66,8 +66,10 @@ Class QueryGenerator
               {
                   if ($key === "tokenId"){
                       $chave = "data_values."."token";
+                  } else{
+                      $chave = "data_values." . $key;    
                   }
-                  $chave = "data_values." . $key;
+                  
               }
               else
               {
