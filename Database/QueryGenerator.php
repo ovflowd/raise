@@ -169,7 +169,7 @@ Class QueryGenerator
                 if ($result["code"] === 200 && count($result["values"]) > 0){
                     $request->setResponseCode(200);
                     $request->setValid(true);
-                    return $request;
+                    return $request; 
                 } else {
                     $request->setResponseCode(403);
                     $request->setValid(false);
