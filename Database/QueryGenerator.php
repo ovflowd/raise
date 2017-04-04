@@ -18,7 +18,7 @@
 include_once ("Treaters/MessageOutPut.php");
 include_once ('Database/DatabaseParser.php');
 use Raise\Treaters\MessageOutPut;
-Class QueryGenerator
+Class QueryGenerator 
 {
     
     public function generate($request) 
