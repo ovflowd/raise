@@ -79,7 +79,6 @@ class RequestTreater
         $security = new SecurityController();
         if ($security->validate($request) === true) {
             $generator = new \QueryGenerator();
-            echo "Validated, will generate query".'<br>';
             $response = $generator->generate($request);
 
             return $response;
