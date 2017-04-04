@@ -46,7 +46,7 @@ class DatabaseParser
 
     private function response($responseRows = NULL)
     {
-
+        var_dump($responseRows);
         if (isset($responseRows->cas))
         {
             $response = (new MessageOutPut())->messageHttp(200);
@@ -105,8 +105,7 @@ class DatabaseParser
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
               $result->request = $requestObj;
-             
-              var_dump($result);      
+                  
               return $this->response($result); 
         } catch(CouchbaseException $e)
         {
