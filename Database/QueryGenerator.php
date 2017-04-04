@@ -131,8 +131,8 @@ Class QueryGenerator
             $request->setResponseCode(401);
             $request->setValid(false);
         }
-        echo $request->getResponseCode();
-        return $request;
+        var_dump($request);
+        return $request; 
     }
     
     private function parsePath($request) 
