@@ -97,11 +97,9 @@ class DatabaseParser
     //return string
     public function insert($requestObj)
     {
-        echo '<br>'.'is here';
         try
         {
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
-              var_dump($result);
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
