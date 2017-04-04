@@ -254,6 +254,7 @@ Class QueryGenerator
                 )); 
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request, "service");
+                echo $request->treatedBody;
                 //End select
                 //create Client
                 //end create
