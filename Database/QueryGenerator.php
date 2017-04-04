@@ -61,7 +61,7 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                
+                echo $key.'<br>';
                 if ($request->bucket == "client" && $key == "token")
                 {
                     $chave = "tokenId";      
