@@ -100,6 +100,7 @@ class DatabaseParser
     {
         try
         {
+            
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
@@ -109,6 +110,7 @@ class DatabaseParser
 
         } catch(CouchbaseException $e)
         {
+            echo $e->getCode();
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     } 
