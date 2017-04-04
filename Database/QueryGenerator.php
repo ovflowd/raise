@@ -119,7 +119,12 @@ Class QueryGenerator
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
-                $request->treatedBody = json_encode(array_merge($services, $requestBody));
+                if ($nextBucket === "client"){
+                    $request->treatedBody = json_encode(array_merge($services, $requestBody));
+                } else if ($nextBucket === "service"){
+                    $request->treatedBody = json_encode($requestBody);)
+                } 
+                
                 $request->token = $requestBody['tokenId'];
                 unset($requestBody['tokenId']);
             }
