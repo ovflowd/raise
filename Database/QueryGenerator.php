@@ -253,8 +253,6 @@ Class QueryGenerator
                 ));
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request);
-                $request->bucket = "service"; 
-                $request->treatedBody = $oldBody;  
                 //End select
                 //create Client
                 //end create
