@@ -110,7 +110,7 @@ class DatabaseParser
 
         } catch(CouchbaseException $e)
         {
-            echo $e->getCode();
+            echo $e->getCode(); 
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     } 
