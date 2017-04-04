@@ -239,7 +239,7 @@ Class QueryGenerator
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 $request->bucket = "client";
-                $request->treatedBody = $request->getBody();
+                $request->treatedBody = $request->getBody();   
             }
             elseif ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] == "register") 
             {
@@ -251,10 +251,11 @@ Class QueryGenerator
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
                 $request->setParameters(array(
                     'token' => $token 
-                )); 
+                ));  
                 $result = $parser->select($request);
                 $request = $this->validateToken($result, $request, "service");
-                echo $request->treatedBody;
+                echo $request->treatedBody.'<br>';
+                echo $request->bucket;
                 //End select
                 //create Client
                 //end create
