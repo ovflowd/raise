@@ -106,6 +106,7 @@ Class QueryGenerator
             {
                 unset($requestBody["time_ini"]);
                 unset($requestBody["time_fim"]);
+                $request->bucket = "client";
                 $request->service = true;
                 $services = array();
                 $i = 0;
@@ -117,11 +118,11 @@ Class QueryGenerator
                     $services['services'][] = $service; 
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
-                $services['timestamp'] = $request->getBody() ['timestamp'];
+                $services['timestamp'] = $request->getBody() ['timestamp']; 
                 if ($nextBucket === "service"){
                     $request->treatedBody = json_encode($services);
                 } else {
-                    $request->treatedBody = json_encode(array_merge($services, $requestBody));
+                    $request->treatedBody = json_encode(array_merge($services, $requestBody)); 
                 }
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
