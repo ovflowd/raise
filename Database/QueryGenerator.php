@@ -159,7 +159,7 @@ Class QueryGenerator
                 $request->setResponseCode(403);
                 $request->setValid(false);
                 return $request;
-            }
+            } 
 
 
           if($request->getPath()['bucket'] === "client" && $request->getPath()['method'] == "register")
