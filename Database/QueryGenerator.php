@@ -60,7 +60,7 @@ Class QueryGenerator
           $typeVerification = array();
           foreach ($request->getParameters() as $key => $parameter)
           {
-              v
+              
               if($request->bucket == "data" && $key !== "service_id")
               {
                   $chave = "data_values." . $key;
@@ -154,12 +154,12 @@ Class QueryGenerator
         if (!empty($method))
         {
             
+            
             if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
             {
-                    $request->setResponseCode(403);
-                    $request->setValid(false);
-                    return $request;
-                
+                $request->setResponseCode(403);
+                $request->setValid(false);
+                return $request;
             } 
 
 
