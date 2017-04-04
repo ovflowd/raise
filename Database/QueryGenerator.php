@@ -62,7 +62,7 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                else if ($request->bucket == "data" && $key !== "service_id") 
+                if ($request->bucket == "data" && $key !== "service_id") 
                 {
                     $chave = "data_values." . $key;
                 }
@@ -77,7 +77,7 @@ Class QueryGenerator
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
                 }
-                else
+                else 
                 {
                     if ($key !== "tokenId" && $key !== "token")
                     {
