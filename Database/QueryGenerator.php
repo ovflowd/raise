@@ -61,7 +61,6 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                echo $key;
                 if ($request->bucket == "client" && $key == "token")
                 {
                     $chave = "tokenId";      
@@ -72,7 +71,7 @@ Class QueryGenerator
                 }
                 else
                 {
-                    $chave = $key;
+                    $chave = $key; 
                 }
                 
                 if (is_numeric($parameter)) 
