@@ -54,7 +54,7 @@ Class QueryGenerator
     private function buildQuery($request) 
     {
         
-        if (count($request->getParameters()) > 0) 
+        if (count($request->getParameters()) > 0 ) 
         {
             $queryStr = "SELECT * FROM `" . $request->bucket . "` WHERE";
             $typeVerification = array();
@@ -78,7 +78,7 @@ Class QueryGenerator
                 }
                 else
                 {
-                        $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
+                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
                 }  
             }
             $request->string = substr($queryStr, 0, -4);
