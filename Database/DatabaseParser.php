@@ -123,7 +123,7 @@ class DatabaseParser
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             echo "Aqui".'<br>';
             $query->namedParams($requestObj->getParameters());
-            echo "Aqui 2".'<br>';
+            var_dump($query->namedParams);
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
