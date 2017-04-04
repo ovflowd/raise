@@ -170,11 +170,11 @@ Class QueryGenerator
                     $request->setResponseCode(200);
                     $request->setValid(true);
                     return $request;
+                } else {
+                    $request->setResponseCode(403);
+                    $request->setValid(false);
+                    return $request;    
                 }
-                
-                $request->setResponseCode(403);
-                $request->setValid(false);
-                return $request;
             } 
 
 
