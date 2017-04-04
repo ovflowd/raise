@@ -166,7 +166,7 @@ Class QueryGenerator
                 $result = $parser->select($request);
                 $request = $this->validateToken($result,$request);
                 
-                var_dump($result);
+                echo count($result["values"]).'<br>';
                 if ($result["code"] === 200){
                     $request->setResponseCode(200);
                     $request->setValid(true);
