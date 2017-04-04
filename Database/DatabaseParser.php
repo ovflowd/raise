@@ -72,7 +72,6 @@ class DatabaseParser
                 'code' => 200,
                 'values' => $responseRows
             );
-            var_dump($response);
         }
         
         return $response;
