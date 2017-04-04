@@ -65,7 +65,7 @@ Class QueryGenerator
               if($request->bucket == "data" && $key !== "service_id")
               {
                   if ($key === "tokenId"){
-                      $chave = "data_values."."token";
+                      $chave = token";
                   } else{
                       $chave = "data_values." . $key;    
                   }
