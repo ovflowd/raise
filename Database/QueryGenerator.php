@@ -85,7 +85,7 @@ Class QueryGenerator
           }
           
           $request->string = substr($queryStr, 0, -4);
-          $request->string = "SELECT * FROM `service` WHERE tokenId LIKE $token"
+          $request->string = "SELECT * FROM `service` WHERE tokenId LIKE $token";
           echo $request->string;
         }
         else
