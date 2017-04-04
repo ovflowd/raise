@@ -49,8 +49,6 @@ class DatabaseParser
 
         if (isset($responseRows->cas))
         {
-
-            
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client")
             {
