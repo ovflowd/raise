@@ -36,7 +36,6 @@ Class QueryGenerator
             }
             elseif ($request->getMethod() == "post") 
             {
-                echo "here";
                 $result = $parser->insert($request);
             }
             return $result;
