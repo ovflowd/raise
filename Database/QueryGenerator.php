@@ -157,7 +157,6 @@ Class QueryGenerator
             if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
             {
                 
-                echo "Entrou".'<br>';
                 $request->bucket = "token";
                 $parser = new DatabaseParser($request);
         
@@ -166,7 +165,9 @@ Class QueryGenerator
                 $request->setParameters(array('token'=>$token));
                 $result = $parser->select($request);
                 $request = $this->validateToken($result,$request);
-              
+                
+                echo "Entrou".'<br>';
+                
                 echo $result->code;
                 if ($result->code === 200){
                     $request->setResponseCode(200);
