@@ -39,7 +39,7 @@ class DatabaseParser
         if($bucket !== NULL)
         {
           $cluster = new CouchbaseCluster($this->serverAddress);
-          var_dump($cluster->openBucket($bucket)->query(\CouchbaseN1qlQuery::fromString("SELECT * from service")));
+          var_dump($cluster->openBucket($bucket)->query(\CouchbaseN1qlQuery::fromString("SELECT * from service where token")));
           return $cluster->openBucket($bucket);
         }
         return $this->bucket;
