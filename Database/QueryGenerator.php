@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request, $nextBucket) 
+    private function validateToken($result, $request) 
     {
         
         if (isset($result['values'][0])) 
@@ -258,7 +258,6 @@ Class QueryGenerator
                 //End select
                 //create Client
                 //end create
-                 
             }
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
