@@ -151,8 +151,7 @@ Class QueryGenerator
                 $request->setParameters(array(
                     'token' => $token
                 ));
-                $result = $parser->select($request);
-                $request = $this->validateToken($result, $request);
+                $result = $parser->select($request););
                 
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
