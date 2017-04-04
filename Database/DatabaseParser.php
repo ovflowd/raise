@@ -119,6 +119,7 @@ class DatabaseParser
     {
         try 
         { 
+            echo '<br>'.$requestObj->string;
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
