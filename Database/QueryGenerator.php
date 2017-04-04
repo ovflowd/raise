@@ -248,7 +248,6 @@ Class QueryGenerator
                 $request = $this->validateToken($result, $request, "service");
                 
                 
-                
                 $request->bucket = "client";
                 $request->treatedBody = json_encode($request->getBody());   
             }
