@@ -79,9 +79,7 @@ Class QueryGenerator
                 }
                 else
                 {
-                    if ( $key !== "tokenId"){
-                        $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
-                    }
+                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
                 }
             }
             echo $queryStr.'<br>'; 
