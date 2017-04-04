@@ -131,7 +131,6 @@ Class QueryGenerator
             $request->setResponseCode(401);
             $request->setValid(false);
         }
-        var_dump($request);
         return $request; 
     }
     
