@@ -18,6 +18,10 @@
  * This script will load the error data and documents from the metadata bucket and add the primary index of all buckets.
  * IMPORTANT: this requires the Development PHP for Couchbase extension and yours dependencys to work.
  */
+ 
+include_once ("Config/Config.php");
+
+use Raise\Treaters\Config;
 
 class CouchBaseInterfacer{
 
@@ -529,9 +533,9 @@ $couchbase = new CouchBaseInterfacer(); //creat a object Couchbase
 *
 *	@var string	$cluster	Should contain a IP adress couchbase server.
 */
-$cluster='127.0.0.1:8091';// enter couchbase ip
+$cluster = DB_IP;// enter couchbase ip
 
-@$couchbase->conchBaseInsertKey($cluster);
+$couchbase->conchBaseInsertKey($cluster);
 
 $couchbase->metadataInsertDocs($cluster);
 
