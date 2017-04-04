@@ -169,10 +169,6 @@ class RequestTreater
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;  
-            if (!in_array("tokenId", array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))))
-            { 
-                
-            }
         }
         return true;
     }
