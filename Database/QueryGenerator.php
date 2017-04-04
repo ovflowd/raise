@@ -239,19 +239,16 @@ Class QueryGenerator
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 
-                $oldBody = $request->getBody();
-                $request->bucket = "token";
-                $parser = new DatabaseParser($request);
-                
-                //Select Client on Token bucket
-                $token = $request->getBody() ['tokenId'];
+                $token = $request->token;
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
                 $request->setParameters(array(
                     'token' => $token 
                 ));  
                 $result = $parser->select($request);
                 
-                $request = $this->validateToken($result, $request, "client");
+                $request = $this->validateToken($result, $request, "service");
+                
+                
                 
                 $request->bucket = "client";
                 $request->treatedBody = json_encode($request->getBody());   
