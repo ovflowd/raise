@@ -124,10 +124,8 @@ class RequestTreater
         if ($request->getPath()['bucket'] === null || empty($request->getPath()['bucket'])  && empty($request->getPath()['address']) && $request->getPath()['method'] == null || empty($request->getPath()['method'])) {
             $request->setResponseCode(202);
             $request->setValid(false);
-            echo "empty bucket not validated";
             return false;
         }
-        echo "Empty validated";
         return true;
     }
 
@@ -137,11 +135,9 @@ class RequestTreater
             $request->setResponseCode(403);
             $request->setValid(false);
             
-        echo "bucket not validated";
             return false;
         }
 
-        echo "bucket validated";
         return true;
     }
 
@@ -175,11 +171,9 @@ class RequestTreater
             $request->setResponseCode(400);
             $request->setValid(false);
 
-        echo "method not validated";
             return false;
         }
         
-        echo "method validated";
         return true;
     }
 
@@ -246,11 +240,9 @@ class RequestTreater
             $request->setResponseCode(422);
             $request->setValid(false);
 
-        echo "not validated method more bucket";
             return false;
         }
     
-        echo "validated method more bucket";
         return true;
     }
 
