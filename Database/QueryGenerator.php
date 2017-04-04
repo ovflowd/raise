@@ -31,6 +31,7 @@ Class QueryGenerator
             
             if ($request->getMethod() == "get")  
             {
+                echo '<br>'."hey";
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             }
@@ -73,7 +74,7 @@ Class QueryGenerator
                 {
                     $chave = $key; 
                 }
-                 
+                
                 if (is_numeric($parameter)) 
                 {
                     $typeVerification[$key] = (int)$parameter;
