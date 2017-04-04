@@ -9,6 +9,5 @@ $tester = new RequestTester();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 
-//$tester->testAutoRegister();
-
-$tester->registerServices("80ad313c43dbfe095cc5d76c4029f499");
+$tester->testAutoRegister();
+//$tester->registerServices("80ad313c43dbfe095cc5d76c4029f499");
