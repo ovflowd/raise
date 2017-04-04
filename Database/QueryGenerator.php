@@ -39,6 +39,7 @@ Class QueryGenerator
             {
                 $result = $parser->insert($request);
             }
+            var_dump($result);
             return $result;
         }
         elseif($parsedPath->isValid() === FALSE)
