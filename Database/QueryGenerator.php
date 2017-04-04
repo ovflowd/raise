@@ -83,7 +83,7 @@ Class QueryGenerator
                 }
             }
             
-            if (in_array("tokenId", $request->getParameters())){
+            if (array_key_exists("tokenId", $request->getParameters())){
                 echo 'um';
             } else {
                 echo 'dois';
