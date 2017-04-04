@@ -99,7 +99,6 @@ class DatabaseParser
     {
         try
         {
-              echo '<br>'.'is here';
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               var_dump($result);
               $result->token = $requestObj->token;
@@ -109,6 +108,8 @@ class DatabaseParser
               return $this->response($result);  
         } catch(CouchbaseException $e) 
         {
+            
+              echo '<br>'.'is here';
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     } 
