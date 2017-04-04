@@ -34,7 +34,6 @@ Class QueryGenerator
             {
                 
                 $request = $this->buildQuery($request);
-                echo '<br><br>'."Comecando".'<br>';                
                 $result = $parser->select($request);
                 
             } elseif ($request->getMethod() == "post")
