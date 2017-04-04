@@ -118,8 +118,8 @@ class DatabaseParser
     public function select($requestObj)
     {
         try
-        {
-            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM client");
+        { 
+            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM client where name LIKE 'renato'");
             $query->namedParams($requestObj->getParameters());
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
