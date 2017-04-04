@@ -80,6 +80,7 @@ class DatabaseParser
     private function parseResult($result, $request)
     {
         $responseRows = array();
+        echo "Startou".'<br>';
         foreach ($result->rows as $row)
         {
             $bucket = $request->bucket;
