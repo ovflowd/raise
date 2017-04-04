@@ -157,7 +157,7 @@ Class QueryGenerator
             if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
             {
                 
-            echo "Entrou".'<br>';
+                echo "Entrou".'<br>';
                 $request->bucket = "token";
                 $parser = new DatabaseParser($request);
         
