@@ -19,7 +19,7 @@
  */
 namespace Raise\Treaters;
 include_once 'Models/Message.php';
-include_once ("opt/RAISe/Config/Config.php");
+include_once ("Config/Config.php");
 
 /**
 *Class MessageOutPut
