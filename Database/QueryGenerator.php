@@ -239,13 +239,12 @@ Class QueryGenerator
                 $parser = new DatabaseParser($request);
                 $parser->insert($request);
                 
-                $token = $request->token;
+                $token = $request->token; 
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
                 $request->setParameters(array(
                     'token' => $token 
                 ));  
                 $result = $parser->select($request);
-                
                 $request = $this->validateToken($result, $request, "service");
                 
                 
