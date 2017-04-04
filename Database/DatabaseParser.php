@@ -39,7 +39,7 @@ class DatabaseParser
         if($bucket !== NULL)
         {
           $cluster = new CouchbaseCluster($this->serverAddress);
-          var_dump($cluster->openBucket($bucket)->query());
+          var_dump($cluster->openBucket($bucket)->query("SELECT * from CLIENT"));
           return $cluster->openBucket($bucket);
         }
         return $this->bucket;
