@@ -100,7 +100,7 @@ class DatabaseParser
         try
         {
               $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
-              echo $result;
+              var_dump($result);
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
