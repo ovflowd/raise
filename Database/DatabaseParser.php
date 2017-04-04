@@ -117,7 +117,7 @@ class DatabaseParser
     //return string
     public function select($requestObj)
     {
-        try
+        try 
         { 
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
