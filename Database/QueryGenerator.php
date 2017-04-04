@@ -84,7 +84,7 @@ Class QueryGenerator
             }
             
             if (count($request->getParameters()) === 1 && array_key_exists("tokenId", $request->getParameters())){
-                echo 'um'.'<br>'; 
+               $request->string = substr($queryStr, 0, -4)
             }
             $request->string = substr($queryStr, 0, -4);
             echo $request->string.'<br>'; 
