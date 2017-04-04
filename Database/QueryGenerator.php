@@ -170,6 +170,7 @@ Class QueryGenerator
                 } else {
                     $request->setResponseCode(403);
                     $request->setValid(false);
+                    $request->bucket = "service";
                     return $request;    
                 }
             } 
