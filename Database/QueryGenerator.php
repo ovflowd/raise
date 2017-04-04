@@ -80,7 +80,7 @@ Class QueryGenerator
                 {
                     $typeVerification[$key] = (int)$parameter;
                     $request->setParameters($typeVerification);
-                    $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
+                    $queryStr = $queryStr . " " . $chave . " = \$$key" . " AND ";
                 }
                 else
                 {
@@ -163,7 +163,7 @@ Class QueryGenerator
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
                     $request->setParameters($oldParameters);
-                    $request->setResponseCode(200);
+                    $request->setResponseCode(200); 
                     $request->setValid(true);
                     $request->bucket = "client";
                 }
