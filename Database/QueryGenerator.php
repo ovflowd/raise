@@ -161,6 +161,22 @@ Class QueryGenerator
                 $request->setValid(false);
                 return $request;
             } 
+            
+            if($request->getPath()['bucket'] === "service" && $request->getPath()["method"] !== "register")
+            {
+                if (!array_key_exists("tokenId", $request->getParameters())){
+                    $request->setResponseCode(403);
+                    $request->setValid(false);
+                    return $request;
+                }
+                
+                $token = $request->getParameters()['tokenId'];
+                $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
+                $request->setParameters(array('token'=>$token));
+                $result = $parser->select($request);
+                $request = $this->validateToken($result,$request);
+                
+            } 
 
 
           if($request->getPath()['bucket'] === "client" && $request->getPath()['method'] == "register")
