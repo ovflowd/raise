@@ -68,7 +68,7 @@ class RequestTester
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		$body = json_encode(array("name" => "renato", "chipset" => "arm",
+		$body = json_encode(array("name" => "GL4D05", "chipset" => "arm",
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64"));
