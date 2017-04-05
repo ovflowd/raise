@@ -161,20 +161,12 @@ Class QueryGenerator
                 if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
                     $request->setResponseCode(401);
                     $request->setValid(false); 
-                }                               
-    
-                if ($result["code"] === 200 && count($result["values"]) > 0) 
-                {
+                } else {
                     $request->setParameters($oldParameters);
                     $request->setResponseCode(200); 
                     $request->setValid(true);
                     $request->bucket = "client";
-                }
-                else
-                {
-                    $request->setResponseCode(403);
-                    $request->setValid(false);
-                }
+                }                         
             }
             
             //if ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] !== "register") 
