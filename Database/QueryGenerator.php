@@ -210,8 +210,8 @@ Class QueryGenerator
             {
                 $request->token = $request->getBody() ['token'];
                 unset($request->getBody() ['token']);   
-                foreach($request->getBody() as $key => $service){
-                    echo '<br>'.$request->getBody().'<br>';
+                foreach($request->getBody() as $key => $row){
+                    echo '<br>'.$key.'<br>';  
                 }
                 echo($request->getBody());     
                 var_dump($request->getBody());  
