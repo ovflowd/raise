@@ -160,7 +160,18 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                               
+
+                $database = (new DatabaseParser($request))->getBucket();
+                $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+                $query->namedParams(array('token' => $token));
+                $parameters = $database->query($query)->rows;
+        
+                if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
+                    $request->setResponseCode(401);
+                    $request->setValid(false);
+                    return false;
+                }                               
+
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
                     $request->setParameters($oldParameters);
