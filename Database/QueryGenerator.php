@@ -62,7 +62,7 @@ Class QueryGenerator
             $typeVerification = array(); 
             
             foreach ($request->getParameters() as $key => $parameter) 
-            {
+            { 
                 if ($request->bucket == "data" && $key !== "service_id") 
                 { 
                     $chave = "data_values." . $key;
