@@ -156,26 +156,26 @@ Class QueryGenerator
                 $database = (new DatabaseParser($request))->getBucket();
                 $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
                 $query->namedParams(array('token' => $token));
-                $parameters = $database->query($query)->rows;
+                //$parameters = $database->query($query)->rows;
         
-                if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
-                    $request->setResponseCode(401);
-                    $request->setValid(false);
-                    return false;
-                }                               
+                //if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
+                //    $request->setResponseCode(401);
+                //    $request->setValid(false);
+                //    return false;
+                //}                               
     
-                if ($result["code"] === 200 && count($result["values"]) > 0) 
-                {
-                    $request->setParameters($oldParameters);
+                //if ($result["code"] === 200 && count($result["values"]) > 0) 
+                //{
+                //    $request->setParameters($oldParameters);
                     $request->setResponseCode(200); 
                     $request->setValid(true);
-                    $request->bucket = "client";
-                }
-                else
-                {
-                    $request->setResponseCode(403);
-                    $request->setValid(false);
-                }
+                //    $request->bucket = "client";
+                //}
+                //else
+                //{
+                //    $request->setResponseCode(403);
+                //    $request->setValid(false);
+                //}
             }
             
             //if ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] !== "register") 
