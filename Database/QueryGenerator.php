@@ -67,7 +67,7 @@ Class QueryGenerator
                 { 
                     $chave = "data_values." . $key;
                 }
-                else if ($key !== "tokenId")
+                else 
                 {
                     $chave = $key; 
                 }
@@ -80,7 +80,9 @@ Class QueryGenerator
                 }
                 else
                 {
-                    $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";
+                    if ($key !== "tokenId"){
+                        $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
+                    }
                 }
             }
             //tirar a gambi do 32 KKKKKKKKKKKKKKKKKK
