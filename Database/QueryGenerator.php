@@ -140,16 +140,9 @@ Class QueryGenerator
         return $request; 
     }
     
-    private function validateExpirationToken($request)
-    {
-        echo 'hey';
-        exit;
-        return true;
-    }
-    
     private function parsePath($request) 
     {
-        $path = $request->getPath(); 
+        $path = $request->getPath();
         $method = $path['method'];
         
         if (!empty($method)) 
@@ -158,11 +151,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                if (validateExpirationToken($request) === true)
-                {
-                    echo "true";
-                    exit;
-                } 
+  
                 $token = $request->getParameters() ['tokenId'];
                 $database = (new DatabaseParser($request))->getBucket();
                 $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
@@ -175,7 +164,7 @@ Class QueryGenerator
                     $request->setResponseCode(200); 
                     $request->setValid(true);
                     $request->bucket = "client"; 
-                }                         
+                }    
             }
             
             //if ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] !== "register") 
