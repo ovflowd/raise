@@ -50,7 +50,7 @@ class DatabaseParser
         { 
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client" || $responseRows->bucket === "service")
-            {
+            { 
                 if(isset($responseRows->request->service))
                 { 
                     $response->services = array();
