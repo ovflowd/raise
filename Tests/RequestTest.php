@@ -40,7 +40,7 @@ class RequestTester
 		$url = "http://{$this->raise_ip}/service/register";
 
 		$body = json_encode(array(
-					"services" => array(array('name'=>'temperature','parameters'=>array('temp'=>'double') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
+					"services" => array(array('name'=>'cake','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
 						"timestamp" => round(microtime(true) *1000),
 						'tokenId' => $token
 						));
@@ -90,9 +90,9 @@ class RequestTester
 			$serv_response = $this->registerServices($token);
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
-			$dados = [ 'token' => $token,  "values" => (array((array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30)))))];
+			$dados = [ 'token' => $token,  "values" => (array((array('service_id' => 0 , 'data_values' => array('isTheCakeALie'=>true)))))];
 			echo "<br><br>";
-			$postData = $this->postData($dados);
+			$postData = $this->postData($dados); 
 
 	} 
 
