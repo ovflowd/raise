@@ -72,7 +72,7 @@ class DatabaseParser
             );
         }
         
-        echo ($response);
+        var_dump ($response);
         exit;
         return $response;
     }
