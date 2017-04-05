@@ -142,7 +142,7 @@ Class QueryGenerator
     
     private function validateTimeToken($request)
     {
-        $token = $request->getParameters() ['tokenId'];
+        //$token = $request->getParameters() ['tokenId'];
         //$database = (new DatabaseParser($request))->getBucket();
         //$query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         //$query->namedParams(array('token' => $token));
@@ -152,7 +152,7 @@ Class QueryGenerator
         //} 
         return true; 
     }
-    
+     
     private function parsePath($request) 
     {
         $path = $request->getPath();
