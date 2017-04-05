@@ -213,7 +213,6 @@ Class QueryGenerator
                 foreach($request->getBody() as $key => $row){
                     echo $key;  
                 }
-                
                 $arrayTest = $request->getBody();
                 unset($arrayTest ["token"]);   
                 echo($arrayTest["token"]);
