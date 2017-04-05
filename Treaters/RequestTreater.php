@@ -172,6 +172,7 @@ class RequestTreater
             return false;  
         } else if(count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) === 1
                   && !in_array("tokenId", array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
+            var_dump((array) $parameters);
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;   
