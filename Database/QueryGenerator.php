@@ -163,7 +163,7 @@ Class QueryGenerator
                     $request->setValid(false); 
                 }                               
     
-                echo '<br>'."end";
+                echo '<br>'."end".'<br>';
                 //if ($result["code"] === 200 && count($result["values"]) > 0) 
                 //{
                 //    $request->setParameters($oldParameters);
