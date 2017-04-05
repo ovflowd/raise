@@ -156,7 +156,11 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                
+                if (validateExpirationToken($request))
+                {
+                    echo "true";
+                    exit;
+                }
                 $token = $request->getParameters() ['tokenId'];
                 $database = (new DatabaseParser($request))->getBucket();
                 $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
