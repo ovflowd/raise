@@ -85,13 +85,7 @@ Class QueryGenerator
                     }
                 }
             }
-            //tirar a gambi do 32 KKKKKKKKKKKKKKKKKK
-            //if (count($request->getParameters()) === 1 && array_key_exists("tokenId", $request->getParameters())){ 
-            //    $request->string =  substr($queryStr, 0, -32);
-            //} else {
-                $request->string = substr($queryStr, 0, -4);   
-                echo '<br>'.$request->string.'<br>';
-            //}
+            $request->string = substr($queryStr, 0, -4);   
         }
         else
         {
