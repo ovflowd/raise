@@ -160,8 +160,6 @@ Class QueryGenerator
         
         if (!empty($method)) 
         {
-            
-            
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
   
