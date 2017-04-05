@@ -88,10 +88,11 @@ class RequestTester
 			//$token = "BatatossauroTraps";
 			sleep(1); //necessário devido ao delay do couchbase )= 
 			$serv_response = $this->registerServices($token);
-			sleep(1);
+			sleep(1); 
 			$service = json_decode($serv_response)->services;
 			$dados = [ 'token' => $token,  array("values" =>(array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30))))];
 			echo "<br><br>";
+			echo json_encode($dados);
 			$postData = $this->postData($dados);
 
 	}
