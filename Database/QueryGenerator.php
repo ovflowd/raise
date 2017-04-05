@@ -209,7 +209,7 @@ Class QueryGenerator
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
                 $request->token = $request->getBody() ['token'];
-                unset($request->getBody() ['token']);   
+                unset($request->getBody() ["token" ]);   
                 foreach($request->getBody() as $key => $row){
                     echo $key;  
                 }  
