@@ -92,7 +92,6 @@ class RequestTester
 			$service = json_decode($serv_response)->services;
 			$dados = [ 'token' => $token,  "values" => (array((array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30)))))];
 			echo "<br><br>";
-			echo json_encode($dados);
 			$postData = $this->postData($dados);
 
 	} 
