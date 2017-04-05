@@ -151,16 +151,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                $request->bucket = "token";
-                $parser = new DatabaseParser($request);
-                $token = $request->getParameters() ['tokenId'];
-                $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $oldParameters = $request->getParameters();
-                $request->setParameters(array(
-                    'token' => $token
-                ));
-                $result = $parser->select($request);
-
+ 
                 $database = (new DatabaseParser($request))->getBucket();
                 $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
                 $query->namedParams(array('token' => $token));
