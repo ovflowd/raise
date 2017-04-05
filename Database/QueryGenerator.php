@@ -161,8 +161,7 @@ Class QueryGenerator
                 ));
                 $result = $parser->select($request);
                 
-                $parameters = $database->query($query)->rows;
-
+                
                 if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
                     $request->setResponseCode(401);
                     $request->setValid(false);
