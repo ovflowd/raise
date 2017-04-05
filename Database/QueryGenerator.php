@@ -213,7 +213,10 @@ Class QueryGenerator
                 foreach($request->getBody() as $key => $row){
                     echo $key;  
                 }
-                echo($request->getBody());     
+                
+                $arrayTest = $request->getBody();
+                unset($request->getBody() ['token']);   
+                
                 var_dump($request->getBody());  
                 $request->treatedBody = json_encode($request->getBody());
                 return $request;   
