@@ -167,7 +167,7 @@ Class QueryGenerator
                     $request->setValid(false); 
                 } else {
                     $request->setResponseCode(200);  
-                    $request->setValid(true);
+                    $request->setValid(true); 
                 }    
             }
             
