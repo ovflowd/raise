@@ -140,6 +140,19 @@ Class QueryGenerator
         return $request; 
     }
     
+    private function validateExpirationToken ($request)
+    {
+        $token = $request->getParameters() ['tokenId'];
+        $database = (new DatabaseParser($request))->getBucket();
+        $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+        $query->namedParams(array('token' => $token));
+        $parameters = $database->query($query)->rows;
+        if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
+            retun false;
+        }    
+        return true;
+    }
+    
     private function parsePath($request) 
     {
         $path = $request->getPath();
