@@ -142,8 +142,9 @@ Class QueryGenerator
     
     private function validateExpirationToken($request)
     {
-        
+        return true;
     }
+    
     private function parsePath($request) 
     {
         $path = $request->getPath();
