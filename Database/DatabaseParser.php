@@ -113,14 +113,12 @@ class DatabaseParser
 
     //Method for performing a select query on the database. 
     //return string
-    public function select($requestObj)
+    public function select($requestObj) 
     {
         try 
         {  
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
-            var_dump ( $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj)));
-            exit;
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
