@@ -206,8 +206,6 @@ class RequestTreater
             
                 foreach ($service['data_values'] as $key => $val) {
                     if (gettype($val) !== $compare[$key]) {
-                        
-                        echo '<br>'.gettype($val).'<br>'."vs ".$compare[$key];
                         $request->setResponseCode(400); 
                         $request->setValid(false);
 
