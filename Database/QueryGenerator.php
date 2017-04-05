@@ -162,7 +162,7 @@ Class QueryGenerator
                 $result = $parser->select($request);
                 
                 var_dump($result);
-                
+                exit;
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
                     $request->setParameters($oldParameters);
