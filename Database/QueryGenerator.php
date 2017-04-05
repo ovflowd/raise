@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request) 
+    private function validateToken($result, $request, $bucket) 
     { 
         
         if (isset($result['values'][0])) 
@@ -102,10 +102,10 @@ Class QueryGenerator
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]) , true);
             if ($requestBody["time_fim"] > round(microtime(true) * 1000)) 
-            {
+            { 
                 unset($requestBody["time_ini"]);
                 unset($requestBody["time_fim"]);
-                $request->bucket = "client";
+                $request->bucket = $bucket;
                 $request->service = true;
                 $services = array();
                 $i = 0;
