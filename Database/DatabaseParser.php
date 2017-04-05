@@ -72,8 +72,6 @@ class DatabaseParser
             );
         }
         
-        var_dump ($response);
-        exit;
         return $response;
     }
 
