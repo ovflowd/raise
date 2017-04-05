@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request, $nextBucket) 
+    private function validateToken($result, $request) 
     { 
         
         if (isset($result['values'][0])) 
@@ -105,7 +105,7 @@ Class QueryGenerator
             { 
                 unset($requestBody["time_ini"]);
                 unset($requestBody["time_fim"]);
-                $request->bucket = $nextBucket;
+                $request->bucket = "client";
                 $request->service = true;
                 $services = array();
                 $i = 0;
