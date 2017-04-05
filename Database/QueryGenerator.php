@@ -264,6 +264,7 @@ Class QueryGenerator
             {
                 $request->token = $request->getBody() ['token'];
                 $request->treatedBody = str_replace('[', '', str_replace(']', '', json_encode($request->getBody() [0])));
+                echo $request->treatedBody;
                 return $request;
             }
             else
