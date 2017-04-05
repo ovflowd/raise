@@ -86,11 +86,11 @@ class RequestTester
 			$token = json_decode($response->body)->tokenId;
 			echo "<br><br>";
 			//$token = "BatatossauroTraps";
-			sleep(1); //necessário devido ao delay do couchbase )=
+			sleep(1); //necessário devido ao delay do couchbase )= 
 			$serv_response = $this->registerServices($token);
 			sleep(1);
 			$service = json_decode($serv_response)->services;
-			$dados = [ 'token' => $token,  array(array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30)))];
+			$dados = [ 'token' => $token,  array("values" =>(array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30))))];
 			echo "<br><br>";
 			$postData = $this->postData($dados);
 
