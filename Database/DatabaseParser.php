@@ -73,6 +73,7 @@ class DatabaseParser
         }
         
         echo ($response);
+        exit;
         return $response;
     }
 
