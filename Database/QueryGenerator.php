@@ -165,6 +165,7 @@ Class QueryGenerator
                     $request->setValid(true);
                     $request->bucket = "client"; 
                 }                         
+                echo '<br>'."All done".'<br>';
             }
             
             //if ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] !== "register") 
