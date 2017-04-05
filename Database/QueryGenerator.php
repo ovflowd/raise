@@ -140,19 +140,6 @@ Class QueryGenerator
         return $request; 
     }
     
-    private function validateTimeToken($request)
-    {
-        //$token = $request->getParameters() ['tokenId'];
-        //$database = (new DatabaseParser($request))->getBucket();
-        //$query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
-        //$query->namedParams(array('token' => $token));
-        //$parameters = $database->query($query)->rows;
-        //if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
-        //    return false;
-        //} 
-        return true; 
-    }
-     
     private function parsePath($request) 
     {
         $path = $request->getPath();
@@ -164,15 +151,18 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                echo validateTimeToken($request);
-                exit; 
-                if (!validateTimeToken($request)) {
+                $token = $request->getParameters() ['tokenId'];
+                $database = (new DatabaseParser($request))->getBucket();
+                $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+                $query->namedParams(array('token' => $token));
+                $parameters = $database->query($query)->rows;
+                if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
                     $request->setResponseCode(401);
                     $request->setValid(false); 
                 } else {
                     $request->setResponseCode(200); 
                     $request->setValid(true);
-                    $request->bucket = "client";  
+                    $request->bucket = "client"; 
                 }                         
             }
             
