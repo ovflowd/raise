@@ -166,9 +166,9 @@ Class QueryGenerator
                 //if ($result["code"] === 200 && count($result["values"]) > 0) 
                 //{
                 //    $request->setParameters($oldParameters);
-                    $request->setResponseCode(200); 
-                    $request->setValid(true);
-                    $request->bucket = "client";
+                //    $request->setResponseCode(200); 
+                //    $request->setValid(true);
+                //    $request->bucket = "client";
                 //}
                 //else
                 //{
