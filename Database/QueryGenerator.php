@@ -142,6 +142,8 @@ Class QueryGenerator
     
     private function validateExpirationToken($request)
     {
+        echo 'hey';
+        exit;
         return true;
     }
     
