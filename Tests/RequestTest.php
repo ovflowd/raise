@@ -84,7 +84,7 @@ class RequestTester
 	{
 			$response = $this->testInsertClient();
 			$token = json_decode($response->body)->tokenId;
-			echo "<br><br>";
+			echo "<br><br>"; 
 			//$token = "BatatossauroTraps";
 			sleep(1); //necessário devido ao delay do couchbase )= 
 			$serv_response = $this->registerServices($token);
