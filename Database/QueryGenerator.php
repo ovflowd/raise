@@ -164,13 +164,13 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
+                if (!validateTimeToken($request)) {
                     $request->setResponseCode(401);
                     $request->setValid(false); 
                 } else {
                     $request->setResponseCode(200); 
                     $request->setValid(true);
-                    $request->bucket = "client"; 
+                    $request->bucket = "client";  
                 }                         
             }
             
