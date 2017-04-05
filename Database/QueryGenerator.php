@@ -180,8 +180,8 @@ Class QueryGenerator
                 } else {
                     $request->setResponseCode(200); 
                     $request->setValid(true);
-                    $request->bucket = "client"; 
-                }
+                    $request->bucket = "data"; 
+                } 
             }
             
             if ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] !== "register") 
