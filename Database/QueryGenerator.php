@@ -147,7 +147,7 @@ Class QueryGenerator
     
     private function parsePath($request) 
     {
-        $path = $request->getPath();
+        $path = $request->getPath(); 
         $method = $path['method'];
         
         if (!empty($method)) 
@@ -156,7 +156,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
-                var_dump(validateExpirationToken($request));
+                
                 $token = $request->getParameters() ['tokenId'];
                 $database = (new DatabaseParser($request))->getBucket();
                 $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
