@@ -154,7 +154,7 @@ Class QueryGenerator
  
                 $token = $request->getParameters() ['tokenId'];
                 $database = (new DatabaseParser($request))->getBucket();
-                //$query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
+                $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
                 //$query->namedParams(array('token' => $token));
                 //$parameters = $database->query($query)->rows;
         
