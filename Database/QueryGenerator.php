@@ -186,7 +186,7 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] !== "register") 
             {
-               if (!$this->validateExpirationToken($request)) {
+                if (!$this->validateExpirationToken($request)) {
                     $request->setResponseCode(401);
                     $request->setValid(false); 
                 } else {
