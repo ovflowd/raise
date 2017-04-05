@@ -160,9 +160,7 @@ Class QueryGenerator
                     'token' => $token
                 ));
                 $result = $parser->select($request);
-                
-                var_dump($result);
-               
+                               
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
                     $request->setParameters($oldParameters);
