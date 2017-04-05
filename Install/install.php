@@ -23,13 +23,11 @@ include_once ("Config/Config.php");
 
 use Raise\Treaters\Config;
 
-//include "metadados.php";
-
 class Install
 {
-    //please change the following credentials to the ones you just configured.
-    private $username = DB_USER; //your couchbase username
-    private $password = DB_PASSWORD; // your couchbase password
+    
+    private $username = DB_USER; 
+    private $password = DB_PASSWORD; 
 
     private function getCredentials()
     {
