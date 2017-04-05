@@ -209,10 +209,11 @@ Class QueryGenerator
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
                 $request->token = $request->getBody() ['token'];
-                echo($request->token);  
-
-                unset($request->getBody()['token']);   
-                echo($request->getBody());    
+                unset($request->getBody() ['token']);   
+                foreach($request->getBody() as $key => $service){
+                    echo '<br>'.$request->getBody().'<br>';
+                }
+                echo($request->getBody());     
                 var_dump($request->getBody());  
                 $request->treatedBody = json_encode($request->getBody());
                 return $request;   
