@@ -94,7 +94,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request, $bucket) 
+    private function validateToken($result, $request, $nextBucket) 
     { 
         
         if (isset($result['values'][0])) 
@@ -105,7 +105,7 @@ Class QueryGenerator
             { 
                 unset($requestBody["time_ini"]);
                 unset($requestBody["time_fim"]);
-                $request->bucket = $bucket;
+                $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
                 $i = 0;
@@ -118,11 +118,11 @@ Class QueryGenerator
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
-                //if ($nextBucket === "client"){
+                if ($nextBucket === "client"){
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
-                //} else if ($nextBucket === "service"){
-                //    $request->treatedBody = json_encode($services);
-                //}   
+                } else if ($nextBucket === "service"){
+                    $request->treatedBody = json_encode($services);
+                }    
                 $request->token = $requestBody['tokenId']; 
                 unset($requestBody['tokenId']);
             } 
