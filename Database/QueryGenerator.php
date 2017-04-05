@@ -162,7 +162,6 @@ Class QueryGenerator
                     $request->setResponseCode(401);
                     $request->setValid(false); 
                 } else {
-                    $request->setParameters($oldParameters);
                     $request->setResponseCode(200); 
                     $request->setValid(true);
                     $request->bucket = "client";
