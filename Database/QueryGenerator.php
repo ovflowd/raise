@@ -165,7 +165,7 @@ Class QueryGenerator
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
             {
                 echo validateTimeToken($request);
-                exit;
+                exit; 
                 if (!validateTimeToken($request)) {
                     $request->setResponseCode(401);
                     $request->setValid(false); 
