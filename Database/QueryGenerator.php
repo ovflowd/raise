@@ -162,11 +162,7 @@ Class QueryGenerator
                 $result = $parser->select($request);
                 
                 echo $result;
-                if ($result->time_fim <= round(microtime(true) * 1000)) {
-                    $request->setResponseCode(401);
-                    $request->setValid(false);
-                    return false;
-                }
+               
                 
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
                 {
