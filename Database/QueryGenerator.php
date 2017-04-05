@@ -160,7 +160,7 @@ Class QueryGenerator
         
         if (!empty($method)) 
         {
-            if ($request->getPath() ['bucket'] === "client" && $request->getPath() ["method"] !== "register") 
+            if ($request->getPath() ["method"] !== "register") 
             {
                 if (!$this->validateExpirationToken($request)) {
                     $request->setResponseCode(401);
@@ -168,32 +168,7 @@ Class QueryGenerator
                 } else {
                     $request->setResponseCode(200);  
                     $request->setValid(true);
-                    $request->bucket = "client"; 
                 }    
-            }
-            
-            if ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] !== "register") 
-            {
-               if (!$this->validateExpirationToken($request)) {
-                    $request->setResponseCode(401);
-                    $request->setValid(false); 
-                } else {
-                    $request->setResponseCode(200); 
-                    $request->setValid(true); 
-                    $request->bucket = "data"; 
-                } 
-            }
-            
-            if ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] !== "register") 
-            {
-                if (!$this->validateExpirationToken($request)) {
-                    $request->setResponseCode(401);
-                    $request->setValid(false); 
-                } else {
-                    $request->setResponseCode(200); 
-                    $request->setValid(true);
-                    $request->bucket = "service"; 
-                } 
             }
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
