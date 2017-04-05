@@ -215,9 +215,10 @@ Class QueryGenerator
                 }
                 
                 $arrayTest = $request->getBody();
-                unset($arrayTest ['token']);   
-                var_dump($arrayTest);
-                $request->treatedBody = json_encode($request->getBody());
+                unset($arrayTest ["token"]);   
+                echo($arrayTest["token"]);
+                
+                $request->treatedBody = json_encode($arrayTest );
                 return $request;   
             }   
             else
