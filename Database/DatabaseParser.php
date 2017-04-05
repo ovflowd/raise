@@ -94,7 +94,7 @@ class DatabaseParser
     }
 
     //Method for performing a insert query on the database.
-    //return string
+    //return string 
     public function insert($requestObj)
     { 
         try
