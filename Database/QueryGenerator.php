@@ -161,7 +161,7 @@ Class QueryGenerator
                 ));
                 $result = $parser->select($request);
                 
-                var_dump($result);
+                var_dump($request); 
                
                 
                 if ($result["code"] === 200 && count($result["values"]) > 0) 
