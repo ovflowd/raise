@@ -161,9 +161,10 @@ Class QueryGenerator
                 ));
                 $result = $parser->select($request);
                 
-                if ($result["time_fim"] <= round(microtime(true) * 1000)) {
+                echo $result;
+                if ($result->time_fim <= round(microtime(true) * 1000)) {
                     $request->setResponseCode(401);
-                    $request->setValid(false); 
+                    $request->setValid(false);
                     return false;
                 }
                 
