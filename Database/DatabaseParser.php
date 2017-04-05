@@ -41,7 +41,7 @@ class DatabaseParser
           $cluster = new CouchbaseCluster($this->serverAddress);
           return $cluster->openBucket($bucket);
         }
-        return $this->bucket;
+        return $this->bucket; 
     }
 
     private function response($responseRows = NULL)
@@ -119,6 +119,8 @@ class DatabaseParser
         {  
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
+            echo $requestObj->string;
+            exit;
             return $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
         } catch(CouchbaseException $e)
         {
