@@ -186,28 +186,14 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "service" && $request->getPath() ["method"] !== "register") 
             {
-                $request->bucket = "token";
-                $parser = new DatabaseParser($request);
-                $token = $request->getParameters() ['tokenId'];
-                $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $oldParameters = $request->getParameters();
-                $request->setParameters(array(
-                    'token' => $token
-                ));
-                $result = $parser->select($request);
-                
-                if ($result["code"] === 200 && count($result["values"]) > 0) 
-                {
-                   $request->setResponseCode(200);
+               if (!$this->validateExpirationToken($request)) {
+                    $request->setResponseCode(401);
+                    $request->setValid(false); 
+                } else {
+                    $request->setResponseCode(200); 
                     $request->setValid(true);
-                    $request->bucket = "service";
-                    $request->setParameters($oldParameters);
-                }
-                else 
-                {
-                      $request->setResponseCode(403);
-                      $request->setValid(false);
-                }
+                    $request->bucket = "data"; 
+                } 
             }
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
