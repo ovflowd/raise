@@ -88,8 +88,6 @@ Class QueryGenerator
             //    $request->string =  substr($queryStr, 0, -32);
             //} else {
                 $request->string = substr($queryStr, 0, -4);    
-                
-            echo '<br>'.$request->string.'<br>';
             //}
         }
         else
