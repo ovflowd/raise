@@ -160,7 +160,7 @@ Class QueryGenerator
         
                 if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
                     $request->setResponseCode(401);
-                    $request->setValid(false);
+                    $request->setValid(false); 
                 }                               
     
                 //if ($result["code"] === 200 && count($result["values"]) > 0) 
