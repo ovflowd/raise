@@ -78,7 +78,7 @@ class RequestTester
 		echo json_decode($response)->code == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
 		echo $response;
 	}
-
+  
 
 	public function testAutoRegister()
 	{
@@ -90,11 +90,11 @@ class RequestTester
 			$serv_response = $this->registerServices($token);
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
-			$dados = [ 'token' => $token,  array("values" =>(array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30))))];
+			$dados = [ 'token' => $token,  "values" => (array((array('service_id' => 0 , 'data_values' => array('temp'=>(int) 30)))))];
 			echo "<br><br>";
 			echo json_encode($dados);
 			$postData = $this->postData($dados);
 
-	}
+	} 
 
 }
