@@ -209,8 +209,8 @@ Class QueryGenerator
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
                 $request->token = $request->getBody() ['token'];
-                $arrayTest = $request->getBody();
-                unset($arrayTest ["token"]);   
+                $arrayTest = $request->getBody(); 
+                unset($arrayTest ["token"]);    
                 validateExpirationToken($request);  
                 $finalArray = $arrayTest ["values"][0];  
                 $request->treatedBody = json_encode($finalArray);
