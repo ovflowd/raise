@@ -79,7 +79,6 @@ class DatabaseParser
     {
         unset($untreatedResp["values"][0]->token);
         var_dump($untreatedResp["values"][0]);
-        exit; 
         return $untreatedResp; 
     }
     
