@@ -48,6 +48,7 @@ class DatabaseParser
     {
         if (isset($responseRows->cas))
         { 
+            echo "ta no if";
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client" || $responseRows->bucket === "service")
             { 
