@@ -85,8 +85,8 @@ Class QueryGenerator
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
                     }
                 }
-            }
-            echo $queryStr
+            } 
+            echo $queryStr; 
             $request->string = substr($queryStr, 0, -4);   
         }
         else
