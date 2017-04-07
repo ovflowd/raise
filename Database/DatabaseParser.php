@@ -81,7 +81,9 @@ class DatabaseParser
           echo $key . "<br>";
           echo $untreatedResp[$key].'<br>';
           if (is_array($untreatedResp[$key])){
-              foreach ($untreatedResp[$key].'<br>'){
+              foreach (array_keys($untreatedResp[$key]) as $chave){
+                  echo $chave."<br>";
+                  echo $untreatedResp[$key][$chave]."<br>";
               } 
           }
         }
