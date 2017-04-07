@@ -78,9 +78,9 @@ class DatabaseParser
         return $response; 
     }
 
-    private function treatData()
+    private function treatData($response)
     { 
-        
+        unset();
     }
     
     private function parseResult($result, $request)
