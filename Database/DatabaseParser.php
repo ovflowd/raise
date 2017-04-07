@@ -100,8 +100,8 @@ class DatabaseParser
         try
         {
               if ($requestObj->bucket === "data"){ //Vai updatar o client 
-                $result = $this->getBucket($requestObj->bucket)->insert(round(microtime(true) * 1000), $requestObj->treatedBody);
-              } else { // Inserir novas coisas  
+                $result = $this->getBucket($requestObj->bucket)->insert(microtime(true) * 1000, $requestObj->treatedBody);
+              } else { // Inserir novas coisas   
                 $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               } 
               $result->token = $requestObj->token;
