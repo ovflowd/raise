@@ -71,6 +71,7 @@ class DatabaseParser
                 'values' => $responseRows
             );
         if (array_key_exists("data_values", $responseRows) === "data"){
+                echo "entrou";
                 $response = $this->treatData($response);    
             }  
         }  
