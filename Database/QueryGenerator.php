@@ -69,7 +69,9 @@ Class QueryGenerator
                 }
                 else 
                 {
-                    $chave = $key; 
+                    if ($key != "tokenId"){
+                        $chave = $key; 
+                    }
                 }
                 
                 if (is_numeric($parameter)) 
