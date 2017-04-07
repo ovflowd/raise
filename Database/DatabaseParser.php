@@ -77,7 +77,7 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        foreach(array_keys($untreatedResp["values"][0]) as $key){
+        foreach(array_keys($untreatedResp["values"]) as $key){
           echo $key . "<br>";
         }
         exit;
