@@ -70,10 +70,6 @@ class DatabaseParser
                 'code' => 200, 
                 'values' => $responseRows
             );
-        if (isset($responseRows[0]["token"])){
-                echo "entrou";
-                $response = $this->treatData($response);    
-            }  
         }  
         
         return $response; 
