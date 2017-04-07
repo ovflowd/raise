@@ -77,7 +77,7 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        $untreatedResp;  
+        echo $untreatedResp["code"];  
         return $untreatedResp; 
     }
     
