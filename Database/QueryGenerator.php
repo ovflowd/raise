@@ -67,11 +67,12 @@ Class QueryGenerator
                 {  
                     $chave = "data_values." . $key;
                 }
+                if ($key == "tokenId" && $request->bucket == "data"){
+                    
+                }
                 else 
                 {
-                    if ($key != "tokenId"){
-                        $chave = $key; 
-                    }
+                    $chave = $key; 
                 }
                 
                 if (is_numeric($parameter)) 
