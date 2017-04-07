@@ -78,7 +78,8 @@ class DatabaseParser
         return $response;
     }
 
-    private function treatData(){
+    private function treatData()
+    { 
         
     }
     private function parseResult($result, $request)
