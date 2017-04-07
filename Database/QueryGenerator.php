@@ -140,9 +140,8 @@ Class QueryGenerator
         return $request; 
     }
     
-    private function validateExpirationToken ($request)
+    private function validateExpirationToken ($request, $token)
     {
-        $token = $request->getParameters() ['tokenId'];
         $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         $query->namedParams(array('token' => $token));
