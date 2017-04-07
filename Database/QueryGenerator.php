@@ -165,7 +165,7 @@ Class QueryGenerator
                     $request->setResponseCode(401);
                     $request->setValid(false); 
                 } else {
-                    $request->setResponseCode(200);  
+                    $request->setResponseCode(200);   
                     $request->setValid(true); 
                 }    
             }
@@ -208,9 +208,9 @@ Class QueryGenerator
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
             {
                 $request->token = $request->getBody() ['token'];
-                $arrayTest = $request->getBody(); 
-                unset($arrayTest ["token"]);    
+                $arrayTest = $request->getBody();  
                 validateExpirationToken($request);  
+                unset($arrayTest ["token"]);    
                 $finalArray = $arrayTest ["values"][0];  
                 $request->treatedBody = json_encode($finalArray);
                 return $request;   
