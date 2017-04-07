@@ -70,7 +70,7 @@ class DatabaseParser
                 'code' => 200, 
                 'values' => $responseRows
             );
-        echo($responseRows["token"]);
+        echo($responseRows["tokenId"]);
         exit;
         if (isset($responseRows[0]["token"])){
                 echo "entrou";
