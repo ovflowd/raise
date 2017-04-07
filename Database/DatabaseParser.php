@@ -70,7 +70,7 @@ class DatabaseParser
                 'code' => 200,
                 'values' => $responseRows
             );
-        if (array_key_exists("data_values", $responseRows)){
+        if (array_key_exists("values", $responseRows)){
                 echo "entrou";
                 $response = $this->treatData($response);    
             }  
