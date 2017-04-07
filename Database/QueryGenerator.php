@@ -215,7 +215,6 @@ Class QueryGenerator
                     $request->treatedBody = json_encode($finalArray);
                     return $request;    
                 } else { 
-                    
                     $request->setResponseCode(401);
                     $request->setValid(false);  
                 }
