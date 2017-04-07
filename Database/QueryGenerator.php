@@ -64,10 +64,9 @@ Class QueryGenerator
             foreach ($request->getParameters() as $key => $parameter) 
             { 
                 if ($request->bucket == "data" && $key !== "service_id" && $key !== "tokenId") 
-                { 
+                {  
                     $chave = "data_values." . $key;
                 }
-                
                 else 
                 {
                     $chave = $key; 
