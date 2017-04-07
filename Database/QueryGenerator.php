@@ -88,6 +88,7 @@ Class QueryGenerator
                     }  
                 }
             } 
+            echo $queryStr.'<br>';
             $request->string = substr($queryStr, 0, -4);   
         }
         else
