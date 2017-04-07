@@ -131,7 +131,7 @@ class DatabaseParser
             $untreatedResp = $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
             if ($requestObj->bucket == "data"){
                 return $this->treatData($untreatedResp);
-            } else {
+            } else { 
                 return $untreatedResp;
             }
         } catch(CouchbaseException $e)
