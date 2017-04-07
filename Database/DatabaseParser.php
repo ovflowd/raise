@@ -70,6 +70,9 @@ class DatabaseParser
                 'code' => 200,
                 'values' => $responseRows
             );
+            if ($responseRows->bucket === "data"){
+                $response = $this->treatData();    
+            }
         }
         
         return $response;
