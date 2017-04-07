@@ -202,7 +202,7 @@ Class QueryGenerator
                 $request = $this->validateToken($result, $request); 
                 //$request->bucket = "service";
                 //End select 
-                //create Client
+                //create Client 
                 //end create
             }
             elseif ($request->getPath() ['bucket'] === "data" && $request->getPath() ["method"] == "register") 
@@ -211,7 +211,7 @@ Class QueryGenerator
                 $arrayTest = $request->getBody();  
                 if ($this->validateExpirationToken($request, $request->token)){
                     $request->treatedBody = json_encode($request->getBody());
-                    return $request;     
+                    return $request;      
                 } else { 
                     $request->setResponseCode(401); 
                     $request->setValid(false);  
