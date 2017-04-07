@@ -73,9 +73,7 @@ class DatabaseParser
         if (array_key_exists("values", $responseRows)){
                 echo "entrou";
                 $response = $this->treatData($response);    
-            }  else {
-                echo "no";
-            }
+            }  
         }  
         
         return $response; 
