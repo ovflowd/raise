@@ -84,6 +84,10 @@ class DatabaseParser
               foreach (array_keys($untreatedResp[$key]) as $chave){
                   echo $chave."<br>";
                   echo $untreatedResp[$key][$chave]."<br>";
+                  foreach (array_keys($untreatedResp[$key][$chave]) as $desisto){
+                  echo $desisto."<br>";
+                  echo $untreatedResp[$key][$chave][$desisto]."<br>";
+              } 
               } 
           }
         }
