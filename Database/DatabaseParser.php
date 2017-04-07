@@ -72,8 +72,8 @@ class DatabaseParser
             );
         if (array_key_exists("data_values", $responseRows) === "data"){
                 $response = $this->treatData($response);    
-            } 
-        } 
+            }  
+        }  
         
         return $response; 
     }
