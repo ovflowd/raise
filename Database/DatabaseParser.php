@@ -78,7 +78,7 @@ class DatabaseParser
     private function treatData($untreatedResp)
     {
         $test =  json_encode($untreatedResp);
-        echo $test;
+        echo json_decode($test)["code"];
         exit;
         return $untreatedResp;
     }
@@ -86,7 +86,7 @@ class DatabaseParser
     private function parseResult($result, $request)
     {
         $responseRows = array();
-        foreach ($result->rows as $row)
+        foreach ($result->rows as $row) 
         {
             $bucket = $request->bucket;
             $responseRows[] = $row->$bucket;
