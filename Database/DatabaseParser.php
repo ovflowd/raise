@@ -99,7 +99,7 @@ class DatabaseParser
     { 
         try
         {
-              if ($requestObj->bucket === "service"){ //Vai updatar o client 
+              if ($requestObj->bucket === "client"){ //Vai updatar o client 
                   $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               } else { // Inserir novas coisas 
                   $result = $this->getBucket($requestObj->bucket)->insert($requestObj->token, $requestObj->treatedBody);
