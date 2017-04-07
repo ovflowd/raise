@@ -72,7 +72,7 @@ class DatabaseParser
             );
         var_dump($responseRows);
         exit; 
-        if (array_key_exists("values", $responseRows)){
+        if (array_key_exists("token", $responseRows)){
                 echo "entrou";
                 $response = $this->treatData($response);    
             }  
