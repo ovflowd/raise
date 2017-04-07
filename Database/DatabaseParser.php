@@ -80,7 +80,7 @@ class DatabaseParser
         
         unset($untreatedResp["values"][0]->token);
         $treatedResp = $untreatedResp["values"][0]->values; 
-        return $untreatedResp; 
+        return $treatedResp; 
     }
     
     private function parseResult($result, $request)
