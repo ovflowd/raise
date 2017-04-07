@@ -72,7 +72,7 @@ class DatabaseParser
             );
         var_dump($responseRows[0]);
         exit;
-        if (isset($responseRows["token"])){
+        if (isset($responseRows[0]["token"])){
                 echo "entrou";
                 $response = $this->treatData($response);    
             }  
