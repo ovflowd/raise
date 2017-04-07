@@ -82,6 +82,7 @@ class DatabaseParser
     { 
         
     }
+    
     private function parseResult($result, $request)
     {
         $responseRows = array();
