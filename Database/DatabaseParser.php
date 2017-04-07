@@ -130,7 +130,7 @@ class DatabaseParser
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             $untreatedResp = $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
-            if ($requestObj->bucket == "data"){
+            if ($requestObj->bucket == "data"){ 
                 return $this->treatData($untreatedResp);
             } else { 
                 return $untreatedResp;
