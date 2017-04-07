@@ -100,7 +100,7 @@ class DatabaseParser
         try
         { 
               if ($requestObj->bucket === "data"){ //Vai updatar o client  
-                $result = $this->getBucket($requestObj->bucket)->insert(sha1(mt_rand(1, 90000) . 'SALT'), $requestObj->treatedBody);
+                $result = $this->getBucket($requestObj->bucket)->insert(sha1(mt_rand(1, round(microtime(true) * 1000)) . 'SALT'), $requestObj->treatedBody);
               } else { // Inserir novas coisas   
                 $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               } 
