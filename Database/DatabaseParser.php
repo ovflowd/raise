@@ -68,7 +68,7 @@ class DatabaseParser
         {
             $response = array(
                 'code' => 200, 
-                'values' => $responseRows
+                'values' => array($responseRows)
             );
         }  
         
