@@ -80,7 +80,8 @@ class DatabaseParser
 
     private function treatData($response)
     { 
-        unset($requestBody["token"]);
+        unset($response["token"]);
+        return $response;
     }
     
     private function parseResult($result, $request)
