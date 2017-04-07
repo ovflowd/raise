@@ -73,7 +73,7 @@ class DatabaseParser
             if ($responseRows->bucket === "data"){
                 $response = $this->treatData($response);    
             }
-        }
+        } 
         
         return $response; 
     }
