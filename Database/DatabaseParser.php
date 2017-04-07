@@ -78,9 +78,9 @@ class DatabaseParser
     private function treatData($untreatedResp)
     {
         $test =  json_encode($untreatedResp);
-        echo json_decode($test)["code"];
+        echo json_decode($test);
         exit;
-        return $untreatedResp;
+        return $untreatedResp; 
     }
     
     private function parseResult($result, $request)
