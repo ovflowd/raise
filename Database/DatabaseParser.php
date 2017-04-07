@@ -85,6 +85,7 @@ class DatabaseParser
             } 
             unset($untreatedResp["values"][$i]->values);
             $untreatedResp["values"][$i]->data_values = $dataValues[0]->data_values;
+            $untreatedResp["values"][$i]->data_values = $dataValues[0]->service_id;
             //$untreatedResp["values"][$i]->service_id = $serviceId;
         } 
         return $untreatedResp; 
