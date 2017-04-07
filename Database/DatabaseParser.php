@@ -48,6 +48,7 @@ class DatabaseParser
     {
         if (isset($responseRows->cas))
         { 
+            echo "here".
             $response = (new MessageOutPut())->messageHttp(200);
             if($responseRows->bucket === "client" || $responseRows->bucket === "service")
             { 
@@ -70,7 +71,6 @@ class DatabaseParser
                 'code' => 200, 
                 'values' => $responseRows
             );
-        exit;
         if (isset($responseRows[0]["token"])){
                 echo "entrou";
                 $response = $this->treatData($response);    
