@@ -73,6 +73,8 @@ class DatabaseParser
             if ($responseRows->bucket === "data"){
                 echo "if";
                 $response = $this->treatData($response);    
+            } else {
+                echo "teste";
             }
         } 
         
