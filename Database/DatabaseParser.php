@@ -77,7 +77,7 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        echo $untreatedResp["values"]["token"];
+        echo $untreatedResp["values"][0]["token"];
         exit; 
         return $untreatedResp; 
     }
