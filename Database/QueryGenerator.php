@@ -209,13 +209,14 @@ Class QueryGenerator
             {
                 $request->token = $request->getBody() ['token'];
                 $arrayTest = $request->getBody();  
-                echo 'here>';
                 if (validateExpirationToken($request, $request->token)){
                     unset($arrayTest ["token"]);    
                     $finalArray = $arrayTest ["values"][0];  
                     $request->treatedBody = json_encode($finalArray);
                     return $request;    
                 } else { 
+                    
+                echo 'here>';
                     $request->setResponseCode(401);
                     $request->setValid(false);  
                 }
