@@ -66,6 +66,9 @@ class DatabaseParser
             
         } else
         {
+            if ($responseRows->bucket === "data"){
+                
+            }
             $response = array(
                 'code' => 200,
                 'values' => $responseRows
@@ -75,6 +78,9 @@ class DatabaseParser
         return $response;
     }
 
+    private function treatData(){
+        
+    }
     private function parseResult($result, $request)
     {
         $responseRows = array();
