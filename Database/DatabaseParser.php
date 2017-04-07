@@ -77,8 +77,8 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        for ($i = 0; $i < $untreatedResp; i ++){
-            unset($untreatedResp["values"][0]->token);
+        for ($i = 0; $i < $untreatedResp; $i ++){
+            unset($untreatedResp["values"][$i]->token);
         }
         return $untreatedResp; 
     }
