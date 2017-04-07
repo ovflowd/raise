@@ -80,7 +80,7 @@ class DatabaseParser
         for ($i = 0; $i < count($untreatedResp); $i ++){
             unset($untreatedResp["values"][$i]->token);
             $dataValues = $untreatedResp["values"][$i]->values;
-            unset($untreatedResp["values"][$i]->token);
+            unset($untreatedResp["values"][$i]->values);
         } 
         return $untreatedResp; 
     }
