@@ -78,7 +78,6 @@ class DatabaseParser
     private function treatData($untreatedResp)
     {
         var_dump($untreatedResp[1]);
-        exit;
     }
     
     private function parseResult($result, $request)
