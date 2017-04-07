@@ -66,9 +66,6 @@ class DatabaseParser
             
         } else
         {
-            if ($responseRows->bucket === "data"){
-                
-            }
             $response = array(
                 'code' => 200,
                 'values' => $responseRows
