@@ -79,7 +79,7 @@ class DatabaseParser
     {
         foreach(array_keys($untreatedResp["values"]) as $key){
           echo $key . "<br>";
-          echo $untreatedResp["values"][$key];
+          echo $untreatedResp["values"][$key].'<br>';
         }
         exit;
     }
