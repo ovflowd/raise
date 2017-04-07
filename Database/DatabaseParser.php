@@ -100,11 +100,9 @@ class DatabaseParser
         try
         {
               //if ($requestObj->bucket === "client"){ //Vai updatar o client 
-                  echo $requestObj->token;
-                  exit;
                   $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               //} else { // Inserir novas coisas 
-              //    $result = $this->getBucket($requestObj->bucket)->insert($requestObj->token, $requestObj->treatedBody);
+                  $result = $this->getBucket($requestObj->bucket)->insert("aaaaa", $requestObj->treatedBody);
               //}
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
