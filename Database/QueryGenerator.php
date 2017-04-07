@@ -211,7 +211,7 @@ Class QueryGenerator
                 $request->token = $request->getBody() ['token'];
                 $arrayTest = $request->getBody();
                 unset($arrayTest ["token"]);   
-                validateExpirationToken();  
+                validateExpirationToken($request);  
                 $finalArray = $arrayTest ["values"][0];  
                 $request->treatedBody = json_encode($finalArray);
                 return $request;   
