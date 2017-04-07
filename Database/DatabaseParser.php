@@ -68,7 +68,7 @@ class DatabaseParser
         {
             $response = array(
                 'code' => 200, 
-                'values' => array($responseRows)
+                'values' => $responseRows
             );
         }  
         
@@ -77,20 +77,7 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        foreach(array_keys($untreatedResp) as $key){
-          echo $key . "<br>";
-          echo $untreatedResp[$key].'<br>';
-          if (is_array($untreatedResp[$key])){
-              foreach (array_keys($untreatedResp[$key]) as $chave){
-                  echo $chave."<br>";
-                  echo $untreatedResp[$key][$chave]."<br>";
-                  foreach (array_keys($untreatedResp[$key][$chave]) as $desisto){
-                  echo $desisto."<br>";
-                  echo $untreatedResp[$key][$chave][$desisto]."<br>";
-              } 
-              } 
-          }
-        }
+        var_dump($untreatedResp[0]);
         exit;
     }
     
