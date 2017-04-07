@@ -83,9 +83,11 @@ Class QueryGenerator
                 {
                     if ($key !== "tokenId" || $request->bucket == "data"){
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
-                    }
+                    } 
                 }
             } 
+            echo $queryStr;
+            
             $request->string = substr($queryStr, 0, -4);   
         }
         else
