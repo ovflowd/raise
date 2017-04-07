@@ -77,8 +77,9 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     {
-        
+            
     }
+    
     private function parseResult($result, $request)
     {
         $responseRows = array();
