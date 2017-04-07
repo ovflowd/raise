@@ -71,11 +71,11 @@ class DatabaseParser
                 'values' => $responseRows
             );
             if ($responseRows->bucket === "data"){
-                $response = $this->treatData();    
+                $response = $this->treatData($response);    
             }
         }
         
-        return $response;
+        return $response; 
     }
 
     private function treatData()
