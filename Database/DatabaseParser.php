@@ -67,6 +67,8 @@ class DatabaseParser
             
         } else
         {
+            
+            echo "ta no if";
             $response = array(
                 'code' => 200,
                 'values' => $responseRows
