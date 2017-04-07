@@ -213,7 +213,11 @@ Class QueryGenerator
                     unset($arrayTest ["token"]);    
                     $finalArray = $arrayTest ["values"][0];  
                     $request->treatedBody = json_encode($finalArray);
-                    return $request;       
+                    $request->setResponseCode(200);   
+                    $request->setValid(true); 
+                    return $request;    
+                } else {
+                    
                 }
             }   
             else
