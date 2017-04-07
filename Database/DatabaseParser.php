@@ -71,15 +71,15 @@ class DatabaseParser
                 'values' => $responseRows
             );
         }  
-        
+         
         return $response; 
     }
 
     private function treatData($untreatedResp)
     {
-        for ($i = 0; $i < $untreatedResp; $i ++){
-            unset($untreatedResp["values"][$i]->token);
-        }
+        for ($i = 0; $i < count($untreatedResp); $i ++){
+             unset($untreatedResp["values"][$i]->token);
+        } 
         return $untreatedResp; 
     }
     
