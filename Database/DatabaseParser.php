@@ -146,6 +146,9 @@ class DatabaseParser
             if ($requestObj->bucket == "service"){
                 var_dump($untreatedResp);
                 exit;
+            } else {
+                echo($requestObj->bucket).'<br>';
+                exit;
             }
             if ($requestObj->bucket === "data"){ 
                 return $this->treatData($untreatedResp);
