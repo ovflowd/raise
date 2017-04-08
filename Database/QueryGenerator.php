@@ -135,6 +135,7 @@ Class QueryGenerator
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false));
                     $request->string = "SELECT * FROM `service`";
                     $Testando = $parserinho->select($request);
+                    //FAZER UM COUNT
                     var_dump($Testando); 
                     exit;
                 }
