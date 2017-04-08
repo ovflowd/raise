@@ -244,7 +244,7 @@ Class QueryGenerator
                     $request = $this->validateToken($result, $request, "client"); 
                 } else {
                     $request = $this->validateToken($result, $request, "service");
-                    $request->bucket = "servie";
+                    $request->bucket = "service"; 
                 }  
                 //$request->bucket = "service";
                 //End select 
