@@ -136,6 +136,7 @@ Class QueryGenerator
                     
                     $Testando = $parserinho->select($requestObj);
                     $i = count($Testando["values"]) + 1;
+                    
                 } else {
                     $i = 0; 
                 }
