@@ -243,7 +243,8 @@ Class QueryGenerator
                 if (!$isServiceSecondTime){
                     $request = $this->validateToken($result, $request, "client"); 
                 } else {
-                    $request = $this->validateToken($result, $request, "service"); 
+                    $request = $this->validateToken($result, $request, "service");
+                    $request->bucket = "servie";
                 }  
                 //$request->bucket = "service";
                 //End select 
