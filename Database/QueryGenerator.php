@@ -128,11 +128,11 @@ Class QueryGenerator
                 $request->service = true;
                 $services = array();
                 
-                if ($nextBucket == "service" || $nextBucket == "client" ){
+                if ($nextBucket == "service"){
                     $requestObj = $request;
+                    
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
                     $requestObj->string = "select * from service order by service desc limit 1";
-                    $requestObj->bucket = "service";   
                     $Testando = $parserinho->select($requestObj); 
                     $lastIndex = count($Testando["values"][0]->services);
                     $indiceFinal = $Testando["values"][0]->services[$lastIndex - 1]->service_id + 1;
@@ -144,11 +144,6 @@ Class QueryGenerator
                 } else { 
                     $i = 0;   
                 }  
-                
-                if ($nextBucket === "client"){
-                    echo '<br>'."Chegou aqui".'<br>';
-                    exit;
-                }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
