@@ -131,9 +131,10 @@ Class QueryGenerator
                 
                 if ($nextBucket == "service"){
                     $parserinho = new DatabaseParser($parsedPath);
-                    $request->string = "SELECT * FROM `service`";
+                    //$request->string = "SELECT * FROM `service`";
                     //$Testando = $parserinho->select($request);
                     //var_dump($Testando); 
+                    exit;
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
