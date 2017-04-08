@@ -145,6 +145,11 @@ Class QueryGenerator
                     $i = 0;   
                 }  
                 
+                if ($nextBucket === "client"){
+                    echo '<br>'."Chegou aqui".'<br>';
+                    exit;
+                }
+                
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
                     $service['service_id'] = $i;
