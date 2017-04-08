@@ -27,7 +27,7 @@ Class QueryGenerator
             $parsedPath = $this->parsePath($request, false);
             
             if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) {
-                $parser = new DatabaseParser($parsedPath); 
+                $parser = new DatabaseParser($parsedPath, false); 
                 $result = $parser->insert($request); 
             }
             elseif ($parsedPath->isValid() === FALSE) 
@@ -42,7 +42,7 @@ Class QueryGenerator
         
         if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) 
         {
-            $parser = new DatabaseParser($parsedPath); 
+            $parser = new DatabaseParser($parsedPath, false); 
             
             if ($request->getMethod() == "get")  
             { 
@@ -132,12 +132,12 @@ Class QueryGenerator
                 if ($nextBucket == "service"){
                     $requestObj = $request;
                     $requestObj->bucket = "service";
-                    $parserinho = new DatabaseParser($this->parsePath($requestObj, false));
+                    $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
                     $request->string = "SELECT * FROM `service`";
-                    $Testando = $parserinho->select($request);
+                    $Testando = $parserinho->select($request); 
                     //FAZER UM COUNT
-                    var_dump($Testando); 
-                    exit;
+                    var_dump($Testando);  
+                     exit; 
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
@@ -172,7 +172,7 @@ Class QueryGenerator
     
     private function validateExpirationToken ($request, $token)
     {
-        $database = (new DatabaseParser($request))->getBucket();
+        $database = (new DatabaseParser($request, false))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         $query->namedParams(array('token' => $token));
         $parameters = $database->query($query)->rows;
@@ -211,7 +211,7 @@ Class QueryGenerator
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim
                 )));
-                $parser = new DatabaseParser($request);
+                $parser = new DatabaseParser($request, false);
                 $parser->insert($request);
                 
                 $request->bucket = "client";
@@ -221,7 +221,7 @@ Class QueryGenerator
             {
                 $oldBody = $request->getBody();
                 $request->bucket = "token";
-                $parser = new DatabaseParser($request);
+                $parser = new DatabaseParser($request, false);
                 //Select Client on Token bucket
                 $token = $request->getBody() ['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
