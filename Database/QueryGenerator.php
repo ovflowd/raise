@@ -139,7 +139,6 @@ Class QueryGenerator
                     $i = 0; 
                 }
                  
-                
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
                     $service['service_id'] = $i;
