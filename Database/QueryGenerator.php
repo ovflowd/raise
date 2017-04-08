@@ -137,6 +137,7 @@ Class QueryGenerator
                     
                     $i = count($Testando["values"]);
                     $i++;
+                    echo $i;
                 } else { 
                     $i = 0;  
                 }
