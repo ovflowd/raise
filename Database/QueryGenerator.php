@@ -98,7 +98,7 @@ Class QueryGenerator
         return $request;
     }
     
-    private function validateToken($result, $request) 
+    private function validateToken($result, $request, $nextBucket) 
     { 
         
         if (isset($result['values'][0])) 
@@ -156,7 +156,7 @@ Class QueryGenerator
         return true;
     }
     
-    private function parsePath($request, $isService)  
+    private function parsePath($request, $isServiceSecondTime)  
     {
         $path = $request->getPath();
         $method = $path['method'];
@@ -202,8 +202,12 @@ Class QueryGenerator
                 $request->setParameters(array(
                     'token' => $token 
                 ));  
-                $result = $parser->select($request);
-                $request = $this->validateToken($result, $request); 
+                $result = $parser->select($request); 
+                if (!$isServiceSecondTime){
+                    $request = $this->validateToken($result, $request, "client"); 
+                } else {
+                    $request = $this->validateToken($result, $request, "service"); 
+                }
                 //$request->bucket = "service";
                 //End select 
                 //create Client 
