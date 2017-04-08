@@ -127,7 +127,6 @@ Class QueryGenerator
                 $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
-                $i = 0; 
                 
                 if ($nextBucket == "service"){
                     $requestObj = $request;
@@ -139,6 +138,8 @@ Class QueryGenerator
                     $i = count($Testando["values"]);
                     echo ($i);
                     //exit;   
+                } else {
+                    $i = 0; 
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
