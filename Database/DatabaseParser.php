@@ -148,7 +148,6 @@ class DatabaseParser
                 exit;
             } else {
                 echo($requestObj->bucket).'<br>';
-                exit;
             }
             if ($requestObj->bucket === "data"){ 
                 return $this->treatData($untreatedResp);
