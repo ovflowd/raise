@@ -140,7 +140,7 @@ Class QueryGenerator
                     if ($indiceFinal === 0){
                         $i = 0;    
                     } else {
-                        $i = $indiceFinal; 
+                        $i = $indiceFinal + 1 ; 
                     }
                 } else { 
                     $i = 0;   
