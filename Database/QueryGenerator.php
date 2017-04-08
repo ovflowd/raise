@@ -139,7 +139,7 @@ Class QueryGenerator
                     if ($Testando["values"][0] === NULL){  
                         $i = 0;     
                     } else {
-                        $i = $indiceFinal + 1; 
+                        $i = $indiceFinal; 
                     }
                 } else { 
                     $i = 0;   
