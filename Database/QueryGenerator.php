@@ -134,18 +134,16 @@ Class QueryGenerator
                     $requestObj->string = "select * from service order by service desc limit 1";
                     $requestObj->bucket = "service";  
                     $Testando = $parserinho->select($requestObj); 
-                    //('<br>'.$Testando["values"][0]->services[])
                     $lastIndex = count($Testando["values"][0]->services);
                     $indiceFinal = $Testando["values"][0]->services[$lastIndex - 1]->service_id + 1;
                     if ($indiceFinal === 0){
                         $i = 0;    
                     } else {
-                        $i = $indiceFinal + 1 ; 
+                        $i = $indiceFinal + 1; 
                     }
                 } else { 
                     $i = 0;   
                 }  
-                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
                     $service['service_id'] = $i;
