@@ -135,7 +135,7 @@ Class QueryGenerator
                     $requestObj->bucket = "service"; 
                     $Testando = $parserinho->select($requestObj); 
                     
-                    $i = count($Testando["values"]);
+                    var_dump($Testando["values"]);
                    
                     exit ($i.'<br>'); 
                 } else { 
