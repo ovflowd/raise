@@ -25,8 +25,8 @@ use Raise\Treaters\Config;
 class DatabaseParser
 {
     private $serverAddress;
-    private $bucket;
-
+    private $bucket; 
+ 
     public function __construct($requestObj, $simpleQuery) 
     {
         $this->serverAddress = DB_ADDRESS;
