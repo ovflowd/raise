@@ -36,9 +36,6 @@ Class QueryGenerator
             {
                 return (new MessageOutPut)->messageHttp($request->getReponseCode());
             }
-            var_dump ($result);
-            exit;
-            
             //service second time
             $parsedPath = $this->parsePath($request, true);
         } else {
