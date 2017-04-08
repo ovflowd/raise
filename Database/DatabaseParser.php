@@ -145,7 +145,8 @@ class DatabaseParser
             $untreatedResp = $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
              
             echo ($requestObj->string);
-            var_dump ($untreatedResp);
+            echo ($requestObj->bucket);
+            var_dump ($untreatedResp); 
             
             if ($requestObj->bucket === "data"){ 
                 return $this->treatData($untreatedResp);
