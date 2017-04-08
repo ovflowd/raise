@@ -129,6 +129,9 @@ Class QueryGenerator
                 $services = array();
                 $i = 0;
                 
+                $parser = new DatabaseParser($parsedPath);
+                $request->string = "SELECT * FROM `" . $request->bucket . "`";
+                
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
                     $service['service_id'] = $i;
