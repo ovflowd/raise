@@ -137,6 +137,7 @@ Class QueryGenerator
                     
                     $Testando = $parserinho->select($requestObj);
                     var_dump($Testando["values"]);
+                    
                     exit;   
                 }
                 
