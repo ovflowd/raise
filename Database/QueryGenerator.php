@@ -98,7 +98,7 @@ Class QueryGenerator
                 }
                 else
                 {
-                    if ($key !== "tokenId" || $request->bucket == "data"){
+                    if ($key !== "tokenId"){
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
                     }  
                 }
