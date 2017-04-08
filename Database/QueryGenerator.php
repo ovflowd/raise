@@ -134,7 +134,8 @@ Class QueryGenerator
                     $requestObj->string = "select * from service order by service desc limit 1";
                     $requestObj->bucket = "service";  
                     $Testando = $parserinho->select($requestObj); 
-                    echo '<br>'.$Testando["values"][0]->services[count($Testando["values"][0]->services[]) - 1]->service_id;
+                    //echo '<br>'.$Testando["values"][0]->services[count($Testando["values"][0]->services[]) - 1 ]; 
+                    $i = $Testando["values"][0]->services;
                 } else { 
                     $i = 0;  
                 }
