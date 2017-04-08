@@ -136,11 +136,11 @@ Class QueryGenerator
                     
                     $Testando = $parserinho->select($requestObj);
                     $i = count($Testando["values"]);
-                    echo ($i);
-                    //exit;   
                 } else {
                     $i = 0; 
                 }
+                 
+                echo ($i);
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
