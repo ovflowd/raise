@@ -136,7 +136,7 @@ Class QueryGenerator
                     $Testando = $parserinho->select($requestObj); 
                     $lastIndex = count($Testando["values"][0]->services);
                     $indiceFinal = $Testando["values"][0]->services[$lastIndex - 1]->service_id + 1;
-                    var_dump(count($Testando["values"][0]));  
+                    var_dump(count($Testando["values"]));  
                     exit;
                     if ($indiceFinal === 0){ 
                         $i = 0;    
