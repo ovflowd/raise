@@ -130,7 +130,7 @@ Class QueryGenerator
                 
                 if ($nextBucket == "service" || $nextBucket == "client" ){
                     $requestObj = $request;
-                    if ($nextBucket = "client"){
+                    if ($nextBucket === "client"){
                         var_dump($requestObj);
                         exit;
                     }
