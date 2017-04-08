@@ -25,7 +25,7 @@ Class QueryGenerator
     {
         if ($request->bucket == "service" && $request->getMethod() == "post"){
             //service first time
-            $parsedPath = $this->parsePath($request, false);
+            $parsedPath = $this->parsePath($request, true);
             
             if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) {
                 //not a simple query
@@ -38,7 +38,7 @@ Class QueryGenerator
             }
             
             //service second time
-            $parsedPath = $this->parsePath($request, true);
+            $parsedPath = $this->parsePath($request, false);
         } else {
             $parsedPath = $this->parsePath($request, false);
         }
