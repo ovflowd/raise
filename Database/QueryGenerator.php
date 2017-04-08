@@ -131,6 +131,7 @@ Class QueryGenerator
                 
                 if ($nextBucket == "service"){
                     $requestObj = $request;
+                    $requestObj->bucket = "service";
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false));
                     $request->string = "SELECT * FROM `service`";
                     $Testando = $parserinho->select($request);
