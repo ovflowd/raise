@@ -136,8 +136,7 @@ Class QueryGenerator
                     $request->string = "SELECT * FROM `service`";
                     $Testando = $parserinho->select($request); 
                     //FAZER UM COUNT
-                    var_dump($Testando);  
-                     exit; 
+                    exit; 
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
