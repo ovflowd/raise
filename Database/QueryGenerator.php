@@ -48,7 +48,6 @@ Class QueryGenerator
             $parser = new DatabaseParser($parsedPath, false); 
             if ($request->getMethod() == "get")  
             { 
-                
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             }
@@ -136,7 +135,7 @@ Class QueryGenerator
                     $requestObj->bucket = "service"; 
                     
                     $Testando = $parserinho->select($requestObj);
-                    $i = count($Testando["values"]);
+                    $i = count($Testando["values"]) + 1;
                 } else {
                     $i = 0; 
                 }
