@@ -133,7 +133,7 @@ class DatabaseParser
             return (new MessageOutPut())->messageHttp($e->getCode());
         }
     } 
-
+  
     //Method for performing a select query on the database. 
     //return string
     public function select($requestObj) 
@@ -143,9 +143,9 @@ class DatabaseParser
             $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
             $query->namedParams($requestObj->getParameters());
             $untreatedResp = $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
-            
-            echo ($requestObj->string);
-            echo ($untreatedResp);
+             
+            echo '<br>'.($requestObj->string).'<br>';
+            echo ($untreatedResp).'<br>';
             
             if ($requestObj->bucket === "data"){ 
                 return $this->treatData($untreatedResp);
