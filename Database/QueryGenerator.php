@@ -134,6 +134,7 @@ Class QueryGenerator
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
                     $requestObj->string = "SELECT * FROM `service`";
                     $requestObj->bucket = "service";
+                    
                     $Testando = $parserinho->select($requestObj);
                     var_dump($Testando["values"]);
                     exit;   
