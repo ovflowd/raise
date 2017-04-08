@@ -156,7 +156,7 @@ Class QueryGenerator
         return true;
     }
     
-    private function parsePath($request)  
+    private function parsePath($request, $isService)  
     {
         $path = $request->getPath();
         $method = $path['method'];
