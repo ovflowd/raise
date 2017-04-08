@@ -138,7 +138,9 @@ Class QueryGenerator
                     $indiceFinal = $Testando["values"][0]->services[$lastIndex - 1]->service_id + 1;
                     
                     if ($Testando["values"][0] === NULL){  
-                        $i = 0;     
+                        $i = 0;
+                        echo ($i);
+                        exit;
                     } else {
                         $i = $indiceFinal;
                         $request->lastIndex = $indiceFinal;
