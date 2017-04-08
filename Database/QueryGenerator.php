@@ -134,11 +134,11 @@ Class QueryGenerator
                     $requestObj->string = "SELECT * FROM `service`";
                     $requestObj->bucket = "service"; 
                     
-                    $Testando = $parserinho->select($requestObj);
+                    $Testando = $parserinho->select($requestObj); 
                     $i = count($Testando["values"]) + 1;
                     
                 } else {
-                    $i = 0; 
+                    $i = 0;  
                 }
                  
                 foreach ($request->getBody() ['services'] as $key => $service) 
