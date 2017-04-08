@@ -133,7 +133,7 @@ Class QueryGenerator
                     $requestObj = $request;
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
                     $request->string = "SELECT * FROM `service`";
-                    echo '<br>'.$requestObj.'<br>';
+                    echo '<br>'.$requestObj->bucket.'<br>'; 
                     $Testando = $parserinho->select($requestObj);
                     var_dump($Testando);
                     exit;   
