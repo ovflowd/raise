@@ -27,7 +27,7 @@ class DatabaseParser
     private $serverAddress;
     private $bucket;
 
-    public function __construct($requestObj)
+    public function __construct($requestObj, $isWithout)
     {
         $this->serverAddress = DB_ADDRESS;
         $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);
@@ -118,7 +118,7 @@ class DatabaseParser
                 $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
               } else { // Inserir novas coisas       
                 $result = $this->getBucket($requestObj->bucket)->insert(sha1(mt_rand(1, round(microtime(true) * 1000)) . 'SALT'), $requestObj->treatedBody);
-              } 
+              }  
               $result->token = $requestObj->token;
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
