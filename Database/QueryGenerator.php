@@ -146,7 +146,7 @@ Class QueryGenerator
                     }
                 } else {   
                     if ($request->lastIndex === null){
-                        $i = 0;    
+                        $i = 0;     
                     } else {
                         $i = $request->lastIndex;
                     } 
