@@ -36,7 +36,6 @@ Class QueryGenerator
             {
                 return (new MessageOutPut)->messageHttp($request->getReponseCode());
             }
-            
             var_dump ($result);
             exit;
             
