@@ -127,7 +127,7 @@ Class QueryGenerator
                 $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
-                $i = 0;
+                $i = 0; 
                 
                 if ($nextBucket == "service"){
                     $requestObj = $request;
