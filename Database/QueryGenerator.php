@@ -153,11 +153,13 @@ Class QueryGenerator
                     $i++;
                     $services['services'][] = $service; 
                 }
+                
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
                 if ($nextBucket === "client"){
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
                 } else if ($nextBucket === "service"){
+                    echo 
                     $request->treatedBody = json_encode($services);
                 }    
                 $request->token = $requestBody['tokenId']; 
@@ -240,6 +242,7 @@ Class QueryGenerator
                     $request = $this->validateToken($result, $request, "client"); 
                 } else {
                     $request = $this->validateToken($result, $request, "service"); 
+                    exit ('<br>'."Foi no service".'<br>'); 
                 } 
                 //$request->bucket = "service";
                 //End select 
