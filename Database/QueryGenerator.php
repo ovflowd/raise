@@ -145,7 +145,11 @@ Class QueryGenerator
                         $request->lastIndex = $indiceFinal;
                     }
                 } else {   
-                    $i = $request->lastIndex;   
+                    if ($request->lastIndex === null){
+                        $i = 0;    
+                    } else {
+                        $i = $request->lastIndex;
+                    } 
                 }   
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
