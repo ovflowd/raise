@@ -23,12 +23,12 @@ Class QueryGenerator
     
     public function generate($request) 
     {
-        if ($request->bucket !== "service"){
-            $parsedPath = $this->parsePath($request, false);
-        } else if ($request->bucket == "service" && $request->getMethod() == "post"){
+         if ($request->bucket == "service" && $request->getMethod() == "post"){
             $parsedPath = $this->parsePath($request, false);
             $result = $parser->insert($request); 
-            
+            $parsedPath = $this->parsePath($request, true);
+        } else {
+            $parsedPath = $this->parsePath($request, false);
         }
         
         if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) 
