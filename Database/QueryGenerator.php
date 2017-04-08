@@ -132,9 +132,9 @@ Class QueryGenerator
                     
                     $requestObj = $request;
                     $requestObj->bucket = "service"; 
-                    $parserinho = new DatabaseParser($this->parsePath($requestObj, true) , true);
+                    $parserinho = new DatabaseParser($requestObj , true);
                     $requestObj->string = "select * from service order by service desc limit 1";
-                    $Testando = $parserinho->select($requestObj); 
+                    $Testando = $parserinho->select($requestObj);  
                     $lastIndex = count($Testando["values"][0]->services);
                     $indiceFinal = $Testando["values"][0]->services[$lastIndex - 1]->service_id + 1;
                     
