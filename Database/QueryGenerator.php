@@ -145,6 +145,8 @@ Class QueryGenerator
                     } else {
                         $i = $indiceFinal;
                         $request->lastIndex = $indiceFinal;
+                        echo ($indiceFinal);
+                        exit;
                     }
                 } else {   
                     $i = $request->lastIndex;   
