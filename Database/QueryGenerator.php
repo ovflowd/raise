@@ -143,7 +143,7 @@ Class QueryGenerator
                         $i = $indiceFinal;
                         $request->lastIndex = $indiceFinal;
                     }
-                } else { 
+                } else {  
                     $i = $request->lastIndex;   
                 }  
                 
