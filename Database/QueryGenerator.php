@@ -37,7 +37,7 @@ Class QueryGenerator
                 return (new MessageOutPut)->messageHttp($request->getReponseCode());
             }
             
-            
+            echo ($result);
             exit;
             
             //service second time
