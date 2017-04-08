@@ -30,7 +30,11 @@ class DatabaseParser
     public function __construct($requestObj, $simpleQuery)
     {
         $this->serverAddress = DB_ADDRESS;
-        $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);
+        if (!$simpleQuery){
+            $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);    
+        } else {
+            $this->bucket = $this->connect("service", $this->serverAddress);        
+        }
     }
 
 
