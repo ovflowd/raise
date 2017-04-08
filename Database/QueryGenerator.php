@@ -136,7 +136,7 @@ Class QueryGenerator
                     $Testando = $parserinho->select($requestObj); 
                     
                     $i = count($Testando["values"]);
-                    $i+=2; 
+                    $i += 2; 
                     
                     exit ($i.'<br>'); 
                 } else { 
