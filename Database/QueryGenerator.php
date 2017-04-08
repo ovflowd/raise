@@ -159,7 +159,6 @@ Class QueryGenerator
                 if ($nextBucket === "client"){
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
                 } else if ($nextBucket === "service"){
-                    echo 
                     $request->treatedBody = json_encode($services);
                 }    
                 $request->token = $requestBody['tokenId']; 
