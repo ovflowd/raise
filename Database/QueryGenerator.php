@@ -119,6 +119,7 @@ Class QueryGenerator
         if (isset($result['values'][0])) 
         {
             unset($request->string);
+             
             $requestBody = json_decode(json_encode($result['values'][0]) , true);
             if ($requestBody["time_fim"] > round(microtime(true) * 1000)) 
             { 
@@ -139,7 +140,8 @@ Class QueryGenerator
                     if ($Testando["values"][0] === NULL){  
                         $i = 0;     
                     } else {
-                        $i = $indiceFinal; 
+                        $i = $indiceFinal;
+                        $request->lastIndex = $indiceFinal;
                     }
                 } else { 
                     $i = 0;   
