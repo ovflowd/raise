@@ -232,7 +232,7 @@ Class QueryGenerator
                     $request = $this->validateToken($result, $request, "client"); 
                 } else {
                     $request = $this->validateToken($result, $request, "service"); 
-                }
+                } 
                 //$request->bucket = "service";
                 //End select 
                 //create Client 
