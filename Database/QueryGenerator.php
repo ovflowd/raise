@@ -130,15 +130,15 @@ Class QueryGenerator
                 $i = 0; 
                 
                 if ($nextBucket == "service"){
-                //    $requestObj = $request;
-                //    $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
-                //    $requestObj->string = "SELECT * FROM `service`";
-                //    $requestObj->bucket = "service"; 
-                //    
-                //    $Testando = $parserinho->select($requestObj);
-                //    echo count($Testando["values"]);
-                //    
-                //    exit;   
+                    $requestObj = $request;
+                    $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
+                    $requestObj->string = "SELECT * FROM `service`";
+                    $requestObj->bucket = "service"; 
+                    
+                    $Testando = $parserinho->select($requestObj);
+                    echo count($Testando["values"]);
+                    
+                    exit;   
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
