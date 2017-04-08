@@ -130,6 +130,7 @@ Class QueryGenerator
                 
                 if ($nextBucket == "service" || $nextBucket == "client" ){
                     $requestObj = $request;
+                    
                     $parserinho = new DatabaseParser($this->parsePath($requestObj, false) , true);
                     $requestObj->string = "select * from service order by service desc limit 1";
                     $requestObj->bucket = "service";   
@@ -144,6 +145,7 @@ Class QueryGenerator
                 } else { 
                     $i = 0;   
                 }  
+                
                 foreach ($request->getBody() ['services'] as $key => $service) 
                 {
                     $service['service_id'] = $i;
