@@ -127,7 +127,7 @@ class DatabaseParser
               $result->method = $requestObj->getPath()['method'];
               $result->bucket = $requestObj->bucket;
               $result->request = $requestObj;
-              return $this->response($result);  
+              return $this->response($result);    
         } catch(CouchbaseException $e)  
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
@@ -140,9 +140,10 @@ class DatabaseParser
     {
         try 
         {  
-            $query = \CouchbaseN1qlQuery::fromString($requestObj->string);
+            $query = \CouchbaseN1qlQuery::fromString($requestObj->string); 
             $query->namedParams($requestObj->getParameters());
             $untreatedResp = $this->response($this->parseResult($this->getBucket($requestObj->bucket)->query($query) , $requestObj));
+            echo $requestObj->string;    
             if ($requestObj->bucket === "data"){ 
                 return $this->treatData($untreatedResp);
             } else { 
