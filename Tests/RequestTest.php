@@ -40,7 +40,7 @@ class RequestTester
 		$url = "http://{$this->raise_ip}/service/register";
 
 		$body = json_encode(array(
-					"services" => array(array('name'=>'cakerson','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
+					"services" => array(array('name'=>'TESTANDO_SERVICO_TUDO','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
 						"timestamp" => round(microtime(true) *1000),
 						'tokenId' => $token
 						));
@@ -68,7 +68,7 @@ class RequestTester
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		$body = json_encode(array("name" => "novissimo", "chipset" => "arm",
+		$body = json_encode(array("name" => "TESTANDO_INSERCAO_TUDO", "chipset" => "arm",
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64"));
