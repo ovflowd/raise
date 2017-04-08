@@ -31,6 +31,8 @@ Class QueryGenerator
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false); 
                 $result = $parser->insert($request); 
+                var_dump($result);
+                exit;
             }
             elseif ($parsedPath->isValid() === FALSE) 
             {
