@@ -24,9 +24,11 @@ Class QueryGenerator
     public function generate($request) 
     {
         if ($request->bucket == "service" && $request->getMethod() == "post"){
+            //service first time
             $parsedPath = $this->parsePath($request, false);
             
             if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) {
+                //not a simple query
                 $parser = new DatabaseParser($parsedPath, false); 
                 $result = $parser->insert($request); 
             }
@@ -35,6 +37,7 @@ Class QueryGenerator
                 return (new MessageOutPut)->messageHttp($request->getReponseCode());
             }
             
+            //service second time
             $parsedPath = $this->parsePath($request, true);
         } else {
             $parsedPath = $this->parsePath($request, false);
@@ -43,7 +46,6 @@ Class QueryGenerator
         if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) 
         {
             $parser = new DatabaseParser($parsedPath, false); 
-            
             if ($request->getMethod() == "get")  
             { 
                 
