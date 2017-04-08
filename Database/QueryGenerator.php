@@ -136,7 +136,6 @@ Class QueryGenerator
                     $requestObj->bucket = "service"; 
                     $Testando = $parserinho->select($requestObj);
                     $i = count($Testando["values"]);
-                       
                 }
                 
                 foreach ($request->getBody() ['services'] as $key => $service) 
