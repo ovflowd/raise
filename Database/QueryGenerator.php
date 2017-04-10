@@ -83,8 +83,7 @@ class QueryGenerator
     {
         $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = ".$namedParam, $namedParam);
         echo count ($Testando["values"]);
-        var_dump ($Testando);
-        exit;  
+        
     }   
 
     private function generateToken()
