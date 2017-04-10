@@ -77,7 +77,7 @@ class QueryGenerator
             }
             $dataValues = $objData->data[$key]->data_values;
             $data = array('service_id' => $serviceId, 'data_values' => $dataValues);
-            $composedData[$key] = array('token' =>  $objData->token;, 'data' => $data);
+            $composedData[$key] = array('token' => $objData->token, 'data' => $data);
         }
         return $composedData;
     }
