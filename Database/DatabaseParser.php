@@ -61,7 +61,7 @@ class DatabaseParser
                       
                     foreach(json_decode($responseRows->request->treatedBody)->services as $key=>$service)
                     {
-                        var_dump(json_decode($responseRows->request->treatedBody, true)["services"]);
+                        var_dump(json_decode($responseRows->request->treatedBody, true)["services"][0]["service_id"]);
                         exit;
                         $response->services[] = array('service_id' => $key, 'service_name' => $service->name);
                     }
