@@ -73,7 +73,7 @@ class QueryGenerator
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
-            if (!$this->validateId($request, $serviceId)){
+            if (!$this->validateServiceId($request, $serviceId)){
                 $request->setResponseCode(400);
                 $request->setValid(false);
             }
@@ -84,7 +84,7 @@ class QueryGenerator
         return $composedData;
     }
     
-    private function validateId($request, $namedParam)
+    private function validateServiceId($request, $namedParam)
     { 
         $oldRequest = $request;
         $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = ".$namedParam, $namedParam);
