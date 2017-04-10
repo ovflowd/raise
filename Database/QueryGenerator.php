@@ -68,7 +68,6 @@ class QueryGenerator
     private function separateData($request)
     {
         $objData = json_decode($request->treatedBody, false);
-        $token =
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
