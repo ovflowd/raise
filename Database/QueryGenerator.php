@@ -121,12 +121,12 @@ class QueryGenerator
         return $request;
     }
 
-    private function simpleSelect ($request)
+    private function simpleSelect ($request, $queryStr)
     {
         $requestObj = $request;
         $requestObj->bucket = 'service';
         $parserinho = new DatabaseParser($requestObj, true);
-        $requestObj->string = ;
+        $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
         return $Testando;
     }
