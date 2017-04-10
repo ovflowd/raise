@@ -121,7 +121,7 @@ class QueryGenerator
         return $request;
     }
 
-    private function simpleSelect ()
+    private function simpleSelect ($request)
     {
         $requestObj = $request;
         $requestObj->bucket = 'service';
@@ -144,6 +144,7 @@ class QueryGenerator
                 $services = array();
 
                 if ($nextBucket == 'service') {
+                    $Testando = $this->simpleSelect($request);
                     $lastIndex = count($Testando['values'][0]->services);
                     $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
 
