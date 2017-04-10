@@ -69,6 +69,7 @@ Class QueryGenerator
     {
         $objData = json_decode($request->treatedBody, false);
         foreach ($objData->data  as $key => $service){
+            echo '<br>'.$key.'<br>';
             var_dump($objData->data[$key]->service_id);
         }
         return $request;
