@@ -244,8 +244,6 @@ class QueryGenerator
                     $request->setResponseCode(400);
                     $request->setValid(false);
                     return $request;
-                } else if(){
-                    
                 }
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
