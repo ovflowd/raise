@@ -226,6 +226,7 @@ Class QueryGenerator
                     $request->setValid(false);  
                     return FALSE;
                 }
+                echo "non entrou";
                 $request->bucket = "token";
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
