@@ -68,7 +68,7 @@ class QueryGenerator
     private function separateData($request)
     {
         $objData = json_decode($request->treatedBody, false);
-        $token = $objData->token;
+        $token =
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
@@ -78,7 +78,7 @@ class QueryGenerator
             }
             $dataValues = $objData->data[$key]->data_values;
             $data = array('service_id' => $serviceId, 'data_values' => $dataValues);
-            $composedData[$key] = array('token' => $token, 'data' => $data);
+            $composedData[$key] = array('token' =>  $objData->token;, 'data' => $data);
         }
         return $composedData;
     }
