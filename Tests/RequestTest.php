@@ -29,7 +29,7 @@ class RequestTester
 						"timestamp" => round(microtime(true) *1000)
 						));
         if (!$isValidTest){
-            $body = json_encode($body);
+            $body = json_encode(json_encode($body));
         } 
 		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete client insertion: " . "<br>";
