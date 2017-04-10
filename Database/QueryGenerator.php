@@ -267,7 +267,7 @@ Class QueryGenerator
                 //valida se os serviços enviados fazem parte do token 
                 if(isset($request->getBody()['services']))
                 {
-                    $token = $request->getBody()['token'];
+                    $token = $request->getBody()['tokenId'];
                     
                     $service_list = $request->getBody()['services'];
                     if(is_array($service_list))
