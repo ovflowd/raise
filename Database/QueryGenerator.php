@@ -109,7 +109,7 @@ Class QueryGenerator
                 }
                 else if ($request->bucket == "data" && $key == "service_id" ) 
                 {  
-                    $chave = "data.data" . $key;
+                    $chave = "data.data." . $key;
                     //$queryStr = "SELECT * FROM data data UNNEST data.data c WHERE c.service_id = "."\$$key"." AND";
                     //$jumpCondition = true;
                 }
@@ -135,6 +135,7 @@ Class QueryGenerator
                 }
             } 
             $request->string = substr($queryStr, 0, -4);   
+            echo $request->string;
         }
         else
         {
