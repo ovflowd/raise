@@ -240,12 +240,12 @@ class QueryGenerator
             }
 
             if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') {
-                if (json_encode($request->getBody()) == 'null') {
+                if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0) {
                     $request->setResponseCode(400);
                     $request->setValid(false);
                     return $request;
-                } else if($this->isJson(json_encode($request->getBody())) === 0){
-                     
+                } else if(){
+                    
                 }
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
