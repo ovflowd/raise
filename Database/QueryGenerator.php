@@ -154,7 +154,7 @@ class QueryGenerator
                 $services = array();
 
                 if ($nextBucket == 'service') {
-                    $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1');
+                    $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1', null);
                     $lastIndex = count($Testando['values'][0]->services);
                     $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
 
