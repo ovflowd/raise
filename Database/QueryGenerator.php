@@ -69,10 +69,12 @@ Class QueryGenerator
     {
         $objData = json_decode($request->treatedBody, false);
         $token = $objData->token;
-        foreach ($objData->data  as $key => $service){
+        foreach ($objData->data as $key => $service){
             $serviceId = $objData->data[$key]->service_id;
             $dataValues = $objData->data[$key]->data_values;
-            $data = 
+            $data[$key] = array("token" => $token,
+                                "service_id" => $serviceId,
+                                "data_values" => $dataValues);
         }
         return $request;
     }
