@@ -221,7 +221,6 @@ Class QueryGenerator
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
                 if (json_encode($request->getBody()) == "null"){
-                    echo "entrou no certo";
                     $request->setResponseCode(400); 
                     $request->setValid(false);  
                     return FALSE;
