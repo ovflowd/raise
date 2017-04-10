@@ -34,7 +34,7 @@ class RequestTester
 		return $response;
 	}	
 	
-	public function invalidServicePostTest($token)  
+	public function invalidServicePostTest($token)   
 	{
 		$url = "http://{$this->raise_ip}/service/register";
 
