@@ -69,7 +69,6 @@ class QueryGenerator
     {
         $objData = json_decode($request->treatedBody, false);
         $token = $objData->token;
-        $data = array();
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
