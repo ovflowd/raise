@@ -50,6 +50,7 @@ Class QueryGenerator
             }
             elseif ($request->getMethod() == "post") 
             {
+                //dividir cada data chamando uma nova função pra isso
                 $result = $parser->insert($request);
             }
             return $result;
@@ -58,6 +59,12 @@ Class QueryGenerator
         {
             return (new MessageOutPut)->messageHttp($request->getReponseCode());
         }
+    }
+    
+    private function separateData($request)
+    {
+        echo $request->treatedBody();
+        return $request;
     }
     
     private function generateToken() 
