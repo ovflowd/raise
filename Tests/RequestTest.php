@@ -42,7 +42,7 @@ class RequestTester
 					"services" => array(array('name'=>'TESTANDO_SERVICO_TUDO','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
 						"timestamp" => round(microtime(true) *1000),
 						'tokenId' => $token
-						));
+						)); 
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
 		echo "Complete service insertion: " . "<br>";
