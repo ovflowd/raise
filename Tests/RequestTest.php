@@ -90,9 +90,10 @@ class RequestTester
 			$serv_response = $this->registerServices($token);
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
+			
 			$aServicesId = array();
 			foreach (json_decode($serv_response)->services as $key => $service){
-			    echo '<br>'.json_decode($serv_response)->services[$key]->service_id.'<br>';
+			    $aServicesId[$key] = json_decode($serv_response)->services[$key]->service_id;
 			}
 			exit;
 			$dados = [ 'token' => $token,  "data" => (array((array('service_id' => 0 , 'data_values' => array('ambiguous'=>true)))))];
