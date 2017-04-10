@@ -124,7 +124,7 @@ class QueryGenerator
     private function simpleSelect ($request, $bucket, $queryStr)
     {
         $requestObj = $request;
-        $requestObj->bucket = 'service';
+        $requestObj->bucket = $bucket;
         $parserinho = new DatabaseParser($requestObj, true); 
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
