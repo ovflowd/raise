@@ -133,12 +133,12 @@ Class QueryGenerator
                     }  
                 }
             } 
-            echo substr($queryStr,0,-4);
-            exit;
             $request->string = substr($queryStr, 0, -4);   
         }
         else
         {
+            echo substr($queryStr,0,-4);
+            exit;
             $request->string = "SELECT * FROM `" . $request->bucket . "`";
         }
         return $request;
