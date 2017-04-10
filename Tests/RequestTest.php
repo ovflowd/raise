@@ -16,7 +16,7 @@ class RequestTester
 		echo $response; 
 	}
 	
-	public function invalidPostTest 
+	public function invalidPostTest()
 	{
 	    $url = "http://{$this->raise_ip}/client/register";
 	    	$body = json_encode(array("name" => "TESTE_ERRADO",
