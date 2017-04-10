@@ -18,7 +18,20 @@ class RequestTester
 	
 	public function invalidPostTest()
 	{
-	    
+	    $url = "http://{$this->raise_ip}/client/register";
+	    	$body = json_encode(array("name" => "gladiumbisson",
+				  "chipset" => "arm",
+			      "mac" => "0a:00:27:00:00:00",
+			      "serial" => "7ARET90OIPUU",
+			      "processor" => "amd-64",
+			      "channel" => "olfato",
+						"timestamp" => round(microtime(true) *1000)
+						));
+
+		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+		echo "Complete client insertion: " . "<br>";
+		echo $response;
+		return $response;
 	}	
 
 	public function testInsertClient()
