@@ -52,7 +52,7 @@ Class QueryGenerator
             {
                 //dividir cada data chamando uma nova função pra isso
                 if ($request->bucket == "data"){
-                    $request = $this->separateData($request);
+                    $separedData = $this->separateData($request);
                     exit;
                 }
                 $result = $parser->insert($request);
@@ -79,8 +79,7 @@ Class QueryGenerator
         
             echo json_encode($data[$key]);
         }
-        
-        return $request;
+        return $data;
     }
     
     private function generateToken() 
