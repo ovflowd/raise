@@ -246,6 +246,8 @@ class QueryGenerator
                     return $request;
                 } else{
                     var_dump(json_encode($request->getBody())); 
+                    $teste = "hey";
+                    var_dump($teste);
                     exit;
                 }   
                 $request->bucket = 'token';
