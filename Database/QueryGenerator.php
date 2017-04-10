@@ -90,7 +90,7 @@ class QueryGenerator
             $request->bucket = "data";
             return true;    
         }
-        return false;
+        return false; 
     }   
 
     private function generateToken()
