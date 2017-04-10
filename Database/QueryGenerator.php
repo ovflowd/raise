@@ -59,7 +59,9 @@ Class QueryGenerator
                         $result = $parser->insert($request);
                     }
                 }
-                $result = $parser->insert($request);
+                else {
+                    $result = $parser->insert($request);
+                }
             }
             return $result;
         }
