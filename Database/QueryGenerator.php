@@ -244,7 +244,7 @@ class QueryGenerator
                     $request->setResponseCode(400);
                     $request->setValid(false);
                     return $request;
-                }
+                }  
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
