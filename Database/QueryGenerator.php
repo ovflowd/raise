@@ -74,6 +74,7 @@ class QueryGenerator
             $data = array('service_id' => $serviceId, 'data_values' => $dataValues);
             $composedData[$key] = array('token' => $token, 'data' => $data);
         }
+        
         return $composedData;
     }
 
@@ -120,6 +121,15 @@ class QueryGenerator
         return $request;
     }
 
+    private function simpleSelect ()
+    {
+        $requestObj = $request;
+        $requestObj->bucket = 'service';
+        $parserinho = new DatabaseParser($requestObj, true);
+        $requestObj->string = 'select * from service order by service.services[0].service_id desc limit 1';
+        $Testando = $parserinho->select($requestObj);
+        return $Testando;
+    }
     private function validateToken($result, $request, $nextBucket)
     {
         if (isset($result['values'][0])) {
@@ -134,11 +144,6 @@ class QueryGenerator
                 $services = array();
 
                 if ($nextBucket == 'service') {
-                    $requestObj = $request;
-                    $requestObj->bucket = 'service';
-                    $parserinho = new DatabaseParser($requestObj, true);
-                    $requestObj->string = 'select * from service order by service.services[0].service_id desc limit 1';
-                    $Testando = $parserinho->select($requestObj);
                     $lastIndex = count($Testando['values'][0]->services);
                     $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
 
