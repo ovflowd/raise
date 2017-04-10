@@ -48,7 +48,7 @@ class QueryGenerator
                 if ($request->bucket == 'data') {
                     $separedData = $this->separateData($request);
                     if (!$request->isValid()){
-                         return (new MessageOutPut())->messageHttp($request->getReponseCode());
+                        return (new MessageOutPut())->messageHttp($request->getReponseCode());
                     }
                     foreach ($separedData as $key => $data) {
                         $request->treatedBody = json_encode($separedData[$key]);
@@ -74,7 +74,7 @@ class QueryGenerator
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
             if (!$this->validateId($request, $serviceId)){
-                $request->setResponseCode(401);
+                $request->setResponseCode(400);
                 $request->setValid(false);
             }
             $dataValues = $objData->data[$key]->data_values;
