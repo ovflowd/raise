@@ -9,6 +9,6 @@ $tester = new RequestTester();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 $tester->testAutoRegister(); 
-echo '<br>'."Testando POST Invalido".'<br>';
+echo '<br><br><br>'."Testando POST Invalido".'<br><br>';
 $tester->invalidPostTest();
 //$tester->registerServices("80ad313c43dbfe095cc5d76c4029f499");
