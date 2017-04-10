@@ -70,7 +70,7 @@ class QueryGenerator
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
-            
+            validateId($serviceId);
             $dataValues = $objData->data[$key]->data_values;
             $data = array('service_id' => $serviceId, 'data_values' => $dataValues);
             $composedData[$key] = array('token' => $token, 'data' => $data);
