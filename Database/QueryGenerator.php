@@ -52,6 +52,7 @@ Class QueryGenerator
             {
                 //dividir cada data chamando uma nova função pra isso
                 if ($request->bucket == "data"){
+                    echo $request->treatedBody;
                     $separedData = $this->separateData($request);
                     foreach ($separedData as $key => $data)
                     {
