@@ -134,7 +134,8 @@ class RequestTester
 			echo "<br><br>"; 
 			$postData = $this->postData($dados); 
             $dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[1] , 'data_values' => array('ambiguous'=>false)))))];
-			$postData = $this->postData($dados); 
+			$postData = $this->postData($dados);
+			return $token;
 	} 
 
 }
