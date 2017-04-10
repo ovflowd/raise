@@ -44,7 +44,7 @@ class RequestTester
 						'tokenId' => $token
 						)); 
 
-		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete service insertion: " . "<br>";
 		echo $response;
 		return $response;
