@@ -30,7 +30,7 @@ class RequestTester
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete client insertion: " . "<br>";  
-		echo $response;
+		echo $response; 
 		return $response;
 	}	
 	
