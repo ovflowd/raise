@@ -57,6 +57,7 @@ Class QueryGenerator
                     foreach ($separedData as $key => $data)
                     {
                         $request->treatedBody = json_encode($separedData[$key]);
+                        echo "      ".$request->treatedBody;
                         $result = $parser->insert($request); 
                     }  
                 }
