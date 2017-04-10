@@ -82,6 +82,7 @@ class QueryGenerator
     private function validateId($serviceId)
     {
         $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = \$$serviceId");
+        
     }
 
     private function generateToken()
