@@ -221,7 +221,7 @@ Class QueryGenerator
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
                 if (json_encode($request->getBody()) === NULL){
-                    $request->setResponseCode(401); 
+                    $request->setResponseCode(400); 
                     $request->setValid(false);  
                     return FALSE;
                 }
