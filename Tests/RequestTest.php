@@ -28,8 +28,10 @@ class RequestTester
 			      "channel" => "olfato",
 						"timestamp" => round(microtime(true) *1000)
 						));
-
-		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+        if (!$isValidTest){
+            $body = json_encode($body);
+        }
+		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete client insertion: " . "<br>";
 		echo $response;
 		return $response;
