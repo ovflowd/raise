@@ -9,6 +9,7 @@ $tester = new RequestTester();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 
-$tester->testAutoRegister(); 
+//$tester->testAutoRegister(); 
 
+$tester->invalidPostTest();
 //$tester->registerServices("80ad313c43dbfe095cc5d76c4029f499");
