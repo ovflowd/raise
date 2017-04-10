@@ -76,6 +76,7 @@ Class QueryGenerator
                                 "service_id" => $serviceId,
                                 "data_values" => $dataValues);
         }
+        var_dump ($data);
         return $request;
     }
     
