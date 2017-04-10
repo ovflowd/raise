@@ -130,6 +130,7 @@ class QueryGenerator
         $Testando = $parserinho->select($requestObj);
         return $Testando;
     }
+    
     private function validateToken($result, $request, $nextBucket)
     {
         if (isset($result['values'][0])) {
