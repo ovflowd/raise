@@ -16,41 +16,7 @@ class RequestTester
 		echo $response; 
 	}
 	
-	public function invalidClientPostTest()
-	{
-	    $url = "http://{$this->raise_ip}/client/register";
-	    	$body = json_encode(array("name" => "TESTE_ERRADO",
-				  "chipset" => "arm",
-			      "mac" => "0a:00:27:00:00:00",
-			      "serial" => "7ARET90OIPUU",
-			      "processor" => "amd-64",
-			      "channel" => "olfato",
-						"timestamp" => round(microtime(true) *1000)
-						));
-
-		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
-		echo "Complete client insertion: " . "<br>";  
-		echo $response; 
-		return $response;
-	}	
-	
-	public function invalidServicePostTest($token)   
-	{
-		$url = "http://{$this->raise_ip}/service/register";
-
-		$body = json_encode(array(
-					"services" => array(array('name'=>'TESTANDO_SERVICO_TUDO','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
-						"timestamp" => round(microtime(true) *1000),
-						'tokenId' => $token
-						)); 
-
-		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
-		echo "Complete service insertion: " . "<br>";
-		echo $response;
-		return $response;
-	}
-
-	public function testInsertClient()
+	public function testInsertClient($isValidTest)
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
@@ -69,7 +35,7 @@ class RequestTester
 		return $response;
 	}
  
-	public function registerServices($token, $validTest)
+	public function registerServices($token, $isValidTest)
 	{
 		$url = "http://{$this->raise_ip}/service/register";
 
@@ -79,9 +45,9 @@ class RequestTester
 						'tokenId' => $token
 						));
 
-        if (!$validTest){
+        if (!$isValidTest){
             $body = json_encode($body);
-        }
+        } 
 		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete service insertion: " . "<br>";
 		echo $response;
