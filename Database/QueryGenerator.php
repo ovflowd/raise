@@ -24,7 +24,6 @@ Class QueryGenerator
     public function generate($request) 
     {
         if ($request->bucket == "service" && $request->getMethod() == "post"){
-            //service first time
             $parsedPath = $this->parsePath($request, true);
             
             if ($parsedPath !== FALSE && $parsedPath->isValid() === TRUE) {
@@ -36,7 +35,6 @@ Class QueryGenerator
             {
                 return (new MessageOutPut)->messageHttp($request->getReponseCode());
             }
-            //service second time
             $parsedPath = $this->parsePath($request, false);
         } else {
             $parsedPath = $this->parsePath($request, false);
@@ -223,7 +221,7 @@ Class QueryGenerator
                 if (json_encode($request->getBody()) == "null"){
                     $request->setResponseCode(400); 
                     $request->setValid(false);  
-                    return FALSE;
+                    return $request;
                 }
                 $request->bucket = "token";
                 $request->token = $this->generateToken();
