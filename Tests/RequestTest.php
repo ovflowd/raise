@@ -35,7 +35,7 @@ class RequestTester
 		echo "Complete client insertion: " . "<br>";
 		echo $response;
 		return $response;
-	}  
+	}   
  
 	public function registerServices($token, $isValidTest)
 	{
