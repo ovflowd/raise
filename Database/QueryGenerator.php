@@ -52,7 +52,8 @@ Class QueryGenerator
             {
                 //dividir cada data chamando uma nova função pra isso
                 if ($request->bucket == "data"){
-                    $this->separateData($request);
+                    $request = $this->separateData($request);
+                    exit;
                 }
                 $result = $parser->insert($request);
             }
