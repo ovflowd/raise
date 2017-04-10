@@ -125,7 +125,7 @@ class QueryGenerator
     {
         $requestObj = $request;
         $requestObj->bucket = 'service';
-        $parserinho = new DatabaseParser($requestObj, true);
+        $parserinho = new DatabaseParser($requestObj, true); 
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
         return $Testando;
