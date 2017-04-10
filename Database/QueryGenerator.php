@@ -57,7 +57,7 @@ class QueryGenerator
                 } else {
                     $result = $parser->insert($request);
                 }
-            }
+            } 
 
             return $result;
         } elseif ($parsedPath->isValid() === false) {
