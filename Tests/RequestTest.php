@@ -68,7 +68,7 @@ class RequestTester
 		echo $response;
 		return $response;
 	}
-
+ 
 	public function registerServices($token)
 	{
 		$url = "http://{$this->raise_ip}/service/register";
