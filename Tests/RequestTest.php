@@ -92,7 +92,7 @@ class RequestTester
 			$service = json_decode($serv_response)->services;
 			
 			foreach (json_decode($serv_response)->services as $key => $service){
-			    echo json_decode($serv_response)->services[$key]->service_id;
+			    echo '<br>'.json_decode($serv_response)->services[$key]->service_id.'<br>';
 			}
 			break;
 			$dados = [ 'token' => $token,  "data" => (array((array('service_id' => 0 , 'data_values' => array('ambiguous'=>true)))))];
