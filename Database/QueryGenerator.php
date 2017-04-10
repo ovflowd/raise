@@ -93,13 +93,13 @@ Class QueryGenerator
                     $chave = $key; 
                 }
                 
-                if (is_numeric($parameter)) 
+                if (is_numeric($parameter) && !$jumpCondition) 
                 {
                     $typeVerification[$key] = (int)$parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
                 }
-                else
+                else if (!$jumpCondition)
                 {
                     if ($key !== "tokenId"){
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
