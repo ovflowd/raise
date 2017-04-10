@@ -81,7 +81,7 @@ class QueryGenerator
     
     private function validateId($request, $serviceId)
     {
-        $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = 1");
+        $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = 2");
         echo count ($Testando["values"]);
         var_dump ($Testando);
         exit;  
