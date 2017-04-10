@@ -23,7 +23,7 @@ use Raise\Treaters\MessageOutPut;
 use Raise\Treaters\Config;
 
 class DatabaseParser
-{
+{ 
     private $serverAddress;
     private $bucket; 
  
