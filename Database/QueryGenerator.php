@@ -82,6 +82,7 @@ Class QueryGenerator
                 }
                 else if ($request->bucket == "data" && $key == "service_id" ) 
                 {  
+                    $queryStr = "SELECT * FROM data d UNNEST d.data c WHERE c.service_id = ".$key;
                     $chave = "data.data[0]." . $key;
                 }
                 else if ($key == "tokenId"){
