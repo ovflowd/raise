@@ -67,7 +67,9 @@ Class QueryGenerator
     
     private function separateData($request)
     {
+        $objData = json_decode($request->treatedBody, false);
         var_dump(json_decode($request->treatedBody, false));
+        foreach 
         return $request;
     }
     
