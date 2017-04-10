@@ -69,7 +69,7 @@ class RequestTester
 		return $response;
 	}
  
-	public function registerServices($token)
+	public function registerServices($token, $validTest)
 	{
 		$url = "http://{$this->raise_ip}/service/register";
 
@@ -79,6 +79,9 @@ class RequestTester
 						'tokenId' => $token
 						));
 
+        if (!$validTest){
+            
+        }
 		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete service insertion: " . "<br>";
 		echo $response;
