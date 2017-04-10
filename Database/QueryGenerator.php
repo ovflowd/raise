@@ -50,7 +50,6 @@ Class QueryGenerator
             }
             elseif ($request->getMethod() == "post") 
             {
-                //dividir cada data chamando uma nova função pra isso
                 if ($request->bucket == "data"){
                     //echo $request->treatedBody;
                     $separedData = $this->separateData($request);
