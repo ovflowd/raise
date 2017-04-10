@@ -224,7 +224,11 @@ Class QueryGenerator
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
-                echo json_encode($request->getBody());
+                if (json_encode($request->getBody()) === NULL){
+                    $request->setResponseCode(401); 
+                    $request->setValid(false);  
+                    return FALSE;
+                }
                 exit;
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
