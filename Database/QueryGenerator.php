@@ -237,7 +237,6 @@ class QueryGenerator
                     $request->setResponseCode(200);
                     $request->setValid(true);
                 }
-            } else { //Mini JSON validation 
                 if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 ||
                     substr(json_encode($request->getBody()), 0, 1) != "{") {
                     $request->setResponseCode(400);  
