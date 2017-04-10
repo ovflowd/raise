@@ -94,7 +94,7 @@ Class QueryGenerator
                     $chave = $key; 
                 }
                 
-                if (is_numeric($parameter) 
+                if (is_numeric($parameter)) 
                 {
                     $typeVerification[$key] = (int)$parameter;
                     $request->setParameters($typeVerification);
@@ -108,7 +108,6 @@ Class QueryGenerator
                 }
             } 
             $request->string = substr($queryStr, 0, -4);   
-            echo $request->string;
         }
         else
         {
