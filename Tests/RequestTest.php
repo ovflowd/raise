@@ -48,7 +48,7 @@ class RequestTester
 						));
 
         if (!$isValidTest){
-            $body = json_encode($body);
+            $body = json_encode($body); 
         } 
 		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
 		echo "Complete service insertion: " . "<br>";
