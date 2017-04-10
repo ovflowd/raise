@@ -68,7 +68,7 @@ Class QueryGenerator
     private function separateData($request)
     {
         $objData = json_decode($request->treatedBody, false);
-        var_dump($objData->data[$key]->service_id);
+        var_dump($objData->data);
         foreach ($objData->data  as $key => $service){
             var_dump($objData->data[$key]->service_id);
         }
