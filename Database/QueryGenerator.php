@@ -139,7 +139,7 @@ Class QueryGenerator
         {
             $request->string = "SELECT * FROM `" . $request->bucket . "`";
             if ($request->bucket == "data"){
-                $request->string = "SELECT * FROM data.data";
+                $request->string = "SELECT data.data FROM data";
             }
         }
         return $request;
