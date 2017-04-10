@@ -220,15 +220,15 @@ Class QueryGenerator
             
             if ($request->getPath() ['bucket'] === "client" && $request->getPath() ['method'] == "register") 
             {
-                $request->bucket = "token";
-                $request->token = $this->generateToken();
-                $tokenIni = round(microtime(true) * 1000);
-                $tokenFim = $tokenIni + 7200000; //millisecons
                 if (json_encode($request->getBody()) === NULL){
                     $request->setResponseCode(401); 
                     $request->setValid(false);  
                     return FALSE;
                 }
+                $request->bucket = "token";
+                $request->token = $this->generateToken();
+                $tokenIni = round(microtime(true) * 1000);
+                $tokenFim = $tokenIni + 7200000; //millisecons
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
