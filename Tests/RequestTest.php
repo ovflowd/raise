@@ -15,6 +15,11 @@ class RequestTester
 		echo "All clients response: ". '<br>';
 		echo $response; 
 	}
+	
+	public function invalidPostTest()
+	{
+	    
+	}	
 
 	public function testInsertClient()
 	{
