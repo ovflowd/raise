@@ -85,7 +85,7 @@ class QueryGenerator
         echo count ($Testando["values"]);
         var_dump ($Testando);
         exit;  
-    }  
+    }   
 
     private function generateToken()
     {
