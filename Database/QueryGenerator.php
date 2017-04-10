@@ -67,7 +67,7 @@ Class QueryGenerator
     
     private function separateData($request)
     {
-        echo $request->treatedBody();
+        echo $request->treatedBody;
         return $request;
     }
     
