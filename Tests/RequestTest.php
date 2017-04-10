@@ -63,7 +63,7 @@ class RequestTester
 		$body = json_encode($data);
 
 		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
-		echo "Complete data insertion: " . "<br>";
+		echo '<br>'."Complete data insertion: " . '<br>';
 		echo $response;
 		return $response;
 	}
