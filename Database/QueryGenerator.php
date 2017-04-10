@@ -73,7 +73,10 @@ class QueryGenerator
         $composedData = array();
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
-            
+            if (!$this->validateId($request, $serviceId)){
+                $request->setResponseCode(400);
+                $request->setValid(false);
+            }
             $dataValues = $objData->data[$key]->data_values;
             $data = array('service_id' => $serviceId, 'data_values' => $dataValues);
             $composedData[$key] = array('token' => $token, 'data' => $data);
@@ -85,6 +88,7 @@ class QueryGenerator
     {
         $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = ".$namedParam, $namedParam);
         if (count ($Testando["values"]) > 0){
+            $request->bucket = "data";
             return true;   
         }
         return false;
