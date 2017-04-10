@@ -133,6 +133,7 @@ Class QueryGenerator
                     }  
                 }
             } 
+            echo substr($queryStr,0,-4);
             $request->string = substr($queryStr, 0, -4);   
         }
         else
