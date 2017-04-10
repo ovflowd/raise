@@ -105,7 +105,7 @@ Class QueryGenerator
             { 
                 if ($request->bucket == "data" && $key !== "service_id" && $key !== "tokenId") 
                 {  
-                    $chave = "data.data_values." . $key;
+                    $chave = "data.data.data_values." . $key;
                 }
                 else if ($request->bucket == "data" && $key == "service_id" ) 
                 {  
@@ -135,8 +135,6 @@ Class QueryGenerator
                 }
             } 
             $request->string = substr($queryStr, 0, -4);   
-            echo $request->string;
-            exit; 
         }
         else
         {
