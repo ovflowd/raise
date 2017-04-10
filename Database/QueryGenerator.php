@@ -136,6 +136,8 @@ class QueryGenerator
         $parserinho = new DatabaseParser($requestObj, true); 
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
+        echo "done";
+        exit;
         return $Testando;
     }
     
