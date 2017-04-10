@@ -92,7 +92,7 @@ class RequestTester
 			echo "<br><br>";  
 			//$token = "BatatossauroTraps";
 			sleep(1); //necessário devido ao delay do couchbase )= 
-			$serv_response = $this->registerServices($token);
+			$serv_response = $this->registerServices($token, true);
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
 			
