@@ -82,8 +82,10 @@ class QueryGenerator
     private function validateId($request, $namedParam)
     {
         $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = ".$namedParam, $namedParam);
-        echo count ($Testando["values"]);
-        
+        if (count ($Testando["values"]) > 0){
+            return true;   
+        }
+        return false;
     }   
 
     private function generateToken()
