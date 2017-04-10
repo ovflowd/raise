@@ -284,13 +284,13 @@ Class QueryGenerator
                             }
                             else
                             {
-                                //bad request
+                                exit('bad request');
                             }
                         }
                     }
                     else
                     {
-                        //bad request
+                        exit('bad request');
                     }
                 }
                 
