@@ -16,7 +16,7 @@ class RequestTester
 		echo $response; 
 	}
 	
-	public function testInsertClient($isValidTest)
+	public function testInsertClient($isValidTest) 
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
@@ -92,7 +92,7 @@ class RequestTester
 			echo "<br><br>";  
 			//$token = "BatatossauroTraps";
 			sleep(1); //necessário devido ao delay do couchbase )= 
-			$serv_response = $this->registerServices($token, true);
+			$serv_response = $this->registerServices($token, true); 
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
 			
