@@ -121,7 +121,7 @@ class QueryGenerator
         return $request;
     }
 
-    private function simpleSelect ($request, $queryStr)
+    private function simpleSelect ($request, $bucket, $queryStr)
     {
         $requestObj = $request;
         $requestObj->bucket = 'service';
