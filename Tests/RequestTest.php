@@ -96,10 +96,10 @@ class RequestTester
 			    $aServicesId[$key] = json_decode($serv_response)->services[$key]->service_id;
 			}
 			
-			$dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServiceId[0] , 'data_values' => array('ambiguous'=>true)))))];
+			$dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[0] , 'data_values' => array('ambiguous'=>true)))))];
 			echo "<br><br>"; 
 			$postData = $this->postData($dados); 
-            $dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServiceId[1] , 'data_values' => array('ambiguous'=>false)))))];
+            $dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[1] , 'data_values' => array('ambiguous'=>false)))))];
 			$postData = $this->postData($dados); 
 	} 
 
