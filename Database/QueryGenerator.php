@@ -51,6 +51,9 @@ Class QueryGenerator
             elseif ($request->getMethod() == "post") 
             {
                 //dividir cada data chamando uma nova função pra isso
+                if ($request->bucket == "data"){
+                    $this->separateData($request);
+                }
                 $result = $parser->insert($request);
             }
             return $result;
