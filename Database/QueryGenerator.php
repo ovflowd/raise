@@ -80,7 +80,7 @@ class QueryGenerator
             $composedData[$key] = array('token' => $objData->token, 'data' => $data);
         }
         return $composedData;
-    } 
+    }  
     
     private function validateServiceId($request, $namedParam)
     { 
