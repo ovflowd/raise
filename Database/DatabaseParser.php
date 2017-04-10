@@ -81,7 +81,7 @@ class DatabaseParser
 
     private function treatData($untreatedResp)
     { 
-        for ($i = 0; $i < count($untreatedResp["values"]); $i ++){
+        /*for ($i = 0; $i < count($untreatedResp["values"]); $i ++){
             unset($untreatedResp["values"][$i]->token); 
             for ($j = 0 ; $j < count($dataValues = $untreatedResp["values"][$i]->data); $j ++)
             {
@@ -91,7 +91,7 @@ class DatabaseParser
             $untreatedResp["values"][$i]->data_values = $dataValues[0]->data_values;
             $untreatedResp["values"][$i]->service_id = $dataValues[0]->service_id;
         } 
-        return $untreatedResp;  
+        return $untreatedResp;  */
     }
     
     private function parseResult($result, $request)
