@@ -245,7 +245,7 @@ class QueryGenerator
                     $request->setValid(false);
                     return $request;
                 } else{
-                    var_dump(json_encode($request->getBody()));
+                    var_dump(json_encode($request->getBody())); 
                     exit;
                 }   
                 $request->bucket = 'token';
