@@ -307,7 +307,6 @@ class QueryGenerator
                 $arrayTest = $request->getBody();
                 if ($this->validateExpirationToken($request, $request->token)) {
                     $request->treatedBody = json_encode($request->getBody());
-
                     return $request;
                 } else {
                     $request->setResponseCode(401);
