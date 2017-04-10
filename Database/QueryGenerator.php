@@ -76,8 +76,10 @@ Class QueryGenerator
             $data[$key] = array("token" => $token,
                                 "service_id" => $serviceId,
                                 "data_values" => $dataValues);
+        
+            echo json_encode($data[$key]);
         }
-        var_dump ($data);
+        
         return $request;
     }
     
