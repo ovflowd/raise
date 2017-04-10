@@ -267,13 +267,19 @@ Class QueryGenerator
                 //valida se os serviços enviados fazem parte do token 
                 if(isset($request->getBody()['services']))
                 {
+                    $token = $request->getBody()['token'];
+                    
                     $service_list = $request->getBody()['services'];
                     if(is_array($service_list))
                     {
                         foreach($service_list as $service)
                         {
-                            if(is_int($service))
+                            if(is_numeric($service))
                             {
+                                // 8 AND services.tokenId = '3c2c5efe23a553eb67db560e865b6bcd'
+                                $request->string = "SELECT * FROM service services UNNEST services.services c WHERE c.service_id = \$$service AND services.tokenId =\$$token" ;
+                                
+                                exit($request->string);
                                 
                             }
                             else
