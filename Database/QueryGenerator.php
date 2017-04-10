@@ -76,15 +76,14 @@ Class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             { 
-                $jumpCondition = false;
                 if ($request->bucket == "data" && $key !== "service_id" && $key !== "tokenId") 
                 {  
                     $chave = "data.data_values." . $key;
                 }
                 else if ($request->bucket == "data" && $key == "service_id" ) 
                 {  
-                    $queryStr = "SELECT * FROM data d UNNEST d.data c WHERE c.service_id "." = \$$key"." AND";
-                    $jumpCondition = true;
+                    $chave = "data.data[0]." . $key;
+                    //$queryStr = "SELECT * FROM data d UNNEST d.data c WHERE c.service_id = ".$key;
                 }
                 else if ($key == "tokenId"){
                     $chave  = "token";
@@ -94,13 +93,13 @@ Class QueryGenerator
                     $chave = $key; 
                 }
                 
-                if (is_numeric($parameter) && !$jumpCondition) 
+                if (is_numeric($parameter)) 
                 {
                     $typeVerification[$key] = (int)$parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr . " " . $chave . " = \$$key" . "AND ";
                 }
-                else if (!$jumpCondition)
+                else
                 {
                     if ($key !== "tokenId"){
                         $queryStr = $queryStr . " " . $chave . " LIKE \$$key" . " AND ";    
