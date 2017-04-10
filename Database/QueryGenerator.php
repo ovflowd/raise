@@ -134,6 +134,10 @@ class QueryGenerator
     {
         $requestObj = $request;
         $requestObj->bucket = $bucket;
+        if ($namedParam !== null)
+        {
+            $requestObj-> setParameters(array('service_id' => $namedParam));
+        }
         $parserinho = new DatabaseParser($requestObj, true); 
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
