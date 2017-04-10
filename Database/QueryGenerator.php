@@ -229,7 +229,6 @@ Class QueryGenerator
                     $request->setValid(false);  
                     return FALSE;
                 }
-                exit;
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
