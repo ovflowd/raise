@@ -53,7 +53,11 @@ Class QueryGenerator
                 //dividir cada data chamando uma nova função pra isso
                 if ($request->bucket == "data"){
                     $separedData = $this->separateData($request);
-                    exit;
+                    foreach ($separedData as $key => $data)
+                    {
+                        $request->treatedBody = json_encode($separedData[$key]);
+                        $result = $parser->insert($request);
+                    }
                 }
                 $result = $parser->insert($request);
             }
@@ -76,8 +80,6 @@ Class QueryGenerator
             $data[$key] = array("token" => $token,
                                 "service_id" => $serviceId,
                                 "data_values" => $dataValues);
-        
-            echo json_encode($data[$key]);
         }
         return $data;
     }
