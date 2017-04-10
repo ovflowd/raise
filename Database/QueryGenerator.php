@@ -244,7 +244,7 @@ class QueryGenerator
                     $request->setResponseCode(400);
                     $request->setValid(false);
                     return $request;
-                } else if(){
+                } else if(json_encode($request->getBody()) == 'null'){
                     
                 }
                 $request->bucket = 'token';
