@@ -137,9 +137,8 @@ Class QueryGenerator
         }
         else
         {
-            echo substr($queryStr,0,-4);
+            echo  $request->string = "SELECT * FROM `" . $request->bucket . "`";
             exit;
-            $request->string = "SELECT * FROM `" . $request->bucket . "`";
         }
         return $request;
     }
