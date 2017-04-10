@@ -137,8 +137,10 @@ Class QueryGenerator
         }
         else
         {
-            echo  $request->string = "SELECT * FROM `" . $request->bucket . "`";
-            exit;
+            $request->string = "SELECT * FROM `" . $request->bucket . "`";
+            if ($request->bucket == "data"){
+                $request->string = "SELECT * FROM ` data.data`";
+            }
         }
         return $request;
     }
