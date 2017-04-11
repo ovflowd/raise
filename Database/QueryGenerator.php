@@ -74,8 +74,11 @@ class QueryGenerator
                         $result = $parser->insert($request);
                     }
                 }
-                else
+                else 
                 {
+                    if ($request->getPath() ['method'] == 'revalidate'){
+                        
+                    }
                     $result = $parser->insert($request);
                 }
             }
