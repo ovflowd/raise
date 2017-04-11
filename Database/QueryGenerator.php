@@ -415,7 +415,7 @@ class QueryGenerator
                     ))));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
-                    exit("Done");
+                    exit($newDocument->tokenId);
                 }
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
