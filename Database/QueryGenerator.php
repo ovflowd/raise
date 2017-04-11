@@ -405,8 +405,6 @@ class QueryGenerator
                     $request->bucket = 'service';
                     $request->treatedBody = json_encode($newDocument);  
                     $parser = new DatabaseParser($request, false);
-                    var_dump($request->treatedBody);
-                    exit;
                     $parser->insert($request); 
                     
                     $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
