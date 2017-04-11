@@ -301,9 +301,9 @@ class QueryGenerator
                    
                    $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
                    $oldTokenDocument = json_encode($this->simpleSelect($request, 'client', $queryStr, null)["values"][0]);
-                   var_dump(json_decode($oldTokenDocument,false)); 
                    unset(json_decode($oldTokenDocument,false)->services); 
-                   exit;
+                   var_dump(json_decode($oldTokenDocument,false)); 
+                   exit; 
                    
                    $request->bucket = 'token';
                    $request->token = $newDocument->tokenId; 
