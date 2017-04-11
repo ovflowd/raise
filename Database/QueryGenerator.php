@@ -22,14 +22,14 @@ use Raise\Treaters\MessageOutPut;
 
 class QueryGenerator
 {
-    
-    public function generate($request) 
+
+    public function generate($request)
     {
-        
-        if ($request->bucket == 'service' && $request->getMethod() == 'post') 
+
+        if ($request->bucket == 'service' && $request->getMethod() == 'post')
         {
             $parsedPath = $this->parsePath($request, true);
-            
+
             if ($parsedPath !== false && $parsedPath->isValid() === true) 
             {
                 //not a simple query
@@ -275,7 +275,6 @@ class QueryGenerator
         }
         return $request;
     }
-    
     private function validateExpirationToken($request, $token) 
     {
         $database = (new DatabaseParser($request, false))->getBucket();
@@ -377,9 +376,7 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                $services = json_decode($request->getBody() ['services']);
-                var_dump($services);exit;
-                
+                //$services = $request->getBody() ['services'];
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
@@ -387,17 +384,7 @@ class QueryGenerator
                 if ($oldDocument !== "null") 
                 {
                     
-                    $services = json_decode($oldDocument)->services;
-                    $validServices = array();
-                    
-                    foreach($services as $service)
-                    {
-                       $validServices[] = $service->service_id;
-                    }
-                    
-                    var_dump($validServices);
-                    
-                    exit;
+                    var_dump($oldDocument);exit;
                     
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
