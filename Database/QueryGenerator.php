@@ -298,6 +298,8 @@ class QueryGenerator
                    $newDocument = json_decode($oldDocument, false);
                    $newDocument->tokenId = $this->generateToken(); 
                    
+                   
+                   $this->simpleSelect();
                    $request->bucket = 'token';
                    $request->token = $newDocument->tokenId; 
                    $tokenIni = round(microtime(true) * 1000);
