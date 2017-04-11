@@ -236,7 +236,7 @@ class CouchBaseInterfacer{
 				"message"=> "string",
 				"tokenId"=> "string",
 			)
-		));
+	));
 
 		$get_service= "get_service";
 
@@ -245,8 +245,9 @@ class CouchBaseInterfacer{
 			"bucket"=>"service",
 			"input"=>array(
 				"tokenId"=> "string",
-				"name"=> "string",
-				"service_id", => 0			),
+				"service_id" => 0,
+				"name"=> "string"
+			),
 			"output"=>array(
 				"code"=> 0,
 		  	    "values"=> [array(
