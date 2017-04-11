@@ -246,7 +246,7 @@ class QueryGenerator
                 }   
             }
             
-            $request->getPath() ['method'] === 'revalidate'{
+            if ($request->getPath() ['method'] === 'revalidate'){
                 
             } 
              
