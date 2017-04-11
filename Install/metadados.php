@@ -245,10 +245,11 @@ class CouchBaseInterfacer{
 			"bucket"=>"service",
 			"input"=>array(
 				"tokenId"=> "string"
+				""
 			),
 			"output"=>array(
 				"code"=> 0,
-		  	"values"=> [array(
+		  	    "values"=> [array(
 			  	"id"=> 0,
 			  	"header_code"=> 0,
 			  	"message"=> "string"
@@ -266,8 +267,8 @@ class CouchBaseInterfacer{
 				"timestamp"=>"string",
 				"services"=>[array(
 					"name"=> "string",
-		  		"return"=> "string",
-		  		"params"=> [array(
+    		  		"return"=> "string",
+    		  		"params"=> [array(
 		  			"name"=> "string",
 		  			"type"=> "string"
 		      )]
