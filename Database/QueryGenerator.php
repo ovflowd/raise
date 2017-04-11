@@ -306,8 +306,8 @@ class QueryGenerator
                    var_dump(json_encode(array_merge($oldTokenDocument, array(
                         'tokenId' => $request->token,
                         'time_ini' => $tokenIni,
-                        'time_fim' => $tokenFim,
-                    ))));
+                        'time_fim' => $tokenFim, 
+                    )))); 
                    exit;  
                    
                    $request->bucket = 'token';
