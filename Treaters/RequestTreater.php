@@ -163,7 +163,7 @@ class RequestTreater
         }
     }
 
-    private function validateRevalidate()
+    private function validateRevalidate($request, $parameters)
     {
         
     }
