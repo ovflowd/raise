@@ -129,7 +129,7 @@ class DatabaseParser
         } catch(CouchbaseException $e)  
         {
             return (new MessageOutPut())->messageHttp($e->getCode());
-        }
+        } 
     } 
   
     //Method for performing a select query on the database. 
