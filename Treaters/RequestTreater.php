@@ -152,7 +152,9 @@ class RequestTreater
                 return $this->validationMethodGet($request, $parameters);
             break;
             case 'post':
-                if ($request->['bucket'] == 'client')
+                if ($request->['bucket'] == 'client' && $request->getPath() ['method'] == 'revalidate'){
+                    return validateRevalidate ($request, $parameters);
+                }
                 return $this->validationMethodPost($request, $parameters);
             break;
         }
