@@ -282,8 +282,6 @@ class QueryGenerator
                 //create Client
                 //end create
             } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
-                 echo "here";
-                   
                 //valida se os serviços enviados fazem parte do token
                 if (isset($request->getBody()['services'])) {
                     $token = $request->getBody()['tokenId'];
