@@ -248,8 +248,6 @@ class QueryGenerator
                 exit ($token); 
             }
             
-             
-             
             if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') {
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
