@@ -112,7 +112,7 @@ class DatabaseParser
 
     //Method for performing a insert query on the database.
     //return string 
-    public function insert($requestObj)
+    public function insert($requestObj, $isRevalidate)
     { 
         try
         { 
