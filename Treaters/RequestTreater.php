@@ -244,7 +244,6 @@ class RequestTreater
         if ($database->query($query)->rows[0]->{'$1'} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
-            $request->token = 
             return false;
         }
         return true;
