@@ -377,7 +377,9 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                //$services = json_encode($request->getBody() ['services']);
+                $services = json_encode($request->getBody() ['services']);
+                var_dump($services);exit;
+                
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
