@@ -414,7 +414,7 @@ class QueryGenerator
                         'time_fim' => $tokenFim,
                     ))));
                     $parser = new DatabaseParser($request, false);
-                    $parser->insert($request);
+                    $parser->insert($request); 
                     exit($newDocument->tokenId);
                 }
             }
