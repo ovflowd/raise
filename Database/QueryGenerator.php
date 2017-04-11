@@ -306,11 +306,10 @@ class QueryGenerator
                         'time_ini' => $tokenIni,
                         'time_fim' => $tokenFim,
                     )));
-                $parser = new DatabaseParser($request, false);
-                $parser->insert($request);
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request);
 
-                   
-                   exit(json_encode($newDocument));  
+                    exit(json_encode($newDocument));  
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
