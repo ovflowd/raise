@@ -297,9 +297,8 @@ class QueryGenerator
                    $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null)["values"][0]);
                    $newDocument = json_decode($oldDocument, false);
                    
-                   $request->token = $this->generateToken();
-                   var_dump($newDocument->tokenId);
-                   exit;  
+                   $newDocument->tokenId = $this->generateToken();
+                   exit(json_encode($newDocument));  
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
