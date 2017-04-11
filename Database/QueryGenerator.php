@@ -228,7 +228,7 @@ class QueryGenerator
         $method = $path['method'];
 
         if (!empty($method)) {
-            if ($request->getPath() ['method'] === 'list' ) {
+            if ($request->getPath() ['method'] === 'list') {
                 if (!$this->validateExpirationToken($request,  $request->getParameters() ['tokenId'])) {
                     echo  $request->getParameters() ['tokenId'];  
                     $request->setResponseCode(401);
@@ -245,7 +245,11 @@ class QueryGenerator
                     return $request;   
                 }   
             }
- 
+            
+            $request->getPath() ['method'] === 'revalidate'{
+                
+            } 
+             
             if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') {
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
