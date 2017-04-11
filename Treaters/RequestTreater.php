@@ -108,7 +108,6 @@ class RequestTreater
      */
     private function validate($request)
     {
-        echo "here";
         if ($this->emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request)) {
             $request->setResponseCode(200);
             $request->setValid(true);
