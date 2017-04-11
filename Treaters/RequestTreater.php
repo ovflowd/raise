@@ -230,7 +230,6 @@ class RequestTreater
         if (!empty(array_diff(array_keys((array) $parameters), array_keys($request->getBody())))) {
             $request->setResponseCode(400);
             $request->setValid(false);
-
             return false;
         }
 
@@ -245,7 +244,7 @@ class RequestTreater
         if ($database->query($query)->rows[0]->{'$1'} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
-
+            $request->token = 
             return false;
         }
         return true;
