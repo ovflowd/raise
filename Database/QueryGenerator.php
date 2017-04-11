@@ -297,7 +297,7 @@ class QueryGenerator
                                 exit;
                             } else {
                                 exit('bad request');
-                            }
+                            }  
                         }
                     } else {
                         exit('bad request');
