@@ -214,7 +214,6 @@ class QueryGenerator
         if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
             return false;
         }
-
         return true;
     }
     
