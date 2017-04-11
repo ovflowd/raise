@@ -381,6 +381,9 @@ class QueryGenerator
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
+                ini_set('display_errors', 1);
+                ini_set('display_startup_errors', 1);
+                error_reporting(E_ALL);
                 
                 if ($oldDocument !== "null") 
                 {
