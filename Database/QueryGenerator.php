@@ -432,7 +432,7 @@ class QueryGenerator
                     $oldClientDocumnet->tokenId =  $newDocument->tokenId;
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
                     $parser = new DatabaseParser($request, false);
-                    $parser->insert($request);   
+                    $parser->insert($request, true);   
                     
                     //UPDATOU A PORRA TODA
                     exit($newDocument->tokenId); 
