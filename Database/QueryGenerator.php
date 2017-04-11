@@ -435,7 +435,7 @@ class QueryGenerator
                     $parser->insert($request);   
                     
                     //UPDATOU A PORRA TODA
-                    exit($newDocument->tokenId);
+                    exit($newDocument->tokenId, true); 
                 }
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
