@@ -432,6 +432,8 @@ class QueryGenerator
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
                     var_dump(json_decode(json_encode($oldClientDocument), true));
                     $request->bucket = 'client';
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request);   
                     exit($newDocument->tokenId);
                 }
             }
