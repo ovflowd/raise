@@ -293,7 +293,7 @@ class QueryGenerator
                 if (isset($request->getBody()['services'])) {
                     $token = $request->getBody()['tokenId'];
                    //select do token id 
-                   $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
+                   $queryStr = "SELECT * FROM service WHERE tokenId = '$token'"; 
                    exit ($queryStr);
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
