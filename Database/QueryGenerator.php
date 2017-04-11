@@ -301,7 +301,7 @@ class QueryGenerator
                    
                    $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
                    $oldTokenDocument = json_encode($this->simpleSelect($request, 'client', $queryStr, null)["values"][0]);
-                   var_dump($oldTokenDocument); 
+                   var_dump(json_decode($oldTokenDocument,false)); 
                    //unset($oldTokenDocument);
                    exit;
                    
