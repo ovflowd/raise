@@ -33,7 +33,7 @@ class DatabaseParser
         if ($simpleQuery !== NULL || $simpleQuery === false){
             $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);    
         } else {
-            $this->bucket = $this->connect("service", $this->serverAddress);        
+            $this->bucket = $this->connect($newBucket, $this->serverAddress);        
         }
     }
 
