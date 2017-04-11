@@ -386,11 +386,14 @@ class QueryGenerator
                 {
                     
                     $services = json_decode($oldDocument)->services;
+                    $validServices = array();
                     
                     foreach($services as $service)
                     {
-                       echo $service->service_id . "   ";
+                       $validServices[] = $service->service_id;
                     }
+                    
+                    var_dump($validServices);
                     
                     exit;
                     
