@@ -220,6 +220,8 @@ class RequestTreater
 
     private function validationMethodPost($request, $parameters)
     {
+        echo "here";
+                    
         if (!empty(array_diff(array_keys((array) $parameters), array_keys($request->getBody())))) {
             $request->setResponseCode(400);
             $request->setValid(false);
