@@ -299,6 +299,17 @@ class QueryGenerator
                    
                    $newDocument->tokenId = $this->generateToken(); 
                    
+                   $tokenIni = round(microtime(true) * 1000);
+                   $tokenFim = $tokenIni + 7200000; //millisecons
+                   $request->treatedBody = json_encode(array_merge($request->getBody(), array(
+                        'tokenId' => $request->token,
+                        'time_ini' => $tokenIni,
+                        'time_fim' => $tokenFim,
+                    )));
+                $parser = new DatabaseParser($request, false);
+                $parser->insert($request);
+
+                   
                    exit(json_encode($newDocument));  
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
