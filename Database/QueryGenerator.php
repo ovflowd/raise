@@ -385,7 +385,7 @@ class QueryGenerator
                 if ($oldDocument !== "null") 
                 {
                     
-                    var_dump($oldDocument);exit;
+                    var_dump(json_decode($oldDocument));exit;
                     
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
