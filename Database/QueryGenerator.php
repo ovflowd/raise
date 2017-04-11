@@ -428,9 +428,10 @@ class QueryGenerator
                     $parser->insert($request); 
                     
                     //Updata o client com seu novo tokenId
+                    $request->bucket = 'client';
+                    
                     $oldClientDocumnet->tokenId =  $newDocument->tokenId;
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
-                    $request->bucket = 'client';
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);   
                     
