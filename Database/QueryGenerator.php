@@ -330,21 +330,6 @@ class QueryGenerator
                 }
             }
             
-            if ($request->getPath() ['method'] === 'revalidate') 
-            {
-                
-                if (!$this->validateExpirationToken($request, $request->getBody() ['tokenId'])) 
-                {
-                    $request->setResponseCode(401);
-                    $request->setValid(false);
-                }
-                else
-                {
-                    $request->setResponseCode(200);
-                    $request->setValid(true);
-                }
-            }
-            
             if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') 
             {
                 $request->bucket = 'token';
