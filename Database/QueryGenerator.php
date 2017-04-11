@@ -293,7 +293,7 @@ class QueryGenerator
                                 // 8 AND services.tokenId = '3c2c5efe23a553eb67db560e865b6bcd'
                                 $request->string = "SELECT * FROM service services UNNEST services.services c WHERE c.service_id = \$$service AND services.tokenId =\$$token";
                                 $teste = $this->simpleSelect($request, "service", $request->string, null);
-                                var_dump($teste); 
+                                var_dump($teste);   
                                 exit;
                             } else {
                                 exit('bad request');
@@ -301,7 +301,7 @@ class QueryGenerator
                         }
                     } else {
                         exit('bad request');
-                    }
+                    } 
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
