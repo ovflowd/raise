@@ -401,6 +401,10 @@ class QueryGenerator
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
+                    $request->treatedBody = json_encode($newDocument);  
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request); 
+                    
                     $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
                     $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
                     unset($oldTokenDocument->services);
