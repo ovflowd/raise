@@ -384,6 +384,7 @@ class QueryGenerator
                 $newDocument = json_decode($oldDocument, false);
                 $oldToken = $newDocument->tokenId;
                 $newDocument->tokenId = $this->generateToken();
+                
                 //Insere o novo serviço com nova tokenId no service
                 $request->bucket = 'service';
                 $request->treatedBody = json_encode($newDocument);
