@@ -30,7 +30,7 @@ class DatabaseParser
     public function __construct($requestObj, $newBucket)  
     {
         $this->serverAddress = DB_ADDRESS;
-        if ($simpleQuery !== NULL || $simpleQuery === false){
+        if ($simpleQuery !== NULL || $simpleQuery == false){
             $this->bucket = $this->connect($requestObj->getPath()['bucket'], $this->serverAddress);    
         } else {
             $this->bucket = $this->connect($newBucket, $this->serverAddress);        
