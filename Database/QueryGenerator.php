@@ -22,10 +22,10 @@ use Raise\Treaters\MessageOutPut;
 
 class QueryGenerator
 {
-
+    
     public function generate($request) 
     {
-
+        
         if ($request->bucket == 'service' && $request->getMethod() == 'post') 
         {
             $parsedPath = $this->parsePath($request, true);
@@ -275,6 +275,7 @@ class QueryGenerator
         }
         return $request;
     }
+    
     private function validateExpirationToken($request, $token) 
     {
         $database = (new DatabaseParser($request, false))->getBucket();
@@ -376,7 +377,9 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                //$services = $request->getBody() ['services'];
+                $services = json_decode($request->getBody() ['services']);
+                var_dump($services);exit;
+                
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
@@ -384,7 +387,17 @@ class QueryGenerator
                 if ($oldDocument !== "null") 
                 {
                     
-                    var_dump($oldDocument);exit;
+                    $services = json_decode($oldDocument)->services;
+                    $validServices = array();
+                    
+                    foreach($services as $service)
+                    {
+                       $validServices[] = $service->service_id;
+                    }
+                    
+                    var_dump($validServices);
+                    
+                    exit;
                     
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
