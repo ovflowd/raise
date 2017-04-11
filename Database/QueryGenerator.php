@@ -434,8 +434,6 @@ class QueryGenerator
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request, true);   
-                    
-                    //UPDATOU A PORRA TODA  
                 }
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
