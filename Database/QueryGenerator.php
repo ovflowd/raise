@@ -434,7 +434,7 @@ class QueryGenerator
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request, true);   
                     
-                    //UPDATOU A PORRA TODA 
+                    //UPDATOU A PORRA TODA  
                     exit($newDocument->tokenId); 
                 }
             }
