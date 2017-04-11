@@ -140,7 +140,7 @@ class QueryGenerator
     {
         $requestObj = $request;
         $requestObj->bucket = $bucket;
-        $parserinho = new DatabaseParser($requestObj, true); 
+        $parserinho = new DatabaseParser($requestObj, $bucket); 
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
         return $Testando;
@@ -309,7 +309,6 @@ class QueryGenerator
                     )));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
-                    
                     
                     exit(json_encode($newDocument));  
                 }    
