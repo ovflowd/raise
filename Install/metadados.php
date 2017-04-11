@@ -244,15 +244,15 @@ class CouchBaseInterfacer{
 			"method"=>"get",
 			"bucket"=>"service",
 			"input"=>array(
-				"tokenId"=> "string"
-				""
-			),
+				"tokenId"=> "string",
+				"name"=> "string",
+				"service_id", => 0			),
 			"output"=>array(
 				"code"=> 0,
 		  	    "values"=> [array(
-			  	"id"=> 0,
-			  	"header_code"=> 0,
-			  	"message"=> "string"
+    			  	"id"=> 0,
+    			  	"header_code"=> 0,
+    			  	"message"=> "string"
 				)]
 		  )
   	));
