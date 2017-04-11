@@ -241,6 +241,7 @@ class RequestTreater
 
     private function validateMethodMoreBucket($request)
     {
+        echo "problemahere";
         $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
         $query->namedParams(array('bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()));
