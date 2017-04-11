@@ -292,7 +292,7 @@ class QueryGenerator
                             if (is_numeric($service)) {
                                 // 8 AND services.tokenId = '3c2c5efe23a553eb67db560e865b6bcd'
                                 $request->string = "SELECT * FROM service services UNNEST services.services c WHERE c.service_id = \$$service AND services.tokenId =\$$token";
-                                $this->simpleSelect($request, $bucket, $request->string, $namedParam);
+                                $this->simpleSelect($request, "service", $request->string, null);
                                 
                                 exit($request->string); 
                             } else {
