@@ -275,7 +275,6 @@ class QueryGenerator
         }
         return $request;
     }
-    
     private function validateExpirationToken($request, $token) 
     {
         $database = (new DatabaseParser($request, false))->getBucket();
@@ -385,7 +384,7 @@ class QueryGenerator
                 if ($oldDocument !== "null") 
                 {
                     
-                    var_dump(json_decode($oldDocument)['services']);exit;
+                    var_dump($oldDocument);exit;
                     
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
