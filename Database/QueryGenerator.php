@@ -240,7 +240,7 @@ class QueryGenerator
             } else { //Mini JSON validation 
                 if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 ||
                     substr(json_encode($request->getBody()), 0, 1) != "{") {
-                    echo ("here")
+                    echo "here";
                     $request->setResponseCode(400);  
                     $request->setValid(false); 
                     return $request;   
