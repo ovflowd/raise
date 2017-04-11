@@ -245,7 +245,7 @@ class QueryGenerator
                 }   
             } if ($request->getPath() ['method'] === 'revalidate'){
                 $token = $request->getBody() ['tokenId'];
-                exit ($token);
+                exit ($token); 
             }
             
              
