@@ -245,7 +245,7 @@ class QueryGenerator
                 }   
             } if ($request->getPath() ['method'] === 'revalidate'){
                 if (!$this->validateExpirationToken($request,  $request->getBody() ['tokenId'])) {
-                    $request->setResponseCode(401);
+                    $request->setResponseCode(401); 
                     $request->setValid(false);
                 } else {
                     $request->setResponseCode(200);
