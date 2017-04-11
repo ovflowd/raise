@@ -401,6 +401,8 @@ class QueryGenerator
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
+                    
+                    $request->bucket = 'service';
                     $request->treatedBody = json_encode($newDocument);  
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request); 
