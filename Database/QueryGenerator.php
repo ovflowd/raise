@@ -304,8 +304,8 @@ class QueryGenerator
                    unset($oldTokenDocument->services);  
                    unset($oldTokenDocument->tokenId);    
                    var_dump(json_encode(array_merge(json_decode(json_encode($oldTokenDocument), true), array(
-                        'tokenId' => $request->token,
-                        'time_ini' => $tokenIni,
+                        'tokenId' =>  $newDocument->tokenId,
+                        'time_ini' => $tokenIni, 
                         'time_fim' => $tokenFim, 
                     )))); 
                    exit;  
