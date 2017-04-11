@@ -393,6 +393,8 @@ class QueryGenerator
                         $validServices[] = $service->service_id;
                     }
                     
+                    var_dump($validServices);exit;
+                    
                     if ($validServices == $services) 
                     {
                         $newDocument = json_decode($oldDocument, false);
