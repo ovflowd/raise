@@ -165,7 +165,7 @@ class RequestTreater
 
     private function validateRevalidate($request, $parameters)
     {
-        
+        return true;
     }
     private function validationMethodGet($request, $parameters)
     {
