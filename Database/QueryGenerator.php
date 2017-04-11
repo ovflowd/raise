@@ -314,7 +314,7 @@ class QueryGenerator
                 }
                 else
                 {
-                    $request->setResponseCode(200);
+                    $request->setResponseCode(200); 
                     $request->setValid(true);
                 }
             }
