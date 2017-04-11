@@ -303,22 +303,17 @@ class QueryGenerator
                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null)["values"][0]), false);
                    unset($oldTokenDocument->services);  
                    unset($oldTokenDocument->tokenId);    
+                   
+                   $request->bucket = 'token';
+                   $tokenIni = round(microtime(true) * 1000);
+                   $tokenFim = $tokenIni + 7200000; //millisecons
+                   
                    var_dump(json_encode(array_merge(json_decode(json_encode($oldTokenDocument), true), array(
                         'tokenId' =>  $newDocument->tokenId,
                         'time_ini' => $tokenIni, 
                         'time_fim' => $tokenFim, 
                     )))); 
                    exit;  
-                   
-                   $request->bucket = 'token';
-                   $request->token = $newDocument->tokenId; 
-                   $tokenIni = round(microtime(true) * 1000);
-                   $tokenFim = $tokenIni + 7200000; //millisecons
-                   $request->treatedBody = json_encode(array_merge($request->getBody(), array(
-                        'tokenId' => $request->token,
-                        'time_ini' => $tokenIni,
-                        'time_fim' => $tokenFim,
-                    )));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
                 }    
