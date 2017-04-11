@@ -315,7 +315,7 @@ class QueryGenerator
                     )))); 
                    exit;  
                     $parser = new DatabaseParser($request, false);
-                    $parser->insert($request);
+                    $parser->insert($request); 
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
