@@ -389,7 +389,7 @@ class QueryGenerator
                     
                     foreach($services as $service)
                     {
-                        var_dump($service);
+                       echo $service->service_id . "   ";
                     }
                     
                     exit;
