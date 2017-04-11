@@ -384,6 +384,9 @@ class QueryGenerator
                 
                 if ($oldDocument !== "null") 
                 {
+                    
+                    var_dump($oldDocument);exit;
+                    
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
@@ -416,9 +419,6 @@ class QueryGenerator
                 }
                 else
                 {
-                    ini_set('display_errors', 1);
-                    ini_set('display_startup_errors', 1);
-                    error_reporting(E_ALL);
                     $request->setResponseCode(401);
                     $request->setValid(false);
                     return $request;
