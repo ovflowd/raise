@@ -294,7 +294,7 @@ class QueryGenerator
                     $token = $request->getBody()['tokenId'];
                    //select do token id 
                    $queryStr = "SELECT * FROM service WHERE tokenId = '$token'"; 
-                   exit ($queryStr);
+                   $this->simpleSelect();
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
