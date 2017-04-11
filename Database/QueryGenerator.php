@@ -136,7 +136,7 @@ class QueryGenerator
         return $request;
     }
 
-    private function simpleSelect ($request, $bucket, $queryStr, $namedParam)
+    private function simpleSelect($request, $bucket, $queryStr, $namedParam)
     {
         $requestObj = $request;
         $requestObj->bucket = $bucket;
@@ -294,7 +294,7 @@ class QueryGenerator
                     $token = $request->getBody()['tokenId'];
                    //select do token id 
                    $queryStr = "SELECT * FROM service WHERE tokenId = '$token'"; 
-                   $this->simpleSelect();
+                   $this->simpleSelect($request, "service", $queryStr, null);
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
