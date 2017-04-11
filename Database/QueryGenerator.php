@@ -408,7 +408,7 @@ class QueryGenerator
                     $request->bucket = 'token';
                     $tokenIni = round(microtime(true) * 1000);
                     $tokenFim = $tokenIni + 7200000; //millisecons
-                    var_dump(json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
+                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
                         'tokenId' => $newDocument->tokenId,
                         'time_ini' => $tokenIni,
                         'time_fim' => $tokenFim,
