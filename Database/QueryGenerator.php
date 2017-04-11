@@ -377,7 +377,7 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                $services = $request->getBody() ['services'];
+                $sentServices = $request->getBody() ['services'];
                 
                 
                 //select do token id
@@ -396,7 +396,7 @@ class QueryGenerator
                     }
                     
                     var_dump($validServices);
-                    var_dump($services);exit;
+                    var_dump($sentServices);exit;
                     
                     exit;
                     
