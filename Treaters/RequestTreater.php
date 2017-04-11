@@ -248,7 +248,6 @@ class RequestTreater
 
             return false;
         }
-        echo "OK";
         return true;
     }
 
