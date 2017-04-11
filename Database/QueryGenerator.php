@@ -304,7 +304,6 @@ class QueryGenerator
         
         if (!empty($method)) 
         {
-            
             if ($request->getPath() ['method'] === 'list') 
             {
                 
