@@ -304,7 +304,6 @@ class QueryGenerator
                    var_dump($this->simpleSelect($request, 'client', $queryStr, null)); 
                    unset($oldTokenDocument);
                    exit;
-                   
                    $request->bucket = 'token';
                    $request->token = $newDocument->tokenId; 
                    $tokenIni = round(microtime(true) * 1000);
