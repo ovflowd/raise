@@ -163,10 +163,12 @@ class RequestTreater
         }
     }
 
+    //TODO: make this a real function
     private function validateRevalidate($request, $parameters)
     {
         return true;
     }
+    
     private function validationMethodGet($request, $parameters)
     {
         if (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
