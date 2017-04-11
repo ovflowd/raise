@@ -382,7 +382,7 @@ class QueryGenerator
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
                 
-                if ($oldDocument === "null") 
+                if ($oldDocument !== "null") 
                 {
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
