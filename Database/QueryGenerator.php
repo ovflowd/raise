@@ -74,9 +74,9 @@ class QueryGenerator
                         $result = $parser->insert($request);
                     }
                 }
-                else 
+                else
                 {
-                    $result = $parser->insert($request);    
+                    $result = $parser->insert($request);
                 }
             }
             return $result;
@@ -304,6 +304,7 @@ class QueryGenerator
         
         if (!empty($method)) 
         {
+            
             if ($request->getPath() ['method'] === 'list') 
             {
                 
@@ -314,7 +315,7 @@ class QueryGenerator
                 }
                 else
                 {
-                    $request->setResponseCode(200); 
+                    $request->setResponseCode(200);
                     $request->setValid(true);
                 }
             }
@@ -375,48 +376,39 @@ class QueryGenerator
             elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') 
             {
                 //valida se os serviços enviados fazem parte do token
-                
-                if (isset($request->getBody() ['services'])) 
-                {
-                    $token = $request->getBody() ['tokenId'];
-                    //select do token id
-                    $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
-                    $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
-                    $newDocument = json_decode($oldDocument, false);
-                    $oldToken = $newDocument->tokenId;
-                    $newDocument->tokenId = $this->generateToken();
-                    
-                    //Insere o novo serviço com nova tokenId no service
-                    $request->bucket = 'service';
-                    $request->treatedBody = json_encode($newDocument);  
-                    $parser = new DatabaseParser($request, false);
-                    $parser->insert($request); 
-                    
-                    
-                    $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
-                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
-                    $oldClientDocument = $oldTokenDocument;
-                    unset($oldTokenDocument->services);
-                    unset($oldTokenDocument->tokenId);
-                    
-                    //Insere uma nova token valida pro cara
-                    $request->bucket = 'token';
-                    $tokenIni = round(microtime(true) * 1000);
-                    $tokenFim = $tokenIni + 7200000; //millisecons 
-                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
-                        'tokenId' => $newDocument->tokenId,
-                        'time_ini' => $tokenIni,
-                        'time_fim' => $tokenFim,
-                    ))));
-                    $parser = new DatabaseParser($request, false);
-                    $parser->insert($request); 
-                    
-                    //Updata o client com seu novo tokenId
-                    $request->bucket = 'client';
-                    $request->token = $newDocument->tokenId;   
-                    $oldClientDocumnet->tokenId =  $newDocument->tokenId;
-                    $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
-                }
+                $token = $request->getBody() ['tokenId'];
+                //select do token id 
+                $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
+                $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
+                $newDocument = json_decode($oldDocument, false);
+                $oldToken = $newDocument->tokenId;
+                $newDocument->tokenId = $this->generateToken();
+                //Insere o novo serviço com nova tokenId no service
+                $request->bucket = 'service';
+                $request->treatedBody = json_encode($newDocument);
+                $parser = new DatabaseParser($request, false);
+                $parser->insert($request);
+                $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
+                $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
+                $oldClientDocument = $oldTokenDocument;
+                unset($oldTokenDocument->services);
+                unset($oldTokenDocument->tokenId);
+                //Insere uma nova token valida pro cara
+                $request->bucket = 'token';
+                $tokenIni = round(microtime(true) * 1000);
+                $tokenFim = $tokenIni + 7200000; //millisecons
+                $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
+                    'tokenId' => $newDocument->tokenId,
+                    'time_ini' => $tokenIni,
+                    'time_fim' => $tokenFim,
+                ))));
+                $parser = new DatabaseParser($request, false);
+                $parser->insert($request);
+                //Updata o client com seu novo tokenId
+                $request->bucket = 'client';
+                $request->token = $newDocument->tokenId;
+                $oldClientDocumnet->tokenId = $newDocument->tokenId;
+                $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument) , true) , json_decode(json_encode($oldClientDocument) , true)));
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
             {
