@@ -231,7 +231,7 @@ class QueryGenerator
         if (!empty($method)) {
             if ($request->getPath() ['method'] !== 'register') {
                 if (!$this->validateExpirationToken($request,  $request->getParameters() ['tokenId'])) {
-                        $request->setResponseCode(401);
+                    $request->setResponseCode(401);
                     $request->setValid(false);
                 } else {
                     $request->setResponseCode(200);
