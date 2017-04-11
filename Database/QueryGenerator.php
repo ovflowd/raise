@@ -427,7 +427,7 @@ class QueryGenerator
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request); 
                     
-                    
+                    //Updata o client com seu novo tokenId
                                         
                     exit($newDocument->tokenId);
                 }
