@@ -299,7 +299,8 @@ class QueryGenerator
                    $newDocument->tokenId = $this->generateToken(); 
                    
                    $oldToken = json_decode(json_encode($oldDocument), false)->tokenId;
-                   $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'"; 
+                   $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
+                   exit ($queryStr);
                    $this->simpleSelect($request, 'client', $queryStr, null); 
                    $request->bucket = 'token';
                    $request->token = $newDocument->tokenId; 
@@ -312,8 +313,6 @@ class QueryGenerator
                     )));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
-                    
-                    exit(json_encode($newDocument));  
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
