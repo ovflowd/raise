@@ -30,15 +30,16 @@ class QueryGenerator
         {
             $parsedPath = $this->parsePath($request, true);
             
+            if ($parsedPath->isValid() === false) 
+            {
+                return (new MessageOutPut())->messageHttp($request->getReponseCode());
+            }
+            
             if ($parsedPath !== false && $parsedPath->isValid() === true) 
             {
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
                 $result = $parser->insert($request);
-            }
-            elseif ($parsedPath->isValid() === false) 
-            {
-                return (new MessageOutPut())->messageHttp($request->getReponseCode());
             }
             $parsedPath = $this->parsePath($request, false);
         }
