@@ -303,7 +303,11 @@ class QueryGenerator
                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null)["values"][0]), false);
                    unset($oldTokenDocument->services);  
                    unset($oldTokenDocument->tokenId);    
-                   var_dump($oldTokenDocument); 
+                   var_dump(json_encode(array_merge($oldTokenDocument, array(
+                        'tokenId' => $request->token,
+                        'time_ini' => $tokenIni,
+                        'time_fim' => $tokenFim,
+                    )));
                    exit;  
                    
                    $request->bucket = 'token';
