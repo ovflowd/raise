@@ -132,7 +132,6 @@ class RequestTreater
         if (!in_array($request->getPath()['bucket'], $this->AllowedBuckets)) {
             $request->setResponseCode(403);
             $request->setValid(false);
-            
             return false;
         }
 
