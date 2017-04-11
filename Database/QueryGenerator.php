@@ -281,8 +281,7 @@ class QueryGenerator
                 //create Client
                 //end create
             } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
-                //valida se os serviços enviados fazem parte do token vc esta sendo raskeado raskeadíssimo
-                //O famoso rask do zé do picadinho xisdê XDDDDDDD
+                //valida se os serviços enviados fazem parte do token
                 if (isset($request->getBody()['services'])) {
                     $token = $request->getBody()['tokenId'];
                    //select do token id 
