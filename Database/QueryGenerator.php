@@ -428,7 +428,7 @@ class QueryGenerator
                     $parser->insert($request); 
                     
                     //Updata o client com seu novo tokenId
-                                        
+                    $oldClientDocumnet->tokenId =  $newDocument->tokenId;                                      
                     exit($newDocument->tokenId);
                 }
             }
