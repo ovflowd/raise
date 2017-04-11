@@ -385,7 +385,7 @@ class QueryGenerator
                 if ($oldDocument !== "null") 
                 {
                     
-                    var_dump(json_decode($oldDocument)->services['services']);exit;
+                    var_dump(json_decode($oldDocument)->services[0]);exit;
                     
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
