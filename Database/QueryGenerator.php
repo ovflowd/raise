@@ -298,7 +298,6 @@ class QueryGenerator
                    $newDocument = json_decode($oldDocument, false);
                    
                    $request->token = $this->generateToken();
-                
                    var_dump($newDocument->tokenId);
                    exit;  
                 }    
