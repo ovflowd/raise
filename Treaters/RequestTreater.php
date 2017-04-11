@@ -153,7 +153,7 @@ class RequestTreater
             break;
             case 'post':
                 if ($request->getPath()['method'] == 'revalidate'){
-                    return validateRevalidate($request, $parameters); 
+                    return validateRevalidate($request, $parameters);  
                 }
                 return $this->validationMethodPost($request, $parameters);
             break;
