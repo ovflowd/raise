@@ -135,7 +135,7 @@ class RequestTreater
             $request->setValid(false);
             return false;
         }
-
+        echo "OK2";
         return true;
     }
 
