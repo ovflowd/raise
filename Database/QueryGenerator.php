@@ -307,7 +307,7 @@ class QueryGenerator
                         'tokenId' => $request->token,
                         'time_ini' => $tokenIni,
                         'time_fim' => $tokenFim,
-                    )));
+                    ))));
                    exit;  
                    
                    $request->bucket = 'token';
