@@ -436,8 +436,7 @@ class QueryGenerator
                     $request->token = $newDocument->tokenId;   
                     $oldClientDocumnet->tokenId =  $newDocument->tokenId;
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
-                    $parser = new DatabaseParser($request, false);
-                    $parser->insert($request, true);   
+                    
                 }
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
