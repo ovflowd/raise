@@ -152,6 +152,7 @@ class RequestTreater
                 return $this->validationMethodGet($request, $parameters);
             break;
             case 'post':
+                if ($request->['bucket'] == 'client')
                 return $this->validationMethodPost($request, $parameters);
             break;
         }
