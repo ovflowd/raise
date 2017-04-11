@@ -431,7 +431,7 @@ class QueryGenerator
                     $oldClientDocumnet->tokenId =  $newDocument->tokenId;
                     $request->treatedBody = json_encode(array_merge( json_decode(json_encode($newDocument),true) , json_decode(json_encode($oldClientDocument), true) ));
                     var_dump(json_decode(json_encode($oldClientDocument), true));
-                    var_dump($request->treatedBody); 
+                    $request->bucket = 'client';
                     exit($newDocument->tokenId);
                 }
             }
