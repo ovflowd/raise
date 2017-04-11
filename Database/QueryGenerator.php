@@ -222,7 +222,7 @@ class QueryGenerator
          json_decode($string);
          return (json_last_error() == JSON_ERROR_NONE);
     }
-
+    
     private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
@@ -240,7 +240,6 @@ class QueryGenerator
             } else { //Mini JSON validation 
                 if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 ||
                     substr(json_encode($request->getBody()), 0, 1) != "{") {
-                    echo "here";
                     $request->setResponseCode(400);  
                     $request->setValid(false); 
                     return $request;   
@@ -284,24 +283,13 @@ class QueryGenerator
                 //end create
             } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
                 //valida se os serviços enviados fazem parte do token
+                echo "done";
                 if (isset($request->getBody()['services'])) {
                     $token = $request->getBody()['tokenId'];
-                    $service_list = $request->getBody()['services'];
-                    if (is_array($service_list)) {
-                        foreach ($service_list as $service) {
-                            if (is_numeric($service)) {
-                                // 8 AND services.tokenId = '3c2c5efe23a553eb67db560e865b6bcd'
-                                $request->string = "SELECT * FROM service services UNNEST services.services c WHERE c.service_id = \$$service AND services.tokenId =\$$token";
-                                $teste = $this->simpleSelect($request, "service", $request->string, null);
-                                var_dump($teste);   
-                                exit;
-                            } else {
-                                exit('bad request');
-                            }  
-                        }
-                    } else {
-                        exit('bad request');
-                    } 
+                   //select do token id 
+                   
+                   
+
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
