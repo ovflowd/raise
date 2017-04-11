@@ -298,6 +298,7 @@ class QueryGenerator
                    $newDocument = json_decode($oldDocument, false);
                    
                    $newDocument->tokenId = $this->generateToken(); 
+                   
                    exit(json_encode($newDocument));  
                 }    
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
