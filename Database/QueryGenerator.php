@@ -395,7 +395,7 @@ class QueryGenerator
                     
                     var_dump($validServices);exit;
                     
-                    if ($validServices == $services) 
+                    if ($validServices == $sentServices) 
                     {
                         $newDocument = json_decode($oldDocument, false);
                         $oldToken = $newDocument->tokenId;
