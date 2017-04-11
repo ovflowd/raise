@@ -434,6 +434,8 @@ class QueryGenerator
                     $request->bucket = 'client';
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);   
+                    
+                    //UPDATOU A PORRA TODA
                     exit($newDocument->tokenId);
                 }
             }
