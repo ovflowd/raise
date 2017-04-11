@@ -413,6 +413,8 @@ class QueryGenerator
                     $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
                     unset($oldTokenDocument->services);
                     unset($oldTokenDocument->tokenId);
+                    
+                    //Insere uma nova token valida pro cara
                     $request->bucket = 'token';
                     $tokenIni = round(microtime(true) * 1000);
                     $tokenFim = $tokenIni + 7200000; //millisecons
@@ -423,6 +425,8 @@ class QueryGenerator
                     ))));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request); 
+                    
+                    
                     exit($newDocument->tokenId);
                 }
             }
