@@ -296,6 +296,9 @@ class QueryGenerator
                    $queryStr = "SELECT * FROM service WHERE tokenId = '$token'"; 
                    $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null)["values"][0]);
                    $newDocument = json_decode($oldDocument, false);
+                   
+                   $request->token = $this->generateToken();
+                
                    var_dump($newDocument->tokenId);
                    exit;  
                 }    
