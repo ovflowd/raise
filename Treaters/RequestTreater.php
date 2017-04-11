@@ -196,7 +196,7 @@ class RequestTreater
         $parameters = $database->query($query)->rows;
 
         if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
-            $request->setResponseCode(401);
+            $request->setResponseCode(401); 
             $request->setValid(false);
             return false;
         }
