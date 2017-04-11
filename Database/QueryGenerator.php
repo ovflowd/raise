@@ -30,16 +30,15 @@ class QueryGenerator
         {
             $parsedPath = $this->parsePath($request, true);
             
-            if ($parsedPath->isValid() === false) 
-            {
-                return (new MessageOutPut())->messageHttp($request->getReponseCode());
-            }
-            
             if ($parsedPath !== false && $parsedPath->isValid() === true) 
             {
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
                 $result = $parser->insert($request);
+            }
+            if ($parsedPath->isValid() === false) 
+            {
+                return (new MessageOutPut())->messageHttp($request->getReponseCode());
             }
             $parsedPath = $this->parsePath($request, false);
         }
@@ -422,7 +421,7 @@ class QueryGenerator
                     error_reporting(E_ALL);
                     $request->setResponseCode(401);
                     $request->setValid(false);
-                    return false;
+                    return $request;
                 }
             }
             elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
