@@ -27,7 +27,7 @@ class DatabaseParser
     private $serverAddress;
     private $bucket; 
  
-    public function __construct($requestObj, $newBucket) 
+    public function __construct($requestObj, $newBucket)  
     {
         $this->serverAddress = DB_ADDRESS;
         if ($simpleQuery !== NULL || $simpleQuery === false){
