@@ -418,7 +418,6 @@ class QueryGenerator
                 {
                     $services = json_decode($oldDocument)->services;
                     $validServices = array();
-                    
                     foreach ($services as $service) 
                     {
                         $validServices[] = $service->service_id; 
