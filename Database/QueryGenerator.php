@@ -141,7 +141,7 @@ class QueryGenerator
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                $chave = $this->getChave()
+                $chave = $this->getChave($request, $key);
                 if ($key === "tag"){
                     $queryStr = $this->appendTagInQuery($request). 'AND ';
                 } else {
@@ -185,6 +185,7 @@ class QueryGenerator
         }
         return $key;
     }
+    
     private function appendTagInQuery($request)
     { 
         $tagsString = $request->getParameters()["tag"];
