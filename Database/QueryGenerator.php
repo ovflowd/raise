@@ -408,8 +408,8 @@ class QueryGenerator
                 if ($bIsRev->is_revalidated){
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
+                    return $request;
                 } 
-                
                 $sentServices = $request->getBody() ['services'];
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
