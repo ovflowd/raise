@@ -315,6 +315,7 @@ class QueryGenerator
         }
         return true;
     }
+    
     function isJson($string) 
     {
         json_decode($string);
