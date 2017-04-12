@@ -405,7 +405,11 @@ class QueryGenerator
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
                 $bIsRev = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
-                exit (var_dump($bIsRev->is_revalidated));
+                if ($bIsRev->is_revalidated){
+                    $request->setResponseCode(400);
+                    $request->setValid(false);
+                }
+                
                 $sentServices = $request->getBody() ['services'];
                 //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
