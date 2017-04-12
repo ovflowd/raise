@@ -374,7 +374,6 @@ class QueryGenerator
                     'token' => $token,
                 ));
                 $result = $parser->select($request);
-                
                 if (!$isServiceSecondTime) 
                 {
                     $request = $this->validateToken($result, $request, 'client');
