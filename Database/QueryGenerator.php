@@ -442,7 +442,7 @@ class QueryGenerator
                         $request->bucket = 'token';
                         $request->treatedBody = json_encode($oldTokenObject);
                         $request->token = $oldTokenObject->tokenId;  
-                        $parser->insert($request, false);   
+                        $parser->insert($request, false);
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
                         $request->token = $newDocument->tokenId;
