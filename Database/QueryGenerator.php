@@ -140,7 +140,6 @@ class QueryGenerator
             $queryStr = 'SELECT * FROM `' . $request->bucket . '` WHERE';
             if ($request->getParameters()){
                 $queryStr = $this->appendTagInQuery($request). 'AND ';
-                
             }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) 
