@@ -406,6 +406,7 @@ class QueryGenerator
                 $token = $request->getBody() ['tokenId'];
                 $oldTokenObject = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
                 if ($oldTokenObject->is_revalidated){
+                    echo "oldAnauth";
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
                     return $request;
