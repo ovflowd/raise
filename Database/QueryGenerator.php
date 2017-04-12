@@ -442,7 +442,7 @@ class QueryGenerator
                         //Updata a old token para revalidated como true e dá um upsert
                         $bIsRev->is_revalidated = true;
                         $request->bucket = 'token';
-                        
+                        $request->treatedBody = json_encode($newDocument);
                         $parser->insert($request);
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
