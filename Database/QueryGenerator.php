@@ -190,7 +190,7 @@ class QueryGenerator
     
     private function appendTag($request)
     { 
-        var_dump($request->getParameters()["tag"]);
+        $this->separateTags($request->getParameters()["tag"]);
         echo "NEW: select * from client WHERE ANY child IN client.tags SATISFIES child = \"Cenoura\"  END";
         exit;
     }
