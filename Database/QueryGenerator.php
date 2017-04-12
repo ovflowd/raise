@@ -144,7 +144,6 @@ class QueryGenerator
             {
                 if ($key === "tag"){
                     echo "Tag here";
-                    exit;
                 }
                 if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
                 {
