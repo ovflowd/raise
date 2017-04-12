@@ -190,7 +190,6 @@ class QueryGenerator
     
     private function appendTagInQuery($request)
     { 
-        $this->separateTags($request->getParameters()["tag"]);
         $tagsArray = explode(',', $tagsString);
         return $this->createTagQueryString($tagsArray, $request->bucket);
     }
