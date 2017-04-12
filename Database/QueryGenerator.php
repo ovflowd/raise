@@ -162,7 +162,7 @@ class QueryGenerator
                     $chave = $key;
                 }
                 if ($key === "tag"){
-                    $queryStr = $this->appendTagInQuery($request);
+                    $queryStr = $this->appendTagInQuery($request). 'AND ';
                 } else {
                     if (is_numeric($parameter)) 
                     {
