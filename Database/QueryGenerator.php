@@ -414,60 +414,50 @@ class QueryGenerator
                 $sentServices = $request->getBody() ['services'];
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
-                if ($oldDocument !== "null") 
+                $services = json_decode($oldDocument)->services;
+                $validServices = array();
+                foreach ($services as $service) 
                 {
-                    $services = json_decode($oldDocument)->services;
-                    $validServices = array();
-                    foreach ($services as $service) 
-                    {
-                        $validServices[] = $service->service_id; 
-                    }
-                    
-                    if ($validServices == $sentServices) 
-                    {
-                        $newDocument = json_decode($oldDocument, false);
-                        $oldToken = $newDocument->tokenId;
-                        $newDocument->tokenId = $this->generateToken();
-                        //Insere o novo serviço com nova tokenId no service
-                        $request->bucket = 'service';
-                        $request->treatedBody = json_encode($newDocument);
-                        $parser = new DatabaseParser($request, false);
-                        $parser->insert($request);
-                        $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
-                        $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
-                        $oldClientDocument = $oldTokenDocument;
-                        unset($oldTokenDocument->services);
-                        unset($oldTokenDocument->tokenId);
-                        //Updata a old token para revalidated como true e dá um upsert
-                        $oldTokenObject->is_revalidated = true;
-                        $request->bucket = 'token';
-                        $request->treatedBody = json_encode($oldTokenObject);
-                        $request->token = $oldTokenObject->tokenId;  
-                        $parser->insert($request, false);
-                        //Insere uma nova token valida pro cara
-                        $request->bucket = 'token';
-                        $request->token = $newDocument->tokenId;
-                        $tokenIni = round(microtime(true) * 1000);
-                        $tokenFim = $tokenIni + 7200000; //millisecons
-                        $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
-                            'tokenId' => $newDocument->tokenId,
-                            'time_ini' => $tokenIni,
-                            'time_fim' => $tokenFim,
-                        ))));
-                        $parser = new DatabaseParser($request, false);
-                        $parser->insert($request);
-                        //Updata o client com seu novo tokenId
-                        $request->bucket = 'client';
-                        $request->token = $newDocument->tokenId;
-                        $oldClientDocumnet->tokenId = $newDocument->tokenId;
-                        $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument) , true) , json_decode(json_encode($oldClientDocument) , true)));
-                    }
-                    else
-                    {
-                        $request->setResponseCode(401);
-                        $request->setValid(false);
-                        return $request;
-                    }
+                    $validServices[] = $service->service_id; 
+                }
+                if ($validServices == $sentServices) 
+                {
+                    $newDocument = json_decode($oldDocument, false);
+                    $oldToken = $newDocument->tokenId;
+                    $newDocument->tokenId = $this->generateToken();
+                    //Insere o novo serviço com nova tokenId no service
+                    $request->bucket = 'service';
+                    $request->treatedBody = json_encode($newDocument);
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request);
+                    $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
+                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
+                    $oldClientDocument = $oldTokenDocument;
+                    unset($oldTokenDocument->services);
+                    unset($oldTokenDocument->tokenId);
+                    //Updata a old token para revalidated como true e dá um upsert
+                    $oldTokenObject->is_revalidated = true;
+                    $request->bucket = 'token';
+                    $request->treatedBody = json_encode($oldTokenObject);
+                    $request->token = $oldTokenObject->tokenId;  
+                    $parser->insert($request, false);
+                    //Insere uma nova token valida pro cara
+                    $request->bucket = 'token';
+                    $request->token = $newDocument->tokenId;
+                    $tokenIni = round(microtime(true) * 1000);
+                    $tokenFim = $tokenIni + 7200000; //millisecons
+                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
+                        'tokenId' => $newDocument->tokenId,
+                        'time_ini' => $tokenIni,
+                        'time_fim' => $tokenFim,
+                    ))));
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request);
+                    //Updata o client com seu novo tokenId
+                    $request->bucket = 'client';
+                    $request->token = $newDocument->tokenId;
+                    $oldClientDocumnet->tokenId = $newDocument->tokenId;
+                    $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument) , true) , json_decode(json_encode($oldClientDocument) , true)));
                 }
                 else
                 {
