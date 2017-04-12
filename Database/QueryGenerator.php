@@ -145,20 +145,20 @@ class QueryGenerator
             foreach ($request->getParameters() as $key => $parameter) 
             {
                 $chave = $this->getChave($request, $key);
-                if (is_numeric($parameter)) 
+                if (is_numeric($parameter) && $chave != "tag") 
                 {
                     $typeVerification[$key] = (int)$parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
                 }
-                else
+                else if ($chave != "tag")
                 {
                     if ($key !== 'tokenId') 
                     {
                         $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
                     }
                 }
-            }
+            } 
             $request->string = substr($queryStr, 0, -4);
         }
         else
