@@ -177,16 +177,13 @@ class QueryGenerator
         }
         elseif ($request->bucket == 'data' && $key == 'service_id') 
         {
-            $chave = 'data.data.' . $key;
+            return 'data.data.' . $key;
         }
         elseif ($key == 'tokenId')  
         {
-            $chave = 'token';
+            return 'token';
         }
-        else
-        {
-            $chave = $key;
-        }
+        return $key;
     }
     private function appendTagInQuery($request)
     { 
