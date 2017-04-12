@@ -199,7 +199,7 @@ class QueryGenerator
     {
         $queryTagModel =  "select * from client WHERE ANY child IN client.tags SATISFIES child = ";
         foreach($tagsArray as $key => $tag){
-            $queryTagModel = $queryTagModel . $tagsArray[$key] . " AND";
+            $queryTagModel = $queryTagModel . $tagsArray[$key] . " AND ";
         }
         echo $queryTagModel;
         exit;
