@@ -202,8 +202,7 @@ class QueryGenerator
         foreach($tagsArray as $key => $tag){
             $queryTagModel .= $queryArrayHelper."\"".$tagsArray[$key]."\"". " END AND "; 
         }
-        echo substr ($queryTagModel, 0, -5);
-        exit;
+        return substr($queryTagModel, 0, -5);
     }
     
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
