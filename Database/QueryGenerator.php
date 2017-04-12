@@ -188,6 +188,11 @@ class QueryGenerator
         return $request;
     }
     
+    private function appendTag($request)
+    {
+        var_dump($request->getParameters()["tag"]); 
+    }
+    
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
     {
         $requestObj = $request;
