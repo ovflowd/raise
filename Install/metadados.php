@@ -238,6 +238,7 @@ class CouchBaseInterfacer
                 'tokenId' => 'string',
                 'service_id' => 0,
                 'name' => 'string',
+                'tag' => 'string',
             ),
             'output' => array(
                 'code' => 0,
