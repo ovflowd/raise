@@ -190,7 +190,9 @@ class QueryGenerator
     
     private function appendTag($request)
     {
-        var_dump($request->getParameters()["tag"]); 
+        var_dump($request->getParameters()["tag"]);
+        echo "NEW: select * from client WHERE ANY child IN client.tags SATISFIES child = "Cenoura"  END";
+        exit;
     }
     
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
