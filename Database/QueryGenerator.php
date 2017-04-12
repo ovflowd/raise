@@ -469,8 +469,8 @@ class QueryGenerator
                 
                 if ($this->validateExpirationToken($request, $request->token)) 
                 {
-                    $request->treatedBody = json_encode(array_merge($request->getBody(), array("server_time" => round(microtime(true) * 1000)));
-                    return $request;
+                    $request->treatedBody = json_encode(array_merge($request->getBody(), array("server_time" => round(microtime(true) * 1000))));
+                    return $request; 
                 }
                 else
                 {
