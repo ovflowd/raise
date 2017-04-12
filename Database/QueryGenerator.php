@@ -200,6 +200,7 @@ class QueryGenerator
         $queryTagModel =  "select * from ".$bucket." WHERE ";
         $queryArrayHelper = "ANY child IN client.tags SATISFIES child = ";
         foreach($tagsArray as $key => $tag){
+            $queryTagModel .= $queryArrayHelper; 
             $queryTagModel = $queryTagModel . $tagsArray[$key] . " END AND ";
         }
         ;
