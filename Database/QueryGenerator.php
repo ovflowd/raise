@@ -109,10 +109,19 @@ class QueryGenerator
             );
             $composedData[$key] = array(
                 'token' => $objData->token,
+                'tag' => ,
                 'data' => $data
             );
         }
         return $composedData;
+    }
+    
+    private function getTagList($request)
+    {
+        if (isset($request->getBody()["tag"])){
+            return $request->getBody()["tag"];
+        }    
+        return array();
     }
     
     private function validateServiceId($request, $namedParam) 
