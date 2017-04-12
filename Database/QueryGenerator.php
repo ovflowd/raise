@@ -151,7 +151,6 @@ class QueryGenerator
                     $chave = 'data.data.' . $key;
                     //$queryStr = "SELECT * FROM data data UNNEST data.data c WHERE c.service_id = "."\$$key"." AND";
                     //$jumpCondition = true;
-                    
                 }
                 elseif ($key == 'tokenId') 
                 {
