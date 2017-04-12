@@ -195,13 +195,6 @@ class QueryGenerator
         exit;
     }
     
-    private function separateTags($tagsString)
-    {
-        $tagsArray = array();
-        $tagsArray = explode(',', $tagsString);
-        var_dump($tagsArray);
-    }
-    
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
     {
         $requestObj = $request;
