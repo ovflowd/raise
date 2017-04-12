@@ -469,6 +469,7 @@ class QueryGenerator
                 }
                 else
                 {
+                    echo "oldAnauth";
                     $request->setResponseCode(401);
                     $request->setValid(false);
                     return $request;
