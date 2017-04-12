@@ -109,7 +109,7 @@ class QueryGenerator
             );
             $composedData[$key] = array(
                 'token' => $objData->token,
-                'tag' => getTagList($request),
+                'tag' => $this->getTagList($request),
                 'data' => $data
             );
         }
