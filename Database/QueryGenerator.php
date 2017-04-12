@@ -463,6 +463,7 @@ class QueryGenerator
                     }
                     else
                     {
+                        echo "oldAnauth2";
                         $request->setResponseCode(401);
                         $request->setValid(false);
                         return $request;
@@ -470,6 +471,7 @@ class QueryGenerator
                 }
                 else
                 {
+                    echo "oldAnauth3";
                     $request->setResponseCode(401);
                     $request->setValid(false);
                     return $request;
