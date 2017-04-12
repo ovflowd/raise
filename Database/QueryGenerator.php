@@ -439,6 +439,8 @@ class QueryGenerator
                         $oldClientDocument = $oldTokenDocument;
                         unset($oldTokenDocument->services);
                         unset($oldTokenDocument->tokenId);
+                        //Updata a old token para revalidated como true
+                        $bIsRev->is_revalidated = true;
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
                         $tokenIni = round(microtime(true) * 1000);
