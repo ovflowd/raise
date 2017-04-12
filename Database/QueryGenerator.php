@@ -154,19 +154,7 @@ class QueryGenerator
             foreach ($request->getParameters() as $key => $parameter) 
             {
                 $chave = $this->getChave($request, $key);
-                if (is_numeric($parameter) && $chave != "tag") 
-                {
-                    $typeVerification[$key] = (int)$parameter;
-                    $request->setParameters($typeVerification);
-                    $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
-                }
-                else if ($chave != "tag")
-                {
-                    if ($key !== 'tokenId') 
-                    {
-                        $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
-                    }
-                }
+                $queryStr = 
             } 
             $request->string = substr($queryStr, 0, -4);
         }
@@ -175,6 +163,23 @@ class QueryGenerator
             $request->string = 'SELECT * FROM `' . $request->bucket . '`';
         }
         return $request;
+    }
+    
+    private function getQueryString()
+    {
+        if (is_numeric($parameter) && $chave != "tag") 
+        {
+            $typeVerification[$key] = (int)$parameter;
+            $request->setParameters($typeVerification);
+            $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
+        }
+        else if ($chave != "tag")
+        {
+            if ($key !== 'tokenId') 
+            {
+                $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
+            }
+        }
     }
     
     private function getChave($request, $key)
