@@ -144,7 +144,6 @@ class RequestTreater
             $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
             $query->namedParams(array('bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()));
             $parameters = $database->query($query)->rows[0]->input; 
-
             switch ($request->getMethod()) {
             case 'get':
                 return $this->validationMethodGet($request, $parameters);
