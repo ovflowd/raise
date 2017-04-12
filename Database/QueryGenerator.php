@@ -411,7 +411,6 @@ class QueryGenerator
                     return $request;
                 } 
                 $sentServices = $request->getBody() ['services'];
-                //select do token id
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
                 if ($oldDocument !== "null") 
