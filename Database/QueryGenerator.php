@@ -470,6 +470,7 @@ class QueryGenerator
                 }
                 else
                 {
+                    echo "foi aqui";
                     $request->setResponseCode(401);
                     $request->setValid(false);
                     return $request;
