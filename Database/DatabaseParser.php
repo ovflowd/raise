@@ -120,6 +120,7 @@ class DatabaseParser
                 if (!$isRevalidate){
                     if ($requestObj->bucket === "token"){
                         echo "Here Token";    
+                        var_dump($requestObj->treatedBody);
                     }
                     $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
                 } else {
