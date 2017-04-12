@@ -434,7 +434,7 @@ class QueryGenerator
                     $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
                     $oldClientDocument = $oldTokenDocument;
                     unset($oldTokenDocument->services);
-                    unset($oldTokenDocument->tokenId);
+                    unset($oldTokenDocument->tokenId); 
                     //Updata a old token para revalidated como true e dá um upsert
                     $oldTokenObject->is_revalidated = true;
                     $request->bucket = 'token';
