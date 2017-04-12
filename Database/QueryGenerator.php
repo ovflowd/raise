@@ -138,25 +138,25 @@ class QueryGenerator
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) 
         {
             $queryStr = 'SELECT * FROM `' . $request->bucket . '` WHERE';
+            if ($request->getParameters()){
+                $queryStr = $this->appendTagInQuery($request). 'AND ';
+                
+            }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) 
             {
                 $chave = $this->getChave($request, $key);
-                if ($key === "tag"){
-                    $queryStr = $this->appendTagInQuery($request). 'AND ';
-                } else {
-                    if (is_numeric($parameter)) 
+                if (is_numeric($parameter)) 
+                {
+                    $typeVerification[$key] = (int)$parameter;
+                    $request->setParameters($typeVerification);
+                    $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
+                }
+                else
+                {
+                    if ($key !== 'tokenId') 
                     {
-                        $typeVerification[$key] = (int)$parameter;
-                        $request->setParameters($typeVerification);
-                        $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
-                    }
-                    else
-                    {
-                        if ($key !== 'tokenId') 
-                        {
-                            $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
-                        }
+                        $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
                     }
                 }
             }
@@ -169,7 +169,7 @@ class QueryGenerator
         return $request;
     }
     
-    private fuction getChave($request, $key)
+    private function getChave($request, $key)
     {
         if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
         {
