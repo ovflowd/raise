@@ -404,7 +404,7 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                $bIsRev = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
+                $oldTokenObject = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
                 if ($bIsRev->is_revalidated){
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
@@ -442,7 +442,7 @@ class QueryGenerator
                         //Updata a old token para revalidated como true e dá um upsert
                         $bIsRev->is_revalidated = true;
                         $request->bucket = 'token';
-                        $request->treatedBody = json_encode($newDocument);
+                        $request->treatedBody = json_encode($bIsRev);
                         $parser->insert($request);
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
