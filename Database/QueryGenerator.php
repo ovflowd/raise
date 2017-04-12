@@ -406,9 +406,9 @@ class QueryGenerator
                 $token = $request->getBody() ['tokenId'];
                 $bIsRev = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
                 if ($bIsRev->is_revalidated){
-                    $request->setResponseCode(401);
+                    $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
-                }
+                } 
                 
                 $sentServices = $request->getBody() ['services'];
                 //select do token id
