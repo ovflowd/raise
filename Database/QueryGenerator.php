@@ -162,7 +162,7 @@ class QueryGenerator
                     $chave = $key;
                 }
                 if ($key === "tag"){
-                    $queryStr = $this->appendTag($request);
+                    $queryStr = $this->appendTagInQuery($request);
                 } else {
                     if (is_numeric($parameter)) 
                     {
@@ -188,9 +188,10 @@ class QueryGenerator
         return $request;
     }
     
-    private function appendTag($request)
+    private function appendTagInQuery($request)
     { 
         $this->separateTags($request->getParameters()["tag"]);
+        $tagsArray = explode(',', $tagsString)
         echo "NEW: select * from client WHERE ANY child IN client.tags SATISFIES child = \"Cenoura\"  END";
         exit;
     }
