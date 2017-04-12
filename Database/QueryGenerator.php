@@ -139,7 +139,7 @@ class QueryGenerator
         {
             $queryStr = 'SELECT * FROM `' . $request->bucket . '` WHERE';
             if (isset($request->getParameters()["tag"])){
-                $queryStr = $this->appendTagInQuery($request). 'AND ';
+                $queryStr = $this->appendTagInQuery($request). ' AND ';
             } 
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) 
@@ -160,7 +160,7 @@ class QueryGenerator
                 }
             }
             $request->string = substr($queryStr, 0, -4);
-            echo $request->string;
+            echo $request->string;    
         }
         else
         {
