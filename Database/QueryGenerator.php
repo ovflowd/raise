@@ -201,6 +201,8 @@ class QueryGenerator
         foreach($tagsArray as $key => $tag){
             $queryTagModel = $queryTagModel . "\\$key";
         }
+        echo $queryTagModel;
+        exit;
     }
     
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
