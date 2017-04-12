@@ -461,6 +461,7 @@ class QueryGenerator
                 if ($this->validateExpirationToken($request, $request->token)) 
                 {
                     $request->treatedBody = json_encode($request->getBody());
+                    echo ($request->treatedBody);
                     return $request;
                 }
                 else
