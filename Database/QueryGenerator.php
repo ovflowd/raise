@@ -103,7 +103,6 @@ class QueryGenerator
                 $request->setValid(false);
             }
             $dataValues = $objData->data[$key]->data_values;
-            var_dump(json_decode($request->treatedBody,false));
             $data = array(
                 'service_id' => $serviceId,
                 'data_values' => $dataValues
@@ -111,6 +110,8 @@ class QueryGenerator
             $composedData[$key] = array(
                 'token' => $objData->token, 
                 'tag' => $this->getTagList($request),
+                'client_time' => json_decode($request->treatedBody,false)->client_time,
+                'server_time' => json_decode($request->treatedBody,false)->server_time,
                 'data' => $data
             );
         }
