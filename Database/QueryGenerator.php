@@ -266,7 +266,7 @@ class QueryGenerator
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
-                $services['tag'] = $request->getBody() ['tag'];
+                $services['tag'] = $request->getBody() ['tag']; 
                 
                 if ($nextBucket === 'client') 
                 {
