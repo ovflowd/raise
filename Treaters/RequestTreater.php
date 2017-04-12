@@ -173,6 +173,7 @@ class RequestTreater
     private function validationMethodGet($request, $parameters)
     {
         if (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
+            echo "here".
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;  
@@ -189,7 +190,6 @@ class RequestTreater
     {
         $token = $request->getBody()['token'];
         $services = $request->getBody()[0];
- 
         $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         $query->namedParams(array('token' => $token));
