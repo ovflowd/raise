@@ -390,7 +390,7 @@ class QueryGenerator
                     
                     foreach ($services as $service) 
                     {
-                        $validServices[] = $service->service_id;
+                        $validServices[] = $service->service_id; 
                     }
                     
                     if ($validServices == $sentServices) 
