@@ -108,7 +108,7 @@ class QueryGenerator
                 'data_values' => $dataValues
             );
             $composedData[$key] = array(
-                'token' => $objData->token,
+                'token' => $objData->token, 
                 'tag' => $this->getTagList($request),
                 'data' => $data
             );
