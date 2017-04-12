@@ -116,7 +116,7 @@ class DatabaseParser
     { 
         try
         { 
-              if ($requestObj->bucket === "client"){ //Vai updatar o client  
+              if ($requestObj->bucket === "client" || $requestObj->bucket === "token"){ 
                 if (!$isRevalidate){
                     $result = $this->getBucket($requestObj->bucket)->upsert($requestObj->token, $requestObj->treatedBody);
                 } else {
