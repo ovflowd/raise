@@ -427,9 +427,9 @@ class QueryGenerator
                     $newDocument->tokenId = $this->generateToken();
                     //Insere o novo serviço com nova tokenId no service
                     
+                    $request->bucket = 'service';
+                    $request->treatedBody = json_encode($newDocument);
                     if (count($validServices)>0){
-                        $request->bucket = 'service';
-                        $request->treatedBody = json_encode($newDocument);
                         $parser = new DatabaseParser($request, false);
                         $parser->insert($request);
                     }
