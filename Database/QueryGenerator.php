@@ -235,7 +235,7 @@ class QueryGenerator
             {
                 unset($requestBody['time_ini']);
                 unset($requestBody['time_fim']);
-                unset($requestBody['is_revalidated'])
+                unset($requestBody['is_revalidated']);
                 $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
