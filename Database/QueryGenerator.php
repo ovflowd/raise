@@ -141,24 +141,7 @@ class QueryGenerator
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
-                {
-                    $chave = 'data.data.data_values.' . $key;
-                }
-                elseif ($request->bucket == 'data' && $key == 'service_id') 
-                {
-                    $chave = 'data.data.' . $key;
-                    //$queryStr = "SELECT * FROM data data UNNEST data.data c WHERE c.service_id = "."\$$key"." AND";
-                    //$jumpCondition = true;
-                }
-                elseif ($key == 'tokenId') 
-                {
-                    $chave = 'token';
-                }
-                else
-                {
-                    $chave = $key;
-                }
+                $chave = $this->getChave()
                 if ($key === "tag"){
                     $queryStr = $this->appendTagInQuery($request). 'AND ';
                 } else {
@@ -186,6 +169,25 @@ class QueryGenerator
         return $request;
     }
     
+    private fuction getChave($request, $key)
+    {
+        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
+        {
+            $chave = 'data.data.data_values.' . $key;
+        }
+        elseif ($request->bucket == 'data' && $key == 'service_id') 
+        {
+            $chave = 'data.data.' . $key;
+        }
+        elseif ($key == 'tokenId')  
+        {
+            $chave = 'token';
+        }
+        else
+        {
+            $chave = $key;
+        }
+    }
     private function appendTagInQuery($request)
     { 
         $tagsString = $request->getParameters()["tag"];
