@@ -198,9 +198,9 @@ class QueryGenerator
     private function createTagQueryString($tagsArray, $bucket)
     {
         $queryTagModel =  "select * from ".$bucket." WHERE ";
-        $queryArrayHelper = "  ANY child IN client.tags SATISFIES child = ";
+        $queryArrayHelper = "ANY child IN client.tags SATISFIES child = ";
         foreach($tagsArray as $key => $tag){
-            $queryTagModel = $queryTagModel . $tagsArray[$key] . " AND ";
+            $queryTagModel = $queryTagModel . $tagsArray[$key] . " END AND ";
         }
         ;
     }
