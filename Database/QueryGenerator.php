@@ -138,7 +138,7 @@ class QueryGenerator
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) 
         {
             $queryStr = 'SELECT * FROM `' . $request->bucket . '` WHERE';
-            if (in_array("tag",$request->getParameters())){
+            if (array_key_exists($request->getParameters(), "tag")){
                 echo "right";
                 $queryStr = $this->appendTagInQuery($request). 'AND ';
             } 
