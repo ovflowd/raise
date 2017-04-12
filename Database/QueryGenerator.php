@@ -160,7 +160,6 @@ class QueryGenerator
                 }
             } 
             $request->string = substr($queryStr, 0, -4);
-            exit($request->string);
         }
         else
         {
