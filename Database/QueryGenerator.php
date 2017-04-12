@@ -142,7 +142,10 @@ class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                
+                if ($key === "tag"){
+                    echo "Tag here";
+                    exit;
+                }
                 if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
                 {
                     $chave = 'data.data.data_values.' . $key;
