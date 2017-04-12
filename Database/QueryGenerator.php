@@ -422,6 +422,7 @@ class QueryGenerator
                 }
                 if ($validServices == $sentServices) 
                 {
+                    exit("OK").
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
