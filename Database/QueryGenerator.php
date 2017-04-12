@@ -142,9 +142,6 @@ class QueryGenerator
             
             foreach ($request->getParameters() as $key => $parameter) 
             {
-                if ($key === "tag"){
-                    echo "Tag here";
-                }
                 if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId') 
                 {
                     $chave = 'data.data.data_values.' . $key;
@@ -164,19 +161,21 @@ class QueryGenerator
                 {
                     $chave = $key;
                 }
-                
-                if (is_numeric($parameter)) 
-                {
-                    $typeVerification[$key] = (int)$parameter;
-                    $request->setParameters($typeVerification);
-                    $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
-                }
-                else
-                {
-                    
-                    if ($key !== 'tokenId') 
+                if ($key === "tag"){
+                    $queryStr = $this->appendTag($request);
+                } else {
+                    if (is_numeric($parameter)) 
                     {
-                        $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
+                        $typeVerification[$key] = (int)$parameter;
+                        $request->setParameters($typeVerification);
+                        $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
+                    }
+                    else
+                    {
+                        if ($key !== 'tokenId') 
+                        {
+                            $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
+                        }
                     }
                 }
             }
