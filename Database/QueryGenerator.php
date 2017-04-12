@@ -428,10 +428,8 @@ class QueryGenerator
                     //Insere o novo serviço com nova tokenId no service
                     $request->bucket = 'service';
                     $request->treatedBody = json_encode($newDocument);
-                    if (count($validServices)>0){
-                        $parser = new DatabaseParser($request, false);
-                        $parser->insert($request);
-                    }
+                    $parser = new DatabaseParser($request, false);
+                    $parser->insert($request);
                     $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
                     $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
                     $oldClientDocument = $oldTokenDocument;
