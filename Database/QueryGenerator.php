@@ -443,7 +443,7 @@ class QueryGenerator
                         $oldTokenObject->is_revalidated = true;
                         $request->bucket = 'token';
                         $request->treatedBody = json_encode($oldTokenObject);
-                        $parser->insert($request); 
+                        $parser->insert($request);  
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
                         $tokenIni = round(microtime(true) * 1000);
