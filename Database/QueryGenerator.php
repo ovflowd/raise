@@ -191,9 +191,14 @@ class QueryGenerator
     private function appendTagInQuery($request)
     { 
         $this->separateTags($request->getParameters()["tag"]);
-        $tagsArray = explode(',', $tagsString)
-        echo "NEW: select * from client WHERE ANY child IN client.tags SATISFIES child = \"Cenoura\"  END";
-        exit;
+        $tagsArray = explode(',', $tagsString);
+        return $this->createTagQueryString($tagsArray, $request->bucket);
+    }
+    
+    private function createTagQueryString($tagsArray, $bucket)
+    {
+        $queryTagModel =  "select * from client WHERE ANY child IN client.tags SATISFIES child =";
+        
     }
     
     private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
