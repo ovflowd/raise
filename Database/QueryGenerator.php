@@ -445,6 +445,7 @@ class QueryGenerator
                         $parser->insert($request, false);  
                         //Insere uma nova token valida pro cara
                         $request->bucket = 'token';
+                        $request->token = $newDocument->tokenId;
                         $tokenIni = round(microtime(true) * 1000);
                         $tokenFim = $tokenIni + 7200000; //millisecons
                         $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
