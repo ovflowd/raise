@@ -404,7 +404,7 @@ class QueryGenerator
             {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                exit($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
+                exit($this->simpleSelect($request, "token", "select * from token where tokenId = ".$token, null) ["values"][0]); 
                 
                 
                 $sentServices = $request->getBody() ['services'];
