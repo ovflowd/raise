@@ -1,6 +1,7 @@
 <?php
 /**
- * UIoT Service Layer
+ * UIoT Service Layer.
+ *
  * @version alpha
  *                          88
  *                          ""              ,d
@@ -17,82 +18,74 @@
  * If you need a http message use messageHttp(), this method get a http code and create a object message
  * for Couchbase message use messageCouch(),
  */
+
 namespace Raise\Treaters;
+
 include_once 'Models/Message.php';
-include_once ("Config/Config.php");
+include_once 'Config/Config.php';
 
 /**
-*Class MessageOutPut
-*@package Models/Message.php
-*@package Config/Config.php
-*/
-
+ *Class MessageOutPut.
+ */
 class MessageOutPut
 {
     /**
-    *Method for search response message with HTTP code
-    *
-    *@param string $code  HTTP code
-    *@return  Object  Response message with HTTP code and message
-    */
-
-
+     *Method for search response message with HTTP code.
+     *
+     *@param string $code  HTTP code
+     *
+     *@return  object  Response message with HTTP code and message
+     */
     public function messageHttp($code)
     {
         $message_out;
         $myCluster = new \CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
-        try
-        { //create a conction with database
-            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM `metadata` WHERE codHttp=\$p");
+        try { //create a conction with database
+            $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM `metadata` WHERE codHttp=$p');
             $query->namedParams(array(
-                "p" => (string) $code
+                'p' => (string) $code,
             ));
             $result = $myBucket->query($query); //save a result of search
 
-            foreach ($result->rows as $row)
-            {
+            foreach ($result->rows as $row) {
                 $message_out = $row->metadata; //get a message object
             }
 
             $message = new \Message($message_out->codHttp, $message_out->codCouch, $message_out->message); //create a message model
-
-        } catch(CouchbaseException $e)
-        { //
-            printf("(code: %d)", $e->getCode());
+        } catch (CouchbaseException $e) {
+            printf('(code: %d)', $e->getCode());
         }
-        return $message->message_out(); //return a message object --> object(stdClass)#11 (2) { ["codeHttp"]=> string(3) "200" ["message"]=> string(10) "OK, Sucess" }
 
+        return $message->message_out(); //return a message object --> object(stdClass)#11 (2) { ["codeHttp"]=> string(3) "200" ["message"]=> string(10) "OK, Sucess" }
     }
 
     /**
-    *Method for search response message with Couchbase exception code
-    *
-    *@param string $code  Couchbase exception code
-    *@return  Object  Response message with HTTP code and message
-    */
-
+     *Method for search response message with Couchbase exception code.
+     *
+     *@param string $code  Couchbase exception code
+     *
+     *@return  object  Response message with HTTP code and message
+     */
     public function messageCouch($code)
     {
         $message_out;
         $myCluster = new \CouchbaseCluster(DB_ADDRESS);
         $myBucket = $myCluster->openBucket('metadata');
-        try
-        {
-            $query = \CouchbaseN1qlQuery::fromString("SELECT * FROM `metadata` WHERE codCouch=\$p");
+        try {
+            $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM `metadata` WHERE codCouch=$p');
             $query->namedParams(array(
-                "p" => $code
+                'p' => $code,
             ));
             $result = $myBucket->query($query);
-            foreach ($result->rows as $row)
-            {
+            foreach ($result->rows as $row) {
                 $message_out = $row->metadata;
             }
             $message = new Message($message_out->codHttp, $message_out->codCouch, $message_out->message);
-        } catch(CouchbaseException $e)
-        {
-            printf("(code: %d)", $e->getCode());
+        } catch (CouchbaseException $e) {
+            printf('(code: %d)', $e->getCode());
         }
+
         return $message->message_out();
     }
 }
