@@ -70,7 +70,6 @@ class RequestTreater
      */
     public function execute()
     {
-        
         $request = $this->create();
         $this->validate($request);
         if (!$request->isValid()) {
@@ -111,6 +110,7 @@ class RequestTreater
         if ($this->emptyValidation($request) && $this->validationBucket($request) && $this->validationMethod($request) && $this->validateMethodMoreBucket($request)) {
             $request->setResponseCode(200);
             $request->setValid(true);
+
             return;
         }
 
@@ -119,11 +119,13 @@ class RequestTreater
 
     private function emptyValidation($request)
     {
-        if ($request->getPath()['bucket'] === null || empty($request->getPath()['bucket'])  && empty($request->getPath()['address']) && $request->getPath()['method'] == null || empty($request->getPath()['method'])) {
+        if ($request->getPath()['bucket'] === null || empty($request->getPath()['bucket']) && empty($request->getPath()['address']) && $request->getPath()['method'] == null || empty($request->getPath()['method'])) {
             $request->setResponseCode(202);
             $request->setValid(false);
+
             return false;
         }
+
         return true;
     }
 
@@ -132,8 +134,10 @@ class RequestTreater
         if (!in_array($request->getPath()['bucket'], $this->AllowedBuckets)) {
             $request->setResponseCode(403);
             $request->setValid(false);
+
             return false;
         }
+
         return true;
     }
 
@@ -143,22 +147,22 @@ class RequestTreater
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
             $query->namedParams(array('bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()));
-            $parameters = $database->query($query)->rows[0]->input; 
+            $parameters = $database->query($query)->rows[0]->input;
             switch ($request->getMethod()) {
             case 'get':
                 return $this->validationMethodGet($request, $parameters);
             break;
             case 'post':
-                if ($request->getPath()['method'] == 'revalidate'){
-                    return $this->validateRevalidate($request, $parameters);   
+                if ($request->getPath()['method'] == 'revalidate') {
+                    return $this->validateRevalidate($request, $parameters);
                 }
+
                 return $this->validationMethodPost($request, $parameters);
             break;
         }
         } else {
-            if($request->getMethod() === "post")
-            {
-               return $this->validateDataInsertion($request); 
+            if ($request->getMethod() === 'post') {
+                return $this->validateDataInsertion($request);
             }
         }
     }
@@ -168,19 +172,22 @@ class RequestTreater
     {
         return true;
     }
-    
+
     private function validationMethodGet($request, $parameters)
     {
         if (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
             $request->setResponseCode(400);
             $request->setValid(false);
-            return false;  
-        } else if(count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) === 1
-                  && !in_array("tokenId", array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
-            $request->setResponseCode(400); 
+
+            return false;
+        } elseif (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) === 1
+                  && !in_array('tokenId', array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
+            $request->setResponseCode(400);
             $request->setValid(false);
-            return false;   
+
+            return false;
         }
+
         return true;
     }
 
@@ -194,13 +201,13 @@ class RequestTreater
         $parameters = $database->query($query)->rows;
 
         if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
-            $request->setResponseCode(401); 
+            $request->setResponseCode(401);
             $request->setValid(false);
+
             return false;
         }
 
         foreach ($services as $service) {
-
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
             $query->namedParams(array('token' => $token));
@@ -208,17 +215,16 @@ class RequestTreater
 
             $compare = json_decode(json_encode($compare), true);
             $compare = $compare['services'][$service['service_id']]['parameters'];
-            
-                foreach ($service['data_values'] as $key => $val) {
-                    if (gettype($val) !== $compare[$key]) {
-                        $request->setResponseCode(400); 
-                        $request->setValid(false);
 
-                        return false;
-                    }
+            foreach ($service['data_values'] as $key => $val) {
+                if (gettype($val) !== $compare[$key]) {
+                    $request->setResponseCode(400);
+                    $request->setValid(false);
+
+                    return false;
                 }
             }
-        
+        }
 
         return true;
     }
@@ -228,6 +234,7 @@ class RequestTreater
         if (!empty(array_diff(array_keys((array) $parameters), array_keys($request->getBody())))) {
             $request->setResponseCode(400);
             $request->setValid(false);
+
             return false;
         }
 
@@ -242,8 +249,10 @@ class RequestTreater
         if ($database->query($query)->rows[0]->{'$1'} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
+
             return false;
         }
+
         return true;
     }
 
