@@ -22,349 +22,296 @@ use Raise\Treaters\MessageOutPut;
 
 class QueryGenerator
 {
-    
-    public function generate($request) 
+    public function generate($request)
     {
-        
-        if ($request->bucket == 'service' && $request->getMethod() == 'post') 
-        {
+        if ($request->bucket == 'service' && $request->getMethod() == 'post') {
             $parsedPath = $this->parsePath($request, true);
-            
-            if ($parsedPath !== false && $parsedPath->isValid() === true) 
-            {
+
+            if ($parsedPath !== false && $parsedPath->isValid() === true) {
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
                 $result = $parser->insert($request);
             }
-            
-            if ($parsedPath->isValid() === false) 
-            {
+
+            if ($parsedPath->isValid() === false) {
                 return (new MessageOutPut())->messageHttp($request->getReponseCode());
             }
             $parsedPath = $this->parsePath($request, false);
-        }
-        else
-        {
+        } else {
             $parsedPath = $this->parsePath($request, false);
         }
-        
-        if ($parsedPath !== false && $parsedPath->isValid() === true) 
-        {
+
+        if ($parsedPath !== false && $parsedPath->isValid() === true) {
             $parser = new DatabaseParser($parsedPath, false);
-            
-            if ($request->getMethod() == 'get') 
-            {
+
+            if ($request->getMethod() == 'get') {
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
-            }
-            elseif ($request->getMethod() == 'post') 
-            {
-                
-                if ($request->bucket == 'data') 
-                {
+            } elseif ($request->getMethod() == 'post') {
+                if ($request->bucket == 'data') {
                     $separedData = $this->separateData($request);
-                    
-                    if (!$request->isValid()) 
-                    {
+
+                    if (!$request->isValid()) {
                         return (new MessageOutPut())->messageHttp($request->getReponseCode());
                     }
-                    
-                    foreach ($separedData as $key => $data) 
-                    {
+
+                    foreach ($separedData as $key => $data) {
                         $request->treatedBody = json_encode($separedData[$key]);
                         $result = $parser->insert($request);
                     }
-                }
-                else
-                {
+                } else {
                     $result = $parser->insert($request);
                 }
             }
+
             return $result;
-        }
-        elseif ($parsedPath->isValid() === false) 
-        {
+        } elseif ($parsedPath->isValid() === false) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
         }
     }
-    
-    private function separateData($request) 
+
+    private function separateData($request)
     {
         $objData = json_decode($request->treatedBody, false);
         $composedData = array();
-        
-        foreach ($objData->data as $key => $service) 
-        {
+
+        foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
-            
-            if (!$this->validateServiceId($request, $serviceId)) 
-            {
+
+            if (!$this->validateServiceId($request, $serviceId)) {
                 $request->setResponseCode(400);
                 $request->setValid(false);
             }
             $dataValues = $objData->data[$key]->data_values;
             $data = array(
                 'service_id' => $serviceId,
-                'data_values' => $dataValues
+                'data_values' => $dataValues,
             );
             $composedData[$key] = array(
-                'token' => $objData->token, 
+                'token' => $objData->token,
                 'tag' => $this->getTagList($request),
-                'client_time' => json_decode($request->treatedBody,false)->client_time,
-                'server_time' => json_decode($request->treatedBody,false)->server_time,
-                'data' => $data
+                'client_time' => json_decode($request->treatedBody, false)->client_time,
+                'server_time' => json_decode($request->treatedBody, false)->server_time,
+                'data' => $data,
             );
         }
+
         return $composedData;
     }
-    
+
     private function getTagList($request)
     {
-        if (isset($request->getBody()["tag"])){
-            return $request->getBody()["tag"];
-        }    
+        if (isset($request->getBody()['tag'])) {
+            return $request->getBody()['tag'];
+        }
+
         return array();
     }
-    
-    private function validateServiceId($request, $namedParam) 
+
+    private function validateServiceId($request, $namedParam)
     {
         $oldRequest = $request;
-        $Testando = $this->simpleSelect($request, 'service', "SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = " . $namedParam, $namedParam);
-        
-        if (count($Testando["values"]) > 0) 
-        {
-            $request->bucket = "data";
+        $Testando = $this->simpleSelect($request, 'service', 'SELECT * FROM service serv UNNEST serv.services c WHERE c.service_id = '.$namedParam, $namedParam);
+
+        if (count($Testando['values']) > 0) {
+            $request->bucket = 'data';
+
             return true;
         }
+
         return false;
     }
-    
-    private function generateToken() 
+
+    private function generateToken()
     {
         return bin2hex(openssl_random_pseudo_bytes(16));
     }
-    
-    private function buildQuery($request) 
+
+    private function buildQuery($request)
     {
-        if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) 
-        {
-            $queryStr = 'SELECT * FROM `' . $request->bucket . '` WHERE';
-            if (isset($request->getParameters()["tag"])){
-                $queryStr = $this->appendTagInQuery($request). ' AND ';
-            } 
+        if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
+            $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
+            if (isset($request->getParameters()['tag'])) {
+                $queryStr = $this->appendTagInQuery($request).' AND ';
+            }
             $typeVerification = array();
-            foreach ($request->getParameters() as $key => $parameter) 
-            {
+            foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
-                if (is_numeric($parameter) && $chave != "tag") 
-                {
-                    $typeVerification[$key] = (int)$parameter;
+                if (is_numeric($parameter) && $chave != 'tag') {
+                    $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
-                    $queryStr = $queryStr . ' ' . $chave . " = \$$key" . 'AND ';
-                }
-                else if ($chave != "tag")
-                {
-                    if ($key !== 'tokenId') 
-                    {
-                        $queryStr = $queryStr . ' ' . $chave . " LIKE \$$key" . ' AND ';
+                    $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
+                } elseif ($chave != 'tag') {
+                    if ($key !== 'tokenId') {
+                        $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
                     }
                 }
-            } 
+            }
             $request->string = substr($queryStr, 0, -4);
+        } else {
+            $request->string = 'SELECT * FROM `'.$request->bucket.'`';
         }
-        else
-        {
-            $request->string = 'SELECT * FROM `' . $request->bucket . '`';
-        }
+
         return $request;
     }
-    
+
     private function getChave($request, $key)
     {
-        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') 
-        {
-            return 'data.data.data_values.' . $key;
-        }
-        elseif ($request->bucket == 'data' && $key == 'service_id') 
-        {
-            return 'data.data.' . $key;
-        }
-        elseif ($key == 'tokenId')  
-        {
+        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') {
+            return 'data.data.data_values.'.$key;
+        } elseif ($request->bucket == 'data' && $key == 'service_id') {
+            return 'data.data.'.$key;
+        } elseif ($key == 'tokenId') {
             return 'token';
         }
+
         return $key;
     }
-    
+
     private function appendTagInQuery($request)
-    { 
-        $tagsString = $request->getParameters()["tag"];
+    {
+        $tagsString = $request->getParameters()['tag'];
         $tagsArray = explode(',', $tagsString);
+
         return $this->createTagQueryString($tagsArray, $request->bucket);
     }
-    
+
     private function createTagQueryString($tagsArray, $bucket)
     {
-        $queryTagModel =  "select * from ".$bucket." WHERE ";
-        $queryArrayHelper = "ANY child IN ".$bucket.".tag SATISFIES child = ";
-        foreach($tagsArray as $key => $tag){
-            $queryTagModel .= $queryArrayHelper."\"".$tagsArray[$key]."\"". " END AND "; 
+        $queryTagModel = 'select * from '.$bucket.' WHERE ';
+        $queryArrayHelper = 'ANY child IN '.$bucket.'.tag SATISFIES child = ';
+        foreach ($tagsArray as $key => $tag) {
+            $queryTagModel .= $queryArrayHelper.'"'.$tagsArray[$key].'"'.' END AND ';
         }
+
         return substr($queryTagModel, 0, -5);
     }
-    
-    private function simpleSelect($request, $bucket, $queryStr, $namedParam) 
+
+    private function simpleSelect($request, $bucket, $queryStr, $namedParam)
     {
         $requestObj = $request;
         $requestObj->bucket = $bucket;
         $parserinho = new DatabaseParser($requestObj, $bucket);
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
+
         return $Testando;
     }
-    
-    private function validateToken($result, $request, $nextBucket) 
+
+    private function validateToken($result, $request, $nextBucket)
     {
-        
-        if (isset($result['values'][0])) 
-        {
+        if (isset($result['values'][0])) {
             unset($request->string);
-            $requestBody = json_decode(json_encode($result['values'][0]) , true);
-            
-            if ($requestBody['time_fim'] > round(microtime(true) * 1000)) 
-            {
+            $requestBody = json_decode(json_encode($result['values'][0]), true);
+
+            if ($requestBody['time_fim'] > round(microtime(true) * 1000)) {
                 unset($requestBody['time_ini']);
                 unset($requestBody['time_fim']);
-                unset($requestBody['is_revalidated']); 
-                $request->bucket = $nextBucket; 
+                unset($requestBody['is_revalidated']);
+                $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
-                
-                if ($nextBucket == 'service') 
-                {
+
+                if ($nextBucket == 'service') {
                     $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1', null);
                     $lastIndex = count($Testando['values'][0]->services);
                     $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
-                    
-                    if ($Testando['values'][0] === null) 
-                    {
+
+                    if ($Testando['values'][0] === null) {
                         $i = 0;
-                    }
-                    else
-                    {
+                    } else {
                         $i = $indiceFinal;
                         $request->lastIndex = $indiceFinal;
                     }
-                }
-                else
-                {
-                    if ($request->lastIndex === null) 
-                    {
+                } else {
+                    if ($request->lastIndex === null) {
                         $i = 0;
-                    }
-                    else
-                    {
+                    } else {
                         $i = $request->lastIndex;
                     }
                 }
-                
-                foreach ($request->getBody() ['services'] as $key => $service) 
-                {
+
+                foreach ($request->getBody() ['services'] as $key => $service) {
                     $service['service_id'] = $i;
                     ++$i;
                     $services['services'][] = $service;
                 }
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
-                $services['tag'] = $request->getBody() ['tag']; 
-                
-                if ($nextBucket === 'client') 
-                {
+                $services['tag'] = $request->getBody() ['tag'];
+
+                if ($nextBucket === 'client') {
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
-                }
-                elseif ($nextBucket === 'service') 
-                {
+                } elseif ($nextBucket === 'service') {
                     $request->treatedBody = json_encode($services);
                 }
                 $request->token = $requestBody['tokenId'];
                 unset($requestBody['tokenId']);
-            }
-            else
-            {
+            } else {
                 $request->setResponseCode(401);
                 $request->setValid(false);
             }
-        }
-        else
-        {
+        } else {
             $request->setResponseCode(401);
             $request->setValid(false);
         }
+
         return $request;
     }
-    
-    private function validateExpirationToken($request, $token) 
+
+    private function validateExpirationToken($request, $token)
     {
         $database = (new DatabaseParser($request, false))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
         $query->namedParams(array(
-            'token' => $token
+            'token' => $token,
         ));
         $parameters = $database->query($query)->rows;
-        
-        if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) 
-        {
+
+        if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
             return false;
         }
+
         return true;
     }
-    
-    function isJson($string) 
+
+    public function isJson($string)
     {
         json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
+
+        return json_last_error() == JSON_ERROR_NONE;
     }
-    
-    private function parsePath($request, $isServiceSecondTime) 
+
+    private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
         $method = $path['method'];
-        
-        if (!empty($method)) 
-        {
-            
-            if ($request->getPath() ['method'] === 'list') 
-            {
-                
-                if (!$this->validateExpirationToken($request, $request->getParameters() ['tokenId'])) 
-                {
+
+        if (!empty($method)) {
+            if ($request->getPath() ['method'] === 'list') {
+                if (!$this->validateExpirationToken($request, $request->getParameters() ['tokenId'])) {
                     $request->setResponseCode(401);
                     $request->setValid(false);
-                }
-                else
-                {
+                } else {
                     $request->setResponseCode(200);
                     $request->setValid(true);
                 }
-            }
-            else
-            { //Mini JSON validation
-                
-                if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 || substr(json_encode($request->getBody()) , 0, 1) != "{") 
-                {
+            } else { //Mini JSON validation
+
+                if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 || substr(json_encode($request->getBody()), 0, 1) != '{') {
                     $request->setResponseCode(400);
                     $request->setValid(false);
+
                     return $request;
                 }
             }
-            
-            if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') 
-            {
+
+            if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') {
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
-                $request->treatedBody = json_encode(array_merge($request->getBody() , array(
+                $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim,
@@ -374,9 +321,7 @@ class QueryGenerator
                 $parser->insert($request);
                 $request->bucket = 'client';
                 $request->treatedBody = json_encode($request->getBody());
-            }
-            elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') 
-            {
+            } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
                 $parser = new DatabaseParser($request, false);
@@ -387,41 +332,34 @@ class QueryGenerator
                     'token' => $token,
                 ));
                 $result = $parser->select($request);
-                if (!$isServiceSecondTime) 
-                {
+                if (!$isServiceSecondTime) {
                     $request = $this->validateToken($result, $request, 'client');
-                }
-                else
-                {
+                } else {
                     $request = $this->validateToken($result, $request, 'service');
                 }
                 //$request->bucket = "service";
                 //End select
                 //create Client
                 //end create
-                
-            }
-            elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') 
-            {
+            } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
                 //valida se os serviços enviados fazem parte do token
                 $token = $request->getBody() ['tokenId'];
-                $oldTokenObject = $this->simpleSelect($request, "token", "select * from token where tokenId = '".$token."'", null)["values"][0];
-                if ($oldTokenObject->is_revalidated){
+                $oldTokenObject = $this->simpleSelect($request, 'token', "select * from token where tokenId = '".$token."'", null)['values'][0];
+                if ($oldTokenObject->is_revalidated) {
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
+
                     return $request;
-                } 
+                }
                 $sentServices = $request->getBody() ['services'];
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
-                $oldDocument = json_encode($this->simpleSelect($request, "service", $queryStr, null) ["values"][0]);
+                $oldDocument = json_encode($this->simpleSelect($request, 'service', $queryStr, null) ['values'][0]);
                 $services = json_decode($oldDocument)->services;
                 $validServices = array();
-                foreach ($services as $service) 
-                {
-                    $validServices[] = $service->service_id; 
+                foreach ($services as $service) {
+                    $validServices[] = $service->service_id;
                 }
-                if ($validServices == $sentServices) 
-                {
+                if ($validServices == $sentServices) {
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
@@ -431,22 +369,22 @@ class QueryGenerator
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
                     $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
-                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ["values"][0]) , false);
+                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ['values'][0]), false);
                     $oldClientDocument = $oldTokenDocument;
                     unset($oldTokenDocument->services);
-                    unset($oldTokenDocument->tokenId); 
+                    unset($oldTokenDocument->tokenId);
                     //Updata a old token para revalidated como true e dá um upsert
                     $oldTokenObject->is_revalidated = true;
                     $request->bucket = 'token';
                     $request->treatedBody = json_encode($oldTokenObject);
-                    $request->token = $oldTokenObject->tokenId;  
+                    $request->token = $oldTokenObject->tokenId;
                     $parser->insert($request, false);
                     //Insere uma nova token valida pro cara
                     $request->bucket = 'token';
                     $request->token = $newDocument->tokenId;
                     $tokenIni = round(microtime(true) * 1000);
                     $tokenFim = $tokenIni + 7200000; //millisecons
-                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument) , true) , array(
+                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument), true), array(
                         'tokenId' => $newDocument->tokenId,
                         'time_ini' => $tokenIni,
                         'time_fim' => $tokenFim,
@@ -457,41 +395,34 @@ class QueryGenerator
                     $request->bucket = 'client';
                     $request->token = $newDocument->tokenId;
                     $oldClientDocumnet->tokenId = $newDocument->tokenId;
-                    $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument) , true) , json_decode(json_encode($oldClientDocument) , true)));
-                }
-                else
-                {
+                    $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument), true), json_decode(json_encode($oldClientDocument), true)));
+                } else {
                     $request->setResponseCode(401);
                     $request->setValid(false);
+
                     return $request;
                 }
-            }
-            elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') 
-            {
+            } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
                 $arrayTest = $request->getBody();
-                
-                if ($this->validateExpirationToken($request, $request->token)) 
-                {
-                    $request->treatedBody = json_encode(array_merge($request->getBody(), array("server_time" => round(microtime(true) * 1000))));
-                    return $request; 
-                }
-                else
-                {
+
+                if ($this->validateExpirationToken($request, $request->token)) {
+                    $request->treatedBody = json_encode(array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000))));
+
+                    return $request;
+                } else {
                     $request->setResponseCode(401);
                     $request->setValid(false);
+
                     return false;
                 }
-            }
-            else
-            {
+            } else {
                 $request->token = $this->generateToken();
                 $request->treatedBody = $request->getBody();
             }
+
             return $request;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
