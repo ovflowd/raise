@@ -221,7 +221,7 @@ class CouchBaseInterfacer
                 'serial' => 'string',
                 'processor' => 'string',
                 'channel' => 0,
-                'timestamp' => 'string',
+                'client_time' => 'string',
             ),
             'output' => array(
                 'code' => 0,
