@@ -144,7 +144,7 @@ class QueryGenerator
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
-                    $queryStr = $queryStr.' '.$chave." = \$$key".'AND  ';
+                    $queryStr = $queryStr.' '.$chave." = \$$key".' AND  ';
                 } elseif ($chave != 'tag' && $chave != 'limit') {
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
