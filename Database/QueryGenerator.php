@@ -167,7 +167,7 @@ class QueryGenerator
         } elseif ($key == 'limit'){
             $request->isLimited = true;
         }
-        return $key;
+        return $key; 
     }
 
     private function appendTagInQuery($request)
