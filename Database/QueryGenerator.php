@@ -145,7 +145,7 @@ class QueryGenerator
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
-                } elseif ($chave != 'tag') {
+                } elseif ($chave != 'tag' && $chave != 'limit') {
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
                     } 
