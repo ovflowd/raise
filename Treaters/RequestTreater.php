@@ -237,8 +237,7 @@ class RequestTreater
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;
-        }
-
+        } 
         return true;
     }
 
