@@ -155,6 +155,7 @@ class QueryGenerator
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
+        echo $request->getParameters()["limit"].'<br>';
         return $request; 
     }
 
