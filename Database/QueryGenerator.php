@@ -160,8 +160,9 @@ class QueryGenerator
     }
 
     private function finalizeQuery($request, $queryStr){
-        
+        $queryStr = substr($queryStr, 0, -4);
     }
+    
     private function getChave($request, $key)
     {
         if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') {
