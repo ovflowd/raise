@@ -139,7 +139,7 @@ class QueryGenerator
                 $request->isLimited = true;
                 $request->limitedBy = $request->getParameters()['limit'];
             }
-            if (isset($request->getParameters()['order']) && $request->getParameters()['order'] == true) {
+            if (isset($request->getParameters()['order'])) {
                 $request->isOrdered = true; 
             }
             $typeVerification = array();
