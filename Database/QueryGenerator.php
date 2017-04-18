@@ -163,6 +163,7 @@ class QueryGenerator
         if ($request->isLimited == true){
             $queryStr .= "LIMIT ".$request->getParameters()["limit"];
         } 
+        return $queryStr;
     }
     
     private function getChave($request, $key)
