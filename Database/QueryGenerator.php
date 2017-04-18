@@ -136,7 +136,7 @@ class QueryGenerator
             $queryStr = $request->queryStr; 
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
-                $chave = $this->getChave($request, $key);
+                $chave = $this->getChave($request, $key); 
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
