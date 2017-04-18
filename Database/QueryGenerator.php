@@ -155,9 +155,6 @@ class QueryGenerator
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
-        echo $request->getParameters()["service_id"].'<br>';
-        echo $request->getParameters()["press"].'<br>';
-        echo $request->string.'<br>';
         return $request; 
     }
 
