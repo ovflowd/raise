@@ -259,7 +259,7 @@ class CouchBaseInterfacer
             'bucket' => 'service',
             'input' => array(
                 'tokenId' => 'string',
-                'timestamp' => 'string',
+                'client_time' => 'string',
                 'services' => [array(
                     'name' => 'string',
                     'return' => 'string',
