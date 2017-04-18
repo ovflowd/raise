@@ -136,14 +136,11 @@ class QueryGenerator
                 $queryStr = $this->appendTagInQuery($request).' AND ';
             }
             if (isset($request->getParameters()['limit'])) {
-                $queryStr = $this->appendTagInQuery($request).' AND ';
+                
             }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
-                if ($chave === 'limit'){
-                    $request->isLimited = true;
-                }
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
@@ -166,7 +163,7 @@ class QueryGenerator
             $queryStr = substr($queryStr, 0, -5);
         }  
         if ($request->isLimited == true){
-            $queryStr .= " LIMIT ".$request->getParameters()['limit'];
+            $queryStr .= " LIMIT ".$request->limitedBy;
         } 
         return $queryStr;
     }
