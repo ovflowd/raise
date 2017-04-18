@@ -159,6 +159,9 @@ class QueryGenerator
         return $request;
     }
 
+    private function finalizeQuery($request, $queryStr){
+        
+    }
     private function getChave($request, $key)
     {
         if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') {
