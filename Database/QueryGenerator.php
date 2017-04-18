@@ -155,9 +155,6 @@ class QueryGenerator
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
-        if (isset($request->getParameters()['tag'])) {
-               echo 'ola';
-            }
         var_dump($request->getParameters());
         echo $request->string;
         return $request; 
