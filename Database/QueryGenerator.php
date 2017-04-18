@@ -242,6 +242,7 @@ class QueryGenerator
                 $services['client_time'] = $request->getBody() ['client_time'];
                 
                 if ($nextBucket === 'client') {
+                    $firtArray = array_merge($services, $requestBody);
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
                 } elseif ($nextBucket === 'service') {
                     $request->treatedBody = json_encode(array_merge($services, array('server_time' =>round(microtime(true) * 1000))));
