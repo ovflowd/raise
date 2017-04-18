@@ -167,11 +167,11 @@ class QueryGenerator
         if (!$noParams){
             $queryStr = substr($queryStr, 0, -5);
         }  
-        if ($request->isLimited == true){
-            $queryStr .= " LIMIT ".$request->limitedBy;
-        } 
         if ($request->isOrdered == true){
             $queryStr .= " order by ".$request->bucket.".server_time DESC";
+        } 
+        if ($request->isLimited == true){
+            $queryStr .= " LIMIT ".$request->limitedBy;
         } 
         return $queryStr;
     }
