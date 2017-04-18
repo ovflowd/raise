@@ -135,7 +135,7 @@ class QueryGenerator
             if (isset($request->getParameters()['tag'])) {
                 $queryStr = $this->appendTagInQuery($request).' AND ';
             }
-            if (isset($request->getParameters()['limit'])) {
+            if (isset($request->getParameters()['limit'])) { 
                 $request->isLimited = true;
                 $request->limitedBy = $request->getParameters()['limit'];
             }
