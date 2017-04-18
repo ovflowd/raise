@@ -145,31 +145,20 @@ class QueryGenerator
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
-                } elseif ($chave != 'tag' && $chave != 'limit') {
+                } elseif ($chave != 'tag') {
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
                     } 
                 }
             }
             $request->string = substr($queryStr, 0, -4);
+            echo ($request->string); 
         } else {
-            $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
-            $request->string = finalizeQuery($request, $queryStr, true);
+            $request->string = 'SELECT * FROM `'.$request->bucket.'`';
         }
-        exit ($request->string);
         return $request;
     }
 
-    private function finalizeQuery($request, $queryStr, $noParams){
-        if (!$noParams){
-            $queryStr = substr($queryStr, 0, -4);
-        }  
-        if ($request->isLimited == true){
-            $queryStr .= " LIMIT ".$request->getParameters()["limit"];
-        } 
-        return $queryStr;
-    }
-    
     private function getChave($request, $key)
     {
         if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') {
