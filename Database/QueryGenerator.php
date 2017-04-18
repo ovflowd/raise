@@ -156,6 +156,7 @@ class QueryGenerator
             $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
             $request->string = finalizeQuery($request, $queryStr, true);
         }
+        exit ($request->string);
         return $request;
     }
 
@@ -164,7 +165,7 @@ class QueryGenerator
             $queryStr = substr($queryStr, 0, -4);
         }  
         if ($request->isLimited == true){
-            $queryStr .= "LIMIT ".$request->getParameters()["limit"];
+            $queryStr .= " LIMIT ".$request->getParameters()["limit"];
         } 
         return $queryStr;
     }
