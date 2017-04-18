@@ -156,7 +156,6 @@ class QueryGenerator
             $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
             $request->string = finalizeQuery($request, $queryStr, true);
         }
-        exit ($request->string); 
         return $request;
     }
 
