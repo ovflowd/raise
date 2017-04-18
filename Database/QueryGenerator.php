@@ -135,6 +135,9 @@ class QueryGenerator
             if (isset($request->getParameters()['tag'])) {
                 $queryStr = $this->appendTagInQuery($request).' AND ';
             }
+            if (isset($request->getParameters()['limit'])) {
+                $queryStr = $this->appendTagInQuery($request).' AND ';
+            }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
