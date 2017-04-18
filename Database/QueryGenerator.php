@@ -145,7 +145,6 @@ class QueryGenerator
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
-                    echo $queryStr;
                 } elseif ($chave != 'tag' && $chave != 'limit') {
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
@@ -161,7 +160,7 @@ class QueryGenerator
 
     private function finalizeQuery($request, $queryStr, $noParams){
         if (!$noParams){
-            $queryStr = substr($queryStr, 0, -5);
+            $queryStr = substr($queryStr, 0, -4);
         }  
         if ($request->isLimited == true){
             $queryStr .= " LIMIT ".$request->getParameters()["limit"];
