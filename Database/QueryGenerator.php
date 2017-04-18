@@ -132,16 +132,6 @@ class QueryGenerator
         $request->isLimited = false;
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
-            if (isset($request->getParameters()['tag'])) {
-                $queryStr = $this->appendTagInQuery($request).' AND ';
-            }
-            if (isset($request->getParameters()['limit'])) { 
-                $request->isLimited = true;
-                $request->limitedBy = $request->getParameters()['limit'];
-            }
-            if (isset($request->getParameters()['order'])) {
-                $request->isOrdered = true; 
-            }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
@@ -162,7 +152,19 @@ class QueryGenerator
         return $request;  
     }
     
-    private function preValidate($request){
+    private function preValidate($request, $queryStr){
+        if (isset($request->getParameters()['tag'])) {
+                $request->queryStr = $this->appendTagInQuery($request).' AND ';
+            }
+            if (isset($request->getParameters()['limit'])) { 
+                $request->isLimited = true;
+                $request->limitedBy = $request->getParameters()['limit'];
+                $request->queryStr = $queryStr;
+            }
+            if (isset($request->getParameters()['order'])) {
+                $request->isOrdered = true; 
+                $request->queryStr = $queryStr;
+            }
         return $request;
     }
 
