@@ -143,9 +143,9 @@ class QueryGenerator
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
                 } elseif ($chave != 'tag') {
-                    if ($key !== 'tokenId') {
+                    if ($key !== 'tokenId' && $key !== 'limit') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
-                    }
+                    } 
                 }
             }
             $request->string = substr($queryStr, 0, -4);
