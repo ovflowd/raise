@@ -133,6 +133,7 @@ class QueryGenerator
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
             $request = $this->preValidate($queryStr, $request);
+            $queryStr = $request->queryStr;
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
