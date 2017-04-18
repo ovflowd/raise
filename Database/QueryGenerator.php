@@ -170,8 +170,8 @@ class QueryGenerator
             $queryStr .= " LIMIT ".$request->limitedBy;
         } 
         if ($request->isOrdered == true){
-            $queryStr .= " order by data.server_time DESC";
-        }
+            $queryStr .= " order by ".$request->bucket.".server_time DESC";
+        } 
         return $queryStr;
     }
  
