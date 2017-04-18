@@ -43,7 +43,7 @@ class DatabaseParser
         if ($bucket !== null) {
             $cluster = new CouchbaseCluster($this->serverAddress);
 
-            return $cluster->openBucket($bucket);
+            return $cluster->openBucket($bucket); 
         }
 
         return $this->bucket;
