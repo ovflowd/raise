@@ -151,14 +151,14 @@ class QueryGenerator
                     } 
                 }
             }
-            $request->string = $this->finalizeQuery($request, $queryStr);
+            $request->string = $this->finalizeQuery($request, $queryStr, false);
         } else {
             $request->string = 'SELECT * FROM `'.$request->bucket.'`';
         }
         return $request;
     }
 
-    private function finalizeQuery($request, $queryStr){
+    private function finalizeQuery($request, $queryStr, $noParams){
         $queryStr = substr($queryStr, 0, -4);
         if ($request->isLimited == true){
             $queryStr .= "LIMIT ".$request->getParameters()["limit"];
