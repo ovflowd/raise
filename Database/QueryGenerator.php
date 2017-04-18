@@ -166,7 +166,7 @@ class QueryGenerator
             $queryStr = substr($queryStr, 0, -5);
         }  
         if ($request->isLimited == true){
-            $queryStr .= " LIMIT ".$request->limitedBy;
+            $queryStr .= " LIMIT ".$request->getParameters()['limit'];
         } 
         return $queryStr;
     }
