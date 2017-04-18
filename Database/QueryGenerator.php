@@ -239,12 +239,13 @@ class QueryGenerator
                 $services['tokenId'] = $request->getBody() ['tokenId'];
                 $services['timestamp'] = $request->getBody() ['timestamp'];
                 $services['tag'] = $request->getBody() ['tag'];
-
+                $services['client_time'] = $request->getBody() ['client_time'];
+                
                 if ($nextBucket === 'client') {
                     $request->treatedBody = json_encode(array_merge($services, $requestBody));
                 } elseif ($nextBucket === 'service') {
                     $request->treatedBody = json_encode(array_merge($services, array('server_time' =>round(microtime(true) * 1000))));
-                }  
+                }   
                 $request->token = $requestBody['tokenId'];
                 unset($requestBody['tokenId']);
             } else {
