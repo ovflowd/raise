@@ -152,8 +152,6 @@ class QueryGenerator
                 }
             }
             $request->string = substr($queryStr, 0, -4);
-            echo ($request->string);
-            echo $request->isLimited;
             exit;
         } else {
             $request->string = 'SELECT * FROM `'.$request->bucket.'`';
