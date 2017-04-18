@@ -129,7 +129,7 @@ class QueryGenerator
 
     private function buildQuery($request)
     {
-        $isLimited = false;
+        $request->isLimited = false;
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
             if (isset($request->getParameters()['tag'])) {
