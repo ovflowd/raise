@@ -170,7 +170,7 @@ class QueryGenerator
 
     private function getChave($request, $key)
     {
-        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag') {
+        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'tag'  && $key !== 'limit') {
             return 'data.data.data_values.'.$key;
         } elseif ($request->bucket == 'data' && $key == 'service_id') {
             return 'data.data.'.$key;
