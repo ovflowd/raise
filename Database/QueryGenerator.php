@@ -164,6 +164,8 @@ class QueryGenerator
             return 'data.data.'.$key;
         } elseif ($key == 'tokenId') {
             return 'token';
+        } elseif ($key == 'limit'){
+            $request->isLimited = true;
         }
         return $key;
     }
