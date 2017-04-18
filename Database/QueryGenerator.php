@@ -155,7 +155,6 @@ class QueryGenerator
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
-        exit ( $request->string);
         return $request;
     }
 
