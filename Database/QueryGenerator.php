@@ -161,6 +161,10 @@ class QueryGenerator
         } 
         return $request;  
     }
+    
+    private function preValidate($request){
+        return $request;
+    }
 
     private function finalizeQuery($request, $queryStr, $noParams){
         if (!$noParams){
