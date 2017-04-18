@@ -147,6 +147,7 @@ class QueryGenerator
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
                 } elseif ($chave != 'tag' && $chave != 'limit') {
                     if ($key !== 'tokenId') {
+                        echo 'here';
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
                     } 
                 }
