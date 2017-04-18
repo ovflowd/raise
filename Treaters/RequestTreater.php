@@ -185,7 +185,6 @@ class RequestTreater
             $request->setValid(false);
             return false;
         }
-
         return true;
     }
 
