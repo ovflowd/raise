@@ -136,7 +136,7 @@ class QueryGenerator
                 $queryStr = $this->appendTagInQuery($request).' AND ';
             }
             if (isset($request->getParameters()['limit'])) {
-                $request->limitedBy = $request->getParameters()['limit']);
+                $request->limitedBy = $request->getParameters()['limit'];
             }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
