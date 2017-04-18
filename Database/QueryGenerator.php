@@ -142,12 +142,12 @@ class QueryGenerator
                     $request->isLimited = true;
                 }
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
+                    echo 'here';
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
                 } elseif ($chave != 'tag' && $chave != 'limit') {
                     if ($key !== 'tokenId') {
-                        echo 'here';
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND ';
                     } 
                 }
