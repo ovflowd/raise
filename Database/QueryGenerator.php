@@ -131,6 +131,7 @@ class QueryGenerator
     {
         $request->isLimited = false;
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
+            var_dump($request->getParameters());
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
             if (isset($request->getParameters()['tag'])) {
                 $queryStr = $this->appendTagInQuery($request).' AND ';
@@ -155,7 +156,6 @@ class QueryGenerator
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
-        var_dump($request->getParameters());
         echo $request->string;
         return $request; 
     }
