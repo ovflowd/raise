@@ -162,7 +162,8 @@ class QueryGenerator
     private function finalizeQuery($request, $queryStr){
         $queryStr = substr($queryStr, 0, -4);
         if ($request->isLimited == true){
-            
+            echo $request->getParameters()["limit"];
+            $queryStr .= "LIMIT ";
         }
     }
     
