@@ -140,7 +140,7 @@ class QueryGenerator
                 $request->limitedBy = $request->getParameters()['limit'];
             }
             if (isset($request->getParameters()['order'])) {
-                $request->isOrderder = true;
+                $request->isOrdered = true;
             }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
@@ -169,6 +169,9 @@ class QueryGenerator
         if ($request->isLimited == true){
             $queryStr .= " LIMIT ".$request->limitedBy;
         } 
+        if ($request->isOrdered == true){
+            $queryStr .= " order by data.server_time DESC";
+        }
         return $queryStr;
     }
  
