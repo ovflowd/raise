@@ -231,7 +231,6 @@ class RequestTreater
 
     private function validationMethodPost($request, $parameters)
     {
-        echo 'hey';
         if (!empty(array_diff(array_keys((array) $parameters), array_keys($request->getBody())))) {
             var_dump(array_diff(array_keys((array) $parameters), array_keys($request->getBody()))); 
             exit();
