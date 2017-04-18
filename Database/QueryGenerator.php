@@ -151,12 +151,23 @@ class QueryGenerator
                     } 
                 }
             }
-            $request->string = substr($queryStr, 0, -4);
-            echo ($request->string); 
+             $request->string = $this->finalizeQuery($request, $queryStr, false);
         } else {
-            $request->string = 'SELECT * FROM `'.$request->bucket.'`';
+            $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
+            $request->string = finalizeQuery($request, $queryStr, true);
         }
+        exit ($request->string);
         return $request;
+    }
+
+    private function finalizeQuery($request, $queryStr, $noParams){
+        if (!$noParams){
+            $queryStr = substr($queryStr, 0, -4);
+        }  
+        if ($request->isLimited == true){
+            $queryStr .= " LIMIT ".$request->getParameters()["limit"];
+        } 
+        return $queryStr;
     }
 
     private function getChave($request, $key)
