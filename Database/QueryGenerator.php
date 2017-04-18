@@ -139,6 +139,9 @@ class QueryGenerator
                 $request->isLimited = true;
                 $request->limitedBy = $request->getParameters()['limit'];
             }
+            if (isset($request->getParameters()['order'])) {
+                $request->isOrderder = true;
+            }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key);
