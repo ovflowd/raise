@@ -194,6 +194,7 @@ class CouchBaseInterfacer
               'channel' => 'double',
               'host' => 'string',
               'tag' => 'string',
+              'limit' => 0,
             ),
             'output' => array(
                 'code' => 0,
@@ -239,6 +240,7 @@ class CouchBaseInterfacer
                 'service_id' => 0,
                 'name' => 'string',
                 'tag' => 'string',
+                'limit' => 0,
             ),
             'output' => array(
                 'code' => 0,
