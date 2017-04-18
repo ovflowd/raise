@@ -142,7 +142,6 @@ class QueryGenerator
                     $request->isLimited = true;
                 }
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
-                    echo 'here';
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".'AND ';
