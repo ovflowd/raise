@@ -135,7 +135,7 @@ class QueryGenerator
             $request = $this->preValidate($request, $queryStr); 
             $queryStr = $request->queryStr; 
             if ($request->isCount === true){
-                $queryStr = 'SELECT COUNT(*) FROM `'.$request->bucket.'` WHERE';
+                $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
             } 
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
