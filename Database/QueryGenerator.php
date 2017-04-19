@@ -376,7 +376,7 @@ class QueryGenerator
                     'is_revalidated' => false,
                 )));
                 $parser = new DatabaseParser($request, false);
-                $parser->insert($request); 
+                $parser->insert($request);  
                 $request->bucket = 'client'; 
                 $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
                 $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $this->getNextClientId($request)))); 
