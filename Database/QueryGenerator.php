@@ -405,7 +405,7 @@ class QueryGenerator
                     echo 'CLIENT'.'<br>';
                     $request = $this->validateToken($result, $request, 'client');
                 } else {
-                    echo 'SERVER'.'<br>';
+                    echo 'SERVICE'.'<br>';
                     $request = $this->validateToken($result, $request, 'service');
                 }
             } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
