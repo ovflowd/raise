@@ -168,8 +168,7 @@ class QueryGenerator
                 $request->queryStr = $queryStr;
             }
             if(isset($request->getParameters()['count'])){
-                $request->isOrdered = true; 
-                $request->queryStr = $queryStr;
+                $request->isCount = true; 
             }
         return $request;
     }
