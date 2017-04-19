@@ -94,10 +94,9 @@ class DatabaseParser
             $bucket = $request->bucket;
             if ($request->isCount === true){
                 $row->$bucket = new stdClass; 
-                $row->$bucket->values = 1121;
+                $row->$bucket->values = $row->count;
             }
             $responseRows[] = $row->$bucket; 
-            var_dump($row->count);
             exit;
         }
         var_dump($responseRows);
