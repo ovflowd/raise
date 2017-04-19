@@ -366,8 +366,8 @@ class QueryGenerator
                 $parser = new DatabaseParser($request, false);
                 $parser->insert($request); 
                 $request->bucket = 'client'; 
-                $request->treatedBody = json_encode(array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000))));
-                
+                $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
+                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => round(microtime(true) * 1000))));
             } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
