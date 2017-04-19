@@ -328,7 +328,7 @@ class QueryGenerator
     }
 
     public function getNextClientId($request){
-        $request->bucket = client;
+        $request->bucket = "client";
         $Testando = $this->simpleSelect($request, 'client', 'select * from client order by client_id desc limit 1', null);
         $indiceFinal = $Testando['values'][0]->client_id + 1;
         if ($Testando['values'][0] === null) {
