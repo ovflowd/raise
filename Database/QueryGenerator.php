@@ -148,7 +148,7 @@ class QueryGenerator
                 }
             }
              $request->string = $this->finalizeQuery($request, $queryStr, false);
-             if (){
+             if ($request->isCount === true){
                  
              }
         } else {
