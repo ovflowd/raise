@@ -328,7 +328,7 @@ class QueryGenerator
         return json_last_error() == JSON_ERROR_NONE;
     }
 
-    public function getNextId(){
+    public function getNextId($request){
         $Testando = $this->simpleSelect($request, 'service', 'select * from client order by client_id desc limit 1', null);
         $lastIndex = count($Testando['values'][0]->services);
         $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
