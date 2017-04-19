@@ -150,8 +150,10 @@ class QueryGenerator
                     } 
                 } elseif($chave == 'service_name'){
                     $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
-                } elseif ($chave == 'start_date' || $chave == 'end_date'){
-                    
+                } elseif ($chave == 'start_date'){
+                   $queryStr = $queryStr.' server_time >'" \$$key".' AND  ';
+                } elseif ($chave == 'end_date'){
+                   $queryStr = $queryStr.' server_time <'" \$$key".' AND  ';
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
