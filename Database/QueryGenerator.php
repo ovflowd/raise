@@ -225,7 +225,7 @@ class QueryGenerator
     private function appendToQuery($queryStr, $serviceName)
     {
         //ANY child IN service.services SATISFIES child.name = "Get Devices Data" END limit 2
-        $queryArrayHelper = 'ANY child IN '.$bucket.'.services SATISFIES child.name = ';
+        $queryArrayHelper = 'ANY child IN service.services SATISFIES child.name = '..' END ';
         return substr($queryTagModel, 0, -5);
     }
 
