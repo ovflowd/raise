@@ -226,7 +226,7 @@ class QueryGenerator
     
     private function appendToQuery($queryStr, $serviceName)
     {
-        $queryArrayHelper = ' ANY child IN service.services SATISFIES child.name = "'.$serviceName.'" END AND ';
+        $queryArrayHelper = ' ANY serv IN service.services SATISFIES serv.name = "'.$serviceName.'" END AND ';
         return $queryStr.$queryArrayHelper;
     }
 
