@@ -374,7 +374,7 @@ class QueryGenerator
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim,
                     'is_revalidated' => false,
-                )));
+                ))); 
                 $parser = new DatabaseParser($request, false);
                 $parser->insert($request);  
                 $request->bucket = 'client'; 
