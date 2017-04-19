@@ -154,7 +154,7 @@ class QueryGenerator
                    $queryStr = $queryStr.' server_time >'.$request->getParameters()['start_date'].' AND  ';
                 } elseif ($chave == 'end_date'){
                    $queryStr = $queryStr.' server_time <'.$request->getParameters()['end_date'].' AND  ';
-                } 
+                }    
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
         } else {
