@@ -222,7 +222,7 @@ class QueryGenerator
         return substr($queryTagModel, 0, -5);
     }
     
-    private function appendToQuery($tagsArray, $bucket)
+    private function appendToQuery($queryStr, $bucket)
     {
         $queryArrayHelper = 'ANY child IN '.$bucket.'.tag SATISFIES child = ';
         foreach ($tagsArray as $key => $tag) {
