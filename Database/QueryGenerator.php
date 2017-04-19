@@ -162,7 +162,7 @@ class QueryGenerator
     private function preValidate($request, $queryStr){
         $request->queryStr = $queryStr;
         if (isset($request->getParameters()['tag'])) {
-                $request->queryStr = $this->appendTagInQuery($request).' AND ';
+            $request->queryStr = $this->appendTagInQuery($request).' AND ';
         }
         if (isset($request->getParameters()['limit'])) { 
             $request->isLimited = true;
