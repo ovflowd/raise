@@ -401,7 +401,7 @@ class QueryGenerator
                 foreach ($services as $service) {
                     $validServices[] = $service->service_id;
                 }
-                if ($validServices == $sentServices || count($validServices) == 0 ) {
+                if ($validServices == $sentServices) {
                     $newDocument = json_decode($oldDocument, false);
                     $oldToken = $newDocument->tokenId;
                     $newDocument->tokenId = $this->generateToken();
