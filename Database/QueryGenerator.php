@@ -149,7 +149,7 @@ class QueryGenerator
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
                     } 
                 } elseif($chave == 'service_name'){
-                    $queryStr = $this->appendToQuery();
+                    $queryStr = $this->appendToQuery($queryStr, $serviceName);
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
