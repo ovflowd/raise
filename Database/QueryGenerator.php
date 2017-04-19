@@ -387,7 +387,7 @@ class QueryGenerator
                 //Select Client on Token bucket
                 $token = $request->getBody() ['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $request->setParameters(array(
+                $request->setParameters(array( 
                     'token' => $token,
                 ));
                 $result = $parser->select($request);
