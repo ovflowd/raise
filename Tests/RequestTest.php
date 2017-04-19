@@ -95,7 +95,6 @@ class RequestTester
 			$serv_response = $this->registerServices($token, true); 
 			sleep(1); 
 			$service = json_decode($serv_response)->services;
-			
 			$aServicesId = array();
 			foreach (json_decode($serv_response)->services as $key => $service){
 			    $aServicesId[$key] = json_decode($serv_response)->services[$key]->service_id;
