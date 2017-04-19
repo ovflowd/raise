@@ -167,6 +167,9 @@ class QueryGenerator
                 $request->isOrdered = true; 
                 $request->queryStr = $queryStr;
             }
+            if(){
+                
+            }
         return $request;
     }
 
