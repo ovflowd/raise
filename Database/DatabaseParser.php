@@ -52,6 +52,7 @@ class DatabaseParser
     private function response($responseRows = null)
     {
         var_dump($responseRows);
+        exit;
         if (isset($responseRows->cas)) {
             $response = (new MessageOutPut())->messageHttp(200);
             if ($responseRows->bucket === 'client' || $responseRows->bucket === 'service') {
