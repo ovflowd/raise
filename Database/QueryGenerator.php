@@ -151,6 +151,7 @@ class QueryGenerator
                 } elseif($chave == 'service_name'){
                     echo ($queryStr);
                     $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
+                    echo ($queryStr);
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
