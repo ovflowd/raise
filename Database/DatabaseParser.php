@@ -95,6 +95,9 @@ class DatabaseParser
             $responseRows[] = $row->$bucket;
             echo 'rowbucket:'.'<br>';
             var_dump ($row->$bucket);
+            if ($request->isCount === true){
+                $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
+            }
         }
         var_dump($responseRows);
         exit; 
