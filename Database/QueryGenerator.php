@@ -275,7 +275,7 @@ class QueryGenerator
                     }
                     $request->bucket = "client";
                     $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$services['tokenId']."'", null)['values'][0];
-                    $services['tokenId'] = $request->getBody() ['tokenId']; 
+                    $fromDBClientId = $clientObjet->client_id;
                     $request->bucket = "service";
                 }
 
@@ -287,10 +287,7 @@ class QueryGenerator
                 $services['tokenId'] = $request->getBody() ['tokenId']; 
                 $services['tag'] = $request->getBody() ['tag'];
                 $services['client_time'] = $request->getBody() ['client_time'];
-                
-                
-                
-                
+                $services['client_id'] = $fromDBClientId;
                 
                 if ($nextBucket === 'client') { 
                     $mergedServices = array_merge($services, $requestBody); 
