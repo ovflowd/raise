@@ -379,7 +379,7 @@ class QueryGenerator
                 $parser->insert($request);  
                 $request->bucket = 'client'; 
                 $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
-                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => ))); 
+                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $nextClientId))); 
             } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
