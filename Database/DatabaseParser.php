@@ -92,7 +92,7 @@ class DatabaseParser
         $responseRows = array();
         foreach ($result->rows as $row) {
             $bucket = $request->bucket;
-            if ($request->isCount === true){ //Inserir esse aqui no metadata
+            if ($request->isCount === true){ //Inserir esse aqui no metadata 
                 $row->$bucket = new stdClass; 
                 $row->$bucket->values = $row->count;
             }
