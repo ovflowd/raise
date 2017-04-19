@@ -329,16 +329,15 @@ class QueryGenerator
     }
 
     public function getNextId(){
-        $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1', null);
+        $Testando = $this->simpleSelect($request, 'service', 'select * from client order by client_id desc limit 1', null);
         $lastIndex = count($Testando['values'][0]->services);
         $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
-
         if ($Testando['values'][0] === null) {
             $i = 0;
         } else {
             $i = $indiceFinal;
-            $request->lastIndex = $indiceFinal;
         }
+        return $i;
     }
     private function parsePath($request, $isServiceSecondTime)
     {
