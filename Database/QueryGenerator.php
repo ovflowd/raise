@@ -160,22 +160,23 @@ class QueryGenerator
     }
     
     private function preValidate($request, $queryStr){
-            if (isset($request->getParameters()['tag'])) {
+        $request->queryStr = $queryStr;
+        if (isset($request->getParameters()['tag'])) {
                 $request->queryStr = $this->appendTagInQuery($request).' AND ';
-            }
-            if (isset($request->getParameters()['limit'])) { 
-                $request->isLimited = true;
-                $request->limitedBy = $request->getParameters()['limit'];
-                $request->queryStr = $queryStr;
-            }
-            if (isset($request->getParameters()['order'])) {
-                $request->isOrdered = true; 
-                $request->queryStr = $queryStr;
-            }
-            if(isset($request->getParameters()['count'])){
-                $request->isCount = true;  
-                $request->queryStr = $queryStr;
-            }
+        }
+        if (isset($request->getParameters()['limit'])) { 
+            $request->isLimited = true;
+            $request->limitedBy = $request->getParameters()['limit'];
+            $request->queryStr = $queryStr;
+        }
+        if (isset($request->getParameters()['order'])) {
+            $request->isOrdered = true; 
+            $request->queryStr = $queryStr;
+        }
+        if(isset($request->getParameters()['count'])){
+            $request->isCount = true;  
+            $request->queryStr = $queryStr;
+        }
         return $request;
     }
 
