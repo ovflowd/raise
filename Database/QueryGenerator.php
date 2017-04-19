@@ -148,6 +148,8 @@ class QueryGenerator
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
                     } 
+                } elseif($chave == 'service_name'){
+                    $queryStr = $this->appendToQuery();
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
@@ -224,7 +226,6 @@ class QueryGenerator
     
     private function appendToQuery($queryStr, $serviceName)
     {
-        //ANY child IN service.services SATISFIES child.name = "Get Devices Data" END limit 2
         $queryArrayHelper = ' ANY child IN service.services SATISFIES child.name = '.$serviceName.' END ';
         return $queryStr.$queryArrayHelper;
     }
