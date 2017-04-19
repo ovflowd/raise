@@ -369,6 +369,7 @@ class QueryGenerator
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
                 $nextClientId =  $this->getNextClientId($request);
+                //Tem que voltar o bucket pra token pois ele eh alterado na chamada acima
                 $request->bucket = 'token';
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
