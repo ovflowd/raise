@@ -149,12 +149,11 @@ class QueryGenerator
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
                     } 
                 } elseif($chave == 'service_name'){
-                    echo ($queryStr).'<br>';
                     $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
-                    echo ($queryStr).'<br>';
-                    exit;
                 }
             }
+            echo ($queryStr).'<br>';
+            exit;
             $request->string = $this->finalizeQuery($request, $queryStr, false);
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
