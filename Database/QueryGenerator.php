@@ -233,7 +233,6 @@ class QueryGenerator
 
     private function simpleSelect($request, $bucket, $queryStr, $namedParam)
     {
-        echo($queryStr);
         $requestObj = $request;
         $requestObj->bucket = $bucket;
         $parserinho = new DatabaseParser($requestObj, $bucket);
