@@ -241,6 +241,7 @@ class CouchBaseInterfacer
                 'name' => 'string',
                 'tag' => 'string',
                 'limit' => 0,
+                'service_name' => 'string',
             ),
             'output' => array(
                 'code' => 0,
