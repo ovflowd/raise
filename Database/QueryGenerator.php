@@ -250,10 +250,10 @@ class QueryGenerator
             
             if ($nextBucket == "client"){
                 $request->bucket = "client";
-                $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$services['tokenId']."'", null)['values'][0];
+                $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$request->getBody() ['tokenId']."'", null);
                 //$requestBody['client_id'] = $clientObject->;
                 var_dump($clientObject);
-                exit;
+                exit; 
             }
                     
             if ($requestBody['time_fim'] > round(microtime(true) * 1000)) {
