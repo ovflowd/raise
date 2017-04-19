@@ -247,6 +247,7 @@ class QueryGenerator
         if (isset($result['values'][0])) {
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]), true);
+            
             if ($nextBucket == "client"){
                 echo 'validating first time'.'<br>';
                 $request->bucket = "client";
