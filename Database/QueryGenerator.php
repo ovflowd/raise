@@ -367,6 +367,7 @@ class QueryGenerator
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
+                $nextClientId =  $this->getNextClientId($request);
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
@@ -378,7 +379,7 @@ class QueryGenerator
                 $parser->insert($request);  
                 $request->bucket = 'client'; 
                 $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
-                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $this->getNextClientId($request)))); 
+                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => ))); 
             } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
