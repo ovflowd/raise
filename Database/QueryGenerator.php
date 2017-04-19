@@ -247,21 +247,10 @@ class QueryGenerator
         if (isset($result['values'][0])) {
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]), true);
-            
-            if ($nextBucket == "client"){
-                echo 'validating first time'.'<br>';
-                $request->bucket = "client";
-                $tempQueryStr = "select * from client where tokenId = '".$request->getBody() ['tokenId']."'"; 
-                $clientObject = $this->simpleSelect($request, 'client', $tempQueryStr, null); 
-                //$requestBody['client_id'] = $clientObject->;
-                var_dump($clientObject);
-                exit; 
-            }
-                    
             if ($requestBody['time_fim'] > round(microtime(true) * 1000)) {
                 unset($requestBody['time_ini']);
                 unset($requestBody['time_fim']);
-                unset($requestBody['is_revalidated']);
+                unset($requestBody['is_revalidated']); 
                 $request->bucket = $nextBucket;
                 $request->service = true;
                 $services = array();
