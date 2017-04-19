@@ -384,6 +384,7 @@ class QueryGenerator
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim,
                     'is_revalidated' => false,
+                    'client_id' = $this->getNextClientId($request),
                 )));
                 $parser = new DatabaseParser($request, false);
                 $parser->insert($request);  
