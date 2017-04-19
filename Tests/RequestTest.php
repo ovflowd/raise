@@ -103,7 +103,7 @@ class RequestTester
 			$dados = [ 'client_time' => round(microtime(true) * 1000),'token' => $token,  "data" => (array((array('service_id' => $aServicesId[0] , 'data_values' => array('ambiguous'=>true)))))];
 			echo "<br><br>"; 
 			$postData = $this->postData($dados); 
-            $dados = [ 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[1] , 'data_values' => array('ambiguous'=>false)))))];
+            $dados = [ client_time' => round(microtime(true) * 1000), 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[1] , 'data_values' => array('ambiguous'=>false)))))];
 			$postData = $this->postData($dados);
 			return $token;
 	} 
