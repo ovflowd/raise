@@ -195,6 +195,7 @@ class CouchBaseInterfacer
               'host' => 'string',
               'tag' => 'string',
               'limit' => 0,
+              'count' => boolean,
             ),
             'output' => array(
                 'code' => 0,
