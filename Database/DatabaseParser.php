@@ -91,7 +91,7 @@ class DatabaseParser
     {
         $responseRows = array();
         foreach ($result->rows as $row) {
-            var_dump $row;
+            var_dump ($row);
             $bucket = $request->bucket;
             $responseRows[] = $row->$bucket;
         }
