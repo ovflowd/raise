@@ -368,7 +368,6 @@ class QueryGenerator
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
                 $nextClientId =  $this->getNextClientId($request);
-                echo ($nextClientId);
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
