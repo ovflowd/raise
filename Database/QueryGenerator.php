@@ -148,6 +148,9 @@ class QueryGenerator
                 }
             }
              $request->string = $this->finalizeQuery($request, $queryStr, false);
+             if (){
+                 
+             }
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
         } 
