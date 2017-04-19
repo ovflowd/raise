@@ -330,8 +330,7 @@ class QueryGenerator
 
     public function getNextClientId($request){
         $Testando = $this->simpleSelect($request, 'client', 'select * from client order by client_id desc limit 1', null);
-        $lastIndex = count($Testando['values'][0]->services);
-        $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
+        $indiceFinal = $Testando['values'][0]->client_id + 1;
         if ($Testando['values'][0] === null) {
             $i = 0;
         } else {
