@@ -167,15 +167,12 @@ class QueryGenerator
         if (isset($request->getParameters()['limit'])) { 
             $request->isLimited = true;
             $request->limitedBy = $request->getParameters()['limit'];
-            $request->queryStr = $request->queryStr;
         }
         if (isset($request->getParameters()['order'])) {
-            $request->isOrdered = true; 
-            $request->queryStr = $queryStr;
+            $request->isOrdered = true;
         }
         if(isset($request->getParameters()['count'])){
             $request->isCount = true;  
-            $request->queryStr = $queryStr;
         }
         return $request;
     }
