@@ -328,7 +328,7 @@ class QueryGenerator
         return json_last_error() == JSON_ERROR_NONE;
     }
 
-    public function getNextId($request){
+    public function getNextClientId($request){
         $Testando = $this->simpleSelect($request, 'client', 'select * from client order by client_id desc limit 1', null);
         $lastIndex = count($Testando['values'][0]->services);
         $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
@@ -379,7 +379,7 @@ class QueryGenerator
                 $parser->insert($request); 
                 $request->bucket = 'client'; 
                 $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
-                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => round(microtime(true) * 1000)))); 
+                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $this->getNextClientId($request)))); 
             } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
