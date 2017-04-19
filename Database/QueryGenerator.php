@@ -339,12 +339,6 @@ class QueryGenerator
             $i = $indiceFinal;
             $request->lastIndex = $indiceFinal;
         }
-    } else {
-        if ($request->lastIndex === null) {
-            $i = 0;
-        } else {
-            $i = $request->lastIndex;
-        }
     }
     private function parsePath($request, $isServiceSecondTime)
     {
