@@ -82,7 +82,7 @@ class RequestTester
 		echo "Client without channel: ";
 		echo json_decode($response)->code == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
 		echo $response;
-	}
+	} 
   
 
 	public function testAutoRegister()
