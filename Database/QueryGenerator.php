@@ -168,7 +168,7 @@ class QueryGenerator
                 $request->queryStr = $queryStr;
             }
             if(isset($request->getParameters()['count'])){
-                $request->isCount = true; 
+                $request->isCount = true;  
             }
         return $request;
     }
