@@ -138,6 +138,7 @@ class QueryGenerator
                 $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
             } 
             $typeVerification = array();
+            echo ($queryStr);
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key); 
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
@@ -150,7 +151,6 @@ class QueryGenerator
                     } 
                 }
             }
-            echo ($queryStr);
             $request->string = $this->finalizeQuery($request, $queryStr, false);
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
