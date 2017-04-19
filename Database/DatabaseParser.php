@@ -97,8 +97,6 @@ class DatabaseParser
                 $row->$bucket->values = 1121;
             }
             $responseRows[] = $row->$bucket; 
-            echo 'rowbucket:'.'<br>';
-            var_dump ($row->$bucket);
         }
         var_dump($responseRows);
         exit; 
