@@ -238,7 +238,6 @@ class QueryGenerator
         $parserinho = new DatabaseParser($requestObj, $bucket);
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
-
         return $Testando;
     }
 
@@ -305,6 +304,7 @@ class QueryGenerator
         return $request;
     }
 
+
     private function validateExpirationToken($request, $token)
     {
         $database = (new DatabaseParser($request, false))->getBucket();
@@ -328,6 +328,18 @@ class QueryGenerator
         return json_last_error() == JSON_ERROR_NONE;
     }
 
+    public function getNextClientId($request){
+        $request->bucket = "client";
+        $Testando = $this->simpleSelect($request, 'client', 'select * from client order by client_id desc limit 1', null);
+        $indiceFinal = $Testando['values'][0]->client_id + 1;
+        if ($Testando['values'][0] === null) {
+            $i = 0;
+        } else {
+            $i = $indiceFinal;
+        }
+        return $i;
+    }
+    
     private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
@@ -357,16 +369,21 @@ class QueryGenerator
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
+                $nextClientId =  $this->getNextClientId($request);
+                //Tem que voltar o bucket pra token pois ele eh alterado na chamada acima
+                $request->bucket = 'token';
                 $request->treatedBody = json_encode(array_merge($request->getBody(), array(
                     'tokenId' => $request->token,
                     'time_ini' => $tokenIni,
                     'time_fim' => $tokenFim,
                     'is_revalidated' => false,
-                )));
+                    'client_id' => $nextClientId,
+                ))); 
                 $parser = new DatabaseParser($request, false);
-                $parser->insert($request); 
+                $parser->insert($request);  
                 $request->bucket = 'client'; 
-                $request->treatedBody = json_encode(array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000))));
+                $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
+                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $nextClientId))); 
             } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
@@ -374,7 +391,7 @@ class QueryGenerator
                 //Select Client on Token bucket
                 $token = $request->getBody() ['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $request->setParameters(array(
+                $request->setParameters(array( 
                     'token' => $token,
                 ));
                 $result = $parser->select($request);
