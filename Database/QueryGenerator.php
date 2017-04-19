@@ -140,7 +140,7 @@ class QueryGenerator
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key); 
-                if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
+                if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit' && $chave != 'start_date' && $chave != 'end_date') {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".' AND  ';
@@ -150,6 +150,8 @@ class QueryGenerator
                     } 
                 } elseif($chave == 'service_name'){
                     $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
+                } elseif ($chave == 'start_date' || $chave == 'end_date'){
+                    
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
