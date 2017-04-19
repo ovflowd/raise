@@ -273,6 +273,10 @@ class QueryGenerator
                     } else {
                         $i = $request->lastIndex;
                     }
+                    $request->bucket = "client";
+                    $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$services['tokenId']."'", null)['values'][0];
+                    $services['tokenId'] = $request->getBody() ['tokenId']; 
+                    $request->bucket = "service";
                 }
 
                 foreach ($request->getBody() ['services'] as $key => $service) {
@@ -283,6 +287,10 @@ class QueryGenerator
                 $services['tokenId'] = $request->getBody() ['tokenId']; 
                 $services['tag'] = $request->getBody() ['tag'];
                 $services['client_time'] = $request->getBody() ['client_time'];
+                
+                
+                
+                
                 
                 if ($nextBucket === 'client') { 
                     $mergedServices = array_merge($services, $requestBody); 
