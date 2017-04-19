@@ -94,6 +94,7 @@ class DatabaseParser
             $bucket = $request->bucket;
             if ($request->isCount === true){
                 $row->$bucket = new stdClass; 
+                $row->$bucket->values = 1121;
             }
             $responseRows[] = $row->$bucket; 
             echo 'rowbucket:'.'<br>';
