@@ -328,6 +328,24 @@ class QueryGenerator
         return json_last_error() == JSON_ERROR_NONE;
     }
 
+    public function getNextId(){
+        $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1', null);
+        $lastIndex = count($Testando['values'][0]->services);
+        $indiceFinal = $Testando['values'][0]->services[$lastIndex - 1]->service_id + 1;
+
+        if ($Testando['values'][0] === null) {
+            $i = 0;
+        } else {
+            $i = $indiceFinal;
+            $request->lastIndex = $indiceFinal;
+        }
+    } else {
+        if ($request->lastIndex === null) {
+            $i = 0;
+        } else {
+            $i = $request->lastIndex;
+        }
+    }
     private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
