@@ -226,7 +226,7 @@ class QueryGenerator
     {
         //ANY child IN service.services SATISFIES child.name = "Get Devices Data" END limit 2
         $queryArrayHelper = 'ANY child IN service.services SATISFIES child.name = '..' END ';
-        return substr($queryTagModel, 0, -5);
+        return $queryStr.$queryArrayHelper;
     }
 
     private function simpleSelect($request, $bucket, $queryStr, $namedParam)
