@@ -167,7 +167,7 @@ class QueryGenerator
         if (isset($request->getParameters()['limit'])) { 
             $request->isLimited = true;
             $request->limitedBy = $request->getParameters()['limit'];
-            $request->queryStr = $queryStr;
+            $request->queryStr = $request->queryStr;
         }
         if (isset($request->getParameters()['order'])) {
             $request->isOrdered = true; 
