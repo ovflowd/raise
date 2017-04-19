@@ -224,7 +224,6 @@ class QueryGenerator
     
     private function appendToQuery($tagsArray, $bucket)
     {
-        $queryTagModel = 'select * from '.$bucket.' WHERE ';
         $queryArrayHelper = 'ANY child IN '.$bucket.'.tag SATISFIES child = ';
         foreach ($tagsArray as $key => $tag) {
             $queryTagModel .= $queryArrayHelper.'"'.$tagsArray[$key].'"'.' END AND ';
