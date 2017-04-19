@@ -176,6 +176,8 @@ class RequestTreater
     private function validationMethodGet($request, $parameters)
     {
         if (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
+            var_dump(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)));
+            exit();
             $request->setResponseCode(400);
             $request->setValid(false);
             return false;
