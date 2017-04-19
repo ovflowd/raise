@@ -339,6 +339,8 @@ class QueryGenerator
         }
         return $i;
     }
+    
+    
     private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
