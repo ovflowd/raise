@@ -133,7 +133,6 @@ class QueryGenerator
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
             echo ($queryStr);
-            
             $request = $this->preValidate($request, $queryStr); 
             $queryStr = $request->queryStr; 
             if ($request->isCount === true){
@@ -176,6 +175,7 @@ class QueryGenerator
                 $request->isCount = true;  
                 $request->queryStr = $queryStr;
             }
+        $request->queryStr = $queryStr;
         return $request;
     }
 
