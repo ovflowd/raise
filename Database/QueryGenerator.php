@@ -248,9 +248,11 @@ class QueryGenerator
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]), true);
             
-            $request->bucket = "client";
-            $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$services['tokenId']."'", null)['values'][0];
-            $requestBody['']
+            if ($nextBucket == "client"){
+                $request->bucket = "client";
+                $clientObject = $this->simpleSelect($request, 'client', "select * from client where tokenId = '".$services['tokenId']."'", null)['values'][0];
+                $requestBody['']
+            }
                     
             if ($requestBody['time_fim'] > round(microtime(true) * 1000)) {
                 unset($requestBody['time_ini']);
