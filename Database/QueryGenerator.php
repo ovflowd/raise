@@ -222,13 +222,10 @@ class QueryGenerator
         return substr($queryTagModel, 0, -5);
     }
     
-    private function appendToQuery($queryStr, $bucket)
+    private function appendToQuery($queryStr, $serviceName)
     {
-        $queryArrayHelper = 'ANY child IN '.$bucket.'.tag SATISFIES child = ';
-        foreach ($tagsArray as $key => $tag) {
-            $queryTagModel .= $queryArrayHelper.'"'.$tagsArray[$key].'"'.' END AND ';
-        }
-
+        //ANY child IN service.services SATISFIES child.name = "Get Devices Data" END limit 2
+        $queryArrayHelper = 'ANY child IN '.$bucket.'.services SATISFIES child.name = ';
         return substr($queryTagModel, 0, -5);
     }
 
