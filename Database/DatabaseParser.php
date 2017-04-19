@@ -89,10 +89,10 @@ class DatabaseParser
 
     private function parseResult($result, $request)
     {
-        var_dump($result);
-        exit;
         $responseRows = array();
         foreach ($result->rows as $row) {
+            var_dump();
+            exit;
             $bucket = $request->bucket;
             $responseRows[] = $row->$bucket;
         }
