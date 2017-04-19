@@ -152,6 +152,7 @@ class QueryGenerator
                     echo ($queryStr).'<br>';
                     $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
                     echo ($queryStr).'<br>';
+                    exit;
                 }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
