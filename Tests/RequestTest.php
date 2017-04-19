@@ -26,7 +26,7 @@ class RequestTester
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64",
 			      "channel" => "olfato",
-						"timestamp" => round(microtime(true) *1000)
+						"client_time" => round(microtime(true) *1000)
 						));
         if (!$isValidTest){
             $body = json_encode($body);
