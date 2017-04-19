@@ -280,7 +280,7 @@ class QueryGenerator
                     ++$i;
                     $services['services'][] = $service;
                 }
-                $services['tokenId'] = $request->getBody() ['tokenId'];
+                $services['tokenId'] = $request->getBody() ['tokenId']; 
                 $services['tag'] = $request->getBody() ['tag'];
                 $services['client_time'] = $request->getBody() ['client_time'];
                 
