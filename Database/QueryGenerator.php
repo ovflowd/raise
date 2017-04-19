@@ -173,6 +173,7 @@ class QueryGenerator
             }
             if(isset($request->getParameters()['count'])){
                 $request->isCount = true;  
+                 $request->queryStr = $queryStr;
             }
         return $request;
     }
