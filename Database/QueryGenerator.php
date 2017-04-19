@@ -132,13 +132,13 @@ class QueryGenerator
         $request->isLimited = false;
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
-            echo ($queryStr);
             $request = $this->preValidate($request, $queryStr); 
             $queryStr = $request->queryStr; 
             if ($request->isCount === true){
                 $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
             } 
             $typeVerification = array();
+            echo ($queryStr);
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key); 
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit') {
