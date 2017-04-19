@@ -97,7 +97,7 @@ class DatabaseParser
                 $row->$bucket->values = $row->count;
             }
             $responseRows[] = $row->$bucket; 
-        }
+        } 
         return $responseRows;
     }
 
