@@ -160,7 +160,7 @@ class QueryGenerator
     }
     
     private function preValidate($request, $queryStr){
-        if (isset($request->getParameters()['tag'])) {
+            if (isset($request->getParameters()['tag'])) {
                 $request->queryStr = $this->appendTagInQuery($request).' AND ';
             }
             if (isset($request->getParameters()['limit'])) { 
@@ -176,7 +176,6 @@ class QueryGenerator
                 $request->isCount = true;  
                 $request->queryStr = $queryStr;
             }
-        $request->queryStr = $queryStr;
         return $request;
     }
 
