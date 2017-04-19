@@ -250,7 +250,7 @@ class QueryGenerator
             
             if ($nextBucket == "client"){
                 $request->bucket = "client";
-                $tempQueryStr = "select * from client where ";
+                $tempQueryStr = "select * from client where tokenId = '".."'";
                 $clientObject = $this->simpleSelect($request, 'client', ,null);
                 //$requestBody['client_id'] = $clientObject->;
                 var_dump($clientObject);
