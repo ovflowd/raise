@@ -247,7 +247,7 @@ class QueryGenerator
         if (isset($result['values'][0])) {
             unset($request->string);
             $requestBody = json_decode(json_encode($result['values'][0]), true);
-            
+            echo 'validating first time';
             if ($nextBucket == "client"){
                 $request->bucket = "client";
                 $tempQueryStr = "select * from client where tokenId = '".$request->getBody() ['tokenId']."'"; 
