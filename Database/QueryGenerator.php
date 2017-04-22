@@ -25,8 +25,10 @@ class QueryGenerator
     public function generate($request)
     {
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
+            echo "post service, trigger it now";
+            var_dump($request);
             $parsedPath = $this->parsePath($request, true);
-
+            
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
@@ -59,10 +61,6 @@ class QueryGenerator
                 } else {
                     $result = $parser->insert($request);
                 }
-            }
-            if ($request->bucket == 'service' && $request->getMethod() == 'post'){
-                echo "post service, trigger it now";
-                var_dump($request);
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
