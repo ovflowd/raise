@@ -66,6 +66,8 @@ class QueryGenerator
             }
             if ($uimsServiceSyncTrigger == true){ 
                 $this->syncUimsService();
+            } elseif ($uimsClientSyncTrigger == true){
+                $this->syncUimsDevice();
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
@@ -74,6 +76,14 @@ class QueryGenerator
     }
     
     private function syncUimsService(){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
+        curl_exec($ch);
+        curl_close($ch);
+    }
+    
+    private function syncUimsDevice(){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
