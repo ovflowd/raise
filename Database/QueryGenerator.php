@@ -25,8 +25,6 @@ class QueryGenerator
     public function generate($request)
     {
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
-            echo "post service, trigger it now";
-            var_dump($request);
             $parsedPath = $this->parsePath($request, true);
             
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
@@ -49,6 +47,8 @@ class QueryGenerator
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             } elseif ($request->getMethod() == 'post') {
+                echo "post service, trigger it now";
+                var_dump($request);
                 if ($request->bucket == 'data') {
                     $separedData = $this->separateData($request);
                     if (!$request->isValid()) {
