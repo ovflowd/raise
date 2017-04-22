@@ -79,21 +79,10 @@ class RequestTreater
         if ($security->validate($request) === true) {
             $generator = new \QueryGenerator();
             $response = $generator->generate($request);
-            if ($request->bucket == 'service' && $request->getMethod() == 'post'){
-                $this->syncUims();  
-            }
             return $response;
         } else {
             return $security->validate($request);
         }
-    }
-    
-    private function syncUims(){
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
-        curl_setopt($ch, CURLOPT_HEADER, 0); 
-        curl_exec($ch);
-        curl_close($ch);
     }
     
     /**
