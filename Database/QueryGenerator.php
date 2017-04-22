@@ -14,7 +14,7 @@
  *
  * @author Universal Internet of Things
  * @license MIT <https://opensource.org/licenses/MIT>
- * @copyright University of Brasília
+ * @copyright University of Brasília 
  */
 include_once 'Treaters/MessageOutPut.php';
 include_once 'Database/DatabaseParser.php';
