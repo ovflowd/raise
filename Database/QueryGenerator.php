@@ -50,11 +50,9 @@ class QueryGenerator
             } elseif ($request->getMethod() == 'post') {
                 if ($request->bucket == 'data') {
                     $separedData = $this->separateData($request);
-
                     if (!$request->isValid()) {
                         return (new MessageOutPut())->messageHttp($request->getReponseCode());
                     }
-
                     foreach ($separedData as $key => $data) {
                         $request->treatedBody = json_encode($separedData[$key]);
                         $result = $parser->insert($request);
