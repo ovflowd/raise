@@ -24,9 +24,9 @@ class QueryGenerator
 {
     public function generate($request)
     {
-        $uimsSyncTrigger = false;
+        $uimsServiceSyncTrigger = false;
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
-            $uimsSyncTrigger = true;
+            $uimsServiceSyncTrigger = true;
             $parsedPath = $this->parsePath($request, true);
             
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
@@ -62,8 +62,8 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-            if ($uimsSyncTrigger == true){ 
-                $this->syncUims();
+            if ($uimsServiceSyncTrigger == true){ 
+                $this->syncUimsService();
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
@@ -71,7 +71,7 @@ class QueryGenerator
         }
     }
     
-    private function syncUims(){
+    private function syncUimsService(){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
