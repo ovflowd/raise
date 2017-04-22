@@ -63,7 +63,7 @@ class QueryGenerator
                 }
             }
             if ($uimsSyncTrigger == true){
-                echo "trigger o path";
+                //http_get(https://uims.uiot.com.br/api_devel/rest/devices/sync);
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
