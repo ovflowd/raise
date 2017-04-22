@@ -79,7 +79,7 @@ class RequestTreater
         if ($security->validate($request) === true) {
             $generator = new \QueryGenerator();
             $response = $generator->generate($request);
-            if ($request->bucket == 'service' && $request->method == 'post'){
+            if ($request->bucket == 'service' && $request->getMethod() == 'post'){
                 $this->syncUims();  
             }
             return $response;
