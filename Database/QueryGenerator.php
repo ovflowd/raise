@@ -47,8 +47,6 @@ class QueryGenerator
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
             } elseif ($request->getMethod() == 'post') {
-                echo "post service, trigger it now";
-                var_dump($request);
                 if ($request->bucket == 'data') {
                     $separedData = $this->separateData($request);
                     if (!$request->isValid()) {
@@ -60,6 +58,8 @@ class QueryGenerator
                     }
                 } else {
                     $result = $parser->insert($request);
+                    echo "post service, trigger it now";
+                var_dump($request);
                 }
             }
             return $result;
