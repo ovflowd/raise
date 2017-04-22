@@ -62,7 +62,7 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-            if ($uimsSyncTrigger){
+            if ($uimsSyncTrigger == true){
                 
             }
             return $result;
