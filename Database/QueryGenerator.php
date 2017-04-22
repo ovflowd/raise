@@ -29,7 +29,6 @@ class QueryGenerator
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
             $uimsServiceSyncTrigger = true;
             $parsedPath = $this->parsePath($request, true);
-            
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
                 //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
@@ -62,7 +61,7 @@ class QueryGenerator
                     }
                 } else {
                     $result = $parser->insert($request);
-                }
+                } 
             }
             if ($uimsServiceSyncTrigger == true){ 
                 $this->syncUimsService();
