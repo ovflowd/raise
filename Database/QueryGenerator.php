@@ -62,6 +62,9 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
+            if ($uimsSyncTrigger){
+                
+            }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
