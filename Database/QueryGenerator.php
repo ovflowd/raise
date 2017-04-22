@@ -62,7 +62,7 @@ class QueryGenerator
                 }
             }
             if ($request->bucket == "service" && $request->getMethod() == "post" && $request->getPath()["method"] === "register"){
-                
+                echo "post service, trigger it now";
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
