@@ -216,6 +216,16 @@ class QueryGenerator
         } 
         return $key; 
     }
+    
+    private function filterTime($request, $queryStr){
+        if(isset($request->getParameters()['start_date'])) {
+            $queryStr = $queryStr.' server_time >'.$request->getParameters()['start_date'].' AND  ';
+        }
+        if (isset($request->getParameters()['end_date'])){
+            $queryStr = $queryStr.' server_time <'.$request->getParameters()['end_date'].' AND  ';
+        }
+        return $queryStr;
+    }
 
     private function appendTagInQuery($request)
     {
