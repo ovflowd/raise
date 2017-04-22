@@ -61,8 +61,9 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-            if ($request->bucket == "service" && $request->getMethod() == "post" && $request->getPath()["method"] === "register"){
+            if ($request->bucket == "service" && $request->getMethod() == "post"){
                 echo "post service, trigger it now";
+                var_dump($request);
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
