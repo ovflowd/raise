@@ -175,9 +175,9 @@ class QueryGenerator
         if (isset($request->getParameters()['order'])) {
             $request->isOrdered = true;
             if ($request->getParameters()['order'] === "true"){
-                $request->isAsc = true;
+                $request->isDesc = true;
             } else {
-                $request->isAsc = false;
+                $request->isDesc = false;
             }
         }
         if(isset($request->getParameters()['count'])){
@@ -196,7 +196,6 @@ class QueryGenerator
             } else {
                 $queryStr .= " order by ".$request->bucket.".server_time ASC";
             }
-            
         } 
         if ($request->isLimited == true){
             $queryStr .= " LIMIT ".$request->limitedBy;
