@@ -58,8 +58,10 @@ class QueryGenerator
                     }
                 } else {
                     $result = $parser->insert($request);
-                    echo "post service, trigger it nsdow";
-                    var_dump($request);
+                    if ($request->bucket == 'service' && $request->getMethod() == 'post'){
+                        echo "post service, trigger it nsdow";
+                        var_dump($request);    
+                    }
                 }
             }
             return $result;
