@@ -84,11 +84,11 @@ class QueryGenerator
     }
     
     private function syncUimsDevice(){
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
-        curl_exec($ch);
-        curl_close($ch);
+        //$ch = curl_init();
+        //curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
+        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
+        //curl_exec($ch);
+        //curl_close($ch);
     }
 
     private function separateData($request)
