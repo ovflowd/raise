@@ -26,7 +26,7 @@ class QueryGenerator
     {
         $uimsSyncTrigger = false;
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
-            
+            $uimsSyncTrigger = true;
             $parsedPath = $this->parsePath($request, true);
             
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
