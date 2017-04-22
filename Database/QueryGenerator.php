@@ -175,7 +175,9 @@ class QueryGenerator
         if (isset($request->getParameters()['order'])) {
             $request->isOrdered = true;
             if ($request->getParameters()['order'] === "true"){
-                
+                $request->isAsc = true;
+            } else {
+                $request->isAsc = false;
             }
         }
         if(isset($request->getParameters()['count'])){
