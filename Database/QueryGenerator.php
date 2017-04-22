@@ -136,8 +136,12 @@ class QueryGenerator
             $queryStr = $request->queryStr; 
             if ($request->isCount === true){
                 $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
-            } elseif(isset($request->getParameters()['start_date'])) {
+            } 
+            if(isset($request->getParameters()['start_date'])) {
                 $queryStr = $queryStr.' server_time >'.$request->getParameters()['start_date'].' AND  ';
+            }
+            if (isset($request->getParameters()['end_date'])){
+                $queryStr = $queryStr.' server_time <'.$request->getParameters()['end_date'].' AND  ';
             }
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
