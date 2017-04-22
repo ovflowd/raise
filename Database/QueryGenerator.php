@@ -40,6 +40,9 @@ class QueryGenerator
             }
             $parsedPath = $this->parsePath($request, false);
         } else {
+            if (){
+                
+            }
             $parsedPath = $this->parsePath($request, false);
         }
 
