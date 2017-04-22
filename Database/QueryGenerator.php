@@ -58,8 +58,8 @@ class QueryGenerator
                     }
                 } else {
                     $result = $parser->insert($request);
-                    echo "post service, trigger it now";
-                var_dump($request);
+                    echo "post service, trigger it nsdow";
+                    var_dump($request);
                 }
             }
             return $result;
