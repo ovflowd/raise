@@ -61,7 +61,9 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-
+            if ($request->bucket === "service" && $request->method  ===  "post"){
+                
+            }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
