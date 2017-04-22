@@ -158,7 +158,7 @@ class QueryGenerator
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
             echo $request->string;
-            echo '<br>'.'<br>'.$request->getParameters()['start_date'];
+            echo '<br>'.'<br>'.$request->getParameters()['start_date']; 
             exit();
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
