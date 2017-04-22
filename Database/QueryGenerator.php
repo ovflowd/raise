@@ -40,12 +40,11 @@ class QueryGenerator
             }
             $parsedPath = $this->parsePath($request, false);
         } else {
-            if (){
-                
+            if ($request->bucket == 'client' && $request->getMethod() == 'post'){
+                $uimsClientSyncTrigger = true;
             }
             $parsedPath = $this->parsePath($request, false);
         }
-
         if ($parsedPath !== false && $parsedPath->isValid() === true) {
             $parser = new DatabaseParser($parsedPath, false);
             if ($request->getMethod() == 'get') {
