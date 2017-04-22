@@ -61,7 +61,7 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-            if ($request->bucket == "service" && $request->getMethod() == "post" && $request->getPath()["method"] === "post"){
+            if ($request->bucket == "service" && $request->getMethod() == "post" && $request->getPath()["method"] === "register"){
                 
             }
             return $result;
