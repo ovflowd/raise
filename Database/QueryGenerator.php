@@ -191,7 +191,12 @@ class QueryGenerator
             $queryStr = substr($queryStr, 0, -5);
         }  
         if ($request->isOrdered == true){
-            $queryStr .= " order by ".$request->bucket.".server_time DESC";
+            if ($request->isAsc = true){
+                $queryStr .= " order by ".$request->bucket.".server_time DESC";
+            } else {
+                $request->isAsc = false;
+            }
+            
         } 
         if ($request->isLimited == true){
             $queryStr .= " LIMIT ".$request->limitedBy;
