@@ -32,7 +32,6 @@ class QueryGenerator
                 $parser = new DatabaseParser($parsedPath, false);
                 $result = $parser->insert($request);
             }
-
             if ($parsedPath->isValid() === false) {
                 return (new MessageOutPut())->messageHttp($request->getReponseCode());
             }
@@ -61,7 +60,7 @@ class QueryGenerator
                     $result = $parser->insert($request);
                 }
             }
-            if ($request->bucket == "service" && $request->getMethod() == "post"){
+            if ($request->bucket == 'service' && $request->getMethod() == 'post'){
                 echo "post service, trigger it now";
                 var_dump($request);
             }
