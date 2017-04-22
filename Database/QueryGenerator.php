@@ -63,7 +63,7 @@ class QueryGenerator
                 }
             }
             if ($uimsSyncTrigger == true){
-                
+                echo "trigger o path";
             }
             return $result;
         } elseif ($parsedPath->isValid() === false) {
