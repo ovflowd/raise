@@ -45,7 +45,6 @@ class QueryGenerator
 
         if ($parsedPath !== false && $parsedPath->isValid() === true) {
             $parser = new DatabaseParser($parsedPath, false);
-
             if ($request->getMethod() == 'get') {
                 $request = $this->buildQuery($request);
                 $result = $parser->select($request);
