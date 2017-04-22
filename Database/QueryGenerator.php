@@ -191,7 +191,7 @@ class QueryGenerator
             $queryStr = substr($queryStr, 0, -5);
         }  
         if ($request->isOrdered == true){
-            if ($request->isAsc == true){
+            if ($request->isDesc == true){
                 $queryStr .= " order by ".$request->bucket.".server_time DESC";
             } else {
                 $request->isAsc = false;
