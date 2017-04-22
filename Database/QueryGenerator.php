@@ -174,6 +174,9 @@ class QueryGenerator
         }
         if (isset($request->getParameters()['order'])) {
             $request->isOrdered = true;
+            if ($request->getParameters()['order'] === "true"){
+                
+            }
         }
         if(isset($request->getParameters()['count'])){
             $request->isCount = true;  
