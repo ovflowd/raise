@@ -75,7 +75,7 @@ class QueryGenerator
     }
     
     /*
-        Outdated for now. //takes too much time
+        Outdated for now. Takes too much time
      */
     private function syncUimsService(){
         //$ch = curl_init(); 
@@ -86,7 +86,7 @@ class QueryGenerator
     }
      
      /*
-        Outdated for now.
+        Outdated for now. Takes too much time
      */
     private function syncUimsDevice(){
         //$ch = curl_init();
