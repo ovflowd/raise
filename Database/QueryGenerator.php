@@ -396,7 +396,6 @@ class QueryGenerator
                     $request->setValid(true);
                 }
             } else { //Mini JSON validation
-
                 if (json_encode($request->getBody()) == 'null' || $this->isJson(json_encode($request->getBody())) === 0 || substr(json_encode($request->getBody()), 0, 1) != '{') {
                     $request->setResponseCode(400);
                     $request->setValid(false);
@@ -505,17 +504,14 @@ class QueryGenerator
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
                 $request->token = $request->getBody() ['token'];
                 $arrayTest = $request->getBody();
-
-                if ($this->validateExpirationToken($request, $request->token)) {
+                //if ($this->validateExpirationToken($request, $request->token)) {
                     $request->treatedBody = json_encode(array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000))));
-
                     return $request;
-                } else {
-                    $request->setResponseCode(401);
-                    $request->setValid(false);
-
-                    return false;
-                }
+                //} else {
+                //    $request->setResponseCode(401);
+                //    $request->setValid(false);
+                //    return false;
+                //}
             } else {
                 $request->token = $this->generateToken();
                 $request->treatedBody = $request->getBody();
