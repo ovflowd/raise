@@ -74,6 +74,9 @@ class QueryGenerator
         }
     }
     
+    /*
+        Outdated for now. //takes too much time
+     */
     private function syncUimsService(){
         //$ch = curl_init(); 
         //curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
