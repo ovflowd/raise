@@ -67,7 +67,7 @@ class QueryGenerator
                 $this->syncUimsService();
             } elseif ($uimsClientSyncTrigger == true){
                 $this->syncUimsDevice();
-            }
+            } 
             return $result;
         } elseif ($parsedPath->isValid() === false) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
