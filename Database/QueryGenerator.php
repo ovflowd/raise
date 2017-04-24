@@ -166,10 +166,12 @@ class QueryGenerator
             $typeVerification = array();
             foreach ($request->getParameters() as $key => $parameter) {
                 $chave = $this->getChave($request, $key); 
-                if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit' && $chave != 'start_date' && $chave != 'end_date') {
+                if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit' && $chave != 'start_date' && $chave != 'end_date' && $request->isLower == false) {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".' AND  ';
+                } elseif ($request->isLower == true) {
+                    
                 } elseif ($chave != 'tag' && $chave != 'end_date' && $chave != 'start_date' && $chave != 'limit' && $chave != 'order' && $chave != 'count' && $chave != 'service_name') { 
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
