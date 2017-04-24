@@ -171,7 +171,7 @@ class QueryGenerator
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." = \$$key".' AND  ';
                 } elseif ($request->isLower == true) {
-                    
+                    $queryStr = $queryStr.' '.$chave." < \$$key".' AND  ';
                 } elseif ($chave != 'tag' && $chave != 'end_date' && $chave != 'start_date' && $chave != 'limit' && $chave != 'order' && $chave != 'count' && $chave != 'service_name') { 
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
