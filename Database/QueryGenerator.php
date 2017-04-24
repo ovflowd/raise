@@ -30,7 +30,6 @@ class QueryGenerator
             $uimsServiceSyncTrigger = true;
             $parsedPath = $this->parsePath($request, true);
             if ($parsedPath !== false && $parsedPath->isValid() === true) {
-                //not a simple query
                 $parser = new DatabaseParser($parsedPath, false);
                 $result = $parser->insert($request);
             }
