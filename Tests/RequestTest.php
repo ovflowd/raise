@@ -94,7 +94,7 @@ class RequestTester
 			$token = json_decode($response->body)->tokenId;
 			echo "<br><br>";  
 			//$token = "BatatossauroTraps";
-			//sleep(1); //necessário devido ao delay do couchbase )= 
+			sleep(1); //necessário devido ao delay do couchbase )= 
 			$serv_response = $this->registerServices($token, true); 
 			//sleep(1); 
 			$service = json_decode($serv_response)->services;
