@@ -25,7 +25,7 @@ class RequestTester
 			      "mac" => "0a:00:27:00:00:00",
 			      "serial" => "7ARET90OIPUU",
 			      "processor" => "amd-64",
-			      "channel" => "olfato",
+			      "channel" => 1,
 						"client_time" => round(microtime(true) *1000)
 						));
         if (!$isValidTest){
