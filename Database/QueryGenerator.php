@@ -506,7 +506,7 @@ class QueryGenerator
                     $oldClientDocumnet->tokenId = $newDocument->tokenId;
                     $request->treatedBody = json_encode(array_merge(json_decode(json_encode($newDocument), true), json_decode(json_encode($oldClientDocument), true)));
                 } else {
-                    $request->setResponseCode(401);
+                    $request->setResponseCode(403);
                     $request->setValid(false);
                     return $request;
                 }
