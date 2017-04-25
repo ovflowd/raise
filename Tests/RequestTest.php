@@ -29,6 +29,7 @@ class RequestTester
 				    "client_time" => round(microtime(true) *1000),
 				    "tag" => [array("cebola")],
 						));
+		echo $body;			
         if (!$isValidTest){
             $body = json_encode($body);
         } 
