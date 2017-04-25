@@ -500,7 +500,7 @@ class QueryGenerator
                     ))));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
-                    //Updata o client com seu novo tokenId
+                    //Updata o client com seu novo tokenId 
                     $request->bucket = 'client';
                     $request->token = $newDocument->tokenId;
                     $oldClientDocumnet->tokenId = $newDocument->tokenId;
