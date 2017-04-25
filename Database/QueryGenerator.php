@@ -508,7 +508,6 @@ class QueryGenerator
                 } else {
                     $request->setResponseCode(401);
                     $request->setValid(false);
-
                     return $request;
                 }
             } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
