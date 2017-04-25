@@ -453,7 +453,6 @@ class QueryGenerator
                 if ($oldTokenObject->is_revalidated) {
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
-
                     return $request;
                 }
                 $sentServices = $request->getBody() ['services'];
@@ -462,6 +461,7 @@ class QueryGenerator
                 if (!isset(json_decode($oldDocument)->services)){
                     $request->setResponseCode(403); //No services to revalidated
                     $request->setValid(false);
+                    return $request;
                 }
                 $services = json_decode($oldDocument)->services;
                 $validServices = array();
