@@ -27,7 +27,7 @@ class RequestTester
 			      "processor" => "amd-64",
 			      "channel" => 1,
 				    "client_time" => round(microtime(true) *1000),
-				    "tag":(array("cebola"))
+				    "tag" => (array("cebola"))
 						));
         if (!$isValidTest){
             $body = json_encode($body);
