@@ -31,7 +31,6 @@ class RequestTester
 				           "cebola"
 				       )]
 				));
-		echo $body;			
         if (!$isValidTest){
             $body = json_encode($body);
         } 
