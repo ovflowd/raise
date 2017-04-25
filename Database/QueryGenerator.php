@@ -460,7 +460,7 @@ class QueryGenerator
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
                 $oldDocument = json_encode($this->simpleSelect($request, 'service', $queryStr, null) ['values'][0]);
                 if (!isset(json_decode($oldDocument)->services)){
-                    $request->setResponseCode(401); //Already revalidated
+                    $request->setResponseCode(403); //No services to revalidated
                     $request->setValid(false);
                 }
                 $services = json_decode($oldDocument)->services;
