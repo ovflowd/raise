@@ -20,15 +20,17 @@ class RequestTester
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		$body = (array("name" => "gladiumbisson",
-				  "chipset" => "arm",
-			      "mac" => "0a:00:27:00:00:00",
-			      "serial" => "7ARET90OIPUU",
-			      "processor" => "amd-64",
-			      "channel" => 1,
-				    "client_time" => round(microtime(true) *1000),
-				    "tag" => [array("cebola")],
-						));
+		$body = (array("name" => "Raspberry PI",
+    				   "chipset" => "arm",
+    			       "mac" => "0a:00:27:00:00:00",
+    			       "serial" => "7ARET90OIPUU",
+    			       "processor" => "amd-64",
+    			       "channel" => "Ethernet",
+				       "client_time" => round(microtime(true) *1000),
+				       "tag" => [array(
+				           "cebola"
+				       )]
+				));
 		echo $body;			
         if (!$isValidTest){
             $body = json_encode($body);
