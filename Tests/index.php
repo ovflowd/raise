@@ -9,7 +9,7 @@ $tester = new RequestTester();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 
-for ($i = 0; $i < 1000; ++$i) {
+for ($i = 0; $i < 10; ++$i) {
     $token = $tester->testAutoRegister(); 
     echo '/n'."Testando POST Client Invalido".'/n';
     $tester->testInsertClient(false); 
