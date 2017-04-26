@@ -20,11 +20,11 @@ class RequestTester
 	{
 		$url = "http://{$this->raise_ip}/client/register";
 
-		$body = (array("name" => "Raspberry PI",
-    				   "chipset" => "arm",
+		$body = (array("name" => "Texas CC130",
+    				   "chipset" => "16-bits",
     			       "mac" => "0a:00:27:00:00:00",
     			       "serial" => "7ARET90OIPUU",
-    			       "processor" => "amd-64",
+    			       "processor" => "arm",
     			       "channel" => "Ethernet",
 				       "client_time" => round(microtime(true) *1000),
 				       "tag" => [array(
