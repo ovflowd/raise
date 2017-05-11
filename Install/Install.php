@@ -209,4 +209,21 @@ foreach($metadataJson as $metadata) {
 	insertMetadata($metadata, $connection);
 }
 
+echo 'Creating Configurationg File...' . PHP_EOL;
+
+$config = <<<CONFIG
+<?php
+
+// RAISe Couchbase Configuration
+
+const DB_TYPE = 'COUCHBASE';
+const DB_ADDRESS = '{$credentials['ip']},{$credentials['user']},{$credentials['senha']}';
+const DB_IP = '{$credentials['ip']}';
+const DB_USER = '{$credentials['user']}';
+const DB_PASSWORD = '{$credentials['senha']}';
+CONFIG;
+
+unlink('../Config/Config.php');
+file_put_contents('../Config/Config.php', $config);
+
 echo 'Setup Finished.' . PHP_EOL;
