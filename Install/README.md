@@ -39,9 +39,9 @@ rpm -i couchbase-server-enterprise-4.6.1-centos7.x86_64.rpm
 1. Execute the following commands:
 <pre>
 cd /opt/couchbase/bin/
-./couchbase-cli cluster-init -c IP-SERVIDOR:8091 -u USERNAME DESEJADO -p SENHA DESEJADA --cluster-name='raise' --cluster-ramsize=TAMANHO DO CLUSTER EM MB
+./couchbase-cli cluster-init -c COUCHBASE-ADDRESS:8091 -u DESIRED USER -p DESIRED PASS --cluster-name='raise' --cluster-ramsize=CLUSTER SIZE IN MB (RAM MEMORY)
 </pre>
-2. Check it running by `http://IPSERVIDOR:8091`
+2. Check it running by `http://SERVER-ADDRESS:8091`
 
 
 Installing RAISe
