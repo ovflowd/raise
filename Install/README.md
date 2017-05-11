@@ -29,7 +29,7 @@ sudo apt-get install libssl-dev
 sudo wget "https://packages.couchbase.com/releases/4.6.1/couchbase-server-enterprise_4.6.1-ubuntu14.04_amd64.deb"
 sudo dpkg -i couchbase-server-enterprise_4.6.1-ubuntu14.04_amd64.deb
 </pre>
-<b>CentOS 7 (Apenas 7)</b>
+<b>CentOS 7 (Only 7 or higher)</b>
 <pre>
 wget https://packages.couchbase.com/releases/4.6.1/couchbase-server-enterprise-4.6.1-centos7.x86_64.rpm
 rpm -i couchbase-server-enterprise-4.6.1-centos7.x86_64.rpm
@@ -61,14 +61,15 @@ Installing RAISe
 
 ### Installing php 7.0
 <b>CentOS</b><br>
-https://webtatic.com/packages/php70/<br>
+  https://webtatic.com/packages/php70/<br>
 <b>Ubuntu 16.04</b><br>
-Natively builtin<br>
+  Natively builtin<br>
 <b>Ubuntu 14.04</b><br>
-https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-php-7-on-ubuntu-14-04</br>
+  https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-php-7-on-ubuntu-14-04</br>
 
 ### Installing `libcouchbase`
 1. Run those commands on your terminal.:
+<br>
 <b>CentOS</b>
 <pre>
 # Only needed during first-time setup:
