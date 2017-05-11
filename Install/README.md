@@ -9,7 +9,8 @@ Installing Couchbase
 * CentOS 7+ ou Ubuntu 16.04+
 
 ### Installing Pre-Requisites
-1. Execute the following commands:
+1. Execute the following commands: 
+<br>
 <b>Ubuntu</b>
 <pre>
 sudo apt-get install python-software-properties software-properties-common
@@ -21,6 +22,7 @@ sudo yum install libss-devel openssl098e
 
 ### Downloading & Installing Couchbase
 1. Execute the following commands:
+<br>
 <b>Ubuntu</b>
 <pre>
 sudo apt-get install libssl-dev
