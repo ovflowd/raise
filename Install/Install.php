@@ -223,13 +223,13 @@ echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true'
 
 echo PHP_EOL;
 
-echo writeText('[INFO]', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
+echo writeText('INFO', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
 
 $serverInfo = communicateCouchbase('pools/default', $credentials);
 
 $memoryQuota = $serverInfo->memoryQuota;
 
-echo writeText('[INFO]', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
+echo writeText('INFO', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
 $buckets = [
     'notcreatable' => 0,
@@ -241,7 +241,7 @@ $buckets = [
     'response'     => floor((($memoryQuota / 100) * 20)),
 ];
 
-echo writeText('[INFO]', '46').'Starting Creation Process...'.PHP_EOL;
+echo writeText('INFO', '46').'Starting Creation Process...'.PHP_EOL;
 
 echo progressBar(0, 7);
 
@@ -263,7 +263,7 @@ $readyToFill = false;
 
 echo PHP_EOL;
 
-echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
+echo writeText('INFO', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 
 $progress = 0;
 
@@ -277,7 +277,7 @@ while (!$readyToFill) {
     }
 }
 
-echo writeText('[INFO]', '46').'Starting to Fill Buckets...'.PHP_EOL;
+echo writeText('INFO', '46').'Starting to Fill Buckets...'.PHP_EOL;
 
 echo progressBar(0, 6);
 
@@ -351,15 +351,17 @@ $metadataJson = json_decode(file_get_contents('metadata.json'));
 
 $progress = 1;
 
-echo progressBar(0, 59);
+echo progressBar(0, 60);
 
 foreach ($metadataJson as $metadata) {
     insertMetadata($metadata, $connection);
 
-    echo progressBar($progress++, 59);
+    echo progressBar($progress++, 60);
 }
 
-echo progressBar(59, 59);
+echo progressBar(60, 60);
+
+echo PHP_EOL;
 
 echo 'Creating Configuration File...'.PHP_EOL;
 
