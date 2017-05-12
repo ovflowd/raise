@@ -195,6 +195,8 @@ if (checkLibrary()) {
     exit(1);
 }
 
+echo PHP_EOL;
+
 $connectionOK = false;
 
 $credentials = null;
@@ -237,7 +239,7 @@ $buckets = [
 
 echo writeText('[INFO]', '46').'Starting Creation Process...'.PHP_EOL;
 
-echo progressBar(0, 100);
+echo progressBar(0, 6);
 
 $progress = 1;
 
@@ -251,9 +253,11 @@ foreach ($buckets as $bucketName => $bucketMemory) {
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
+echo progressBar(6, 6);
+
 $readyToFill = false;
 
-echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL.PHP_EOL;
+echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 
 echo progressBar(0, 100);
 
@@ -350,6 +354,8 @@ foreach ($metadataJson as $metadata) {
 
     echo progressBar($progress++, 59);
 }
+
+echo progressBar(59, 59);
 
 echo 'Creating Configuration File...'.PHP_EOL;
 
