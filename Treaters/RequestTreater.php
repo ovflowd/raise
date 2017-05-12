@@ -24,9 +24,9 @@ include_once 'Treaters/MessageOutPut.php';
 include_once 'Controllers/SecurityController.php';
 include_once 'Database/QueryGenerator.php';
 include_once 'Database/DatabaseParser.php';
-use Raise\Models\Request;
-use Raise\Controllers\SecurityController;
 use DatabaseParser;
+use Raise\Controllers\SecurityController;
+use Raise\Models\Request;
 
 /**
  *Class RequestTreater.
@@ -36,31 +36,31 @@ class RequestTreater
     /**
      *@var array
      */
-    private $requestInfo = array(
+    private $requestInfo = [
         'protocol' => 'SERVER_PROTOCOL',
-        'method' => 'REQUEST_METHOD',
-        'path' => 'PATH_INFO',
-        'query' => 'QUERY_STRING',
-        'sender' => 'REMOTE_ADDRESS',
-    );
+        'method'   => 'REQUEST_METHOD',
+        'path'     => 'PATH_INFO',
+        'query'    => 'QUERY_STRING',
+        'sender'   => 'REMOTE_ADDRESS',
+    ];
     /**
      *@var array error code for validate info
      */
-    private $codes = array(
+    private $codes = [
         'protocol' => 505,
-        'method' => 405,
-        'path' => 400,
-        'query' => 400,
-        'remote' => 403,
-    );
+        'method'   => 405,
+        'path'     => 400,
+        'query'    => 400,
+        'remote'   => 403,
+    ];
 
-    private $protocols = array(
+    private $protocols = [
       'HTTP/1.0', 'HTTP/1.1', 'HTTPS/1.0', 'HTTPs/1.1',
-    );
+    ];
 
-    private $AllowedBuckets = array(
+    private $AllowedBuckets = [
       'client', 'data', 'service',
-    );
+    ];
 
     /**
      *Create a request and validate parameters.
@@ -71,7 +71,7 @@ class RequestTreater
     public function execute()
     {
         $request = $this->create();
-        $this->validate($request); 
+        $this->validate($request);
         if (!$request->isValid()) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
         }
@@ -79,12 +79,13 @@ class RequestTreater
         if ($security->validate($request) === true) {
             $generator = new \QueryGenerator();
             $response = $generator->generate($request);
+
             return $response;
         } else {
             return $security->validate($request);
         }
     }
-    
+
     /**
      *Create Request Object.
      *
@@ -112,8 +113,6 @@ class RequestTreater
 
             return;
         }
-
-        return;
     }
 
     private function emptyValidation($request)
@@ -145,7 +144,7 @@ class RequestTreater
         if ($request->getPath()['bucket'] !== 'data') {
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT input FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
-            $query->namedParams(array('bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()));
+            $query->namedParams(['bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()]);
             $parameters = $database->query($query)->rows[0]->input;
             switch ($request->getMethod()) {
             case 'get':
@@ -177,13 +176,16 @@ class RequestTreater
         if (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) > 1) {
             $request->setResponseCode(400);
             $request->setValid(false);
+
             return false;
         } elseif (count(array_diff(array_keys($request->getParameters()), array_keys((array) $parameters))) === 1
                   && !in_array('tokenId', array_diff(array_keys($request->getParameters()), array_keys((array) $parameters)))) {
             $request->setResponseCode(400);
             $request->setValid(false);
+
             return false;
         }
+
         return true;
     }
 
@@ -193,7 +195,7 @@ class RequestTreater
         $services = $request->getBody()[0];
         $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
-        $query->namedParams(array('token' => $token));
+        $query->namedParams(['token' => $token]);
         $parameters = $database->query($query)->rows;
 
         if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
@@ -206,7 +208,7 @@ class RequestTreater
         foreach ($services as $service) {
             $database = (new DatabaseParser($request))->getBucket();
             $query = \CouchbaseN1qlQuery::fromString('SELECT services FROM client WHERE `tokenId` = $token');
-            $query->namedParams(array('token' => $token));
+            $query->namedParams(['token' => $token]);
             $parameters = $database->query($query)->rows;
 
             $compare = json_decode(json_encode($compare), true);
@@ -230,8 +232,10 @@ class RequestTreater
         if (!empty(array_diff(array_keys((array) $parameters), array_keys($request->getBody())))) {
             $request->setResponseCode(400);
             $request->setValid(false);
+
             return false;
-        } 
+        }
+
         return true;
     }
 
@@ -239,7 +243,7 @@ class RequestTreater
     {
         $database = (new DatabaseParser($request))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT COUNT(`bucket`) FROM metadata WHERE `method` = $method AND `bucket` = $bucket');
-        $query->namedParams(array('bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()));
+        $query->namedParams(['bucket' => $request->getPath()['bucket'], 'method' => $request->getMethod()]);
         if ($database->query($query)->rows[0]->{'$1'} <= 0) {
             $request->setResponseCode(422);
             $request->setValid(false);
@@ -261,6 +265,7 @@ class RequestTreater
     {
         return in_array($protocol, self::VALID_PROTOCOLS);
     }
+
     /**
      *Comparate method name in private array $methods for validation.
      *
@@ -272,6 +277,7 @@ class RequestTreater
     {
         return in_array($method, self::VALID_METHODS);
     }
+
     /**
      *Comparate sender name in privare array $senders for validation.
      *
@@ -283,6 +289,7 @@ class RequestTreater
     {
         return in_array($sender, self::VALID_SENDERS);
     }
+
     /**
      *Validate request body.
      *

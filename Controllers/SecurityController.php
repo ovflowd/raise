@@ -1,6 +1,7 @@
 <?php
 /**
- * UIoT Service Layer
+ * UIoT Service Layer.
+ *
  * @version alpha
  *                          88
  *                          ""              ,d
@@ -18,8 +19,8 @@
 
 namespace Raise\Controllers;
 
-include("Database/DatabaseParser.php");
-include_once("Treaters/MessageOutPut.php");
+include 'Database/DatabaseParser.php';
+include_once 'Treaters/MessageOutPut.php';
 
 use Raise\Treaters\MessageOutPut;
 
@@ -27,7 +28,7 @@ class SecurityController
 {
     public function validate($request)
     {
-            // //extract the request body as associative array
+        // //extract the request body as associative array
             // $bodyArray = $request->getBody();
             //
             //
@@ -83,8 +84,8 @@ class SecurityController
         //consult database to verify if
         //the client can execute the list of service
         return true;
-
     }
+
     private function updateContext($body, $httpCode)
     {
         //use the request body and the http code

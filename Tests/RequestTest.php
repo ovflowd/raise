@@ -1,112 +1,111 @@
 <?php
 
-include('httpful.phar');
+include 'httpful.phar';
 
 class RequestTester
 {
+    private $raise_ip = 'localhost';
 
-	private $raise_ip = 'localhost';
+    public function testListAllClients()
+    {
+        $url = "http://{$this->raise_ip}/client/list";
+        $response = \Httpful\Request::get($url)->send();
+        echo 'All clients response: '.'<br>';
+        echo $response;
+    }
 
+    public function testInsertClient($isValidTest)
+    {
+        $url = "http://{$this->raise_ip}/client/register";
 
-	public function testListAllClients()
-	{
-		$url = "http://{$this->raise_ip}/client/list";
-		$response = \Httpful\Request::get($url)->send();
-		echo "All clients response: ". '<br>';
-		echo $response; 
-	}
-	
-	public function testInsertClient($isValidTest) 
-	{
-		$url = "http://{$this->raise_ip}/client/register";
-
-		$body = (array("name" => "Texas CC130",
-    				   "chipset" => "16-bits",
-    			       "mac" => "0a:00:27:00:00:00",
-    			       "serial" => "7ARET90OIPUU",
-    			       "processor" => "arm",
-    			       "channel" => "Ethernet",
-				       "client_time" => round(microtime(true) *1000),
-				       "tag" => [array(
-				           "cebola"
-				       )]
-				));
-        if (!$isValidTest){
+        $body = (['name'             => 'Texas CC130',
+                       'chipset'     => '16-bits',
+                       'mac'         => '0a:00:27:00:00:00',
+                       'serial'      => '7ARET90OIPUU',
+                       'processor'   => 'arm',
+                       'channel'     => 'Ethernet',
+                       'client_time' => round(microtime(true) * 1000),
+                       'tag'         => [[
+                           'cebola',
+                       ]],
+                ]);
+        if (!$isValidTest) {
             $body = json_encode($body);
-        } 
-		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
-		echo "Complete client insertion: " . "/n";
-		echo $response;
-		return $response;
-	}   
- 
-	public function registerServices($token, $isValidTest)
-	{
-		$url = "http://{$this->raise_ip}/service/register";
+        }
+        $response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
+        echo 'Complete client insertion: '.'/n';
+        echo $response;
 
-		$body = (array(
-					"services" => array(array('name'=>'TESTANDO_SERVICO_TUDO','parameters'=>array('isTheCakeALie'=>'bool') , 'return_type' => 'float'),array('name'=>'pressure','parameters'=>array('press'=>'integer') , 'return_type' => 'float')),
-						"client_time" => round(microtime(true) *1000),
-						'tokenId' => $token
-						));
+        return $response;
+    }
 
-        if (!$isValidTest){
-            $body = json_encode($body);  
-        } 
-		$response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
-		echo "Complete service insertion: " . "<br>";
-		echo $response;
-		return $response;
-	}
-	
-	public function postData($data)
-	{
-		$url = "http://{$this->raise_ip}/data/register";
+    public function registerServices($token, $isValidTest)
+    {
+        $url = "http://{$this->raise_ip}/service/register";
 
-		$body = json_encode($data);
+        $body = ([
+                    'services'        => [['name'=>'TESTANDO_SERVICO_TUDO', 'parameters'=>['isTheCakeALie'=>'bool'], 'return_type' => 'float'], ['name'=>'pressure', 'parameters'=>['press'=>'integer'], 'return_type' => 'float']],
+                        'client_time' => round(microtime(true) * 1000),
+                        'tokenId'     => $token,
+                        ]);
 
-		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
-		echo "Complete data insertion: " . '<br>';
-		echo $response.'<br>'; 
-		return $response;
-	}
-	
+        if (!$isValidTest) {
+            $body = json_encode($body);
+        }
+        $response = \Httpful\Request::post($url)->sendsJson()->body(json_encode($body))->send();
+        echo 'Complete service insertion: '.'<br>';
+        echo $response;
 
-	public function testInsertClientWithoutChannel()
-	{
-		$url = "http://{$this->raise_ip}/client/register";
+        return $response;
+    }
 
-		$body = json_encode(array("name" => "TESTANDO_INSERCAO_TUDO", "chipset" => "arm",
-			      "mac" => "0a:00:27:00:00:00",
-			      "serial" => "7ARET90OIPUU",
-			      "processor" => "amd-64"));
+    public function postData($data)
+    {
+        $url = "http://{$this->raise_ip}/data/register";
 
-		$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
-		echo "Client without channel: ";
-		echo json_decode($response)->code == 400 ? "TEST PASSED...." . "<br>" : "TEST FAILED...." . "<br>";
-		echo $response;
-	} 
-  
+        $body = json_encode($data);
 
-	public function testAutoRegister()
-	{
-			$response = $this->testInsertClient(true);
-			$token = json_decode($response->body)->tokenId;
-			echo "<br><br>";  
-			usleep(250000);  
-			$serv_response = $this->registerServices($token, true); 
-			//sleep(1); 
-			$service = json_decode($serv_response)->services;
-			$aServicesId = array();
-			foreach (json_decode($serv_response)->services as $key => $service){
-			    $aServicesId[$key] = json_decode($serv_response)->services[$key]->service_id;
-			}
-			$dados = [ 'client_time' => round(microtime(true) * 1000),'token' => $token,  "data" => (array((array('service_id' => $aServicesId[0] , 'data_values' => array('ambiguous'=>true)))))];
-			echo "<br><br>";  
-			$postData = $this->postData($dados); 
-            $dados = [ 'client_time' => round(microtime(true) * 1000), 'token' => $token,  "data" => (array((array('service_id' => $aServicesId[1] , 'data_values' => array('ambiguous'=>false)))))];
-			$postData = $this->postData($dados);
-			return $token;
-	} 
+        $response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+        echo 'Complete data insertion: '.'<br>';
+        echo $response.'<br>';
 
+        return $response;
+    }
+
+    public function testInsertClientWithoutChannel()
+    {
+        $url = "http://{$this->raise_ip}/client/register";
+
+        $body = json_encode(['name' => 'TESTANDO_INSERCAO_TUDO', 'chipset' => 'arm',
+                  'mac'             => '0a:00:27:00:00:00',
+                  'serial'          => '7ARET90OIPUU',
+                  'processor'       => 'amd-64', ]);
+
+        $response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();
+        echo 'Client without channel: ';
+        echo json_decode($response)->code == 400 ? 'TEST PASSED....'.'<br>' : 'TEST FAILED....'.'<br>';
+        echo $response;
+    }
+
+    public function testAutoRegister()
+    {
+        $response = $this->testInsertClient(true);
+        $token = json_decode($response->body)->tokenId;
+        echo '<br><br>';
+        usleep(250000);
+        $serv_response = $this->registerServices($token, true);
+            //sleep(1);
+            $service = json_decode($serv_response)->services;
+        $aServicesId = [];
+        foreach (json_decode($serv_response)->services as $key => $service) {
+            $aServicesId[$key] = json_decode($serv_response)->services[$key]->service_id;
+        }
+        $dados = ['client_time' => round(microtime(true) * 1000), 'token' => $token,  'data' => ([(['service_id' => $aServicesId[0], 'data_values' => ['ambiguous'=>true]])])];
+        echo '<br><br>';
+        $postData = $this->postData($dados);
+        $dados = ['client_time' => round(microtime(true) * 1000), 'token' => $token,  'data' => ([(['service_id' => $aServicesId[1], 'data_values' => ['ambiguous'=>false]])])];
+        $postData = $this->postData($dados);
+
+        return $token;
+    }
 }

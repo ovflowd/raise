@@ -43,9 +43,9 @@ class MessageOutPut
         $myBucket = $myCluster->openBucket('metadata');
         try { //create a conction with database
             $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM `metadata` WHERE codHttp=$p');
-            $query->namedParams(array(
+            $query->namedParams([
                 'p' => (string) $code,
-            ));
+            ]);
             $result = $myBucket->query($query); //save a result of search
 
             foreach ($result->rows as $row) {
@@ -74,9 +74,9 @@ class MessageOutPut
         $myBucket = $myCluster->openBucket('metadata');
         try {
             $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM `metadata` WHERE codCouch=$p');
-            $query->namedParams(array(
+            $query->namedParams([
                 'p' => $code,
-            ));
+            ]);
             $result = $myBucket->query($query);
             foreach ($result->rows as $row) {
                 $message_out = $row->metadata;

@@ -5,15 +5,15 @@ include 'RequestTest.php';
 
 $tester = new RequestTester();
 
-//$tester->testInsertClient(); 
+//$tester->testInsertClient();
 //$tester->testInsertClientwithoutChannel();
 //$tester->testListAllClients();
 
 for ($i = 0; $i < 10; ++$i) {
-    $token = $tester->testAutoRegister(); 
-    echo '/n'."Testando POST Client Invalido".'/n';
-    $tester->testInsertClient(false); 
-    echo '/n'."Testando POST Service Invalido".'/n';
+    $token = $tester->testAutoRegister();
+    echo '/n'.'Testando POST Client Invalido'.'/n';
+    $tester->testInsertClient(false);
+    echo '/n'.'Testando POST Service Invalido'.'/n';
     $tester->registerServices($token, false);
     echo $i;
 }

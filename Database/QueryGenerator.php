@@ -14,7 +14,7 @@
  *
  * @author Universal Internet of Things
  * @license MIT <https://opensource.org/licenses/MIT>
- * @copyright University of Brasília 
+ * @copyright University of Brasília
  */
 include_once 'Treaters/MessageOutPut.php';
 include_once 'Database/DatabaseParser.php';
@@ -25,7 +25,7 @@ class QueryGenerator
     public function generate($request)
     {
         $uimsServiceSyncTrigger = false;
-        $uimsClientSyncTrigger  = false;
+        $uimsClientSyncTrigger = false;
         if ($request->bucket == 'service' && $request->getMethod() == 'post') {
             $uimsServiceSyncTrigger = true;
             $parsedPath = $this->parsePath($request, true);
@@ -38,7 +38,7 @@ class QueryGenerator
             }
             $parsedPath = $this->parsePath($request, false);
         } else {
-            if ($request->bucket == 'client' && $request->getMethod() == 'post'){
+            if ($request->bucket == 'client' && $request->getMethod() == 'post') {
                 $uimsClientSyncTrigger = true;
             }
             $parsedPath = $this->parsePath($request, false);
@@ -60,45 +60,48 @@ class QueryGenerator
                     }
                 } else {
                     $result = $parser->insert($request);
-                } 
+                }
             }
-            if ($uimsServiceSyncTrigger == true){ 
+            if ($uimsServiceSyncTrigger == true) {
                 $this->syncUimsService();
-            } elseif ($uimsClientSyncTrigger == true){
+            } elseif ($uimsClientSyncTrigger == true) {
                 $this->syncUimsDevice();
-            } 
+            }
+
             return $result;
         } elseif ($parsedPath->isValid() === false) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
         }
     }
-    
+
     /*
         Outdated for now. Takes too much time
      */
-    private function syncUimsService(){
-        //$ch = curl_init(); 
+    private function syncUimsService()
+    {
+        //$ch = curl_init();
         //curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/sync");
-        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
+        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_exec($ch);
         //curl_close($ch);
     }
-     
+
      /*
         Outdated for now. Takes too much time
      */
-    private function syncUimsDevice(){
+    private function syncUimsDevice()
+    {
         //$ch = curl_init();
         //curl_setopt($ch, CURLOPT_URL, "https://uims.uiot.com.br/api_devel/rest/devices/syncdevice");
-        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
-        //curl_exec($ch); 
+        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_exec($ch);
         //curl_close($ch);
     }
 
     private function separateData($request)
     {
         $objData = json_decode($request->treatedBody, false);
-        $composedData = array();
+        $composedData = [];
 
         foreach ($objData->data as $key => $service) {
             $serviceId = $objData->data[$key]->service_id;
@@ -108,17 +111,17 @@ class QueryGenerator
                 $request->setValid(false);
             }
             $dataValues = $objData->data[$key]->data_values;
-            $data = array(
-                'service_id' => $serviceId,
+            $data = [
+                'service_id'  => $serviceId,
                 'data_values' => $dataValues,
-            );
-            $composedData[$key] = array(
-                'token' => $objData->token,
-                'tag' => $this->getTagList($request),
+            ];
+            $composedData[$key] = [
+                'token'       => $objData->token,
+                'tag'         => $this->getTagList($request),
                 'client_time' => json_decode($request->treatedBody, false)->client_time,
                 'server_time' => json_decode($request->treatedBody, false)->server_time,
-                'data' => $data,
-            );
+                'data'        => $data,
+            ];
         }
 
         return $composedData;
@@ -130,7 +133,7 @@ class QueryGenerator
             return $request->getBody()['tag'];
         }
 
-        return array();
+        return [];
     }
 
     private function validateServiceId($request, $namedParam)
@@ -157,15 +160,15 @@ class QueryGenerator
         $request->isLimited = false;
         if (count($request->getParameters()) > 0 && !(count($request->getParameters()) === 1 && array_key_exists('tokenId', $request->getParameters()))) {
             $queryStr = 'SELECT * FROM `'.$request->bucket.'` WHERE';
-            $request = $this->preValidate($request, $queryStr); 
-            $queryStr = $request->queryStr; 
-            if ($request->isCount === true){
+            $request = $this->preValidate($request, $queryStr);
+            $queryStr = $request->queryStr;
+            if ($request->isCount === true) {
                 $queryStr = 'SELECT COUNT(*) as count FROM `'.$request->bucket.'` WHERE';
-            } 
+            }
             $queryStr = $this->filterTime($request, $queryStr);
-            $typeVerification = array();
+            $typeVerification = [];
             foreach ($request->getParameters() as $key => $parameter) {
-                $chave = $this->getChave($request, $key); 
+                $chave = $this->getChave($request, $key);
                 if (is_numeric($parameter) && $chave != 'tag' && $chave != 'limit' && $chave != 'start_date' && $chave != 'end_date' && $request->isLower == false) {
                     $typeVerification[$key] = (int) $parameter;
                     $request->setParameters($typeVerification);
@@ -175,82 +178,91 @@ class QueryGenerator
                     $request->setParameters($typeVerification);
                     $queryStr = $queryStr.' '.$chave." < \$$key".' AND  ';
                     $request->isLower = false;
-                } elseif ($chave != 'tag' && $chave != 'end_date' && $chave != 'start_date' && $chave != 'limit' && $chave != 'order' && $chave != 'count' && $chave != 'service_name') { 
+                } elseif ($chave != 'tag' && $chave != 'end_date' && $chave != 'start_date' && $chave != 'limit' && $chave != 'order' && $chave != 'count' && $chave != 'service_name') {
                     if ($key !== 'tokenId') {
                         $queryStr = $queryStr.' '.$chave." LIKE \$$key".' AND  ';
-                    } 
-                } elseif($chave == 'service_name'){
-                    $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]); 
-                } 
+                    }
+                } elseif ($chave == 'service_name') {
+                    $queryStr = $this->appendToQuery($queryStr, $request->getParameters()[$key]);
+                }
             }
             $request->string = $this->finalizeQuery($request, $queryStr, false);
             //exit($request->string);
         } else {
             $request->string = $queryStr = 'SELECT * FROM `'.$request->bucket.'`';
-        } 
-        return $request;  
+        }
+
+        return $request;
     }
-    
-    private function preValidate($request, $queryStr){
+
+    private function preValidate($request, $queryStr)
+    {
         $request->queryStr = $queryStr;
         if (isset($request->getParameters()['tag'])) {
             $request->queryStr = $this->appendTagInQuery($request).' AND ';
         }
-        if (isset($request->getParameters()['limit'])) { 
+        if (isset($request->getParameters()['limit'])) {
             $request->isLimited = true;
-            $request->limitedBy = $request->getParameters()['limit']; 
+            $request->limitedBy = $request->getParameters()['limit'];
         }
         if (isset($request->getParameters()['order'])) {
             $request->isOrdered = true;
-            if ($request->getParameters()['order'] === "true"){
+            if ($request->getParameters()['order'] === 'true') {
                 $request->isDesc = true;
             } else {
                 $request->isDesc = false;
             }
         }
-        if(isset($request->getParameters()['count'])){
-            $request->isCount = true;  
+        if (isset($request->getParameters()['count'])) {
+            $request->isCount = true;
         }
+
         return $request;
     }
 
-    private function finalizeQuery($request, $queryStr, $noParams){
-        if (!$noParams){
+    private function finalizeQuery($request, $queryStr, $noParams)
+    {
+        if (!$noParams) {
             $queryStr = substr($queryStr, 0, -5);
-        }  
-        if ($request->isOrdered == true){
-            if ($request->isDesc == true){
-                $queryStr .= " order by ".$request->bucket.".server_time DESC";
+        }
+        if ($request->isOrdered == true) {
+            if ($request->isDesc == true) {
+                $queryStr .= ' order by '.$request->bucket.'.server_time DESC';
             } else {
-                $queryStr .= " order by ".$request->bucket.".server_time ASC";
+                $queryStr .= ' order by '.$request->bucket.'.server_time ASC';
             }
-        } 
-        if ($request->isLimited == true){
-            $queryStr .= " LIMIT ".$request->limitedBy;
-        } 
+        }
+        if ($request->isLimited == true) {
+            $queryStr .= ' LIMIT '.$request->limitedBy;
+        }
+
         return $queryStr;
     }
- 
+
     private function getChave($request, $key)
     {
-        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'end_date' && $key !== 'start_date' && $key !== 'tag'  && $key !== 'limit' && $key !== 'order') {
+        if ($request->bucket == 'data' && $key !== 'service_id' && $key !== 'tokenId' && $key !== 'end_date' && $key !== 'start_date' && $key !== 'tag' && $key !== 'limit' && $key !== 'order') {
             $request->isLower = true;
+
             return 'data.data.data_values.'.$key;
         } elseif ($request->bucket == 'data' && $key == 'service_id') {
             return 'data.data.'.$key;
         } elseif ($key == 'tokenId') {
             return 'token';
-        } 
-        return $key; 
+        }
+
+        return $key;
     }
-    
-    private function filterTime($request, $queryStr){
-        if(isset($request->getParameters()['start_date'])) {
+
+    private function filterTime($request, $queryStr)
+    {
+        if (isset($request->getParameters()['start_date'])) {
             $queryStr = $queryStr.' server_time >'.$request->getParameters()['start_date'].' AND  ';
         }
-        if (isset($request->getParameters()['end_date'])){
+        if (isset($request->getParameters()['end_date'])) {
             $queryStr = $queryStr.' server_time <'.$request->getParameters()['end_date'].' AND  ';
         }
+
         return $queryStr;
     }
 
@@ -272,10 +284,11 @@ class QueryGenerator
 
         return substr($queryTagModel, 0, -5);
     }
-    
+
     private function appendToQuery($queryStr, $serviceName)
     {
         $queryArrayHelper = ' ANY serv IN service.services SATISFIES serv.name = "'.$serviceName.'" END AND ';
+
         return $queryStr.$queryArrayHelper;
     }
 
@@ -286,6 +299,7 @@ class QueryGenerator
         $parserinho = new DatabaseParser($requestObj, $bucket);
         $requestObj->string = $queryStr;
         $Testando = $parserinho->select($requestObj);
+
         return $Testando;
     }
 
@@ -301,7 +315,7 @@ class QueryGenerator
                 unset($requestBody['is_revalidated']);
                 $request->bucket = $nextBucket;
                 $request->service = true;
-                $services = array();
+                $services = [];
 
                 if ($nextBucket == 'service') {
                     $Testando = $this->simpleSelect($request, 'service', 'select * from service order by service.services[0].service_id desc limit 1', null);
@@ -322,21 +336,21 @@ class QueryGenerator
                     }
                 }
 
-                foreach ($request->getBody() ['services'] as $key => $service) {
+                foreach ($request->getBody()['services'] as $key => $service) {
                     $service['service_id'] = $i;
                     ++$i;
                     $services['services'][] = $service;
                 }
-                $services['tokenId'] = $request->getBody() ['tokenId'];
-                $services['tag'] = $request->getBody() ['tag'];
-                $services['client_time'] = $request->getBody() ['client_time'];
-                
-                if ($nextBucket === 'client') { 
-                    $mergedServices = array_merge($services, $requestBody); 
-                    $request->treatedBody = json_encode(array_merge($mergedServices, array('server_time' =>round(microtime(true) * 1000))));
+                $services['tokenId'] = $request->getBody()['tokenId'];
+                $services['tag'] = $request->getBody()['tag'];
+                $services['client_time'] = $request->getBody()['client_time'];
+
+                if ($nextBucket === 'client') {
+                    $mergedServices = array_merge($services, $requestBody);
+                    $request->treatedBody = json_encode(array_merge($mergedServices, ['server_time' =>round(microtime(true) * 1000)]));
                 } elseif ($nextBucket === 'service') {
-                    $request->treatedBody = json_encode(array_merge($services, array('server_time' =>round(microtime(true) * 1000))));
-                }   
+                    $request->treatedBody = json_encode(array_merge($services, ['server_time' =>round(microtime(true) * 1000)]));
+                }
                 $request->token = $requestBody['tokenId'];
                 unset($requestBody['tokenId']);
             } else {
@@ -351,14 +365,13 @@ class QueryGenerator
         return $request;
     }
 
-
     private function validateExpirationToken($request, $token)
     {
         $database = (new DatabaseParser($request, false))->getBucket();
         $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM token WHERE `tokenId` = $token');
-        $query->namedParams(array(
+        $query->namedParams([
             'token' => $token,
-        ));
+        ]);
         $parameters = $database->query($query)->rows;
 
         if ($parameters[0]->token->time_fim <= round(microtime(true) * 1000)) {
@@ -375,8 +388,9 @@ class QueryGenerator
         return json_last_error() == JSON_ERROR_NONE;
     }
 
-    public function getNextClientId($request){
-        $request->bucket = "client";
+    public function getNextClientId($request)
+    {
+        $request->bucket = 'client';
         $Testando = $this->simpleSelect($request, 'client', 'select * from client order by client_id desc limit 1', null);
         $indiceFinal = $Testando['values'][0]->client_id + 1;
         if ($Testando['values'][0] === null) {
@@ -384,17 +398,18 @@ class QueryGenerator
         } else {
             $i = $indiceFinal;
         }
+
         return $i;
     }
-    
+
     private function parsePath($request, $isServiceSecondTime)
     {
         $path = $request->getPath();
         $method = $path['method'];
 
         if (!empty($method)) {
-            if ($request->getPath() ['method'] === 'list') {
-                if (!$this->validateExpirationToken($request, $request->getParameters() ['tokenId'])) {
+            if ($request->getPath()['method'] === 'list') {
+                if (!$this->validateExpirationToken($request, $request->getParameters()['tokenId'])) {
                     $request->setResponseCode(401);
                     $request->setValid(false);
                 } else {
@@ -410,61 +425,63 @@ class QueryGenerator
                 }
             }
 
-            if ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'register') {
+            if ($request->getPath()['bucket'] === 'client' && $request->getPath()['method'] == 'register') {
                 $request->bucket = 'token';
                 $request->token = $this->generateToken();
                 $tokenIni = round(microtime(true) * 1000);
                 $tokenFim = $tokenIni + 7200000; //millisecons
-                $nextClientId =  $this->getNextClientId($request);
+                $nextClientId = $this->getNextClientId($request);
                 //Tem que voltar o bucket pra token pois ele eh alterado na chamada acima
                 $request->bucket = 'token';
-                $request->treatedBody = json_encode(array_merge($request->getBody(), array(
-                    'tokenId' => $request->token,
-                    'time_ini' => $tokenIni,
-                    'time_fim' => $tokenFim,
+                $request->treatedBody = json_encode(array_merge($request->getBody(), [
+                    'tokenId'        => $request->token,
+                    'time_ini'       => $tokenIni,
+                    'time_fim'       => $tokenFim,
                     'is_revalidated' => false,
-                    'client_id' => $nextClientId,
-                ))); 
+                    'client_id'      => $nextClientId,
+                ]));
                 $parser = new DatabaseParser($request, false);
-                $parser->insert($request);  
-                $request->bucket = 'client'; 
-                $arrayHelper = array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000)));
-                $request->treatedBody = json_encode(array_merge($arrayHelper, array('client_id' => $nextClientId))); 
-            } elseif ($request->getPath() ['bucket'] === 'service' && $request->getPath() ['method'] == 'register') {
+                $parser->insert($request);
+                $request->bucket = 'client';
+                $arrayHelper = array_merge($request->getBody(), ['server_time' => round(microtime(true) * 1000)]);
+                $request->treatedBody = json_encode(array_merge($arrayHelper, ['client_id' => $nextClientId]));
+            } elseif ($request->getPath()['bucket'] === 'service' && $request->getPath()['method'] == 'register') {
                 $oldBody = $request->getBody();
                 $request->bucket = 'token';
                 $parser = new DatabaseParser($request, false);
                 //Select Client on Token bucket
-                $token = $request->getBody() ['tokenId'];
+                $token = $request->getBody()['tokenId'];
                 $request->string = 'SELECT * FROM `token` WHERE tokenId = $token';
-                $request->setParameters(array( 
+                $request->setParameters([
                     'token' => $token,
-                ));
+                ]);
                 $result = $parser->select($request);
                 if (!$isServiceSecondTime) {
                     $request = $this->validateToken($result, $request, 'client');
                 } else {
                     $request = $this->validateToken($result, $request, 'service');
                 }
-            } elseif ($request->getPath() ['bucket'] === 'client' && $request->getPath() ['method'] == 'revalidate') {
+            } elseif ($request->getPath()['bucket'] === 'client' && $request->getPath()['method'] == 'revalidate') {
                 //valida se os serviços enviados fazem parte do token
-                $token = $request->getBody() ['tokenId'];
+                $token = $request->getBody()['tokenId'];
                 $oldTokenObject = $this->simpleSelect($request, 'token', "select * from token where tokenId = '".$token."'", null)['values'][0];
                 if ($oldTokenObject->is_revalidated) {
                     $request->setResponseCode(401); //Already revalidated
                     $request->setValid(false);
+
                     return $request;
                 }
-                $sentServices = $request->getBody() ['services'];
+                $sentServices = $request->getBody()['services'];
                 $queryStr = "SELECT * FROM service WHERE tokenId = '$token'";
-                $oldDocument = json_encode($this->simpleSelect($request, 'service', $queryStr, null) ['values'][0]);
-                if (!isset(json_decode($oldDocument)->services)){
+                $oldDocument = json_encode($this->simpleSelect($request, 'service', $queryStr, null)['values'][0]);
+                if (!isset(json_decode($oldDocument)->services)) {
                     $request->setResponseCode(403); //No services to revalidated
                     $request->setValid(false);
+
                     return $request;
                 }
                 $services = json_decode($oldDocument)->services;
-                $validServices = array();
+                $validServices = [];
                 foreach ($services as $service) {
                     $validServices[] = $service->service_id;
                 }
@@ -478,7 +495,7 @@ class QueryGenerator
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
                     $queryStr = "SELECT * FROM client WHERE tokenId = '$oldToken'";
-                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null) ['values'][0]), false);
+                    $oldTokenDocument = json_decode(json_encode($this->simpleSelect($request, 'client', $queryStr, null)['values'][0]), false);
                     $oldClientDocument = $oldTokenDocument;
                     unset($oldTokenDocument->services);
                     unset($oldTokenDocument->tokenId);
@@ -493,14 +510,14 @@ class QueryGenerator
                     $request->token = $newDocument->tokenId;
                     $tokenIni = round(microtime(true) * 1000);
                     $tokenFim = $tokenIni + 7200000; //millisecons
-                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument), true), array(
-                        'tokenId' => $newDocument->tokenId,
+                    $request->treatedBody = (json_encode(array_merge(json_decode(json_encode($oldTokenDocument), true), [
+                        'tokenId'  => $newDocument->tokenId,
                         'time_ini' => $tokenIni,
                         'time_fim' => $tokenFim,
-                    ))));
+                    ])));
                     $parser = new DatabaseParser($request, false);
                     $parser->insert($request);
-                    //Updata o client com seu novo tokenId 
+                    //Updata o client com seu novo tokenId
                     $request->bucket = 'client';
                     $request->token = $newDocument->tokenId;
                     $oldClientDocumnet->tokenId = $newDocument->tokenId;
@@ -508,14 +525,16 @@ class QueryGenerator
                 } else {
                     $request->setResponseCode(403);
                     $request->setValid(false);
+
                     return $request;
                 }
-            } elseif ($request->getPath() ['bucket'] === 'data' && $request->getPath() ['method'] == 'register') {
-                $request->token = $request->getBody() ['token'];
+            } elseif ($request->getPath()['bucket'] === 'data' && $request->getPath()['method'] == 'register') {
+                $request->token = $request->getBody()['token'];
                 $arrayTest = $request->getBody();
                 //if ($this->validateExpirationToken($request, $request->token)) {
-                    $request->treatedBody = json_encode(array_merge($request->getBody(), array('server_time' => round(microtime(true) * 1000))));
-                    return $request;
+                    $request->treatedBody = json_encode(array_merge($request->getBody(), ['server_time' => round(microtime(true) * 1000)]));
+
+                return $request;
                 //} else {
                 //    $request->setResponseCode(401);
                 //    $request->setValid(false);
