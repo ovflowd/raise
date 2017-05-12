@@ -94,7 +94,7 @@ sudo apt-get install libcouchbase-dev build-essential zlib1g-dev
 sudo pecl install pcs-1.3.3
 sudo pecl install couchbase
 </pre>
-2. Add the following on your php Configuration `php.ini` generally found on `/etc/php/7.0/cli/php.ini` or `/etc/php/7.0/apache/php.ini` or `/etc/php.ini`
+2. Add the following on your php Configuration <pre>php.ini</pre>.
 <pre>
 extension=json.so
 extension=pcs.so
@@ -104,7 +104,6 @@ extension=couchbase.so
 ### Installing RAISe
 1. Download RAISe by cloning the repository or by Downloading a ZIP
 2. Go to folder Install
-3. Give chmod 77 to Install.php (`chmod 777 Install.php`)
-4. Execute by `php Install.php`
-5. Follow the setup
-6. You're all set.
+3. Execute by `php Install.php`
+4. Follow the setup
+5. You're all set.
