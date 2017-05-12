@@ -157,7 +157,7 @@ try {
 	$clientBucket = $connection->openBucket('client');
 
 	$clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
-catch (CouchbaseException $e) {
+} catch (CouchbaseException $e) {
 	echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
 }
 
@@ -167,7 +167,7 @@ try {
 	$serviceBucket = $connection->openBucket('service');
 
 	$serviceBucket->manager()->createN1qlPrimaryIndex('', false, false);
-catch (CouchbaseException $e) {
+} catch (CouchbaseException $e) {
 	echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
 }
 
@@ -177,7 +177,7 @@ try {
 	$tokenBucket = $connection->openBucket('token');
 
 	$tokenBucket->manager()->createN1qlPrimaryIndex('', false, false);
-catch (CouchbaseException $e) {
+} catch (CouchbaseException $e) {
 	echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
 }
 
@@ -187,7 +187,7 @@ try {
 	$dataBucket = $connection->openBucket('data');
 
 	$dataBucket->manager()->createN1qlPrimaryIndex('', false, false);
-catch (CouchbaseException $e) {
+} catch (CouchbaseException $e) {
 	echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
 }
 
@@ -197,7 +197,7 @@ try {
 	$responseBucket = $connection->openBucket('response');
 
 	$responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
-catch (CouchbaseException $e) {
+} catch (CouchbaseException $e) {
 	echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
