@@ -20,8 +20,8 @@
 include_once 'Treaters/MessageOutPut.php';
 include_once 'Config/Config.php';
 
-use Raise\Treaters\MessageOutPut;
 use Raise\Treaters\Config;
+use Raise\Treaters\MessageOutPut;
 
 class DatabaseParser
 {
@@ -43,7 +43,7 @@ class DatabaseParser
         if ($bucket !== null) {
             $cluster = new CouchbaseCluster($this->serverAddress);
 
-            return $cluster->openBucket($bucket); 
+            return $cluster->openBucket($bucket);
         }
 
         return $this->bucket;
@@ -55,19 +55,19 @@ class DatabaseParser
             $response = (new MessageOutPut())->messageHttp(200);
             if ($responseRows->bucket === 'client' || $responseRows->bucket === 'service') {
                 if (isset($responseRows->request->service)) {
-                    $response->services = array();
+                    $response->services = [];
 
                     foreach (json_decode($responseRows->request->treatedBody)->services as $key => $service) {
-                        $response->services[] = array('service_id' => json_decode($responseRows->request->treatedBody, true)['services'][$key]['service_id'], 'service_name' => $service->name);
+                        $response->services[] = ['service_id' => json_decode($responseRows->request->treatedBody, true)['services'][$key]['service_id'], 'service_name' => $service->name];
                     }
                 }
                 $response->tokenId = $responseRows->token;
             }
         } else {
-            $response = array(
-                'code' => 200,
+            $response = [
+                'code'   => 200,
                 'values' => $responseRows,
-            );
+            ];
         }
 
         return $response;
@@ -89,15 +89,16 @@ class DatabaseParser
 
     private function parseResult($result, $request)
     {
-        $responseRows = array();
+        $responseRows = [];
         foreach ($result->rows as $row) {
             $bucket = $request->bucket;
-            if ($request->isCount === true){ //Inserir esse aqui no metadata 
-                $row->$bucket = new stdClass; 
+            if ($request->isCount === true) { //Inserir esse aqui no metadata
+                $row->$bucket = new stdClass();
                 $row->$bucket->values = $row->count;
             }
-            $responseRows[] = $row->$bucket; 
-        } 
+            $responseRows[] = $row->$bucket;
+        }
+
         return $responseRows;
     }
 
