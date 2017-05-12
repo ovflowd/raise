@@ -48,10 +48,10 @@ function createBucket(array $details, array $credentials)
 /**
  * Insert a Metadata Object on Metadata Table.
  *
- * @param object           $details
+ * @param stdClass         $details
  * @param CouchbaseCluster $connection
  */
-function insertMetadata(object $details, CouchbaseCluster $connection)
+function insertMetadata(stdClass $details, CouchbaseCluster $connection)
 {
     $metadataBucket = $connection->openBucket('metadata');
 
@@ -219,9 +219,9 @@ while (!$connectionOK) {
 
 $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
-echo PHP_EOL;
-
 echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
+
+echo PHP_EOL;
 
 echo writeText('[INFO]', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
 
@@ -249,9 +249,7 @@ $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
     if ($bucketName != 'notcreatable') {
-        echo writeText('[INFO]', '46')."Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB.".PHP_EOL;
-
-        echo progressBar($progress++, 7);
+        echo progressBar($progress++, 7, "Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB.");
     }
 
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
@@ -274,14 +272,14 @@ while (!$readyToFill) {
     
     sleep(2);
 
-    echo progressBar($progress += 2, 100);
+    echo progressBar($progress += 2, 300, 'Configuring Buckets');
 
     if (count($data) == 0) {
         $readyToFill = true;
     }
 }
 
-echo progressBar(100, 100);
+echo progressBar(300, 300, 'Buckets Configured');
 
 echo writeText('[INFO]', '46').'Starting to Fill Buckets...'.PHP_EOL;
 
