@@ -249,17 +249,23 @@ $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
     if ($bucketName != 'notcreatable') {
-        echo progressBar($progress++, 7, "Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB.");
+        echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.");
     }
+    
+    sleep(2);
 
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
-echo progressBar(7, 7);
+echo progressBar(7, 7, "Buckets Created Successfully.");
 
 $readyToFill = false;
 
+echo PHP_EOL;
+
 echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
+
+echo PHP_EOL;
 
 echo progressBar(0, 100, 'Configuring Buckets');
 
