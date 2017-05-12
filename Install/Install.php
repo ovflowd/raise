@@ -22,21 +22,22 @@
 set_time_limit(0);
 
 /**
- * Create a Bucket on Couchbase
+ * Create a Bucket on Couchbase.
  *
  * @param array $details
  * @param array $credentials
+ *
  * @return mixed
  */
 function createBucket(array $details, array $credentials)
 {
     $bucket = [
-        'authType' => 'sasl',
-        'bucketType' => 'membase',
-        'flushEnabled' => 0,
-        'name' => $details['name'],
-        'ramQuotaMB' => $details['memory'],
-        'replicaIndex' => 0,
+        'authType'      => 'sasl',
+        'bucketType'    => 'membase',
+        'flushEnabled'  => 0,
+        'name'          => $details['name'],
+        'ramQuotaMB'    => $details['memory'],
+        'replicaIndex'  => 0,
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
@@ -45,9 +46,9 @@ function createBucket(array $details, array $credentials)
 }
 
 /**
- * Insert a Metadata Object on Metadata Table
+ * Insert a Metadata Object on Metadata Table.
  *
- * @param object $details
+ * @param object           $details
  * @param CouchbaseCluster $connection
  */
 function insertMetadata(object $details, CouchbaseCluster $connection)
@@ -57,18 +58,19 @@ function insertMetadata(object $details, CouchbaseCluster $connection)
     $metadataName = uniqid('', true);
 
     $metadataBucket->insert($metadataName, [
-        'codHttp' => $details->codHttp,
+        'codHttp'  => $details->codHttp,
         'codCouch' => $details->codCouch,
-        'message' => $details->message,
+        'message'  => $details->message,
     ]);
 }
 
 /**
- * Communicate with the Couchbase CLI
+ * Communicate with the Couchbase CLI.
  *
  * @param string $url
- * @param array $credentials
- * @param mixed $post
+ * @param array  $credentials
+ * @param mixed  $post
+ *
  * @return array|object
  */
 function communicateCouchbase(string $url, array $credentials, $post = null)
@@ -94,22 +96,22 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
     return json_decode($server_output);
 }
 
-
 /**
- * Write Colored Text
+ * Write Colored Text.
  *
  * @param string $text
  * @param string $color
- * @param bool $endOfLine
+ * @param bool   $endOfLine
+ *
  * @return string
  */
 function writeText(string $text, string $color = '0', bool $endOfLine = false)
 {
-    return "\033[{$color}m{$text}\033[0m " . ($endOfLine ? PHP_EOL : '');
+    return "\033[{$color}m{$text}\033[0m ".($endOfLine ? PHP_EOL : '');
 }
 
 /**
- * Check if CouchbaseLibrary is installed
+ * Check if CouchbaseLibrary is installed.
  *
  * @return bool
  */
@@ -119,7 +121,7 @@ function checkLibrary()
 }
 
 /**
- * Check if php is higher or equal than version 7.0
+ * Check if php is higher or equal than version 7.0.
  *
  * @return bool
  */
@@ -129,13 +131,13 @@ function checkVersion()
 }
 
 /**
- * Set User Credentials for Couchbase
+ * Set User Credentials for Couchbase.
  *
  * @return array
  */
 function setCredentials()
 {
-    echo 'Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.' . PHP_EOL;
+    echo 'Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.'.PHP_EOL;
 
     echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
@@ -153,23 +155,24 @@ function setCredentials()
 }
 
 /**
- * CLI Progress Bar
+ * CLI Progress Bar.
  *
- * @param int $done
- * @param int $total
+ * @param int    $done
+ * @param int    $total
  * @param string $info
- * @param int $width
+ * @param int    $width
+ *
  * @return string
  */
-function progressBar($done, $total, $info = "", $width = 50)
+function progressBar($done, $total, $info = '', $width = 50)
 {
     $percent = round(($done * 100) / $total);
     $bar = round(($width * $percent) / 100);
 
-    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat("=", $bar), str_repeat(" ", $width - $bar), $info);
+    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat('=', $bar), str_repeat(' ', $width - $bar), $info);
 }
 
-echo PHP_EOL . PHP_EOL;
+echo PHP_EOL.PHP_EOL;
 
 echo writeText('Welcome to the RAISe Installer.', '0;31', true);
 echo writeText('This Installer will do many checks before continue, be patient.', '43', true);
@@ -177,17 +180,17 @@ echo writeText('This Installer will do many checks before continue, be patient.'
 echo PHP_EOL;
 
 if (checkVersion()) {
-    echo writeText('OK', '42') . 'php version passed.' . PHP_EOL;
+    echo writeText('OK', '42').'php version passed.'.PHP_EOL;
 } else {
-    echo writeText('ERROR', '41') . "Your PHP version isn't correct. You need use php 7 or higher. Actually using: " . phpversion() . PHP_EOL;
+    echo writeText('ERROR', '41')."Your PHP version isn't correct. You need use php 7 or higher. Actually using: ".phpversion().PHP_EOL;
 
     exit(1);
 }
 
 if (checkLibrary()) {
-    echo writeText('OK', '42') . 'Library Checks Passed...' . PHP_EOL;
+    echo writeText('OK', '42').'Library Checks Passed...'.PHP_EOL;
 } else {
-    echo writeText('ERROR', '41') . "Couchbase Library for PHP isn't installed correctly." . PHP_EOL;
+    echo writeText('ERROR', '41')."Couchbase Library for PHP isn't installed correctly.".PHP_EOL;
 
     exit(1);
 }
@@ -214,25 +217,25 @@ $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
 echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
 
-echo writeText('[INFO]', '46') . 'Getting Information from the Cluster via API....' . PHP_EOL;
+echo writeText('[INFO]', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
 
 $serverInfo = communicateCouchbase('pools/default', $credentials);
 
 $memoryQuota = $serverInfo->memoryQuota;
 
-echo writeText('[INFO]', '46') . "Your Cluster RAM size is: {$memoryQuota}MB." . PHP_EOL;
+echo writeText('[INFO]', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
 $buckets = [
     'notcreatable' => 0,
-    'metadata' => floor((($memoryQuota / 100) * 4)),
-    'client' => floor((($memoryQuota / 100) * 12)),
-    'service' => floor((($memoryQuota / 100) * 12)),
-    'token' => floor((($memoryQuota / 100) * 12)),
-    'data' => floor((($memoryQuota / 100) * 20)),
-    'response' => floor((($memoryQuota / 100) * 20)),
+    'metadata'     => floor((($memoryQuota / 100) * 4)),
+    'client'       => floor((($memoryQuota / 100) * 12)),
+    'service'      => floor((($memoryQuota / 100) * 12)),
+    'token'        => floor((($memoryQuota / 100) * 12)),
+    'data'         => floor((($memoryQuota / 100) * 20)),
+    'response'     => floor((($memoryQuota / 100) * 20)),
 ];
 
-echo writeText('[INFO]', '46') . 'Starting Creation Process...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Starting Creation Process...'.PHP_EOL;
 
 echo progressBar(0, 100);
 
@@ -240,7 +243,7 @@ $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
     if ($bucketName != 'notcreatable') {
-        echo writeText('[INFO]', '46') . "Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB." . PHP_EOL;
+        echo writeText('[INFO]', '46')."Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB.".PHP_EOL;
 
         echo progressBar($progress++, 6);
     }
@@ -250,7 +253,7 @@ foreach ($buckets as $bucketName => $bucketMemory) {
 
 $readyToFill = false;
 
-echo writeText('[INFO]', '46') . 'Waiting Buckets to be Ready....' . PHP_EOL;
+echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 
 echo progressBar(0, 100);
 
@@ -270,69 +273,69 @@ while (!$readyToFill) {
 
 echo progressBar(100, 100);
 
-echo writeText('[INFO]', '46') . 'Starting to Fill Buckets...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Starting to Fill Buckets...'.PHP_EOL;
 
-echo writeText('[INFO]', '46') . 'Filling Metadata Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Metadata Bucket...'.PHP_EOL;
 
 try {
     $clientBucket = $connection->openBucket('metadata');
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Metadata Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Metadata Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . 'Filling Client Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Client Bucket...'.PHP_EOL;
 
 try {
     $clientBucket = $connection->openBucket('client');
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . 'Filling Service Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Service Bucket...'.PHP_EOL;
 
 try {
     $serviceBucket = $connection->openBucket('service');
 
     $serviceBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Service Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . 'Filling Token Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Token Bucket...'.PHP_EOL;
 
 try {
     $tokenBucket = $connection->openBucket('token');
 
     $tokenBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Token Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . 'Filling Data Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Data Bucket...'.PHP_EOL;
 
 try {
     $dataBucket = $connection->openBucket('data');
 
     $dataBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Data Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . 'Filling Response Bucket...' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Response Bucket...'.PHP_EOL;
 
 try {
     $responseBucket = $connection->openBucket('response');
 
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46') . '[INFO] Filling Metadata Bucket with Codes.' . PHP_EOL;
+echo writeText('[INFO]', '46').'[INFO] Filling Metadata Bucket with Codes.'.PHP_EOL;
 
 $metadataJson = json_decode(file_get_contents('metadata.json'));
 
@@ -346,7 +349,7 @@ foreach ($metadataJson as $metadata) {
     echo progressBar($progress++, 59);
 }
 
-echo 'Creating Configuration File...' . PHP_EOL;
+echo 'Creating Configuration File...'.PHP_EOL;
 
 $config = <<<CONFIG
 <?php
@@ -365,4 +368,4 @@ CONFIG;
 @unlink('../Config/Config.php');
 file_put_contents('../Config/Config.php', $config);
 
-echo "\033[42mSetup Finished.\033[0m" . PHP_EOL;
+echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
