@@ -219,6 +219,8 @@ while (!$connectionOK) {
 
 $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
+echo PHP_EOL;
+
 echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
 
 echo writeText('[INFO]', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
@@ -241,7 +243,7 @@ $buckets = [
 
 echo writeText('[INFO]', '46').'Starting Creation Process...'.PHP_EOL;
 
-echo progressBar(0, 6);
+echo progressBar(0, 7);
 
 $progress = 1;
 
@@ -249,19 +251,19 @@ foreach ($buckets as $bucketName => $bucketMemory) {
     if ($bucketName != 'notcreatable') {
         echo writeText('[INFO]', '46')."Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB.".PHP_EOL;
 
-        echo progressBar($progress++, 6);
+        echo progressBar($progress++, 7);
     }
 
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
-echo progressBar(6, 6);
+echo progressBar(7, 7);
 
 $readyToFill = false;
 
 echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 
-echo progressBar(0, 100);
+echo progressBar(0, 100, 'Configuring Buckets');
 
 $progress = 0;
 
