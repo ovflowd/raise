@@ -253,7 +253,7 @@ foreach ($buckets as $bucketName => $bucketMemory) {
 
 $readyToFill = false;
 
-echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
+echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL.PHP_EOL;
 
 echo progressBar(0, 100);
 
@@ -263,8 +263,10 @@ while (!$readyToFill) {
     $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials), function ($bucket) {
         return $bucket->nodes[0]->status != 'healthy';
     });
+    
+    sleep(2);
 
-    echo progressBar($progress += 5, 100);
+    echo progressBar($progress += 2, 100);
 
     if (count($data) == 0) {
         $readyToFill = true;
