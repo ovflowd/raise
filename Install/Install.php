@@ -265,25 +265,17 @@ echo PHP_EOL;
 
 echo writeText('[INFO]', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 
-echo progressBar(0, 300, 'Configuring Buckets');
-
 $progress = 0;
 
 while (!$readyToFill) {
     $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials), function ($bucket) {
         return $bucket->nodes[0]->status != 'healthy';
     });
-    
-    sleep(2);
-
-    echo progressBar($progress++, 300, 'Configuring Buckets...');
 
     if (count($data) == 0) {
         $readyToFill = true;
     }
 }
-
-echo progressBar(300, 300, 'Buckets Configured');
 
 echo writeText('[INFO]', '46').'Starting to Fill Buckets...'.PHP_EOL;
 
