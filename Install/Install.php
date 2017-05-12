@@ -1,16 +1,42 @@
 <?php
 
+/**
+ * UIoT Service Layer.
+ *
+ *                          88
+ *                          ""              ,d
+ *                                          88
+ *              88       88 88  ,adPPYba, MM88MMM
+ *              88       88 88 a8"     "8a  88
+ *              88       88 88 8b       d8  88
+ *              "8a,   ,a88 88 "8a,   ,a8"  88,
+ *               `"YbbdP'Y8 88  `"YbbdP"'   "Y888
+ *
+ * @author Universal Internet of Things
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @copyright University of Brasília
+ * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html
+ */
+
+// Set Time Limit to 0
 set_time_limit(0);
 
-function createBucket($details, $credentials)
+/**
+ * Create a Bucket on Couchbase
+ *
+ * @param array $details
+ * @param array $credentials
+ * @return mixed
+ */
+function createBucket(array $details, array $credentials)
 {
     $bucket = [
-        'authType'      => 'sasl',
-        'bucketType'    => 'membase',
-        'flushEnabled'  => 0,
-        'name'          => $details['name'],
-        'ramQuotaMB'    => $details['memory'],
-        'replicaIndex'  => 0,
+        'authType' => 'sasl',
+        'bucketType' => 'membase',
+        'flushEnabled' => 0,
+        'name' => $details['name'],
+        'ramQuotaMB' => $details['memory'],
+        'replicaIndex' => 0,
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
@@ -18,24 +44,38 @@ function createBucket($details, $credentials)
     return communicateCouchbase('pools/default/buckets', $credentials, $bucket);
 }
 
-function insertMetadata($details, $connection)
+/**
+ * Insert a Metadata Object on Metadata Table
+ *
+ * @param object $details
+ * @param CouchbaseCluster $connection
+ */
+function insertMetadata(object $details, CouchbaseCluster $connection)
 {
     $metadataBucket = $connection->openBucket('metadata');
 
     $metadataName = uniqid('', true);
 
-    $result = $metadataBucket->insert($metadataName, [
-        'codHttp'  => $details->codHttp,
+    $metadataBucket->insert($metadataName, [
+        'codHttp' => $details->codHttp,
         'codCouch' => $details->codCouch,
-        'message'  => $details->message,
+        'message' => $details->message,
     ]);
 }
 
-function communicateCouchbase($url, $credentials, $post = null)
+/**
+ * Communicate with the Couchbase CLI
+ *
+ * @param string $url
+ * @param array $credentials
+ * @param mixed $post
+ * @return array|object
+ */
+function communicateCouchbase(string $url, array $credentials, $post = null)
 {
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_USERPWD, "{$credentials['user']}:{$credentials['senha']}");
+    curl_setopt($ch, CURLOPT_USERPWD, "{$credentials['user']}:{$credentials['pass']}");
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($ch, CURLOPT_URL, "http://{$credentials['ip']}:8091/{$url}");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -54,65 +94,100 @@ function communicateCouchbase($url, $credentials, $post = null)
     return json_decode($server_output);
 }
 
-function write($isOk = true)
+
+/**
+ * Write Colored Text
+ *
+ * @param string $text
+ * @param string $color
+ * @param bool $endOfLine
+ * @return string
+ */
+function writeText(string $text, string $color = '0', bool $endOfLine = false)
 {
-    return ($isOk == true) ? "\033[42m[OK]\033[0m " : "\033[41m[ERROR]\033[0m ";
+    return "\033[{$color}m{$text}\033[0m " . ($endOfLine ? PHP_EOL : '');
 }
 
+/**
+ * Check if CouchbaseLibrary is installed
+ *
+ * @return bool
+ */
 function checkLibrary()
 {
     return class_exists('CouchbaseCluster');
 }
 
+/**
+ * Check if php is higher or equal than version 7.0
+ *
+ * @return bool
+ */
 function checkVersion()
 {
     return PHP_MAJOR_VERSION >= 7;
 }
 
+/**
+ * Set User Credentials for Couchbase
+ *
+ * @return array
+ */
 function setCredentials()
 {
-    echo 'Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.'.PHP_EOL;
+    echo 'Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.' . PHP_EOL;
 
     echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
     $ip = str_replace("\n", '', fgets(STDIN));
 
-    echo PHP_EOL;
-
     echo 'Please input Couchbase Username (eg.: user): ';
 
     $user = str_replace("\n", '', fgets(STDIN));
 
-    echo PHP_EOL;
-
     echo 'Please input Couchbase Password (eg.: pass): ';
 
-    $senha = str_replace("\n", '', fgets(STDIN));
+    $password = str_replace("\n", '', fgets(STDIN));
 
-    echo PHP_EOL;
-
-    return ['ip' => $ip, 'user' => $user, 'senha' => $senha];
+    return ['ip' => $ip, 'user' => $user, 'pass' => $password];
 }
 
-echo PHP_EOL.PHP_EOL;
+/**
+ * CLI Progress Bar
+ *
+ * @param int $done
+ * @param int $total
+ * @param string $info
+ * @param int $width
+ * @return string
+ */
+function progressBar($done, $total, $info = "", $width = 50)
+{
+    $percent = round(($done * 100) / $total);
+    $bar = round(($width * $percent) / 100);
 
-echo "\033[0;31mWelcome to the RAISe Installer.\033[0m".PHP_EOL
-    ."\033[43mThis Installer will do many checks before continue, be patient.\033[0m".PHP_EOL;
+    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat("=", $bar), str_repeat(" ", $width - $bar), $info);
+}
+
+echo PHP_EOL . PHP_EOL;
+
+echo writeText('Welcome to the RAISe Installer.', '0;31', true);
+echo writeText('This Installer will do many checks before continue, be patient.', '43', true);
 
 echo PHP_EOL;
 
 if (checkVersion()) {
-    echo write().'php version passed.'.PHP_EOL;
+    echo writeText('OK', '42') . 'php version passed.' . PHP_EOL;
 } else {
-    echo write(0).'Your PHP version isn\'t correct. You need use php 7 or higher. Actually using: '.phpversion().PHP_EOL;
+    echo writeText('ERROR', '41') . "Your PHP version isn't correct. You need use php 7 or higher. Actually using: " . phpversion() . PHP_EOL;
 
     exit(1);
 }
 
 if (checkLibrary()) {
-    echo write().'Library Checks Passed...'.PHP_EOL;
+    echo writeText('OK', '42') . 'Library Checks Passed...' . PHP_EOL;
 } else {
-    echo write(0).'Couchbase Library for PHP isn\'t installed correctly.'.PHP_EOL;
+    echo writeText('ERROR', '41') . "Couchbase Library for PHP isn't installed correctly." . PHP_EOL;
 
     exit(1);
 }
@@ -123,15 +198,13 @@ $credentials = null;
 
 while (!$connectionOK) {
     try {
-        $temporaryCredentials = setCredentials();
+        $credentials = setCredentials();
 
-        $temporaryConnection = (new CouchbaseCluster("{$temporaryCredentials['ip']},{$temporaryCredentials['user']},{$temporaryCredentials['senha']}"));
+        $temporaryConnection = (new CouchbaseCluster("{$credentials['ip']},{$credentials['user']},{$credentials['pass']}"));
     } catch (CouchbaseException $e) {
-        echo write(0).'Your credentials aren\'t correct. Try again please.'.PHP_EOL;
+        echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
     } finally {
-        echo write().'Connected Successfully to Couchbase Server.'.PHP_EOL;
-
-        $credentials = $temporaryCredentials;
+        echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
 
         $connectionOK = true;
     }
@@ -139,121 +212,141 @@ while (!$connectionOK) {
 
 $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
-echo 'Now the Buckets will be created. Please wait...'.PHP_EOL;
+echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
 
-echo '[WAIT] Getting Information from the Cluster via API....'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Getting Information from the Cluster via API....' . PHP_EOL;
 
 $serverInfo = communicateCouchbase('pools/default', $credentials);
 
 $memoryQuota = $serverInfo->memoryQuota;
 
-echo '[INFO] Your Cluster RAM is: '.$memoryQuota.'MB.'.PHP_EOL;
+echo writeText('[INFO]', '46') . "Your Cluster RAM size is: {$memoryQuota}MB." . PHP_EOL;
 
 $buckets = [
-    'notcreatable'     => 0,
-    'metadata'         => floor((($memoryQuota / 100) * 4)),
-    'client'           => floor((($memoryQuota / 100) * 12)),
-    'service'          => floor((($memoryQuota / 100) * 12)),
-    'token'            => floor((($memoryQuota / 100) * 12)),
-    'data'             => floor((($memoryQuota / 100) * 20)),
-    'response'         => floor((($memoryQuota / 100) * 20)),
+    'notcreatable' => 0,
+    'metadata' => floor((($memoryQuota / 100) * 4)),
+    'client' => floor((($memoryQuota / 100) * 12)),
+    'service' => floor((($memoryQuota / 100) * 12)),
+    'token' => floor((($memoryQuota / 100) * 12)),
+    'data' => floor((($memoryQuota / 100) * 20)),
+    'response' => floor((($memoryQuota / 100) * 20)),
 ];
 
-echo '[INFO] Starting Creation Proccess...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Starting Creation Process...' . PHP_EOL;
+
+echo progressBar(0, 100);
+
+$progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
-    echo '[INFO] Creating Bucket: '.$bucketName.' with '.$bucketMemory.' of memory in MB.'.PHP_EOL;
+    if ($bucketName != 'notcreatable') {
+        echo writeText('[INFO]', '46') . "Creating Bucket: {$bucketName} with {$bucketMemory} of RAM memory in MB." . PHP_EOL;
+
+        echo progressBar($progress++, 6);
+    }
 
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
 $readyToFill = false;
 
-echo '[INFO] Waiting Buckets to be Ready'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Waiting Buckets to be Ready....' . PHP_EOL;
+
+echo progressBar(0, 100);
+
+$progress = 0;
 
 while (!$readyToFill) {
-    $data = communicateCouchbase('pools/default/buckets', $credentials);
-
-    $data = array_filter($data, function ($bucket) {
+    $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials), function ($bucket) {
         return $bucket->nodes[0]->status != 'healthy';
     });
+
+    echo progressBar($progress += 5, 100);
 
     if (count($data) == 0) {
         $readyToFill = true;
     }
 }
 
-echo 'Starting to Fill Buckets...'.PHP_EOL;
+echo progressBar(100, 100);
 
-echo 'Filling Metadata Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Starting to Fill Buckets...' . PHP_EOL;
+
+echo writeText('[INFO]', '46') . 'Filling Metadata Bucket...' . PHP_EOL;
 
 try {
     $clientBucket = $connection->openBucket('metadata');
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Metada Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Metadata Bucket!' . PHP_EOL;
 }
 
-echo 'Filling Client Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Filling Client Bucket...' . PHP_EOL;
 
 try {
     $clientBucket = $connection->openBucket('client');
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
 }
 
-echo 'Filling Service Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Filling Service Bucket...' . PHP_EOL;
 
 try {
     $serviceBucket = $connection->openBucket('service');
 
     $serviceBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Service Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
 }
 
-echo 'Filling Token Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Filling Token Bucket...' . PHP_EOL;
 
 try {
     $tokenBucket = $connection->openBucket('token');
 
     $tokenBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Token Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
 }
 
-echo 'Filling Data Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Filling Data Bucket...' . PHP_EOL;
 
 try {
     $dataBucket = $connection->openBucket('data');
 
     $dataBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Data Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
 }
 
-echo 'Filling Response Bucket...'.PHP_EOL;
+echo writeText('[INFO]', '46') . 'Filling Response Bucket...' . PHP_EOL;
 
 try {
     $responseBucket = $connection->openBucket('response');
 
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
-echo '[INFO] Filling Metadatas...'.PHP_EOL;
+echo writeText('[INFO]', '46') . '[INFO] Filling Metadata Bucket with Codes.' . PHP_EOL;
 
 $metadataJson = json_decode(file_get_contents('metadata.json'));
 
+$progress = 1;
+
+echo progressBar(0, 59);
+
 foreach ($metadataJson as $metadata) {
     insertMetadata($metadata, $connection);
+
+    echo progressBar($progress++, 59);
 }
 
-echo 'Creating Configurationg File...'.PHP_EOL;
+echo 'Creating Configuration File...' . PHP_EOL;
 
 $config = <<<CONFIG
 <?php
@@ -261,10 +354,10 @@ $config = <<<CONFIG
 // RAISe Couchbase Configuration
 
 const DB_TYPE = 'COUCHBASE';
-const DB_ADDRESS = '{$credentials['ip']},{$credentials['user']},{$credentials['senha']}';
+const DB_ADDRESS = '{$credentials['ip']},{$credentials['user']},{$credentials['pass']}';
 const DB_IP = '{$credentials['ip']}';
 const DB_USER = '{$credentials['user']}';
-const DB_PASSWORD = '{$credentials['senha']}';
+const DB_PASSWORD = '{$credentials['pass']}';
 
 ?>
 CONFIG;
@@ -272,4 +365,4 @@ CONFIG;
 @unlink('../Config/Config.php');
 file_put_contents('../Config/Config.php', $config);
 
-echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
+echo "\033[42mSetup Finished.\033[0m" . PHP_EOL;
