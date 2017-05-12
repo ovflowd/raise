@@ -134,12 +134,12 @@ $memoryQuota = $serverInfo->memoryQuota;
 
 echo '[INFO] Your Cluster RAM is: ' . $memoryQuota . 'MB.' . PHP_EOL; 
 
-$buckets = ['metadata' => floor((($memoryQuota / 100) * 2.5), 
-	'client' => floor((($memoryQuota / 100) * 17.5), 
-	'service' => floor((($memoryQuota / 100) * 17.5), 
-	'token' => floor((($memoryQuota / 100) * 12.5), 
-	'data' => floor((($memoryQuota / 100) * 25), 
-	'response' => floor((($memoryQuota / 100) * 25)];
+$buckets = ['metadata' => floor((($memoryQuota / 100) * 2.5)), 
+	'client' => floor((($memoryQuota / 100) * 17.5)), 
+	'service' => floor((($memoryQuota / 100) * 17.5)), 
+	'token' => floor((($memoryQuota / 100) * 12.5)), 
+	'data' => floor((($memoryQuota / 100) * 25)), 
+	'response' => floor((($memoryQuota / 100) * 25))];
 
 echo '[INFO] Starting Creation Proccess...' . PHP_EOL;
 
