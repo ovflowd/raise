@@ -36,10 +36,13 @@ rpm -i couchbase-server-enterprise-4.6.1-centos7.x86_64.rpm
 </pre>
 
 ### Configuring Couchbase
+
+Obs.: Recommended Minimal Cluster Ramsize in Megabytes: 4064
+
 1. Execute the following commands:
 <pre>
 cd /opt/couchbase/bin/
-./couchbase-cli cluster-init -c COUCHBASE-ADDRESS:8091 -u DESIRED USER -p DESIRED PASS --cluster-name='raise' --cluster-ramsize=CLUSTER SIZE IN MB (RAM MEMORY)
+./couchbase-cli cluster-init -c COUCHBASE-ADDRESS:8091 -u DESIRED USER -p DESIRED PASS --cluster-name='raise' --services=data,index,query --cluster-ramsize=CLUSTER SIZE IN MB (RAM MEMORY) --cluster-index-ramsize=512
 </pre>
 2. Check it running by `http://SERVER-ADDRESS:8091`
 
