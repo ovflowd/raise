@@ -137,7 +137,7 @@ function checkVersion()
  */
 function setCredentials()
 {
-    echo 'Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.'.PHP_EOL;
+    echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.', '0;32', true);
 
     echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
@@ -209,6 +209,8 @@ while (!$connectionOK) {
     } catch (CouchbaseException $e) {
         echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
     } finally {
+        echo PHP_EOL;
+        
         echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
 
         $connectionOK = true;
