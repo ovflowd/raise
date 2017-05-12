@@ -72,6 +72,7 @@ class RequestTreater
     {
         $request = $this->create();
         $this->validate($request);
+
         if (!$request->isValid()) {
             return (new MessageOutPut())->messageHttp($request->getReponseCode());
         }

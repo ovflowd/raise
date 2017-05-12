@@ -44,7 +44,7 @@ class MessageOutPut
         try { //create a conction with database
             $query = \CouchbaseN1qlQuery::fromString('SELECT * FROM `metadata` WHERE codHttp=$p');
             $query->namedParams([
-                'p' => (string) $code,
+                'p' => (string) $code
             ]);
             $result = $myBucket->query($query); //save a result of search
 

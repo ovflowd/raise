@@ -1,5 +1,7 @@
 <?php
 
+set_time_limit(0);
+
 function createBucket($details, $credentials)
 {
     $bucket = [
@@ -52,6 +54,10 @@ function communicateCouchbase($url, $credentials, $post = null)
     return json_decode($server_output);
 }
 
+function write($isOk = true) {
+    return ($isOk == true) ? "\033[42m[OK]\033[0m " : "\033[41m[ERROR]\033[0m ";
+}
+
 function checkLibrary()
 {
     return class_exists('CouchbaseCluster');
@@ -68,40 +74,44 @@ function setCredentials()
 
     echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
-    $ip = fgets(STDIN);
+    $ip = str_replace("\n", '', fgets(STDIN));
 
     echo PHP_EOL;
 
     echo 'Please input Couchbase Username (eg.: user): ';
 
-    $user = fgets(STDIN);
+    $user = str_replace("\n", '', fgets(STDIN));
 
     echo PHP_EOL;
 
     echo 'Please input Couchbase Password (eg.: pass): ';
 
-    $senha = fgets(STDIN);
+    $senha = str_replace("\n", '', fgets(STDIN));
 
     echo PHP_EOL;
 
     return ['ip' => $ip, 'user' => $user, 'senha' => $senha];
 }
 
-echo 'Welcome to the RAISe Installer.'.PHP_EOL
-    .'<<This Installer will do many checks before continue, be patient.>>'.PHP_EOL;
+echo PHP_EOL . PHP_EOL;
+
+echo "\033[0;31mWelcome to the RAISe Installer.\033[0m".PHP_EOL
+    ."\033[43mThis Installer will do many checks before continue, be patient.\033[0m".PHP_EOL;
+
+echo PHP_EOL;
 
 if (checkVersion()) {
-    echo '[OK] php version passed.'.PHP_EOL;
+    echo write() . 'php version passed.'.PHP_EOL;
 } else {
-    echo '[ERROR] Your PHP version isn\'t correct. You need use php 7 or higher. Actually using: '.phpversion().PHP_EOL;
+    echo write(0) . 'Your PHP version isn\'t correct. You need use php 7 or higher. Actually using: '.phpversion().PHP_EOL;
 
     exit(1);
 }
 
 if (checkLibrary()) {
-    echo '[OK] Library Checks Passed...'.PHP_EOL;
+    echo write() . 'Library Checks Passed...'.PHP_EOL;
 } else {
-    echo '[ERROR] Couchbase Library for PHP isn\'t installed correctly.'.PHP_EOL;
+    echo write(0) . 'Couchbase Library for PHP isn\'t installed correctly.'.PHP_EOL;
 
     exit(1);
 }
@@ -116,9 +126,9 @@ while (!$connectionOK) {
 
         $temporaryConnection = (new CouchbaseCluster("{$temporaryCredentials['ip']},{$temporaryCredentials['user']},{$temporaryCredentials['senha']}"));
     } catch (CouchbaseException $e) {
-        echo '[ERROR] Your credentials aren\'t correct. Try again please.'.PHP_EOL;
+        echo write(0) . 'Your credentials aren\'t correct. Try again please.'.PHP_EOL;
     } finally {
-        echo '[OK] Connected Successfully to Couchbase Server.'.PHP_EOL;
+        echo write() . 'Connected Successfully to Couchbase Server.'.PHP_EOL;
 
         $credentials = $temporaryCredentials;
 
@@ -126,9 +136,7 @@ while (!$connectionOK) {
     }
 }
 
-$connection = (new CouchbaseCluster("{$credentials['ip']},{$credentials['user']},{$credentials['senha']}"));
-
-$manager = $connection->manager($credentials['user'], $credentials['senha']);
+$connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
 echo 'Now the Buckets will be created. Please wait...'.PHP_EOL;
 
@@ -140,12 +148,15 @@ $memoryQuota = $serverInfo->memoryQuota;
 
 echo '[INFO] Your Cluster RAM is: '.$memoryQuota.'MB.'.PHP_EOL;
 
-$buckets = ['metadata' => floor((($memoryQuota / 100) * 2.5)),
-    'client'           => floor((($memoryQuota / 100) * 17.5)),
-    'service'          => floor((($memoryQuota / 100) * 17.5)),
-    'token'            => floor((($memoryQuota / 100) * 12.5)),
-    'data'             => floor((($memoryQuota / 100) * 25)),
-    'response'         => floor((($memoryQuota / 100) * 25)), ];
+$buckets = [
+    'notcreatable'     => 0,
+    'metadata'         => floor((($memoryQuota / 100) * 4)),
+    'client'           => floor((($memoryQuota / 100) * 12)),
+    'service'          => floor((($memoryQuota / 100) * 12)),
+    'token'            => floor((($memoryQuota / 100) * 12)),
+    'data'             => floor((($memoryQuota / 100) * 20)),
+    'response'         => floor((($memoryQuota / 100) * 20))
+];
 
 echo '[INFO] Starting Creation Proccess...'.PHP_EOL;
 
@@ -155,7 +166,34 @@ foreach ($buckets as $bucketName => $bucketMemory) {
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
+$readyToFill = false;
+
+echo '[INFO] Waiting Buckets to be Ready'.PHP_EOL;
+
+while(!$readyToFill) {
+    $data = communicateCouchbase('pools/default/buckets', $credentials);
+
+    $data = array_filter($data, function($bucket) {
+	return $bucket->nodes[0]->status != 'healthy';
+    });
+
+    if(count($data) == 0) {
+	$readyToFill = true;
+    }
+}
+
 echo 'Starting to Fill Buckets...'.PHP_EOL;
+
+echo 'Filling Metadata Bucket...'.PHP_EOL;
+
+try {
+    $clientBucket = $connection->openBucket('metadata');
+
+    $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
+} catch (CouchbaseException $e) {
+
+    echo '[WARN] Failed to Fill Metada Bucket!'.PHP_EOL;
+}
 
 echo 'Filling Client Bucket...'.PHP_EOL;
 
@@ -164,6 +202,7 @@ try {
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
+
     echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
 }
 
@@ -227,9 +266,11 @@ const DB_ADDRESS = '{$credentials['ip']},{$credentials['user']},{$credentials['s
 const DB_IP = '{$credentials['ip']}';
 const DB_USER = '{$credentials['user']}';
 const DB_PASSWORD = '{$credentials['senha']}';
+
+?>
 CONFIG;
 
-unlink('../Config/Config.php');
+@unlink('../Config/Config.php');
 file_put_contents('../Config/Config.php', $config);
 
-echo 'Setup Finished.'.PHP_EOL;
+echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
