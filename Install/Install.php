@@ -335,6 +335,8 @@ echo progressBar(6, 6, "Filling Response Bucket...                  ");
 
 echo progressBar(6, 6, "Buckets Filled.                            ");
 
+echo PHP_EOL;
+
 try {
     $responseBucket = $connection->openBucket('response');
 
@@ -343,7 +345,7 @@ try {
     echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
 }
 
-echo writeText('[INFO]', '46').'[INFO] Filling Metadata Bucket with Codes.'.PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Metadata Bucket with Codes.'.PHP_EOL;
 
 $metadataJson = json_decode(file_get_contents('metadata.json'));
 
