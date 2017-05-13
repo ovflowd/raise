@@ -5,9 +5,9 @@
 
 <b>Builds</b>
 
-Windows | Linux        | Artifacts |
---------|--------------|-----------|
-Build   | Build        | Artifcats |
+Version | Windows | Linux | Artifacts |
+--------|---------|-------|-----------|
+v0.4.0  | Build   | Build | Artifacts |
 
 UIoT RAISe
 ----------
