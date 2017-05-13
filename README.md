@@ -9,7 +9,7 @@
 
 Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
-v0.4.0  | Build   | Build | Artifacts |
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/pfa62986wf69cawp?svg=true)](https://ci.appveyor.com/project/sant0ro/raise)   | Build | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise/branch/sbr/artifacts) |
 
 UIoT RAISe
 ----------
