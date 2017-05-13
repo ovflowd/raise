@@ -3,10 +3,8 @@
 namespace App\Handlers;
 
 /**
- * Class CouchbaseHandler
- * @package App\Handlers
+ * Class CouchbaseHandler.
  */
 class CouchbaseHandler
 {
-
 }

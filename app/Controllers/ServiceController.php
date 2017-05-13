@@ -3,10 +3,8 @@
 namespace App\Controllers;
 
 /**
- * Class ServiceController
- * @package App\Controllers
+ * Class ServiceController.
  */
 class ServiceController
 {
-
 }

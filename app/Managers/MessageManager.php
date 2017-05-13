@@ -3,10 +3,8 @@
 namespace App\Managers;
 
 /**
- * Class MessageManager
- * @package App\Managers
+ * Class MessageManager.
  */
 class MessageManager
 {
-
 }

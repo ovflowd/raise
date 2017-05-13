@@ -3,10 +3,8 @@
 namespace App\Managers;
 
 /**
- * Class LogManager
- * @package App\Managers
+ * Class LogManager.
  */
 class LogManager
 {
-
 }

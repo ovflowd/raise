@@ -3,10 +3,8 @@
 namespace App\Facades;
 
 /**
- * Class SecurityFacade
- * @package App\Facades
+ * Class SecurityFacade.
  */
 class SecurityFacade
 {
-
 }

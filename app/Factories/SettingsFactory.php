@@ -3,10 +3,8 @@
 namespace App\Factories;
 
 /**
- * Class SettingsFactory
- * @package App\Factories
+ * Class SettingsFactory.
  */
 class SettingsFactory
 {
-
 }

@@ -13,7 +13,7 @@
  *  /  | /  ||__|               |  |
  * |   `'.  |      UIoT RAISe   |  '.'
  * '   .'|  '/        alpha     |   /
- *  `-'  `--'                   `'-'
+ *  `-'  `--'                   `'-'.
  *
  * @author Universal Internet of Things
  * @license Apache 2 <https://opensource.org/licenses/Apache-2.0>

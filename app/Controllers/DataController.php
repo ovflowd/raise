@@ -3,10 +3,8 @@
 namespace App\Controllers;
 
 /**
- * Class DataController
- * @package App\Controllers
+ * Class DataController.
  */
 class DataController
 {
-
 }

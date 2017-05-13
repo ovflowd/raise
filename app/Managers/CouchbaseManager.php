@@ -3,10 +3,8 @@
 namespace App\Managers;
 
 /**
- * Class CouchbaseManager
- * @package App\Managers
+ * Class CouchbaseManager.
  */
 class CouchbaseManager
 {
-
 }

@@ -3,10 +3,8 @@
 namespace App\Facades;
 
 /**
- * Class RequestFacade
- * @package App\Facades
+ * Class RequestFacade.
  */
 class RequestFacade
 {
-
 }
