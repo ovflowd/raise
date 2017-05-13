@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4012de68-a297-441e-99ef-c9eabcc7b8da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/swagger/index.html-e" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui-bundle.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui-bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui-standalone-preset.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui-standalone-preset.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install/swagger-ui.sh" afterPath="$PROJECT_DIR$/install/swagger-ui.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/install/swagger-ui.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -33,14 +35,9 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/swagger/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="79" column="31" lean-forward="false" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-              <folding>
-                <marker date="1494700799000" expanded="true" signature="3139:3510" ph="{...}" />
-                <marker date="1494700799000" expanded="true" signature="3190:3489" ph="{&quot;url&quot;: &quot;http://petstore.swagger.io/v2/swagger.json&quot;...}" />
-                <marker date="1494700799000" expanded="true" signature="3314:3389" ph="[...]" />
-                <marker date="1494700799000" expanded="true" signature="3404:3453" ph="[...]" />
-              </folding>
+            <state relative-caret-position="428">
+              <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,6 +50,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>\/</find>
+      <find>petst</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -103,6 +101,7 @@
         <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/Models/Messaging/MetadataModel.php" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/docs/swagger/index.html" />
         <option value="$PROJECT_DIR$/install/swagger-ui.sh" />
       </list>
     </option>
@@ -382,12 +381,12 @@
       <option name="presentableId" value="Default" />
       <updated>1494692991354</updated>
       <workItem from="1494692995413" duration="4019000" />
-      <workItem from="1494699893788" duration="898000" />
+      <workItem from="1494699893788" duration="1192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4917000" />
+    <option name="totallyTimeSpent" value="5211000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -400,7 +399,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36634716" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -409,7 +407,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33028457" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33028457" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -722,23 +720,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/docs/swagger/oauth2-redirect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/swagger/swagger-ui-bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="0" column="2208" lean-forward="false" selection-start-line="0" selection-start-column="2208" selection-end-line="0" selection-end-column="2208" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/docs/swagger/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="79" column="31" lean-forward="false" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-          <folding>
-            <marker date="1494700799000" expanded="true" signature="3139:3510" ph="{...}" />
-            <marker date="1494700799000" expanded="true" signature="3190:3489" ph="{&quot;url&quot;: &quot;http://petstore.swagger.io/v2/swagger.json&quot;...}" />
-            <marker date="1494700799000" expanded="true" signature="3314:3389" ph="[...]" />
-            <marker date="1494700799000" expanded="true" signature="3404:3453" ph="[...]" />
-          </folding>
+        <state relative-caret-position="428">
+          <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/swagger/swagger-ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="0" column="13934" lean-forward="false" selection-start-line="0" selection-start-column="13934" selection-end-line="0" selection-end-column="13934" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/install/swagger-ui.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
       </provider>
