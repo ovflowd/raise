@@ -12,8 +12,6 @@ RAISe is an <b>Internet of Things</b> open web service open middleware. Made to 
 
 You can read more about the architecture and about <b>RAISe</b> by accessing our [wiki](wiki).
 
-----------------------------------------------------
-
 Installing
 ----------
 
