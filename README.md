@@ -3,6 +3,12 @@
 
 [![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/)
 
+<b>Builds</b>
+
+Windows | Linux        | Artifacts |
+--------|--------------|-----------|
+Build   | Build        | Artifcats |
+
 UIoT RAISe
 ----------
 
@@ -15,8 +21,21 @@ You can read more about the architecture and about <b>RAISe</b> by accessing our
 Installing
 ----------
 
-+ Go to this URL: (https://github.com/sant0ro/RAISe/tree/development/Install)
-+ Follow steps explained on `README.md`
+You can install <b>RAISe</b> by easily going on our [Wiki](wiki) and check the Installation Pages.
+
+Any troubles that you may/have, check our [Contributing/Reporting Guide](sbr/CONTRIBUTING.md).
+
+Contributing
+------------
+
+You can <b>Contribute</b> on RAISe! <b>RAISe</b> is open source, and everyone can contribute on it.
+
+Check the [Contributing Guide](sbr/CONTRIBUTING.md).
+
+Documentation
+-------------
+
+
 
 <br>
 <br>
