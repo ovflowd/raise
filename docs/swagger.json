@@ -1,9 +1,28 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.3.0",
-        "title": "UIOT RAISE API"
+        "version": "0.4.0",
+        "title": "UIoT RAISe API",
+        "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <<More Description Later>>",
+        "contact": {
+          "email": "contact@uiot.org"
+        },
+        "license": {
+          "name": "Apache 2",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
     },
+    "basePath": "/",
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "token",
+        "in": "query"
+      }
+    },
+    "schemes": [
+      "https"
+    ],
     "parameters": {
         "auth-token": {
             "name": "token",
