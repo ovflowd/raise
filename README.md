@@ -1,7 +1,9 @@
 <h4><img src="http://i.imgur.com/Ftmda0f.png"/> RAISe</h4>
 <br>
 
-[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/)
+[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![GitHub release](https://img.shields.io/github/release/sant0ro/raise.svg)]() [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/) 
+
+<hr>
 
 <b>Builds</b>
 
