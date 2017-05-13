@@ -3,6 +3,22 @@ php:
   - 7.0
   - 7.1
 before_install:
+  # LibCouchbase
+  - sudo wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-2-amd64.deb
+  - sudo dpkg -i couchbase-release-1.0-2-amd64.deb
+  - sudo apt-get update
+  - sudo apt-get install libcouchbase-dev build-essential zlib1g-dev
+  - sudo pecl install pcs-1.3.3
+  - sudo pecl install couchbase
+  # Couchbase Server
+  - sudo apt-get install libssl-dev
+  - sudo wget "https://packages.couchbase.com/releases/4.6.1/couchbase-server-enterprise_4.6.1-ubuntu14.04_amd64.deb"
+  - sudo dpkg -i couchbase-server-enterprise_4.6.1-ubuntu14.04_amd64.deb
+  - sudo service couchbase-server start
+  # Configure Couchbase
+  # cd /opt/couchbase/bin/
+  # ./couchbase-cli cluster-init -c 127.0.0.1:8091 -u couch -p couchbase --cluster-name='raise' --services=data,index,query --cluster-ramsize=256 --cluster-index-ramsize=50
+  # Composer
   - composer self-update
   - composer install --no-interaction
   - php artisan migrate
