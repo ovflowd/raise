@@ -1,5 +1,5 @@
-Installing RAISe
-=================
+<h1><img src="http://i.imgur.com/Ftmda0f.png"/><sup><sup>RAISe Installation</sup></sup></h1>
+<br>
 
 Installing Couchbase
 ---------------------

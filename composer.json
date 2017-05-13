@@ -1,0 +1,23 @@
+{
+  "name": "UIoT/RAISe",
+  "description": "RAISe is an Internet of Things open aware middleware based on a passive restful services methodology",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Claudio Santoro",
+      "email": "claudio.santoro@redes.unb.br"
+    },
+    {
+      "name": "Sérgio Bittencourt",
+      "email": "sergio.augusto@redes.unb.br"
+    },
+    {
+      "name": "Lucas Martins Alves",
+      "email": "lucas.martins@uiot.org"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^6.1"
+  }
+}

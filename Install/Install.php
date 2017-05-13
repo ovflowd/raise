@@ -380,6 +380,7 @@ const DB_PASSWORD = '{$credentials['pass']}';
 CONFIG;
 
 @unlink('../Config/Config.php');
+
 file_put_contents('../Config/Config.php', $config);
 
 echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
