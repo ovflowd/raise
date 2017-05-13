@@ -210,7 +210,7 @@ while (!$connectionOK) {
         echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
     } finally {
         echo PHP_EOL;
-        
+
         echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
 
         $connectionOK = true;
@@ -251,13 +251,13 @@ foreach ($buckets as $bucketName => $bucketMemory) {
     if ($bucketName != 'notcreatable') {
         echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.              ");
     }
-    
+
     sleep(2);
 
     createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
 }
 
-echo progressBar(7, 7, "Buckets Created Successfully.");
+echo progressBar(7, 7, 'Buckets Created Successfully.');
 
 $readyToFill = false;
 
@@ -281,7 +281,7 @@ echo writeText('INFO', '46').'Starting to Fill Buckets...'.PHP_EOL;
 
 echo progressBar(0, 6);
 
-echo progressBar(1, 6, "Filling Metadata Bucket...                  ");
+echo progressBar(1, 6, 'Filling Metadata Bucket...                  ');
 
 try {
     $clientBucket = $connection->openBucket('metadata');
@@ -291,7 +291,7 @@ try {
     echo '[WARN] Failed to Fill Metadata Bucket!'.PHP_EOL;
 }
 
-echo progressBar(2, 6, "Filling Client Bucket...                  ");
+echo progressBar(2, 6, 'Filling Client Bucket...                  ');
 
 try {
     $clientBucket = $connection->openBucket('client');
@@ -301,7 +301,7 @@ try {
     echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
 }
 
-echo progressBar(3, 6, "Filling Service Bucket...                  ");
+echo progressBar(3, 6, 'Filling Service Bucket...                  ');
 
 try {
     $serviceBucket = $connection->openBucket('service');
@@ -311,7 +311,7 @@ try {
     echo '[WARN] Failed to Fill Service Bucket!'.PHP_EOL;
 }
 
-echo progressBar(4, 6, "Filling Token Bucket...                  ");
+echo progressBar(4, 6, 'Filling Token Bucket...                  ');
 
 try {
     $tokenBucket = $connection->openBucket('token');
@@ -321,7 +321,7 @@ try {
     echo '[WARN] Failed to Fill Token Bucket!'.PHP_EOL;
 }
 
-echo progressBar(5, 6, "Filling Data Bucket...                  ");
+echo progressBar(5, 6, 'Filling Data Bucket...                  ');
 
 try {
     $dataBucket = $connection->openBucket('data');
@@ -331,9 +331,9 @@ try {
     echo '[WARN] Failed to Fill Data Bucket!'.PHP_EOL;
 }
 
-echo progressBar(6, 6, "Filling Response Bucket...                  ");
+echo progressBar(6, 6, 'Filling Response Bucket...                  ');
 
-echo progressBar(6, 6, "Buckets Filled.                            ");
+echo progressBar(6, 6, 'Buckets Filled.                            ');
 
 echo PHP_EOL;
 
