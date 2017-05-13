@@ -1,0 +1,886 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.3.0",
+        "title": "UIOT RAISE API"
+    },
+    "parameters": {
+        "auth-token": {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "description": "client token",
+            "type": "string"
+        }
+    },
+    "paths": {
+        "/client/": {
+            "get": {
+                "tags": [
+                    "client"
+                ],
+                "description": "Get registered clients",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth-token"
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the starting date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the ending date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "client name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "processor",
+                        "in": "query",
+                        "description": "client processor name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "channel",
+                        "in": "query",
+                        "description": "Channel label, as in WiFi, etc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "host",
+                        "in": "query",
+                        "description": "client host name (for example - ip, domain...)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "client tag",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "required": [
+                                "code",
+                                "clients"
+                            ],
+                            "title": "clients",
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 200
+                                },
+                                "clients": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Client"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/register/": {
+            "post": {
+                "tags": [
+                    "client"
+                ],
+                "description": "Register a client",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "required": true,
+                        "description": "client attributes",
+                        "schema": {
+                            "$ref": "#/definitions/ClientRegister"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponseClient"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbbiden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/Error422"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        },
+        "/service/": {
+            "get": {
+                "tags": [
+                    "service"
+                ],
+                "description": "Get registered services",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth-token"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limits the amount of records for request. Used to prevent memory issues.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Bool.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Service name",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "required": [
+                                "code",
+                                "services"
+                            ],
+                            "title": "Service",
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 200
+                                },
+                                "services": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Services"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        },
+        "/service/register/": {
+            "post": {
+                "tags": [
+                    "service"
+                ],
+                "description": "Register an array of services",
+                "parameters": [
+                    {
+                        "name": "services",
+                        "in": "body",
+                        "required": true,
+                        "description": "an array of services to be registered",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ServicesRegister"
+                            }
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "description": "indicates if service actuates on environment",
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponseRegister"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbbiden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/Error422"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        },
+        "/data/": {
+            "get": {
+                "tags": [
+                    "data"
+                ],
+                "description": "Get registered data",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth-token"
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the starting date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "In the case of a search between a time interval, this is the ending date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limits the amount of records for request",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Bool.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "data name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "host",
+                        "in": "query",
+                        "description": "data host",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "tag host",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "required": [
+                                "code",
+                                "services"
+                            ],
+                            "title": "Service",
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "example": 200
+                                },
+                                "services": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Data"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        },
+        "/data/register/": {
+            "post": {
+                "tags": [
+                    "data"
+                ],
+                "description": "Register some data",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "description": "an array of data to be registered",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRegister"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid or expired token",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbbiden",
+                        "schema": {
+                            "$ref": "#/definitions/Error403"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/Error422"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Error429"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ClientRegister": {
+            "required": [
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel",
+                "client_time"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Raspberry PI"
+                },
+                "chipset": {
+                    "type": "string",
+                    "example": "AMD 790FX"
+                },
+                "mac": {
+                    "type": "string",
+                    "example": "FF:FF:FF:FF:FF:FF"
+                },
+                "serial": {
+                    "type": "string",
+                    "example": "C210"
+                },
+                "processor": {
+                    "type": "string",
+                    "example": "Intel I3"
+                },
+                "channel": {
+                    "type": "string",
+                    "example": "Ethernet"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                }
+            }
+        },
+        "Client": {
+            "required": [
+                "name",
+                "chipset",
+                "mac",
+                "serial",
+                "processor",
+                "channel",
+                "client_time",
+                "server_time"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Raspberry PI"
+                },
+                "chipset": {
+                    "type": "string",
+                    "example": "AMD 790FX"
+                },
+                "mac": {
+                    "type": "string",
+                    "example": "FF:FF:FF:FF:FF:FF"
+                },
+                "serial": {
+                    "type": "string",
+                    "example": "C210"
+                },
+                "processor": {
+                    "type": "string",
+                    "example": "Intel I3"
+                },
+                "channel": {
+                    "type": "string",
+                    "example": "Ethernet"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
+                }
+            }
+        },
+        "DataRegister": {
+            "required": [
+                "token",
+                "service_id",
+                "values",
+                "client_time"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "AAFFAAFFAAFFAAFF"
+                },
+                "service_id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataValues"
+                    }
+                },
+                "tag": {
+                    "type": "string",
+                    "example": "Chip"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                }
+            }
+        },
+        "Data": {
+            "required": [
+                "service_id",
+                "values",
+                "client_time",
+                "server_time"
+            ],
+            "type": "object",
+            "properties": {
+                "service_id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataValues"
+                    }
+                },
+                "tag": {
+                    "type": "string",
+                    "example": "Chip"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
+                }
+            }
+        },
+        "DataValues": {
+            "type": "object",
+            "properties": {
+                "value1": {
+                    "type": "integer",
+                    "example": 35
+                },
+                "value2": {
+                    "type": "integer",
+                    "example": 12
+                }
+            }
+        },
+        "ServicesRegister": {
+            "type": "object",
+            "required": [
+                "token",
+                "name",
+                "parameters",
+                "return_type",
+                "client_time"
+            ],
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "AAFFAAFFAAFFAAFF"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Get temp"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }
+                },
+                "return_type": {
+                    "type": "string",
+                    "example": "float"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                }
+            }
+        },
+        "Services": {
+            "type": "object",
+            "required": [
+                "name",
+                "parameters",
+                "return_type",
+                "client_time",
+                "server_time"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Get temp"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }
+                },
+                "return_type": {
+                    "type": "string",
+                    "example": "float"
+                },
+                "client_time": {
+                    "type": "integer",
+                    "example": 1317427200
+                },
+                "server_time": {
+                    "type": "integer",
+                    "example": 1317987654
+                }
+            }
+        },
+        "Parameter": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Temp"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "float"
+                }
+            }
+        },
+        "Error400": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Invalid Parameters"
+                }
+            }
+        },
+        "Error401": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 401
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unauthorized"
+                }
+            }
+        },
+        "Error403": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 403
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Forbidden"
+                }
+            }
+        },
+        "Error422": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 422
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Unprocessable Entity"
+                }
+            }
+        },
+        "Error429": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 429
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Too many requests"
+                }
+            }
+        },
+        "TokenResponseRegister": {
+            "type": "object",
+            "required": [
+                "code",
+                "id",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 15
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
+                }
+            }
+        },
+        "TokenResponseClient": {
+            "type": "object",
+            "required": [
+                "code",
+                "message",
+                "token"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
+                },
+                "token": {
+                    "type": "string",
+                    "example": "AAFFAAFFAAFFAAFF"
+                }
+            }
+        },
+        "TokenResponse": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
+                }
+            }
+        }
+    }
+}
