@@ -3,10 +3,8 @@
 namespace App\Factories;
 
 /**
- * Class ServiceFactory
- * @package App\Factories
+ * Class ServiceFactory.
  */
 class ServiceFactory
 {
-
 }

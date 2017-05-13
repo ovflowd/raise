@@ -3,10 +3,8 @@
 namespace App\Models\Settings;
 
 /**
- * Class SecuritySettings
- * @package App\Models\Settings
+ * Class SecuritySettings.
  */
 class SecuritySettings
 {
-
 }

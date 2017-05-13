@@ -3,10 +3,8 @@
 namespace App\Handlers;
 
 /**
- * Class SettingsHandler
- * @package App\Handlers
+ * Class SettingsHandler.
  */
 class SettingsHandler
 {
-
 }

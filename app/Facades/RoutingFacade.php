@@ -3,10 +3,8 @@
 namespace App\Facades;
 
 /**
- * Class RoutingFacade
- * @package App\Facades
+ * Class RoutingFacade.
  */
 class RoutingFacade
 {
-
 }

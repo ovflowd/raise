@@ -3,10 +3,8 @@
 namespace App\Factories;
 
 /**
- * Class MetadataFactory
- * @package App\Factories
+ * Class MetadataFactory.
  */
 class MetadataFactory
 {
-
 }

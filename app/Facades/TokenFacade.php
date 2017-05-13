@@ -3,10 +3,8 @@
 namespace App\Facades;
 
 /**
- * Class TokenFacade
- * @package App\Facades
+ * Class TokenFacade.
  */
 class TokenFacade
 {
-
 }

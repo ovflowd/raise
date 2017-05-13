@@ -3,10 +3,8 @@
 namespace App\Models\Settings;
 
 /**
- * Class CouchbaseSettings
- * @package App\Models\Settings
+ * Class CouchbaseSettings.
  */
 class CouchbaseSettings
 {
-
 }

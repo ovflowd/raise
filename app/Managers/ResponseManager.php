@@ -3,10 +3,8 @@
 namespace App\Managers;
 
 /**
- * Class ResponseManager
- * @package App\Managers
+ * Class ResponseManager.
  */
 class ResponseManager
 {
-
 }

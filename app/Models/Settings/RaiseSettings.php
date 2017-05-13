@@ -3,10 +3,8 @@
 namespace App\Models\Settings;
 
 /**
- * Class RaiseSettings
- * @package App\Models\Settings
+ * Class RaiseSettings.
  */
 class RaiseSettings
 {
-
 }

@@ -13,7 +13,7 @@
  *  /  | /  ||__|               |  |
  * |   `'.  |      UIoT RAISe   |  '.'
  * '   .'|  '/        alpha     |   /
- *  `-'  `--'                   `'-'
+ *  `-'  `--'                   `'-'.
  *
  * @author Universal Internet of Things
  * @license Apache 2 <https://opensource.org/licenses/Apache-2.0>
@@ -26,4 +26,4 @@
 |----------------------------------------------------------------------------
 */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';

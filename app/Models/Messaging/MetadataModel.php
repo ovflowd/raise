@@ -3,10 +3,8 @@
 namespace App\Models\Messaging;
 
 /**
- * Class MetadataModel
- * @package App\Models\Messaging
+ * Class MetadataModel.
  */
 class MetadataModel
 {
-
 }
