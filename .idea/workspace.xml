@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4012de68-a297-441e-99ef-c9eabcc7b8da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui-bundle.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui-bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui-standalone-preset.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui-standalone-preset.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/swagger/swagger-ui.js" afterPath="$PROJECT_DIR$/docs/swagger/swagger-ui.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install/swagger-ui.sh" afterPath="$PROJECT_DIR$/install/swagger-ui.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -381,12 +377,12 @@
       <option name="presentableId" value="Default" />
       <updated>1494692991354</updated>
       <workItem from="1494692995413" duration="4019000" />
-      <workItem from="1494699893788" duration="1192000" />
+      <workItem from="1494699893788" duration="1359000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5211000" />
+    <option name="totallyTimeSpent" value="5378000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -492,7 +488,7 @@
         <state relative-caret-position="30">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#7#625#0#PHP" expanded="true" />
+            <element signature="e#7#625#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -502,7 +498,7 @@
         <state relative-caret-position="435">
           <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="e#7#625#0#PHP" expanded="true" />
+            <element signature="e#7#625#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
