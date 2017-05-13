@@ -1,21 +1,23 @@
 <?php
 
 /**
- * UIoT Service Layer.
- *
- *                          88
- *                          ""              ,d
- *                                          88
- *              88       88 88  ,adPPYba, MM88MMM
- *              88       88 88 a8"     "8a  88
- *              88       88 88 8b       d8  88
- *              "8a,   ,a88 88 "8a,   ,a8"  88,
- *               `"YbbdP'Y8 88  `"YbbdP"'   "Y888
+ *                   .-'''-.
+ *                  '   _    \
+ *           .--. /   /` '.   \
+ *           |__|.   |     \  '
+ *           .--.|   '      |  '  .|
+ *           |  |\    \     / / .' |_
+ *    _    _ |  | `.   ` ..' /.'     |
+ *   | '  / ||  |    '-...-'`'--.  .-'
+ *  .' | .' ||  |               |  |
+ *  /  | /  ||__|               |  |
+ * |   `'.  |      UIoT RAISe   |  '.'
+ * '   .'|  '/        alpha     |   /
+ *  `-'  `--'                   `'-'
  *
  * @author Universal Internet of Things
- * @license MIT <https://opensource.org/licenses/MIT>
+ * @license Apache 2 <https://opensource.org/licenses/Apache-2.0>
  * @copyright University of Brasília
- * important docs http://developer.couchbase.com/documentation/server/current/sdk/php/start-using-sdk.html
  */
 
 // Set Time Limit to 0
