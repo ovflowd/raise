@@ -3,9 +3,13 @@
 
 [![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/)
 
-<b>UIoT RAISE</b><br>
+<b>UIoT RAISe</b><br>
 
-RAISE is our <i>REST</i>  Abstract Service Layer for UIoT Architecture. Is Dynamic, Abstract, Following PSR-1 Adequations. Made with Design Patterns and coded using OO* Software Development Methodology. Fast, and with huge Performance.
+RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
+
+<b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).
+
+You can read more about the architecture and about <b>RAISe</b> by accessing our [wiki](wiki).
 
 ----------------------------------------------------
 
