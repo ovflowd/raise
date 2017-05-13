@@ -9,7 +9,7 @@
 
 Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/pfa62986wf69cawp?svg=true)](https://ci.appveyor.com/project/sant0ro/raise)   | Build | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise/branch/sbr/artifacts) |
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/pfa62986wf69cawp?svg=true)](https://ci.appveyor.com/project/sant0ro/raise)   | [![Build Status](https://travis-ci.org/sant0ro/RAISe.svg?branch=master)](https://travis-ci.org/sant0ro/RAISe) | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise/branch/sbr/artifacts) |
 
 UIoT RAISe
 ----------
