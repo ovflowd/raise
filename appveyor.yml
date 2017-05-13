@@ -1,5 +1,4 @@
 build: true
-platform: 'x86'
 branches:
   except:
     - master
