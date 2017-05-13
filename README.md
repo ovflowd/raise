@@ -13,3 +13,7 @@ RAISE is our <i>REST</i>  Abstract Service Layer for UIoT Architecture. Is Dynam
 
 + Go to this URL: (https://github.com/sant0ro/RAISe/tree/development/Install)
 + Follow steps explained on `README.md`
+
+<br>
+<br>
+<img align="right" src="http://3.bp.blogspot.com/_0oAS_01e8zM/SfEXdfGyQRI/AAAAAAAAAEI/D94K-PR5owU/s200/unb_logo.gif">
