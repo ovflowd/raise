@@ -19,5 +19,14 @@
   ],
   "require-dev": {
     "phpunit/phpunit": "^6.1"
+  },
+  "require": {
+    "swagger-api/swagger-ui": "^3.0"
+  },
+  "scripts": {
+    "post-update-cmd": "install/swagger-ui.sh",
+    "post-install-cmd": [
+      "install/swagger-ui.sh"
+    ]
   }
 }
