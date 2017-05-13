@@ -11,6 +11,10 @@ cache:
   - c:\tools\php -> appveyor.yml
 clone_folder: c:\projects\raise
 environment:
+  global:
+    CYG_ROOT: C:/cygwin
+    CYG_CACHE: C:/cygwin/var/cache/setup
+    CYG_MIRROR: http://mirrors.kernel.org/sourceware/cygwin/
   matrix:
     - dependencies: lowest
       php_ver_target: 7.0
@@ -18,12 +22,18 @@ environment:
       php_ver_target: 7.0
     - dependencies: highest
       php_ver_target: 7.0
+    -
+      CYG_ARCH: x86
 init:
   - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
   - SET COMPOSER_NO_INTERACTION=1
   - SET PHP=1 # This var is connected to PHP install cache
   - SET ANSICON=121x90 (121x90)
 install:
+  #- 'appveyor DownloadFile http://cygwin.com/setup-%CYG_ARCH%.exe -FileName setup.exe'
+  #- 'setup.exe -qnNdO -R "%CYG_ROOT%" -s "%CYG_MIRROR%" -l "%CYG_CACHE%" -P make -P git -P gcc-core -P ocaml -P ocaml-camlp4 -P ocaml-compiler-libs -P libncurses-devel -P unzip >NUL'
+  #- 'setup.exe -qnNdO -R "%CYG_ROOT%" -s "%CYG_MIRROR%" -l "%CYG_CACHE%" -P libmpfr-devel -P patch -P flexdll >NUL'
+  #- '%CYG_ROOT%/bin/bash -lc "cygcheck -dc cygwin"'
   - IF EXIST c:\tools\php (SET PHP=0) # Checks for the PHP install being cached
   - ps: appveyor-retry cinst --params '""/InstallDir:C:\tools\php""' --ignore-checksums -y php --version ((choco search php --exact --all-versions -r | select-string -pattern $env:php_ver_target | sort { [version]($_ -split '\|' | select -last 1) } -Descending | Select-Object -first 1) -replace '[php|]','')
   - cd c:\tools\php
@@ -36,10 +46,9 @@ install:
   - IF %PHP%==1 echo @php %%~dp0composer.phar %%* > composer.bat
   - appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
   - cd c:\projects\raise
-  - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress --profile -n
-  - IF %dependencies%==current appveyor-retry composer install --no-progress --profile
-  - IF %dependencies%==highest appveyor-retry composer update --no-progress --profile -n
-  - composer install --prefer-dist --no-progress
+  - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress --profile -n --no-dev
+  - IF %dependencies%==current appveyor-retry composer install --no-progress --profile --no-dev
+  - IF %dependencies%==highest appveyor-retry composer update --no-progress --profile --no-dev -n
 test_script:
   - cd c:\projects\raise
   - vendor/bin/phpunit --colors=always
