@@ -1,4 +1,4 @@
-<h1><img src="http://i.imgur.com/Ftmda0f.png"/>RAISe</h1>
+<h1><img src="http://i.imgur.com/Ftmda0f.png"/></h1>RAISe
 <br>
 
 [![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/)
