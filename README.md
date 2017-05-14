@@ -37,7 +37,11 @@ Check the [Contributing Guide](sbr/CONTRIBUTING.md).
 Documentation
 -------------
 
+You can learn more about the <b>RAISe</b> architecture by checking our [wiki](wiki)
 
+<b>You also may read those scientific papers</b> that explain about the <b>UIoT</b> architecture and the key features, and lot more about <b>RAISe</b>
+* [Design and Evaluation of a Services Interface for the Internet of Things](http://dl.acm.org/citation.cfm?id=3023305)
+* Other Papers being Added on the list.
 
 <br>
 <br>
