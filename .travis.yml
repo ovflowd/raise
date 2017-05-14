@@ -23,7 +23,6 @@ before_install:
   # Composer
   - composer self-update
   - composer install --no-interaction
-  - php artisan migrate
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:
