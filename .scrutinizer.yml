@@ -5,7 +5,9 @@ checks:
     php:
         code_rating: true
         duplication: true
-    javascript: false
+    javascript:
+        code_rating: false
+        duplication: false
 coding_style:
     php: {  }
 build: true
