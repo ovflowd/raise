@@ -19,7 +19,7 @@ RAISe is an <b>Internet of Things</b> open web service open middleware. Made to 
 
 <b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).
 
-You can read more about the architecture and about <b>RAISe</b> by accessing our [wiki](wiki).
+You can read more about the architecture and about <b>RAISe</b> by accessing our [Wiki](wiki).
 
 Installing
 ----------
@@ -38,7 +38,7 @@ Check the [Contributing Guide](sbr/CONTRIBUTING.md).
 Documentation
 -------------
 
-You can learn more about the <b>RAISe</b> architecture by checking our [wiki](wiki)
+You can learn more about the <b>RAISe</b> architecture by checking our [Wiki](wiki)
 
 <b>You also may read those scientific papers</b> that explain about the <b>UIoT</b> architecture and the key features, and lot more about <b>RAISe</b>
 * [Design and Evaluation of a Services Interface for the Internet of Things](http://dl.acm.org/citation.cfm?id=3023305)
