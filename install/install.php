@@ -252,7 +252,6 @@ $memoryQuota = $serverInfo->memoryQuota;
 echo writeText('INFO', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
 $buckets = [
-    'notcreatable' => 0,
     'metadata'     => floor((($memoryQuota / 100) * 4)),
     'client'       => floor((($memoryQuota / 100) * 12)),
     'service'      => floor((($memoryQuota / 100) * 12)),
@@ -268,9 +267,7 @@ echo progressBar(0, 7);
 $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
-    if ($bucketName != 'notcreatable') {
-        echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.              ");
-    }
+    echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.              ");
 
     sleep(2);
 
