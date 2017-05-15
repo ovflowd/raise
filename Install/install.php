@@ -43,20 +43,20 @@ function createBucket(array $details, array $credentials)
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
-    
+
     $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
-    
+
     $try = 0;
-    
-    while($response['info']['http_code'] != 202) {
+
+    while ($response['info']['http_code'] != 202) {
         $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
-        
-        if($try >= 4) {
+
+        if ($try >= 4) {
             echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
-            
+
             return false;
         }
-        
+
         $try++;
     }
 
@@ -107,7 +107,7 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
     }
 
     $server_output = curl_exec($ch);
-    
+
     $info = curl_getinfo($ch);
 
     curl_setopt($ch, CURLOPT_VERBOSE, true);
@@ -274,7 +274,7 @@ foreach ($buckets as $bucketName => $bucketMemory) {
 
     sleep(2);
 
-    if(createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials) == false) {
+    if (createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials) == false) {
         exit(1);
     }
 }
