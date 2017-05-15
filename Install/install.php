@@ -47,11 +47,11 @@ function createBucket(array $details, array $credentials)
     $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
     
     $try = 0;
-
+    
     while($response['info']['http_code'] != 202) {
         $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
         
-        if($try >= 10) {
+        if($try >= 4) {
             echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
             
             return false;
@@ -60,7 +60,7 @@ function createBucket(array $details, array $credentials)
         $try++;
     }
 
-    return $response['info']['http_code'] == 202;
+    return $response['body'];
 }
 
 /**
@@ -252,6 +252,7 @@ $memoryQuota = $serverInfo->memoryQuota;
 echo writeText('INFO', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
 $buckets = [
+    'notcreatable' => 0,
     'metadata'     => floor((($memoryQuota / 100) * 4)),
     'client'       => floor((($memoryQuota / 100) * 12)),
     'service'      => floor((($memoryQuota / 100) * 12)),
@@ -267,7 +268,9 @@ echo progressBar(0, 7);
 $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
-    echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.              ");
+    if ($bucketName != 'notcreatable') {
+        echo progressBar($progress++, 7, "Creating Bucket: {$bucketName}.              ");
+    }
 
     sleep(2);
 
