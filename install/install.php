@@ -43,8 +43,24 @@ function createBucket(array $details, array $credentials)
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
+    
+    $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
+    
+    $try = 0;
+    
+    while($response['info']['http_code'] != 202) {
+        $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
+        
+        if($try >= 4) {
+            echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
+            
+            return false;
+        }
+        
+        $try++;
+    }
 
-    return communicateCouchbase('pools/default/buckets', $credentials, $bucket);
+    return $response['body'];
 }
 
 /**
@@ -91,11 +107,13 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
     }
 
     $server_output = curl_exec($ch);
+    
+    $info = curl_getinfo($ch);
 
     curl_setopt($ch, CURLOPT_VERBOSE, true);
     curl_close($ch);
 
-    return json_decode($server_output);
+    return ['body' => json_decode($server_output), 'info' => $info];
 }
 
 /**
@@ -227,7 +245,7 @@ echo PHP_EOL;
 
 echo writeText('INFO', '46').'Getting Information from the Cluster via API....'.PHP_EOL;
 
-$serverInfo = communicateCouchbase('pools/default', $credentials);
+$serverInfo = communicateCouchbase('pools/default', $credentials)['body'];
 
 $memoryQuota = $serverInfo->memoryQuota;
 
@@ -256,7 +274,9 @@ foreach ($buckets as $bucketName => $bucketMemory) {
 
     sleep(2);
 
-    createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials);
+    if(createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials) == false) {
+        exit(1);
+    }
 }
 
 echo progressBar(7, 7, 'Buckets Created Successfully.');
@@ -270,7 +290,7 @@ echo writeText('INFO', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
 $progress = 0;
 
 while (!$readyToFill) {
-    $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials), function ($bucket) {
+    $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials)['body'], function ($bucket) {
         return $bucket->nodes[0]->status != 'healthy';
     });
 
