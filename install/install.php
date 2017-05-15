@@ -23,6 +23,9 @@
 // Set Time Limit to 0
 set_time_limit(0);
 
+// Enable $argv
+ini_set('register_argc_argv', true);
+
 /**
  * Create a Bucket on Couchbase.
  *
@@ -157,7 +160,21 @@ function checkVersion()
  */
 function setCredentials()
 {
+    global $argc, $argv;
+
     echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.', '0;32', true);
+
+    if(count($argv) > 1) {
+	//@TODO: Do Input Check
+
+	$user = str_replace('--user=', '', $argv[2]);
+
+	$ip = str_replace('--address=', '', $argv[1]);
+
+	$pass = str_replace('--pÃass=', '', $argv[2]);
+
+	return ['ip' => $ip, 'user' => $user, 'pass' => $pass];
+    }
 
     echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
@@ -169,9 +186,9 @@ function setCredentials()
 
     echo 'Please input Couchbase Password (eg.: pass): ';
 
-    $password = str_replace("\n", '', fgets(STDIN));
+    $pass = str_replace("\n", '', fgets(STDIN));
 
-    return ['ip' => $ip, 'user' => $user, 'pass' => $password];
+    return ['ip' => $ip, 'user' => $user, 'pass' => $pass];
 }
 
 /**
