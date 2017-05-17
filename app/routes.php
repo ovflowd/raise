@@ -26,7 +26,9 @@
 |----------------------------------------------------------------------------
 */
 
-// Todo
+$router->get('/', function () {
+    return 'Welcome to RAISe';
+});
 
 /*
 |----------------------------------------------------------------------------
@@ -34,7 +36,11 @@
 |----------------------------------------------------------------------------
 */
 
-// Todo
+// Register a Client
+$router->post('/client/register', 'ClientController@register');
+
+// List Clients
+$router->get('/client', 'ClientController@list');
 
 /*
 |----------------------------------------------------------------------------
@@ -42,7 +48,11 @@
 |----------------------------------------------------------------------------
 */
 
-// Todo
+// Register a Service
+$router->post('/service/register', 'ServiceController@register');
+
+// List Service
+$router->get('/service', 'ServiceController@list');
 
 /*
 |----------------------------------------------------------------------------
@@ -50,7 +60,11 @@
 |----------------------------------------------------------------------------
 */
 
-// Todo
+// Register Data
+$router->post('/data/register', 'DataController@register');
+
+// List Data
+$router->get('/data', 'DataController@list');
 
 /*
 |----------------------------------------------------------------------------
@@ -59,3 +73,5 @@
 */
 
 // Todo
+
+return $router;

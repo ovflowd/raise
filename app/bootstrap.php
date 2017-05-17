@@ -26,4 +26,17 @@
 |----------------------------------------------------------------------------
 */
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Instance Router
+$router = new \Bramus\Router\Router();
+
+// Gather Router Data
+$router = require_once __DIR__ . '/../app/routes.php';
+
+// Run Router
+$router->run();
+
+$settings = require_once __DIR__ . '/../app/settings.php';
+
+\App\Handlers\SettingsHandler::store($settings);

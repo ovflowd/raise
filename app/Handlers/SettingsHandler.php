@@ -61,4 +61,16 @@ class SettingsHandler
 
         return false;
     }
+
+    /**
+     * Store all Settings Blocks
+     *
+     * @param array $settings
+     */
+    public static function store(array $settings)
+    {
+        foreach ($settings as $settingName => $settingModel) {
+            self::add($settingName, $settingModel);
+        }
+    }
 }
