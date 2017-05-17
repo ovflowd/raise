@@ -5,6 +5,6 @@ namespace App\Controllers;
 /**
  * Class ClientController.
  */
-class ClientController
+class ClientController extends BaseController
 {
 }

@@ -5,6 +5,6 @@ namespace App\Controllers;
 /**
  * Class ServiceController.
  */
-class ServiceController
+class ServiceController extends BaseController
 {
 }

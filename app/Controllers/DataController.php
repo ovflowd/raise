@@ -5,6 +5,6 @@ namespace App\Controllers;
 /**
  * Class DataController.
  */
-class DataController
+class DataController extends BaseController
 {
 }
