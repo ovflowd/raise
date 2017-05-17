@@ -7,5 +7,4 @@ namespace App\Models\Database;
  */
 class DatabaseHandler
 {
-
 }
