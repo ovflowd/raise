@@ -7,5 +7,4 @@ namespace App\Models\Interfaces;
  */
 interface Controller
 {
-
 }

@@ -3,9 +3,8 @@
 namespace App\Handlers;
 
 /**
- * Class RoutingHandler
+ * Class RoutingHandler.
  */
 class RoutingHandler
 {
-
 }
