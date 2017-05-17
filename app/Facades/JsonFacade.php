@@ -3,9 +3,8 @@
 namespace App\Facades;
 
 /**
- * Class JsonFacade
+ * Class JsonFacade.
  */
 class JsonFacade
 {
-
 }

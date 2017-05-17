@@ -7,5 +7,4 @@ namespace App\Facades;
  */
 class UtilitiesFacade
 {
-
 }

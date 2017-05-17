@@ -7,7 +7,7 @@
  * | |  | | | |  ___ | |
  * | |  | | | | / _ \| |
  * | |__| |_| || (_)|| |
- * \_____/|____\____/|_|
+ * \_____/|____\____/|_|.
  *
  * @author Universal Internet of Things
  * @license Apache 2 <https://opensource.org/licenses/Apache-2.0>
