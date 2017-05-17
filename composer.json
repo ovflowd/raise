@@ -13,8 +13,8 @@
       "email": "sergio.augusto@redes.unb.br"
     },
     {
-      "name": "Lucas Martins Alves",
-      "email": "lucas.martins@uiot.org"
+      "name": "Iury Farias",
+      "email": "lucas.farias@uiot.org"
     }
   ],
   "require-dev": {
@@ -24,5 +24,8 @@
   "scripts": {
     "post-update-cmd": "",
     "post-install-cmd": ""
+  },
+  "require": {
+    "bramus/router": "^1.1"
   }
 }
