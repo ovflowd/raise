@@ -3,9 +3,8 @@
 namespace App\Models\Interfaces;
 
 /**
- * Interface Database
+ * Interface Database.
  */
 interface Database
 {
-
 }

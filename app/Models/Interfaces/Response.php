@@ -3,9 +3,8 @@
 namespace App\Models\Interfaces;
 
 /**
- * Interface Response
+ * Interface Response.
  */
 interface Response
 {
-
 }
