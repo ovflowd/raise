@@ -1,7 +1,7 @@
 <h4><img src="http://i.imgur.com/Ftmda0f.png"/> RAISe</h4>
 <br>
 
-[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![Github All Releases](https://img.shields.io/github/downloads/sant0ro/raise/total.svg)]() [![GitHub release](https://img.shields.io/github/release/sant0ro/raise.svg)]() [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/91028140/shield?style=flat)](https://styleci.io/repos/91028140/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sant0ro/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/sant0ro/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/sant0ro/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/sant0ro/RAISe)
+[![We Use ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com) [![Github All Releases](https://img.shields.io/github/downloads/sant0ro/raise/total.svg)]() [![GitHub release](https://img.shields.io/github/release/sant0ro/raise.svg)]() [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Style CI](https://styleci.io/repos/34536644/shield?style=flat)](https://styleci.io/repos/34536644/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/sant0ro/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/sant0ro/RAISe)
 
 
 <hr>
@@ -10,7 +10,7 @@
 
 Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/pfa62986wf69cawp?svg=true)](https://ci.appveyor.com/project/sant0ro/raise)   | [![Build Status](https://travis-ci.org/sant0ro/RAISe.svg?branch=sbr)](https://travis-ci.org/sant0ro/RAISe) | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise/branch/sbr/artifacts) |
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek2p0hnc5?svg=true)](https://ci.appveyor.com/project/uiot/raise)   | [![Build Status](https://travis-ci.org/UIoT/RAISe.svg?branch=sbr)](https://travis-ci.org/UIoT/RAISe) | [Artifacts](https://ci.appveyor.com/project/uiot/raise/branch/sbr/artifacts) |
 
 UIoT RAISe
 ----------
