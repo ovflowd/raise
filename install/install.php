@@ -54,13 +54,11 @@ function createBucket(array $details, array $credentials)
     while ($response['info']['http_code'] != 202) {
         $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
 
-        if ($try >= 10) {
+        if (($try++) >= 10) {
             echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
 
             return false;
         }
-
-        $try++;
     }
 
     return $response['info']['http_code'] == 202;
