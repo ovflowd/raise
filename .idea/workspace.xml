@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4012de68-a297-441e-99ef-c9eabcc7b8da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Factories/BaseFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Factories/SettingsFactory.php" afterPath="$PROJECT_DIR$/app/Factories/SettingsFactory.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Handlers/SettingsHandler.php" afterPath="$PROJECT_DIR$/app/Handlers/SettingsHandler.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +31,8 @@
       <file leaf-file-name="SettingsHandler.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Handlers/SettingsHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+            <state relative-caret-position="520">
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -475,12 +472,12 @@
       <workItem from="1494955581296" duration="653000" />
       <workItem from="1495032006495" duration="2136000" />
       <workItem from="1495039589912" duration="252000" />
-      <workItem from="1495048360953" duration="3046000" />
+      <workItem from="1495048360953" duration="3360000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11848000" />
+    <option name="totallyTimeSpent" value="12162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -885,8 +882,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Handlers/SettingsHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        <state relative-caret-position="520">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding />
         </state>
       </provider>
