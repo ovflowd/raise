@@ -29,7 +29,7 @@ $router->get('/', function () {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/client', function() use ($router) {
+$router->mount('/client', function () use ($router) {
     // Register a Client
     $router->post('/register', 'ClientController@register');
 
@@ -43,7 +43,7 @@ $router->mount('/client', function() use ($router) {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/service', function() use ($router) {
+$router->mount('/service', function () use ($router) {
     // Register a Service
     $router->post('/register', 'ServiceController@register');
 
@@ -57,7 +57,7 @@ $router->mount('/service', function() use ($router) {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/data', function() use ($router) {
+$router->mount('/data', function () use ($router) {
     // Register Data
     $router->post('/register', 'DataController@register');
 
