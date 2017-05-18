@@ -13,23 +13,20 @@
  * @copyright University of Brasília
  */
 
-/*
-|----------------------------------------------------------------------------
-| Require Compose Autoloader                                                |
-|----------------------------------------------------------------------------
-*/
-
+// Require Composer Autoloader
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Instance Router
 $router = new \Bramus\Router\Router();
 
-// Gather Router Data
+// Load Routes
 $router = require_once __DIR__.'/../app/routes.php';
+
+// Load Settings
+$settings = require_once __DIR__.'/../app/settings.php';
+
+// Store Settings
+\App\Handlers\SettingsHandler::store($settings);
 
 // Run Router
 $router->run();
-
-$settings = require_once __DIR__.'/../app/settings.php';
-
-\App\Handlers\SettingsHandler::store($settings);
