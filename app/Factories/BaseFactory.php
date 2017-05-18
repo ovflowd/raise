@@ -8,7 +8,7 @@ namespace App\Factories;
 abstract class BaseFactory
 {
     /**
-     * Elements of the Factory
+     * Elements of the Factory.
      *
      * @var array
      */
@@ -16,7 +16,7 @@ abstract class BaseFactory
 
     /**
      * Create an Instance if not exists
-     * If exists, return the instance
+     * If exists, return the instance.
      *
      * @return BaseFactory
      */
@@ -32,32 +32,35 @@ abstract class BaseFactory
     }
 
     /**
-     * Get an Element
+     * Get an Element.
      *
      * If the element exists return in,
      * If not return a false boolean.
      *
-     * @param String $element
+     * @param string $element
+     *
      * @return mixed|bool
      */
-    public abstract static function get(String $element);
+    abstract public static function get(String $element);
 
     /**
-     * Add an Element
+     * Add an Element.
      *
-     * @param String $element
-     * @param mixed $content
+     * @param string $element
+     * @param mixed  $content
+     *
      * @return mixed
      */
-    public abstract static function add(String $element, $content);
+    abstract public static function add(String $element, $content);
 
     /**
-     * Remove an Element
+     * Remove an Element.
      *
      * Return true if removed with success, false if element doesn't exists
      *
-     * @param String $element
+     * @param string $element
+     *
      * @return bool
      */
-    public abstract static function remove(String $element);
+    abstract public static function remove(String $element);
 }

@@ -8,21 +8,21 @@ namespace App\Models\Settings;
 class CouchbaseSettings
 {
     /**
-     * ip address from the couchbase
+     * ip address from the couchbase.
      *
      * @var string
      */
     public $address = 'localhost';
 
     /**
-     * user name from the couchbase
+     * user name from the couchbase.
      *
      * @var string
      */
     public $user = 'couchbase';
 
     /**
-     * password from the couchbase
+     * password from the couchbase.
      *
      * @var string
      */
