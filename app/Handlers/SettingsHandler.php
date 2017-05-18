@@ -47,7 +47,7 @@ class SettingsHandler
      */
     public static function add(String $modelName, array $configurationSet)
     {
-        if (class_exists($className = 'App\Models\Settings'.ucfirst($modelName).'Settings')) {
+        if (class_exists($className = ('App\Models\Settings'.ucfirst($modelName).'Settings'))) {
             $model = new $className();
 
             foreach ($configurationSet as $key => $value) {
