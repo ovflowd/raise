@@ -29,11 +29,13 @@ $router->get('/', function () {
 |----------------------------------------------------------------------------
 */
 
-// Register a Client
-$router->post('/client/register', 'ClientController@register');
+$router->mount('/client', function() use ($router) {
+    // Register a Client
+    $router->post('/register', 'ClientController@register');
 
-// List Clients
-$router->get('/client', 'ClientController@list');
+    // List Clients
+    $router->get('/', 'ClientController@list');
+});
 
 /*
 |----------------------------------------------------------------------------
@@ -41,11 +43,13 @@ $router->get('/client', 'ClientController@list');
 |----------------------------------------------------------------------------
 */
 
-// Register a Service
-$router->post('/service/register', 'ServiceController@register');
+$router->mount('/service', function() use ($router) {
+    // Register a Service
+    $router->post('/register', 'ServiceController@register');
 
-// List Service
-$router->get('/service', 'ServiceController@list');
+    // List Service
+    $router->get('/', 'ServiceController@list');
+});
 
 /*
 |----------------------------------------------------------------------------
@@ -53,11 +57,13 @@ $router->get('/service', 'ServiceController@list');
 |----------------------------------------------------------------------------
 */
 
-// Register Data
-$router->post('/data/register', 'DataController@register');
+$router->mount('/data', function() use ($router) {
+    // Register Data
+    $router->post('/register', 'DataController@register');
 
-// List Data
-$router->get('/data', 'DataController@list');
+    // List Data
+    $router->get('/', 'DataController@list');
+});
 
 /*
 |----------------------------------------------------------------------------
