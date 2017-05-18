@@ -399,22 +399,6 @@ echo PHP_EOL;
 
 echo 'Creating Configuration File...'.PHP_EOL;
 
-$config = <<<CONFIG
-<?php
-
-// RAISe Couchbase Configuration
-
-const DB_TYPE = 'COUCHBASE';
-const DB_ADDRESS = '{$credentials['ip']},{$credentials['user']},{$credentials['pass']}';
-const DB_IP = '{$credentials['ip']}';
-const DB_USER = '{$credentials['user']}';
-const DB_PASSWORD = '{$credentials['pass']}';
-
-?>
-CONFIG;
-
-@unlink('../Config/Config.php');
-
-file_put_contents('../Config/Config.php', $config);
+//TODO: Update Configuration File of new RAISe
 
 echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
