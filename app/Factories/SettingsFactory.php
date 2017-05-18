@@ -8,12 +8,13 @@ namespace App\Factories;
 class SettingsFactory extends BaseFactory
 {
     /**
-     * Get an Element
+     * Get an Element.
      *
      * If the element exists return in,
      * If not return a false boolean.
      *
-     * @param String $element
+     * @param string $element
+     *
      * @return mixed|bool
      */
     public static function get(String $element)
@@ -23,12 +24,13 @@ class SettingsFactory extends BaseFactory
     }
 
     /**
-     * Add an Element
+     * Add an Element.
      *
      * Return true if added with success, false if element already exists
      *
-     * @param String $element
-     * @param mixed $content
+     * @param string $element
+     * @param mixed  $content
+     *
      * @return bool
      */
     public static function add(String $element, $content)
@@ -43,11 +45,12 @@ class SettingsFactory extends BaseFactory
     }
 
     /**
-     * Remove an Element
+     * Remove an Element.
      *
      * Return true if removed with success, false if element doesn't exists
      *
-     * @param String $element
+     * @param string $element
+     *
      * @return bool
      */
     public static function remove(String $element)
