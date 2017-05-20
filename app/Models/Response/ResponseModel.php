@@ -10,30 +10,28 @@ class ResponseModel
     /**
      * Reference HTTP code about response of request.
      *
-     * @var String
+     * @var string
      */
     public $codehttp;
 
     /**
      * Exception code from Couchbase Database functions.
      *
-     * @var String
+     * @var string
      */
     public $codecouchbase;
 
     /**
      * Message about HTTP code and/or Couchbase exception code.
      *
-     * @var String
+     * @var string
      */
     public $message;
 
     /**
      * Describes the message and displays the response body.
      *
-     * @var String
+     * @var string
      */
     public $decription;
-
-
 }
