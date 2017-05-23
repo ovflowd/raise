@@ -36,5 +36,4 @@ class ResponseModel extends Model
      * @var string
      */
     public $description;
-
 }
