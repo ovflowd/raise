@@ -38,7 +38,7 @@ abstract class DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null $parameters
+     * @param null   $parameters
      *
      * @return mixed
      */
