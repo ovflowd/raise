@@ -3,7 +3,7 @@
 namespace App\Models\Communication;
 
 /**
- * Class ServiceBagModel
+ * Class ServiceBagModel.
  */
 class ServiceBagModel
 {

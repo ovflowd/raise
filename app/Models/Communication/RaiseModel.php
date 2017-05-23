@@ -3,7 +3,7 @@
 namespace App\Models\Communication;
 
 /**
- * Class RaiseModel
+ * Class RaiseModel.
  */
 class RaiseModel extends Model
 {

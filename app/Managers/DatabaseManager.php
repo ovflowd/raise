@@ -19,7 +19,7 @@ class DatabaseManager
     private static $databaseHandler;
 
     /**
-     * Connection Configuration
+     * Connection Configuration.
      *
      * @var array|object
      */
@@ -44,7 +44,7 @@ class DatabaseManager
     }
 
     /**
-     * Get Desired DatabaseHandler
+     * Get Desired DatabaseHandler.
      *
      * @return bool|DatabaseHandler
      */
@@ -52,7 +52,7 @@ class DatabaseManager
     {
         $handler = SettingsHandler::get('raise.databaseType');
 
-        $className = ('App\Handlers\\' . ucfirst($handler) . 'Handler');
+        $className = ('App\Handlers\\'.ucfirst($handler).'Handler');
 
         if (class_exists($className)) {
             self::$configuration = SettingsHandler::get($handler);

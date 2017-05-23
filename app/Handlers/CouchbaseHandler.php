@@ -5,7 +5,6 @@ namespace App\Handlers;
 use App\Models\Database\DatabaseHandler;
 use Couchbase\N1qlQuery;
 use Koine\QueryBuilder\Statements\Select;
-use Pixie\QueryBuilder\QueryBuilderHandler;
 
 /**
  * Class CouchbaseHandler.
@@ -63,13 +62,13 @@ class CouchbaseHandler extends DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null $parameters
+     * @param null   $parameters
      *
      * @return mixed
      */
     public function select(string $table, $parameters = null)
     {
-        $query = new Select;
+        $query = new Select();
 
         $query->select('*');
 
@@ -81,10 +80,11 @@ class CouchbaseHandler extends DatabaseHandler
     }
 
     /**
-     * Select an Object by its Identifier
+     * Select an Object by its Identifier.
      *
      * @param string $table
      * @param string $id
+     *
      * @return object|null
      */
     public function selectById(string $table, string $id)
