@@ -12,24 +12,16 @@ class SettingsHandler
     /**
      * Get a Configuration Element from a Settings Model.
      *
-     * @param string     $configuration
-     * @param null|mixed $settingModel
-     * @param null|mixed $value
+     * @param string $configuration
      *
      * @return bool|mixed
      */
-    public static function get(String $configuration, $settingModel = null, $value = null)
+    public static function get(String $configuration)
     {
         if (strpos($configuration, '.') !== false) {
-            if ($settingModel == null) {
-                return self::get(strstr($configuration, '.', true),
-                    SettingsFactory::get(explode('.', $configuration)[0]));
-            }
+            $values = explode('.', $configuration);
 
-            return self::get(strstr($configuration, '.', true), $settingModel,
-                $settingModel->{explode('.', $configuration)[0]});
-        } elseif ($settingModel !== null && $value !== null) {
-            return $value->{$configuration};
+            return SettingsFactory::get($values[0])->{$values[1]};
         } else {
             return SettingsFactory::get($configuration);
         }
@@ -41,13 +33,13 @@ class SettingsHandler
      * Return true if created with success and if class exists, false if it not exists
      *
      * @param string $modelName
-     * @param array  $configurationSet
+     * @param array $configurationSet
      *
      * @return bool
      */
     public static function add(String $modelName, array $configurationSet)
     {
-        if (class_exists($className = ('App\Models\Settings'.ucfirst($modelName).'Settings'))) {
+        if (class_exists($className = ('App\Models\Settings\\' . ucfirst($modelName) . 'Settings'))) {
             $model = new $className();
 
             foreach ($configurationSet as $key => $value) {

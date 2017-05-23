@@ -28,5 +28,10 @@ $settings = require_once __DIR__.'/../app/settings.php';
 // Store Settings
 \App\Handlers\SettingsHandler::store($settings);
 
+// Response Manager
+$response = new \App\Managers\ResponseManager();
+
 // Run Router
-$router->run();
+$router->run(function () use ($response) {
+    echo $response->getResponse();
+});
