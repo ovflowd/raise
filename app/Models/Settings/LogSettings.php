@@ -5,6 +5,6 @@ namespace App\Models\Settings;
 /**
  * Class LogSettings.
  */
-class LogSettings
+class LogSettings extends Settings
 {
 }

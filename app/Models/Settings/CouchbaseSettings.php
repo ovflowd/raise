@@ -5,7 +5,7 @@ namespace App\Models\Settings;
 /**
  * Class CouchbaseSettings.
  */
-class CouchbaseSettings
+class CouchbaseSettings extends Settings
 {
     /**
      * ip address from the couchbase.

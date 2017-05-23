@@ -51,20 +51,6 @@ class SettingsHandler
      */
     public static function add(String $modelName, array $configurationSet)
     {
-        if (class_exists($className = ('App\Models\Settings\\' . ucfirst($modelName) . 'Settings'))) {
-            $model = new $className();
-
-            foreach ($configurationSet as $key => $value) {
-                if (property_exists($className, $key)) {
-                    $model->{$key} = $value;
-                }
-            }
-
-            SettingsFactory::add($modelName, $model);
-
-            return true;
-        }
-
-        return false;
+        return SettingsFactory::add($modelName, $configurationSet);
     }
 }

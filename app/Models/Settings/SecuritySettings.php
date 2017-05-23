@@ -5,6 +5,6 @@ namespace App\Models\Settings;
 /**
  * Class SecuritySettings.
  */
-class SecuritySettings
+class SecuritySettings extends Settings
 {
 }

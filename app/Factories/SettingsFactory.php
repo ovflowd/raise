@@ -35,13 +35,15 @@ class SettingsFactory extends BaseFactory
      */
     public static function add(String $element, $content)
     {
-        if (array_key_exists($element, self::getInstance()->elements)) {
-            return false;
+        $className = ('App\Models\Settings\\' . ucfirst($element) . 'Settings');
+
+        if (!array_key_exists($element, self::getInstance()->elements) && class_exists($className)) {
+            self::getInstance()->elements[$element] = (new $className())->fill($content);
+
+            return true;
         }
 
-        self::getInstance()->elements[$element] = $content;
-
-        return true;
+        return false;
     }
 
     /**
