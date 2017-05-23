@@ -3,19 +3,19 @@
 namespace App\Models\Communication;
 
 /**
- * Class ServiceModel
+ * Class ServiceModel.
  */
 class ServiceModel extends RaiseModel
 {
     /**
-     * Array of Service Models
+     * Array of Service Models.
      *
      * @var ServiceBagModel[]
      */
     public $services = [];
 
     /**
-     * Add a Service Bag into a Service Model
+     * Add a Service Bag into a Service Model.
      *
      * @param ServiceBagModel $bag
      */

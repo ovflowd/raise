@@ -3,7 +3,7 @@
 namespace App\Models\Communication;
 
 /**
- * Class DataBagModel
+ * Class DataBagModel.
  */
 class DataBagModel
 {
