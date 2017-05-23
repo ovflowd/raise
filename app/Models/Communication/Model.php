@@ -3,14 +3,15 @@
 namespace App\Models\Communication;
 
 /**
- * Class Model
+ * Class Model.
  */
 abstract class Model
 {
     /**
-     * Fill Model Properties
+     * Fill Model Properties.
      *
      * @param array|object $data
+     *
      * @return $this
      */
     public function fill($data)
