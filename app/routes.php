@@ -30,6 +30,11 @@ $router->get('/', function () use ($response) {
 */
 
 $router->mount('/client', function () use ($router) {
+    // Client Security
+    $router->before('GET|POST', '/*', function () {
+        // Require User Authentication
+    });
+
     // Register a Client
     $router->post('/register', 'ClientController@register');
 
@@ -44,6 +49,11 @@ $router->mount('/client', function () use ($router) {
 */
 
 $router->mount('/service', function () use ($router) {
+    // Service Security
+    $router->before('GET|POST', '/*', function () {
+        // Require User Authentication
+    });
+
     // Register a Service
     $router->post('/register', 'ServiceController@register');
 
@@ -58,6 +68,11 @@ $router->mount('/service', function () use ($router) {
 */
 
 $router->mount('/data', function () use ($router) {
+    // Data Security
+    $router->before('GET|POST', '/*', function () {
+        // Require User Authentication
+    });
+
     // Register Data
     $router->post('/register', 'DataController@register');
 
