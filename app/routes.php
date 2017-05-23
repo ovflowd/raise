@@ -19,8 +19,8 @@
 |----------------------------------------------------------------------------
 */
 
-$router->get('/', function () {
-    return 'Welcome to RAISe';
+$router->get('/', function () use ($response) {
+    $response->setResponse(202, 'Welcome to RAISe');
 });
 
 /*

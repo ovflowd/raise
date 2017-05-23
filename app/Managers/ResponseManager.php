@@ -2,33 +2,73 @@
 
 namespace App\Managers;
 
+use App\Models\Response\ResponseModel;
+
 /**
  * Class ResponseManager.
  */
 class ResponseManager
 {
     /**
+     * Response Model
+     *
+     * @var ResponseModel
+     */
+    private $responseModel = null;
+
+    /**
+     * Create a ResponseManager Instance
+     *
+     * @param null|string $contentType
+     */
+    public function __construct($contentType = null)
+    {
+        if ($contentType !== null) {
+            $this->addHeader('Content-Type', $contentType);
+        }
+
+        $this->responseModel = new ResponseModel;
+    }
+
+    /**
      * Add a Header to the Response
      *
      * @param String $name
      * @param String $value
-     * @return mixed
+     * @return void
      */
-    public abstract function addHeader(String $name, String $value);
+    public function addHeader(String $name, String $value)
+    {
+        header("{$name}: {$value}");
+    }
 
     /**
      * Set the Response Content
      *
      * @param int $httpCode
      * @param $description
-     * @return mixed
      */
-    public abstract function setResponse(Integer $httpCode, $description);
+    public function setResponse(Int $httpCode, $description)
+    {
+        $responseData = DatabaseManager::getConnection()->select('metadata', ['codHttp' => $httpCode]);
+
+        foreach ($responseData as $property => $value) {
+            if (property_exists($this->responseModel, $property)) {
+                $this->responseModel->{$property} = $value;
+            }
+        }
+
+        $this->responseModel->description = $description;
+    }
 
     /**
      * Get the Response Content
      *
-     * @return mixed
+     * @param null|callable $callback
+     * @return string
      */
-    public abstract function getResponse();
+    public function getResponse($callback = null)
+    {
+        return $callback($this->responseModel);
+    }
 }
