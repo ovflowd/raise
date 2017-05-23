@@ -26,9 +26,12 @@
     "post-install-cmd": ""
   },
   "require": {
-    "bramus/router": "^1.1"
+    "bramus/router": "^1.1",
+    "koine/query-builder": "^0.9.7"
   },
   "autoload": {
-    "psr-4": {"App\\": "app/"}
+    "psr-4": {
+      "App\\": "app/"
+    }
   }
 }

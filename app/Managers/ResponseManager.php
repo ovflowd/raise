@@ -38,7 +38,7 @@ class ResponseManager
      *
      * @return void
      */
-    public function addHeader(String $name, String $value)
+    public function addHeader(string $name, string $value)
     {
         header("{$name}: {$value}");
     }
@@ -56,17 +56,17 @@ class ResponseManager
     /**
      * Set the Response Content.
      *
-     * @param int   $httpCode
+     * @param string $httpCode
      * @param mixed $description
-     * @param bool  $returnContent
+     * @param bool $returnContent
      *
      * @return ResponseModel|null
      */
-    public function setResponse(int $httpCode, $description = null, bool $returnContent = false)
+    public function setResponse(string $httpCode, $description = null, bool $returnContent = false)
     {
         $this->setCode($httpCode);
 
-        $responseData = DatabaseManager::getConnection()->select('metadata', ['codHttp' => $httpCode])[0]->metadata;
+        $responseData = DatabaseManager::getConnection()->select('metadata', [['codHttp', $httpCode, '=']])[0]->metadata;
 
         $this->responseModel->fill($responseData);
 

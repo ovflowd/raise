@@ -32,7 +32,7 @@ abstract class DatabaseHandler
      *
      * @return mixed
      */
-    abstract public function insert(String $table, $data, $parameters = null);
+    abstract public function insert(string $table, $data, $parameters = null);
 
     /**
      * Select Data on Database.
@@ -42,5 +42,5 @@ abstract class DatabaseHandler
      *
      * @return mixed
      */
-    abstract public function select(String $table, $parameters = null);
+    abstract public function select(string $table, $parameters = null);
 }
