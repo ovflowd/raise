@@ -10,10 +10,10 @@ abstract class Model
     /**
      * Fill Model Properties
      *
-     * @param array $data
+     * @param array|object $data
      * @return $this
      */
-    public function fill(array $data)
+    public function fill($data)
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {

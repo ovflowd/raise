@@ -7,7 +7,7 @@ use App\Models\Communication\Model;
 /**
  * Class CouchbaseSettings.
  */
-class CouchbaseModel extends Model
+class CouchbaseSettings extends Model
 {
     /**
      * ip address from the couchbase.

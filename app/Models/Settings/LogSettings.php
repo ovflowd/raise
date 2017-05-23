@@ -7,6 +7,6 @@ use App\Models\Communication\Model;
 /**
  * Class LogSettings.
  */
-class LogModel extends Model
+class LogSettings extends Model
 {
 }

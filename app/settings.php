@@ -32,8 +32,8 @@ return [
     */
 
     'couchbase' => [
-        'address'  => 'localhost',
-        'user'     => 'couch',
+        'address' => 'localhost',
+        'user' => 'couch',
         'password' => 'couchbase',
     ],
 

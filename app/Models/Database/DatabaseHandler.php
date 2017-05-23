@@ -10,11 +10,11 @@ abstract class DatabaseHandler
     /**
      * Connect to the Database.
      *
-     * @param array $connection
+     * @param array|object $connection
      *
      * @return mixed
      */
-    abstract public function connect(array $connection);
+    abstract public function connect($connection);
 
     /**
      * Destroy the Connection.
@@ -38,7 +38,7 @@ abstract class DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */

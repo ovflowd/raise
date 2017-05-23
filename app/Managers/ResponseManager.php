@@ -40,7 +40,7 @@ class ResponseManager
      */
     public function addHeader(String $name, String $value)
     {
-        header("{$name}: {$value}");
+        //header("{$name}: {$value}");
     }
 
     /**

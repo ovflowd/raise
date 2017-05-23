@@ -5,8 +5,8 @@ namespace App\Models\Settings;
 use App\Models\Communication\Model;
 
 /**
- * Class RaiseSettings.
+ * Class SecuritySettings.
  */
-class RaiseModel extends Model
+class SecuritySettings extends Model
 {
 }

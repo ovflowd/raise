@@ -20,13 +20,13 @@ class CouchbaseHandler extends DatabaseHandler
     /**
      * Connect to the Database.
      *
-     * @param array $connection
+     * @param array|object $connection
      *
      * @return void
      */
-    public function connect(array $connection)
+    public function connect($connection)
     {
-        $this->connection = new \CouchbaseCluster("{$connection['address']},{$connection['user']},{$connection['password']}");
+        $this->connection = new \CouchbaseCluster("{$connection->address},{$connection->user},{$connection->password}");
     }
 
     /**
@@ -59,7 +59,7 @@ class CouchbaseHandler extends DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
