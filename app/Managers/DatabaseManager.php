@@ -30,7 +30,7 @@ class DatabaseManager
         if (self::$databaseHandler == null) {
             self::$databaseHandler = new CouchbaseHandler();
 
-            self::$databaseHandler->connect((array)SettingsHandler::get('couchbase'));
+            self::$databaseHandler->connect((array) SettingsHandler::get('couchbase'));
         }
 
         return self::$databaseHandler;

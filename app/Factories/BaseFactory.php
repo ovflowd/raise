@@ -30,7 +30,7 @@ abstract class BaseFactory
      * Add an Element.
      *
      * @param string $element
-     * @param mixed $content
+     * @param mixed  $content
      *
      * @return mixed
      */
