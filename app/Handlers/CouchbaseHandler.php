@@ -11,16 +11,17 @@ use Couchbase\N1qlQuery;
 class CouchbaseHandler extends DatabaseHandler
 {
     /**
-     * Couchbase Connection Instance
+     * Couchbase Connection Instance.
      *
      * @var \CouchbaseCluster
      */
     private $connection = null;
 
     /**
-     * Connect to the Database
+     * Connect to the Database.
      *
      * @param array $connection
+     *
      * @return void
      */
     public function connect(array $connection)
@@ -29,7 +30,7 @@ class CouchbaseHandler extends DatabaseHandler
     }
 
     /**
-     * Destroy the Connection
+     * Destroy the Connection.
      *
      * @return void
      */
@@ -39,11 +40,12 @@ class CouchbaseHandler extends DatabaseHandler
     }
 
     /**
-     * Insert Data on Database
+     * Insert Data on Database.
      *
-     * @param String $table
+     * @param string $table
      * @param $data
      * @param null $parameters
+     *
      * @return void
      */
     public function insert(String $table, $data, $parameters = null)
@@ -54,11 +56,12 @@ class CouchbaseHandler extends DatabaseHandler
     }
 
     /**
-     * Select Data on Database
+     * Select Data on Database.
      *
-     * @param String $table
+     * @param string $table
      * @param $data
      * @param null $parameters
+     *
      * @return mixed
      */
     public function select(String $table, $data, $parameters = null)

@@ -12,14 +12,14 @@ use App\Models\Database\DatabaseHandler;
 class DatabaseManager
 {
     /**
-     * Database Handler Instance
+     * Database Handler Instance.
      *
      * @var DatabaseHandler
      */
     private static $databaseHandler;
 
     /**
-     * Get Database Connection
+     * Get Database Connection.
      *
      * If the Connection doesn't exists, tries to connect.
      *
@@ -30,7 +30,7 @@ class DatabaseManager
         if (self::$databaseHandler == null) {
             self::$databaseHandler = new CouchbaseHandler();
 
-            self::$databaseHandler->connect((array)SettingsHandler::get('couchbase'));
+            self::$databaseHandler->connect((array) SettingsHandler::get('couchbase'));
         }
 
         return self::$databaseHandler;

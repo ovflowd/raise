@@ -45,13 +45,13 @@ class SettingsHandler
      * Return true if created with success and if class exists, false if it not exists
      *
      * @param string $modelName
-     * @param array $configurationSet
+     * @param array  $configurationSet
      *
      * @return bool
      */
     public static function add(String $modelName, array $configurationSet)
     {
-        if (class_exists($className = ('App\Models\Settings\\' . ucfirst($modelName) . 'Settings'))) {
+        if (class_exists($className = ('App\Models\Settings\\'.ucfirst($modelName).'Settings'))) {
             $model = new $className();
 
             foreach ($configurationSet as $key => $value) {
