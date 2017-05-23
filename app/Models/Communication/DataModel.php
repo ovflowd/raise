@@ -3,19 +3,19 @@
 namespace App\Models\Communication;
 
 /**
- * Class DataModel
+ * Class DataModel.
  */
 class DataModel extends RaiseModel
 {
     /**
-     * Array of Datas
+     * Array of Datas.
      *
      * @var DataBagModel[]
      */
     public $data = [];
 
     /**
-     * Add a Data Bag
+     * Add a Data Bag.
      *
      * @param DataBagModel $bag
      */

@@ -10,14 +10,14 @@ use App\Models\Communication\Model;
 class RaiseSettings extends Model
 {
     /**
-     * Type of Database that will be used for connection
+     * Type of Database that will be used for connection.
      *
      * @var string
      */
     public $databaseType = 'couchbase';
 
     /**
-     * Base URL of RAISe
+     * Base URL of RAISe.
      *
      * @var string
      */
