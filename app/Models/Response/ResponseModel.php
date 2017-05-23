@@ -2,24 +2,26 @@
 
 namespace App\Models\Response;
 
+use App\Models\Communication\Model;
+
 /**
  * Class ResponseModel.
  */
-class ResponseModel
+class ResponseModel extends Model
 {
     /**
      * Reference HTTP code about response of request.
      *
      * @var string
      */
-    public $httpCode;
+    public $codHttp;
 
     /**
      * Exception code from Couchbase Database functions.
      *
      * @var string
      */
-    public $couchbaseCode;
+    public $codCouch;
 
     /**
      * Message about HTTP code and/or Couchbase exception code.

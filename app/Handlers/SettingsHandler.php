@@ -28,35 +28,6 @@ class SettingsHandler
     }
 
     /**
-     * Tries to Add a SettingsModel with given Attributes.
-     *
-     * Return true if created with success and if class exists, false if it not exists
-     *
-     * @param string $modelName
-     * @param array $configurationSet
-     *
-     * @return bool
-     */
-    public static function add(String $modelName, array $configurationSet)
-    {
-        if (class_exists($className = ('App\Models\Settings\\' . ucfirst($modelName) . 'Settings'))) {
-            $model = new $className();
-
-            foreach ($configurationSet as $key => $value) {
-                if (property_exists($className, $key)) {
-                    $model->{$key} = $value;
-                }
-            }
-
-            SettingsFactory::add($modelName, $model);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Store all Settings Blocks.
      *
      * @param array $settings
@@ -66,5 +37,20 @@ class SettingsHandler
         foreach ($settings as $settingName => $settingModel) {
             self::add($settingName, $settingModel);
         }
+    }
+
+    /**
+     * Tries to Add a SettingsModel with given Attributes.
+     *
+     * Return true if created with success and if class exists, false if it not exists
+     *
+     * @param string $modelName
+     * @param array  $configurationSet
+     *
+     * @return bool
+     */
+    public static function add(String $modelName, array $configurationSet)
+    {
+        return SettingsFactory::add($modelName, $configurationSet);
     }
 }

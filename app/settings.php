@@ -32,9 +32,9 @@ return [
     */
 
     'couchbase' => [
-        'address' => '127.0.0.1',
-        'user' => 'couchbase',
-        'password' => 'couchbase'
+        'address'  => 'localhost',
+        'user'     => 'couch',
+        'password' => 'couchbase',
     ],
 
     /*

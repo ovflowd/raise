@@ -2,9 +2,11 @@
 
 namespace App\Models\Settings;
 
+use App\Models\Communication\Model;
+
 /**
  * Class LogSettings.
  */
-class LogSettings
+class LogSettings extends Model
 {
 }

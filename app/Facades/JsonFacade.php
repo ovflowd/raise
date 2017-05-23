@@ -7,7 +7,28 @@ namespace App\Facades;
  */
 class JsonFacade
 {
-    public abstract function encode($content, array $parameters = array());
+    /**
+     * Encode a jSON Object into a string.
+     *
+     * @param $content
+     * @param int $parameters
+     *
+     * @return string
+     */
+    public static function encode($content, $parameters = JSON_UNESCAPED_SLASHES)
+    {
+        return json_encode($content, $parameters);
+    }
 
-    public abstract function decode(String $content);
+    /**
+     * Decode a jSON string into Object.
+     *
+     * @param string $content
+     *
+     * @return mixed
+     */
+    public static function decode(String $content)
+    {
+        return json_decode($content);
+    }
 }

@@ -8,37 +8,39 @@ namespace App\Models\Database;
 abstract class DatabaseHandler
 {
     /**
-     * Connect to the Database
+     * Connect to the Database.
      *
-     * @param array $connection
-     * @return mixed
-     */
-    public abstract function connect(array $connection);
-
-    /**
-     * Destroy the Connection
+     * @param array|object $connection
      *
      * @return mixed
      */
-    public abstract function destroy();
+    abstract public function connect($connection);
 
     /**
-     * Insert Data on Database
+     * Destroy the Connection.
      *
-     * @param String $table
+     * @return mixed
+     */
+    abstract public function destroy();
+
+    /**
+     * Insert Data on Database.
+     *
+     * @param string $table
      * @param $data
      * @param null $parameters
+     *
      * @return mixed
      */
-    public abstract function insert(String $table, $data, $parameters = null);
+    abstract public function insert(String $table, $data, $parameters = null);
 
     /**
-     * Select Data on Database
+     * Select Data on Database.
      *
-     * @param String $table
-     * @param $data
-     * @param null $parameters
+     * @param string $table
+     * @param null   $parameters
+     *
      * @return mixed
      */
-    public abstract function select(String $table, $data, $parameters = null);
+    abstract public function select(String $table, $parameters = null);
 }

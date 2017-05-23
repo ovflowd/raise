@@ -19,6 +19,9 @@ require_once __DIR__.'/../vendor/autoload.php';
 // Instance Router
 $router = new \Bramus\Router\Router();
 
+// Response Manager
+$response = new \App\Managers\ResponseManager('application/json');
+
 // Load Routes
 $router = require_once __DIR__.'/../app/routes.php';
 
@@ -28,10 +31,9 @@ $settings = require_once __DIR__.'/../app/settings.php';
 // Store Settings
 \App\Handlers\SettingsHandler::store($settings);
 
-// Response Manager
-$response = new \App\Managers\ResponseManager();
-
 // Run Router
 $router->run(function () use ($response) {
-    echo $response->getResponse();
+    echo $response->getResponse(function (\App\Models\Response\ResponseModel $model) {
+        return \App\Facades\JsonFacade::encode($model);
+    });
 });
