@@ -59,24 +59,23 @@ class CouchbaseHandler extends DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param $data
      * @param null $parameters
      *
      * @return mixed
      */
-    public function select(String $table, $data, $parameters = null)
+    public function select(String $table, $parameters = null)
     {
         $params = '';
-        $lastParam = end(array_keys($parameters));
+        $lastParam = end($parameters);
 
         foreach ($parameters as $name => $value) {
-            if ($lastParam == $name) {
+            if ($lastParam == $value) {
                 $params .= "{$name} = '{$value}'";
             } else {
                 $params .= "{$name} = '{$value}',";
             }
         }
 
-        return $this->connection->openBucket($table)->query(N1qlQuery::fromString("SELECT * FROM {$table} WHERE {$params}"))->results;
+        return $this->connection->openBucket($table)->query(N1qlQuery::fromString("SELECT * FROM {$table} WHERE {$params}"))->rows;
     }
 }

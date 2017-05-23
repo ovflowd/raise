@@ -51,7 +51,7 @@ class ResponseManager
      */
     public function setResponse(Int $httpCode, $description)
     {
-        $responseData = DatabaseManager::getConnection()->select('metadata', ['codHttp' => $httpCode]);
+        $responseData = DatabaseManager::getConnection()->select('metadata', ['codHttp' => $httpCode])[0]->metadata;
 
         foreach ($responseData as $property => $value) {
             if (property_exists($this->responseModel, $property)) {

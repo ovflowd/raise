@@ -12,14 +12,14 @@ class ResponseModel
      *
      * @var string
      */
-    public $httpCode;
+    public $codHttp;
 
     /**
      * Exception code from Couchbase Database functions.
      *
      * @var string
      */
-    public $couchbaseCode;
+    public $codCouch;
 
     /**
      * Message about HTTP code and/or Couchbase exception code.

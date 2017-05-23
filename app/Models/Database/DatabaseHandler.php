@@ -38,10 +38,9 @@ abstract class DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param $data
      * @param null $parameters
      *
      * @return mixed
      */
-    abstract public function select(String $table, $data, $parameters = null);
+    abstract public function select(String $table, $parameters = null);
 }

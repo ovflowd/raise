@@ -32,9 +32,9 @@ return [
     */
 
     'couchbase' => [
-        'address'  => 'raise.homol.uiot.org',
-        'user'     => 'couchadmin',
-        'password' => 'abidelbob2017',
+        'address' => 'localhost',
+        'user' => 'couch',
+        'password' => 'couchbase',
     ],
 
     /*

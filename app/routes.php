@@ -20,7 +20,7 @@
 */
 
 $router->get('/', function () use ($response) {
-    $response->setResponse(202, 'Welcome to RAISe');
+    $response->setResponse(200, 'Welcome to RAISe');
 });
 
 /*
