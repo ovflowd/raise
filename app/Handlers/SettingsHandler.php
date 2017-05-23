@@ -28,6 +28,18 @@ class SettingsHandler
     }
 
     /**
+     * Store all Settings Blocks.
+     *
+     * @param array $settings
+     */
+    public static function store(array $settings)
+    {
+        foreach ($settings as $settingName => $settingModel) {
+            self::add($settingName, $settingModel);
+        }
+    }
+
+    /**
      * Tries to Add a SettingsModel with given Attributes.
      *
      * Return true if created with success and if class exists, false if it not exists
@@ -54,17 +66,5 @@ class SettingsHandler
         }
 
         return false;
-    }
-
-    /**
-     * Store all Settings Blocks.
-     *
-     * @param array $settings
-     */
-    public static function store(array $settings)
-    {
-        foreach ($settings as $settingName => $settingModel) {
-            self::add($settingName, $settingModel);
-        }
     }
 }

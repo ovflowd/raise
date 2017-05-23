@@ -15,23 +15,6 @@ abstract class BaseFactory
     protected $elements = [];
 
     /**
-     * Create an Instance if not exists
-     * If exists, return the instance.
-     *
-     * @return BaseFactory
-     */
-    protected static function getInstance()
-    {
-        static $instance = null;
-
-        if (null === $instance) {
-            $instance = new static();
-        }
-
-        return $instance;
-    }
-
-    /**
      * Get an Element.
      *
      * If the element exists return in,
@@ -47,7 +30,7 @@ abstract class BaseFactory
      * Add an Element.
      *
      * @param string $element
-     * @param mixed  $content
+     * @param mixed $content
      *
      * @return mixed
      */
@@ -63,4 +46,21 @@ abstract class BaseFactory
      * @return bool
      */
     abstract public static function remove(String $element);
+
+    /**
+     * Create an Instance if not exists
+     * If exists, return the instance.
+     *
+     * @return BaseFactory
+     */
+    protected static function getInstance()
+    {
+        static $instance = null;
+
+        if (null === $instance) {
+            $instance = new static();
+        }
+
+        return $instance;
+    }
 }
