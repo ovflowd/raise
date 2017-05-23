@@ -2,10 +2,12 @@
 
 namespace App\Models\Settings;
 
+use App\Models\Communication\Model;
+
 /**
  * Class CouchbaseSettings.
  */
-class CouchbaseSettings extends Settings
+class CouchbaseModel extends Model
 {
     /**
      * ip address from the couchbase.

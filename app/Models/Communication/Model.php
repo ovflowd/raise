@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Settings;
+namespace App\Models\Communication;
 
 /**
- * Class Settings
+ * Class Model
  */
-abstract class Settings
+abstract class Model
 {
     /**
      * Fill Model Properties

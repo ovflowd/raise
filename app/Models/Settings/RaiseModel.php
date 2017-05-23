@@ -2,9 +2,11 @@
 
 namespace App\Models\Settings;
 
+use App\Models\Communication\Model;
+
 /**
  * Class RaiseSettings.
  */
-class RaiseSettings extends Settings
+class RaiseModel extends Model
 {
 }

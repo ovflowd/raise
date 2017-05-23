@@ -2,10 +2,12 @@
 
 namespace App\Models\Response;
 
+use App\Models\Communication\Model;
+
 /**
  * Class ResponseModel.
  */
-class ResponseModel
+class ResponseModel extends Model
 {
     /**
      * Reference HTTP code about response of request.

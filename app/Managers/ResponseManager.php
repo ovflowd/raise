@@ -53,11 +53,7 @@ class ResponseManager
     {
         $responseData = DatabaseManager::getConnection()->select('metadata', ['codHttp' => $httpCode])[0]->metadata;
 
-        foreach ($responseData as $property => $value) {
-            if (property_exists($this->responseModel, $property)) {
-                $this->responseModel->{$property} = $value;
-            }
-        }
+        $this->responseModel->fill($responseData);
 
         $this->responseModel->description = $description;
     }
