@@ -27,4 +27,5 @@ class CouchbaseSettings
      * @var string
      */
     public $password = 'couchbase';
+
 }
