@@ -29,7 +29,7 @@ class SettingsFactory extends BaseFactory
      * Return true if added with success, false if element already exists
      *
      * @param string $element
-     * @param mixed $content
+     * @param mixed  $content
      *
      * @return bool
      */
