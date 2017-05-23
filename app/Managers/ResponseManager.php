@@ -44,9 +44,9 @@ class ResponseManager
     }
 
     /**
-     * Set HTTP Response Code
+     * Set HTTP Response Code.
      *
-     * @param Int $code
+     * @param int $code
      */
     public function setCode(Int $code)
     {
@@ -56,9 +56,10 @@ class ResponseManager
     /**
      * Set the Response Content.
      *
-     * @param int $httpCode
+     * @param int   $httpCode
      * @param mixed $description
-     * @param bool $returnContent
+     * @param bool  $returnContent
+     *
      * @return ResponseModel|null
      */
     public function setResponse(Int $httpCode, $description = null, bool $returnContent = false)

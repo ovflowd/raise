@@ -29,5 +29,4 @@ class CouchbaseSettings extends Model
      * @var string
      */
     public $password = 'couchbase';
-
 }
