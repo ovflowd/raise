@@ -10,14 +10,14 @@ use App\Models\Response\ResponseModel;
 class ResponseManager
 {
     /**
-     * Response Model
+     * Response Model.
      *
      * @var ResponseModel
      */
     private $responseModel = null;
 
     /**
-     * Create a ResponseManager Instance
+     * Create a ResponseManager Instance.
      *
      * @param null|string $contentType
      */
@@ -27,14 +27,15 @@ class ResponseManager
             $this->addHeader('Content-Type', $contentType);
         }
 
-        $this->responseModel = new ResponseModel;
+        $this->responseModel = new ResponseModel();
     }
 
     /**
-     * Add a Header to the Response
+     * Add a Header to the Response.
      *
-     * @param String $name
-     * @param String $value
+     * @param string $name
+     * @param string $value
+     *
      * @return void
      */
     public function addHeader(String $name, String $value)
@@ -43,7 +44,7 @@ class ResponseManager
     }
 
     /**
-     * Set the Response Content
+     * Set the Response Content.
      *
      * @param int $httpCode
      * @param $description
@@ -62,9 +63,10 @@ class ResponseManager
     }
 
     /**
-     * Get the Response Content
+     * Get the Response Content.
      *
      * @param null|callable $callback
+     *
      * @return string
      */
     public function getResponse($callback = null)

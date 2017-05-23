@@ -14,7 +14,7 @@
  */
 
 // Require Composer Autoloader
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 // Instance Router
 $router = new \Bramus\Router\Router();
@@ -23,10 +23,10 @@ $router = new \Bramus\Router\Router();
 $response = new \App\Managers\ResponseManager();
 
 // Load Routes
-$router = require_once __DIR__ . '/../app/routes.php';
+$router = require_once __DIR__.'/../app/routes.php';
 
 // Load Settings
-$settings = require_once __DIR__ . '/../app/settings.php';
+$settings = require_once __DIR__.'/../app/settings.php';
 
 // Store Settings
 \App\Handlers\SettingsHandler::store($settings);

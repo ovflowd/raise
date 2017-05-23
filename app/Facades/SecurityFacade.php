@@ -7,5 +7,5 @@ namespace App\Facades;
  */
 class SecurityFacade
 {
-    public abstract function generateToken();
+    abstract public function generateToken();
 }

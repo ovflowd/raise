@@ -7,7 +7,7 @@ namespace App\Facades;
  */
 class UtilitiesFacade
 {
-    public abstract function inArray(array $search, array $needle);
+    abstract public function inArray(array $search, array $needle);
 
-    public abstract function arrayDiff(array $original, array $compareTo);
+    abstract public function arrayDiff(array $original, array $compareTo);
 }
