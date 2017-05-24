@@ -48,7 +48,7 @@ class ResponseManager
      *
      * @param int $code
      */
-    public function setCode(Int $code)
+    public function setCode(int $code)
     {
         http_response_code($code);
     }
@@ -62,7 +62,7 @@ class ResponseManager
      *
      * @return ResponseModel|null
      */
-    public function setResponse(Int $httpCode, $description = null, bool $returnContent = false)
+    public function setResponse(int $httpCode, $description = null, bool $returnContent = false)
     {
         $this->setCode($httpCode);
 

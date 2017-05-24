@@ -17,13 +17,6 @@ class ResponseModel extends Model
     public $codHttp;
 
     /**
-     * Exception code from Couchbase Database functions.
-     *
-     * @var string
-     */
-    public $codCouch;
-
-    /**
      * Message about HTTP code and/or Couchbase exception code.
      *
      * @var string

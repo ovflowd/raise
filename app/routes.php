@@ -31,7 +31,7 @@ $router->get('/', function () use ($response) {
 
 $router->mount('/client', function () use ($router) {
     // Client Security
-    $router->before('GET|POST', '/*', function () {
+    $router->before('GET', '/*', function () {
         // Require User Authentication
     });
 
