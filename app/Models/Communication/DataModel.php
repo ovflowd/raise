@@ -15,7 +15,7 @@ class DataModel extends RaiseModel
     public $data = [];
 
     /**
-     * Service Identifier for the Data Bag
+     * Service Identifier for the Data Bag.
      *
      * @var int
      */
@@ -31,6 +31,6 @@ class DataModel extends RaiseModel
      */
     public function addBag(string $key, string $value)
     {
-        $this->data[] = array($key, $value);
+        $this->data[] = [$key, $value];
     }
 }
