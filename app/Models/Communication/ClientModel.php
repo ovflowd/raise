@@ -7,15 +7,45 @@ namespace App\Models\Communication;
  */
 class ClientModel extends RaiseModel
 {
-    public $name;
+    /**
+     * Client Name
+     *
+     * @var string
+     */
+    public $name = 'default client';
 
-    public $chipset;
+    /**
+     * Client Chipset Model
+     *
+     * @var string
+     */
+    public $chipset = '0000000000';
 
-    public $mac;
+    /**
+     * Client Mac Address
+     *
+     * @var string
+     */
+    public $mac = 'FF:FF:FF:FF';
 
-    public $serial;
+    /**
+     * Client Serial Model
+     *
+     * @var string
+     */
+    public $serial = '1.0.0';
 
-    public $processor;
+    /**
+     * Client Processor Model
+     *
+     * @var string
+     */
+    public $processor = 'i86-generic';
 
-    public $channel;
+    /**
+     * Client Communication Channel
+     *
+     * @var string
+     */
+    public $channel = 'ieee-wireless-80211';
 }

@@ -7,9 +7,24 @@ namespace App\Models\Communication;
  */
 class ServiceBagModel
 {
+    /**
+     * Service Name
+     *
+     * @var string
+     */
     public $name;
 
+    /**
+     * Parameters of the Service
+     *
+     * @var ServiceBagModel[]
+     */
     public $parameters = [];
 
-    public $return_type;
+    /**
+     * Return Type of a Service
+     *
+     * @var string
+     */
+    public $returnType = 'string';
 }

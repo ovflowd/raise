@@ -7,9 +7,24 @@ namespace App\Models\Communication;
  */
 class RaiseModel extends Model
 {
-    public $tags;
+    /**
+     * Data Tags
+     *
+     * @var array
+     */
+    public $tags = [];
 
-    public $client_time;
+    /**
+     * Time when the client sent the Data
+     *
+     * @var int (UNIX_TIMESTAMP)
+     */
+    public $clientTime = 0;
 
-    public $server_time;
+    /**
+     * Time when the server registered the Data
+     *
+     * @var int (UNIX_TIMESTAMP)
+     */
+    public $server_time = 0;
 }

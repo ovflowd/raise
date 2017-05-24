@@ -8,19 +8,29 @@ namespace App\Models\Communication;
 class DataModel extends RaiseModel
 {
     /**
-     * Array of Datas.
+     * Array of Data.
      *
-     * @var DataBagModel[]
+     * @var array
      */
     public $data = [];
 
     /**
+     * Service Identifier for the Data Bag
+     *
+     * @var int
+     */
+    public $serviceId;
+
+    /**
      * Add a Data Bag.
      *
-     * @param DataBagModel $bag
+     * DataBag: key:value
+     *
+     * @param string $key
+     * @param string $value
      */
-    public function addBag(DataBagModel $bag)
+    public function addBag(string $key, string $value)
     {
-        $this->data[] = $bag;
+        $this->data[] = array($key, $value);
     }
 }
