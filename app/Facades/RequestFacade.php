@@ -10,39 +10,39 @@ use stdClass;
 class RequestFacade
 {
     /**
-     * Requested Page Sent Headers
+     * Requested Page Sent Headers.
      *
      * @var array
      */
     private static $headers = [];
 
     /**
-     * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS)
+     * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS).
      *
      * @var string
      */
     private static $method = 'GET';
 
     /**
-     * Requested Page Body (POST, PUT)
+     * Requested Page Body (POST, PUT).
      *
      * @var object
      */
     private static $body = null;
 
     /**
-     * Requested Page Query String
+     * Requested Page Query String.
      *
      * @var array
      */
     private static $query = [];
 
     /**
-     * Prepare the RequestFacade with the Requested Page Data
+     * Prepare the RequestFacade with the Requested Page Data.
      *
-     * @param array $headers
+     * @param array  $headers
      * @param string $method
-     * @param array $server
+     * @param array  $server
      */
     public static function prepare(array $headers, string $method, array $server)
     {
@@ -54,11 +54,11 @@ class RequestFacade
 
         self::$query = $queryArray;
 
-        self::$body = JsonFacade::decode(file_get_contents('php://input') ?? new stdClass);
+        self::$body = JsonFacade::decode(file_get_contents('php://input') ?? new stdClass());
     }
 
     /**
-     * Return Requested Page Method
+     * Return Requested Page Method.
      *
      * @return string
      */
@@ -68,7 +68,7 @@ class RequestFacade
     }
 
     /**
-     * Return Requested Page Sent Headers
+     * Return Requested Page Sent Headers.
      *
      * @return array
      */
@@ -78,12 +78,13 @@ class RequestFacade
     }
 
     /**
-     * Return the Requested Body or a Parameter of the Body
+     * Return the Requested Body or a Parameter of the Body.
      *
      * Note.: Always an Object
      * Note.: Return false if doesn't exists
      *
      * @param string|null $key
+     *
      * @return object|bool
      */
     public static function body(string $key = null)
@@ -96,11 +97,12 @@ class RequestFacade
     }
 
     /**
-     * Return the Query String or a Parameter from the Query String if exists
+     * Return the Query String or a Parameter from the Query String if exists.
      *
      * Note.: Return false if doesn't exists
      *
      * @param string|null $key
+     *
      * @return array|mixed
      */
     public static function query(string $key = null)

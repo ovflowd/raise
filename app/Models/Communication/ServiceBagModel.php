@@ -8,21 +8,21 @@ namespace App\Models\Communication;
 class ServiceBagModel
 {
     /**
-     * Service Name
+     * Service Name.
      *
      * @var string
      */
     public $name;
 
     /**
-     * Parameters of the Service
+     * Parameters of the Service.
      *
      * @var ServiceBagModel[]
      */
     public $parameters = [];
 
     /**
-     * Return Type of a Service
+     * Return Type of a Service.
      *
      * @var string
      */
