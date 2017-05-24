@@ -46,20 +46,22 @@ class CouchbaseHandler extends DatabaseHandler
      * @param $data
      * @param null $parameters
      *
-     * @return void
+     * @return int The Unique Object Identifier
      */
     public function insert(String $table, $data, $parameters = null)
     {
         $itemId = openssl_random_pseudo_bytes(200);
 
         $this->connection->openBucket($table)->insert($itemId, $data);
+
+        return $itemId;
     }
 
     /**
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
