@@ -50,7 +50,9 @@ class RequestFacade
 
         self::$method = $method;
 
-        self::$query = parse_url($server['REQUEST_URI'], PHP_URL_QUERY);
+        parse_str(parse_url($server['REQUEST_URI'], PHP_URL_QUERY), $queryArray);
+
+        self::$query = $queryArray;
 
         self::$body = JsonFacade::decode(file_get_contents('php://input') ?? new stdClass);
     }
