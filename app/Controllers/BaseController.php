@@ -9,4 +9,5 @@ use App\Models\Interfaces\Controller;
  */
 abstract class BaseController implements Controller
 {
+
 }

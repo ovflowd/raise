@@ -31,8 +31,8 @@ $router->get('/', function () use ($response) {
 
 $router->mount('/client', function () use ($router) {
     // Client List Security
-    $router->before('GET', '/*', function () use ($router) {
-        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
+    $router->before('GET', '/*', function () {
+        //\App\Facades\SecurityFacade::validateToken(\App\Facades\RequestFacade::method(), \App\Facades\RequestFacade::query('token'));
     });
 
     // Register a Client
