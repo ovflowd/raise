@@ -2,6 +2,7 @@
 
 namespace App\Facades;
 
+use App\Handlers\CouchbaseHandler;
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
 
@@ -70,6 +71,8 @@ class SecurityFacade
             $model = new $className();
 
             $result = UtilitiesFacade::arrayDiff((array)$model, (array)$body);
+
+            $result = UtilitiesFacade::arrayDiff(array('serverTime'), array_values($result));
 
             return empty($result);
         }
