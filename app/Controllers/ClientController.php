@@ -12,7 +12,7 @@ use App\Models\Interfaces\Controller;
 class ClientController implements Controller
 {
     /**
-     * Register Process
+     * Register Process.
      *
      * @return mixed
      */

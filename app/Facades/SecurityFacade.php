@@ -51,9 +51,10 @@ class SecurityFacade
     /**
      * Check if the Given Parameters of the Body/Request are valid.
      *
-     * @param string $httpMethod
-     * @param string $modelName
+     * @param string       $httpMethod
+     * @param string       $modelName
      * @param array|object $body
+     *
      * @return bool
      */
     public static function validateParams(string $httpMethod, string $modelName, $body)
