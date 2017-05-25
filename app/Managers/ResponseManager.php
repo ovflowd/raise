@@ -70,7 +70,7 @@ class ResponseManager
      */
     public function getResponse($callback = null)
     {
-        if ($this->responseModel == null) {
+        if ($this->responseModel->codHttp == null) {
             $this->setResponse(404);
         }
 

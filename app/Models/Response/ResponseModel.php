@@ -12,7 +12,7 @@ class ResponseModel extends Model
     /**
      * Reference HTTP code about response of request.
      *
-     * @var string
+     * @var int
      */
     public $codHttp;
 
