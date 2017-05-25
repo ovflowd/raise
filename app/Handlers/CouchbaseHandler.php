@@ -50,7 +50,7 @@ class CouchbaseHandler implements Database
      *
      * @return int The Unique Object Identifier
      */
-    public function insert(string $bucket, $data, $parameters = null)
+    public function insert(string $table, $data, $parameters = null)
     {
         $itemId = openssl_random_pseudo_bytes(200);
 
