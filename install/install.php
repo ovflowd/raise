@@ -196,7 +196,7 @@ function setCredentials()
     echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.',
         '0;32', true);
 
-    if (count($argv) > 1) {
+    if (array_key_exists('-D', $argv)) {
         $user = str_replace('--user=', '', $argv[2]);
 
         $ip = str_replace('--address=', '', $argv[1]);
@@ -291,7 +291,7 @@ while (!$connectionOK) {
 
 $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
-if (!array_key_exists('--skip-create', $argv) || $argv['--skip-create'] == false) {
+if (!array_key_exists('--skip-create', $argv)) {
     echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
 
     echo PHP_EOL;
@@ -334,7 +334,7 @@ if (!array_key_exists('--skip-create', $argv) || $argv['--skip-create'] == false
     echo progressBar(7, 7, 'Buckets Created Successfully.');
 }
 
-if (!array_key_exists('--skip-fill', $argv) || $argv['--skip-fill'] == false) {
+if (!array_key_exists('--skip-fill', $argv)) {
     $readyToFill = false;
 
     echo PHP_EOL;
@@ -441,7 +441,7 @@ if (!array_key_exists('--skip-fill', $argv) || $argv['--skip-fill'] == false) {
 }
 
 // Configuration File only for Old RAISe
-if (!array_key_exists('--skip-configuration', $argv) || $argv['--skip-configuration'] == false) {
+if (!array_key_exists('--skip-configuration', $argv)) {
     echo 'Creating Configuration File...'.PHP_EOL;
 
     $configType = array_key_exists('--config-type', $argv) ? (string) $argv['--config-type'] : 'old';
