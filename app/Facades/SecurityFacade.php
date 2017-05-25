@@ -4,7 +4,6 @@ namespace App\Facades;
 
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
-use stdClass;
 
 /**
  * Class SecurityFacade.
@@ -23,10 +22,11 @@ class SecurityFacade
     }
 
     /**
-     * Check if the Token is Valid
+     * Check if the Token is Valid.
      *
      * @param string $httpMethod
      * @param string $token
+     *
      * @return bool
      */
     public static function validateToken(string $httpMethod, string $token)
@@ -49,7 +49,7 @@ class SecurityFacade
     }
 
     /**
-     * Check if the Given Parameters of the Body/Request are valid
+     * Check if the Given Parameters of the Body/Request are valid.
      *
      * @param string $httpMethod
      * @param string $modelName

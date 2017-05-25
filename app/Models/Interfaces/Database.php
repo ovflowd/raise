@@ -45,19 +45,21 @@ interface Database
     public function select(string $table, $parameters = null);
 
     /**
-     * Count number of Elements of a specific Query
+     * Count number of Elements of a specific Query.
      *
      * @param string $table
      * @param null $parameters
+     *
      * @return mixed
      */
     public function count(string $table, $parameters = null);
 
     /**
-     * Update an Element of the Database
+     * Update an Element of the Database.
      *
      * @param string $table
      * @param $elementIdentifier
+     *
      * @return mixed
      */
     public function update(string $table, $elementIdentifier);

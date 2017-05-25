@@ -12,27 +12,17 @@ use App\Models\Interfaces\Controller;
 class ClientController implements Controller
 {
     /**
-     * Return the Bucket Name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'client';
-    }
-
-    /**
      * Register Process
      *
      * @return mixed
      */
     public function register()
     {
-        SecurityFacade::validateParams('POST', 'client', RequestFacade::body(), )
+        SecurityFacade::validateParams('POST', 'client', RequestFacade::body());
     }
 
     /**
-     * List Process
+     * List Process.
      *
      * @return mixed
      */
