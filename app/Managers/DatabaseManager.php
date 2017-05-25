@@ -4,7 +4,7 @@ namespace App\Managers;
 
 use App\Handlers\CouchbaseHandler;
 use App\Handlers\SettingsHandler;
-use App\Models\Database\DatabaseHandler;
+use App\Models\Interfaces\Database;
 
 /**
  * Class CouchbaseManager.
@@ -14,7 +14,7 @@ class DatabaseManager
     /**
      * Database Handler Instance.
      *
-     * @var DatabaseHandler
+     * @var Database
      */
     private static $databaseHandler;
 
@@ -30,7 +30,7 @@ class DatabaseManager
      *
      * If the Connection doesn't exists, tries to connect.
      *
-     * @return CouchbaseHandler|DatabaseHandler
+     * @return CouchbaseHandler|Database
      */
     public static function getConnection()
     {
@@ -46,7 +46,7 @@ class DatabaseManager
     /**
      * Get Desired DatabaseHandler.
      *
-     * @return bool|DatabaseHandler
+     * @return bool|Database
      */
     public static function getHandler()
     {

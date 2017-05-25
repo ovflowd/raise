@@ -2,7 +2,7 @@
 
 namespace App\Handlers;
 
-use App\Models\Database\DatabaseHandler;
+use App\Models\Interfaces\Database;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
 use Koine\QueryBuilder\Statements\Select;
@@ -10,7 +10,7 @@ use Koine\QueryBuilder\Statements\Select;
 /**
  * Class CouchbaseHandler.
  */
-class CouchbaseHandler extends DatabaseHandler
+class CouchbaseHandler implements Database
 {
     /**
      * Couchbase Connection Instance.
