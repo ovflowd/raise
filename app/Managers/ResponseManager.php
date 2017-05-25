@@ -10,6 +10,12 @@ use App\Models\Response\ResponseModel;
 class ResponseManager
 {
     /**
+     * Response Manager Instance
+     *
+     * @var ResponseManager|null
+     */
+    private static $instance = null;
+    /**
      * Response Model.
      *
      * @var ResponseModel
@@ -23,6 +29,8 @@ class ResponseManager
      */
     public function __construct($contentType = null)
     {
+        self::$instance = $this;
+
         if ($contentType !== null) {
             $this->addHeader('Content-Type', $contentType);
         }
@@ -44,35 +52,13 @@ class ResponseManager
     }
 
     /**
-     * Set HTTP Response Code.
+     * Get Response Manager Instance
      *
-     * @param int $code
+     * @return ResponseManager|null
      */
-    public function setCode(int $code)
+    public static function get()
     {
-        http_response_code($code);
-    }
-
-    /**
-     * Set the Response Content.
-     *
-     * @param string $httpCode
-     * @param mixed  $description
-     * @param bool   $returnContent
-     *
-     * @return ResponseModel|null
-     */
-    public function setResponse(string $httpCode, $description = null, bool $returnContent = false)
-    {
-        $this->setCode($httpCode);
-
-        $responseData = DatabaseManager::getConnection()->select('metadata', [['codHttp', $httpCode, '=']])[0]->metadata;
-
-        $this->responseModel->fill($responseData);
-
-        $this->responseModel->description = $description;
-
-        return $returnContent ? $this->responseModel : null;
+        return self::$instance;
     }
 
     /**
@@ -84,6 +70,43 @@ class ResponseManager
      */
     public function getResponse($callback = null)
     {
+        if ($this->responseModel == null) {
+            $this->setResponse(404);
+        }
+
         return $callback($this->responseModel);
+    }
+
+    /**
+     * Set the Response Content.
+     *
+     * @param string $httpCode
+     * @param mixed $description
+     * @param bool $returnContent
+     *
+     * @return ResponseModel|null
+     */
+    public function setResponse(string $httpCode, $description = null, bool $returnContent = false)
+    {
+        $this->setCode($httpCode);
+
+        $responseData = DatabaseManager::getConnection()->select('metadata',
+            [['codHttp', $httpCode, '=']])[0]->metadata;
+
+        $this->responseModel->fill($responseData);
+
+        $this->responseModel->description = $description;
+
+        return $returnContent ? $this->responseModel : null;
+    }
+
+    /**
+     * Set HTTP Response Code.
+     *
+     * @param int $code
+     */
+    public function setCode(int $code)
+    {
+        http_response_code($code);
     }
 }

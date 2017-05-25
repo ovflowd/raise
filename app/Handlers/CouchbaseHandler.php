@@ -3,6 +3,7 @@
 namespace App\Handlers;
 
 use App\Models\Database\DatabaseHandler;
+use Couchbase\Exception;
 use Couchbase\N1qlQuery;
 use Koine\QueryBuilder\Statements\Select;
 
@@ -62,7 +63,7 @@ class CouchbaseHandler extends DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
@@ -90,5 +91,35 @@ class CouchbaseHandler extends DatabaseHandler
     public function selectById(string $table, string $id)
     {
         return $this->connection->openBucket($table)->get($id)->value;
+    }
+
+    /**
+     * Count number of Elements of a specific Query
+     *
+     * @param string $table
+     * @param null|int $parameters
+     * @return mixed
+     */
+    public function count(string $table, $parameters = null)
+    {
+        try {
+            $elements = $this->connection->openBucket($table)->get($parameters);
+
+            return is_array($elements) ? count($elements) : 1;
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Update an Element of the Database
+     *
+     * @param string $table
+     * @param $elementIdentifier
+     * @return mixed
+     */
+    public function update(string $table, $elementIdentifier)
+    {
+        // TODO: Implement update() method.
     }
 }

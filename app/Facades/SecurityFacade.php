@@ -2,6 +2,8 @@
 
 namespace App\Facades;
 
+use App\Managers\DatabaseManager;
+use App\Managers\ResponseManager;
 use App\Models\Communication\RaiseModel;
 use stdClass;
 
@@ -21,7 +23,42 @@ class SecurityFacade
         return openssl_random_pseudo_bytes(40);
     }
 
-    abstract public static function validateToken(string $httpMethod, string $token);
+    /**
+     * Check if the Token is Valid
+     *
+     * @param string $httpMethod
+     * @param string $token
+     * @return bool
+     */
+    public static function validateToken(string $httpMethod, string $token)
+    {
+        $token = $httpMethod == 'GET' ? RequestFacade::query('token') : RequestFacade::body('token');
 
-    abstract public static function validateParams(string $httpMethod, stdClass $body, RaiseModel $model);
+        if ($token == false) {
+            ResponseManager::get()->setResponse(401, 'No Token provided.');
+
+            return false;
+        }
+
+        if (DatabaseManager::getConnection()->count('token', $token) == 0) {
+            ResponseManager::get()->setResponse(401, 'Invalid Token provided.');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the Given Parameters of the Body/Request are valid
+     *
+     * @param string $httpMethod
+     * @param stdClass $body
+     * @param RaiseModel $model
+     * @return bool
+     */
+    public static function validateParams(string $httpMethod, stdClass $body, RaiseModel $model)
+    {
+        return false;
+    }
 }

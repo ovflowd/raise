@@ -1,5 +1,8 @@
 <?php
 
+use App\Facades\RequestFacade;
+use App\Facades\SecurityFacade;
+
 /**
  *  _    _ _____   _______
  * | |  | |_   _| |__   __|
@@ -30,16 +33,15 @@ $router->get('/', function () use ($response) {
 */
 
 $router->mount('/client', function () use ($router) {
-    // Client List Security
-    $router->before('GET', '/*', function () {
-        //\App\Facades\SecurityFacade::validateToken(\App\Facades\RequestFacade::method(), \App\Facades\RequestFacade::query('token'));
+    // Client Security
+    $router->before('GET', '/*', function () use ($router) {
+        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+            // List Clients
+            $router->get('/', 'ClientController@list');
+        }
     });
-
     // Register a Client
     $router->post('/register', 'ClientController@register');
-
-    // List Clients
-    $router->get('/', 'ClientController@list');
 });
 
 /*
@@ -49,21 +51,16 @@ $router->mount('/client', function () use ($router) {
 */
 
 $router->mount('/service', function () use ($router) {
-    // Service List Security
-    $router->before('GET', '/*', function () use ($router) {
-        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
+    // Service Security
+    $router->before('GET|POST', '/*', function () use ($router) {
+        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+            // Register a Service
+            $router->post('/register', 'ServiceController@register');
+
+            // List Service
+            $router->get('/', 'ServiceController@list');
+        }
     });
-
-    // Service Register Security
-    $router->before('POST', '/*', function () use ($router) {
-        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::body('token'));
-    });
-
-    // Register a Service
-    $router->post('/register', 'ServiceController@register');
-
-    // List Service
-    $router->get('/', 'ServiceController@list');
 });
 
 /*
@@ -73,21 +70,16 @@ $router->mount('/service', function () use ($router) {
 */
 
 $router->mount('/data', function () use ($router) {
-    // Data List Security
-    $router->before('GET', '/*', function () use ($router) {
-        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
+    // Data Security
+    $router->before('GET|POST', '/*', function () use ($router) {
+        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+            // Register Data
+            $router->post('/register', 'DataController@register');
+
+            // List Data
+            $router->get('/', 'DataController@list');
+        }
     });
-
-    // Data Register Security
-    $router->before('POST', '/*', function () use ($router) {
-        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::body('token'));
-    });
-
-    // Register Data
-    $router->post('/register', 'DataController@register');
-
-    // List Data
-    $router->get('/', 'DataController@list');
 });
 
 /*

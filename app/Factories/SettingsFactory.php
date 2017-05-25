@@ -29,13 +29,13 @@ class SettingsFactory extends BaseFactory
      * Return true if added with success, false if element already exists
      *
      * @param string $element
-     * @param mixed  $content
+     * @param mixed $content
      *
      * @return bool
      */
     public static function add(string $element, $content)
     {
-        $className = ('App\Models\Settings\\'.ucfirst($element).'Settings');
+        $className = ('App\Models\Settings\\' . ucfirst($element) . 'Settings');
 
         if (!array_key_exists($element, self::getInstance()->elements) && class_exists($className)) {
             self::getInstance()->elements[$element] = (new $className())->fill($content);

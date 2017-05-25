@@ -38,9 +38,27 @@ abstract class DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
     abstract public function select(string $table, $parameters = null);
+
+    /**
+     * Count number of Elements of a specific Query
+     *
+     * @param string $table
+     * @param null $parameters
+     * @return mixed
+     */
+    abstract public function count(string $table, $parameters = null);
+
+    /**
+     * Update an Element of the Database
+     *
+     * @param string $table
+     * @param $elementIdentifier
+     * @return mixed
+     */
+    abstract public function update(string $table, $elementIdentifier);
 }
