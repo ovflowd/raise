@@ -60,6 +60,8 @@ You can learn more about the <b>RAISe</b> architecture by checking our [Wiki](wi
 * [Design and Evaluation of a Services Interface for the Internet of Things](http://dl.acm.org/citation.cfm?id=3023305)
 * Other Papers being Added on the list.
 
+You can also **fetch** the [API Documentation](tree/sbr/docs/) and check it **online** by using [Swagger UI](http://docs.uiot.org/raise/).
+
 <br>
 <br>
 <img align="right" src="http://3.bp.blogspot.com/_0oAS_01e8zM/SfEXdfGyQRI/AAAAAAAAAEI/D94K-PR5owU/s200/unb_logo.gif">
