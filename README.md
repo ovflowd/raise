@@ -12,6 +12,20 @@ Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
 Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek2p0hnc5)](https://ci.appveyor.com/project/uiot/raise)   | [![Build Status](https://travis-ci.org/UIoT/RAISe.svg?branch=sbr)](https://travis-ci.org/UIoT/RAISe) | [Artifacts](https://ci.appveyor.com/project/uiot/raise/branch/sbr/artifacts) |
 
+<b>Supported Features</b>
+
+| Feature  |  Supported?   | Description  |
+|----------|:-------------:|:-------------|
+| Home Page |    &#10004;  |  Ability of accessing the main route of **RAIse** to check the status of the middleware. |
+| Not Found Route |    &#10004;  |  Ability of accessing a non-existent route and receive a response of the route doesn't exists. |
+| Register a Client |    &#10008;  |  Ability of Registering a Client within RAISe. |
+| Revalidate a Client |    &#10008;  |  Ability of Revalidating a Client when the Token expires. |
+| Register a Service |    &#10008;  |  Ability of Registering a Service or multiple Services in one time within RAISe. |
+| Send Data |    &#10008;  |  Ability of Sending Data froma  Service+Client within RAISe. |
+| List a Client or Clients |    &#10008;  |  Ability to Get a Client or multiple Clients, list and filter the parameters for the Response. |
+| List a Service or Services |    &#10008;  |  Ability to Get a Service or multiple Services, list and filter the parameters for the Response. |
+| List and filter Data |    &#10008;  |  Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
+
 UIoT RAISe
 ----------
 
