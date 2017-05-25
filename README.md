@@ -42,6 +42,8 @@ You can install <b>RAISe</b> by easily going on our [Wiki](wiki) and check the I
 
 Any troubles that you may/have, check our [Contributing/Reporting Guide](sbr/CONTRIBUTING.md).
 
+You can also check the [Table of Contents of the RAISe Installer](wiki/installer-reference).
+
 Contributing
 ------------
 
