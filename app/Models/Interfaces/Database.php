@@ -38,7 +38,7 @@ interface Database
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
@@ -48,7 +48,7 @@ interface Database
      * Count number of Elements of a specific Query.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */

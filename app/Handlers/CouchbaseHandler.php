@@ -45,14 +45,14 @@ class CouchbaseHandler implements Database
      * Insert Data on Database.
      *
      * @param string $table
-     * @param $data
+     * @param object|array $data
      * @param null $parameters
      *
      * @return int The Unique Object Identifier
      */
     public function insert(string $table, $data, $parameters = null)
     {
-        $itemId = openssl_random_pseudo_bytes(200);
+        $itemId = $parameters == null ? bin2hex(openssl_random_pseudo_bytes(20)) : $parameters;
 
         $this->connection->openBucket($table)->insert($itemId, $data);
 
@@ -63,7 +63,7 @@ class CouchbaseHandler implements Database
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param null $parameters
      *
      * @return mixed
      */
@@ -96,7 +96,7 @@ class CouchbaseHandler implements Database
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string   $table
+     * @param string $table
      * @param null|int $parameters
      *
      * @return mixed

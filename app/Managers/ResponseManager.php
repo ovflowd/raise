@@ -81,8 +81,8 @@ class ResponseManager
      * Set the Response Content.
      *
      * @param string $httpCode
-     * @param mixed  $description
-     * @param bool   $returnContent
+     * @param mixed $description
+     * @param bool $returnContent
      *
      * @return ResponseModel|null
      */
