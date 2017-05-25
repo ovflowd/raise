@@ -19,6 +19,9 @@ require_once __DIR__.'/../vendor/autoload.php';
 // Instance Router
 $router = new \Bramus\Router\Router();
 
+// Prepare Request Utilities
+\App\Facades\RequestFacade::prepare($router->getRequestHeaders(), $router->getRequestMethod(), $_SERVER);
+
 // Response Manager
 $response = new \App\Managers\ResponseManager('application/json');
 

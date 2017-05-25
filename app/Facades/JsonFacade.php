@@ -27,7 +27,7 @@ class JsonFacade
      *
      * @return mixed
      */
-    public static function decode(String $content)
+    public static function decode(string $content)
     {
         return json_decode($content);
     }

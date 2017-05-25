@@ -16,7 +16,7 @@ class SettingsHandler
      *
      * @return bool|mixed
      */
-    public static function get(String $configuration)
+    public static function get(string $configuration)
     {
         if (strpos($configuration, '.') !== false) {
             $values = explode('.', $configuration);
@@ -49,7 +49,7 @@ class SettingsHandler
      *
      * @return bool
      */
-    public static function add(String $modelName, array $configurationSet)
+    public static function add(string $modelName, array $configurationSet)
     {
         return SettingsFactory::add($modelName, $configurationSet);
     }

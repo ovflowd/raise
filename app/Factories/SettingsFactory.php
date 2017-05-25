@@ -17,7 +17,7 @@ class SettingsFactory extends BaseFactory
      *
      * @return mixed|bool
      */
-    public static function get(String $element)
+    public static function get(string $element)
     {
         return array_key_exists($element, self::getInstance()->elements)
             ? self::getInstance()->elements[$element] : false;
@@ -33,7 +33,7 @@ class SettingsFactory extends BaseFactory
      *
      * @return bool
      */
-    public static function add(String $element, $content)
+    public static function add(string $element, $content)
     {
         $className = ('App\Models\Settings\\'.ucfirst($element).'Settings');
 
@@ -55,7 +55,7 @@ class SettingsFactory extends BaseFactory
      *
      * @return bool
      */
-    public static function remove(String $element)
+    public static function remove(string $element)
     {
         if (array_key_exists($element, self::getInstance()->elements)) {
             unset(self::getInstance()->elements[$element]);

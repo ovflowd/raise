@@ -4,6 +4,7 @@ namespace App\Handlers;
 
 use App\Models\Database\DatabaseHandler;
 use Couchbase\N1qlQuery;
+use Koine\QueryBuilder\Statements\Select;
 
 /**
  * Class CouchbaseHandler.
@@ -48,7 +49,7 @@ class CouchbaseHandler extends DatabaseHandler
      *
      * @return int The Unique Object Identifier
      */
-    public function insert(String $table, $data, $parameters = null)
+    public function insert(string $table, $data, $parameters = null)
     {
         $itemId = openssl_random_pseudo_bytes(200);
 
@@ -61,23 +62,33 @@ class CouchbaseHandler extends DatabaseHandler
      * Select Data on Database.
      *
      * @param string $table
-     * @param null $parameters
+     * @param null   $parameters
      *
      * @return mixed
      */
-    public function select(String $table, $parameters = null)
+    public function select(string $table, $parameters = null)
     {
-        $params = '';
-        $lastParam = end($parameters);
+        $query = new Select();
 
-        foreach ($parameters as $name => $value) {
-            if ($lastParam == $value) {
-                $params .= "{$name} = '{$value}'";
-            } else {
-                $params .= "{$name} = '{$value}',";
-            }
-        }
+        $query->select('*');
 
-        return $this->connection->openBucket($table)->query(N1qlQuery::fromString("SELECT * FROM {$table} WHERE {$params}"))->rows;
+        $query->from($table);
+
+        $query->where($parameters);
+
+        return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
+    }
+
+    /**
+     * Select an Object by its Identifier.
+     *
+     * @param string $table
+     * @param string $id
+     *
+     * @return object|null
+     */
+    public function selectById(string $table, string $id)
+    {
+        return $this->connection->openBucket($table)->get($id)->value;
     }
 }

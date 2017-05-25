@@ -24,7 +24,7 @@ abstract class BaseFactory
      *
      * @return mixed|bool
      */
-    abstract public static function get(String $element);
+    abstract public static function get(string $element);
 
     /**
      * Add an Element.
@@ -34,7 +34,7 @@ abstract class BaseFactory
      *
      * @return mixed
      */
-    abstract public static function add(String $element, $content);
+    abstract public static function add(string $element, $content);
 
     /**
      * Remove an Element.
@@ -45,7 +45,7 @@ abstract class BaseFactory
      *
      * @return bool
      */
-    abstract public static function remove(String $element);
+    abstract public static function remove(string $element);
 
     /**
      * Create an Instance if not exists

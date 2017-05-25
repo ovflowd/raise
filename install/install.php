@@ -19,6 +19,11 @@ set_time_limit(0);
 // Enable $argv
 ini_set('register_argc_argv', true);
 
+// We don't want error reporting during execution of the script
+ini_set('display_errors', false);
+
+error_reporting(0);
+
 /**
  * Create a Configuration File.
  *
@@ -105,12 +110,9 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
 {
     $metadataBucket = $connection->openBucket('metadata');
 
-    $metadataName = uniqid('', true);
-
-    $metadataBucket->insert($metadataName, [
-        'codHttp'  => $details->codHttp,
-        'codCouch' => $details->codCouch,
-        'message'  => $details->message,
+    $metadataBucket->insert((string) $details->codHttp, [
+        'codHttp' => $details->codHttp,
+        'message' => $details->message,
     ]);
 }
 
@@ -194,7 +196,7 @@ function setCredentials()
     echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.',
         '0;32', true);
 
-    if (count($argv) > 1) {
+    if (array_key_exists('-D', $argv)) {
         $user = str_replace('--user=', '', $argv[2]);
 
         $ip = str_replace('--address=', '', $argv[1]);
@@ -289,7 +291,7 @@ while (!$connectionOK) {
 
 $connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
-if (!array_key_exists('--skip-create', $argv) || $argv['--skip-create'] == false) {
+if (!array_key_exists('--skip-create', $argv)) {
     echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
 
     echo PHP_EOL;
@@ -300,13 +302,15 @@ if (!array_key_exists('--skip-create', $argv) || $argv['--skip-create'] == false
 
     $memoryQuota = $serverInfo->memoryQuota;
 
+    communicateCouchbase('pools/default', $credentials, ['indexMemoryQuota' => ($memoryQuota / 8)]);
+
     echo writeText('INFO', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
     $buckets = [
-        'metadata' => floor((($memoryQuota / 100) * 4)),
-        'client'   => floor((($memoryQuota / 100) * 12)),
-        'service'  => floor((($memoryQuota / 100) * 12)),
-        'token'    => floor((($memoryQuota / 100) * 12)),
+        'metadata' => floor((($memoryQuota / 100) * 5)),
+        'client'   => floor((($memoryQuota / 100) * 10)),
+        'service'  => floor((($memoryQuota / 100) * 10)),
+        'token'    => floor((($memoryQuota / 100) * 10)),
         'data'     => floor((($memoryQuota / 100) * 20)),
         'response' => floor((($memoryQuota / 100) * 20)),
     ];
@@ -330,7 +334,7 @@ if (!array_key_exists('--skip-create', $argv) || $argv['--skip-create'] == false
     echo progressBar(7, 7, 'Buckets Created Successfully.');
 }
 
-if (!array_key_exists('--skip-fill', $argv) || $argv['--skip-fill'] == false) {
+if (!array_key_exists('--skip-fill', $argv)) {
     $readyToFill = false;
 
     echo PHP_EOL;
@@ -437,12 +441,10 @@ if (!array_key_exists('--skip-fill', $argv) || $argv['--skip-fill'] == false) {
 }
 
 // Configuration File only for Old RAISe
-if (!array_key_exists('--skip-configuration', $argv) || $argv['--skip-configuration'] == false) {
+if (!array_key_exists('--skip-configuration', $argv)) {
     echo 'Creating Configuration File...'.PHP_EOL;
 
-    $configType = array_key_exists('--config-type', $argv) ? (string) $argv['--config-type'] : 'old';
-
-    createConfigurationFile('../Config/Config.php', $configType, $credentials);
+    createConfigurationFile('../Config/Config.php', 'old', $credentials);
 }
 
 echo "\033[42mSetup Finished.\033[0m".PHP_EOL;

@@ -30,9 +30,9 @@ $router->get('/', function () use ($response) {
 */
 
 $router->mount('/client', function () use ($router) {
-    // Client Security
-    $router->before('GET', '/*', function () {
-        // Require User Authentication
+    // Client List Security
+    $router->before('GET', '/*', function () use ($router) {
+        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
     });
 
     // Register a Client
@@ -49,9 +49,14 @@ $router->mount('/client', function () use ($router) {
 */
 
 $router->mount('/service', function () use ($router) {
-    // Service Security
-    $router->before('GET|POST', '/*', function () {
-        // Require User Authentication
+    // Service List Security
+    $router->before('GET', '/*', function () use ($router) {
+        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
+    });
+
+    // Service Register Security
+    $router->before('POST', '/*', function () use ($router) {
+        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::body('token'));
     });
 
     // Register a Service
@@ -68,9 +73,14 @@ $router->mount('/service', function () use ($router) {
 */
 
 $router->mount('/data', function () use ($router) {
-    // Data Security
-    $router->before('GET|POST', '/*', function () {
-        // Require User Authentication
+    // Data List Security
+    $router->before('GET', '/*', function () use ($router) {
+        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::query('token'));
+    });
+
+    // Data Register Security
+    $router->before('POST', '/*', function () use ($router) {
+        //\App\Facades\SecurityFacade::validateToken($router->getRequestMethod(), \App\Facades\RequestFacade::body('token'));
     });
 
     // Register Data

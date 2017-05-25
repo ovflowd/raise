@@ -1,297 +1,235 @@
 [
   {
-    "codCouch": "00",
-    "codHttp": "200",
+    "codHttp": 200,
     "message": "Success"
   },
   {
-    "codCouch": "",
-    "codHttp": "201",
+    "codHttp": 201,
     "message": "Created"
   },
   {
-    "codCouch": "",
-    "codHttp": "202",
+    "codHttp": 202,
     "message": "Welcome to RAISe!"
   },
   {
-    "codCouch": "",
-    "codHttp": "203",
+    "codHttp": 203,
     "message": "Non-Authoritative Information"
   },
   {
-    "codCouch": "",
-    "codHttp": "204",
+    "codHttp": 204,
     "message": "No Content"
   },
   {
-    "codCouch": "",
-    "codHttp": "205",
+    "codHttp": 205,
     "message": "Reset Content"
   },
   {
-    "codCouch": "",
-    "codHttp": "206",
+    "codHttp": 206,
     "message": "Partial Content"
   },
   {
-    "codCouch": "",
-    "codHttp": "207",
+    "codHttp": 207,
     "message": "Multi-Status"
   },
   {
     "codCouch": "00",
-    "codHttp": "208",
+    "codHttp": 208,
     "message": "Already Reported"
   },
   {
-    "codCouch": "",
-    "codHttp": "226",
+    "codHttp": 226,
     "message": "IM Used"
   },
   {
-    "codCouch": "",
-    "codHttp": "300",
+    "codHttp": 300,
     "message": "Multiple Choices"
   },
   {
-    "codCouch": "",
-    "codHttp": "301",
+    "codHttp": 301,
     "message": "Moced Permanently"
   },
   {
-    "codCouch": "",
-    "codHttp": "302",
+    "codHttp": 302,
     "message": "Found"
   },
   {
-    "codCouch": "",
-    "codHttp": "303",
+    "codHttp": 303,
     "message": "See Other"
   },
   {
-    "codCouch": "",
-    "codHttp": "304",
+    "codHttp": 304,
     "message": "Not Modified"
   },
   {
-    "codCouch": "",
-    "codHttp": "305",
+    "codHttp": 305,
     "message": "Use Proxy"
   },
   {
-    "codCouch": "",
-    "codHttp": "306",
+    "codHttp": 306,
     "message": "Swich Proxy"
   },
   {
-    "codCouch": "",
-    "codHttp": "307",
+    "codHttp": 307,
     "message": "Temporary Redirect"
   },
   {
-    "codCouch": "",
-    "codHttp": "308",
+    "codHttp": 308,
     "message": "Permanent Redirect"
   },
   {
-    "codCouch": "",
-    "codHttp": "400",
+    "codHttp": 400,
     "message": "Bad Request"
   },
   {
-    "codCouch": "",
-    "codHttp": "401",
+    "codHttp": 401,
     "message": "Unauthorized"
   },
   {
-    "codCouch": "",
-    "codHttp": "402",
+    "codHttp": 402,
     "message": "Payment Required"
   },
   {
-    "codCouch": "",
-    "codHttp": "403",
+    "codHttp": 403,
     "message": "Forbidden"
   },
   {
-    "codCouch": "",
-    "codHttp": "404",
+    "codHttp": 404,
     "message": "Not Found"
   },
   {
-    "codCouch": "",
-    "codHttp": "405",
+    "codHttp": 405,
     "message": "Method Not Allowed"
   },
   {
-    "codCouch": "",
-    "codHttp": "406",
+    "codHttp": 406,
     "message": "Not acceptable"
   },
   {
-    "codCouch": "",
-    "codHttp": "407",
+    "codHttp": 407,
     "message": "Proxy Authentication Required"
   },
   {
-    "codCouch": "",
-    "codHttp": "408",
+    "codHttp": 408,
     "message": "Request Timeout"
   },
   {
-    "codCouch": "",
-    "codHttp": "409",
+    "codHttp": 409,
     "message": "Conflict"
   },
   {
-    "codCouch": "",
-    "codHttp": "410",
+    "codHttp": 410,
     "message": "Gone"
   },
   {
-    "codCouch": "",
-    "codHttp": "411",
+    "codHttp": 411,
     "message": "Length Requered"
   },
   {
-    "codCouch": "",
-    "codHttp": "412",
+    "codHttp": 412,
     "message": "Precondition Failed"
   },
   {
-    "codCouch": "",
-    "codHttp": "413",
+    "codHttp": 413,
     "message": "Payload too Large"
   },
   {
-    "codCouch": "",
-    "codHttp": "414",
+    "codHttp": 414,
     "message": "URI too Long"
   },
   {
-    "codCouch": "",
-    "codHttp": "415",
+    "codHttp": 415,
     "message": "Unsupported Media Type"
   },
   {
-    "codCouch": "",
-    "codHttp": "416",
+    "codHttp": 416,
     "message": "Range Not satisfiable"
   },
   {
-    "codCouch": "01",
-    "codHttp": "417",
+    "codHttp": 417,
     "message": "Expectation Failed"
   },
   {
-    "codCouch": "",
-    "codHttp": "418",
+    "codHttp": 418,
     "message": "I'm a teapot"
   },
   {
-    "codCouch": "",
-    "codHttp": "421",
+    "codHttp": 421,
     "message": "Misdirected Request"
   },
   {
-    "codCouch": "",
-    "codHttp": "422",
+    "codHttp": 422,
     "message": "Unprocessable Entity"
   },
   {
-    "codCouch": "",
-    "codHttp": "423",
+    "codHttp": 423,
     "message": "Locked"
   },
   {
-    "codCouch": "",
-    "codHttp": "424",
+    "codHttp": 424,
     "message": "Failed Dependency"
   },
   {
-    "codCouch": "",
-    "codHttp": "426",
+    "codHttp": 426,
     "message": "Upgrade Required"
   },
   {
-    "codCouch": "",
-    "codHttp": "428",
+    "codHttp": 428,
     "message": "Precodition Required"
   },
   {
-    "codCouch": "05",
-    "codHttp": "429",
+    "codHttp": 429,
     "message": "Too Many Requests"
   },
   {
-    "codCouch": "",
-    "codHttp": "431",
+    "codHttp": 431,
     "message": "Request Header Fields Too Large"
   },
   {
-    "codCouch": "",
-    "codHttp": "451",
+    "codHttp": 451,
     "message": "Unavailable For Legal Reasons"
   },
   {
-    "codCouch": "06",
-    "codHttp": "500",
+    "codHttp": 500,
     "message": "Internal Server Error"
   },
   {
-    "codCouch": "",
-    "codHttp": "501",
+    "codHttp": 501,
     "message": "Not Implemented"
   },
   {
-    "codCouch": "",
-    "codHttp": "502",
+    "codHttp": 502,
     "message": "Bad Gateway"
   },
   {
-    "codCouch": "08",
-    "codHttp": "503",
+    "codHttp": 503,
     "message": "Service Unavailable"
   },
   {
-    "codCouch": "",
-    "codHttp": "504",
+    "codHttp": 504,
     "message": "Gateway Timeout"
   },
   {
-    "codCouch": "",
-    "codHttp": "505",
+    "codHttp": 505,
     "message": "HTTP version Not supported"
   },
   {
-    "codCouch": "",
-    "codHttp": "506",
+    "codHttp": 506,
     "message": "Variant Also Negotiates"
   },
   {
-    "codCouch": "04",
-    "codHttp": "507",
+    "codHttp": 507,
     "message": "Insufficient Storage"
   },
   {
-    "codCouch": "",
-    "codHttp": "508",
+    "codHttp": 508,
     "message": "loop Detected"
   },
   {
-    "codCouch": "",
-    "codHttp": "510",
+    "codHttp": 510,
     "message": "Not Extended"
   },
   {
-    "codCouch": "",
-    "codHttp": "511",
+    "codHttp": 511,
     "message": "Network Authentication Required"
-  },
-  {
-    "codCouch": "59",
-    "codHttp": "",
-    "message": "Internal Error"
   }
 ]
