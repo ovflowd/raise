@@ -10,7 +10,7 @@ use App\Models\Interfaces\Controller;
 class ServiceController implements Controller
 {
     /**
-     * Register Process
+     * Register Process.
      *
      * @return mixed
      */
@@ -20,7 +20,7 @@ class ServiceController implements Controller
     }
 
     /**
-     * List Process
+     * List Process.
      *
      * @return mixed
      */

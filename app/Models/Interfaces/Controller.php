@@ -8,14 +8,14 @@ namespace App\Models\Interfaces;
 interface Controller
 {
     /**
-     * Register Process
+     * Register Process.
      *
      * @return mixed
      */
     public function register();
 
     /**
-     * List Process
+     * List Process.
      *
      * @return mixed
      */
