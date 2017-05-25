@@ -45,7 +45,7 @@ class SettingsHandler
      * Return true if created with success and if class exists, false if it not exists
      *
      * @param string $modelName
-     * @param array $configurationSet
+     * @param array  $configurationSet
      *
      * @return bool
      */
