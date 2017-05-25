@@ -35,7 +35,7 @@ $router->get('/', function () use ($response) {
 $router->mount('/client', function () use ($router) {
     // Client Security
     $router->before('GET', '/*', function () use ($router) {
-        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+        if (SecurityFacade::validateToken(RequestFacade::query('token'))) {
             // List Clients
             $router->get('/', '\App\Controllers\ClientController@list');
         }
@@ -53,7 +53,7 @@ $router->mount('/client', function () use ($router) {
 $router->mount('/service', function () use ($router) {
     // Service Security
     $router->before('GET|POST', '/*', function () use ($router) {
-        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+        if (SecurityFacade::validateToken($router->getRequestMethod() == 'GET' ? RequestFacade::query('token') : RequestFacade::body('token'))) {
             // Register a Service
             $router->post('/register', '\App\Controllers\ServiceController@register');
 
@@ -72,7 +72,7 @@ $router->mount('/service', function () use ($router) {
 $router->mount('/data', function () use ($router) {
     // Data Security
     $router->before('GET|POST', '/*', function () use ($router) {
-        if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
+        if (SecurityFacade::validateToken($router->getRequestMethod() == 'GET' ? RequestFacade::query('token') : RequestFacade::body('token'))) {
             // Register Data
             $router->post('/register', '\App\Controllers\DataController@register');
 

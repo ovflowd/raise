@@ -40,15 +40,12 @@ class SecurityFacade
     /**
      * Check if the Token is Valid.
      *
-     * @param string $httpMethod
      * @param string $token
      *
      * @return bool
      */
-    public static function validateToken(string $httpMethod, string $token)
+    public static function validateToken(string $token)
     {
-        $token = $httpMethod == 'GET' ? RequestFacade::query('token') : RequestFacade::body('token');
-
         if ($token == false) {
             ResponseManager::get()->setResponse(401, 'No Token provided.');
 
