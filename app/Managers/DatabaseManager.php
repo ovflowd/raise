@@ -52,7 +52,7 @@ class DatabaseManager
     {
         $handler = SettingsHandler::get('raise.databaseType');
 
-        $className = ('App\Handlers\\' . ucfirst($handler) . 'Handler');
+        $className = ('App\Handlers\\'.ucfirst($handler).'Handler');
 
         if (class_exists($className)) {
             self::$configuration = SettingsHandler::get($handler);
