@@ -45,7 +45,7 @@ return [
     */
 
     'security' => [
-
+        'expireTime' => '2hours'
     ],
 
     /*
