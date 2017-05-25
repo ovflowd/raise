@@ -30,7 +30,7 @@ class SecurityFacade
      */
     public static function insertToken(string $token, string $clientId)
     {
-        $model = (new TokenModel)->fill(array('serverTime' => time(), 'clientId' => $clientId));
+        $model = (new TokenModel)->fill(array('serverTime' => microtime(true), 'clientId' => $clientId));
 
         $model->setExpireTime();
 

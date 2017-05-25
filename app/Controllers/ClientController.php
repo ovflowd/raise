@@ -16,11 +16,13 @@ class ClientController implements Controller
     /**
      * Register Process.
      *
-     * @return mixed
+     * @return void
      */
     public function register()
     {
-        if (SecurityFacade::validateBody('client', RequestFacade::body()) == false) {
+        $model = RequestFacade::body();
+
+        if (SecurityFacade::validateBody('client', $model) == false) {
             ResponseManager::get()->setResponse(400, "Missing required Parameters");
 
             return;
@@ -28,7 +30,9 @@ class ClientController implements Controller
 
         $token = SecurityFacade::generateToken();
 
-        SecurityFacade::insertToken($token, DatabaseManager::getConnection()->insert('client', RequestFacade::body()));
+        $model->serverTime = microtime(true);
+
+        SecurityFacade::insertToken($token, DatabaseManager::getConnection()->insert('client', $model));
 
         ResponseManager::get()->setResponse(200, $token);
     }
@@ -36,7 +40,7 @@ class ClientController implements Controller
     /**
      * List Process.
      *
-     * @return mixed
+     * @return void
      */
     public function list()
     {
