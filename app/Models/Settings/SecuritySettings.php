@@ -10,7 +10,7 @@ use App\Models\Communication\Model;
 class SecuritySettings extends Model
 {
     /**
-     * Token Expire Time
+     * Token Expire Time.
      *
      * @var string
      */

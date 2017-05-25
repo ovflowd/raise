@@ -21,7 +21,7 @@ class ClientController implements Controller
     public function register()
     {
         if (SecurityFacade::validateBody('client', RequestFacade::body()) == false) {
-            ResponseManager::get()->setResponse(400, "Missing required Parameters");
+            ResponseManager::get()->setResponse(400, 'Missing required Parameters');
 
             return;
         }
