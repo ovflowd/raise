@@ -444,9 +444,7 @@ if (!array_key_exists('--skip-fill', $argv)) {
 if (!array_key_exists('--skip-configuration', $argv)) {
     echo 'Creating Configuration File...'.PHP_EOL;
 
-    $configType = array_key_exists('--config-type', $argv) ? (string) $argv['--config-type'] : 'old';
-
-    createConfigurationFile('../Config/Config.php', $configType, $credentials);
+    createConfigurationFile('../Config/Config.php', 'old', $credentials);
 }
 
 echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
