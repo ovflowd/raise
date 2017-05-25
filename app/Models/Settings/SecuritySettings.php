@@ -9,4 +9,10 @@ use App\Models\Communication\Model;
  */
 class SecuritySettings extends Model
 {
+    /**
+     * Token Expire Time
+     *
+     * @var string
+     */
+    public $expireTime = '2hours';
 }
