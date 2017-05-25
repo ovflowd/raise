@@ -19,7 +19,8 @@
   ],
   "require-dev": {
     "phpunit/phpunit": "^6.1",
-    "swagger-api/swagger-ui": "^3.0"
+    "swagger-api/swagger-ui": "^3.0",
+    "nategood/httpful": "^0.2.20"
   },
   "scripts": {
     "post-update-cmd": "",
