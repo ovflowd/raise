@@ -8,10 +8,11 @@ namespace App\Facades;
 class UtilitiesFacade
 {
     /**
-     * Compares two arrays and returns their difference
+     * Compares two arrays and returns their difference.
      *
      * @param array $original
      * @param array $compareTo
+     *
      * @return array
      */
     public static function arrayDiff(array $original, array $compareTo)
