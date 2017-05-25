@@ -10,7 +10,7 @@ use App\Models\Response\ResponseModel;
 class ResponseManager
 {
     /**
-     * Response Manager Instance
+     * Response Manager Instance.
      *
      * @var ResponseManager|null
      */
@@ -52,7 +52,7 @@ class ResponseManager
     }
 
     /**
-     * Get Response Manager Instance
+     * Get Response Manager Instance.
      *
      * @return ResponseManager|null
      */
@@ -81,8 +81,8 @@ class ResponseManager
      * Set the Response Content.
      *
      * @param string $httpCode
-     * @param mixed $description
-     * @param bool $returnContent
+     * @param mixed  $description
+     * @param bool   $returnContent
      *
      * @return ResponseModel|null
      */
