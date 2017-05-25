@@ -26,5 +26,5 @@ class RaiseModel extends Model
      *
      * @var int (UNIX_TIMESTAMP)
      */
-    public $server_time = 0;
+    public $serverTime = 0;
 }

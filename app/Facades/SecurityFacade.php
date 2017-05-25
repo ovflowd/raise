@@ -21,6 +21,11 @@ class SecurityFacade
         return openssl_random_pseudo_bytes(40);
     }
 
+    public static function insertToken(string $token)
+    {
+
+    }
+
     /**
      * Check if the Token is Valid.
      *
@@ -51,14 +56,24 @@ class SecurityFacade
     /**
      * Check if the Given Parameters of the Body/Request are valid.
      *
-     * @param string       $httpMethod
-     * @param string       $modelName
+     * @param string $httpMethod
+     * @param string $modelName
      * @param array|object $body
      *
      * @return bool
      */
     public static function validateParams(string $httpMethod, string $modelName, $body)
     {
+        $className = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
+
+        if (class_exists($className)) {
+            $model = new $className();
+
+            $result = UtilitiesFacade::arrayDiff((array)$model, (array)$body);
+
+            return empty($result);
+        }
+
         return false;
     }
 }

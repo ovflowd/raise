@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Facades\RequestFacade;
 use App\Facades\SecurityFacade;
+use App\Managers\ResponseManager;
 use App\Models\Interfaces\Controller;
 
 /**
@@ -18,7 +19,13 @@ class ClientController implements Controller
      */
     public function register()
     {
-        SecurityFacade::validateParams('POST', 'client', RequestFacade::body());
+        $result = SecurityFacade::validateParams('POST', 'client', RequestFacade::body());
+
+        if ($result == false) {
+            ResponseManager::get()->setResponse(400, "Missing required Parameters");
+
+            return false;
+        }
     }
 
     /**

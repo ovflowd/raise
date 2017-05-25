@@ -37,11 +37,11 @@ $router->mount('/client', function () use ($router) {
     $router->before('GET', '/*', function () use ($router) {
         if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
             // List Clients
-            $router->get('/', 'ClientController@list');
+            $router->get('/', '\App\Controllers\ClientController@list');
         }
     });
     // Register a Client
-    $router->post('/register', 'ClientController@register');
+    $router->post('/register', '\App\Controllers\ClientController@register');
 });
 
 /*
@@ -55,10 +55,10 @@ $router->mount('/service', function () use ($router) {
     $router->before('GET|POST', '/*', function () use ($router) {
         if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
             // Register a Service
-            $router->post('/register', 'ServiceController@register');
+            $router->post('/register', '\App\Controllers\ServiceController@register');
 
             // List Service
-            $router->get('/', 'ServiceController@list');
+            $router->get('/', '\App\Controllers\ServiceController@list');
         }
     });
 });
@@ -74,10 +74,10 @@ $router->mount('/data', function () use ($router) {
     $router->before('GET|POST', '/*', function () use ($router) {
         if (SecurityFacade::validateToken(RequestFacade::method(), RequestFacade::query('token'))) {
             // Register Data
-            $router->post('/register', 'DataController@register');
+            $router->post('/register', '\App\Controllers\DataController@register');
 
             // List Data
-            $router->get('/', 'DataController@list');
+            $router->get('/', '\App\Controllers\DataController@list');
         }
     });
 });
