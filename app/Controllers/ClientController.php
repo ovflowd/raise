@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Facades\RequestFacade;
+use App\Facades\SecurityFacade;
 use App\Models\Interfaces\Controller;
 
 /**
@@ -10,13 +12,23 @@ use App\Models\Interfaces\Controller;
 class ClientController implements Controller
 {
     /**
+     * Return the Bucket Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'client';
+    }
+
+    /**
      * Register Process
      *
      * @return mixed
      */
     public function register()
     {
-        // TODO: Implement register() method.
+        SecurityFacade::validateParams('POST', 'client', RequestFacade::body(), )
     }
 
     /**

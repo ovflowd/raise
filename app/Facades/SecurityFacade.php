@@ -4,7 +4,6 @@ namespace App\Facades;
 
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
-use App\Models\Communication\RaiseModel;
 use stdClass;
 
 /**
@@ -53,11 +52,11 @@ class SecurityFacade
      * Check if the Given Parameters of the Body/Request are valid
      *
      * @param string $httpMethod
-     * @param stdClass $body
-     * @param RaiseModel $model
+     * @param string $modelName
+     * @param array|object $body
      * @return bool
      */
-    public static function validateParams(string $httpMethod, stdClass $body, RaiseModel $model)
+    public static function validateParams(string $httpMethod, string $modelName, $body)
     {
         return false;
     }
