@@ -23,7 +23,7 @@ class ClientController implements Controller
         $model = RequestFacade::body();
 
         if (SecurityFacade::validateBody('client', $model) == false) {
-            ResponseManager::get()->setResponse(400, "Missing required Parameters");
+            ResponseManager::get()->setResponse(400, 'Missing required Parameters');
 
             return;
         }
