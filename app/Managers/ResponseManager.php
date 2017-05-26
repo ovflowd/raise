@@ -81,8 +81,8 @@ class ResponseManager
      * Set the Response Content.
      *
      * @param string $httpCode
-     * @param mixed $description
-     * @param bool $returnContent
+     * @param mixed  $description
+     * @param bool   $returnContent
      *
      * @return MessageResponse|null
      */
@@ -93,7 +93,7 @@ class ResponseManager
         $this->responseModel = new MessageResponse();
 
         $responseData = array_merge(DatabaseManager::getConnection()->select('metadata',
-            [['codHttp', $httpCode, '=']])[0]->metadata, array('details' => $description));
+            [['codHttp', $httpCode, '=']])[0]->metadata, ['details' => $description]);
 
         $this->responseModel->fill($responseData);
 
@@ -101,11 +101,12 @@ class ResponseManager
     }
 
     /**
-     * Set the Data of a DataModel
+     * Set the Data of a DataModel.
      *
      * @param string $httpCode
-     * @param array $values
-     * @param bool $returnContent
+     * @param array  $values
+     * @param bool   $returnContent
+     *
      * @return DataResponse|MessageResponse|null
      */
     public function setData(string $httpCode, array $values, bool $returnContent = false)
@@ -120,11 +121,12 @@ class ResponseManager
     }
 
     /**
-     * Set a Custom Model with Data
+     * Set a Custom Model with Data.
      *
      * @param string $httpCode
-     * @param Model $responseModel
-     * @param bool $returnContent
+     * @param Model  $responseModel
+     * @param bool   $returnContent
+     *
      * @return Model|DataResponse|MessageResponse|null
      */
     public function setModel(string $httpCode, Model $responseModel, bool $returnContent = false)

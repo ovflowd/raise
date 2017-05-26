@@ -24,7 +24,7 @@ class TokenResponse extends Model
     public $message;
 
     /**
-     * The Generated Token
+     * The Generated Token.
      *
      * @var string
      */

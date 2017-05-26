@@ -17,7 +17,7 @@ class DataResponse extends Model
     public $codHttp;
 
     /**
-     * The Result values of the Search
+     * The Result values of the Search.
      *
      * @var array
      */
