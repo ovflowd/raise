@@ -7,6 +7,7 @@ use App\Facades\SecurityFacade;
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
 use App\Models\Interfaces\Controller;
+use App\Models\Response\TokenResponse;
 
 /**
  * Class ClientController.
@@ -34,7 +35,8 @@ class ClientController implements Controller
 
         SecurityFacade::insertToken($token, DatabaseManager::getConnection()->insert('client', $model));
 
-        ResponseManager::get()->setResponse(200, $token);
+        ResponseManager::get()->setModel(200,
+            (new TokenResponse())->fill(array('message' => 'Client Inserted Successfully', 'token' => $token)));
     }
 
     /**

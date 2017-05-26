@@ -5,9 +5,9 @@ namespace App\Models\Response;
 use App\Models\Communication\Model;
 
 /**
- * Class ResponseModel.
+ * Class TokenResponse.
  */
-class ResponseModel extends Model
+class TokenResponse extends Model
 {
     /**
      * Reference HTTP code about response of request.
@@ -24,9 +24,9 @@ class ResponseModel extends Model
     public $message;
 
     /**
-     * Describes the message and displays the response body.
+     * The Generated Token
      *
      * @var string
      */
-    public $details;
+    public $token;
 }

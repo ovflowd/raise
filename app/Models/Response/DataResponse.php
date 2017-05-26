@@ -5,9 +5,9 @@ namespace App\Models\Response;
 use App\Models\Communication\Model;
 
 /**
- * Class DataModel.
+ * Class DataResponse.
  */
-class DataModel extends Model
+class DataResponse extends Model
 {
     /**
      * Reference HTTP code about response of request.

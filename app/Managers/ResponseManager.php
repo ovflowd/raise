@@ -2,8 +2,9 @@
 
 namespace App\Managers;
 
-use App\Models\Response\DataModel;
-use App\Models\Response\ResponseModel;
+use App\Models\Communication\Model;
+use App\Models\Response\DataResponse;
+use App\Models\Response\MessageResponse;
 
 /**
  * Class ResponseManager.
@@ -19,7 +20,7 @@ class ResponseManager
     /**
      * Response Model.
      *
-     * @var ResponseModel|DataModel
+     * @var MessageResponse|DataResponse
      */
     private $responseModel = null;
 
@@ -83,20 +84,18 @@ class ResponseManager
      * @param mixed $description
      * @param bool $returnContent
      *
-     * @return ResponseModel|null
+     * @return MessageResponse|null
      */
     public function setResponse(string $httpCode, $description = null, bool $returnContent = false)
     {
         $this->setCode($httpCode);
 
-        $this->responseModel = new ResponseModel();
+        $this->responseModel = new MessageResponse();
 
-        $responseData = DatabaseManager::getConnection()->select('metadata',
-            [['codHttp', $httpCode, '=']])[0]->metadata;
+        $responseData = array_merge(DatabaseManager::getConnection()->select('metadata',
+            [['codHttp', $httpCode, '=']])[0]->metadata, array('details' => $description));
 
         $this->responseModel->fill($responseData);
-
-        $this->responseModel->details = $description;
 
         return $returnContent ? $this->responseModel : null;
     }
@@ -107,15 +106,32 @@ class ResponseManager
      * @param string $httpCode
      * @param array $values
      * @param bool $returnContent
-     * @return DataModel|ResponseModel|null
+     * @return DataResponse|MessageResponse|null
      */
     public function setData(string $httpCode, array $values, bool $returnContent = false)
     {
         $this->setCode($httpCode);
 
-        $this->responseModel = new DataModel();
+        $this->responseModel = new DataResponse();
 
         $this->responseModel->values = $values;
+
+        return $returnContent ? $this->responseModel : null;
+    }
+
+    /**
+     * Set a Custom Model with Data
+     *
+     * @param string $httpCode
+     * @param Model $responseModel
+     * @param bool $returnContent
+     * @return Model|DataResponse|MessageResponse|null
+     */
+    public function setModel(string $httpCode, Model $responseModel, bool $returnContent = false)
+    {
+        $this->setCode($httpCode);
+
+        $this->responseModel = $responseModel;
 
         return $returnContent ? $this->responseModel : null;
     }
