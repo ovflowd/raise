@@ -36,7 +36,7 @@ class ClientController implements Controller
         SecurityFacade::insertToken($token, DatabaseManager::getConnection()->insert('client', $model));
 
         ResponseManager::get()->setModel(200,
-            (new TokenResponse())->fill(array('message' => 'Client Inserted Successfully', 'token' => $token)));
+            (new TokenResponse())->fill(['message' => 'Client Inserted Successfully', 'token' => $token]));
     }
 
     /**
