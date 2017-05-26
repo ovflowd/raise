@@ -64,19 +64,19 @@ class SecurityFacade
     /**
      * Check if the Given Parameters of the Body/Request are valid.
      *
-     * @param string       $modelName
+     * @param string $modelName
      * @param array|object $body
      *
      * @return bool
      */
     public static function validateBody(string $modelName, $body)
     {
-        $className = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
+        $className = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
 
         if (class_exists($className)) {
             $model = new $className();
 
-            $result = UtilitiesFacade::arrayDiff((array) $model, (array) $body);
+            $result = UtilitiesFacade::arrayDiff((array)$model, (array)$body);
 
             $result = UtilitiesFacade::arrayDiff(['serverTime'], array_values($result));
 
