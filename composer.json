@@ -1,8 +1,13 @@
 {
-  "name": "UIoT/RAISe",
+  "name": "uiot/raise",
   "description": "RAISe is an Internet of Things open aware middleware based on a passive restful services methodology",
   "minimum-stability": "stable",
   "license": "Apache-2.0",
+  "type": "project",
+  "support": {
+    "email": "contact@uiot.org",
+    "github": "https://github.com/uiot/"
+  },
   "authors": [
     {
       "name": "Claudio Santoro",
@@ -23,12 +28,12 @@
     "nategood/httpful": "^0.2.20"
   },
   "scripts": {
-    "post-update-cmd": "",
-    "post-install-cmd": ""
+    "post-create-project-cmd": "cd install/ && php install.php"
   },
   "require": {
     "bramus/router": "^1.1",
-    "koine/query-builder": "^0.9.7"
+    "koine/query-builder": "^0.9.7",
+    "firebase/php-jwt": "^4.0"
   },
   "autoload": {
     "psr-4": {

@@ -3,7 +3,7 @@
   "info": {
     "version": "0.4.0",
     "title": "UIoT RAISe API",
-    "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <<More Description Later>>",
+    "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices. <br><br><b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).",
     "contact": {
       "email": "contact@uiot.org"
     },
@@ -14,9 +14,10 @@
   },
   "basePath": "/",
   "securityDefinitions": {
-    "api_key": {
+    "apiKey": {
       "type": "apiKey",
       "name": "token",
+      "description": "The Token it's the onliest way to authorize your requestes within RAISe. A Token it's obtained by registering a Client on RAISe. The Token allows you interact with RAISe only with Data, Clients and Services related with your Client.",
       "in": "query"
     }
   },
@@ -32,74 +33,86 @@
       "type": "string"
     }
   },
+  "tags": [
+    {
+      "name": "client",
+      "description": "Clients of the Network"
+    },
+    {
+      "name": "service",
+      "description": "Services of a Client, they describes the processes of a Client"
+    },
+    {
+      "name": "data",
+      "description": "Data of Services, the knowledge layer of RAISe"
+    }
+  ],
   "paths": {
-    "/client/list/": {
+    "/client": {
       "get": {
         "tags": [
           "client"
         ],
-        "description": "Get registered clients",
-        "parameters": [
+        "description": "List a set of Clients using multiple parameters to filter the result data set.",
+        "security": [
           {
-            "name": "token",
-            "in": "query",
-            "description": "token obtained after registration",
-            "required": true,
-            "type": "string"
-          },
+            "apiKey": []
+          }
+        ],
+        "parameters": [
           {
             "name": "name",
             "in": "query",
-            "description": "client name",
+            "description": "Filter by Client Names.",
             "required": false,
             "type": "string"
           },
           {
             "name": "processor",
             "in": "query",
-            "description": "client processor name",
+            "description": "Filter by Client Processor Type.",
             "required": false,
             "type": "string"
           },
           {
             "name": "channel",
             "in": "query",
-            "description": "Channel label, as in WiFi, etc",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "host",
-            "in": "query",
-            "description": "client host name (for example - ip, domain...)",
+            "description": "Filter By Client Communication Channel.",
             "required": false,
             "type": "string"
           },
           {
             "name": "tag",
             "in": "query",
-            "description": "tag to specify certain type of clients; separate it by comas as in 'tag=Cebola,CebolaRoxa'",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags.",
             "required": false,
             "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Limits the amount of entries in response ",
+            "description": "You can limit the **size** of the result set of Clients on the response.<br><b>Example:</b> 20.",
             "required": false,
             "type": "string"
           },
           {
             "name": "order",
             "in": "query",
-            "description": "Will order the documents by the time they were processed (server time). Be aware of the combination LIMIT and ORDER, which gives preference to ORDER.",
+            "description": "You can Order the Result by a specific order. The Clients **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
             "required": false,
             "type": "boolean"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful Response",
             "schema": {
               "required": [
                 "code",
@@ -122,13 +135,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -142,18 +155,18 @@
         }
       }
     },
-    "/client/register/": {
+    "/client/register": {
       "post": {
         "tags": [
           "client"
         ],
-        "description": "Register a client",
+        "description": "Register a Client within RAISe",
         "parameters": [
           {
             "name": "client",
             "in": "body",
             "required": true,
-            "description": "client attributes",
+            "description": "Client Document",
             "schema": {
               "$ref": "#/definitions/ClientRegister"
             }
@@ -167,15 +180,9 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
-            }
-          },
-          "403": {
-            "description": "Forbbiden",
-            "schema": {
-              "$ref": "#/definitions/Error403"
             }
           },
           "422": {
@@ -193,18 +200,23 @@
         }
       }
     },
-    "/client/revalidate/": {
+    "/client/revalidate": {
       "post": {
         "tags": [
           "client"
         ],
-        "description": "Revalidate a client and the services passed to do so",
+        "description": "Revalidate a Client when the Token Expires",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "parameters": [
           {
             "name": "client",
             "in": "body",
             "required": true,
-            "description": "Client's token and IDs of services to revalidate",
+            "description": "The Desired Services that need to be Revalidated",
             "schema": {
               "$ref": "#/definitions/ClientRevalidate"
             }
@@ -218,13 +230,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -250,48 +262,57 @@
         }
       }
     },
-    "/service/list/": {
+    "/service": {
       "get": {
         "tags": [
           "service"
         ],
-        "description": "Get registered services",
+        "description": "List a Result set of Services. Only Services linked to a Client are displayed",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/auth-token"
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Limits the amount of records for request. Used to prevent memory issues.",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "description": "tag to specify certain type of services; separate it by comas as in 'tag=Cebola,CebolaRoxa'",
+            "description": "You can limit the **size** of the result set of Services on the response.<br><b>Example:</b> 20.",
             "required": false,
             "type": "string"
           },
           {
             "name": "order",
             "in": "query",
-            "description": "Will order the documents by the time they were processed (server time). Be aware of the combination LIMIT and ORDER, which gives preference to ORDER.",
+            "description": "You can Order the Result by a specific order. The Services **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
             "required": false,
             "type": "boolean"
           },
           {
-            "name": "service_name",
+            "name": "serviceName",
             "in": "query",
-            "description": "The name of the service.",
+            "description": "Filter by the name of Services",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "serviceId",
+            "in": "query",
+            "description": "Filter by the Unique Identifier of a Service",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful Response",
             "schema": {
               "required": [
                 "code",
@@ -311,13 +332,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -337,18 +358,23 @@
         }
       }
     },
-    "/service/register/": {
+    "/service/register": {
       "post": {
         "tags": [
           "service"
         ],
-        "description": "Register an array of services",
+        "description": "Register a set of Services within RAISe",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "parameters": [
           {
             "name": "services",
             "in": "body",
             "required": true,
-            "description": "an array of services to be registered",
+            "description": "A set of Services that will be registered on RAISe",
             "schema": {
               "$ref": "#/definitions/ServicesRegister"
             }
@@ -357,7 +383,7 @@
             "name": "type",
             "in": "query",
             "required": true,
-            "description": "indicates if service actuates on environment",
+            "description": "The type of the Service if it's a triggerer or a listener.<br><b>Example:</b> FALSE, TRUE",
             "type": "boolean"
           }
         ],
@@ -369,13 +395,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -401,55 +427,57 @@
         }
       }
     },
-    "/data/list/": {
+    "/data": {
       "get": {
         "tags": [
           "data"
         ],
-        "description": "Get registered data",
+        "description": "List a set of Data related to your Clients or Client Services",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/auth-token"
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Limits the amount of records for request",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "data_name",
-            "in": "query",
-            "description": "actual data name. Use as example: 'press=5'",
+            "description": "You can limit the **size** of the result set of Data on the response.<br><b>Example:</b> 20.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "host",
-            "in": "query",
-            "description": "data host",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "description": "tag to specify certain type of services; separate it by comas as in 'tag=Cebola,CebolaRoxa'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "service_id",
-            "in": "query",
-            "description": "filters all data of an specified service_id.",
-            "required": false,
-            "type": "integer"
           },
           {
             "name": "order",
             "in": "query",
-            "description": "Will order the documents by the time they were processed (server time). Be aware of the combination LIMIT and ORDER, which gives preference to ORDER.",
+            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "dataName",
+            "in": "query",
+            "description": "Filter by the name of the Data <i>(The Key of the Data)</i>",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceId",
+            "in": "query",
+            "description": "Filter by the ServiceId, since Data is related to Services.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
             "required": false,
             "type": "boolean"
           }
@@ -479,13 +507,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -505,18 +533,23 @@
         }
       }
     },
-    "/data/register/": {
+    "/data/register": {
       "post": {
         "tags": [
           "data"
         ],
-        "description": "Register some data",
+        "description": "Register a set of Data on RAISe",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "parameters": [
           {
             "name": "data",
             "in": "body",
             "required": true,
-            "description": "an array of data to be registered",
+            "description": "A set of Data that will be registered on RAIse",
             "schema": {
               "$ref": "#/definitions/DataRegister"
             }
@@ -530,13 +563,13 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/Error400"
             }
           },
           "401": {
-            "description": "Invalid or expired token",
+            "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error401"
             }
@@ -572,8 +605,8 @@
         "serial",
         "processor",
         "channel",
-        "client_time",
-        "tag"
+        "clientTime",
+        "tags"
       ],
       "type": "object",
       "properties": {
@@ -601,30 +634,25 @@
           "type": "string",
           "example": "Ethernet"
         },
-        "client_time": {
+        "clientTime": {
           "type": "integer",
           "example": 1317427200
         },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "cebola"
+            "example": "example-tag"
           }
         }
       }
     },
     "ClientRevalidate": {
       "required": [
-        "token",
         "services"
       ],
       "type": "object",
       "properties": {
-        "token": {
-          "type": "string",
-          "example": "4c9adfb96a364c6805b28f90a342b65c"
-        },
         "services": {
           "type": "array",
           "items": {
@@ -642,11 +670,8 @@
         "serial",
         "processor",
         "channel",
-        "client_time",
-        "server_time",
-        "token",
-        "services",
-        "tag"
+        "clientTime",
+        "services"
       ],
       "type": "object",
       "properties": {
@@ -677,11 +702,7 @@
         "services": {
           "$ref": "#/definitions/Services"
         },
-        "client_time": {
-          "type": "integer",
-          "example": 1317427200
-        },
-        "server_time": {
+        "clientTime": {
           "type": "integer",
           "example": 1317427200
         },
@@ -689,11 +710,11 @@
           "type": "string",
           "example": "0e62354889cbc6f08f9e92521d389157"
         },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "cebola"
+            "example": "example-tag"
           }
         }
       }
@@ -702,23 +723,18 @@
       "type": "object",
       "required": [
         "data",
-        "token",
-        "client_time"
+        "clientTime"
       ],
       "properties": {
-        "token": {
-          "type": "string",
-          "example": "4c9adfb96a364c6805b28f90a342b65c"
-        },
-        "client_time": {
+        "clientTime": {
           "type": "integer",
           "example": 342343242
         },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "Cebola"
+            "example": "example-tag"
           }
         },
         "data": {
@@ -732,44 +748,39 @@
     "Values": {
       "type": "object",
       "properties": {
-        "service_id": {
+        "serviceId": {
           "type": "integer",
           "example": 0
         },
-        "data_values": {
+        "dataValues": {
           "$ref": "#/definitions/DataValues"
         }
       }
     },
     "Data": {
       "required": [
-        "data_values",
-        "service_id",
-        "client_time",
-        "server_time"
+        "dataValues",
+        "serviceId",
+        "clientTime"
       ],
       "type": "object",
       "properties": {
-        "data_values": {
+        "dataValues": {
           "$ref": "#/definitions/DataValues"
         },
-        "service_id": {
+        "serviceId": {
           "type": "integer",
           "example": 15
         },
-        "client_time": {
+        "clientTime": {
           "type": "integer",
           "example": 1317427200
         },
-        "server_time": {
-          "type": "integer",
-          "example": 1317987654
-        },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "Cebola"
+            "example": "example-tag"
           }
         }
       }
@@ -786,9 +797,8 @@
     "ServicesRegister": {
       "type": "object",
       "required": [
-        "token",
         "services",
-        "client_time"
+        "clientTime"
       ],
       "properties": {
         "services": {
@@ -797,19 +807,15 @@
             "$ref": "#/definitions/ServiceRegister"
           }
         },
-        "token": {
-          "type": "string",
-          "example": "4c9adfb96a364c6805b28f90a342b65c"
-        },
-        "client_time": {
+        "clientTime": {
           "type": "integer",
           "example": 1317427200
         },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "Cebola"
+            "example": "example-tag"
           }
         }
       }
@@ -824,7 +830,7 @@
         "parameters": {
           "$ref": "#/definitions/Parameter"
         },
-        "return_type": {
+        "returnType": {
           "type": "string",
           "example": "float"
         }
@@ -835,8 +841,8 @@
       "required": [
         "name",
         "parameters",
-        "return_type",
-        "service_id"
+        "returnType",
+        "serviceId"
       ],
       "properties": {
         "name": {
@@ -846,11 +852,11 @@
         "parameters": {
           "$ref": "#/definitions/Parameter"
         },
-        "return_type": {
+        "returnType": {
           "type": "string",
           "example": "float"
         },
-        "service_id": {
+        "serviceId": {
           "type": "integer",
           "example": 0
         }
@@ -865,29 +871,24 @@
     "ServiceValues": {
       "type": "object",
       "required": [
-        "client_time",
-        "server_time",
+        "clientTime",
         "token",
         "services"
       ],
       "properties": {
-        "client_time": {
+        "clientTime": {
           "type": "integer",
           "example": 4324342342
-        },
-        "server_time": {
-          "type": "integer",
-          "example": 43243423421
         },
         "token": {
           "type": "string",
           "example": "7c5307af813437e7bac2b9f011d24e21"
         },
-        "tag": {
+        "tags": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "Cebola"
+            "example": "example-tag"
           }
         },
         "services": {
@@ -926,7 +927,11 @@
         },
         "message": {
           "type": "string",
-          "example": "Invalid Parameters (Bad request)"
+          "example": "Bad Request"
+        },
+        "details": {
+          "type": "string",
+          "example": "Invalid Parameters Given"
         }
       }
     },
@@ -944,6 +949,10 @@
         "message": {
           "type": "string",
           "example": "Unauthorized"
+        },
+        "details": {
+          "type": "string",
+          "example": "Your Token is Invalid or Expired"
         }
       }
     },
@@ -961,6 +970,10 @@
         "message": {
           "type": "string",
           "example": "Forbidden"
+        },
+        "details": {
+          "type": "string",
+          "example": "You didn't provided a Token"
         }
       }
     },
@@ -978,6 +991,10 @@
         "message": {
           "type": "string",
           "example": "Unprocessable Entity"
+        },
+        "details": {
+          "type": "string",
+          "example": "The given jSON probably it's malformed"
         }
       }
     },
@@ -995,6 +1012,10 @@
         "message": {
           "type": "string",
           "example": "Too many requests"
+        },
+        "details": {
+          "type": "string",
+          "example": "You reacehd the maximum API usage for the limit time interval"
         }
       }
     },
@@ -1003,7 +1024,6 @@
       "required": [
         "code",
         "message",
-        "token",
         "services"
       ],
       "properties": {
@@ -1014,10 +1034,6 @@
         "message": {
           "type": "string",
           "example": "Success"
-        },
-        "token": {
-          "type": "string",
-          "example": "4c9adfb96a364c6805b28f90a342b65c"
         },
         "services": {
           "type": "array",
@@ -1030,15 +1046,15 @@
     "ServiceRegisterResponse": {
       "type": "object",
       "required": [
-        "service_id",
-        "service_name"
+        "serviceId",
+        "serviceName"
       ],
       "properties": {
-        "service_id": {
+        "serviceId": {
           "type": "number",
           "example": 1151
         },
-        "service_name": {
+        "serviceName": {
           "type": "string",
           "example": "Get temp"
         }
@@ -1058,7 +1074,7 @@
         },
         "message": {
           "type": "string",
-          "example": "Success"
+          "example": "Client Registered Successfully"
         },
         "token": {
           "type": "string",
