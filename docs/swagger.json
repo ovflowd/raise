@@ -41,7 +41,7 @@
         "description": "Get registered clients",
         "parameters": [
           {
-            "name": "tokenId",
+            "name": "token",
             "in": "query",
             "description": "token obtained after registration",
             "required": true,
@@ -204,7 +204,7 @@
             "name": "client",
             "in": "body",
             "required": true,
-            "description": "Client's tokenId and IDs of services to revalidate",
+            "description": "Client's token and IDs of services to revalidate",
             "schema": {
               "$ref": "#/definitions/ClientRevalidate"
             }
@@ -616,12 +616,12 @@
     },
     "ClientRevalidate": {
       "required": [
-        "tokenId",
+        "token",
         "services"
       ],
       "type": "object",
       "properties": {
-        "tokenId": {
+        "token": {
           "type": "string",
           "example": "4c9adfb96a364c6805b28f90a342b65c"
         },
@@ -644,7 +644,7 @@
         "channel",
         "client_time",
         "server_time",
-        "tokenId",
+        "token",
         "services",
         "tag"
       ],
@@ -685,7 +685,7 @@
           "type": "integer",
           "example": 1317427200
         },
-        "tokenId": {
+        "token": {
           "type": "string",
           "example": "0e62354889cbc6f08f9e92521d389157"
         },
@@ -786,7 +786,7 @@
     "ServicesRegister": {
       "type": "object",
       "required": [
-        "tokenId",
+        "token",
         "services",
         "client_time"
       ],
@@ -797,7 +797,7 @@
             "$ref": "#/definitions/ServiceRegister"
           }
         },
-        "tokenId": {
+        "token": {
           "type": "string",
           "example": "4c9adfb96a364c6805b28f90a342b65c"
         },
@@ -867,7 +867,7 @@
       "required": [
         "client_time",
         "server_time",
-        "tokenId",
+        "token",
         "services"
       ],
       "properties": {
@@ -879,7 +879,7 @@
           "type": "integer",
           "example": 43243423421
         },
-        "tokenId": {
+        "token": {
           "type": "string",
           "example": "7c5307af813437e7bac2b9f011d24e21"
         },
@@ -1003,7 +1003,7 @@
       "required": [
         "code",
         "message",
-        "tokenId",
+        "token",
         "services"
       ],
       "properties": {
@@ -1015,7 +1015,7 @@
           "type": "string",
           "example": "Success"
         },
-        "tokenId": {
+        "token": {
           "type": "string",
           "example": "4c9adfb96a364c6805b28f90a342b65c"
         },

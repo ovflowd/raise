@@ -2,6 +2,7 @@
 
 namespace App\Managers;
 
+use App\Models\Response\DataModel;
 use App\Models\Response\ResponseModel;
 
 /**
@@ -18,7 +19,7 @@ class ResponseManager
     /**
      * Response Model.
      *
-     * @var ResponseModel
+     * @var ResponseModel|DataModel
      */
     private $responseModel = null;
 
@@ -34,8 +35,6 @@ class ResponseManager
         if ($contentType !== null) {
             $this->addHeader('Content-Type', $contentType);
         }
-
-        $this->responseModel = new ResponseModel();
     }
 
     /**
@@ -70,7 +69,7 @@ class ResponseManager
      */
     public function getResponse($callback = null)
     {
-        if ($this->responseModel->codHttp == null) {
+        if ($this->responseModel == null) {
             $this->setResponse(404);
         }
 
@@ -81,8 +80,8 @@ class ResponseManager
      * Set the Response Content.
      *
      * @param string $httpCode
-     * @param mixed  $description
-     * @param bool   $returnContent
+     * @param mixed $description
+     * @param bool $returnContent
      *
      * @return ResponseModel|null
      */
@@ -90,12 +89,33 @@ class ResponseManager
     {
         $this->setCode($httpCode);
 
+        $this->responseModel = new ResponseModel();
+
         $responseData = DatabaseManager::getConnection()->select('metadata',
             [['codHttp', $httpCode, '=']])[0]->metadata;
 
         $this->responseModel->fill($responseData);
 
-        $this->responseModel->description = $description;
+        $this->responseModel->details = $description;
+
+        return $returnContent ? $this->responseModel : null;
+    }
+
+    /**
+     * Set the Data of a DataModel
+     *
+     * @param string $httpCode
+     * @param array $values
+     * @param bool $returnContent
+     * @return DataModel|ResponseModel|null
+     */
+    public function setData(string $httpCode, array $values, bool $returnContent = false)
+    {
+        $this->setCode($httpCode);
+
+        $this->responseModel = new DataModel();
+
+        $this->responseModel->values = $values;
 
         return $returnContent ? $this->responseModel : null;
     }
