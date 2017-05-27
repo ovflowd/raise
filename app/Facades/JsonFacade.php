@@ -9,15 +9,15 @@ use JsonMapper_Exception;
 use UnexpectedValueException;
 
 /**
- * Class JsonFacade
- * @package App\Facades
+ * Class JsonFacade.
  */
 class JsonFacade
 {
     /**
-     * Encode Data into a jSON string
+     * Encode Data into a jSON string.
      *
      * @param $data
+     *
      * @return string
      */
     public static function jsonEncode($data)
@@ -26,9 +26,10 @@ class JsonFacade
     }
 
     /**
-     * Decode a jSON String into Object
+     * Decode a jSON String into Object.
      *
      * @param string $json
+     *
      * @return object
      */
     public static function jsonDecode(string $json)
@@ -37,10 +38,11 @@ class JsonFacade
     }
 
     /**
-     * Encode data unto JWT Algorithm
+     * Encode data unto JWT Algorithm.
      *
      * @param string $secret
      * @param $data
+     *
      * @return string
      */
     public static function encode(string $secret, $data)
@@ -49,10 +51,11 @@ class JsonFacade
     }
 
     /**
-     * Decode an
+     * Decode an.
      *
      * @param string $secret
      * @param string $hash
+     *
      * @return object|bool
      */
     public static function decode(string $secret, string $hash)
@@ -67,10 +70,11 @@ class JsonFacade
     }
 
     /**
-     * Map an object into a Model
+     * Map an object into a Model.
      *
      * @param string|object $model
      * @param $data
+     *
      * @return object
      */
     public static function map($model, $data)
@@ -80,12 +84,13 @@ class JsonFacade
 
     /**
      * Internal Mapping Class
-     * Executes an Object Mapping
+     * Executes an Object Mapping.
      *
      * @param string|object $model
-     * @param array|object $data
-     * @param bool $mapArray
-     * @param bool $evaluateInput
+     * @param array|object  $data
+     * @param bool          $mapArray
+     * @param bool          $evaluateInput
+     *
      * @return bool|mixed|object
      */
     private static function doMap($model, $data, bool $mapArray = false, bool $evaluateInput = false)
@@ -104,17 +109,18 @@ class JsonFacade
         }
 
         try {
-            return $mapArray ? $mapper->mapArray($data, array(), $model) : $mapper->map((object)$data, $model);
+            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object) $data, $model);
         } catch (JsonMapper_Exception $e) {
             return false;
         }
     }
 
     /**
-     * Map a set of Data into a specific Model type
+     * Map a set of Data into a specific Model type.
      *
      * @param string|object $model
-     * @param array $data
+     * @param array         $data
+     *
      * @return bool|mixed|object
      */
     public static function mapSet($model, array $data)
@@ -125,10 +131,11 @@ class JsonFacade
     /**
      * Compare an Object with a Model
      * If the validation passes it return the Mapped Object
-     * In other case, return a false boolean
+     * In other case, return a false boolean.
      *
      * @param string|object $model
      * @param $data
+     *
      * @return bool|object
      */
     public static function compare($model, $data)

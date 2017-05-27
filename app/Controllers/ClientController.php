@@ -27,10 +27,10 @@ class ClientController implements Controller
             return;
         }
 
-        ResponseManager::get()->setResponseModel(200, new TokenResponse, array(
+        ResponseManager::get()->setResponseModel(200, new TokenResponse(), [
             'message' => 'Client Registered Successfully',
-            'token' => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel))
-        ));
+            'token'   => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel)),
+        ]);
     }
 
     /**

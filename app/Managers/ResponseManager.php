@@ -80,15 +80,15 @@ class ResponseManager
     /**
      * Set the Response Content.
      *
-     * @param int $httpCode
+     * @param int   $httpCode
      * @param mixed $description
-     * @param bool $returnContent
+     * @param bool  $returnContent
      *
      * @return MessageResponse|null
      */
     public function setResponse(int $httpCode, $description = null, bool $returnContent = false)
     {
-        $this->setResponseModel($httpCode, new MessageResponse,
+        $this->setResponseModel($httpCode, new MessageResponse(),
             DatabaseManager::getConnection()->selectById('metadata', $httpCode));
 
         $this->responseModel->details = $description;
@@ -97,11 +97,11 @@ class ResponseManager
     }
 
     /**
-     * Set the Response Data
+     * Set the Response Data.
      *
-     * @param int $httpCode
+     * @param int           $httpCode
      * @param string|object $model
-     * @param array|object $data
+     * @param array|object  $data
      */
     public function setResponseModel(int $httpCode, $model, $data)
     {
@@ -125,15 +125,15 @@ class ResponseManager
     /**
      * Set the Data of a DataModel.
      *
-     * @param int $httpCode
+     * @param int   $httpCode
      * @param array $values
-     * @param bool $returnContent
+     * @param bool  $returnContent
      *
      * @return DataResponse|MessageResponse|null
      */
     public function setResponseData(int $httpCode, array $values, bool $returnContent = false)
     {
-        $this->setResponseModel($httpCode, new DataResponse, ['values' => $values]);
+        $this->setResponseModel($httpCode, new DataResponse(), ['values' => $values]);
 
         return $returnContent ? $this->responseModel : null;
     }

@@ -41,10 +41,11 @@ class CouchbaseHandler implements Database
     /**
      * Insert Data on Database.
      *
-     * @param string $table
+     * @param string       $table
      * @param object|array $data
-     * @param string $primaryKey
-     * @param mixed|null $parameters
+     * @param string       $primaryKey
+     * @param mixed|null   $parameters
+     *
      * @return int
      */
     public function insert(string $table, $data, string $primaryKey = null, $parameters = null)
@@ -64,7 +65,7 @@ class CouchbaseHandler implements Database
      * Select Data on Database.
      *
      * @param string $table
-     * @param null $parameters
+     * @param null   $parameters
      *
      * @return mixed
      */

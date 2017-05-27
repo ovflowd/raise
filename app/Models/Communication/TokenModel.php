@@ -13,6 +13,7 @@ class TokenModel extends RaiseModel
      * Client Unique Identifier.
      *
      * @required
+     *
      * @var int
      */
     public $clientId;
@@ -25,10 +26,11 @@ class TokenModel extends RaiseModel
     public $expireTime;
 
     /**
-     * Client Token
+     * Client Token.
      *
      * @see http://php.net/manual/pt_BR/function.openssl-random-pseudo-bytes.php
      * @required
+     *
      * @var string
      */
     public $tokenId;
@@ -40,7 +42,7 @@ class TokenModel extends RaiseModel
      */
     public function setExpireTime()
     {
-        $this->expireTime = strtotime('+' . SettingsHandler::get('security.expireTime'), $this->serverTime);
+        $this->expireTime = strtotime('+'.SettingsHandler::get('security.expireTime'), $this->serverTime);
 
         return $this;
     }
