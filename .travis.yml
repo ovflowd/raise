@@ -18,12 +18,12 @@ before_install:
   - sudo dpkg -i couchbase-server-enterprise_4.6.1-ubuntu14.04_amd64.deb
   - sudo service couchbase-server start
   # Configure Couchbase
-  # cd /opt/couchbase/bin/
-  # ./couchbase-cli cluster-init -c 127.0.0.1:8091 -u couch -p couchbase --cluster-name='raise' --services=data,index,query --cluster-ramsize=256 --cluster-index-ramsize=50
+  - /opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 -u couch -p couchbase --cluster-name='raise' --services=data,index,query --cluster-ramsize=2048 --cluster-index-ramsize=256
   # Composer
   - composer self-update
   - composer install --no-interaction
 script:
+  - php install/instal.php -D --user=couch --pass=couchbase --address=localhost --skip-configuration
   - php -S 0.0.0.0:8000 index.php 1>/dev/null &
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:
