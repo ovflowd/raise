@@ -24,8 +24,9 @@ before_install:
   - composer self-update
   - composer install --no-interaction
 script:
-  - php -S 0.0.0.0:8000 index.php
+  - php -S 0.0.0.0:8000 index.php &
   - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - kill $!
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 branches:
