@@ -49,7 +49,3 @@ install:
   - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress --profile -n --no-dev
   - IF %dependencies%==current appveyor-retry composer install --no-progress --profile --no-dev
   - IF %dependencies%==highest appveyor-retry composer update --no-progress --profile --no-dev -n
-test_script:
-  - cd c:\projects\raise
-  - php -S 0.0.0.0:8000 index.php
-  - vendor/bin/phpunit --colors=always
