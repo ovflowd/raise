@@ -2,6 +2,7 @@
 
 namespace App\Facades;
 
+use Firebase\JWT\JWT;
 use stdClass;
 
 /**
@@ -54,7 +55,7 @@ class RequestFacade
 
         self::$query = $queryArray;
 
-        self::$body = JsonFacade::decode(file_get_contents('php://input') ?? new stdClass());
+        self::$body = JWT::jsonDecode(file_get_contents('php://input') ?? new stdClass());
     }
 
     /**

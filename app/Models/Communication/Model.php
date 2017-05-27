@@ -10,7 +10,7 @@ abstract class Model
     /**
      * Fill Model Properties.
      *
-     * @param array|object $data
+     * @param object $data
      *
      * @return $this
      */

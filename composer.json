@@ -62,7 +62,8 @@
   "require": {
     "bramus/router": "^1.1",
     "koine/query-builder": "^0.9.7",
-    "firebase/php-jwt": "^4.0"
+    "firebase/php-jwt": "^4.0",
+    "netresearch/jsonmapper": "^1.1"
   },
   "autoload": {
     "psr-4": {

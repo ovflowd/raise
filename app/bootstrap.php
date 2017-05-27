@@ -37,13 +37,13 @@ $settings = require_once __DIR__.'/../app/settings.php';
 // Set 404 Route
 $router->set404(function () use ($response) {
     echo $response->getResponse(function (\App\Models\Response\MessageResponse $model) {
-        return \App\Facades\JsonFacade::encode($model);
+        return Firebase\JWT\JWT::jsonEncode($model);
     });
 });
 
 // Run Router
 $router->run(function () use ($response) {
     echo $response->getResponse(function (\App\Models\Response\MessageResponse $model) {
-        return \App\Facades\JsonFacade::encode($model);
+        return Firebase\JWT\JWT::jsonEncode($model);
     });
 });
