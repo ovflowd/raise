@@ -2,7 +2,7 @@
 
 namespace App\Managers;
 
-use App\Models\Communication\Model;
+use App\Facades\JsonFacade;
 use App\Models\Response\DataResponse;
 use App\Models\Response\MessageResponse;
 
@@ -80,62 +80,36 @@ class ResponseManager
     /**
      * Set the Response Content.
      *
-     * @param string $httpCode
-     * @param mixed  $description
-     * @param bool   $returnContent
+     * @param int $httpCode
+     * @param mixed $description
+     * @param bool $returnContent
      *
      * @return MessageResponse|null
      */
-    public function setResponse(string $httpCode, $description = null, bool $returnContent = false)
+    public function setResponse(int $httpCode, $description = null, bool $returnContent = false)
     {
-        $this->setCode($httpCode);
+        $this->setResponseModel($httpCode, new MessageResponse,
+            DatabaseManager::getConnection()->selectById('metadata', $httpCode));
 
-        $this->responseModel = new MessageResponse();
-
-        $responseData = array_merge(DatabaseManager::getConnection()->select('metadata',
-            [['codHttp', $httpCode, '=']])[0]->metadata, ['details' => $description]);
-
-        $this->responseModel->fill($responseData);
+        $this->responseModel->details = $description;
 
         return $returnContent ? $this->responseModel : null;
     }
 
     /**
-     * Set the Data of a DataModel.
+     * Set the Response Data
      *
-     * @param string $httpCode
-     * @param array  $values
-     * @param bool   $returnContent
-     *
-     * @return DataResponse|MessageResponse|null
+     * @param int $httpCode
+     * @param string|object $model
+     * @param array|object $data
      */
-    public function setData(string $httpCode, array $values, bool $returnContent = false)
+    public function setResponseModel(int $httpCode, $model, $data)
     {
         $this->setCode($httpCode);
 
-        $this->responseModel = new DataResponse();
+        $this->responseModel = JsonFacade::map($model, $data);
 
-        $this->responseModel->values = $values;
-
-        return $returnContent ? $this->responseModel : null;
-    }
-
-    /**
-     * Set a Custom Model with Data.
-     *
-     * @param string $httpCode
-     * @param Model  $responseModel
-     * @param bool   $returnContent
-     *
-     * @return Model|DataResponse|MessageResponse|null
-     */
-    public function setModel(string $httpCode, Model $responseModel, bool $returnContent = false)
-    {
-        $this->setCode($httpCode);
-
-        $this->responseModel = $responseModel;
-
-        return $returnContent ? $this->responseModel : null;
+        $this->responseModel->codHttp = $httpCode;
     }
 
     /**
@@ -146,5 +120,21 @@ class ResponseManager
     public function setCode(int $code)
     {
         http_response_code($code);
+    }
+
+    /**
+     * Set the Data of a DataModel.
+     *
+     * @param int $httpCode
+     * @param array $values
+     * @param bool $returnContent
+     *
+     * @return DataResponse|MessageResponse|null
+     */
+    public function setResponseData(int $httpCode, array $values, bool $returnContent = false)
+    {
+        $this->setResponseModel($httpCode, new DataResponse, ['values' => $values]);
+
+        return $returnContent ? $this->responseModel : null;
     }
 }

@@ -21,22 +21,16 @@ class ClientController implements Controller
      */
     public function register()
     {
-        $model = RequestFacade::body();
-
-        if (SecurityFacade::validateBody('client', $model) == false) {
+        if (($mappedModel = SecurityFacade::validateBody('client', RequestFacade::body())) == false) {
             ResponseManager::get()->setResponse(400, 'Missing required Parameters');
 
             return;
         }
 
-        $token = SecurityFacade::generateToken();
-
-        $model->serverTime = microtime(true);
-
-        SecurityFacade::insertToken($token, DatabaseManager::getConnection()->insert('client', $model));
-
-        ResponseManager::get()->setModel(200,
-            (new TokenResponse())->fill(['message' => 'Client Inserted Successfully', 'token' => $token]));
+        ResponseManager::get()->setResponseModel(200, new TokenResponse, array(
+            'message' => 'Client Registered Successfully',
+            'token' => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel))
+        ));
     }
 
     /**

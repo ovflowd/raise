@@ -12,14 +12,14 @@ interface Database
      *
      * @param array|object $connection
      *
-     * @return mixed
+     * @return void
      */
     public function connect($connection);
 
     /**
      * Destroy the Connection.
      *
-     * @return mixed
+     * @return void
      */
     public function destroy();
 
@@ -27,18 +27,18 @@ interface Database
      * Insert Data on Database.
      *
      * @param string $table
-     * @param $data
-     * @param null $parameters
-     *
-     * @return mixed
+     * @param object $data
+     * @param string $primaryKey
+     * @param mixed|null $parameters
+     * @return int
      */
-    public function insert(string $table, $data, $parameters = null);
+    public function insert(string $table, $data, string $primaryKey, $parameters = null);
 
     /**
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param mixed|null $parameters
      *
      * @return mixed
      */
@@ -48,11 +48,11 @@ interface Database
      * Count number of Elements of a specific Query.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param mixed|null $primaryKey
      *
-     * @return mixed
+     * @return int
      */
-    public function count(string $table, $parameters = null);
+    public function count(string $table, $primaryKey = null);
 
     /**
      * Update an Element of the Database.

@@ -3,7 +3,7 @@
   "info": {
     "version": "0.4.0",
     "title": "UIoT RAISe API",
-    "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices. <br><br><b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).",
+    "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices. <br><br><b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).<br><br><b>Security Note:</b> RAISe uses [JWT](https://jwt.io) for Token Schemas.",
     "contact": {
       "email": "contact@uiot.org"
     },
@@ -17,8 +17,8 @@
     "apiKey": {
       "type": "apiKey",
       "name": "token",
-      "description": "The Token it's the onliest way to authorize your requestes within RAISe. A Token it's obtained by registering a Client on RAISe. The Token allows you interact with RAISe only with Data, Clients and Services related with your Client.",
-      "in": "query"
+      "description": "The Token it's the onliest way to authorize your requestes within RAISe. A Token it's obtained by registering a Client on RAISe. The Token allows you interact with RAISe only with Data, Clients and Services related with your Client.<br><b>Example:</b> `Bearer <TOKEN>`",
+      "in": "header"
     }
   },
   "schemes": [

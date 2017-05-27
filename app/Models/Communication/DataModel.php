@@ -10,6 +10,7 @@ class DataModel extends RaiseModel
     /**
      * Array of Data.
      *
+     * @required
      * @var array
      */
     public $data = [];
@@ -17,6 +18,7 @@ class DataModel extends RaiseModel
     /**
      * Service Identifier for the Data Bag.
      *
+     * @required
      * @var int
      */
     public $serviceId;

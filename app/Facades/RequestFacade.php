@@ -2,9 +2,6 @@
 
 namespace App\Facades;
 
-use Firebase\JWT\JWT;
-use stdClass;
-
 /**
  * Class RequestFacade.
  */
@@ -41,9 +38,9 @@ class RequestFacade
     /**
      * Prepare the RequestFacade with the Requested Page Data.
      *
-     * @param array  $headers
+     * @param array $headers
      * @param string $method
-     * @param array  $server
+     * @param array $server
      */
     public static function prepare(array $headers, string $method, array $server)
     {
@@ -55,7 +52,9 @@ class RequestFacade
 
         self::$query = $queryArray;
 
-        self::$body = JWT::jsonDecode(file_get_contents('php://input') ?? new stdClass());
+        $phpInput = file_get_contents('php://input');
+
+        self::$body = JsonFacade::jsonDecode(empty($phpInput) ? '{}' : $phpInput);
     }
 
     /**
@@ -71,11 +70,16 @@ class RequestFacade
     /**
      * Return Requested Page Sent Headers.
      *
-     * @return array
+     * @param string|null $key
+     * @return array|bool
      */
-    public static function headers()
+    public static function headers(string $key = null)
     {
-        return self::$headers;
+        if ($key == null) {
+            return self::$headers;
+        }
+
+        return array_key_exists($key, self::$headers) ? self::$headers[$key] : false;
     }
 
     /**
@@ -104,7 +108,7 @@ class RequestFacade
      *
      * @param string|null $key
      *
-     * @return array|mixed
+     * @return array|bool
      */
     public static function query(string $key = null)
     {
