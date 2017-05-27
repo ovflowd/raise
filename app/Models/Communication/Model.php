@@ -7,5 +7,4 @@ namespace App\Models\Communication;
  */
 abstract class Model
 {
-
 }

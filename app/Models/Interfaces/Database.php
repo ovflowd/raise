@@ -26,10 +26,11 @@ interface Database
     /**
      * Insert Data on Database.
      *
-     * @param string $table
-     * @param object $data
-     * @param string $primaryKey
+     * @param string     $table
+     * @param object     $data
+     * @param string     $primaryKey
      * @param mixed|null $parameters
+     *
      * @return int
      */
     public function insert(string $table, $data, string $primaryKey, $parameters = null);
@@ -37,7 +38,7 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string $table
+     * @param string     $table
      * @param mixed|null $parameters
      *
      * @return mixed
@@ -47,7 +48,7 @@ interface Database
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string $table
+     * @param string     $table
      * @param mixed|null $primaryKey
      *
      * @return int

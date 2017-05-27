@@ -11,6 +11,7 @@ class ServiceModel extends RaiseModel
      * Array of Service Models.
      *
      * @required
+     *
      * @var ServiceBagModel[]
      */
     public $services = [];

@@ -38,9 +38,9 @@ class RequestFacade
     /**
      * Prepare the RequestFacade with the Requested Page Data.
      *
-     * @param array $headers
+     * @param array  $headers
      * @param string $method
-     * @param array $server
+     * @param array  $server
      */
     public static function prepare(array $headers, string $method, array $server)
     {
@@ -71,6 +71,7 @@ class RequestFacade
      * Return Requested Page Sent Headers.
      *
      * @param string|null $key
+     *
      * @return array|bool
      */
     public static function headers(string $key = null)

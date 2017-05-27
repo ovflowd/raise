@@ -16,12 +16,13 @@ class SecurityFacade
      * Inserts the client's token into the database.
      *
      * @param string $clientId
+     *
      * @return string
      */
     public static function insertToken(string $clientId)
     {
-        $tokenModel = JsonFacade::map(new TokenModel,
-            array('clientId' => $clientId, 'tokenId' => self::generateToken()))->setExpireTime();
+        $tokenModel = JsonFacade::map(new TokenModel(),
+            ['clientId' => $clientId, 'tokenId' => self::generateToken()])->setExpireTime();
 
         DatabaseManager::getConnection()->insert('token', $tokenModel, $tokenModel->tokenId);
 
@@ -41,7 +42,6 @@ class SecurityFacade
 
     public static function updateToken(string $hash)
     {
-
     }
 
     /**
@@ -82,7 +82,7 @@ class SecurityFacade
     /**
      * Check if the Request Payload it's valid
      * If is return it Mapped in the given Model
-     * If not, return a false boolean
+     * If not, return a false boolean.
      *
      * @param string $modelName
      * @param object $body
@@ -91,7 +91,7 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
+        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
 
         return class_exists($modelPath) ? JsonFacade::compare(new $modelPath(), $body) : false;
     }

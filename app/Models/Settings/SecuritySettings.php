@@ -18,7 +18,7 @@ class SecuritySettings extends Model
 
     /**
      * RAISe Secret Key
-     * That will be used by JWT
+     * That will be used by JWT.
      *
      * @var string
      */
