@@ -33,8 +33,6 @@ $options = getopt(null, [
     'skip-configuration',
 ]);
 
-var_dump($options);
-
 /**
  * Return an Argument Option.
  *
