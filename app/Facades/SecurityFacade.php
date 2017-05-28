@@ -2,6 +2,7 @@
 
 namespace App\Facades;
 
+use App\Handlers\SettingsHandler;
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
 use App\Models\Communication\TokenModel;
@@ -11,6 +12,23 @@ use App\Models\Communication\TokenModel;
  */
 class SecurityFacade
 {
+    /**
+     * Inserts the client's token into the database.
+     *
+     * @param string $clientId
+     *
+     * @return string
+     */
+    public static function insertToken(string $clientId)
+    {
+        $tokenModel = JsonFacade::map(new TokenModel(),
+            ['clientId' => $clientId, 'tokenId' => self::generateToken()])->setExpireTime();
+
+        DatabaseManager::getConnection()->insert('token', $tokenModel, $tokenModel->tokenId);
+
+        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), $tokenModel);
+    }
+
     /**
      * Generate a random pseudo string that will be used as token
      * the token will be always of 40 characters.
@@ -22,38 +40,38 @@ class SecurityFacade
         return bin2hex(openssl_random_pseudo_bytes(20));
     }
 
-    /**
-     * Inserts the client's token into the database.
-     *
-     * @param string $token
-     * @param string $clientId
-     */
-    public static function insertToken(string $token, string $clientId)
+    public static function updateToken(string $hash)
     {
-        $model = (new TokenModel())->fill(['serverTime' => microtime(true), 'clientId' => $clientId]);
-
-        $model->setExpireTime();
-
-        DatabaseManager::getConnection()->insert('token', $model, $token);
     }
 
     /**
      * Check if the Token is Valid.
      *
-     * @param string $token
+     * @param string|bool $hash (JWT Hash)
      *
      * @return bool
      */
-    public static function validateToken(string $token)
+    public static function validateToken($hash)
     {
-        if ($token == false) {
-            ResponseManager::get()->setResponse(401, 'No Token provided.');
+        if ($hash === false) {
+            ResponseManager::get()->setResponse(403, 'You didn\'t provided a Token');
 
             return false;
         }
 
-        if (DatabaseManager::getConnection()->count('token', $token) == 0) {
-            ResponseManager::get()->setResponse(401, 'Invalid Token provided.');
+        // Verifies the Token Integrity is an valid JWT Token and has the same Secret Key
+        $tokenModel = JsonFacade::decode(SettingsHandler::get('security.secretKey'), str_replace('Bearer ', '', $hash));
+
+        // First Verifies the Token Expiry Time
+        if ($tokenModel === false || $tokenModel->expireTime < microtime(true)) {
+            ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
+
+            return false;
+        }
+
+        // Now last check, verifies if the Token provided on this JWT it's really valid
+        if (DatabaseManager::getConnection()->selectById('token', $tokenModel->tokenId) == false) {
+            ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
@@ -62,27 +80,19 @@ class SecurityFacade
     }
 
     /**
-     * Check if the Given Parameters of the Body/Request are valid.
+     * Check if the Request Payload it's valid
+     * If is return it Mapped in the given Model
+     * If not, return a false boolean.
      *
-     * @param string       $modelName
-     * @param array|object $body
+     * @param string $modelName
+     * @param object $body
      *
-     * @return bool
+     * @return bool|object
      */
     public static function validateBody(string $modelName, $body)
     {
-        $className = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
+        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
 
-        if (class_exists($className)) {
-            $model = new $className();
-
-            $result = UtilitiesFacade::arrayDiff((array) $model, (array) $body);
-
-            $result = UtilitiesFacade::arrayDiff(['serverTime'], array_values($result));
-
-            return empty($result);
-        }
-
-        return false;
+        return class_exists($modelPath) ? JsonFacade::compare(new $modelPath(), $body) : false;
     }
 }

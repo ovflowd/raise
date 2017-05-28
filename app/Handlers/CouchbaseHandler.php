@@ -5,6 +5,7 @@ namespace App\Handlers;
 use App\Models\Interfaces\Database;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
+use CouchbaseCluster;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -15,7 +16,7 @@ class CouchbaseHandler implements Database
     /**
      * Couchbase Connection Instance.
      *
-     * @var \CouchbaseCluster
+     * @var CouchbaseCluster
      */
     private $connection = null;
 
@@ -23,18 +24,14 @@ class CouchbaseHandler implements Database
      * Connect to the Database.
      *
      * @param array|object $connection
-     *
-     * @return void
      */
     public function connect($connection)
     {
-        $this->connection = new \CouchbaseCluster("{$connection->address},{$connection->user},{$connection->password}");
+        $this->connection = new CouchbaseCluster("{$connection->address},{$connection->user},{$connection->password}");
     }
 
     /**
      * Destroy the Connection.
-     *
-     * @return void
      */
     public function destroy()
     {
@@ -46,13 +43,18 @@ class CouchbaseHandler implements Database
      *
      * @param string       $table
      * @param object|array $data
-     * @param null         $parameters
+     * @param string       $primaryKey
+     * @param mixed|null   $parameters
      *
-     * @return int The Unique Object Identifier
+     * @return int
      */
-    public function insert(string $table, $data, $parameters = null)
+    public function insert(string $table, $data, string $primaryKey = null, $parameters = null)
     {
-        $itemId = $parameters == null ? bin2hex(openssl_random_pseudo_bytes(20)) : $parameters;
+        $itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
+
+        if ($parameters !== null && method_exists($data, $parameters)) {
+            $data->{$parameters}();
+        }
 
         $this->connection->openBucket($table)->insert($itemId, $data);
 
@@ -86,25 +88,35 @@ class CouchbaseHandler implements Database
      * @param string $table
      * @param string $id
      *
-     * @return object|null
+     * @return object|bool
      */
     public function selectById(string $table, string $id)
     {
-        return $this->connection->openBucket($table)->get($id)->value;
+        try {
+            $result = $this->connection->openBucket($table)->get($id);
+
+            return $result->value;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string   $table
-     * @param null|int $parameters
+     * @param string $table
+     * @param string $primaryKey
      *
-     * @return mixed
+     * @return int|bool
      */
-    public function count(string $table, $parameters = null)
+    public function count(string $table, $primaryKey = null)
     {
+        if (is_bool($primaryKey) || $primaryKey == null) {
+            return false;
+        }
+
         try {
-            $elements = $this->connection->openBucket($table)->get($parameters);
+            $elements = $this->connection->openBucket($table)->get($primaryKey);
 
             return is_array($elements) ? count($elements) : 1;
         } catch (Exception $e) {

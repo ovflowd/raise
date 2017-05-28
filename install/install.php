@@ -133,7 +133,6 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
     $metadataBucket = $connection->openBucket('metadata');
 
     $metadataBucket->insert((string)$details->codHttp, [
-        'codHttp' => $details->codHttp,
         'message' => $details->message,
     ]);
 }

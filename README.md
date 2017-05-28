@@ -10,7 +10,7 @@
 
 Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek2p0hnc5)](https://ci.appveyor.com/project/uiot/raise)   | [![Build Status](https://travis-ci.org/UIoT/RAISe.svg?branch=sbr)](https://travis-ci.org/UIoT/RAISe) | [Artifacts](https://ci.appveyor.com/project/uiot/raise/branch/sbr/artifacts) |
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek2p0hnc5)](https://ci.appveyor.com/project/uiot/raise)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | [Artifacts](https://ci.appveyor.com/project/uiot/raise/branch/sbr/artifacts) |
 
 <b>Supported Features</b>
 

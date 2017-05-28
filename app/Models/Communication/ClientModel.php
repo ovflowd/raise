@@ -10,12 +10,16 @@ class ClientModel extends RaiseModel
     /**
      * Client Name.
      *
+     * @required
+     *
      * @var string
      */
     public $name = 'default client';
 
     /**
      * Client Chipset Model.
+     *
+     * @required
      *
      * @var string
      */
@@ -24,12 +28,16 @@ class ClientModel extends RaiseModel
     /**
      * Client Mac Address.
      *
+     * @required
+     *
      * @var string
      */
     public $mac = 'FF:FF:FF:FF';
 
     /**
      * Client Serial Model.
+     *
+     * @required
      *
      * @var string
      */
@@ -38,12 +46,16 @@ class ClientModel extends RaiseModel
     /**
      * Client Processor Model.
      *
+     * @required
+     *
      * @var string
      */
     public $processor = 'i86-generic';
 
     /**
      * Client Communication Channel.
+     *
+     * @required
      *
      * @var string
      */

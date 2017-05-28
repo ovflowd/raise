@@ -15,4 +15,12 @@ class SecuritySettings extends Model
      * @var string
      */
     public $expireTime = '2hours';
+
+    /**
+     * RAISe Secret Key
+     * That will be used by JWT.
+     *
+     * @var string
+     */
+    public $secretKey = 'default-raise-secret-key';
 }
