@@ -58,8 +58,7 @@ function createConfigurationFile(string $fileName, string $configType, array $cr
     $configurationFile = file_get_contents(__DIR__ . "/configuration/{$configType}.inc.php");
 
     $configurationFile = replaceArray([
-        '{{ADDRESS}}',
-        $credentials['ip'],
+        '{{ADDRESS}}' => $credentials['ip'],
         '{{USER}}' => $credentials['user'],
         '{{PASSWORD}}' => $credentials['pass'],
     ], $configurationFile);
