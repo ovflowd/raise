@@ -4,6 +4,9 @@ language: php
 php:
   - 7.0
   - 7.1
+before_script:
+  # PHP.ini
+  - phpenv config-add travis.php.ini
 before_install:
   # LibCouchbase
   - sudo wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-2-amd64.deb
@@ -27,7 +30,7 @@ before_install:
   - composer self-update
   - composer install --no-interaction
 script:
-  - php install/install.php -D --user=couch --pass=couchbase --address=localhost --skip-configuration
+  - php install/install.php --user=couch --pass=couchbase --address=localhost --skip-configuration
   - php -S 0.0.0.0:8000 index.php 1>/dev/null &
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:

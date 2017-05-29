@@ -24,19 +24,21 @@ ini_set('display_errors', false);
 
 error_reporting(0);
 
-$options = getopt(null, array(
+$options = getopt(null, [
     'user::',
     'pass::',
     'address::',
     'skip-create',
     'skip-fill',
-    'skip-configuration'
-));
+    'skip-configuration',
+    'config-schema::'
+]);
 
 /**
- * Return an Argument Option
+ * Return an Argument Option.
  *
  * @param string $key
+ *
  * @return string|null
  */
 function option(string $key)
@@ -456,7 +458,11 @@ if (option('skip-fill') === null) {
 if (option('skip-configuration') === null) {
     echo 'Creating Configuration File...' . PHP_EOL;
 
-    createConfigurationFile('../Config/Config.php', 'old', $credentials);
+    $configurationType = option('config-schema') !== null ? option('config-schema') : 'old';
+
+    $configurationFile = option('config-file') !== null ? option('config-file') : '../Config/Config.php';
+
+    createConfigurationFile($configurationFile, $configurationType, $credentials);
 }
 
 echo "\033[42mSetup Finished.\033[0m" . PHP_EOL;
