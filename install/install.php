@@ -32,6 +32,7 @@ $options = getopt(null, [
     'skip-fill',
     'skip-configuration',
     'config-schema::',
+    'config-file::'
 ]);
 
 /**
