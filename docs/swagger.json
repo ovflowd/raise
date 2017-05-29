@@ -107,7 +107,7 @@
             "in": "query",
             "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
             "required": false,
-            "type": "boolean"
+            "type": "string"
           }
         ],
         "responses": {
@@ -308,6 +308,13 @@
             "description": "Filter by the Unique Identifier of a Service",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -479,7 +486,7 @@
             "in": "query",
             "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
             "required": false,
-            "type": "boolean"
+            "type": "string"
           }
         ],
         "responses": {
@@ -605,8 +612,7 @@
         "serial",
         "processor",
         "channel",
-        "clientTime",
-        "tags"
+        "clientTime"
       ],
       "type": "object",
       "properties": {
@@ -638,6 +644,10 @@
           "type": "integer",
           "example": 1317427200
         },
+        "location": {
+          "type": "string",
+          "example": "-15.7757876:-48.077829"
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -649,7 +659,8 @@
     },
     "ClientRevalidate": {
       "required": [
-        "services"
+        "services",
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -659,6 +670,10 @@
             "type": "integer",
             "example": 13
           }
+        },
+        "location": {
+          "type": "string",
+          "example": "-15.7757876:-48.077829"
         }
       }
     },
@@ -671,7 +686,8 @@
         "processor",
         "channel",
         "clientTime",
-        "services"
+        "services",
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -702,13 +718,13 @@
         "services": {
           "$ref": "#/definitions/Services"
         },
+        "location": {
+          "type": "string",
+          "example": "-15.7757876:-48.077829"
+        },
         "clientTime": {
           "type": "integer",
           "example": 1317427200
-        },
-        "token": {
-          "type": "string",
-          "example": "0e62354889cbc6f08f9e92521d389157"
         },
         "tags": {
           "type": "array",
@@ -872,17 +888,12 @@
       "type": "object",
       "required": [
         "clientTime",
-        "token",
         "services"
       ],
       "properties": {
         "clientTime": {
           "type": "integer",
           "example": 4324342342
-        },
-        "token": {
-          "type": "string",
-          "example": "7c5307af813437e7bac2b9f011d24e21"
         },
         "tags": {
           "type": "array",
@@ -903,15 +914,10 @@
       }
     },
     "Parameter": {
-      "type": "object",
-      "required": [
-        "example_parameter"
-      ],
-      "properties": {
-        "example_parameter": {
-          "type": "string",
-          "example": "float"
-        }
+      "type": "array",
+      "items": {
+        "type": "string",
+        "example": "example-tag"
       }
     },
     "Error400": {
