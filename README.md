@@ -29,7 +29,7 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek
 UIoT RAISe
 ----------
 
-RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
+RAISe is an <b>Internet of Things</b> open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
 
 <b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).
 
