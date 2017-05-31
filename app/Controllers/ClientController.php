@@ -48,12 +48,12 @@ class ClientController extends BaseController
      *
      * @param Select|null $query
      *
-     * @return void
+     * @return Select
      */
     protected function filter(Select $query = null)
     {
         $query = new Select();
 
-        parent::filter($query);
+        return parent::filter($query);
     }
 }

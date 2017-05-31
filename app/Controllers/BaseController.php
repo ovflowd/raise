@@ -28,12 +28,14 @@ abstract class BaseController
      *
      * @param Select|null $query
      *
-     * @return void
+     * @return Select
      */
     protected function filter(Select $query = null)
     {
         $query = $query == null ? new Select() : $query;
 
         $query->where([]);
+
+        return $query;
     }
 }
