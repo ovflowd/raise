@@ -40,7 +40,7 @@ Installing
 
 You can install <b>RAISe</b> by easily going on our [Wiki](wiki) and check the Installation Pages.
 
-Any troubles that you may/have, check our [Contributing/Reporting Guide](sbr/CONTRIBUTING.md).
+Any troubles that you may/have, check our [Contributing/Reporting Guide](CONTRIBUTING.md).
 
 You can also check the [Table of Contents of the RAISe Installer](wiki/installer-reference).
 
@@ -60,7 +60,7 @@ You can learn more about the <b>RAISe</b> architecture by checking our [Wiki](wi
 * [Design and Evaluation of a Services Interface for the Internet of Things](http://dl.acm.org/citation.cfm?id=3023305)
 * Other Papers being Added on the list.
 
-You can also **fetch** the [API Documentation](tree/sbr/docs/) and check it **online** by using [Swagger UI](http://docs.uiot.org/raise/).
+You can also **fetch** the [API Documentation](docs/) and check it **online** by using [Swagger UI](http://docs.uiot.org/raise/).
 
 <br>
 <br>
