@@ -376,9 +376,9 @@ if (option('skip-fill') === null) {
     echo progressBar(1, 6, 'Filling Metadata Bucket...                  ');
 
     try {
-        $clientBucket = $connection->openBucket('metadata');
+        $metadataBucket = $connection->openBucket('metadata');
 
-        $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
+        $metadataBucket->manager()->createN1qlPrimaryIndex('', false, false);
     } catch (CouchbaseException $e) {
         echo '[WARN] Failed to Fill Metadata Bucket!' . PHP_EOL;
     }
