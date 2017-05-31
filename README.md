@@ -49,7 +49,7 @@ Contributing
 
 You can <b>Contribute</b> on RAISe! <b>RAISe</b> is open source, and everyone can contribute on it.
 
-Check the [Contributing Guide](sbr/CONTRIBUTING.md).
+Check the [Contributing Guide](CONTRIBUTING.md).
 
 Documentation
 -------------
