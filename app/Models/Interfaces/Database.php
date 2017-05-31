@@ -2,6 +2,8 @@
 
 namespace App\Models\Interfaces;
 
+use Koine\QueryBuilder\Statements\Select;
+
 /**
  * Interface Database.
  */
@@ -39,11 +41,11 @@ interface Database
      * Select Data on Database.
      *
      * @param string     $table
-     * @param mixed|null $parameters
+     * @param Select|null $query
      *
      * @return mixed
      */
-    public function select(string $table, $parameters = null);
+    public function select(string $table, Select $query = null);
 
     /**
      * Count number of Elements of a specific Query.

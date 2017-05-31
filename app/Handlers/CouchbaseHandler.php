@@ -41,10 +41,10 @@ class CouchbaseHandler implements Database
     /**
      * Insert Data on Database.
      *
-     * @param string       $table
+     * @param string $table
      * @param object|array $data
-     * @param string       $primaryKey
-     * @param mixed|null   $parameters
+     * @param string $primaryKey
+     * @param mixed|null $parameters
      *
      * @return int
      */
@@ -65,19 +65,13 @@ class CouchbaseHandler implements Database
      * Select Data on Database.
      *
      * @param string $table
-     * @param null   $parameters
+     * @param Select|null $query
      *
      * @return mixed
      */
-    public function select(string $table, $parameters = null)
+    public function select(string $table, Select $query = null)
     {
-        $query = new Select();
-
-        $query->select('*');
-
-        $query->from($table);
-
-        $query->where($parameters);
+        $query->select('*')->from($table);
 
         return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
     }

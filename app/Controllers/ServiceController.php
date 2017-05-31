@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Models\Interfaces\Controller;
+use Koine\QueryBuilder\Statements\Select;
 
 /**
  * Class ServiceController.
  */
-class ServiceController implements Controller
+class ServiceController extends BaseController
 {
     /**
      * Register Process.
@@ -27,5 +27,19 @@ class ServiceController implements Controller
     public function list()
     {
         // TODO: Implement list() method.
+    }
+
+    /**
+     * Filter Input Data
+     *
+     * @param Select|null $query
+     *
+     * @return void
+     */
+    protected function filter(Select $query = null)
+    {
+        $query = new Select();
+
+        parent::filter($query);
     }
 }

@@ -5,29 +5,23 @@ namespace App\Controllers;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class DataController.
+ * Class BaseController
  */
-class DataController extends BaseController
+abstract class BaseController
 {
     /**
      * Register Process.
      *
      * @return mixed
      */
-    public function register()
-    {
-        // TODO: Implement register() method.
-    }
+    public abstract function register();
 
     /**
      * List Process.
      *
      * @return mixed
      */
-    public function list()
-    {
-        // TODO: Implement list() method.
-    }
+    public abstract function list();
 
     /**
      * Filter Input Data
@@ -38,8 +32,8 @@ class DataController extends BaseController
      */
     protected function filter(Select $query = null)
     {
-        $query = new Select();
+        $query = $query == null ? new Select() : $query;
 
-        parent::filter($query);
+        $query->where([]);
     }
 }
