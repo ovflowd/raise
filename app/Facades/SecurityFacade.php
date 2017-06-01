@@ -22,10 +22,10 @@ class SecurityFacade
     public static function insertToken(string $clientId)
     {
         DatabaseManager::insert('token',
-            JsonFacade::map(new TokenModel(), array('clientId' => $clientId))->setExpireTime(),
+            JsonFacade::map(new TokenModel(), ['clientId' => $clientId])->setExpireTime(),
             $token = self::generateToken());
 
-        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), array('token' => $token));
+        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), ['token' => $token]);
     }
 
     /**
@@ -40,7 +40,7 @@ class SecurityFacade
     }
 
     /**
-     * Update the Token (Revalidate)
+     * Update the Token (Revalidate).
      *
      * @param string $hash
      */
@@ -92,7 +92,7 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
+        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
 
         return class_exists($modelPath) ? JsonFacade::compare(new $modelPath(), $body) : false;
     }

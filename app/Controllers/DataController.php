@@ -30,7 +30,7 @@ class DataController extends BaseController
     }
 
     /**
-     * Filter Input Data
+     * Filter Input Data.
      *
      * @param Select|null $query
      *

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class BaseController
+ * Class BaseController.
  */
 abstract class BaseController
 {
@@ -14,17 +14,17 @@ abstract class BaseController
      *
      * @return mixed
      */
-    public abstract function register();
+    abstract public function register();
 
     /**
      * List Process.
      *
      * @return mixed
      */
-    public abstract function list();
+    abstract public function list();
 
     /**
-     * Filter Input Data
+     * Filter Input Data.
      *
      * @param Select|null $query
      *

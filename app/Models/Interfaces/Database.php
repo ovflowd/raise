@@ -40,7 +40,7 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string     $table
+     * @param string      $table
      * @param Select|null $query
      *
      * @return mixed
