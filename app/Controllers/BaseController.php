@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Managers\ResponseManager;
+use App\Models\Response\DataResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -19,9 +21,17 @@ abstract class BaseController
     /**
      * List Process.
      *
-     * @return mixed
+     * @param string $modelName
+     * @param array|null $list
      */
-    abstract public function list();
+    public function list(string $modelName, array $list = null)
+    {
+        $data = array_map(function ($model) use ($modelName) {
+            return $model->{$modelName};
+        }, $list);
+
+        ResponseManager::get()->setResponseModel(200, new DataResponse(), ['values' => $data]);
+    }
 
     /**
      * Filter Input Data.

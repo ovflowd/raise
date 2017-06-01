@@ -37,7 +37,7 @@ $router->get('/', function () use ($response, $showResponse) {
 $router->mount('/client', function () use ($router, $showResponse) {
     // Client Security
     $router->before('GET', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
+        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
             die($showResponse());
         }
     });
@@ -58,7 +58,7 @@ $router->mount('/client', function () use ($router, $showResponse) {
 $router->mount('/service', function () use ($router, $showResponse) {
     // Service Security
     $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
+        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
             die($showResponse());
         }
     });
@@ -79,7 +79,7 @@ $router->mount('/service', function () use ($router, $showResponse) {
 $router->mount('/data', function () use ($router, $showResponse) {
     // Data Security
     $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
+        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
             die($showResponse());
         }
     });

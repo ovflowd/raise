@@ -37,14 +37,12 @@ class ClientController extends BaseController
 
     /**
      * List Process.
-     *
-     * @return void
      */
     public function list()
     {
         $list = DatabaseManager::getConnection()->select('client', new Select());
-        var_dump($list);
-        ResponseManager::get()->setResponse(200, JsonFacade::mapSet(new DataResponse(), $list));
+
+        parent::list('client', $list);
     }
 
     /**
