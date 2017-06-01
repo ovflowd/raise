@@ -24,7 +24,7 @@ abstract class BaseController
      * @param string     $modelName
      * @param array|null $list
      */
-    public function list(string $modelName, array $list = null)
+    public function list(string $modelName = null, array $list = null)
     {
         $data = array_map(function ($model) use ($modelName) {
             return $model->{$modelName};
