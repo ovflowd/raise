@@ -29,6 +29,7 @@ class ClientTest extends TestCase
             'serial'     => 'm3t41xR3l02d3d',
             'processor'  => 'AMD SUX-K2',
             'channel'    => 'ieee-4chan(nel)-802154',
+            'location'   => '0:0',
             'clientTime' => microtime(true),
         ];
 
