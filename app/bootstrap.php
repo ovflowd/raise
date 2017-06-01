@@ -14,7 +14,7 @@
  */
 
 // Require Composer Autoloader
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Instance Router
 $router = new \Bramus\Router\Router();
@@ -25,25 +25,28 @@ $router = new \Bramus\Router\Router();
 // Response Manager
 $response = new \App\Managers\ResponseManager('application/json');
 
+// Set Response Function
+$showResponse = function (\App\Models\Communication\Model $optionalModel = null) use ($response) {
+    echo $response->getResponse(function (\App\Models\Communication\Model $model) use ($optionalModel) {
+        return \App\Facades\JsonFacade::jsonEncode($optionalModel ?? $model);
+    });
+};
+
 // Load Routes
-$router = require_once __DIR__.'/../app/routes.php';
+$router = require_once __DIR__ . '/../app/routes.php';
 
 // Load Settings
-$settings = require_once __DIR__.'/../app/settings.php';
+$settings = require_once __DIR__ . '/../app/settings.php';
 
 // Store Settings
 \App\Handlers\SettingsHandler::store($settings);
 
 // Set 404 Route
-$router->set404(function () use ($response) {
-    echo $response->getResponse(function (\App\Models\Communication\Model $model) {
-        return \App\Facades\JsonFacade::jsonEncode($model);
-    });
+$router->set404(function () use ($response, $showResponse) {
+    $showResponse();
 });
 
 // Run Router
-$router->run(function () use ($response) {
-    echo $response->getResponse(function (\App\Models\Communication\Model $model) {
-        return \App\Facades\JsonFacade::jsonEncode($model);
-    });
+$router->run(function () use ($response, $showResponse) {
+    $showResponse();
 });

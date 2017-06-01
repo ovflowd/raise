@@ -22,8 +22,10 @@ use App\Facades\SecurityFacade;
 |----------------------------------------------------------------------------
 */
 
-$router->get('/', function () use ($response) {
-    $response->setResponse(200, 'Welcome to RAISe');
+$router->get('/', function () use ($response, $showResponse) {
+    $showResponse(function () use ($response) {
+        $response->setResponse(200, 'Welcome to RAISe');
+    });
 });
 
 /*
@@ -32,14 +34,17 @@ $router->get('/', function () use ($response) {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/client', function () use ($router) {
+$router->mount('/client', function () use ($router, $showResponse) {
     // Client Security
-    $router->before('GET', '/*', function () use ($router) {
+    $router->before('GET', '/*', function () use ($router, $showResponse) {
         if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
-            // List Clients
-            $router->get('/', '\App\Controllers\ClientController@list');
+            die($showResponse());
         }
     });
+
+    // List Clients
+    $router->get('/', '\App\Controllers\ClientController@list');
+
     // Register a Client
     $router->post('/register', '\App\Controllers\ClientController@register');
 });
@@ -50,17 +55,19 @@ $router->mount('/client', function () use ($router) {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/service', function () use ($router) {
+$router->mount('/service', function () use ($router, $showResponse) {
     // Service Security
-    $router->before('GET|POST', '/*', function () use ($router) {
+    $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
         if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
-            // Register a Service
-            $router->post('/register', '\App\Controllers\ServiceController@register');
-
-            // List Service
-            $router->get('/', '\App\Controllers\ServiceController@list');
+            die($showResponse());
         }
     });
+
+    // Register a Service
+    $router->post('/register', '\App\Controllers\ServiceController@register');
+
+    // List Service
+    $router->get('/', '\App\Controllers\ServiceController@list');
 });
 
 /*
@@ -69,17 +76,19 @@ $router->mount('/service', function () use ($router) {
 |----------------------------------------------------------------------------
 */
 
-$router->mount('/data', function () use ($router) {
+$router->mount('/data', function () use ($router, $showResponse) {
     // Data Security
-    $router->before('GET|POST', '/*', function () use ($router) {
+    $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
         if (SecurityFacade::validateToken(RequestFacade::headers('authorization'))) {
-            // Register Data
-            $router->post('/register', '\App\Controllers\DataController@register');
-
-            // List Data
-            $router->get('/', '\App\Controllers\DataController@list');
+            die($showResponse());
         }
     });
+
+    // Register Data
+    $router->post('/register', '\App\Controllers\DataController@register');
+
+    // List Data
+    $router->get('/', '\App\Controllers\DataController@list');
 });
 
 /*
