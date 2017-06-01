@@ -140,6 +140,7 @@ class JsonFacade
      */
     public static function compare($model, $data)
     {
+        var_dump(self::doMap($model, $data, false, true));
         return self::doMap($model, $data, false, true);
     }
 

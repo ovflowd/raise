@@ -12,7 +12,7 @@ class ServiceModel extends RaiseModel
      *
      * @required
      *
-     * @var ServiceBagModel[]
+     * @var array
      */
     public $services = [];
 
