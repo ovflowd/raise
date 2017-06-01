@@ -17,6 +17,8 @@ class RaiseModel extends Model
     /**
      * Time when the client sent the Data.
      *
+     * @required
+     *
      * @var int (UNIX_TIMESTAMP)
      */
     public $clientTime = 0;
