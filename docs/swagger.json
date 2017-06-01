@@ -17,7 +17,7 @@
     "apiKey": {
       "type": "apiKey",
       "name": "token",
-      "description": "The Token it's the onliest way to authorize your requestes within RAISe. A Token it's obtained by registering a Client on RAISe. The Token allows you interact with RAISe only with Data, Clients and Services related with your Client.<br><b>Example:</b> `Bearer <TOKEN>`",
+      "description": "The Token it's the onliest way to authorize your requestes within RAISe. A Token it's obtained by registering a Client on RAISe. The Token allows you interact with RAISe only with Data, Clients and Services related with your Client.<br><b>Example:</b> `<TOKEN>`",
       "in": "header"
     }
   },

@@ -21,12 +21,11 @@ class SecurityFacade
      */
     public static function insertToken(string $clientId)
     {
-        $tokenModel = JsonFacade::map(new TokenModel(),
-            ['clientId' => $clientId, 'tokenId' => self::generateToken()])->setExpireTime();
+        DatabaseManager::insert('token',
+            JsonFacade::map(new TokenModel(), array('clientId' => $clientId))->setExpireTime(),
+            $token = self::generateToken());
 
-        DatabaseManager::getConnection()->insert('token', $tokenModel, $tokenModel->tokenId);
-
-        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), $tokenModel);
+        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), array('token' => $token));
     }
 
     /**
@@ -40,6 +39,11 @@ class SecurityFacade
         return bin2hex(openssl_random_pseudo_bytes(20));
     }
 
+    /**
+     * Update the Token (Revalidate)
+     *
+     * @param string $hash
+     */
     public static function updateToken(string $hash)
     {
     }
@@ -54,23 +58,20 @@ class SecurityFacade
     public static function validateToken($hash)
     {
         if ($hash === false) {
-            ResponseManager::get()->setResponse(403, 'You didn\'t provided a Token');
+            ResponseManager::get()->setResponse(403, "You didn't provided a Token");
 
             return false;
         }
 
-        // Verifies the Token Integrity is an valid JWT Token and has the same Secret Key
-        $tokenModel = JsonFacade::decode(SettingsHandler::get('security.secretKey'), str_replace('Bearer ', '', $hash));
-
-        // First Verifies the Token Expiry Time
-        if ($tokenModel === false || $tokenModel->expireTime < microtime(true)) {
+        // Verifies if is an valid JWT
+        if (($token = JsonFacade::decode(SettingsHandler::get('security.secretKey'), $hash)) == false) {
             ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
 
-        // Now last check, verifies if the Token provided on this JWT it's really valid
-        if (DatabaseManager::getConnection()->selectById('token', $tokenModel->tokenId) == false) {
+        // Check if the Token exists on the Database and check if is Valid
+        if (($token = DatabaseManager::selectById('token', $token->token)) == false || $token->expireTime < microtime(true)) {
             ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
@@ -91,7 +92,7 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
+        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
 
         return class_exists($modelPath) ? JsonFacade::compare(new $modelPath(), $body) : false;
     }

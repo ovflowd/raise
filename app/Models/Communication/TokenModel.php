@@ -26,16 +26,6 @@ class TokenModel extends RaiseModel
     public $expireTime;
 
     /**
-     * Client Token.
-     *
-     * @see http://php.net/manual/pt_BR/function.openssl-random-pseudo-bytes.php
-     * @required
-     *
-     * @var string
-     */
-    public $tokenId;
-
-    /**
      * Set the Token Expire Time.
      *
      * @return $this

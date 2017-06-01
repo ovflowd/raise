@@ -89,7 +89,7 @@ class ResponseManager
     public function setResponse(int $httpCode, $description = null, bool $returnContent = false)
     {
         $this->setResponseModel($httpCode, new MessageResponse(),
-            DatabaseManager::getConnection()->selectById('metadata', $httpCode));
+            DatabaseManager::selectById('metadata', $httpCode));
 
         $this->responseModel->details = $description;
 

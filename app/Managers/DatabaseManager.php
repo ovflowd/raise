@@ -26,6 +26,22 @@ class DatabaseManager
     private static $configuration;
 
     /**
+     * Call a method from the Database Handler
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return bool|mixed
+     */
+    public static function __callStatic($name, array $arguments)
+    {
+        if (method_exists(self::getConnection(), $name)) {
+            return call_user_func_array(array(self::getConnection(), $name), $arguments);
+        }
+
+        return false;
+    }
+
+    /**
      * Get Database Connection.
      *
      * If the Connection doesn't exists, tries to connect.
@@ -52,7 +68,7 @@ class DatabaseManager
     {
         $handler = SettingsHandler::get('raise.databaseType');
 
-        $className = ('App\Handlers\\'.ucfirst($handler).'Handler');
+        $className = ('App\Handlers\\' . ucfirst($handler) . 'Handler');
 
         if (class_exists($className)) {
             self::$configuration = SettingsHandler::get($handler);
