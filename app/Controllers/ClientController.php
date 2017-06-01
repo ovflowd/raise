@@ -41,7 +41,10 @@ class ClientController extends BaseController
      */
     public function list(string $modelName = null, array $list = null)
     {
-        var_dump(RequestFacade::headers('client'));
+
+        if(RequestFacade::headers('name') || RequestFacade::headers('processor') || RequestFacade::headers('channel') || RequestFacade::headers('tag') || RequestFacade::headers('limit') || RequestFacade::headers('order') || RequestFacade::headers('interval')){
+            this->filter();
+        }
 
         $list = DatabaseManager::getConnection()->select('client', new Select());
 
