@@ -2,12 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Facades\JsonFacade;
 use App\Facades\RequestFacade;
 use App\Facades\SecurityFacade;
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
-use App\Models\Response\DataResponse;
 use App\Models\Response\TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
