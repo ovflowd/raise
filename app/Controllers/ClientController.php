@@ -29,7 +29,7 @@ class ClientController extends BaseController
 
         ResponseManager::get()->setResponseModel(200, new TokenResponse(), [
             'message' => 'Client Registered Successfully',
-            'token' => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel)),
+            'token'   => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel)),
         ]);
     }
 
@@ -44,7 +44,7 @@ class ClientController extends BaseController
     }
 
     /**
-     * Filter Input Data
+     * Filter Input Data.
      *
      * @param Select|null $query
      *

@@ -62,7 +62,7 @@ class ClientModel extends RaiseModel
     public $channel = 'ieee-wireless-80211';
 
     /**
-     * Client Location or Nearest Path
+     * Client Location or Nearest Path.
      *
      * @required
      *
