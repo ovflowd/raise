@@ -24,13 +24,14 @@ class ServiceController extends BaseController
         if (($mappedModel = SecurityFacade::validateBody('service', RequestFacade::body())) == false) {
             ResponseManager::get()->setResponse(400, 'Missing required paramaters');
 
+            var_dump($mappedModel);
+
             return;
         }
 
-        ResponseManager::get()->setResponseModel(200, new TokenResponse(), [
-            'message' => 'Service Registered Succesfully',
-            'token'   => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('server', $mappedModel)),
-             ]);
+        DatabaseManager::insert('service', $mappedModel);
+
+        ResponseManager::get()->setResponse(200, 'Service Registered Successfully');
     }
 
     /**
