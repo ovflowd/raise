@@ -38,6 +38,8 @@ class ClientController extends BaseController
      */
     public function list()
     {
+        var_dump(RequestFacade::headers('client'));
+
         $list = DatabaseManager::getConnection()->select('client', new Select());
 
         parent::list('client', $list);
