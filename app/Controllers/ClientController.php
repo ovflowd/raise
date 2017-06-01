@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Facades\JsonFacade;
 use App\Facades\RequestFacade;
 use App\Facades\SecurityFacade;
 use App\Managers\DatabaseManager;
 use App\Managers\ResponseManager;
+use App\Models\Response\DataResponse;
 use App\Models\Response\TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
@@ -40,7 +42,9 @@ class ClientController extends BaseController
      */
     public function list()
     {
-        //TODO function
+        $list = DatabaseManager::getConnection()->select('client', new Select());
+        var_dump($list);
+        ResponseManager::get()->setResponse(200, JsonFacade::mapSet(new DataResponse(), $list));
     }
 
     /**
