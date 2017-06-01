@@ -2,6 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Facades\RequestFacade;
+use App\Facades\SecurityFacade;
+use App\Managers\DatabaseManager;
+use App\Managers\ResponseManager;
+use App\Models\Response\TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -16,15 +21,25 @@ class ServiceController extends BaseController
      */
     public function register()
     {
-        // TODO: Implement register() method.
+        if (($mappedModel = SecurityFacade::validateBody('service', RequestFacade::body())) == false) {
+            ResponseManager::get()->setResponse(400, 'Missing required paramaters');
+
+            return;
+        }
+
+        ResponseManager::get()->setResponseModel(200, new TokenResponse(), [
+            'message' => 'Service Registered Succesfully',
+            'token'   => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('server', $mappedModel)),
+             ]);
     }
 
     /**
      * List Process.
      *
-     * @return mixed
+     * @param string     $modelName
+     * @param array|null $list
      */
-    public function list()
+    public function list(string $modelName = null, array $list = null)
     {
         // TODO: Implement list() method.
     }

@@ -142,4 +142,9 @@ class JsonFacade
     {
         return self::doMap($model, $data, false, true);
     }
+
+    public static function compareSet($model, array $data)
+    {
+        return self::doMap($model, $data,true, true);
+    }
 }

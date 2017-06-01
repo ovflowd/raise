@@ -35,8 +35,11 @@ class ClientController extends BaseController
 
     /**
      * List Process.
+     *
+     * @param string     $modelName
+     * @param array|null $list
      */
-    public function list()
+    public function list(string $modelName = null, array $list = null)
     {
         var_dump(RequestFacade::headers('client'));
 
