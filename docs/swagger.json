@@ -82,7 +82,7 @@
             "type": "string"
           },
           {
-            "name": "tag",
+            "name": "tags",
             "in": "query",
             "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,
@@ -275,7 +275,7 @@
         ],
         "parameters": [
           {
-            "name": "tag",
+            "name": "tags",
             "in": "query",
             "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,
@@ -447,7 +447,7 @@
         ],
         "parameters": [
           {
-            "name": "tag",
+            "name": "tags",
             "in": "query",
             "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,

@@ -43,7 +43,24 @@ abstract class BaseController
     {
         $query = $query == null ? new Select() : $query;
 
-        $query->where([]);
+        if (request()::query('tags') !== false) {
+            array_walk(explode(':', request()::query('tags')), function ($tag) use ($query) {
+                $query->where("'{$tag}' IN tags");
+            });
+        }
+
+        if (request()::query('interval') !== false) {
+            $interval = explode(':', request()::query('interval'));
+
+            $query->where('clientTime', $interval[0], '>=');
+            $query->where('clientTime', $interval[1], '<=');
+        }
+
+        if (request()::query('limit') !== false) {
+            $query->limit(request()::query('limit'));
+        }
+
+        $query->orderBy('serverTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }
