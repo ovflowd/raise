@@ -18,7 +18,7 @@ class ResponseFacade
     private static $responseModel = null;
 
     /**
-     * Prepare ResponseFacade
+     * Prepare ResponseFacade.
      *
      * @param string $contentType
      *
@@ -47,7 +47,7 @@ class ResponseFacade
     }
 
     /**
-     * Get the JsonFacade Instance
+     * Get the JsonFacade Instance.
      *
      * @return self
      */
@@ -75,9 +75,9 @@ class ResponseFacade
     /**
      * Set the Response Content.
      *
-     * @param int $httpCode
+     * @param int   $httpCode
      * @param mixed $description
-     * @param bool $returnContent
+     * @param bool  $returnContent
      *
      * @return MessageResponse|null
      */
@@ -93,9 +93,9 @@ class ResponseFacade
     /**
      * Set the Response Data.
      *
-     * @param int $httpCode
+     * @param int           $httpCode
      * @param string|object $model
-     * @param array|object $data
+     * @param array|object  $data
      */
     public static function setResponseModel(int $httpCode, $model, $data)
     {
@@ -119,9 +119,9 @@ class ResponseFacade
     /**
      * Set the Data of a DataModel.
      *
-     * @param int $httpCode
+     * @param int   $httpCode
      * @param array $values
-     * @param bool $returnContent
+     * @param bool  $returnContent
      *
      * @return DataResponse|MessageResponse|null
      */

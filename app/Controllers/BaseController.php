@@ -20,7 +20,7 @@ abstract class BaseController
     /**
      * List Process.
      *
-     * @param string $modelName
+     * @param string     $modelName
      * @param array|null $list
      */
     public function list(string $modelName = null, array $list = null)
@@ -60,7 +60,7 @@ abstract class BaseController
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('serverTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('serverTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

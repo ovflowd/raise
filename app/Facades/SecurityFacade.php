@@ -10,7 +10,7 @@ use App\Models\Communication\TokenModel;
 class SecurityFacade
 {
     /**
-     * Get the JsonFacade Instance
+     * Get the JsonFacade Instance.
      *
      * @return self
      */
@@ -99,7 +99,7 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
+        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
 
         return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }
