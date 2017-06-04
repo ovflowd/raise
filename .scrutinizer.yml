@@ -1,6 +1,8 @@
 filter:
     excluded_paths:
         - 'tests/*'
+        - 'docs/*'
+        - 'install/*'
 checks:
     php:
         code_rating: true
