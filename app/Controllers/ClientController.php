@@ -2,10 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Facades\RequestFacade;
-use App\Facades\SecurityFacade;
-use App\Managers\DatabaseManager;
-use App\Managers\ResponseManager;
 use App\Models\Response\TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
@@ -21,32 +17,29 @@ class ClientController extends BaseController
      */
     public function register()
     {
-        if (($mappedModel = SecurityFacade::validateBody('client', RequestFacade::body())) == false) {
-            ResponseManager::get()->setResponse(400, 'Missing required Parameters');
+        if (($mappedModel = security()::validateBody('client', request()::body())) == false) {
+            response()::setResponse(400, 'Missing required Parameters');
 
             return;
         }
 
-        ResponseManager::get()->setResponseModel(200, new TokenResponse(), [
+        response()::setResponseModel(200, new TokenResponse(), [
             'message' => 'Client Registered Successfully',
-            'token'   => SecurityFacade::insertToken(DatabaseManager::getConnection()->insert('client', $mappedModel)),
+            'token' => security()::insertToken(database()->insert('client', $mappedModel)),
         ]);
     }
 
     /**
      * List Process.
      *
-     * @param string     $modelName
+     * @param string $modelName
      * @param array|null $list
      */
     public function list(string $modelName = null, array $list = null)
     {
+        $query = $this->filter();
 
-        if(RequestFacade::headers('name') || RequestFacade::headers('processor') || RequestFacade::headers('channel') || RequestFacade::headers('tag') || RequestFacade::headers('limit') || RequestFacade::headers('order') || RequestFacade::headers('interval')){
-            this->filter();
-        }
-
-        $list = DatabaseManager::getConnection()->select('client', new Select());
+        $list = database()->select('client', $query);
 
         parent::list('client', $list);
     }
@@ -61,6 +54,10 @@ class ClientController extends BaseController
     protected function filter(Select $query = null)
     {
         $query = new Select();
+
+        if (request()::query('name') !== false) {
+            $query->where('name', request()::query('name'));
+        }
 
         return parent::filter($query);
     }

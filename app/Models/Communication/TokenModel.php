@@ -2,8 +2,6 @@
 
 namespace App\Models\Communication;
 
-use App\Handlers\SettingsHandler;
-
 /**
  * Class TokenModel.
  */
@@ -32,7 +30,7 @@ class TokenModel extends RaiseModel
      */
     public function setExpireTime()
     {
-        $this->expireTime = strtotime('+'.SettingsHandler::get('security.expireTime'), $this->serverTime);
+        $this->expireTime = strtotime('+' . setting('security.expireTime'), $this->serverTime);
 
         return $this;
     }

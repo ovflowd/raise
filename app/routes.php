@@ -1,8 +1,5 @@
 <?php
 
-use App\Facades\RequestFacade;
-use App\Facades\SecurityFacade;
-
 /*
  *  _    _ _____   _______
  * | |  | |_   _| |__   __|
@@ -22,10 +19,8 @@ use App\Facades\SecurityFacade;
 |----------------------------------------------------------------------------
 */
 
-$router->get('/', function () use ($response, $showResponse) {
-    $showResponse(function () use ($response) {
-        $response->setResponse(200, 'Welcome to RAISe');
-    });
+$router->get('/', function () use ($showResponse) {
+    response()::setResponse(200, 'Welcome to RAISe');
 });
 
 /*
@@ -37,7 +32,7 @@ $router->get('/', function () use ($response, $showResponse) {
 $router->mount('/client', function () use ($router, $showResponse) {
     // Client Security
     $router->before('GET', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
+        if (security()::validateToken(request()::headers('authorization')) == false) {
             die($showResponse());
         }
     });
@@ -58,7 +53,7 @@ $router->mount('/client', function () use ($router, $showResponse) {
 $router->mount('/service', function () use ($router, $showResponse) {
     // Service Security
     $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
+        if (security()::validateToken(request()::headers('authorization')) == false) {
             die($showResponse());
         }
     });
@@ -79,7 +74,7 @@ $router->mount('/service', function () use ($router, $showResponse) {
 $router->mount('/data', function () use ($router, $showResponse) {
     // Data Security
     $router->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (SecurityFacade::validateToken(RequestFacade::headers('authorization')) == false) {
+        if (security()::validateToken(request()::headers('authorization')) == false) {
             die($showResponse());
         }
     });

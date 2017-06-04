@@ -84,7 +84,7 @@
           {
             "name": "tag",
             "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags.",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,
             "type": "string"
           },
@@ -98,7 +98,7 @@
           {
             "name": "order",
             "in": "query",
-            "description": "You can Order the Result by a specific order. The Clients **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
+            "description": "You can Order the Result by a specific order. The Clients **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
             "required": false,
             "type": "boolean"
           },
@@ -277,7 +277,7 @@
           {
             "name": "tag",
             "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags.",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,
             "type": "string"
           },
@@ -291,7 +291,7 @@
           {
             "name": "order",
             "in": "query",
-            "description": "You can Order the Result by a specific order. The Services **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
+            "description": "You can Order the Result by a specific order. The Services **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
             "required": false,
             "type": "boolean"
           },
@@ -449,7 +449,7 @@
           {
             "name": "tag",
             "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags.",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags. <br><b>Example:</b> tag1:tag2:tag3",
             "required": false,
             "type": "string"
           },
@@ -463,7 +463,7 @@
           {
             "name": "order",
             "in": "query",
-            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> NEWEST or OLDEST.",
+            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
             "required": false,
             "type": "boolean"
           },

@@ -2,9 +2,6 @@
 
 namespace App\Facades;
 
-use App\Handlers\SettingsHandler;
-use App\Managers\DatabaseManager;
-use App\Managers\ResponseManager;
 use App\Models\Communication\TokenModel;
 
 /**
@@ -12,6 +9,16 @@ use App\Models\Communication\TokenModel;
  */
 class SecurityFacade
 {
+    /**
+     * Get the JsonFacade Instance
+     *
+     * @return self
+     */
+    public static function get()
+    {
+        return __CLASS__;
+    }
+
     /**
      * Inserts the client's token into the database.
      *
@@ -21,11 +28,11 @@ class SecurityFacade
      */
     public static function insertToken(string $clientId)
     {
-        DatabaseManager::insert('token',
+        database()->insert('token',
             JsonFacade::map(new TokenModel(), ['clientId' => $clientId])->setExpireTime(),
             $token = self::generateToken());
 
-        return JsonFacade::encode(SettingsHandler::get('security.secretKey'), ['token' => $token]);
+        return json()::encode(setting('security.secretKey'), ['token' => $token]);
     }
 
     /**
@@ -58,21 +65,21 @@ class SecurityFacade
     public static function validateToken($hash)
     {
         if ($hash === false) {
-            ResponseManager::get()->setResponse(403, "You didn't provided a Token");
+            response()::setResponse(403, "You didn't provided a Token");
 
             return false;
         }
 
         // Verifies if is an valid JWT
-        if (($token = JsonFacade::decode(SettingsHandler::get('security.secretKey'), $hash)) == false) {
-            ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
+        if (($token = json()::decode(setting('security.secretKey'), $hash)) == false) {
+            response()::setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
 
         // Check if the Token exists on the Database and check if is Valid
-        if (($token = DatabaseManager::selectById('token', $token->token)) == false || $token->expireTime < microtime(true)) {
-            ResponseManager::get()->setResponse(401, 'Your Token is Invalid or Expired');
+        if (($token = database()->selectById('token', $token->token)) == false || $token->expireTime < microtime()) {
+            response()::setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
@@ -92,8 +99,8 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
+        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
 
-        return class_exists($modelPath) ? JsonFacade::compare(new $modelPath(), $body) : false;
+        return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }
 }

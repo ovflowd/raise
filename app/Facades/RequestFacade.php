@@ -36,11 +36,21 @@ class RequestFacade
     private static $query = [];
 
     /**
+     * Get the RequestFacade Instance
+     *
+     * @return self
+     */
+    public static function get()
+    {
+        return __CLASS__;
+    }
+
+    /**
      * Prepare the RequestFacade with the Requested Page Data.
      *
-     * @param array  $headers
+     * @param array $headers
      * @param string $method
-     * @param array  $server
+     * @param array $server
      */
     public static function prepare(array $headers, string $method, array $server)
     {
@@ -54,7 +64,7 @@ class RequestFacade
 
         $phpInput = file_get_contents('php://input');
 
-        self::$body = JsonFacade::jsonDecode(empty($phpInput) ? '{}' : $phpInput);
+        self::$body = json()::jsonDecode(empty($phpInput) ? '{}' : $phpInput);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Managers\ResponseManager;
 use App\Models\Response\DataResponse;
 use Koine\QueryBuilder\Statements\Select;
 
@@ -21,7 +20,7 @@ abstract class BaseController
     /**
      * List Process.
      *
-     * @param string     $modelName
+     * @param string $modelName
      * @param array|null $list
      */
     public function list(string $modelName = null, array $list = null)
@@ -30,7 +29,7 @@ abstract class BaseController
             return $model->{$modelName};
         }, $list);
 
-        ResponseManager::get()->setResponseModel(200, new DataResponse(), ['values' => $data]);
+        response()::setResponseModel(200, new DataResponse(), ['values' => $data]);
     }
 
     /**

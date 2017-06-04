@@ -14,6 +14,16 @@ use UnexpectedValueException;
 class JsonFacade
 {
     /**
+     * Get the JsonFacade Instance
+     *
+     * @return self
+     */
+    public static function get()
+    {
+        return __CLASS__;
+    }
+
+    /**
      * Encode Data into a jSON string.
      *
      * @param $data
@@ -87,9 +97,9 @@ class JsonFacade
      * Executes an Object Mapping.
      *
      * @param string|object $model
-     * @param array|object  $data
-     * @param bool          $mapArray
-     * @param bool          $evaluateInput
+     * @param array|object $data
+     * @param bool $mapArray
+     * @param bool $evaluateInput
      *
      * @return bool|mixed|object
      */
@@ -109,7 +119,7 @@ class JsonFacade
         }
 
         try {
-            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object) $data, $model);
+            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object)$data, $model);
         } catch (JsonMapper_Exception $e) {
             return false;
         }
@@ -119,7 +129,7 @@ class JsonFacade
      * Map a set of Data into a specific Model type.
      *
      * @param string|object $model
-     * @param array         $data
+     * @param array $data
      *
      * @return bool|mixed|object
      */
@@ -140,12 +150,11 @@ class JsonFacade
      */
     public static function compare($model, $data)
     {
-        var_dump(self::doMap($model, $data, false, true));
         return self::doMap($model, $data, false, true);
     }
 
     public static function compareSet($model, array $data)
     {
-        return self::doMap($model, $data,true, true);
+        return self::doMap($model, $data, true, true);
     }
 }
