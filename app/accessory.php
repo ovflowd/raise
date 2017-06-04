@@ -14,7 +14,7 @@
  */
 
 /**
- * Get the ResponseFacade Instance
+ * Get the ResponseFacade Instance.
  *
  * @return \App\Facades\ResponseFacade
  */
@@ -24,7 +24,7 @@ function response()
 }
 
 /**
- * Get the RequestFacade Instance
+ * Get the RequestFacade Instance.
  *
  * @return \App\Facades\RequestFacade
  */
@@ -34,7 +34,7 @@ function request()
 }
 
 /**
- * Get the DatabaseHandler Instance
+ * Get the DatabaseHandler Instance.
  *
  * @return \App\Handlers\CouchbaseHandler|\App\Models\Interfaces\Database
  */
@@ -44,7 +44,7 @@ function database()
 }
 
 /**
- * Get the JsonFacade Instance
+ * Get the JsonFacade Instance.
  *
  * @return \App\Facades\JsonFacade
  */
@@ -54,7 +54,7 @@ function json()
 }
 
 /**
- * Get the SecurityFacade Instance
+ * Get the SecurityFacade Instance.
  *
  * @return \App\Facades\SecurityFacade
  */
@@ -64,9 +64,10 @@ function security()
 }
 
 /**
- * Get a Variable from the SettingsHandler
+ * Get a Variable from the SettingsHandler.
  *
  * @param string $configuration
+ *
  * @return bool|mixed
  */
 function setting(string $configuration)

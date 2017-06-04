@@ -25,14 +25,14 @@ class ClientController extends BaseController
 
         response()::setResponseModel(200, new TokenResponse(), [
             'message' => 'Client Registered Successfully',
-            'token' => security()::insertToken(database()->insert('client', $mappedModel)),
+            'token'   => security()::insertToken(database()->insert('client', $mappedModel)),
         ]);
     }
 
     /**
      * List Process.
      *
-     * @param string $modelName
+     * @param string     $modelName
      * @param array|null $list
      */
     public function list(string $modelName = null, array $list = null)
