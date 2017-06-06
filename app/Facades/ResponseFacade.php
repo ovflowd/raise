@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Models\Response\DataResponse;
+use App\Models\Response\ClientListResponse;
 use App\Models\Response\MessageResponse;
 
 /**
@@ -13,7 +13,7 @@ class ResponseFacade extends Facade
     /**
      * Response Model.
      *
-     * @var MessageResponse|DataResponse
+     * @var MessageResponse|ClientListResponse
      */
     private static $responseModel = null;
 
@@ -65,9 +65,9 @@ class ResponseFacade extends Facade
     /**
      * Set the Response Content.
      *
-     * @param int   $httpCode
+     * @param int $httpCode
      * @param mixed $description
-     * @param bool  $returnContent
+     * @param bool $returnContent
      *
      * @return MessageResponse|null
      */
@@ -83,9 +83,9 @@ class ResponseFacade extends Facade
     /**
      * Set the Response Data.
      *
-     * @param int           $httpCode
+     * @param int $httpCode
      * @param string|object $model
-     * @param array|object  $data
+     * @param array|object $data
      */
     public static function setResponseModel(int $httpCode, $model, $data)
     {
@@ -109,15 +109,15 @@ class ResponseFacade extends Facade
     /**
      * Set the Data of a DataModel.
      *
-     * @param int   $httpCode
+     * @param int $httpCode
      * @param array $values
-     * @param bool  $returnContent
+     * @param bool $returnContent
      *
-     * @return DataResponse|MessageResponse|null
+     * @return ClientListResponse|MessageResponse|null
      */
     public static function setResponseData(int $httpCode, array $values, bool $returnContent = false)
     {
-        self::setResponseModel($httpCode, new DataResponse(), ['values' => $values]);
+        self::setResponseModel($httpCode, new ClientListResponse(), array('values' => $values));
 
         return $returnContent ? self::$responseModel : null;
     }

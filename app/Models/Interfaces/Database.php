@@ -28,9 +28,9 @@ interface Database
     /**
      * Insert Data on Database.
      *
-     * @param string     $table
-     * @param object     $data
-     * @param string     $primaryKey
+     * @param string $table
+     * @param object $data
+     * @param string $primaryKey
      * @param mixed|null $parameters
      *
      * @return int
@@ -40,7 +40,7 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string      $table
+     * @param string $table
      * @param Select|null $query
      *
      * @return mixed
@@ -50,7 +50,7 @@ interface Database
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string     $table
+     * @param string $table
      * @param mixed|null $primaryKey
      *
      * @return int
@@ -62,8 +62,9 @@ interface Database
      *
      * @param string $table
      * @param $elementIdentifier
+     * @param $data
      *
      * @return mixed
      */
-    public function update(string $table, $elementIdentifier);
+    public function update(string $table, $elementIdentifier, $data);
 }

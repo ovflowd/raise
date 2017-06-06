@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Response\ServiceListResponse;
+use App\Models\Response\ServiceRegisterResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -16,28 +18,36 @@ class ServiceController extends BaseController
      */
     public function register()
     {
-        global $token;
-
         if (($mappedModel = security()::validateBody('service', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');
 
             return;
         }
 
-        $mappedModel->clientId = $token()->clientId;
+        $servicesResponse = array();
 
-        database()->insert('service', $mappedModel);
+        array_walk($mappedModel->services, function ($service) use ($mappedModel, &$servicesResponse) {
+            $service->clientTime = $mappedModel->clientTime;
+            $service->tags = $mappedModel->tags;
 
-        response()::setResponse(200, 'Service Registered Successfully');
+            $service->id = database()->insert('service', $service);
+
+            database()->update('service', $service->id, $service);
+
+            array_push($servicesResponse, array('id' => $service->id, 'name' => $service->name));
+        });
+
+        response()::setResponseModel(200, new ServiceRegisterResponse(),
+            array('services' => $servicesResponse, 'message' => 'Success'));
     }
 
     /**
      * List Process.
      *
-     * @param string            $modelName
      * @param array|object|null $list
+     * @param object|callable $callback
      */
-    public function list(string $modelName = null, $list = null)
+    public function list($list = null, $callback = null)
     {
         global $token;
 
@@ -47,7 +57,9 @@ class ServiceController extends BaseController
 
         $list = database()->select('service', $query);
 
-        parent::list('service', $list);
+        parent::list($list, function ($data) {
+            response()::setResponseModel(200, new ServiceListResponse(), array('services' => $data));
+        });
     }
 
     /**
@@ -60,12 +72,6 @@ class ServiceController extends BaseController
     protected function filter(Select $query = null)
     {
         $query = new Select();
-
-        if (($id = request()::query('id')) !== false) {
-            $query->where("META(service).id = '{$id}'");
-
-            return $query;
-        }
 
         if (request()::query('serviceName') !== false) {
             $query->where('serviceName', request()::query('serviceName'));

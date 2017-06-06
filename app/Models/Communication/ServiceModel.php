@@ -12,16 +12,9 @@ class ServiceModel extends RaiseModel
      *
      * @required
      *
-     * @var array
+     * @var ServiceBagModel[]
      */
-    public $services = [];
-
-    /**
-     * Client Unique Identifier.
-     *
-     * @var string
-     */
-    public $clientId = '';
+    public $services = array();
 
     /**
      * Add a Service Bag into a Service Model.

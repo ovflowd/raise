@@ -5,9 +5,9 @@ namespace App\Models\Response;
 use App\Models\Communication\Model;
 
 /**
- * Class DataResponse.
+ * Class ClientListResponse.
  */
-class DataResponse extends Model
+class ClientListResponse extends Model
 {
     /**
      * Reference HTTP code about response of request.
@@ -21,5 +21,5 @@ class DataResponse extends Model
      *
      * @var array
      */
-    public $values = [];
+    public $clients = array();
 }

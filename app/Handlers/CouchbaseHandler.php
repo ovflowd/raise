@@ -41,10 +41,10 @@ class CouchbaseHandler implements Database
     /**
      * Insert Data on Database.
      *
-     * @param string       $table
+     * @param string $table
      * @param object|array $data
-     * @param string       $primaryKey
-     * @param mixed|null   $parameters
+     * @param string $primaryKey
+     * @param mixed|null $parameters
      *
      * @return string Document Identifier
      */
@@ -64,14 +64,14 @@ class CouchbaseHandler implements Database
     /**
      * Select Data on Database.
      *
-     * @param string      $table
+     * @param string $table
      * @param Select|null $query
      *
      * @return mixed
      */
     public function select(string $table, Select $query = null)
     {
-        $query->select('*')->from("{$table}");
+        $query->select('*')->from("{$table} document");
 
         return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
     }
@@ -123,11 +123,18 @@ class CouchbaseHandler implements Database
      *
      * @param string $table
      * @param $elementIdentifier
-     *
+
+     * @param $data
      * @return mixed
      */
-    public function update(string $table, $elementIdentifier)
+    public function update(string $table, $elementIdentifier, $data)
     {
-        // TODO: Implement update() method.
+        try {
+            $result = $this->connection->openBucket($table)->upsert($elementIdentifier, $data);
+
+            return $result->value;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }

@@ -8,13 +8,6 @@ namespace App\Models\Communication;
 class RaiseModel extends Model
 {
     /**
-     * Data Tags.
-     *
-     * @var array
-     */
-    public $tags = [];
-
-    /**
      * Time when the client sent the Data.
      *
      * @var float (UNIX_TIMESTAMP)
@@ -27,6 +20,13 @@ class RaiseModel extends Model
      * @var float (UNIX_TIMESTAMP)
      */
     public $serverTime = 0;
+
+    /**
+     * Data Tags.
+     *
+     * @var array
+     */
+    public $tags = array();
 
     /**
      * RaiseModel constructor.

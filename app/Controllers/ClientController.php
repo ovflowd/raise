@@ -23,25 +23,25 @@ class ClientController extends BaseController
             return;
         }
 
-        response()::setResponseModel(200, new TokenResponse(), [
+        response()::setResponseModel(200, new TokenResponse(), array(
             'message' => 'Client Registered Successfully',
-            'token' => security()::insertToken(database()->insert('client', $mappedModel)),
-        ]);
+            'token' => security()::insertToken(database()->insert('client', $mappedModel))
+        ));
     }
 
     /**
      * List Process.
      *
-     * @param string $modelName
      * @param array|object|null $list
+     * @param object|callable $callback
      */
-    public function list(string $modelName = null, $list = null)
+    public function list($list = null, $callback = null)
     {
         $query = $this->filter();
 
         $list = database()->select('client', $query);
 
-        parent::list('client', $list);
+        parent::list($list);
     }
 
     /**
@@ -54,12 +54,6 @@ class ClientController extends BaseController
     protected function filter(Select $query = null)
     {
         $query = new Select();
-
-        if (($id = request()::query('id')) !== false) {
-            $query->where("META(client).id = '{$id}'");
-
-            return $query;
-        }
 
         if (request()::query('name') !== false) {
             $query->where('name', request()::query('name'));

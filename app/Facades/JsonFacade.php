@@ -87,9 +87,9 @@ class JsonFacade extends Facade
      * Executes an Object Mapping.
      *
      * @param string|object $model
-     * @param array|object  $data
-     * @param bool          $mapArray
-     * @param bool          $evaluateInput
+     * @param array|object $data
+     * @param bool $mapArray
+     * @param bool $evaluateInput
      *
      * @return bool|mixed|object
      */
@@ -105,7 +105,7 @@ class JsonFacade extends Facade
         $model = is_object($model) ? $model : new $model();
 
         try {
-            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object) $data, $model);
+            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object)$data, $model);
         } catch (JsonMapper_Exception $e) {
             return false;
         }
@@ -115,7 +115,7 @@ class JsonFacade extends Facade
      * Map a set of Data into a specific Model type.
      *
      * @param string|object $model
-     * @param array         $data
+     * @param array $data
      *
      * @return bool|mixed|object
      */

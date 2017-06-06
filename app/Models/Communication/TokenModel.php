@@ -45,7 +45,7 @@ class TokenModel extends RaiseModel
      */
     public function setExpireTime()
     {
-        $this->expireTime = strtotime('+'.setting('security.expireTime'), $this->serverTime);
+        $this->expireTime = strtotime('+' . setting('security.expireTime'), $this->serverTime);
 
         return $this;
     }

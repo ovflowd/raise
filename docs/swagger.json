@@ -123,7 +123,7 @@
             "schema": {
               "required": [
                 "code",
-                "values"
+                "clients"
               ],
               "title": "clients",
               "type": "object",
@@ -132,7 +132,7 @@
                   "type": "integer",
                   "example": 200
                 },
-                "values": {
+                "clients": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/Client"
@@ -330,7 +330,7 @@
             "schema": {
               "required": [
                 "code",
-                "values"
+                "services"
               ],
               "title": "Service",
               "type": "object",
@@ -339,7 +339,7 @@
                   "type": "integer",
                   "example": 200
                 },
-                "values": {
+                "services": {
                   "$ref": "#/definitions/ServicesList"
                 }
               }
@@ -864,13 +864,22 @@
       "required": [
         "name",
         "parameters",
+        "clientId",
         "returnType",
-        "serviceId"
+        "id"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
+        },
         "name": {
           "type": "string",
           "example": "Get temp"
+        },
+        "clientId": {
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
         "parameters": {
           "$ref": "#/definitions/Parameter"
@@ -879,25 +888,6 @@
           "type": "string",
           "example": "float"
         },
-        "serviceId": {
-          "type": "integer",
-          "example": 0
-        }
-      }
-    },
-    "ServicesList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ServiceValues"
-      }
-    },
-    "ServiceValues": {
-      "type": "object",
-      "required": [
-        "clientTime",
-        "services"
-      ],
-      "properties": {
         "clientTime": {
           "type": "number",
           "example": 1000000000.100000
@@ -908,13 +898,10 @@
             "type": "string",
             "example": "example-tag"
           }
-        },
-        "services": {
-          "$ref": "#/definitions/Services"
         }
       }
     },
-    "Services": {
+    "ServicesList": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/Service"
