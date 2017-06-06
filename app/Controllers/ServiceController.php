@@ -53,6 +53,14 @@ class ServiceController extends BaseController
     {
         $query = new Select();
 
+        if (request()::query('serviceName') !== false) {
+            $query->where('serviceName', request()::query('serviceName'));
+        }
+
+        if (request()::query('serviceId') !== false) {
+            $query->where('serviceId', request()::query('serviceName'));
+        }
+
         return parent::filter($query);
     }
 }
