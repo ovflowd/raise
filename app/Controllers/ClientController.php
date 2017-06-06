@@ -67,10 +67,6 @@ class ClientController extends BaseController
             $query->where('channel', request()::query('channel'));
         }
 
-        if (request()::query('tags') !== false) {
-            $query->where('tags', request()::query('tags'));
-        }
-
         return parent::filter($query);
     }
 }
