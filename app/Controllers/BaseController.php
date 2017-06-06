@@ -60,7 +60,7 @@ abstract class BaseController
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('serverTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

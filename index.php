@@ -13,6 +13,8 @@
  * @copyright University of Brasília
  */
 
+ini_set('display_errors', 1);
+
 /*
 |----------------------------------------------------------------------------
 | Create The Application                                                    |

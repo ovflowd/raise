@@ -74,3 +74,25 @@ function setting(string $configuration)
 {
     return \App\Handlers\SettingsHandler::get($configuration);
 }
+
+/**
+ * Get a Bramus\Router Instance
+ *
+ * @return \Bramus\Router\Router
+ */
+$router = function () {
+    static $router;
+
+    return $router ?? ($router = new \Bramus\Router\Router());
+};
+
+/**
+ * Show the Rendered Response
+ *
+ * @param \App\Models\Communication\Model|null $optionalModel
+ */
+$showResponse = function (\App\Models\Communication\Model $optionalModel = null) {
+    echo response()::getResponse(function (\App\Models\Communication\Model $model) use ($optionalModel) {
+        return json()::jsonEncode($optionalModel ?? $model);
+    });
+};
