@@ -16,11 +16,15 @@ class ServiceController extends BaseController
      */
     public function register()
     {
+        global $token;
+
         if (($mappedModel = security()::validateBody('service', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');
 
             return;
         }
+
+        $mappedModel->clientId = $token()->clientId;
 
         database()->insert('service', $mappedModel);
 
@@ -35,10 +39,13 @@ class ServiceController extends BaseController
      */
     public function list(string $modelName = null, $list = null)
     {
+        global $token;
+
         $query = $this->filter();
 
-        $list = request()::query('id') === false ? database()->select('service', $query)
-            : database()->selectById('service', request()::query('id'));
+        $query->where('clientId', $token()->clientId);
+
+        $list = database()->select('service', $query);
 
         parent::list('service', $list);
     }
@@ -53,6 +60,12 @@ class ServiceController extends BaseController
     protected function filter(Select $query = null)
     {
         $query = new Select();
+
+        if (($id = request()::query('id')) !== false) {
+            $query->where("META(service).id = '{$id}'");
+
+            return $query;
+        }
 
         if (request()::query('serviceName') !== false) {
             $query->where('serviceName', request()::query('serviceName'));

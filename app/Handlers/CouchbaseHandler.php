@@ -71,7 +71,7 @@ class CouchbaseHandler implements Database
      */
     public function select(string $table, Select $query = null)
     {
-        $query->select('*')->from($table);
+        $query->select('*')->from("{$table}");
 
         return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
     }
