@@ -13,29 +13,26 @@
  * @copyright University of Brasília
  */
 
-// Require Composer Autoloader
+// Register Composer Autoloader
 require_once __DIR__.'/../vendor/autoload.php';
 
-// Accessory Functions
+// Register Accessor Functions
 require_once __DIR__.'/../app/accessory.php';
 
-// Load Routes
+// Register the middleware Routes
 require_once __DIR__.'/../app/routes.php';
 
-// Response Manager
-response()::prepare('application/json');
-
-// Prepare Request Utilities
+// Prepare RequestFacade, gathering the sent Request (headers, method, etc)
 request()::prepare($router()->getRequestHeaders(), $router()->getRequestMethod(), $_SERVER);
 
-// Load Settings
-$settings = require_once __DIR__.'/../app/settings.php';
+// Prepare ResponseFacade, applying the response schema
+response()::prepare('application/json');
 
-// Store Settings
-\App\Handlers\SettingsHandler::store($settings);
+// Gather Settings from configuration file and store it on SettingsHandler
+\App\Handlers\SettingsHandler::store(require_once __DIR__.'/../app/settings.php');
 
-// Set 404 Route
+// Set the Not Found Route and set a Callback
 $router()->set404($showResponse);
 
-// Run Router
+// Run the Route and set a Callback
 $router()->run($showResponse);
