@@ -103,6 +103,13 @@
             "type": "boolean"
           },
           {
+            "name": "id",
+            "in": "query",
+            "description": "Filter by the Unique Identifier of a Client",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "interval",
             "in": "query",
             "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
@@ -296,18 +303,18 @@
             "type": "boolean"
           },
           {
-            "name": "serviceName",
+            "name": "name",
             "in": "query",
             "description": "Filter by the name of Services",
             "required": false,
             "type": "string"
           },
           {
-            "name": "serviceId",
+            "name": "id",
             "in": "query",
             "description": "Filter by the Unique Identifier of a Service",
             "required": false,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "interval",
@@ -479,7 +486,7 @@
             "in": "query",
             "description": "Filter by the ServiceId, since Data is related to Services.",
             "required": false,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "interval",
@@ -641,8 +648,8 @@
           "example": "Ethernet"
         },
         "clientTime": {
-          "type": "integer",
-          "example": 1317427200
+          "type": "number",
+          "example": 1000000000.100000
         },
         "location": {
           "type": "string",
@@ -723,8 +730,8 @@
           "example": "-15.7757876:-48.077829"
         },
         "clientTime": {
-          "type": "integer",
-          "example": 1317427200
+          "type": "number",
+          "example": 1000000000.100000
         },
         "tags": {
           "type": "array",
@@ -743,8 +750,8 @@
       ],
       "properties": {
         "clientTime": {
-          "type": "integer",
-          "example": 342343242
+          "type": "number",
+          "example": 1000000000.100000
         },
         "tags": {
           "type": "array",
@@ -765,8 +772,8 @@
       "type": "object",
       "properties": {
         "serviceId": {
-          "type": "integer",
-          "example": 0
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
         "dataValues": {
           "$ref": "#/definitions/DataValues"
@@ -785,12 +792,12 @@
           "$ref": "#/definitions/DataValues"
         },
         "serviceId": {
-          "type": "integer",
-          "example": 15
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
         "clientTime": {
-          "type": "integer",
-          "example": 1317427200
+          "type": "number",
+          "example": 1000000000.100000
         },
         "tags": {
           "type": "array",
@@ -824,8 +831,8 @@
           }
         },
         "clientTime": {
-          "type": "integer",
-          "example": 1317427200
+          "type": "number",
+          "example": 1000000000.100000
         },
         "tags": {
           "type": "array",
@@ -892,8 +899,8 @@
       ],
       "properties": {
         "clientTime": {
-          "type": "integer",
-          "example": 4324342342
+          "type": "number",
+          "example": 1000000000.100000
         },
         "tags": {
           "type": "array",
@@ -1052,15 +1059,15 @@
     "ServiceRegisterResponse": {
       "type": "object",
       "required": [
-        "serviceId",
-        "serviceName"
+        "id",
+        "name"
       ],
       "properties": {
-        "serviceId": {
+        "id": {
           "type": "number",
           "example": 1151
         },
-        "serviceName": {
+        "name": {
           "type": "string",
           "example": "Get temp"
         }

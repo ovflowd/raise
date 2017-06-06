@@ -39,7 +39,8 @@ class ClientController extends BaseController
     {
         $query = $this->filter();
 
-        $list = database()->select('client', $query);
+        $list = request()::query('id') === false ? database()->select('client', $query)
+            : database()->selectById('client', request()::query('id'));
 
         parent::list('client', $list);
     }
