@@ -20,14 +20,14 @@ abstract class BaseController
     /**
      * List Process.
      *
-     * @param string     $modelName
-     * @param array|null $list
+     * @param string $modelName
+     * @param array|object|null $list
      */
-    public function list(string $modelName = null, array $list = null)
+    public function list(string $modelName = null, $list = null)
     {
-        $data = array_map(function ($model) use ($modelName) {
+        $data = is_array($list) ? array_map(function ($model) use ($modelName) {
             return $model->{$modelName};
-        }, $list);
+        }, $list) : array($list);
 
         response()::setResponseModel(200, new DataResponse(), ['values' => $data]);
     }
@@ -60,7 +60,7 @@ abstract class BaseController
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('clientTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

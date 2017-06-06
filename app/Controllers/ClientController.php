@@ -33,9 +33,9 @@ class ClientController extends BaseController
      * List Process.
      *
      * @param string $modelName
-     * @param array|null $list
+     * @param array|object|null $list
      */
-    public function list(string $modelName = null, array $list = null)
+    public function list(string $modelName = null, $list = null)
     {
         $query = $this->filter();
 

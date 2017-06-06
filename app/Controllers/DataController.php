@@ -22,10 +22,10 @@ class DataController extends BaseController
     /**
      * List Process.
      *
-     * @param string     $modelName
-     * @param array|null $list
+     * @param string $modelName
+     * @param array|object|null $list
      */
-    public function list(string $modelName = null, array $list = null)
+    public function list(string $modelName = null, $list = null)
     {
         // TODO: Implement list() method.
     }

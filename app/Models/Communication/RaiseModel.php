@@ -43,17 +43,6 @@ class RaiseModel extends Model
     }
 
     /**
-     * Set manually serverTime
-     * with the ability of setting the with the current microtime
-     *
-     * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
-     */
-    public function setServerTime(float $serverTime = null)
-    {
-        $this->serverTime = $serverTime ?? microtime(true);
-    }
-
-    /**
      * Set manually clientTime
      * with the ability of setting the with the current microtime
      *
@@ -62,5 +51,16 @@ class RaiseModel extends Model
     public function setClientTime(float $clientTime = null)
     {
         $this->clientTime = $clientTime ?? microtime(true);
+    }
+
+    /**
+     * Set manually serverTime
+     * with the ability of setting the with the current microtime
+     *
+     * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
+     */
+    public function setServerTime(float $serverTime = null)
+    {
+        $this->serverTime = $serverTime ?? microtime(true);
     }
 }
