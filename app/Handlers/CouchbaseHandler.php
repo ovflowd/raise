@@ -46,7 +46,7 @@ class CouchbaseHandler implements Database
      * @param string       $primaryKey
      * @param mixed|null   $parameters
      *
-     * @return int
+     * @return string Document Identifier
      */
     public function insert(string $table, $data, string $primaryKey = null, $parameters = null)
     {

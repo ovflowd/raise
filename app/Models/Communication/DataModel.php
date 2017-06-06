@@ -21,9 +21,9 @@ class DataModel extends RaiseModel
      *
      * @required
      *
-     * @var int
+     * @var string
      */
-    public $serviceId;
+    public $serviceId = '';
 
     /**
      * Add a Data Bag.

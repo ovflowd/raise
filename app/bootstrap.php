@@ -32,7 +32,7 @@ response()::prepare('application/json');
 \App\Handlers\SettingsHandler::store(require_once __DIR__.'/../app/settings.php');
 
 // Set the Not Found Route and set a Callback
-$router()->set404($showResponse);
+$router()->set404($response);
 
 // Run the Route and set a Callback
-$router()->run($showResponse);
+$router()->run($response);

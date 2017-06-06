@@ -12,16 +12,31 @@ class TokenModel extends RaiseModel
      *
      * @required
      *
-     * @var int
+     * @var string
      */
     public $clientId;
 
     /**
      * Token Expire Time.
      *
-     * @var int
+     * @var float
      */
     public $expireTime;
+
+    /**
+     * TokenModel constructor.
+     *
+     * Set the Timestamps of when RAISe handled
+     * this model.
+     *
+     * And set the ExpireTime
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setExpireTime();
+    }
 
     /**
      * Set the Token Expire Time.
@@ -30,7 +45,7 @@ class TokenModel extends RaiseModel
      */
     public function setExpireTime()
     {
-        $this->expireTime = strtotime('+'.setting('security.expireTime'), $this->serverTime);
+        $this->expireTime = strtotime('+' . setting('security.expireTime'), $this->serverTime);
 
         return $this;
     }

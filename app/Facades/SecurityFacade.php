@@ -7,18 +7,8 @@ use App\Models\Communication\TokenModel;
 /**
  * Class SecurityFacade.
  */
-class SecurityFacade
+class SecurityFacade extends Facade
 {
-    /**
-     * Get the JsonFacade Instance.
-     *
-     * @return self
-     */
-    public static function get()
-    {
-        return __CLASS__;
-    }
-
     /**
      * Inserts the client's token into the database.
      *
@@ -28,11 +18,10 @@ class SecurityFacade
      */
     public static function insertToken(string $clientId)
     {
-        database()->insert('token',
-            JsonFacade::map(new TokenModel(), ['clientId' => $clientId])->setExpireTime(),
-            $token = self::generateToken());
-
-        return json()::encode(setting('security.secretKey'), ['token' => $token]);
+        return json()::encode(setting('security.secretKey'), [
+            'token' => database()->insert('token',
+                JsonFacade::map(new TokenModel(), ['clientId' => $clientId]), self::generateToken())
+        ]);
     }
 
     /**
@@ -60,10 +49,11 @@ class SecurityFacade
      *
      * @param string|bool $hash (JWT Hash)
      *
-     * @return bool
+     * @return bool|TokenModel
      */
     public static function validateToken($hash)
     {
+        // Verifies if the token is present on the headers
         if ($hash === false) {
             response()::setResponse(403, "You didn't provided a Token");
 
@@ -77,14 +67,17 @@ class SecurityFacade
             return false;
         }
 
-        // Check if the Token exists on the Database and check if is Valid
-        if (($token = database()->selectById('token', $token->token)) == false || $token->expireTime < microtime()) {
+        // Retrieve the TokenModel if it exists on the database
+        $tokenModel = database()->selectById('token', $token->token);
+
+        // Check if the Token exists on the Database and check if is valid
+        if ($tokenModel == false || $tokenModel->expireTime < microtime(true)) {
             response()::setResponse(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
 
-        return true;
+        return $tokenModel;
     }
 
     /**
@@ -99,7 +92,7 @@ class SecurityFacade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\'.ucfirst($modelName).'Model');
+        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
 
         return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }

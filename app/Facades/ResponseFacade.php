@@ -8,7 +8,7 @@ use App\Models\Response\MessageResponse;
 /**
  * Class ResponseFacade.
  */
-class ResponseFacade
+class ResponseFacade extends Facade
 {
     /**
      * Response Model.
@@ -44,16 +44,6 @@ class ResponseFacade
     public static function addHeader(string $name, string $value)
     {
         header("{$name}: {$value}");
-    }
-
-    /**
-     * Get the JsonFacade Instance.
-     *
-     * @return self
-     */
-    public static function get()
-    {
-        return __CLASS__;
     }
 
     /**

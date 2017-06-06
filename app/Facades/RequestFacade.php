@@ -5,7 +5,7 @@ namespace App\Facades;
 /**
  * Class RequestFacade.
  */
-class RequestFacade
+class RequestFacade extends Facade
 {
     /**
      * Requested Page Sent Headers.
@@ -34,16 +34,6 @@ class RequestFacade
      * @var array
      */
     private static $query = [];
-
-    /**
-     * Get the RequestFacade Instance.
-     *
-     * @return self
-     */
-    public static function get()
-    {
-        return __CLASS__;
-    }
 
     /**
      * Prepare the RequestFacade with the Requested Page Data.

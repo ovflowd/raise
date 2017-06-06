@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "40d97778f7aca65a350efebf5591e080",
+    "content-hash": "1e65935faa72382c9f90225854785e54",
     "packages": [
         {
             "name": "bramus/router",
@@ -226,6 +226,41 @@
                 "instantiate"
             ],
             "time": "2015-06-14T21:17:01+00:00"
+        },
+        {
+            "name": "lavoiesl/php-benchmark",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lavoiesl/php-benchmark.git",
+                "reference": "3618d0c2e2c0c0e4452a446a8b125295a1d47d4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lavoiesl/php-benchmark/zipball/3618d0c2e2c0c0e4452a446a8b125295a1d47d4d",
+                "reference": "3618d0c2e2c0c0e4452a446a8b125295a1d47d4d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lavoiesl\\PhpBenchmark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sébastien Lavoie",
+                    "email": "github@lavoie.sl",
+                    "homepage": "http://sebastien.lavoie.sl",
+                    "role": "Packager"
+                }
+            ],
+            "description": "Tool to compare different functions in PHP",
+            "time": "2014-03-22T07:38:16+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -16,7 +16,7 @@
 /**
  * Get the ResponseFacade Instance.
  *
- * @return \App\Facades\ResponseFacade
+ * @return \App\Facades\Facade|\App\Facades\ResponseFacade|string
  */
 function response()
 {
@@ -26,7 +26,7 @@ function response()
 /**
  * Get the RequestFacade Instance.
  *
- * @return \App\Facades\RequestFacade
+ * @return \App\Facades\Facade|\App\Facades\RequestFacade|string
  */
 function request()
 {
@@ -46,7 +46,7 @@ function database()
 /**
  * Get the JsonFacade Instance.
  *
- * @return \App\Facades\JsonFacade
+ * @return \App\Facades\Facade|\App\Facades\JsonFacade|string
  */
 function json()
 {
@@ -56,7 +56,7 @@ function json()
 /**
  * Get the SecurityFacade Instance.
  *
- * @return \App\Facades\SecurityFacade
+ * @return \App\Facades\Facade|\App\Facades\SecurityFacade|string
  */
 function security()
 {
@@ -91,8 +91,34 @@ $router = function () {
  *
  * @param \App\Models\Communication\Model|null $optionalModel
  */
-$showResponse = function (\App\Models\Communication\Model $optionalModel = null) {
+$response = function (\App\Models\Communication\Model $optionalModel = null) {
     echo response()::getResponse(function (\App\Models\Communication\Model $model) use ($optionalModel) {
         return json()::jsonEncode($optionalModel ?? $model);
     });
+
+    exit(0);
 };
+
+/**
+ * Do the Token Validation and if everything all right
+ * Returns the TokenModel
+ *
+ * @return \App\Models\Communication\TokenModel
+ */
+$token = function () use ($response) {
+    static $tokenModel;
+
+    if ($tokenModel == null) {
+        $tokenModel = security()::validateToken(request()::headers('authorization'));
+
+        if ($tokenModel === false) {
+            $response();
+
+            exit(1);
+        }
+    }
+
+    return $tokenModel;
+};
+
+

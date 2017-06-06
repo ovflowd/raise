@@ -29,12 +29,10 @@ $router()->get('/', function () {
 |----------------------------------------------------------------------------
 */
 
-$router()->mount('/client', function () use ($router, $showResponse) {
+$router()->mount('/client', function () use ($router, $response, $token) {
     // Client Security
-    $router()->before('GET', '/*', function () use ($router, $showResponse) {
-        if (security()::validateToken(request()::headers('authorization')) == false) {
-            die($showResponse());
-        }
+    $router()->before('GET', '/*', function () use ($router, $response, $token) {
+        $token();
     });
 
     // List Clients
@@ -50,12 +48,10 @@ $router()->mount('/client', function () use ($router, $showResponse) {
 |----------------------------------------------------------------------------
 */
 
-$router()->mount('/service', function () use ($router, $showResponse) {
+$router()->mount('/service', function () use ($router, $response, $token) {
     // Service Security
-    $router()->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (security()::validateToken(request()::headers('authorization')) == false) {
-            die($showResponse());
-        }
+    $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
+        $token();
     });
 
     // Register a Service
@@ -71,12 +67,10 @@ $router()->mount('/service', function () use ($router, $showResponse) {
 |----------------------------------------------------------------------------
 */
 
-$router()->mount('/data', function () use ($router, $showResponse) {
+$router()->mount('/data', function () use ($router, $response, $token) {
     // Data Security
-    $router()->before('GET|POST', '/*', function () use ($router, $showResponse) {
-        if (security()::validateToken(request()::headers('authorization')) == false) {
-            die($showResponse());
-        }
+    $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
+        $token();
     });
 
     // Register Data
