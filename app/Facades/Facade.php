@@ -3,7 +3,7 @@
 namespace App\Facades;
 
 /**
- * Class Facade
+ * Class Facade.
  */
 abstract class Facade
 {

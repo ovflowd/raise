@@ -30,7 +30,7 @@ class ServiceController extends BaseController
     /**
      * List Process.
      *
-     * @param string $modelName
+     * @param string            $modelName
      * @param array|object|null $list
      */
     public function list(string $modelName = null, $list = null)
