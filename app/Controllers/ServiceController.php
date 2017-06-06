@@ -30,7 +30,7 @@ class ServiceController extends BaseController
     /**
      * List Process.
      *
-     * @param string $modelName
+     * @param string            $modelName
      * @param array|object|null $list
      */
     public function list(string $modelName = null, $list = null)
@@ -52,6 +52,14 @@ class ServiceController extends BaseController
     protected function filter(Select $query = null)
     {
         $query = new Select();
+
+        if (request()::query('serviceName') !== false) {
+            $query->where('serviceName', request()::query('serviceName'));
+        }
+
+        if (request()::query('serviceId') !== false) {
+            $query->where('serviceId', request()::query('serviceName'));
+        }
 
         return parent::filter($query);
     }

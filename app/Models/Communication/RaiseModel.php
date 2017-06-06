@@ -44,7 +44,7 @@ class RaiseModel extends Model
 
     /**
      * Set manually clientTime
-     * with the ability of setting the with the current microtime
+     * with the ability of setting the with the current microtime.
      *
      * @param float|null $clientTime Client Sent Time on UNIX_TIMESTAMP with milliseconds
      */
@@ -55,7 +55,7 @@ class RaiseModel extends Model
 
     /**
      * Set manually serverTime
-     * with the ability of setting the with the current microtime
+     * with the ability of setting the with the current microtime.
      *
      * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
      */

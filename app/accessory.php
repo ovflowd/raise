@@ -76,7 +76,7 @@ function setting(string $configuration)
 }
 
 /**
- * Get a Bramus\Router Instance
+ * Get a Bramus\Router Instance.
  *
  * @return \Bramus\Router\Router
  */
@@ -87,7 +87,7 @@ $router = function () {
 };
 
 /**
- * Show the Rendered Response
+ * Show the Rendered Response.
  *
  * @param \App\Models\Communication\Model|null $optionalModel
  */
@@ -101,7 +101,7 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
 
 /**
  * Do the Token Validation and if everything all right
- * Returns the TokenModel
+ * Returns the TokenModel.
  *
  * @return \App\Models\Communication\TokenModel
  */
@@ -120,5 +120,3 @@ $token = function () use ($response) {
 
     return $tokenModel;
 };
-
-
