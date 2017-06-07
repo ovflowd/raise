@@ -1,7 +1,7 @@
 <h4><img src="http://i.imgur.com/Ftmda0f.png"/> RAISe</h4>
 <br>
 
-[![Github All Releases](https://img.shields.io/github/downloads/uiot/raise/total.svg)]() [![Packagist](https://img.shields.io/packagist/v/uiot/raise.svg)]() [![GitHub release](https://img.shields.io/github/release/uiot/raise.svg)]() [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Code Climate](https://codeclimate.com/github/UIoT/RAISe/badges/gpa.svg)](https://codeclimate.com/github/UIoT/RAISe) [![Style CI](https://styleci.io/repos/34536644/shield?style=flat)](https://styleci.io/repos/34536644/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/uiot/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/uiot/RAISe)
+[![Github All Releases](https://img.shields.io/github/downloads/uiot/raise/total.svg)](https://github.com/uiot/raise/releases) [![Packagist](https://img.shields.io/packagist/v/uiot/raise.svg)](https://packagist.org/packages/uiot/raise) [![GitHub release](https://img.shields.io/github/release/uiot/raise.svg)](https://github.com/uiot/raise/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Code Climate](https://codeclimate.com/github/UIoT/RAISe/badges/gpa.svg)](https://codeclimate.com/github/UIoT/RAISe) [![Style CI](https://styleci.io/repos/34536644/shield?style=flat)](https://styleci.io/repos/34536644/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/uiot/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/uiot/RAISe)
 
 
 <hr>
@@ -10,7 +10,7 @@
 
 Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/7kwiofnek2p0hnc5)](https://ci.appveyor.com/project/uiot/raise)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | [Artifacts](https://ci.appveyor.com/project/uiot/raise/branch/sbr/artifacts) |
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moinqrha2n?svg=true)](https://ci.appveyor.com/project/sant0ro/raise-askjk)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise-askjk/branch/sbr/artifacts) |
 
 <b>Supported Features</b>
 
