@@ -7,7 +7,7 @@ use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
 
 /**
- * Class Database
+ * Class Database.
  *
  * A Setting Model to describe Database settings
  * Supported Databases: {Couchbase}
@@ -18,12 +18,13 @@ use App\Models\Interfaces\Database as DatabaseHandler;
  * @property CouchbaseHandler
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Database extends Model
 {
     /**
-     * Database IPv4 Address or Hostname
+     * Database IPv4 Address or Hostname.
      *
      * @uses DatabaseHandler
      * @uses CouchbaseHandler
@@ -33,7 +34,7 @@ class Database extends Model
     public $address = 'localhost';
 
     /**
-     * Database Admin Username
+     * Database Admin Username.
      *
      * @uses DatabaseHandler
      * @uses CouchbaseHandler
@@ -43,7 +44,7 @@ class Database extends Model
     public $user = 'couch';
 
     /**
-     * Database Admin Password
+     * Database Admin Password.
      *
      * @uses DatabaseInterface
      * @uses CouchbaseHandler
@@ -53,7 +54,7 @@ class Database extends Model
     public $password = 'couchbase';
 
     /**
-     * Desired Database for RAISe
+     * Desired Database for RAISe.
      *
      * @uses DatabaseHandler
      *

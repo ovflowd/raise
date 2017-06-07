@@ -6,7 +6,7 @@ use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
 
 /**
- * Class Message
+ * Class Message.
  *
  * A base Model used to output HTTP Messages,
  * the content of it are gathered from the Database
@@ -17,12 +17,13 @@ use App\Models\Interfaces\Database as DatabaseHandler;
  * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Message extends Model
 {
     /**
-     * The Applied HTTP Response Code
+     * The Applied HTTP Response Code.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
      *
@@ -31,7 +32,7 @@ class Message extends Model
     public $codHttp;
 
     /**
-     * The HTTP Response Message from the RFC
+     * The HTTP Response Message from the RFC.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
      *
@@ -41,7 +42,7 @@ class Message extends Model
 
     /**
      * Additional Details that can be defined
-     * and will be sent also on the Response
+     * and will be sent also on the Response.
      *
      * @var string
      */

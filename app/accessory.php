@@ -14,7 +14,7 @@
  */
 
 /**
- * Get the static instance of ResponseFacade
+ * Get the static instance of ResponseFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Response|string
  */
@@ -24,7 +24,7 @@ function response()
 }
 
 /**
- * Get the static instance of RequestFacade
+ * Get the static instance of RequestFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Request|string
  */
@@ -34,7 +34,7 @@ function request()
 }
 
 /**
- * Get the DatabaseHandler Instance based on DatabaseManager approach
+ * Get the DatabaseHandler Instance based on DatabaseManager approach.
  *
  * @return \App\Database\Couchbase|\App\Models\Interfaces\Database
  */
@@ -44,7 +44,7 @@ function database()
 }
 
 /**
- * Get the static instance of JsonFacade
+ * Get the static instance of JsonFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Json|string
  */
@@ -54,7 +54,7 @@ function json()
 }
 
 /**
- * Get the static instance of SecurityFacade
+ * Get the static instance of SecurityFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Security|string
  */
@@ -64,12 +64,12 @@ function security()
 }
 
 /**
- * Get a specific settings entry from the SettingsHandler
+ * Get a specific settings entry from the SettingsHandler.
  *
  * @param string $configuration A setting model name or a setting model name with a entry
  *
  * @return bool|mixed false if didn't found what you're searching,
- *  If not return the value of the property or the model
+ *                    If not return the value of the property or the model
  */
 function setting(string $configuration)
 {
@@ -77,7 +77,7 @@ function setting(string $configuration)
 }
 
 /**
- * Get the Router instance
+ * Get the Router instance.
  *
  * If the instance already exists return it, if not create it
  *
@@ -90,7 +90,7 @@ $router = function () {
 };
 
 /**
- * Output the jSON Response of the result of the execution of RAISe
+ * Output the jSON Response of the result of the execution of RAISe.
  *
  * You can also provide a specific Model, that will override the ResponseFacade's model.
  * This accessory function echoes the output and exit the application with success status
@@ -106,7 +106,7 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
 };
 
 /**
- * Does the token validation process
+ * Does the token validation process.
  *
  * This accessory function checks if the token is valid, if is
  * store an instance of the TokenModel and return it.

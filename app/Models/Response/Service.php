@@ -5,18 +5,19 @@ namespace App\Models\Response;
 use App\Models\Communication\Model;
 
 /**
- * Class Service
+ * Class Service.
  *
  * This is the Response Model of a Service
  * Contains a List of Service of a Service Register set Response
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Service extends Model
 {
     /**
-     * The Applied HTTP Response Code
+     * The Applied HTTP Response Code.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
      *
@@ -25,7 +26,7 @@ class Service extends Model
     public $codHttp;
 
     /**
-     * The HTTP Response Message from the RFC
+     * The HTTP Response Message from the RFC.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
      *
@@ -34,14 +35,14 @@ class Service extends Model
     public $message;
 
     /**
-     * A set of Services that will be returned on the Response
+     * A set of Services that will be returned on the Response.
      *
      * @var array
      */
-    public $services = array();
+    public $services = [];
 
     /**
-     * Set the Services Array
+     * Set the Services Array.
      *
      * Depending if is a Register or or List
      * may be an ServiceDefinition or a simple array

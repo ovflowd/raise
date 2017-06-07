@@ -3,18 +3,19 @@
 namespace App\Models\Communication;
 
 /**
- * Class Client
+ * Class Client.
  *
  * A Client Model is a Schema Definition of
  * A Client and how it will be stored on the Database
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Client extends Raise
 {
     /**
-     * Client Name
+     * Client Name.
      *
      * A Name given for the Client, can be anything
      *
@@ -88,7 +89,7 @@ class Client extends Raise
     public $channel = 'ieee-wireless-80211';
 
     /**
-     * Client Location or nearest path
+     * Client Location or nearest path.
      *
      * Based on Latitude : Longitude
      *

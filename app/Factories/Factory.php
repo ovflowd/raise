@@ -11,6 +11,7 @@ namespace App\Factories;
  * @see https://en.wikipedia.org/wiki/Factory_method_pattern About the Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 abstract class Factory
@@ -37,7 +38,7 @@ abstract class Factory
     /**
      * Add an Element.
      *
-     * @param string $element the name of the element to be added
+     * @param string       $element the name of the element to be added
      * @param array|object $content the content of the element
      *
      * @return bool if added successfully or not

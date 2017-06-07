@@ -3,7 +3,7 @@
 namespace App\Models\Communication;
 
 /**
- * Class ServiceBag
+ * Class ServiceBag.
  *
  * A Service Bag Model it's used
  * as a definition for a Service Register Definition
@@ -15,22 +15,23 @@ namespace App\Models\Communication;
  * @property Service
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class ServiceBag extends Raise
 {
     /**
-     * A set of Services that will be Registered
+     * A set of Services that will be Registered.
      *
      * @required
      *
      * @var Service[]
      */
-    public $services = array();
+    public $services = [];
 
     /**
      * Stores a set of Services (ServiceModel)
-     * inside a Service Bag
+     * inside a Service Bag.
      *
      * @see Service the Service Definition
      *

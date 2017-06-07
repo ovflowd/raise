@@ -5,7 +5,7 @@ namespace App\Facades;
 use Bramus\Router\Router;
 
 /**
- * Class Request
+ * Class Request.
  *
  * A Facade used to Handle and map all the Request inputs
  * like Headers, Method and Payload, QueryString, etc.
@@ -13,6 +13,7 @@ use Bramus\Router\Router;
  * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Request extends Facade
@@ -25,7 +26,7 @@ class Request extends Facade
      *
      * @var array of headers
      */
-    private static $headers = array();
+    private static $headers = [];
 
     /**
      * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS).
@@ -53,16 +54,16 @@ class Request extends Facade
      *
      * @var array
      */
-    private static $query = array();
+    private static $query = [];
 
     /**
      * Prepare the RequestFacade with the Requested Page Data.
      *
      * @see https://secure.php.net/manual/en/reserved.variables.server.php $_SERVER Manual
      *
-     * @param array $headers Given Headers
-     * @param string $method Given Requested Method
-     * @param array $server $_SERVER super Global
+     * @param array  $headers Given Headers
+     * @param string $method  Given Requested Method
+     * @param array  $server  $_SERVER super Global
      */
     public static function prepare(array $headers, string $method, array $server)
     {

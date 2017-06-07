@@ -5,7 +5,7 @@ namespace App\Models\Settings;
 use App\Models\Communication\Model;
 
 /**
- * Class Security
+ * Class Security.
  *
  * A Setting Model that describes Security Interfaces,
  * that are used for Security artifacts.
@@ -13,6 +13,7 @@ use App\Models\Communication\Model;
  * @property Security
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Security extends Model
@@ -31,7 +32,7 @@ class Security extends Model
 
     /**
      * The Secret Key that will be used on the JWT hash,
-     * the JWT hash is used as Authentication Hash on RAISe
+     * the JWT hash is used as Authentication Hash on RAISe.
      *
      * @see https://jwt.io/introduction/ JWT Documentation
      *

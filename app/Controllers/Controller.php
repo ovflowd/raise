@@ -6,7 +6,7 @@ use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class Controller
+ * Class Controller.
  *
  * A Controller is a manager of a specific model schema,
  * a RAISe Controller manages everything related to a Model
@@ -14,6 +14,7 @@ use Koine\QueryBuilder\Statements\Select;
  * @see https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC Controller Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 abstract class Controller
@@ -23,7 +24,7 @@ abstract class Controller
      *
      * Validated and Registers Models unto the Database
      *
-     * @param object $data the payload as object from the Request
+     * @param object     $data     the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
@@ -36,9 +37,9 @@ abstract class Controller
      *
      * List a set of Models or a single Model based on the Request Parameters
      *
-     * @param array|object|null $data the given Data to be Mapped
-     * @param Model $response the Response Model
-     * @param callable $callback an optional callback to treat the mapping result
+     * @param array|object|null $data     the given Data to be Mapped
+     * @param Model             $response the Response Model
+     * @param callable          $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -83,7 +84,7 @@ abstract class Controller
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('clientTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

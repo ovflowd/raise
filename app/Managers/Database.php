@@ -7,7 +7,7 @@ use App\Models\Interfaces\Database as DatabaseHandler;
 use App\Models\Response\Message;
 
 /**
- * Class Database
+ * Class Database.
  *
  * A Manager is a Mediator, it does specific processes and operations
  * to make everything available and functional for the rest of the components.
@@ -20,12 +20,13 @@ use App\Models\Response\Message;
  * @see https://en.wikipedia.org/wiki/Mediator_pattern Mediator Design Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Database
 {
     /**
-     * The instance of the Desired Database Handler
+     * The instance of the Desired Database Handler.
      *
      * @see CouchbaseHandler
      * @see DatabaseHandler
@@ -46,7 +47,7 @@ class Database
     private static $configuration;
 
     /**
-     * Get the Database Handler
+     * Get the Database Handler.
      *
      * Creates the Connection if doesn't exists and instantiates the Handler
      * if also doesn't exists.
@@ -61,10 +62,10 @@ class Database
             self::$databaseHandler = self::setHandler();
 
             if (self::$databaseHandler == null) {
-                $response(response()::setResponseModel(500, new Message(), array(
+                $response(response()::setResponseModel(500, new Message(), [
                     'message' => 'Failed to Connect upon Database',
-                    'details' => 'The Database Handler doesn\'t exists'
-                )));
+                    'details' => 'The Database Handler doesn\'t exists',
+                ]));
             }
 
             self::$databaseHandler->connect(self::$configuration);
@@ -74,7 +75,7 @@ class Database
     }
 
     /**
-     * Set the Database Handler
+     * Set the Database Handler.
      *
      * check if the desired Database Handler exists
      * store it and create it.
@@ -87,7 +88,7 @@ class Database
     {
         $handler = setting('raise.databaseType');
 
-        $handler = ('App\Database\\' . ucwords($handler));
+        $handler = ('App\Database\\'.ucwords($handler));
 
         if (class_exists($handler)) {
             self::$configuration = setting('database');

@@ -7,7 +7,7 @@ use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
 
 /**
- * Class Raise
+ * Class Raise.
  *
  * A Setting Model used to describe the current
  * environment of RAISe will operate.
@@ -16,13 +16,14 @@ use App\Models\Interfaces\Database as DatabaseHandler;
  * @property CouchbaseHandler
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Raise extends Model
 {
     /**
      * The desired DatabaseHandler that will be used
-     *  as Handler for current RAISe environment
+     *  as Handler for current RAISe environment.
      *
      * @see DatabaseHandler
      * @see CouchbaseHandler
@@ -34,7 +35,7 @@ class Raise extends Model
     /**
      * The base path of RAISe, like SCHEMA://URL/BASE-PATH,
      * by default is empty that means that RAISe it's running
-     * on the DocumentRoot
+     * on the DocumentRoot.
      *
      * @var string
      */

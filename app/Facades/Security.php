@@ -7,7 +7,7 @@ use App\Models\Communication\Model;
 use App\Models\Communication\Token as TokenDefinition;
 
 /**
- * Class Security
+ * Class Security.
  *
  * A Facade to handle all the Security and Authentication of RAISe
  *
@@ -17,6 +17,7 @@ use App\Models\Communication\Token as TokenDefinition;
  * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Security extends Facade
@@ -35,7 +36,7 @@ class Security extends Facade
     {
         return json()::encode(setting('security.secretKey'), [
             'token' => database()->insert('token',
-                json()::map(new TokenDefinition(), array('clientId' => $clientId)), self::generateToken()),
+                json()::map(new TokenDefinition(), ['clientId' => $clientId]), self::generateToken()),
         ]);
     }
 
@@ -108,13 +109,13 @@ class Security extends Facade
      * If not, return a false boolean.
      *
      * @param string $modelName the Model to be validated
-     * @param object $body the Payload to be validated
+     * @param object $body      the Payload to be validated
      *
      * @return bool|object|Model the mapped model or false if doesn't exists
      */
     public static function validateBody(string $modelName, $body)
     {
-        $model = ('App\Models\Communication\\' . ucwords($modelName));
+        $model = ('App\Models\Communication\\'.ucwords($modelName));
 
         return class_exists($model) ? json()::compare($model, $body) : false;
     }

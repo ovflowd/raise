@@ -3,7 +3,7 @@
 namespace App\Models\Communication;
 
 /**
- * Class Raise
+ * Class Raise.
  *
  * The RAISe Model is a Base Model used as definition of data
  * that will be stored on the Database
@@ -12,34 +12,35 @@ namespace App\Models\Communication;
  * stored on a Document
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 abstract class Raise extends Model
 {
     /**
-     * The time when the Client requested the operation
+     * The time when the Client requested the operation.
      *
      * @var float (UNIX_TIMESTAMP)
      */
     public $clientTime = 0;
     /**
-     * Tags Identifiers
+     * Tags Identifiers.
      *
      * Tags are used to contextual data filtering
      * and may be used to filter set of results
      *
      * @var array
      */
-    public $tags = array();
+    public $tags = [];
     /**
-     * The time when the server handled the operation and inserted it
+     * The time when the server handled the operation and inserted it.
      *
      * @var float (UNIX_TIMESTAMP)
      */
     protected $serverTime = 0;
 
     /**
-     * RaiseModel constructor
+     * RaiseModel constructor.
      *
      * Set the Timestamps of when RAISe handled
      * this model.

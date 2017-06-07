@@ -6,12 +6,13 @@ use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Interface Database
+ * Interface Database.
  *
  * An Interface used to Describe
  * the default methods of an DatabaseHandler
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 interface Database
@@ -24,7 +25,7 @@ interface Database
     public function connect($connection);
 
     /**
-     * Destroy the Connection
+     * Destroy the Connection.
      *
      * (only if the connection it's already active)
      */
@@ -33,8 +34,8 @@ interface Database
     /**
      * Insert Data on Database.
      *
-     * @param string $table desired table to insert
-     * @param Model $data data to be inserted
+     * @param string $table      desired table to insert
+     * @param Model  $data       data to be inserted
      * @param string $primaryKey defined primary key or generated
      *
      * @return int|string generated or defined primary key or the result of the primary key
@@ -54,7 +55,7 @@ interface Database
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string $table the desired table
+     * @param string $table      the desired table
      * @param string $primaryKey the primary key to identify
      *
      * @return int amount of rows that the statement find
@@ -64,9 +65,9 @@ interface Database
     /**
      * Update an Element of the Database.
      *
-     * @param string $table desired table to update
+     * @param string $table      desired table to update
      * @param string $primaryKey desired element to update
-     * @param Model $data data to update
+     * @param Model  $data       data to update
      *
      * @return array|string|object the result of the update
      */

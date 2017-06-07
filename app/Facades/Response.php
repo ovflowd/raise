@@ -7,7 +7,7 @@ use App\Models\Response\Client;
 use App\Models\Response\Message;
 
 /**
- * Class Response
+ * Class Response.
  *
  * A Facade that manages and handles
  * everything related with the output content of
@@ -16,12 +16,13 @@ use App\Models\Response\Message;
  * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Response extends Facade
 {
     /**
-     * Response Model
+     * Response Model.
      *
      * The Model that will be sent on the execution output
      *
@@ -30,7 +31,7 @@ class Response extends Facade
     private static $response;
 
     /**
-     * Prepare ResponseFacade
+     * Prepare ResponseFacade.
      *
      * This method does some pre-configurations
      * to prepare the ResponseFacade
@@ -51,11 +52,11 @@ class Response extends Facade
     }
 
     /**
-     * Add a HTTP Header to the Response
+     * Add a HTTP Header to the Response.
      *
      * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields List of Headers
      *
-     * @param string $name Desired HTTP Headers
+     * @param string $name  Desired HTTP Headers
      * @param string $value the value of the Header
      *
      * @return void
@@ -83,16 +84,16 @@ class Response extends Facade
     }
 
     /**
-     * Set the Response Content
+     * Set the Response Content.
      *
      * Set a Response Content using the Default Response Model, the MessageResponse
      *
      * @see Message used Model
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP Code
-     * @param string $description Response Details
-     * @param bool $returnContent If need return the content
+     * @param int    $httpCode      desired HTTP Code
+     * @param string $description   Response Details
+     * @param bool   $returnContent If need return the content
      *
      * @return Message|null The returned content or nothing
      */
@@ -106,14 +107,14 @@ class Response extends Facade
     }
 
     /**
-     * Set a specific ResponseModel
+     * Set a specific ResponseModel.
      *
      * @see Model base of the Models
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP code
-     * @param string|Model $model the namespace of the model or an instance of it
-     * @param array|object $data the data to be mapped into the Model
+     * @param int          $httpCode desired HTTP code
+     * @param string|Model $model    the namespace of the model or an instance of it
+     * @param array|object $data     the data to be mapped into the Model
      */
     public static function setResponseModel(int $httpCode, $model, $data)
     {
