@@ -5,7 +5,7 @@ namespace App\Models\Communication;
 /**
  * Class TokenModel.
  */
-class TokenModel extends RaiseModel
+class Token extends Raise
 {
     /**
      * Client Unique Identifier.

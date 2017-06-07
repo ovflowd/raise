@@ -8,7 +8,7 @@ use Koine\QueryBuilder\Statements\Select;
 /**
  * Class DataController.
  */
-class DataController extends BaseController
+class DataController extends Controller
 {
     /**
      * Register Process.

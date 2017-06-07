@@ -5,7 +5,7 @@ namespace App\Models\Communication;
 /**
  * Class ServiceModel.
  */
-class ServiceModel extends RaiseModel
+class Service extends Raise
 {
     /**
      * Service Unique Identifier.

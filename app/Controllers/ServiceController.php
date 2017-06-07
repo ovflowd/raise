@@ -3,20 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\Communication\Model;
-use App\Models\Communication\ServiceModel;
-use App\Models\Response\ServiceListResponse;
-use App\Models\Response\ServiceRegisterResponse;
+use App\Models\Communication\Service;
+use App\Models\Response\Service;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
  * Class ServiceController.
  */
-class ServiceController extends BaseController
+class ServiceController extends Controller
 {
     /**
      * Register Process.
      *
-     * @param null       $data
+     * @param null $data
      * @param Model|null $responseModel
      */
     public function register($data = null, Model $responseModel = null)
@@ -27,7 +26,7 @@ class ServiceController extends BaseController
             return;
         }
 
-        $response = array_map(function (ServiceModel $service) {
+        $response = array_map(function (Service $service) {
             $service->id = database()->insert('service', $service);
 
             database()->update('service', $service->id, $service);
@@ -35,15 +34,15 @@ class ServiceController extends BaseController
             return ['id' => $service->id, 'name' => $service->name];
         }, $serviceBag->services);
 
-        parent::register(['services' => $response, 'message' => 'Success'], new ServiceRegisterResponse());
+        parent::register(['services' => $response, 'message' => 'Success'], new Service());
     }
 
     /**
      * List Process.
      *
      * @param array|null $data
-     * @param Model      $response
-     * @param callable   $callback
+     * @param Model $response
+     * @param callable $callback
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -51,8 +50,8 @@ class ServiceController extends BaseController
 
         $data = database()->select('service', $query);
 
-        parent::list($data, new ServiceListResponse(), function ($services) {
-            return ['services' => json()::mapSet(new ServiceModel(), $services)];
+        parent::list($data, new Service(), function ($services) {
+            return ['services' => json()::mapSet(new Service(), $services)];
         });
     }
 

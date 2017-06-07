@@ -3,7 +3,7 @@
 namespace App\Facades;
 
 use App\Models\Communication\Model;
-use App\Models\Communication\TokenModel;
+use App\Models\Communication\Token as TokenDefinition;
 
 /**
  * Class SecurityFacade.
@@ -21,7 +21,7 @@ class SecurityFacade extends Facade
     {
         return json()::encode(setting('security.secretKey'), [
             'token' => database()->insert('token',
-                JsonFacade::map(new TokenModel(), ['clientId' => $clientId]), self::generateToken()),
+                json()::map(new TokenDefinition(), array('clientId' => $clientId)), self::generateToken()),
         ]);
     }
 
@@ -31,7 +31,7 @@ class SecurityFacade extends Facade
      *
      * @return string
      */
-    public static function generateToken()
+    protected static function generateToken()
     {
         return bin2hex(openssl_random_pseudo_bytes(20));
     }
@@ -50,7 +50,7 @@ class SecurityFacade extends Facade
      *
      * @param string|bool $hash (JWT Hash)
      *
-     * @return bool|TokenModel
+     * @return bool|Token
      */
     public static function validateToken($hash)
     {
@@ -93,7 +93,7 @@ class SecurityFacade extends Facade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\'.ucwords($modelName).'Model');
+        $modelPath = ('App\Models\Communication\\' . ucwords($modelName));
 
         return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }

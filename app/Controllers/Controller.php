@@ -6,15 +6,25 @@ use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class BaseController.
+ * Class Controller
+ *
+ * A Controller is a manager of a specific model schema,
+ * a RAISe Controller manages everything related to a Model
+ *
+ * @see https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC Controller Pattern
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-abstract class BaseController
+abstract class Controller
 {
     /**
      * Register Process.
      *
-     * @param null       $data
-     * @param Model|null $responseModel
+     * Validated and Registers Models unto the Database
+     *
+     * @param object $data the payload as object from the Request
+     * @param Model|null $responseModel a Response Model to be used as Response
      */
     public function register($data = null, Model $responseModel = null)
     {
@@ -24,9 +34,11 @@ abstract class BaseController
     /**
      * List Process.
      *
-     * @param array|null $data
-     * @param Model      $response
-     * @param callable   $callback
+     * List a set of Models or a single Model based on the Request Parameters
+     *
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -41,9 +53,14 @@ abstract class BaseController
     /**
      * Filter Input Data.
      *
-     * @param Select|null $query
+     * Used to filter and apply a several filters and patches
+     * into a Query that will be used on the Database
      *
-     * @return Select
+     * This method has the default filters that all requests may have
+     *
+     * @param Select|null $query the Select Query class
+     *
+     * @return Select the Select Query class
      */
     protected function filter(Select $query = null)
     {
@@ -66,7 +83,7 @@ abstract class BaseController
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('clientTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

@@ -2,22 +2,30 @@
 
 namespace App\Controllers;
 
-use App\Models\Communication\ClientModel;
+use App\Models\Communication\Client as ClientDefinition;
 use App\Models\Communication\Model;
-use App\Models\Response\ClientListResponse;
-use App\Models\Response\TokenResponse;
+use App\Models\Response\Client as ClientResponse;
+use App\Models\Response\Token as TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class ClientController.
+ * Class Client
+ *
+ * A Controller that Manages all Interactions with a Client
+ * or a set of Clients
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-class ClientController extends BaseController
+class Client extends Controller
 {
     /**
      * Register Process.
      *
-     * @param null       $data
-     * @param Model|null $responseModel
+     * Validated and Registers Clients unto the Database
+     *
+     * @param object $data the payload as object from the Request
+     * @param Model|null $responseModel a Response Model to be used as Response
      */
     public function register($data = null, Model $responseModel = null)
     {
@@ -29,16 +37,17 @@ class ClientController extends BaseController
 
         $jwtHash = security()::insertToken(database()->insert('client', $clientModel));
 
-        parent::register(['message' => 'Client Registered Successfully', 'token' => $jwtHash],
-            new TokenResponse());
+        parent::register(['message' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
     }
 
     /**
      * List Process.
      *
-     * @param array|null $data
-     * @param Model      $response
-     * @param callable   $callback
+     * List a set of Clients or a single Client based on the Request Parameters
+     *
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -46,17 +55,20 @@ class ClientController extends BaseController
 
         $data = database()->select('client', $query);
 
-        parent::list($data, new ClientListResponse(), function ($clients) {
-            return ['clients' => json()::mapSet(new ClientModel(), $clients)];
+        parent::list($data, new ClientResponse(), function ($clients) {
+            return ['clients' => json()::mapSet(new ClientDefinition(), $clients)];
         });
     }
 
     /**
      * Filter Input Data.
      *
-     * @param Select|null $query
+     * Used to filter and apply a several filters and patches
+     * into a Query that will be used on the Database
      *
-     * @return Select
+     * @param Select|null $query the Select Query class
+     *
+     * @return Select the Select Query class
      */
     protected function filter(Select $query = null)
     {

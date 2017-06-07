@@ -3,33 +3,45 @@
 namespace App\Models\Communication;
 
 /**
- * Class RaiseModel.
+ * Class Raise
+ *
+ * The RAISe Model is a Base Model used as definition of data
+ * that will be stored on the Database
+ *
+ * This Model contains all items that are by default
+ * stored on a Document
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-class RaiseModel extends Model
+abstract class Raise extends Model
 {
     /**
-     * Time when the client sent the Data.
+     * The time when the Client requested the operation
      *
      * @var float (UNIX_TIMESTAMP)
      */
     public $clientTime = 0;
 
     /**
-     * Time when the server registered the Data.
+     * The time when the server handled the operation and inserted it
      *
      * @var float (UNIX_TIMESTAMP)
      */
     protected $serverTime = 0;
 
     /**
-     * Data Tags.
+     * Tags Identifiers
+     *
+     * Tags are used to contextual data filtering
+     * and may be used to filter set of results
      *
      * @var array
      */
-    public $tags = [];
+    public $tags = array();
 
     /**
-     * RaiseModel constructor.
+     * RaiseModel constructor
      *
      * Set the Timestamps of when RAISe handled
      * this model.

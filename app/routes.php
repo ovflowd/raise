@@ -42,10 +42,10 @@ $router()->mount('/client', function () use ($router, $response, $token) {
     });
 
     // List Clients
-    $router()->get('/', '\App\Controllers\ClientController@list');
+    $router()->get('/', '\App\Controllers\Client@list');
 
     // Register a Client
-    $router()->post('/register', '\App\Controllers\ClientController@register');
+    $router()->post('/register', '\App\Controllers\Client@register');
 });
 
 /*

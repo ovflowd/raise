@@ -16,11 +16,11 @@
 /**
  * Get the static instance of ResponseFacade
  *
- * @return \App\Facades\Facade|\App\Facades\ResponseFacade|string
+ * @return \App\Facades\Facade|\App\Facades\Response|string
  */
 function response()
 {
-    return \App\Facades\ResponseFacade::get();
+    return \App\Facades\Response::get();
 }
 
 /**
@@ -112,7 +112,7 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
  * store an instance of the TokenModel and return it.
  * If the token isn't valid, echoes the output of invalid authentication and finish the execution
  *
- * @return \App\Models\Communication\TokenModel
+ * @return \App\Models\Communication\Token
  */
 $token = function () use ($response) {
     static $tokenModel;

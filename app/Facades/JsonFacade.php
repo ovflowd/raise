@@ -2,6 +2,7 @@
 
 namespace App\Facades;
 
+use App\Models\Communication\Model;
 use Firebase\JWT\JWT;
 use Firebase\JWT\SignatureInvalidException;
 use JsonMapper;
@@ -75,7 +76,7 @@ class JsonFacade extends Facade
      * @param string|object $model
      * @param $data
      *
-     * @return object
+     * @return object|Model
      */
     public static function map($model, $data)
     {
