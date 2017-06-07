@@ -2,7 +2,7 @@
 
 namespace App\Handlers;
 
-use App\Factories\SettingsFactory;
+use App\Factories\Settings;
 
 /**
  * Class SettingsHandler.
@@ -21,9 +21,9 @@ class SettingsHandler
         if (strpos($configuration, '.') !== false) {
             $values = explode('.', $configuration);
 
-            return SettingsFactory::get($values[0])->{$values[1]};
+            return Settings::get($values[0])->{$values[1]};
         } else {
-            return SettingsFactory::get($configuration);
+            return Settings::get($configuration);
         }
     }
 
@@ -51,6 +51,6 @@ class SettingsHandler
      */
     public static function add(string $modelName, array $configurationSet)
     {
-        return SettingsFactory::add($modelName, $configurationSet);
+        return Settings::add($modelName, $configurationSet);
     }
 }

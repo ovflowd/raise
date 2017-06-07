@@ -14,7 +14,7 @@
  */
 
 /**
- * Get the ResponseFacade Instance.
+ * Get the static instance of ResponseFacade
  *
  * @return \App\Facades\Facade|\App\Facades\ResponseFacade|string
  */
@@ -24,7 +24,7 @@ function response()
 }
 
 /**
- * Get the RequestFacade Instance.
+ * Get the static instance of RequestFacade
  *
  * @return \App\Facades\Facade|\App\Facades\RequestFacade|string
  */
@@ -34,17 +34,17 @@ function request()
 }
 
 /**
- * Get the DatabaseHandler Instance.
+ * Get the DatabaseHandler Instance based on DatabaseManager approach
  *
  * @return \App\Handlers\CouchbaseHandler|\App\Models\Interfaces\Database
  */
 function database()
 {
-    return \App\Managers\DatabaseManager::getConnection();
+    return \App\Managers\DatabaseManager::getHandler();
 }
 
 /**
- * Get the JsonFacade Instance.
+ * Get the static instance of JsonFacade
  *
  * @return \App\Facades\Facade|\App\Facades\JsonFacade|string
  */
@@ -54,7 +54,7 @@ function json()
 }
 
 /**
- * Get the SecurityFacade Instance.
+ * Get the static instance of SecurityFacade
  *
  * @return \App\Facades\Facade|\App\Facades\SecurityFacade|string
  */
@@ -64,11 +64,12 @@ function security()
 }
 
 /**
- * Get a Variable from the SettingsHandler.
+ * Get a specific settings entry from the SettingsHandler
  *
- * @param string $configuration
+ * @param string $configuration A setting model name or a setting model name with a entry
  *
- * @return bool|mixed
+ * @return bool|mixed false if didn't found what you're searching,
+ *  If not return the value of the property or the model
  */
 function setting(string $configuration)
 {
@@ -76,7 +77,9 @@ function setting(string $configuration)
 }
 
 /**
- * Get a Bramus\Router Instance.
+ * Get the Router instance
+ *
+ * If the instance already exists return it, if not create it
  *
  * @return \Bramus\Router\Router
  */
@@ -87,9 +90,12 @@ $router = function () {
 };
 
 /**
- * Show the Rendered Response.
+ * Output the jSON Response of the result of the execution of RAISe
  *
- * @param \App\Models\Communication\Model|null $optionalModel
+ * You can also provide a specific Model, that will override the ResponseFacade's model.
+ * This accessory function echoes the output and exit the application with success status
+ *
+ * @param \App\Models\Communication\Model|null $optionalModel An optional Model to override the response
  */
 $response = function (\App\Models\Communication\Model $optionalModel = null) {
     echo response()::getResponse(function (\App\Models\Communication\Model $model) use ($optionalModel) {
@@ -100,8 +106,11 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
 };
 
 /**
- * Do the Token Validation and if everything all right
- * Returns the TokenModel.
+ * Does the token validation process
+ *
+ * This accessory function checks if the token is valid, if is
+ * store an instance of the TokenModel and return it.
+ * If the token isn't valid, echoes the output of invalid authentication and finish the execution
  *
  * @return \App\Models\Communication\TokenModel
  */

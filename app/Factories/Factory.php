@@ -3,9 +3,17 @@
 namespace App\Factories;
 
 /**
- * Class BaseFactory.
+ * Class Factory.
+ *
+ * A Design Pattern used to manage
+ * and manipulate data set.
+ *
+ * @see https://en.wikipedia.org/wiki/Factory_method_pattern About the Pattern
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-abstract class BaseFactory
+abstract class Factory
 {
     /**
      * Elements of the Factory.
@@ -20,19 +28,19 @@ abstract class BaseFactory
      * If the element exists return in,
      * If not return a false boolean.
      *
-     * @param string $element
+     * @param string $element name of the element
      *
-     * @return mixed|bool
+     * @return object|array|bool the element or false if didn't found it
      */
     abstract public static function get(string $element);
 
     /**
      * Add an Element.
      *
-     * @param string $element
-     * @param mixed  $content
+     * @param string $element the name of the element to be added
+     * @param array|object $content the content of the element
      *
-     * @return mixed
+     * @return bool if added successfully or not
      */
     abstract public static function add(string $element, $content);
 
@@ -41,9 +49,9 @@ abstract class BaseFactory
      *
      * Return true if removed with success, false if element doesn't exists
      *
-     * @param string $element
+     * @param string $element the element to be removed
      *
-     * @return bool
+     * @return bool if removed successfully or not
      */
     abstract public static function remove(string $element);
 
@@ -51,9 +59,9 @@ abstract class BaseFactory
      * Create an Instance if not exists
      * If exists, return the instance.
      *
-     * @return BaseFactory
+     * @return Factory
      */
-    protected static function getInstance()
+    protected static function instance()
     {
         static $instance = null;
 

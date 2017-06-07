@@ -13,6 +13,12 @@
  * @copyright University of Brasília
  */
 
+/*
+|----------------------------------------------------------------------------
+| Include Resources                                                         |
+|----------------------------------------------------------------------------
+*/
+
 // Register Composer Autoloader
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -22,14 +28,32 @@ require_once __DIR__.'/../app/accessory.php';
 // Register the middleware Routes
 require_once __DIR__.'/../app/routes.php';
 
+/*
+|----------------------------------------------------------------------------
+| Prepare Request and Response utilities                                    |
+|----------------------------------------------------------------------------
+*/
+
 // Prepare RequestFacade, gathering the sent Request (headers, method, etc)
 request()::prepare($router()->getRequestHeaders(), $router()->getRequestMethod(), $_SERVER);
 
 // Prepare ResponseFacade, applying the response schema
 response()::prepare('application/json');
 
+/*
+|----------------------------------------------------------------------------
+| Store Settings                                                            |
+|----------------------------------------------------------------------------
+*/
+
 // Gather Settings from configuration file and store it on SettingsHandler
 \App\Handlers\SettingsHandler::store(require_once __DIR__.'/../app/settings.php');
+
+/*
+|----------------------------------------------------------------------------
+| Run the Router                                                            |
+|----------------------------------------------------------------------------
+*/
 
 // Set the Not Found Route and set a Callback
 $router()->set404($response);

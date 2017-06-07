@@ -460,9 +460,9 @@ if (option('skip-fill') === null) {
 if (option('skip-configuration') === null) {
     echo 'Creating Configuration File...'.PHP_EOL;
 
-    $configurationType = option('config-schema') !== null ? option('config-schema') : 'old';
+    $configurationType = option('config-schema') !== null ? option('config-schema') : 'new';
 
-    $configurationFile = option('config-file') !== null ? option('config-file') : '../Config/Config.php';
+    $configurationFile = option('config-file') !== null ? option('config-file') : '../app/settings.php';
 
     createConfigurationFile($configurationFile, $configurationType, $credentials);
 }

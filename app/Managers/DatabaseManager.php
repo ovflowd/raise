@@ -7,7 +7,7 @@ use App\Handlers\SettingsHandler;
 use App\Models\Interfaces\Database;
 
 /**
- * Class CouchbaseManager.
+ * Class DatabaseManager.
  */
 class DatabaseManager
 {
@@ -32,10 +32,10 @@ class DatabaseManager
      *
      * @return CouchbaseHandler|Database
      */
-    public static function getConnection()
+    public static function getHandler()
     {
         if (self::$databaseHandler == null) {
-            self::$databaseHandler = self::getHandler();
+            self::$databaseHandler = self::setHandler();
 
             self::$databaseHandler->connect(self::$configuration);
         }
@@ -48,14 +48,14 @@ class DatabaseManager
      *
      * @return bool|Database
      */
-    public static function getHandler()
+    protected static function setHandler()
     {
         $handler = SettingsHandler::get('raise.databaseType');
 
-        $className = ('App\Handlers\\'.ucfirst($handler).'Handler');
+        $className = ('App\Handlers\\' . ucwords($handler) . 'Handler');
 
         if (class_exists($className)) {
-            self::$configuration = SettingsHandler::get($handler);
+            self::$configuration = SettingsHandler::get('database');
 
             return new $className();
         }

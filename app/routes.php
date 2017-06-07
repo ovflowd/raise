@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *  _    _ _____   _______
  * | |  | |_   _| |__   __|
  * | |  | | | |  ___ | |
@@ -19,8 +19,14 @@
 |----------------------------------------------------------------------------
 */
 
+// Main Route
 $router()->get('/', function () {
     response()::setResponse(200, 'Welcome to RAISe');
+});
+
+// Easter Egg
+$router()->get('/tea', function () {
+    response()::setResponse(408, 'RAISe easter egg');
 });
 
 /*
@@ -86,4 +92,4 @@ $router()->mount('/data', function () use ($router, $response, $token) {
 |----------------------------------------------------------------------------
 */
 
-// Todo
+// @TODO: Define the Management API Routes
