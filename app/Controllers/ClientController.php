@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Communication\ClientModel;
 use App\Models\Communication\Model;
 use App\Models\Response\ClientListResponse;
 use App\Models\Response\TokenResponse;
@@ -46,7 +47,7 @@ class ClientController extends BaseController
         $data = database()->select('client', $query);
 
         parent::list($data, new ClientListResponse(), function ($clients) {
-            return array('clients' => $clients);
+            return array('clients' => json()::mapSet(new ClientModel(), $clients));
         });
     }
 
