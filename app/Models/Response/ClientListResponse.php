@@ -21,5 +21,5 @@ class ClientListResponse extends Model
      *
      * @var array
      */
-    public $clients = array();
+    public $clients = [];
 }

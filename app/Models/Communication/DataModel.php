@@ -23,7 +23,7 @@ class DataModel extends RaiseModel
      *
      * @var array
      */
-    public $data = array();
+    public $data = [];
 
     /**
      * Add a Data Bag.
@@ -35,6 +35,6 @@ class DataModel extends RaiseModel
      */
     public function addBag(string $key, string $value)
     {
-        $this->data[] = array($key, $value);
+        $this->data[] = [$key, $value];
     }
 }

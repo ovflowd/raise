@@ -8,14 +8,14 @@ namespace App\Models\Communication;
 class ServiceModel extends RaiseModel
 {
     /**
-     * Service Unique Identifier
+     * Service Unique Identifier.
      *
      * @var string
      */
     public $id = '';
 
     /**
-     * Related Client Unique Identifier
+     * Related Client Unique Identifier.
      *
      * @var string
      */
@@ -37,7 +37,7 @@ class ServiceModel extends RaiseModel
      *
      * @var array
      */
-    public $parameters = array();
+    public $parameters = [];
 
     /**
      * Return Type of a Service.
@@ -65,7 +65,7 @@ class ServiceModel extends RaiseModel
 
     /**
      * Set the Unique Client Identifier
-     * That is related to this Service
+     * That is related to this Service.
      *
      * @param string|null $clientId
      */
@@ -77,7 +77,7 @@ class ServiceModel extends RaiseModel
     }
 
     /**
-     * Get the Related Client Unique Identifier
+     * Get the Related Client Unique Identifier.
      *
      * @return string
      */
