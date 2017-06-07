@@ -716,7 +716,10 @@
           "example": "C210"
         },
         "services": {
-          "$ref": "#/definitions/Services"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          }
         },
         "location": {
           "type": "string",

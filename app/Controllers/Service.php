@@ -39,10 +39,10 @@ class Service extends Controller
 
             database()->update('service', $service->id, $service);
 
-            return ['id' => $service->id, 'name' => $service->name];
+            return array('id' => $service->id, 'name' => $service->name);
         }, $serviceBag->services);
 
-        parent::register(['services' => $response, 'message' => 'Success'], new ServiceResponse());
+        parent::register(array('services' => $response, 'message' => 'Success'), new ServiceResponse());
     }
 
     /**
@@ -61,7 +61,7 @@ class Service extends Controller
         $data = database()->select('service', $query);
 
         parent::list($data, new ServiceResponse(), function ($services) {
-            return ['services' => json()::mapSet(new ServiceDefinition(), $services)];
+            return array('services' => json()::mapSet(new ServiceDefinition(), $services), 'message' => 'Success');
         });
     }
 

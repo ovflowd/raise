@@ -10,7 +10,7 @@ use App\Models\Communication\Model;
  * This is the Response Model of a Client
  * Contains a List of Clients
  *
- * @property Client
+ * @property \App\Models\Communication\Client
  *
  * @version 2.0.0
  * @since 2.0.0
@@ -38,7 +38,7 @@ class Client extends Model
     /**
      * A set of Clients that will be returned on the Response
      *
-     * @var Client[]
+     * @var \App\Models\Communication\Client[]
      */
     public $clients = array();
 }

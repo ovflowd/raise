@@ -36,7 +36,26 @@ class Service extends Model
     /**
      * A set of Services that will be returned on the Response
      *
-     * @var Service[]|array
+     * @var array
      */
     public $services = array();
+
+    /**
+     * Set the Services Array
+     *
+     * Depending if is a Register or or List
+     * may be an ServiceDefinition or a simple array
+     *
+     * @param array $services array of ServiceDefinitions or simple array
+     */
+    public function setServices(array $services)
+    {
+        $this->services = array_map(function ($service) {
+            if ($service instanceof \App\Models\Communication\Service) {
+                return $service;
+            }
+
+            return $service;
+        }, $services);
+    }
 }

@@ -56,7 +56,7 @@ class Client extends Controller
         $data = database()->select('client', $query);
 
         parent::list($data, new ClientResponse(), function ($clients) {
-            return ['clients' => json()::mapSet(new ClientDefinition(), $clients)];
+            return array('clients' => json()::mapSet(new ClientDefinition(), $clients), 'message' => 'Success');
         });
     }
 
