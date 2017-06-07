@@ -16,7 +16,7 @@ class ClientController extends BaseController
     /**
      * Register Process.
      *
-     * @param null $data
+     * @param null       $data
      * @param Model|null $responseModel
      */
     public function register($data = null, Model $responseModel = null)
@@ -29,7 +29,7 @@ class ClientController extends BaseController
 
         $jwtHash = security()::insertToken(database()->insert('client', $clientModel));
 
-        parent::register(array('message' => 'Client Registered Successfully', 'token' => $jwtHash),
+        parent::register(['message' => 'Client Registered Successfully', 'token' => $jwtHash],
             new TokenResponse());
     }
 
@@ -37,8 +37,8 @@ class ClientController extends BaseController
      * List Process.
      *
      * @param array|null $data
-     * @param Model $response
-     * @param callable $callback
+     * @param Model      $response
+     * @param callable   $callback
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -47,7 +47,7 @@ class ClientController extends BaseController
         $data = database()->select('client', $query);
 
         parent::list($data, new ClientListResponse(), function ($clients) {
-            return array('clients' => json()::mapSet(new ClientModel(), $clients));
+            return ['clients' => json()::mapSet(new ClientModel(), $clients)];
         });
     }
 

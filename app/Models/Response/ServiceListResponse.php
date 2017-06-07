@@ -21,5 +21,5 @@ class ServiceListResponse extends Model
      *
      * @var array
      */
-    public $services = array();
+    public $services = [];
 }

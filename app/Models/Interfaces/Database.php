@@ -29,9 +29,9 @@ interface Database
     /**
      * Insert Data on Database.
      *
-     * @param string $table
+     * @param string       $table
      * @param object Model $data
-     * @param string $primaryKey
+     * @param string       $primaryKey
      *
      * @return int
      */
@@ -62,7 +62,7 @@ interface Database
      *
      * @param string $table
      * @param string $primaryKey
-     * @param Model $data
+     * @param Model  $data
      *
      * @return mixed
      */

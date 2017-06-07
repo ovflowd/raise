@@ -13,7 +13,7 @@ abstract class BaseController
     /**
      * Register Process.
      *
-     * @param null $data
+     * @param null       $data
      * @param Model|null $responseModel
      */
     public function register($data = null, Model $responseModel = null)
@@ -25,8 +25,8 @@ abstract class BaseController
      * List Process.
      *
      * @param array|null $data
-     * @param Model $response
-     * @param callable $callback
+     * @param Model      $response
+     * @param callable   $callback
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -66,7 +66,7 @@ abstract class BaseController
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('clientTime ' . (request()::query('order') === false ? 'DESC' : 'ASC'));
+        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
 
         return $query;
     }

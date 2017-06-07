@@ -14,7 +14,7 @@ class ServiceBagModel extends RaiseModel
      *
      * @var ServiceModel[]
      */
-    public $services = array();
+    public $services = [];
 
     /**
      * Add a Service Bag into a Service Model.

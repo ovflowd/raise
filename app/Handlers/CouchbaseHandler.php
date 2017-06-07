@@ -43,7 +43,7 @@ class CouchbaseHandler implements Database
      * Insert Data on Database.
      *
      * @param string $table
-     * @param Model $data
+     * @param Model  $data
      * @param string $primaryKey
      *
      * @return string Document Identifier
@@ -119,7 +119,8 @@ class CouchbaseHandler implements Database
      *
      * @param string $table
      * @param string $primaryKey
-     * @param Model $data
+     * @param Model  $data
+     *
      * @return mixed
      */
     public function update(string $table, string $primaryKey, Model $data)

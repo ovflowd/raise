@@ -26,7 +26,7 @@ class RaiseModel extends Model
      *
      * @var array
      */
-    public $tags = array();
+    public $tags = [];
 
     /**
      * RaiseModel constructor.

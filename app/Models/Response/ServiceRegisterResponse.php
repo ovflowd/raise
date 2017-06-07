@@ -28,5 +28,5 @@ class ServiceRegisterResponse extends Model
      *
      * @var array
      */
-    public $services = array();
+    public $services = [];
 }

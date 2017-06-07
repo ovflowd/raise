@@ -93,7 +93,7 @@ class SecurityFacade extends Facade
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucwords($modelName) . 'Model');
+        $modelPath = ('App\Models\Communication\\'.ucwords($modelName).'Model');
 
         return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }

@@ -16,7 +16,7 @@ class ServiceController extends BaseController
     /**
      * Register Process.
      *
-     * @param null $data
+     * @param null       $data
      * @param Model|null $responseModel
      */
     public function register($data = null, Model $responseModel = null)
@@ -32,18 +32,18 @@ class ServiceController extends BaseController
 
             database()->update('service', $service->id, $service);
 
-            return array('id' => $service->id, 'name' => $service->name);
+            return ['id' => $service->id, 'name' => $service->name];
         }, $serviceBag->services);
 
-        parent::register(array('services' => $response, 'message' => 'Success'), new ServiceRegisterResponse());
+        parent::register(['services' => $response, 'message' => 'Success'], new ServiceRegisterResponse());
     }
 
     /**
      * List Process.
      *
      * @param array|null $data
-     * @param Model $response
-     * @param callable $callback
+     * @param Model      $response
+     * @param callable   $callback
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -52,7 +52,7 @@ class ServiceController extends BaseController
         $data = database()->select('service', $query);
 
         parent::list($data, new ServiceListResponse(), function ($services) {
-            return array('services' => json()::mapSet(new ServiceModel(), $services));
+            return ['services' => json()::mapSet(new ServiceModel(), $services)];
         });
     }
 
