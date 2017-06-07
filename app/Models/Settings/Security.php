@@ -2,7 +2,6 @@
 
 namespace App\Models\Settings;
 
-use App\Facades\SecurityFacade;
 use App\Models\Communication\Model;
 
 /**
@@ -11,7 +10,7 @@ use App\Models\Communication\Model;
  * A Setting Model that describes Security Interfaces,
  * that are used for Security artifacts.
  *
- * @property SecurityFacade
+ * @property Security
  *
  * @version 2.0.0
  * @since 2.0.0

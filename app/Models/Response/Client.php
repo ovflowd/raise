@@ -2,7 +2,6 @@
 
 namespace App\Models\Response;
 
-use App\Models\Communication\Client;
 use App\Models\Communication\Model;
 
 /**

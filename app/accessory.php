@@ -26,41 +26,41 @@ function response()
 /**
  * Get the static instance of RequestFacade
  *
- * @return \App\Facades\Facade|\App\Facades\RequestFacade|string
+ * @return \App\Facades\Facade|\App\Facades\Request|string
  */
 function request()
 {
-    return \App\Facades\RequestFacade::get();
+    return \App\Facades\Request::get();
 }
 
 /**
  * Get the DatabaseHandler Instance based on DatabaseManager approach
  *
- * @return \App\Handlers\CouchbaseHandler|\App\Models\Interfaces\Database
+ * @return \App\Database\Couchbase|\App\Models\Interfaces\Database
  */
 function database()
 {
-    return \App\Managers\DatabaseManager::getHandler();
+    return \App\Managers\Database::getHandler();
 }
 
 /**
  * Get the static instance of JsonFacade
  *
- * @return \App\Facades\Facade|\App\Facades\JsonFacade|string
+ * @return \App\Facades\Facade|\App\Facades\Json|string
  */
 function json()
 {
-    return \App\Facades\JsonFacade::get();
+    return \App\Facades\Json::get();
 }
 
 /**
  * Get the static instance of SecurityFacade
  *
- * @return \App\Facades\Facade|\App\Facades\SecurityFacade|string
+ * @return \App\Facades\Facade|\App\Facades\Security|string
  */
 function security()
 {
-    return \App\Facades\SecurityFacade::get();
+    return \App\Facades\Security::get();
 }
 
 /**
@@ -73,7 +73,7 @@ function security()
  */
 function setting(string $configuration)
 {
-    return \App\Handlers\SettingsHandler::get($configuration);
+    return \App\Handlers\Settings::get($configuration);
 }
 
 /**

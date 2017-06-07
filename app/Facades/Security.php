@@ -2,20 +2,34 @@
 
 namespace App\Facades;
 
+use App\Models\Communication\Client as ClientDefinition;
 use App\Models\Communication\Model;
 use App\Models\Communication\Token as TokenDefinition;
 
 /**
- * Class SecurityFacade.
+ * Class Security
+ *
+ * A Facade to handle all the Security and Authentication of RAISe
+ *
+ * @property ClientDefinition
+ *
+ * @see TokenDefinition
+ * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-class SecurityFacade extends Facade
+class Security extends Facade
 {
     /**
      * Inserts the client's token into the database.
      *
-     * @param string $clientId
+     * @see Json JsonFacade
+     * @see ClientDefinition
      *
-     * @return string
+     * @param string $clientId the given Client Identifier
+     *
+     * @return string the JWT Generated Hash
      */
     public static function insertToken(string $clientId)
     {
@@ -29,7 +43,10 @@ class SecurityFacade extends Facade
      * Generate a random pseudo string that will be used as token
      * the token will be always of 40 characters.
      *
-     * @return string
+     * @see http://php.net/manual/en/function.openssl-random-pseudo-bytes.php OpenSSL Bytes Generator
+     * @see bin2hex()
+     *
+     * @return string the generated openssl bytes encoded into a string
      */
     protected static function generateToken()
     {
@@ -38,6 +55,8 @@ class SecurityFacade extends Facade
 
     /**
      * Update the Token (Revalidate).
+     *
+     * @TODO: Code this Method
      *
      * @param string $hash
      */
@@ -48,9 +67,11 @@ class SecurityFacade extends Facade
     /**
      * Check if the Token is Valid.
      *
-     * @param string|bool $hash (JWT Hash)
+     * @see TokenDefinition
      *
-     * @return bool|Token
+     * @param string|bool $hash the Request Given JWT hash
+     *
+     * @return bool|TokenDefinition false if isn't valid the token or expired, a TokenModel if it's valid
      */
     public static function validateToken($hash)
     {
@@ -86,15 +107,15 @@ class SecurityFacade extends Facade
      * If is return it Mapped in the given Model
      * If not, return a false boolean.
      *
-     * @param string $modelName
-     * @param object $body
+     * @param string $modelName the Model to be validated
+     * @param object $body the Payload to be validated
      *
-     * @return bool|object|Model
+     * @return bool|object|Model the mapped model or false if doesn't exists
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucwords($modelName));
+        $model = ('App\Models\Communication\\' . ucwords($modelName));
 
-        return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
+        return class_exists($model) ? json()::compare($model, $body) : false;
     }
 }

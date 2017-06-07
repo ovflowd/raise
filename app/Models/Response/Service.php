@@ -3,7 +3,6 @@
 namespace App\Models\Response;
 
 use App\Models\Communication\Model;
-use App\Models\Communication\Service;
 
 /**
  * Class Service

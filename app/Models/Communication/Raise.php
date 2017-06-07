@@ -22,14 +22,6 @@ abstract class Raise extends Model
      * @var float (UNIX_TIMESTAMP)
      */
     public $clientTime = 0;
-
-    /**
-     * The time when the server handled the operation and inserted it
-     *
-     * @var float (UNIX_TIMESTAMP)
-     */
-    protected $serverTime = 0;
-
     /**
      * Tags Identifiers
      *
@@ -39,6 +31,12 @@ abstract class Raise extends Model
      * @var array
      */
     public $tags = array();
+    /**
+     * The time when the server handled the operation and inserted it
+     *
+     * @var float (UNIX_TIMESTAMP)
+     */
+    protected $serverTime = 0;
 
     /**
      * RaiseModel constructor
@@ -66,6 +64,16 @@ abstract class Raise extends Model
     }
 
     /**
+     * Time when the server registered the Data.
+     *
+     * @return float
+     */
+    public function getServerTime()
+    {
+        return $this->serverTime;
+    }
+
+    /**
      * Set manually serverTime
      * with the ability of setting the with the current microtime.
      *
@@ -74,15 +82,5 @@ abstract class Raise extends Model
     public function setServerTime(float $serverTime = null)
     {
         $this->serverTime = $serverTime ?? microtime(true);
-    }
-
-    /**
-     * Time when the server registered the Data.
-     *
-     * @return float
-     */
-    public function getServerTime()
-    {
-        return $this->serverTime;
     }
 }

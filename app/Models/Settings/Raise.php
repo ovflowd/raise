@@ -2,15 +2,18 @@
 
 namespace App\Models\Settings;
 
-use App\Handlers\CouchbaseHandler;
+use App\Database\Couchbase as CouchbaseHandler;
 use App\Models\Communication\Model;
-use App\Models\Interfaces\Database;
+use App\Models\Interfaces\Database as DatabaseHandler;
 
 /**
  * Class Raise
  *
  * A Setting Model used to describe the current
  * environment of RAISe will operate.
+ *
+ * @property DatabaseHandler
+ * @property CouchbaseHandler
  *
  * @version 2.0.0
  * @since 2.0.0
@@ -21,7 +24,7 @@ class Raise extends Model
      * The desired DatabaseHandler that will be used
      *  as Handler for current RAISe environment
      *
-     * @see Database
+     * @see DatabaseHandler
      * @see CouchbaseHandler
      *
      * @var string

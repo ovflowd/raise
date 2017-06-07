@@ -20,19 +20,6 @@ class Service extends Raise
      * @var string
      */
     public $id = '';
-
-    /**
-     * The Unique Client Identifier
-     *
-     * Each Service is related to an Service,
-     * this identified which Client the Service is associated
-     *
-     * @see Client
-     *
-     * @var string
-     */
-    protected $clientId = '';
-
     /**
      * The Service Name
      *
@@ -45,7 +32,6 @@ class Service extends Raise
      * @var string
      */
     public $name;
-
     /**
      * Parameters of the Service.
      *
@@ -60,7 +46,6 @@ class Service extends Raise
      * @var array
      */
     public $parameters = array();
-
     /**
      * Return Type of a Service.
      *
@@ -73,6 +58,17 @@ class Service extends Raise
      * @var string
      */
     public $returnType = 'string';
+    /**
+     * The Unique Client Identifier
+     *
+     * Each Service is related to an Service,
+     * this identified which Client the Service is associated
+     *
+     * @see Client
+     *
+     * @var string
+     */
+    protected $clientId = '';
 
     /**
      * Service constructor.
@@ -90,6 +86,16 @@ class Service extends Raise
     }
 
     /**
+     * Get the Related Client Unique Identifier.
+     *
+     * @return string Get the Client Identifier
+     */
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    /**
      * Set the Unique Client Identifier
      * That is related to this Service.
      *
@@ -100,15 +106,5 @@ class Service extends Raise
         global $token;
 
         $this->clientId = $clientId ?? $token()->clientId;
-    }
-
-    /**
-     * Get the Related Client Unique Identifier.
-     *
-     * @return string Get the Client Identifier
-     */
-    public function getClientId()
-    {
-        return $this->clientId;
     }
 }

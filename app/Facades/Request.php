@@ -2,45 +2,67 @@
 
 namespace App\Facades;
 
+use Bramus\Router\Router;
+
 /**
- * Class RequestFacade.
+ * Class Request
+ *
+ * A Facade used to Handle and map all the Request inputs
+ * like Headers, Method and Payload, QueryString, etc.
+ *
+ * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-class RequestFacade extends Facade
+class Request extends Facade
 {
     /**
      * Requested Page Sent Headers.
      *
-     * @var array
+     * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields Available Headers
+     * @see Router (used to gather headers)
+     *
+     * @var array of headers
      */
-    private static $headers = [];
+    private static $headers = array();
 
     /**
      * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS).
      *
-     * @var string
+     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html HTTP Methods
+     *
+     * @var string the requested method
      */
     private static $method = 'GET';
 
     /**
      * Requested Page Body (POST, PUT).
      *
+     * A Payload that was sent on the Request
+     * On RAISe will be used as Registering of Data
+     *
      * @var object
      */
-    private static $body = null;
+    private static $body;
 
     /**
      * Requested Page Query String.
      *
+     * @see https://en.wikipedia.org/wiki/Query_string Documentation of QS
+     *
      * @var array
      */
-    private static $query = [];
+    private static $query = array();
 
     /**
      * Prepare the RequestFacade with the Requested Page Data.
      *
-     * @param array  $headers
-     * @param string $method
-     * @param array  $server
+     * @see https://secure.php.net/manual/en/reserved.variables.server.php $_SERVER Manual
+     *
+     * @param array $headers Given Headers
+     * @param string $method Given Requested Method
+     * @param array $server $_SERVER super Global
      */
     public static function prepare(array $headers, string $method, array $server)
     {
@@ -70,9 +92,9 @@ class RequestFacade extends Facade
     /**
      * Return Requested Page Sent Headers.
      *
-     * @param string|null $key
+     * @param string|null $key specify a header to be returned
      *
-     * @return array|bool
+     * @return array|bool the entire set of headers or only a value of a specific header
      */
     public static function headers(string $key = null)
     {
@@ -89,9 +111,9 @@ class RequestFacade extends Facade
      * Note.: Always an Object
      * Note.: Return false if doesn't exists
      *
-     * @param string|null $key
+     * @param string|null $key an property/value of the payload
      *
-     * @return object|bool
+     * @return object|bool the entire payload or a value of it (if exists)
      */
     public static function body(string $key = null)
     {
@@ -107,9 +129,9 @@ class RequestFacade extends Facade
      *
      * Note.: Return false if doesn't exists
      *
-     * @param string|null $key
+     * @param string|null $key a specific query string element
      *
-     * @return array|bool
+     * @return array|bool the entire query string as array or a value of it (if exists)
      */
     public static function query(string $key = null)
     {

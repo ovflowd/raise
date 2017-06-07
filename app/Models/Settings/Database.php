@@ -2,7 +2,7 @@
 
 namespace App\Models\Settings;
 
-use App\Handlers\CouchbaseHandler;
+use App\Database\Couchbase as CouchbaseHandler;
 use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
 

@@ -1,21 +1,32 @@
 <?php
 
-namespace App\Handlers;
+namespace App\Database;
 
 use App\Models\Communication\Model;
-use App\Models\Interfaces\Database;
+use App\Models\Interfaces\Database as DatabaseHandler;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
 use CouchbaseCluster;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class CouchbaseHandler.
+ * Class Couchbase
+ *
+ * A Couchbase Handler is a Database Handler that
+ * Handles and does all operations with a Couchbase Database
+ *
+ * @see CouchbaseCluster You will need Couchbase PHP SDK!
+ *
+ * @see https://developer.couchbase.com/documentation/server/current/introduction/intro.html Couchbase Documentation
+ * @see https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern CR Design Pattern
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
-class CouchbaseHandler implements Database
+class Couchbase implements DatabaseHandler
 {
     /**
-     * Couchbase Connection Instance.
+     * The Couchbase Connection Instance
      *
      * @var CouchbaseCluster
      */
@@ -24,7 +35,7 @@ class CouchbaseHandler implements Database
     /**
      * Connect to the Database.
      *
-     * @param array|object $connection
+     * @param array|object $connection the connection string for Couchbase
      */
     public function connect($connection)
     {
@@ -40,13 +51,13 @@ class CouchbaseHandler implements Database
     }
 
     /**
-     * Insert Data on Database.
+     * Insert Documents on Couchbase.
      *
-     * @param string $table
-     * @param Model  $data
-     * @param string $primaryKey
+     * @param string $table desired bucket
+     * @param Model $data data to be inserted
+     * @param string $primaryKey defined primary key or generated
      *
-     * @return string Document Identifier
+     * @return int|string generated or defined primary key or the result of the primary key
      */
     public function insert(string $table, Model $data, string $primaryKey = null)
     {
@@ -58,12 +69,12 @@ class CouchbaseHandler implements Database
     }
 
     /**
-     * Select Data on Database.
+     * Select Data on Couchbase.
      *
-     * @param string $table
-     * @param Select $query
+     * @param string $table desired bucket to select
+     * @param Select $query a Select query to search
      *
-     * @return mixed
+     * @return array|string|object selected document or set of documents
      */
     public function select(string $table, Select $query)
     {
@@ -75,10 +86,10 @@ class CouchbaseHandler implements Database
     /**
      * Select an Object by its Identifier.
      *
-     * @param string $table
-     * @param string $primaryKey
+     * @param string $table desired bucket
+     * @param string $primaryKey a document identifier
      *
-     * @return object|bool
+     * @return object|bool selected document or set of documents
      */
     public function selectById(string $table, string $primaryKey)
     {
@@ -94,10 +105,10 @@ class CouchbaseHandler implements Database
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string $table
-     * @param string $primaryKey
+     * @param string $table the desired bucket
+     * @param string $primaryKey the document identifier
      *
-     * @return int|bool
+     * @return int amount of documents that the statement find
      */
     public function count(string $table, string $primaryKey)
     {
@@ -115,13 +126,13 @@ class CouchbaseHandler implements Database
     }
 
     /**
-     * Update an Element of the Database.
+     * Update an Element of the Couchbase.
      *
-     * @param string $table
-     * @param string $primaryKey
-     * @param Model  $data
+     * @param string $table desired bucket to update
+     * @param string $primaryKey the document identifier
+     * @param Model $data data to update
      *
-     * @return mixed
+     * @return array|string|object the result of the update
      */
     public function update(string $table, string $primaryKey, Model $data)
     {
