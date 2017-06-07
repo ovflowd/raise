@@ -103,13 +103,6 @@
             "type": "boolean"
           },
           {
-            "name": "id",
-            "in": "query",
-            "description": "Filter by the Unique Identifier of a Client",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "interval",
             "in": "query",
             "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",

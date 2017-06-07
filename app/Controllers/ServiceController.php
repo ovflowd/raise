@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Communication\Model;
+use App\Models\Communication\ServiceModel;
 use App\Models\Response\ServiceListResponse;
 use App\Models\Response\ServiceRegisterResponse;
 use Koine\QueryBuilder\Statements\Select;
@@ -14,51 +16,43 @@ class ServiceController extends BaseController
     /**
      * Register Process.
      *
-     * @return void
+     * @param null $data
+     * @param Model|null $responseModel
      */
-    public function register()
+    public function register($data = null, Model $responseModel = null)
     {
-        if (($mappedModel = security()::validateBody('service', request()::body())) == false) {
+        if (($serviceBag = security()::validateBody('servicebag', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');
 
             return;
         }
 
-        $servicesResponse = array();
-
-        array_walk($mappedModel->services, function ($service) use ($mappedModel, &$servicesResponse) {
-            $service->clientTime = $mappedModel->clientTime;
-            $service->tags = $mappedModel->tags;
-
+        $response = array_map(function (ServiceModel $service) {
             $service->id = database()->insert('service', $service);
 
             database()->update('service', $service->id, $service);
 
-            array_push($servicesResponse, array('id' => $service->id, 'name' => $service->name));
-        });
+            return array('id' => $service->id, 'name' => $service->name);
+        }, $serviceBag->services);
 
-        response()::setResponseModel(200, new ServiceRegisterResponse(),
-            array('services' => $servicesResponse, 'message' => 'Success'));
+        parent::register(array('services' => $response, 'message' => 'Success'), new ServiceRegisterResponse());
     }
 
     /**
      * List Process.
      *
-     * @param array|object|null $list
-     * @param object|callable $callback
+     * @param array|null $data
+     * @param Model $response
+     * @param callable $callback
      */
-    public function list($list = null, $callback = null)
+    public function list($data = null, Model $response = null, $callback = null)
     {
-        global $token;
-
         $query = $this->filter();
 
-        $query->where('clientId', $token()->clientId);
+        $data = database()->select('service', $query);
 
-        $list = database()->select('service', $query);
-
-        parent::list($list, function ($data) {
-            response()::setResponseModel(200, new ServiceListResponse(), array('services' => $data));
+        parent::list($data, new ServiceListResponse(), function ($services) {
+            return array('services' => json()::mapSet(new ServiceModel(), $services));
         });
     }
 
@@ -71,7 +65,15 @@ class ServiceController extends BaseController
      */
     protected function filter(Select $query = null)
     {
+        global $token;
+
         $query = new Select();
+
+        $query->where('clientId', $token()->clientId);
+
+        if (request()::query('id') !== false) {
+            $query->where('META(document).id', request()::query('id'));
+        }
 
         if (request()::query('serviceName') !== false) {
             $query->where('serviceName', request()::query('serviceName'));

@@ -8,21 +8,81 @@ namespace App\Models\Communication;
 class ServiceModel extends RaiseModel
 {
     /**
-     * Array of Service Models.
+     * Service Unique Identifier
+     *
+     * @var string
+     */
+    public $id = '';
+
+    /**
+     * Related Client Unique Identifier
+     *
+     * @var string
+     */
+    protected $clientId = '';
+
+    /**
+     * Service Name.
      *
      * @required
      *
-     * @var ServiceBagModel[]
+     * @var string
      */
-    public $services = array();
+    public $name;
 
     /**
-     * Add a Service Bag into a Service Model.
+     * Parameters of the Service.
      *
-     * @param ServiceBagModel $bag
+     * @required
+     *
+     * @var array
      */
-    public function addBag(ServiceBagModel $bag)
+    public $parameters = array();
+
+    /**
+     * Return Type of a Service.
+     *
+     * @required
+     *
+     * @var string
+     */
+    public $returnType = 'string';
+
+    /**
+     * ServiceBagModel constructor.
+     *
+     * Set the Timestamps of when RAISe handled
+     * this model.
+     *
+     * And set the Client Identifier
+     */
+    public function __construct()
     {
-        $this->services[] = $bag;
+        parent::__construct();
+
+        $this->setClientId();
+    }
+
+    /**
+     * Set the Unique Client Identifier
+     * That is related to this Service
+     *
+     * @param string|null $clientId
+     */
+    public function setClientId(string $clientId = null)
+    {
+        global $token;
+
+        $this->clientId = $clientId ?? $token()->clientId;
+    }
+
+    /**
+     * Get the Related Client Unique Identifier
+     *
+     * @return string
+     */
+    public function getClientId()
+    {
+        return $this->clientId;
     }
 }

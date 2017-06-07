@@ -2,6 +2,7 @@
 
 namespace App\Handlers;
 
+use App\Models\Communication\Model;
 use App\Models\Interfaces\Database;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
@@ -42,21 +43,16 @@ class CouchbaseHandler implements Database
      * Insert Data on Database.
      *
      * @param string $table
-     * @param object|array $data
+     * @param Model $data
      * @param string $primaryKey
-     * @param mixed|null $parameters
      *
      * @return string Document Identifier
      */
-    public function insert(string $table, $data, string $primaryKey = null, $parameters = null)
+    public function insert(string $table, Model $data, string $primaryKey = null)
     {
         $itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
 
-        if ($parameters !== null && method_exists($data, $parameters)) {
-            $data->{$parameters}();
-        }
-
-        $this->connection->openBucket($table)->insert($itemId, $data);
+        $this->connection->openBucket($table)->insert($itemId, $data->encode());
 
         return $itemId;
     }
@@ -65,11 +61,11 @@ class CouchbaseHandler implements Database
      * Select Data on Database.
      *
      * @param string $table
-     * @param Select|null $query
+     * @param Select $query
      *
      * @return mixed
      */
-    public function select(string $table, Select $query = null)
+    public function select(string $table, Select $query)
     {
         $query->select('*')->from("{$table} document");
 
@@ -80,14 +76,14 @@ class CouchbaseHandler implements Database
      * Select an Object by its Identifier.
      *
      * @param string $table
-     * @param string $id
+     * @param string $primaryKey
      *
      * @return object|bool
      */
-    public function selectById(string $table, string $id)
+    public function selectById(string $table, string $primaryKey)
     {
         try {
-            $result = $this->connection->openBucket($table)->get($id);
+            $result = $this->connection->openBucket($table)->get($primaryKey);
 
             return $result->value;
         } catch (Exception $e) {
@@ -103,7 +99,7 @@ class CouchbaseHandler implements Database
      *
      * @return int|bool
      */
-    public function count(string $table, $primaryKey = null)
+    public function count(string $table, string $primaryKey)
     {
         if (is_bool($primaryKey) || $primaryKey == null) {
             return false;
@@ -122,15 +118,14 @@ class CouchbaseHandler implements Database
      * Update an Element of the Database.
      *
      * @param string $table
-     * @param $elementIdentifier
-
-     * @param $data
+     * @param string $primaryKey
+     * @param Model $data
      * @return mixed
      */
-    public function update(string $table, $elementIdentifier, $data)
+    public function update(string $table, string $primaryKey, Model $data)
     {
         try {
-            $result = $this->connection->openBucket($table)->upsert($elementIdentifier, $data);
+            $result = $this->connection->openBucket($table)->upsert($primaryKey, $data->encode());
 
             return $result->value;
         } catch (Exception $e) {

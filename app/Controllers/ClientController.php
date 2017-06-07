@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Communication\Model;
+use App\Models\Response\ClientListResponse;
 use App\Models\Response\TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
@@ -13,35 +15,39 @@ class ClientController extends BaseController
     /**
      * Register Process.
      *
-     * @return void
+     * @param null $data
+     * @param Model|null $responseModel
      */
-    public function register()
+    public function register($data = null, Model $responseModel = null)
     {
-        if (($mappedModel = security()::validateBody('client', request()::body())) == false) {
+        if (($clientModel = security()::validateBody('client', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');
 
             return;
         }
 
-        response()::setResponseModel(200, new TokenResponse(), array(
-            'message' => 'Client Registered Successfully',
-            'token' => security()::insertToken(database()->insert('client', $mappedModel))
-        ));
+        $jwtHash = security()::insertToken(database()->insert('client', $clientModel));
+
+        parent::register(array('message' => 'Client Registered Successfully', 'token' => $jwtHash),
+            new TokenResponse());
     }
 
     /**
      * List Process.
      *
-     * @param array|object|null $list
-     * @param object|callable $callback
+     * @param array|null $data
+     * @param Model $response
+     * @param callable $callback
      */
-    public function list($list = null, $callback = null)
+    public function list($data = null, Model $response = null, $callback = null)
     {
         $query = $this->filter();
 
-        $list = database()->select('client', $query);
+        $data = database()->select('client', $query);
 
-        parent::list($list);
+        parent::list($data, new ClientListResponse(), function ($clients) {
+            return array('clients' => $clients);
+        });
     }
 
     /**

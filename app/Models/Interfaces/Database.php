@@ -2,6 +2,7 @@
 
 namespace App\Models\Interfaces;
 
+use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -29,42 +30,41 @@ interface Database
      * Insert Data on Database.
      *
      * @param string $table
-     * @param object $data
+     * @param object Model $data
      * @param string $primaryKey
-     * @param mixed|null $parameters
      *
      * @return int
      */
-    public function insert(string $table, $data, string $primaryKey, $parameters = null);
+    public function insert(string $table, Model $data, string $primaryKey);
 
     /**
      * Select Data on Database.
      *
      * @param string $table
-     * @param Select|null $query
+     * @param Select $query
      *
      * @return mixed
      */
-    public function select(string $table, Select $query = null);
+    public function select(string $table, Select $query);
 
     /**
      * Count number of Elements of a specific Query.
      *
      * @param string $table
-     * @param mixed|null $primaryKey
+     * @param string $primaryKey
      *
      * @return int
      */
-    public function count(string $table, $primaryKey = null);
+    public function count(string $table, string $primaryKey);
 
     /**
      * Update an Element of the Database.
      *
      * @param string $table
-     * @param $elementIdentifier
-     * @param $data
+     * @param string $primaryKey
+     * @param Model $data
      *
      * @return mixed
      */
-    public function update(string $table, $elementIdentifier, $data);
+    public function update(string $table, string $primaryKey, Model $data);
 }

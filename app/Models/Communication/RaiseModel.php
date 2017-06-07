@@ -19,7 +19,7 @@ class RaiseModel extends Model
      *
      * @var float (UNIX_TIMESTAMP)
      */
-    public $serverTime = 0;
+    protected $serverTime = 0;
 
     /**
      * Data Tags.
@@ -62,5 +62,15 @@ class RaiseModel extends Model
     public function setServerTime(float $serverTime = null)
     {
         $this->serverTime = $serverTime ?? microtime(true);
+    }
+
+    /**
+     * Time when the server registered the Data.
+     *
+     * @return float
+     */
+    public function getServerTime()
+    {
+        return $this->serverTime;
     }
 }

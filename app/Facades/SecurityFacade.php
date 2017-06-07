@@ -2,6 +2,7 @@
 
 namespace App\Facades;
 
+use App\Models\Communication\Model;
 use App\Models\Communication\TokenModel;
 
 /**
@@ -88,11 +89,11 @@ class SecurityFacade extends Facade
      * @param string $modelName
      * @param object $body
      *
-     * @return bool|object
+     * @return bool|object|Model
      */
     public static function validateBody(string $modelName, $body)
     {
-        $modelPath = ('App\Models\Communication\\' . ucfirst($modelName) . 'Model');
+        $modelPath = ('App\Models\Communication\\' . ucwords($modelName) . 'Model');
 
         return class_exists($modelPath) ? json()::compare(new $modelPath(), $body) : false;
     }

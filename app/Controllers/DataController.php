@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -12,9 +13,10 @@ class DataController extends BaseController
     /**
      * Register Process.
      *
-     * @return mixed
+     * @param null $data
+     * @param Model|null $responseModel
      */
-    public function register()
+    public function register($data = null, Model $responseModel = null)
     {
         // TODO: Implement register() method.
     }
@@ -22,10 +24,11 @@ class DataController extends BaseController
     /**
      * List Process.
      *
-     * @param array|object|null $list
-     * @param object|callable $callback
+     * @param array|null $data
+     * @param Model $response
+     * @param callable $callback
      */
-    public function list($list = null, $callback = null)
+    public function list($data = null, Model $response = null, $callback = null)
     {
         // TODO: Implement list() method.
     }

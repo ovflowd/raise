@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Response\ClientListResponse;
+use App\Models\Communication\Model;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -13,29 +13,29 @@ abstract class BaseController
     /**
      * Register Process.
      *
-     * @return mixed
+     * @param null $data
+     * @param Model|null $responseModel
      */
-    abstract public function register();
+    public function register($data = null, Model $responseModel = null)
+    {
+        response()::setResponseModel(200, $responseModel, $data);
+    }
 
     /**
      * List Process.
      *
-     * @param array|object|null $list
-     * @param object|callable $callback
+     * @param array|null $data
+     * @param Model $response
+     * @param callable $callback
      */
-    public function list($list = null, $callback = null)
+    public function list($data = null, Model $response = null, $callback = null)
     {
-        $data = is_array($list) ? array_map(function ($model) {
+        $data = array_map(function ($model) {
             return $model->document;
-        }, $list) : [$list];
+        }, $data);
 
-        if (is_callable($callback)) {
-            $callback($data);
-
-            return;
-        }
-
-        response()::setResponseModel(200, new ClientListResponse(), array('clients' => $data));
+        response()::setResponseModel(200, $response, is_callable($callback) ?
+            $callback($data) : $data);
     }
 
     /**
@@ -48,12 +48,6 @@ abstract class BaseController
     protected function filter(Select $query = null)
     {
         $query = $query == null ? new Select() : $query;
-
-        if (request()::query('id') !== false) {
-            $query->where('META(document).id', request()::query('id'));
-
-            return $query;
-        }
 
         if (request()::query('tags') !== false) {
             array_walk(explode(':', request()::query('tags')), function ($tag) use ($query) {
