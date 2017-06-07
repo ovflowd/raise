@@ -25,9 +25,9 @@ class Client extends Controller
      * Validated and Registers Clients unto the Database
      *
      * @param object $data the payload as object from the Request
-     * @param Model|null $responseModel a Response Model to be used as Response
+     * @param Model|null $response a Response Model to be used as Response
      */
-    public function register($data = null, Model $responseModel = null)
+    public function register($data = null, Model $response = null)
     {
         if (($clientModel = security()::validateBody('client', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');

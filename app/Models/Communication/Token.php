@@ -3,12 +3,23 @@
 namespace App\Models\Communication;
 
 /**
- * Class TokenModel.
+ * Class Token
+ *
+ * A Token Model is a Schema Definition of
+ * A Token and how it will be stored on the Database
+ *
+ * @version 2.0.0
+ * @since 2.0.0
  */
 class Token extends Raise
 {
     /**
-     * Client Unique Identifier.
+     * The Client Unique Identifier
+     *
+     * Each Token expires, but the Client Definition does not,
+     * each Token it's related to an Unique Client,
+     *
+     * Token changes, Clients doesn't not.
      *
      * @required
      *
@@ -19,12 +30,15 @@ class Token extends Raise
     /**
      * Token Expire Time.
      *
+     * When the Token goes expire,
+     * in seconds.milliseconds on UNIX Timestamp
+     *
      * @var float
      */
     public $expireTime;
 
     /**
-     * TokenModel constructor.
+     * Token constructor.
      *
      * Set the Timestamps of when RAISe handled
      * this model.
@@ -45,7 +59,7 @@ class Token extends Raise
      */
     public function setExpireTime()
     {
-        $this->expireTime = strtotime('+'.setting('security.expireTime'), $this->serverTime);
+        $this->expireTime = strtotime('+' . setting('security.expireTime'), $this->serverTime);
 
         return $this;
     }

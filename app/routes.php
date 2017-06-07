@@ -61,10 +61,10 @@ $router()->mount('/service', function () use ($router, $response, $token) {
     });
 
     // Register a Service
-    $router()->post('/register', '\App\Controllers\ServiceController@register');
+    $router()->post('/register', '\App\Controllers\Service@register');
 
     // List Service
-    $router()->get('/', '\App\Controllers\ServiceController@list');
+    $router()->get('/', '\App\Controllers\Service@list');
 });
 
 /*
@@ -80,10 +80,10 @@ $router()->mount('/data', function () use ($router, $response, $token) {
     });
 
     // Register Data
-    $router()->post('/register', '\App\Controllers\DataController@register');
+    $router()->post('/register', '\App\Controllers\Data@register');
 
     // List Data
-    $router()->get('/', '\App\Controllers\DataController@list');
+    $router()->get('/', '\App\Controllers\Data@list');
 });
 
 /*
