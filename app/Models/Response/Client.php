@@ -5,7 +5,7 @@ namespace App\Models\Response;
 use App\Models\Communication\Model;
 
 /**
- * Class Client
+ * Class Client.
  *
  * This is the Response Model of a Client
  * Contains a List of Clients
@@ -13,12 +13,13 @@ use App\Models\Communication\Model;
  * @property \App\Models\Communication\Client
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Client extends Model
 {
     /**
-     * The Applied HTTP Response Code
+     * The Applied HTTP Response Code.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
      *
@@ -27,7 +28,7 @@ class Client extends Model
     public $codHttp;
 
     /**
-     * The HTTP Response Message from the RFC
+     * The HTTP Response Message from the RFC.
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
      *
@@ -36,9 +37,9 @@ class Client extends Model
     public $message;
 
     /**
-     * A set of Clients that will be returned on the Response
+     * A set of Clients that will be returned on the Response.
      *
      * @var \App\Models\Communication\Client[]
      */
-    public $clients = array();
+    public $clients = [];
 }

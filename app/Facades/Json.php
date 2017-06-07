@@ -11,7 +11,7 @@ use JsonMapper_Exception;
 use UnexpectedValueException;
 
 /**
- * Class Json
+ * Class Json.
  *
  * A Facade that handles and manages the mapping
  * of objects, data and arrays, and also the encoding of data
@@ -21,6 +21,7 @@ use UnexpectedValueException;
  * @see https://en.wikipedia.org/wiki/Facade_pattern Documentation of the Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Json extends Facade
@@ -47,7 +48,7 @@ class Json extends Facade
      * @param string $json the given jSON string
      *
      * @return object|array the decoded jSON string into object
-     *  or array of objects
+     *                      or array of objects
      */
     public static function jsonDecode(string $json)
     {
@@ -59,8 +60,8 @@ class Json extends Facade
      *
      * @see https://github.com/firebase/php-jwt JWT Library
      *
-     * @param string $secret The defined secret key
-     * @param array|object|Model $data the Data to be encoded
+     * @param string             $secret The defined secret key
+     * @param array|object|Model $data   the Data to be encoded
      *
      * @return string the generated JWT hash
      */
@@ -70,12 +71,12 @@ class Json extends Facade
     }
 
     /**
-     * Decode an JWT hash into an Object
+     * Decode an JWT hash into an Object.
      *
      * @see https://github.com/firebase/php-jwt JWT Library
      *
      * @param string $secret the given secret key
-     * @param string $hash the given JWT hash
+     * @param string $hash   the given JWT hash
      *
      * @return object|array|Model|bool false if is invalid, the object if is valid
      */
@@ -93,8 +94,8 @@ class Json extends Facade
     /**
      * Map an object into a Model.
      *
-     * @param string|object $model the Model or Namespace of the Model to be Mapped
-     * @param array|object|Model $data the Data to be mapped
+     * @param string|object      $model the Model or Namespace of the Model to be Mapped
+     * @param array|object|Model $data  the Data to be mapped
      *
      * @return object|Model|RaiseModel the mapped object
      */
@@ -107,10 +108,10 @@ class Json extends Facade
      * Internal Mapping Class
      * Executes an Object Mapping.
      *
-     * @param string|object $model the Model to be mapped or the namespace of it
-     * @param array|object|Model $data the data to be mapped
-     * @param bool $mapArray If need to map as a set (array)
-     * @param bool $evaluateInput If need validate the input data
+     * @param string|object      $model         the Model to be mapped or the namespace of it
+     * @param array|object|Model $data          the data to be mapped
+     * @param bool               $mapArray      If need to map as a set (array)
+     * @param bool               $evaluateInput If need validate the input data
      *
      * @return bool|mixed|object|Model|RaiseModel the mapped object
      */
@@ -126,7 +127,7 @@ class Json extends Facade
         $model = is_object($model) ? $model : new $model();
 
         try {
-            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object)$data, $model);
+            return $mapArray ? $mapper->mapArray($data, [], $model) : $mapper->map((object) $data, $model);
         } catch (JsonMapper_Exception $e) {
             return false;
         }
@@ -135,8 +136,8 @@ class Json extends Facade
     /**
      * Map a set of Data into a specific Model type.
      *
-     * @param string|object $model the Model to be mapped or the namespace of it
-     * @param array|object|Model $data the data to be mapped
+     * @param string|object      $model the Model to be mapped or the namespace of it
+     * @param array|object|Model $data  the data to be mapped
      *
      * @return bool|mixed|object|Model|RaiseModel the mapped object
      */
@@ -150,8 +151,8 @@ class Json extends Facade
      * If the validation passes it return the Mapped Object
      * In other case, return a false boolean.
      *
-     * @param string|object $model the Model to be mapped or the namespace of it
-     * @param array|object|Model $data the data to be mapped
+     * @param string|object      $model the Model to be mapped or the namespace of it
+     * @param array|object|Model $data  the data to be mapped
      *
      * @return bool|mixed|object|Model|RaiseModel the mapped object or false if not valid
      */
@@ -161,10 +162,10 @@ class Json extends Facade
     }
 
     /**
-     * Compare a set of Data and Map it
+     * Compare a set of Data and Map it.
      *
-     * @param string|object $model the Model to be mapped or the namespace of it
-     * @param array|object|Model $data the data to be mapped
+     * @param string|object      $model the Model to be mapped or the namespace of it
+     * @param array|object|Model $data  the data to be mapped
      *
      * @return bool|mixed|object|Model|RaiseModel the mapped object or false if not valid
      */

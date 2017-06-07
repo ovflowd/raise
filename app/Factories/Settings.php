@@ -3,11 +3,12 @@
 namespace App\Factories;
 
 /**
- * Class Settings
+ * Class Settings.
  *
  * This is a Factory used to store Settings Models
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Settings extends Factory
@@ -33,14 +34,14 @@ class Settings extends Factory
      *
      * Return true if added with success, false if element already exists
      *
-     * @param string $element desired Settings Model to add
+     * @param string       $element desired Settings Model to add
      * @param array|object $content the content that will be mapped
      *
      * @return bool true if added successfully, false if already exists
      */
     public static function add(string $element, $content)
     {
-        $class = ('App\Models\Settings\\' . ucwords($element));
+        $class = ('App\Models\Settings\\'.ucwords($element));
 
         if (!array_key_exists($element, self::instance()->elements) && class_exists($class)) {
             self::instance()->elements[$element] = json()::map($class, $content);

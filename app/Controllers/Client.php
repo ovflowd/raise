@@ -9,12 +9,13 @@ use App\Models\Response\Token as TokenResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class Client
+ * Class Client.
  *
  * A Controller that Manages all Interactions with a Client
  * or a set of Clients
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Client extends Controller
@@ -24,7 +25,7 @@ class Client extends Controller
      *
      * Validated and Registers Clients unto the Database
      *
-     * @param object $data the payload as object from the Request
+     * @param object     $data     the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
@@ -45,9 +46,9 @@ class Client extends Controller
      *
      * List a set of Clients or a single Client based on the Request Parameters
      *
-     * @param array|object|null $data the given Data to be Mapped
-     * @param Model $response the Response Model
-     * @param callable $callback an optional callback to treat the mapping result
+     * @param array|object|null $data     the given Data to be Mapped
+     * @param Model             $response the Response Model
+     * @param callable          $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -56,7 +57,7 @@ class Client extends Controller
         $data = database()->select('client', $query);
 
         parent::list($data, new ClientResponse(), function ($clients) {
-            return array('clients' => json()::mapSet(new ClientDefinition(), $clients), 'message' => 'Success');
+            return ['clients' => json()::mapSet(new ClientDefinition(), $clients), 'message' => 'Success'];
         });
     }
 

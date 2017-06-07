@@ -10,23 +10,23 @@ use CouchbaseCluster;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
- * Class Couchbase
+ * Class Couchbase.
  *
  * A Couchbase Handler is a Database Handler that
  * Handles and does all operations with a Couchbase Database
  *
  * @see CouchbaseCluster You will need Couchbase PHP SDK!
- *
  * @see https://developer.couchbase.com/documentation/server/current/introduction/intro.html Couchbase Documentation
  * @see https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern CR Design Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Couchbase implements DatabaseHandler
 {
     /**
-     * The Couchbase Connection Instance
+     * The Couchbase Connection Instance.
      *
      * @var CouchbaseCluster
      */
@@ -53,8 +53,8 @@ class Couchbase implements DatabaseHandler
     /**
      * Insert Documents on Couchbase.
      *
-     * @param string $table desired bucket
-     * @param Model $data data to be inserted
+     * @param string $table      desired bucket
+     * @param Model  $data       data to be inserted
      * @param string $primaryKey defined primary key or generated
      *
      * @return int|string generated or defined primary key or the result of the primary key
@@ -86,7 +86,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Select an Object by its Identifier.
      *
-     * @param string $table desired bucket
+     * @param string $table      desired bucket
      * @param string $primaryKey a document identifier
      *
      * @return object|bool selected document or set of documents
@@ -105,7 +105,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Count number of Elements of a specific Query.
      *
-     * @param string $table the desired bucket
+     * @param string $table      the desired bucket
      * @param string $primaryKey the document identifier
      *
      * @return int amount of documents that the statement find
@@ -128,9 +128,9 @@ class Couchbase implements DatabaseHandler
     /**
      * Update an Element of the Couchbase.
      *
-     * @param string $table desired bucket to update
+     * @param string $table      desired bucket to update
      * @param string $primaryKey the document identifier
-     * @param Model $data data to update
+     * @param Model  $data       data to update
      *
      * @return array|string|object the result of the update
      */

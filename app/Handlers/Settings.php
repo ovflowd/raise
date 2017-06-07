@@ -5,7 +5,7 @@ namespace App\Handlers;
 use App\Factories\Settings as SettingsFactory;
 
 /**
- * Class Settings
+ * Class Settings.
  *
  * A Settings Handler manages the set of Settings that are stored on the Factory,
  * retrieves it, does find algorithms, and many other things
@@ -13,6 +13,7 @@ use App\Factories\Settings as SettingsFactory;
  * @see https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern CR Design Pattern
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Settings
@@ -52,8 +53,8 @@ class Settings
      *
      * Return true if created with success and if class exists, false if it not exists
      *
-     * @param string $modelName the model name
-     * @param array $configurationSet the configuration set
+     * @param string $modelName        the model name
+     * @param array  $configurationSet the configuration set
      *
      * @return bool
      */

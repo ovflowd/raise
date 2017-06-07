@@ -3,25 +3,26 @@
 namespace App\Models\Communication;
 
 /**
- * Class Service
+ * Class Service.
  *
  * A Service Model is a Schema Definition of
  * A Service and how it will be stored on the Database
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Service extends Raise
 {
     /**
      * The Unique Identifier of the Service
-     * used on the Response
+     * used on the Response.
      *
      * @var string
      */
     public $id = '';
     /**
-     * The Service Name
+     * The Service Name.
      *
      * The Service name uses approaches for contextual Data
      * so we recommend using names that can related
@@ -45,7 +46,7 @@ class Service extends Raise
      *
      * @var array
      */
-    public $parameters = array();
+    public $parameters = [];
     /**
      * Return Type of a Service.
      *
@@ -59,7 +60,7 @@ class Service extends Raise
      */
     public $returnType = 'string';
     /**
-     * The Unique Client Identifier
+     * The Unique Client Identifier.
      *
      * Each Service is related to an Service,
      * this identified which Client the Service is associated

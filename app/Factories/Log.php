@@ -3,11 +3,12 @@
 namespace App\Factories;
 
 /**
- * Class Log
+ * Class Log.
  *
  * A Factory that will be used to Manage Log Entries
  *
  * @version 2.0.0
+ *
  * @since 2.0.0
  */
 class Log
