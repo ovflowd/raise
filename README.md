@@ -1,5 +1,8 @@
-<h4><img src="http://i.imgur.com/Ftmda0f.png"/> RAISe</h4>
-<br>
+<p align="center">
+  <h4><img src="http://imgur.com/iQU8c9L"/> RAISe</h4>
+  <br>
+  <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
+</p>
 
 [![Github All Releases](https://img.shields.io/github/downloads/uiot/raise/total.svg)](https://github.com/uiot/raise/releases) [![Packagist](https://img.shields.io/packagist/v/uiot/raise.svg)](https://packagist.org/packages/uiot/raise) [![GitHub release](https://img.shields.io/github/release/uiot/raise.svg)](https://github.com/uiot/raise/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Code Climate](https://codeclimate.com/github/UIoT/RAISe/badges/gpa.svg)](https://codeclimate.com/github/UIoT/RAISe) [![Style CI](https://styleci.io/repos/34536644/shield?style=flat)](https://styleci.io/repos/34536644/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/uiot/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/uiot/RAISe)
 
