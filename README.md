@@ -10,7 +10,7 @@
     <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
     <a href="https://codeclimate.com/github/UIoT/RAISe"><img src="https://codeclimate.com/github/UIoT/RAISe/badges/gpa.svg"/></a>
     <a href="https://styleci.io/repos/34536644/"><img src="https://styleci.io/repos/34536644/shield?style=flat"/></a>
-    <a href="(https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr"><img src="https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)"/></a>
+    <a href="(https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr"><img src="https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr"/></a>
     <a href="https://codecov.io/gh/uiot/RAISe"><img src="https://codecov.io/gh/uiot/RAISe/branch/sbr/graph/badge.svg"/></a>
   </p>
 </p>
