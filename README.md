@@ -1,5 +1,5 @@
 <p align="center">
-  <h4><img src="http://imgur.com/iQU8c9L.png" width="200px"/> RAISe</h4>
+  <h4><img src="http://imgur.com/iQU8c9L.png" width="50px"/> RAISe</h4>
   <br>
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
 </p>
