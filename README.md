@@ -27,7 +27,7 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moi
 
 | Feature  |  Supported?   | Description  |
 |----------|:-------------:|:-------------|
-| Home Page |    &#10004;  |  Ability of accessing the main route of **RAIse** to check the status of the middleware. |
+| Home Page |    &#10004;  |  Ability of accessing the main route of **RAISe** to check the status of the middleware. |
 | Not Found Route |    &#10004;  |  Ability of accessing a non-existent route and receive a response of the route doesn't exists. |
 | Register a Client |    &#10004;  |  Ability of Registering a Client within RAISe. |
 | Revalidate a Client |    &#10008;  |  Ability of Revalidating a Client when the Token expires. |
