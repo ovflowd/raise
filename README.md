@@ -42,6 +42,8 @@ UIoT RAISe
 
 **RAISe** is an *Internet of Things* open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
 
+**RAISe** is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).
+
 ### What the word means?
 
 > **RAISe** is an acronym for *RESTful API for Internet of Things Services*. In terms, RAISe it's abstract and generic and can handle data, knowledge and information for any type of architecture that you may use, require, create or contribute.
@@ -49,11 +51,7 @@ UIoT RAISe
 ### Go deep!
 
 > In fact, **RAISe** it's a knowledge layer, in other words, a middleware for the *Internet of Things*, we can actually call it as an surface too.
-> The *API's* of **RAISe** are really simple, you can search more about what each *actor*, *component*, *api* and *entities* of **RAISe** on this [link](wiki/entities) of our wiki page. You also can read the papers related to the **RAISe** architecture and approaches, our went to our [academics repository](https://github.com/uiot/academics) and learn/read more about the **UIoT** architecture, papers, power-points and other related academic stuff.
-
-**RAISe** is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).
-
-You can read more about the architecture and about <b>RAISe</b> by accessing our [Wiki](wiki).
+> The *API's* of **RAISe** are really simple, you can search more about what each *actor*, *component*, *api* and *entities* of **RAISe** on our [wiki](wiki). You also can read the papers related to the **RAISe** architecture and approaches, our went to our [academics repository](https://github.com/uiot/academics) and learn/read more about the **UIoT** architecture, papers, power-points and other related academic stuff.
 
 Installing
 ----------
