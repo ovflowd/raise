@@ -29,7 +29,7 @@ class Service extends Controller
      */
     public function register($data = null, Model $response = null)
     {
-        if (($serviceBag = security()::validateBody('servicebag', request()::body())) == false) {
+        if (($serviceBag = security()::validateBody('serviceBag', request()::body())) == false) {
             response()::setResponse(400, 'Missing required Parameters');
 
             return;
