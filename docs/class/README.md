@@ -6,8 +6,6 @@
   </p>
 </p>
 
-<hr>
-
 <p align="center">
   <h2 align="center">RAISe Class Documentation</h2>
 </p>
