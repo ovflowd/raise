@@ -20,8 +20,6 @@ Methods
 -------
 
 
-<hr>
-
 ### get
 
 Get a Configuration Element from a Settings Model.
@@ -42,7 +40,6 @@ boolean|mixed App\Handlers\Settings::get(string $configuration)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $configuration | string |  - the configuration string or model to search |
-
 
 
 <hr>
@@ -67,7 +64,6 @@ mixed App\Handlers\Settings::store(array $settings)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $settings | array |  - the entire set of settings block |
-
 
 
 <hr>
@@ -95,3 +91,4 @@ boolean App\Handlers\Settings::add(string $modelName, array $configurationSet)
 | $configurationSet | array |  - the configuration set |
 
 
+<hr>

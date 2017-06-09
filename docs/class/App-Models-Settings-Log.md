@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### 
 
 
@@ -34,12 +32,11 @@ public \App\Factories\Log
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### encode
 
@@ -58,3 +55,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

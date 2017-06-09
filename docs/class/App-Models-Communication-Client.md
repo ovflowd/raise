@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $name
 
 Client Name.
@@ -33,7 +31,6 @@ public string $name = 'default client'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -51,7 +48,6 @@ public string $chipset = '0000000000'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $mac
@@ -67,7 +63,6 @@ public string $mac = 'FF:FF:FF:FF'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -85,7 +80,6 @@ public string $serial = '1.0.0'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $processor
@@ -102,7 +96,6 @@ public string $processor = 'i86-generic'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $channel
@@ -117,7 +110,6 @@ public string $channel = 'ieee-wireless-80211'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -134,7 +126,6 @@ public string $location = '-15.7757876:-48.077829'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $clientTime
@@ -149,7 +140,6 @@ public float $clientTime
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -167,7 +157,6 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $serverTime
@@ -183,12 +172,11 @@ protected float $serverTime
 #### Details:
 * Visibility: **protected**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### __construct
 
@@ -204,7 +192,6 @@ mixed App\Models\Communication\Raise::__construct()
 #### Details:
 * Visibility: **public**
 * This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 
@@ -233,7 +220,6 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 | $clientTime | float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### getServerTime
@@ -249,7 +235,6 @@ float App\Models\Communication\Raise::getServerTime()
 #### Details:
 * Visibility: **public**
 * This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 
@@ -278,7 +263,6 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### encode
@@ -298,3 +282,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

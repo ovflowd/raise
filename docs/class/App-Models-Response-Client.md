@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $codHttp
 
 The Applied HTTP Response Code.
@@ -33,7 +31,6 @@ public integer $codHttp
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -50,7 +47,6 @@ public string $message
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $clients
@@ -65,7 +61,6 @@ public array<mixed,\App\Models\Communication\Client> $clients = array()
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -82,12 +77,11 @@ public \App\Models\Communication\Client
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### encode
 
@@ -106,3 +100,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

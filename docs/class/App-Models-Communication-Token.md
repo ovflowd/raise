@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $clientId
 
 The Client Unique Identifier.
@@ -36,7 +34,6 @@ public string $clientId
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -54,7 +51,6 @@ public float $expireTime
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $clientTime
@@ -69,7 +65,6 @@ public float $clientTime
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -87,7 +82,6 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $serverTime
@@ -103,12 +97,11 @@ protected float $serverTime
 #### Details:
 * Visibility: **protected**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### __construct
 
@@ -127,7 +120,6 @@ mixed App\Models\Communication\Raise::__construct()
 
 
 
-
 <hr>
 
 ### setExpireTime
@@ -142,7 +134,6 @@ Set the Token Expire Time.
 
 #### Details:
 * Visibility: **public**
-
 
 
 
@@ -171,7 +162,6 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 | $clientTime | float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### getServerTime
@@ -187,7 +177,6 @@ float App\Models\Communication\Raise::getServerTime()
 #### Details:
 * Visibility: **public**
 * This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 
@@ -216,7 +205,6 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### encode
@@ -236,3 +224,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

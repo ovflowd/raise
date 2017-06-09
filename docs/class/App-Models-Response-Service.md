@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $codHttp
 
 The Applied HTTP Response Code.
@@ -33,7 +31,6 @@ public integer $codHttp
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -50,7 +47,6 @@ public string $message
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $services
@@ -66,12 +62,11 @@ public array $services = array()
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### setServices
 
@@ -95,7 +90,6 @@ mixed App\Models\Response\Service::setServices(array $services)
 | $services | array |  - array of ServiceDefinitions or simple array |
 
 
-
 <hr>
 
 ### encode
@@ -115,3 +109,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

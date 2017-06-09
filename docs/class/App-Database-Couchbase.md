@@ -18,8 +18,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $connection
 
 The Couchbase Connection Instance.
@@ -33,12 +31,11 @@ private \CouchbaseCluster $connection = null
 #### Details:
 * Visibility: **private**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### connect
 
@@ -62,7 +59,6 @@ mixed App\Models\Interfaces\Database::connect(array or object $connection)
 | $connection | array or object |  - the connection string |
 
 
-
 <hr>
 
 ### destroy
@@ -78,7 +74,6 @@ mixed App\Models\Interfaces\Database::destroy()
 #### Details:
 * Visibility: **public**
 * This method is defined by [App\Models\Interfaces\Database](App-Models-Interfaces-Database.md)
-
 
 
 
@@ -108,7 +103,6 @@ integer|string App\Models\Interfaces\Database::insert(string $table, \App\Models
 | $primaryKey | string |  - defined primary key or generated |
 
 
-
 <hr>
 
 ### select
@@ -132,7 +126,6 @@ array|string|object App\Models\Interfaces\Database::select(string $table, \Koine
 |-----------|------|-------------|
 | $table | string |  - desired table to select |
 | $query | Koine\QueryBuilder\Statements\Select |  - a Select query to search |
-
 
 
 <hr>
@@ -159,7 +152,6 @@ object|boolean App\Database\Couchbase::selectById(string $table, string $primary
 | $primaryKey | string |  - a document identifier |
 
 
-
 <hr>
 
 ### count
@@ -183,7 +175,6 @@ integer App\Models\Interfaces\Database::count(string $table, string $primaryKey)
 |-----------|------|-------------|
 | $table | string |  - the desired table |
 | $primaryKey | string |  - the primary key to identify |
-
 
 
 <hr>
@@ -212,3 +203,4 @@ array|string|object App\Models\Interfaces\Database::update(string $table, string
 | $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) |  - data to update |
 
 
+<hr>

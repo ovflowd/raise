@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $address
 
 Database IPv4 Address or Hostname.
@@ -33,7 +31,6 @@ public string $address = 'localhost'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -50,7 +47,6 @@ public string $user = 'couch'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $password
@@ -65,7 +61,6 @@ public string $password = 'couchbase'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -82,7 +77,6 @@ public string $database = 'my-database'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### 
@@ -98,12 +92,11 @@ public \App\Database\Couchbase
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### encode
 
@@ -122,3 +115,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

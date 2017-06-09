@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $id
 
 The Unique Identifier of the Service
@@ -34,7 +32,6 @@ public string $id = ''
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -53,7 +50,6 @@ public string $name
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $parameters
@@ -70,7 +66,6 @@ public array $parameters = array()
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -89,7 +84,6 @@ public string $returnType = 'string'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $clientId
@@ -106,7 +100,6 @@ protected string $clientId = ''
 #### Details:
 * Visibility: **protected**
 
-
 <hr>
 
 ### $clientTime
@@ -121,7 +114,6 @@ public float $clientTime
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -139,7 +131,6 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $serverTime
@@ -155,12 +146,11 @@ protected float $serverTime
 #### Details:
 * Visibility: **protected**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### __construct
 
@@ -179,7 +169,6 @@ mixed App\Models\Communication\Raise::__construct()
 
 
 
-
 <hr>
 
 ### getClientId
@@ -194,7 +183,6 @@ string App\Models\Communication\Service::getClientId()
 
 #### Details:
 * Visibility: **public**
-
 
 
 
@@ -222,7 +210,6 @@ mixed App\Models\Communication\Service::setClientId(string or null $clientId)
 | $clientId | string or null |  - the ClientId to be set |
 
 
-
 <hr>
 
 ### setClientTime
@@ -248,7 +235,6 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 | $clientTime | float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### getServerTime
@@ -264,7 +250,6 @@ float App\Models\Communication\Raise::getServerTime()
 #### Details:
 * Visibility: **public**
 * This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 
@@ -293,7 +278,6 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### encode
@@ -313,3 +297,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

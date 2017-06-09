@@ -23,8 +23,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $clientTime
 
 The time when the Client requested the operation.
@@ -37,7 +35,6 @@ public float $clientTime
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -55,7 +52,6 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### $serverTime
@@ -71,12 +67,11 @@ protected float $serverTime
 #### Details:
 * Visibility: **protected**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### __construct
 
@@ -91,7 +86,6 @@ mixed App\Models\Communication\Raise::__construct()
 
 #### Details:
 * Visibility: **public**
-
 
 
 
@@ -119,7 +113,6 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 | $clientTime | float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### getServerTime
@@ -134,7 +127,6 @@ float App\Models\Communication\Raise::getServerTime()
 
 #### Details:
 * Visibility: **public**
-
 
 
 
@@ -162,7 +154,6 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
-
 <hr>
 
 ### encode
@@ -182,3 +173,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

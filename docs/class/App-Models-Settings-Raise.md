@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $databaseType
 
 The desired DatabaseHandler that will be used
@@ -34,7 +32,6 @@ public string $databaseType = 'couchbase'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -53,7 +50,6 @@ public string $path = ''
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### 
@@ -69,12 +65,11 @@ public \App\Database\Couchbase
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### encode
 
@@ -93,3 +88,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>

@@ -22,8 +22,6 @@ Methods
 -------
 
 
-<hr>
-
 ### jsonEncode
 
 Encode Data into a jSON string.
@@ -44,7 +42,6 @@ string App\Facades\Json::jsonEncode(object or array $data)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $data | object or array |  - the data to be encoded |
-
 
 
 <hr>
@@ -69,7 +66,6 @@ object|array App\Facades\Json::jsonDecode(string $json)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $json | string |  - the given jSON string |
-
 
 
 <hr>
@@ -97,7 +93,6 @@ string App\Facades\Json::encode(string $secret, array or object or \App\Models\C
 | $data | array or object or \App\Models\Communication\Model |  - the Data to be encoded |
 
 
-
 <hr>
 
 ### decode
@@ -123,7 +118,6 @@ object|array|\App\Models\Communication\Model|boolean App\Facades\Json::decode(st
 | $hash | string |  - the given JWT hash |
 
 
-
 <hr>
 
 ### map
@@ -147,7 +141,6 @@ object|\App\Models\Communication\Model|\App\Models\Communication\Raise App\Facad
 |-----------|------|-------------|
 | $model | string or object |  - the Model or Namespace of the Model to be Mapped |
 | $data | array or object or \App\Models\Communication\Model |  - the Data to be mapped |
-
 
 
 <hr>
@@ -178,7 +171,6 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 | $evaluateInput | boolean |  - If need validate the input data |
 
 
-
 <hr>
 
 ### mapSet
@@ -202,7 +194,6 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 |-----------|------|-------------|
 | $model | string or object |  - the Model to be mapped or the namespace of it |
 | $data | array or object or \App\Models\Communication\Model |  - the data to be mapped |
-
 
 
 <hr>
@@ -232,7 +223,6 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 | $data | array or object or \App\Models\Communication\Model |  - the data to be mapped |
 
 
-
 <hr>
 
 ### compareSet
@@ -258,7 +248,6 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 | $data | array or object or \App\Models\Communication\Model |  - the data to be mapped |
 
 
-
 <hr>
 
 ### get
@@ -278,3 +267,4 @@ Get the Facade Instance.
 
 
 
+<hr>

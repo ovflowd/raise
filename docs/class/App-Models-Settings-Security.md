@@ -19,8 +19,6 @@ Properties
 ----------
 
 
-<hr>
-
 ### $expireTime
 
 The Authorization Token expire time,
@@ -36,7 +34,6 @@ public string $expireTime = '2hours'
 
 #### Details:
 * Visibility: **public**
-
 
 <hr>
 
@@ -54,7 +51,6 @@ public string $secretKey = 'default-raise-secret-key'
 #### Details:
 * Visibility: **public**
 
-
 <hr>
 
 ### 
@@ -70,12 +66,11 @@ public \App\Models\Settings\Security
 #### Details:
 * Visibility: **public**
 
+<hr>
 
 Methods
 -------
 
-
-<hr>
 
 ### encode
 
@@ -94,3 +89,4 @@ array App\Models\Communication\Model::encode()
 
 
 
+<hr>
