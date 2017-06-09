@@ -38,7 +38,7 @@ mixed App\Models\Interfaces\Database::connect(array or object $connection)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $connection | **array or object** |  - the connection string |
+| $connection | array or object | the connection string |
 
 
 <hr>
@@ -78,9 +78,9 @@ integer|string App\Models\Interfaces\Database::insert(string $table, \App\Models
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $table | **string** |  - desired table to insert |
-| $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) |  - data to be inserted |
-| $primaryKey | **string** |  - defined primary key or generated |
+| $table | **string** | desired table to insert |
+| $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) | data to be inserted |
+| $primaryKey | **string** | defined primary key or generated |
 
 
 <hr>
@@ -103,8 +103,8 @@ array|string|object App\Models\Interfaces\Database::select(string $table, \Koine
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $table | **string** |  - desired table to select |
-| $query | **Koine\QueryBuilder\Statements\Select** |  - a Select query to search |
+| $table | **string** | desired table to select |
+| $query | **Koine\QueryBuilder\Statements\Select** | a Select query to search |
 
 
 <hr>
@@ -127,8 +127,8 @@ integer App\Models\Interfaces\Database::count(string $table, string $primaryKey)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $table | **string** |  - the desired table |
-| $primaryKey | **string** |  - the primary key to identify |
+| $table | **string** | the desired table |
+| $primaryKey | **string** | the primary key to identify |
 
 
 <hr>
@@ -151,9 +151,9 @@ array|string|object App\Models\Interfaces\Database::update(string $table, string
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $table | **string** |  - desired table to update |
-| $primaryKey | **string** |  - desired element to update |
-| $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) |  - data to update |
+| $table | **string** | desired table to update |
+| $primaryKey | **string** | desired element to update |
+| $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) | data to update |
 
 
 <hr>

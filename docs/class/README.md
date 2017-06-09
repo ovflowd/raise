@@ -34,7 +34,7 @@ Table of Contents
             * [Security](App-Models-Settings-Security.md)
         * **App\Models\Interfaces**
             * [Database](App-Models-Interfaces-Database.md)
-    * **App\Factories**
+    * App\Factories
         * [Log](App-Factories-Log.md)
         * [Factory](App-Factories-Factory.md)
     * **App\Managers**

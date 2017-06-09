@@ -87,7 +87,7 @@ mixed App\Models\Response\Service::setServices(array $services)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $services | **array** |  - array of ServiceDefinitions or simple array |
+| $services | **array** | array of ServiceDefinitions or simple array |
 
 
 <hr>
