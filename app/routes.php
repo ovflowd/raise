@@ -26,7 +26,7 @@ $router()->get('/', function () {
 
 // Easter Egg
 $router()->get('/tea', function () {
-    response()::setResponse(408, 'RAISe easter egg');
+    response()::setResponse(418, 'RAISe easter egg');
 });
 
 /*

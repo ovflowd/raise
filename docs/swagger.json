@@ -125,6 +125,10 @@
                   "type": "integer",
                   "example": 200
                 },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
                 "clients": {
                   "type": "array",
                   "items": {
@@ -332,6 +336,10 @@
                   "type": "integer",
                   "example": 200
                 },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
                 "services": {
                   "$ref": "#/definitions/ServicesList"
                 }
@@ -503,6 +511,10 @@
                 "code": {
                   "type": "integer",
                   "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
                 },
                 "values": {
                   "type": "array",
@@ -687,7 +699,7 @@
         "channel",
         "clientTime",
         "services",
-        "location"
+        "location",
       ],
       "type": "object",
       "properties": {
@@ -742,9 +754,20 @@
       "type": "object",
       "required": [
         "data",
-        "clientTime"
+        "clientTime",
+        "serviceId"
       ],
       "properties": {
+        "serviceId": {
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataValues"
+          }
+        },
         "clientTime": {
           "type": "number",
           "example": 1000000000.100000
@@ -756,40 +779,22 @@
             "example": "example-tag"
           }
         },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Values"
-          }
-        }
-      }
-    },
-    "Values": {
-      "type": "object",
-      "properties": {
-        "serviceId": {
-          "type": "string",
-          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
-        },
-        "dataValues": {
-          "$ref": "#/definitions/DataValues"
-        }
       }
     },
     "Data": {
       "required": [
-        "dataValues",
+        "data",
         "serviceId",
         "clientTime"
       ],
       "type": "object",
       "properties": {
-        "dataValues": {
-          "$ref": "#/definitions/DataValues"
-        },
         "serviceId": {
           "type": "string",
           "example": "019e61290e441bca691f24d5f53b002ab0960e74"
+        },
+        "data": {
+          "$ref": "#/definitions/DataValues"
         },
         "clientTime": {
           "type": "number",
