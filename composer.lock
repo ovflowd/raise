@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a2c1334b6f684843bbb679322c704a5",
+    "content-hash": "d0078b6c6d32e02d7cec409e248286a6",
     "packages": [
         {
             "name": "bramus/router",
@@ -170,6 +170,125 @@
             ],
             "description": "Map nested JSON structures onto PHP classes",
             "time": "2017-01-27T21:01:41+00:00"
+        },
+        {
+            "name": "sant0ro/phpdoc-md",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sant0ro/phpdoc-md.git",
+                "reference": "db0267fa866cce19b86806a6a9d44947833e4f4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sant0ro/phpdoc-md/zipball/db0267fa866cce19b86806a6a9d44947833e4f4b",
+                "reference": "db0267fa866cce19b86806a6a9d44947833e4f4b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "twig/twig": "~1.2|2.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "~2.8.0",
+                "sabre/cs": "~0.0.5"
+            },
+            "bin": [
+                "bin/phpdocmd"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPDocMD\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Evert Pot",
+                    "email": "evert@rooftopsolutions.nl",
+                    "homepage": "http://www.rooftopsolutions.nl/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP documentation generator, with markdown output",
+            "homepage": "https://github.com/evert/phpdoc-md",
+            "keywords": [
+                "Markdown",
+                "PHP",
+                "PHPDoc"
+            ],
+            "support": {
+                "source": "https://github.com/sant0ro/phpdoc-md/tree/0.4.0"
+            },
+            "time": "2017-06-09T01:07:12+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.34.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~3.3@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.34-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2017-06-07T18:45:17+00:00"
         }
     ],
     "packages-dev": [
@@ -2223,60 +2342,6 @@
             "time": "2016-10-10T12:19:37+00:00"
         },
         {
-            "name": "sant0ro/phpdoc-md",
-            "version": "0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sant0ro/phpdoc-md.git",
-                "reference": "2714e1e5d425d56c62e5e20ad1cb4ac492a03e52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sant0ro/phpdoc-md/zipball/2714e1e5d425d56c62e5e20ad1cb4ac492a03e52",
-                "reference": "2714e1e5d425d56c62e5e20ad1cb4ac492a03e52",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "twig/twig": "~1.2|2.0"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "~2.8.0",
-                "sabre/cs": "~0.0.5"
-            },
-            "bin": [
-                "bin/phpdocmd"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PHPDocMD\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Evert Pot",
-                    "email": "evert@rooftopsolutions.nl",
-                    "homepage": "http://www.rooftopsolutions.nl/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP documentation generator, with markdown output",
-            "homepage": "https://github.com/evert/phpdoc-md",
-            "keywords": [
-                "Markdown",
-                "PHP",
-                "PHPDoc"
-            ],
-            "support": {
-                "source": "https://github.com/sant0ro/phpdoc-md/tree/master"
-            },
-            "time": "2017-06-09T00:46:39+00:00"
-        },
-        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -3606,71 +3671,6 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2017-04-07T12:08:54+00:00"
-        },
-        {
-            "name": "twig/twig",
-            "version": "v1.34.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
-                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.34-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Twig_": "lib/"
-                },
-                "psr-4": {
-                    "Twig\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
-                    "role": "Contributors"
-                }
-            ],
-            "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
-            "keywords": [
-                "templating"
-            ],
-            "time": "2017-06-07T18:45:17+00:00"
         },
         {
             "name": "zendframework/zend-cache",
