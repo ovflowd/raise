@@ -15,10 +15,10 @@
 
 namespace App\Controllers;
 
-use App\Models\Communication\Model;
 use App\Models\Communication\Data as DataDefinition;
-use App\Models\Response\Message;
+use App\Models\Communication\Model;
 use App\Models\Response\Data as DataResponse;
+use App\Models\Response\Message;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -52,7 +52,7 @@ class Data extends Controller
         $service = database()->selectById('service', $dataModel->serviceId);
 
         $dataModel->data = array_filter($dataModel->data, function ($data) use ($service) {
-           return empty(array_diff($service->parameters, array_keys((array) $data)));
+            return empty(array_diff($service->parameters, array_keys((array) $data)));
         });
 
         database()->insert('data', $dataModel);

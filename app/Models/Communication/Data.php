@@ -51,13 +51,13 @@ class Data extends Raise
     public $data = [];
 
     /**
-     * Set a serviceId
+     * Set a serviceId.
      *
      * This method verifies the validity of the serviceId
      * if it's invalid the method returns a null.
      *
      * @param string $serviceId the service identifier
-     *  related to this data.
+     *                          related to this data.
      */
     public function setServiceId(string $serviceId)
     {
@@ -65,7 +65,6 @@ class Data extends Raise
     }
 
     /**
-     *
      * @required
      *
      * @var string
