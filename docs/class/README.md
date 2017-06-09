@@ -1,12 +1,6 @@
 <p align="center">
   <img src="http://imgur.com/iQU8c9L.png" width="100px"/>
-  <h4 align="center">RAISe</h4>
-  <p align="center">
-    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
-  </p>
 </p>
-
-<hr>
 
 <p align="center">
   <h2 align="center">RAISe Class Documentation</h2>
@@ -15,12 +9,12 @@
 Table of Contents
 -----------------
 
-* App
-    * App\Facades
+* **App
+    * **App\Facades
         * [Json](App-Facades-Json.md)
         * [Facade](App-Facades-Facade.md)
-    * App\Models
-        * App\Models\Communication
+    * **App\Models
+        * **App\Models\Communication
             * [Model](App-Models-Communication-Model.md)
             * [Service](App-Models-Communication-Service.md)
             * [ServiceBag](App-Models-Communication-ServiceBag.md)
@@ -28,25 +22,25 @@ Table of Contents
             * [Token](App-Models-Communication-Token.md)
             * [Client](App-Models-Communication-Client.md)
             * [Data](App-Models-Communication-Data.md)
-        * App\Models\Response
+        * **App\Models\Response
             * [Service](App-Models-Response-Service.md)
             * [Message](App-Models-Response-Message.md)
             * [Client](App-Models-Response-Client.md)
             * [Token](App-Models-Response-Token.md)
-        * App\Models\Settings
+        * **App\Models\Settings
             * [Raise](App-Models-Settings-Raise.md)
             * [Database](App-Models-Settings-Database.md)
             * [Log](App-Models-Settings-Log.md)
             * [Security](App-Models-Settings-Security.md)
-        * App\Models\Interfaces
+        * **App\Models\Interfaces
             * [Database](App-Models-Interfaces-Database.md)
-    * App\Factories
+    * **App\Factories
         * [Log](App-Factories-Log.md)
         * [Factory](App-Factories-Factory.md)
-    * App\Managers
+    * **App\Managers
         * [Log](App-Managers-Log.md)
-    * App\Handlers
+    * **App\Handlers
         * [Settings](App-Handlers-Settings.md)
-    * App\Database
+    * **App\Database
         * [Couchbase](App-Database-Couchbase.md)
 

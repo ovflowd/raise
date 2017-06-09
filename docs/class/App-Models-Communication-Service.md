@@ -207,7 +207,7 @@ mixed App\Models\Communication\Service::setClientId(string or null $clientId)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $clientId | string or null |  - the ClientId to be set |
+| $clientId | **string or null |  - the ClientId to be set |
 
 
 <hr>
@@ -232,7 +232,7 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $clientTime | float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
+| $clientTime | **float or null |  - Client Sent Time on UNIX_TIMESTAMP with milliseconds |
 
 
 <hr>
@@ -275,7 +275,7 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
+| $serverTime | **float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
 <hr>

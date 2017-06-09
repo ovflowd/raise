@@ -76,7 +76,7 @@
     "koine/query-builder": "^0.9.7",
     "firebase/php-jwt": "^4.0",
     "netresearch/jsonmapper": "^1.1",
-    "sant0ro/phpdoc-md": "0.4.0"
+    "sant0ro/phpdoc-md": "0.4.5"
   },
   "autoload": {
     "psr-4": {

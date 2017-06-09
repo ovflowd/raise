@@ -39,7 +39,7 @@ boolean|mixed App\Handlers\Settings::get(string $configuration)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $configuration | string |  - the configuration string or model to search |
+| $configuration | **string |  - the configuration string or model to search |
 
 
 <hr>
@@ -63,7 +63,7 @@ mixed App\Handlers\Settings::store(array $settings)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $settings | array |  - the entire set of settings block |
+| $settings | **array |  - the entire set of settings block |
 
 
 <hr>
@@ -87,8 +87,8 @@ boolean App\Handlers\Settings::add(string $modelName, array $configurationSet)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $modelName | string |  - the model name |
-| $configurationSet | array |  - the configuration set |
+| $modelName | **string |  - the model name |
+| $configurationSet | **array |  - the configuration set |
 
 
 <hr>
