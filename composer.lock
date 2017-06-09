@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa6f7e2aa8bc462e82a6e64971e77568",
+    "content-hash": "364f55db2d3cc249148100a44a171f62",
     "packages": [
         {
             "name": "bramus/router",
@@ -173,16 +173,16 @@
         },
         {
             "name": "sant0ro/phpdoc-md",
-            "version": "0.4.6",
+            "version": "0.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sant0ro/phpdoc-md.git",
-                "reference": "79b8921f98ecfc6e6b65cffa7159089cec927064"
+                "reference": "52653b083fb50a2294ba75dbc326e9c3a48e8f56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sant0ro/phpdoc-md/zipball/79b8921f98ecfc6e6b65cffa7159089cec927064",
-                "reference": "79b8921f98ecfc6e6b65cffa7159089cec927064",
+                "url": "https://api.github.com/repos/sant0ro/phpdoc-md/zipball/52653b083fb50a2294ba75dbc326e9c3a48e8f56",
+                "reference": "52653b083fb50a2294ba75dbc326e9c3a48e8f56",
                 "shasum": ""
             },
             "require": {
@@ -221,9 +221,9 @@
                 "PHPDoc"
             ],
             "support": {
-                "source": "https://github.com/sant0ro/phpdoc-md/tree/0.4.6"
+                "source": "https://github.com/sant0ro/phpdoc-md/tree/0.4.8"
             },
-            "time": "2017-06-09T01:21:10+00:00"
+            "time": "2017-06-09T01:31:08+00:00"
         },
         {
             "name": "twig/twig",
