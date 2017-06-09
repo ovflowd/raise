@@ -59,7 +59,7 @@ object|array|boolean App\Factories\Factory::get(string $element)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $element | **string |  - name of the element |
+| $element | **string** |  - name of the element |
 
 
 <hr>
@@ -84,8 +84,8 @@ boolean App\Factories\Factory::add(string $element, array or object $content)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $element | **string |  - the name of the element to be added |
-| $content | **array or object |  - the content of the element |
+| $element | **string** |  - the name of the element to be added |
+| $content | **array or object** |  - the content of the element |
 
 
 <hr>
@@ -110,7 +110,7 @@ boolean App\Factories\Factory::remove(string $element)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $element | **string |  - the element to be removed |
+| $element | **string** |  - the element to be removed |
 
 
 <hr>
