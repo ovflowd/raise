@@ -75,4 +75,4 @@ You can also **fetch** the [API Documentation](docs/) and check it **online** by
 
 <br>
 <br>
-<img align="right" src="http://3.bp.blogspot.com/_0oAS_01e8zM/SfEXdfGyQRI/AAAAAAAAAEI/D94K-PR5owU/s200/unb_logo.gif">
+<img align="right" src="http://imgur.com/l5hOjj4.gif">
