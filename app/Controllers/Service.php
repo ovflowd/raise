@@ -101,8 +101,8 @@ class Service extends Controller
             $query->where('META(document).id', request()::query('id'));
         }
 
-        if (request()::query('serviceName') !== false) {
-            $query->where('serviceName', request()::query('serviceName'));
+        if (request()::query('name') !== false) {
+            $query->where('name', request()::query('name'));
         }
 
         return parent::filter($query);

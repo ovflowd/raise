@@ -16,6 +16,9 @@
 namespace App\Controllers;
 
 use App\Models\Communication\Model;
+use App\Models\Communication\Data as DataDefinition;
+use App\Models\Response\Message;
+use App\Models\Response\Data as DataResponse;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -40,7 +43,21 @@ class Data extends Controller
      */
     public function register($data = null, Model $response = null)
     {
-        // TODO: Implement register() method.
+        if (($dataModel = security()::validateBody('data', request()::body())) == false) {
+            response()::setResponse(400, 'Missing required Parameters');
+
+            return;
+        }
+
+        $service = database()->selectById('service', $dataModel->serviceId);
+
+        $dataModel->data = array_filter($dataModel->data, function ($data) use ($service) {
+           return empty(array_diff($service->parameters, array_keys((array) $data)));
+        });
+
+        database()->insert('data', $dataModel);
+
+        parent::register(['details' => 'Data Registered Successfully'], new Message());
     }
 
     /**
@@ -54,7 +71,13 @@ class Data extends Controller
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
-        // TODO: Implement list() method.
+        $query = $this->filter();
+
+        $data = database()->select('data', $query);
+
+        parent::list($data, new DataResponse(), function ($data) {
+            return ['data' => json()::mapSet(new DataDefinition(), $data), 'message' => 'success'];
+        });
     }
 
     /**
@@ -69,7 +92,17 @@ class Data extends Controller
      */
     protected function filter(Select $query = null)
     {
+        global $token;
+
         $query = new Select();
+
+        if (request()::query('serviceId') !== false) {
+            $query->where('serviceId', request()::query('serviceId'));
+        }
+
+        if (request()::query('dataName') !== false) {
+            $query->where('data', request()::query('dataName'));
+        }
 
         return parent::filter($query);
     }

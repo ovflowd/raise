@@ -30,14 +30,14 @@ class Data extends Raise
     /**
      * Each Data it's associated to a specific Service.
      *
-     * the serviceId it's the Unique Service Identifier
-     * that need be stored on the data to link it.
+     * serviceId is the Unique Service Identifier
+     * that needs to be stored on the data to link it.
      *
      * @required
      *
      * @var string
      */
-    public $serviceId = '';
+    public $serviceId = null;
 
     /**
      * An array of Data
@@ -49,4 +49,26 @@ class Data extends Raise
      * @var array
      */
     public $data = [];
+
+    /**
+     * Set a serviceId
+     *
+     * This method verifies the validity of the serviceId
+     * if it's invalid the method returns a null.
+     *
+     * @param string $serviceId the service identifier
+     *  related to this data.
+     */
+    public function setServiceId(string $serviceId)
+    {
+        $this->serviceId = (database()->selectById('service', $serviceId) !== false) ? $serviceId : null;
+    }
+
+    /**
+     *
+     * @required
+     *
+     * @var string
+     */
+    public $type = null;
 }
