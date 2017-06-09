@@ -61,7 +61,8 @@ class Data extends Raise
      */
     public function setServiceId(string $serviceId)
     {
-        $this->serviceId = (database()->selectById('service', $serviceId) !== false) ? $serviceId : null;
+        $this->serviceId = (database()->selectById('service', $serviceId) !== false)
+            ? $serviceId : null;
     }
 
     /**
