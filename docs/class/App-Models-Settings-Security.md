@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $expireTime
 
 The Authorization Token expire time,
@@ -36,6 +38,8 @@ public string $expireTime = '2hours'
 * Visibility: **public**
 
 
+<hr>
+
 ### $secretKey
 
 The Secret Key that will be used on the JWT hash,
@@ -50,6 +54,8 @@ public string $secretKey = 'default-raise-secret-key'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### 
 
@@ -68,6 +74,8 @@ public \App\Models\Settings\Security
 Methods
 -------
 
+
+<hr>
 
 ### encode
 

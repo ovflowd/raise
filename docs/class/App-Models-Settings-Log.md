@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### 
 
 
@@ -36,6 +38,8 @@ public \App\Factories\Log
 Methods
 -------
 
+
+<hr>
 
 ### encode
 

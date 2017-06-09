@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $clientId
 
 The Client Unique Identifier.
@@ -36,6 +38,8 @@ public string $clientId
 * Visibility: **public**
 
 
+<hr>
+
 ### $expireTime
 
 Token Expire Time.
@@ -51,6 +55,8 @@ public float $expireTime
 * Visibility: **public**
 
 
+<hr>
+
 ### $clientTime
 
 The time when the Client requested the operation.
@@ -64,6 +70,8 @@ public float $clientTime
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $tags
 
@@ -79,6 +87,8 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $serverTime
 
@@ -98,6 +108,8 @@ Methods
 -------
 
 
+<hr>
+
 ### __construct
 
 RaiseModel constructor.
@@ -116,6 +128,8 @@ mixed App\Models\Communication\Raise::__construct()
 
 
 
+<hr>
+
 ### setExpireTime
 
 Set the Token Expire Time.
@@ -131,6 +145,8 @@ Set the Token Expire Time.
 
 
 
+
+<hr>
 
 ### setClientTime
 
@@ -156,6 +172,8 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 
 
 
+<hr>
+
 ### getServerTime
 
 Time when the server registered the Data.
@@ -172,6 +190,8 @@ float App\Models\Communication\Raise::getServerTime()
 
 
 
+
+<hr>
 
 ### setServerTime
 
@@ -196,6 +216,8 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
+
+<hr>
 
 ### encode
 

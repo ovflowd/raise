@@ -22,6 +22,8 @@ Methods
 -------
 
 
+<hr>
+
 ### jsonEncode
 
 Encode Data into a jSON string.
@@ -45,6 +47,8 @@ string App\Facades\Json::jsonEncode(object or array $data)
 
 
 
+<hr>
+
 ### jsonDecode
 
 Decode a jSON String into Object.
@@ -67,6 +71,8 @@ object|array App\Facades\Json::jsonDecode(string $json)
 | $json | string |  - the given jSON string |
 
 
+
+<hr>
 
 ### encode
 
@@ -92,6 +98,8 @@ string App\Facades\Json::encode(string $secret, array or object or \App\Models\C
 
 
 
+<hr>
+
 ### decode
 
 Decode an JWT hash into an Object.
@@ -116,6 +124,8 @@ object|array|\App\Models\Communication\Model|boolean App\Facades\Json::decode(st
 
 
 
+<hr>
+
 ### map
 
 Map an object into a Model.
@@ -139,6 +149,8 @@ object|\App\Models\Communication\Model|\App\Models\Communication\Raise App\Facad
 | $data | array or object or \App\Models\Communication\Model |  - the Data to be mapped |
 
 
+
+<hr>
 
 ### doMap
 
@@ -167,6 +179,8 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 
 
 
+<hr>
+
 ### mapSet
 
 Map a set of Data into a specific Model type.
@@ -190,6 +204,8 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 | $data | array or object or \App\Models\Communication\Model |  - the data to be mapped |
 
 
+
+<hr>
 
 ### compare
 
@@ -217,6 +233,8 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 
 
 
+<hr>
+
 ### compareSet
 
 Compare a set of Data and Map it.
@@ -240,6 +258,8 @@ boolean|mixed|object|\App\Models\Communication\Model|\App\Models\Communication\R
 | $data | array or object or \App\Models\Communication\Model |  - the data to be mapped |
 
 
+
+<hr>
 
 ### get
 

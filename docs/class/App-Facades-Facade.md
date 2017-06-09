@@ -20,6 +20,8 @@ Methods
 -------
 
 
+<hr>
+
 ### get
 
 Get the Facade Instance.

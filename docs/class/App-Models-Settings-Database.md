@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $address
 
 Database IPv4 Address or Hostname.
@@ -32,6 +34,8 @@ public string $address = 'localhost'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $user
 
@@ -47,6 +51,8 @@ public string $user = 'couch'
 * Visibility: **public**
 
 
+<hr>
+
 ### $password
 
 Database Admin Password.
@@ -61,6 +67,8 @@ public string $password = 'couchbase'
 * Visibility: **public**
 
 
+<hr>
+
 ### $database
 
 Desired Database for RAISe.
@@ -74,6 +82,8 @@ public string $database = 'my-database'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### 
 
@@ -92,6 +102,8 @@ public \App\Database\Couchbase
 Methods
 -------
 
+
+<hr>
 
 ### encode
 

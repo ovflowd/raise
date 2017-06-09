@@ -20,6 +20,8 @@ Methods
 -------
 
 
+<hr>
+
 ### get
 
 Get a Configuration Element from a Settings Model.
@@ -43,6 +45,8 @@ boolean|mixed App\Handlers\Settings::get(string $configuration)
 
 
 
+<hr>
+
 ### store
 
 Store all Settings Blocks.
@@ -65,6 +69,8 @@ mixed App\Handlers\Settings::store(array $settings)
 | $settings | array |  - the entire set of settings block |
 
 
+
+<hr>
 
 ### add
 

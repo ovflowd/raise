@@ -23,6 +23,8 @@ Methods
 -------
 
 
+<hr>
+
 ### encode
 
 Get all public properties of the Model

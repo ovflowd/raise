@@ -20,6 +20,8 @@ Methods
 -------
 
 
+<hr>
+
 ### connect
 
 Connect to the Database.
@@ -42,6 +44,8 @@ mixed App\Models\Interfaces\Database::connect(array or object $connection)
 
 
 
+<hr>
+
 ### destroy
 
 Destroy the Connection.
@@ -57,6 +61,8 @@ mixed App\Models\Interfaces\Database::destroy()
 
 
 
+
+<hr>
 
 ### insert
 
@@ -82,6 +88,8 @@ integer|string App\Models\Interfaces\Database::insert(string $table, \App\Models
 
 
 
+<hr>
+
 ### select
 
 Select Data on Database.
@@ -105,6 +113,8 @@ array|string|object App\Models\Interfaces\Database::select(string $table, \Koine
 
 
 
+<hr>
+
 ### count
 
 Count number of Elements of a specific Query.
@@ -127,6 +137,8 @@ integer App\Models\Interfaces\Database::count(string $table, string $primaryKey)
 | $primaryKey | string |  - the primary key to identify |
 
 
+
+<hr>
 
 ### update
 

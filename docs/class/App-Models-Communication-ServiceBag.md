@@ -23,6 +23,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $services
 
 A set of Services that will be Registered.
@@ -37,6 +39,8 @@ public array<mixed,\App\Models\Communication\Service> $services = array()
 * Visibility: **public**
 
 
+<hr>
+
 ### $clientTime
 
 The time when the Client requested the operation.
@@ -50,6 +54,8 @@ public float $clientTime
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $tags
 
@@ -66,6 +72,8 @@ public array $tags = array()
 * Visibility: **public**
 
 
+<hr>
+
 ### $serverTime
 
 The time when the server handled the operation and inserted it.
@@ -79,6 +87,8 @@ protected float $serverTime
 #### Details:
 * Visibility: **protected**
 
+
+<hr>
 
 ### 
 
@@ -97,6 +107,8 @@ public \App\Models\Communication\Service
 Methods
 -------
 
+
+<hr>
 
 ### setServices
 
@@ -121,6 +133,8 @@ mixed App\Models\Communication\ServiceBag::setServices(array<mixed,\App\Models\C
 
 
 
+<hr>
+
 ### __construct
 
 RaiseModel constructor.
@@ -138,6 +152,8 @@ mixed App\Models\Communication\Raise::__construct()
 
 
 
+
+<hr>
 
 ### setClientTime
 
@@ -163,6 +179,8 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 
 
 
+<hr>
+
 ### getServerTime
 
 Time when the server registered the Data.
@@ -179,6 +197,8 @@ float App\Models\Communication\Raise::getServerTime()
 
 
 
+
+<hr>
 
 ### setServerTime
 
@@ -203,6 +223,8 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
+
+<hr>
 
 ### encode
 

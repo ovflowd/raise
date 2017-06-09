@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $elements
 
 Elements of the Factory.
@@ -36,6 +38,8 @@ protected array $elements = array()
 Methods
 -------
 
+
+<hr>
 
 ### get
 
@@ -62,6 +66,8 @@ object|array|boolean App\Factories\Factory::get(string $element)
 
 
 
+<hr>
+
 ### add
 
 Add an Element.
@@ -87,6 +93,8 @@ boolean App\Factories\Factory::add(string $element, array or object $content)
 
 
 
+<hr>
+
 ### remove
 
 Remove an Element.
@@ -110,6 +118,8 @@ boolean App\Factories\Factory::remove(string $element)
 | $element | string |  - the element to be removed |
 
 
+
+<hr>
 
 ### instance
 

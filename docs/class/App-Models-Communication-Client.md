@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $name
 
 Client Name.
@@ -32,6 +34,8 @@ public string $name = 'default client'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $chipset
 
@@ -48,6 +52,8 @@ public string $chipset = '0000000000'
 * Visibility: **public**
 
 
+<hr>
+
 ### $mac
 
 Client Mac Address.
@@ -62,6 +68,8 @@ public string $mac = 'FF:FF:FF:FF'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $serial
 
@@ -78,6 +86,8 @@ public string $serial = '1.0.0'
 * Visibility: **public**
 
 
+<hr>
+
 ### $processor
 
 Client Processor.
@@ -93,6 +103,8 @@ public string $processor = 'i86-generic'
 * Visibility: **public**
 
 
+<hr>
+
 ### $channel
 
 Client Communication Channel.
@@ -106,6 +118,8 @@ public string $channel = 'ieee-wireless-80211'
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $location
 
@@ -121,6 +135,8 @@ public string $location = '-15.7757876:-48.077829'
 * Visibility: **public**
 
 
+<hr>
+
 ### $clientTime
 
 The time when the Client requested the operation.
@@ -134,6 +150,8 @@ public float $clientTime
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $tags
 
@@ -149,6 +167,8 @@ public array $tags = array()
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $serverTime
 
@@ -168,6 +188,8 @@ Methods
 -------
 
 
+<hr>
+
 ### __construct
 
 RaiseModel constructor.
@@ -185,6 +207,8 @@ mixed App\Models\Communication\Raise::__construct()
 
 
 
+
+<hr>
 
 ### setClientTime
 
@@ -210,6 +234,8 @@ mixed App\Models\Communication\Raise::setClientTime(float or null $clientTime)
 
 
 
+<hr>
+
 ### getServerTime
 
 Time when the server registered the Data.
@@ -226,6 +252,8 @@ float App\Models\Communication\Raise::getServerTime()
 
 
 
+
+<hr>
 
 ### setServerTime
 
@@ -250,6 +278,8 @@ mixed App\Models\Communication\Raise::setServerTime(float or null $serverTime)
 | $serverTime | float or null |  - Server Time on UNIX_TIMESTAMP with milliseconds |
 
 
+
+<hr>
 
 ### encode
 

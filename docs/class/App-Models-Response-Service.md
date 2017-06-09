@@ -19,6 +19,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $codHttp
 
 The Applied HTTP Response Code.
@@ -33,6 +35,8 @@ public integer $codHttp
 * Visibility: **public**
 
 
+<hr>
+
 ### $message
 
 The HTTP Response Message from the RFC.
@@ -46,6 +50,8 @@ public string $message
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $services
 
@@ -64,6 +70,8 @@ public array $services = array()
 Methods
 -------
 
+
+<hr>
 
 ### setServices
 
@@ -87,6 +95,8 @@ mixed App\Models\Response\Service::setServices(array $services)
 | $services | array |  - array of ServiceDefinitions or simple array |
 
 
+
+<hr>
 
 ### encode
 

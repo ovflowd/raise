@@ -20,6 +20,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $codHttp
 
 The Applied HTTP Response Code.
@@ -33,6 +35,8 @@ public integer $codHttp
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $message
 
@@ -48,6 +52,8 @@ public string $message
 * Visibility: **public**
 
 
+<hr>
+
 ### $details
 
 Additional Details that can be defined
@@ -62,6 +68,8 @@ public string $details
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### 
 
@@ -80,6 +88,8 @@ public \App\Models\Interfaces\Database
 Methods
 -------
 
+
+<hr>
 
 ### encode
 

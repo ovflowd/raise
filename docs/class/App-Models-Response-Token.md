@@ -20,6 +20,8 @@ Properties
 ----------
 
 
+<hr>
+
 ### $codHttp
 
 The Applied HTTP Response Code.
@@ -34,6 +36,8 @@ public integer $codHttp
 * Visibility: **public**
 
 
+<hr>
+
 ### $message
 
 The HTTP Response Message from the RFC.
@@ -47,6 +51,8 @@ public string $message
 #### Details:
 * Visibility: **public**
 
+
+<hr>
 
 ### $token
 
@@ -65,6 +71,8 @@ public string $token
 Methods
 -------
 
+
+<hr>
 
 ### encode
 
