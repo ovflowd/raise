@@ -1,9 +1,5 @@
 <p align="center">
   <img src="http://imgur.com/iQU8c9L.png" width="100px"/>
-  <h4 align="center">RAISe</h4>
-  <p align="center">
-    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
-  </p>
 </p>
 
 <p align="center">
