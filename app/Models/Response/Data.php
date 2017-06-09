@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Faraday
  * Date: 6/9/2017
- * Time: 12:57 PM
+ * Time: 12:57 PM.
  */
 
 namespace App\Models\Response;
-
 
 use App\Models\Communication\Model;
 
