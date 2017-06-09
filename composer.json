@@ -51,12 +51,18 @@
       "email": "lucas.farias@uiot.org"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sant0ro/phpdoc-md"
+    }
+  ],
   "require-dev": {
     "swagger-api/swagger-ui": "^3.0",
     "nategood/httpful": "^0.2.20",
     "phpdocumentor/phpdocumentor": "^2.9",
     "phpunit/phpunit": "^6.2",
-    "evert/phpdoc-md": "^0.2.0"
+    "sant0ro/phpdoc-md": "^0.3.0"
   },
   "scripts": {
     "post-create-project-cmd": "cd install/ && php install.php"
