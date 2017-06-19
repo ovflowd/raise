@@ -15,6 +15,8 @@
 
 namespace App\Models\Communication;
 
+use JsonMapper_Exception;
+
 /**
  * Class Data.
  *
@@ -58,11 +60,15 @@ class Data extends Raise
      *
      * @param string $serviceId the service identifier
      *                          related to this data.
+     * @throws JsonMapper_Exception
      */
     public function setServiceId(string $serviceId)
     {
-        $this->serviceId = (database()->selectById('service', $serviceId) !== false)
-            ? $serviceId : null;
+        if (database()->selectById('service', $serviceId) === false) {
+            throw new JsonMapper_Exception();
+        }
+
+        $this->serviceId = $serviceId;
     }
 
     /**
