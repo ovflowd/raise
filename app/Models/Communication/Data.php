@@ -60,6 +60,7 @@ class Data extends Raise
      *
      * @param string $serviceId the service identifier
      *                          related to this data.
+     *
      * @throws JsonMapper_Exception
      */
     public function setServiceId(string $serviceId)
