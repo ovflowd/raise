@@ -1,7 +1,8 @@
 {
   "name": "uiot/raise",
   "description": "RAISe is an Internet of Things open aware middleware based on a passive restful services methodology",
-  "minimum-stability": "stable",
+  "minimum-stability": "beta",
+  "prefer-stable" : true
   "license": "Apache-2.0",
   "type": "project",
   "keywords": [
