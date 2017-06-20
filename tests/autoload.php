@@ -26,4 +26,4 @@ require_once __DIR__.'/../app/accessory.php';
 require_once __DIR__.'/../app/routes.php';
 
 // Load Settings
-$settings = require_once __DIR__ . '/../app/settings.php';
+$settings = require_once __DIR__.'/../app/settings.php';

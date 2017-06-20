@@ -3,7 +3,7 @@
 use App\Facades\Test;
 
 /**
- * Class RaiseTest
+ * Class RaiseTest.
  *
  * Executes phpunit test cases
  * for standard RAISe Procedures
@@ -11,7 +11,7 @@ use App\Facades\Test;
 class RaiseTest extends Test
 {
     /**
-     * Test the RAISe Default Route
+     * Test the RAISe Default Route.
      *
      * Try to get the default definition of a Route
      *
@@ -29,7 +29,7 @@ class RaiseTest extends Test
     }
 
     /**
-     * Test the RAISe Not Found Route
+     * Test the RAISe Not Found Route.
      *
      * Try to get the not found route of RAISe
      *

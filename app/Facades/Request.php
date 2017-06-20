@@ -94,7 +94,7 @@ class Request extends Facade
     }
 
     /**
-     * Set a Request Body
+     * Set a Request Body.
      *
      * This is useful for overwriting the
      * Request Body with another one.
