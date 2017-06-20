@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "292c30a0041a52b67602cfb84a8c9718",
+    "content-hash": "0956e0f2f8521695d773a9d704178375",
     "packages": [
         {
             "name": "bramus/router",
@@ -2439,16 +2439,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3"
+                "reference": "74776f8dbc081cab9287c2a601c0c1d842568744"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/74776f8dbc081cab9287c2a601c0c1d842568744",
+                "reference": "74776f8dbc081cab9287c2a601c0c1d842568744",
                 "shasum": ""
             },
             "require": {
@@ -2485,7 +2485,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-05-18T10:10:00+00:00"
+            "time": "2017-06-20T16:25:05+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -4378,7 +4378,7 @@
         "php": "^7.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "ext-pcs": "*",
+        "ext-pcs": "1.3.3",
         "ext-couchbase": "*"
     },
     "platform-dev": []
