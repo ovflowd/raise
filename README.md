@@ -25,7 +25,7 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moi
 | Register a Client |    &#10004;  |  Ability of Registering a Client within RAISe. |
 | Revalidate a Client |    &#10008;  |  Ability of Revalidating a Client when the Token expires. |
 | Register a Service |    &#10004;  |  Ability of Registering a Service or multiple Services in one time within RAISe. |
-| Send Data |    &#10008;  |  Ability of Sending Data froma  Service+Client within RAISe. |
+| Send Data |    &#10004;  |  Ability of Sending Data froma  Service+Client within RAISe. |
 | List a Client or Clients |    &#10004;  |  Ability to Get a Client or multiple Clients, list and filter the parameters for the Response. |
 | List a Service or Services |    &#10004;  |  Ability to Get a Service or multiple Services, list and filter the parameters for the Response. |
 | List and filter Data |    &#10008;  |  Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
