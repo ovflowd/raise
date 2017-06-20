@@ -71,11 +71,4 @@ class Data extends Raise
 
         $this->serviceId = $serviceId;
     }
-
-    /**
-     * @required
-     *
-     * @var string
-     */
-    public $type = null;
 }

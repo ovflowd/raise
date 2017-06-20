@@ -38,7 +38,7 @@ class Data extends Controller
      *
      * Validated and Registers Data unto the Database
      *
-     * @param object     $data     the payload as object from the Request
+     * @param object $data the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
@@ -52,12 +52,12 @@ class Data extends Controller
         $service = database()->selectById('service', $dataModel->serviceId);
 
         $dataModel->data = array_filter($dataModel->data, function ($data) use ($service) {
-            return empty(array_diff($service->parameters, array_keys((array) $data)));
+            return empty(array_diff($service->parameters, array_keys((array)$data)));
         });
 
         database()->insert('data', $dataModel);
 
-        parent::register(['details' => 'Data Registered Successfully'], new Message());
+        parent::register(['details' => 'Data Registered Successfully', 'message' => 'Success'], new Message());
     }
 
     /**
@@ -65,9 +65,9 @@ class Data extends Controller
      *
      * List a set of Data or a single Data based on the Request Parameters
      *
-     * @param array|object|null $data     the given Data to be Mapped
-     * @param Model             $response the Response Model
-     * @param callable          $callback an optional callback to treat the mapping result
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {

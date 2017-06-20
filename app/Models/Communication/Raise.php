@@ -60,10 +60,8 @@ abstract class Raise extends Model
      */
     public function __construct()
     {
-        $currentTime = microtime(true);
-
-        $this->setClientTime($currentTime);
-        $this->setServerTime($currentTime);
+        $this->setClientTime();
+        $this->setServerTime();
     }
 
     /**

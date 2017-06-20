@@ -135,7 +135,7 @@ class Response extends Facade
 
         self::$response = json()::map($model, $data);
 
-        self::$response->codHttp = $httpCode;
+        self::$response->code = $httpCode;
     }
 
     /**

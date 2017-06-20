@@ -19,7 +19,7 @@ class Data extends Model
      *
      * @var int
      */
-    public $codHttp;
+    public $code;
 
     /**
      * The HTTP Response Message from the RFC.

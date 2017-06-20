@@ -33,7 +33,7 @@ return [
     */
 
     'database' => [
-        'address'  => 'localhost',
+        'address'  => '172.16.9.93',
         'user'     => 'couch',
         'password' => 'couchbase',
     ],
