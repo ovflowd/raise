@@ -72,7 +72,7 @@ class Response extends Facade
      *
      * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields List of Headers
      *
-     * @param string $name Desired HTTP Headers
+     * @param string $name  Desired HTTP Headers
      * @param string $value the value of the Header
      *
      * @return void
@@ -111,9 +111,9 @@ class Response extends Facade
      * @see Message used Model
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP Code
-     * @param string $description Response Details
-     * @param bool $returnContent If need return the content
+     * @param int    $httpCode      desired HTTP Code
+     * @param string $description   Response Details
+     * @param bool   $returnContent If need return the content
      *
      * @return Message|null The returned content or nothing
      */
@@ -132,9 +132,9 @@ class Response extends Facade
      * @see Model base of the Models
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP code
-     * @param string|Model $model the namespace of the model or an instance of it
-     * @param array|object $data the data to be mapped into the Model
+     * @param int          $httpCode desired HTTP code
+     * @param string|Model $model    the namespace of the model or an instance of it
+     * @param array|object $data     the data to be mapped into the Model
      */
     public static function setResponseModel(int $httpCode, $model, $data)
     {

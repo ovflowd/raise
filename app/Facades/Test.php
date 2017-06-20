@@ -19,7 +19,7 @@ use App\Handlers\Settings;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class Test
+ * Class Test.
  *
  * A Standard Test Case for RAISe
  * testing and procedures
@@ -31,16 +31,16 @@ use PHPUnit\Framework\TestCase;
 abstract class Test extends TestCase
 {
     /**
-     * Configure a RAISe Test Case
+     * Configure a RAISe Test Case.
      *
      * Emulates a RAISe scenario with standard Data
      * configured on the Continuous Integration Environments
      * without requesting HTTP Requests
      *
-     * @param array $headers The HTTP Headers
-     * @param string $method The Request Method
-     * @param array $server The php's $_SERVER environment
-     * @param string $path Execution Path
+     * @param array  $headers The HTTP Headers
+     * @param string $method  The Request Method
+     * @param array  $server  The php's $_SERVER environment
+     * @param string $path    Execution Path
      */
     protected function configureRaise(array $headers, string $method, array $server, string $path = '')
     {
@@ -61,7 +61,7 @@ abstract class Test extends TestCase
     }
 
     /**
-     * RAISe Eexutor method
+     * RAISe Eexutor method.
      *
      * Execute's RAISe Router
      * and let the User add a Request Body
