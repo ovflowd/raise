@@ -11,4 +11,4 @@ checks:
         code_rating: false
 coding_style:
     php: {  }
-build: true
+build: false
