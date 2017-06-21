@@ -1,235 +1,234 @@
 [
   {
-    "codHttp": 200,
+    "code": 200,
     "message": "Success"
   },
   {
-    "codHttp": 201,
+    "code": 201,
     "message": "Created"
   },
   {
-    "codHttp": 202,
+    "code": 202,
     "message": "Welcome to RAISe!"
   },
   {
-    "codHttp": 203,
+    "code": 203,
     "message": "Non-Authoritative Information"
   },
   {
-    "codHttp": 204,
+    "code": 204,
     "message": "No Content"
   },
   {
-    "codHttp": 205,
+    "code": 205,
     "message": "Reset Content"
   },
   {
-    "codHttp": 206,
+    "code": 206,
     "message": "Partial Content"
   },
   {
-    "codHttp": 207,
+    "code": 207,
     "message": "Multi-Status"
   },
   {
-    "codCouch": "00",
-    "codHttp": 208,
+    "code": 208,
     "message": "Already Reported"
   },
   {
-    "codHttp": 226,
+    "code": 226,
     "message": "IM Used"
   },
   {
-    "codHttp": 300,
+    "code": 300,
     "message": "Multiple Choices"
   },
   {
-    "codHttp": 301,
+    "code": 301,
     "message": "Moced Permanently"
   },
   {
-    "codHttp": 302,
+    "code": 302,
     "message": "Found"
   },
   {
-    "codHttp": 303,
+    "code": 303,
     "message": "See Other"
   },
   {
-    "codHttp": 304,
+    "code": 304,
     "message": "Not Modified"
   },
   {
-    "codHttp": 305,
+    "code": 305,
     "message": "Use Proxy"
   },
   {
-    "codHttp": 306,
+    "code": 306,
     "message": "Swich Proxy"
   },
   {
-    "codHttp": 307,
+    "code": 307,
     "message": "Temporary Redirect"
   },
   {
-    "codHttp": 308,
+    "code": 308,
     "message": "Permanent Redirect"
   },
   {
-    "codHttp": 400,
+    "code": 400,
     "message": "Bad Request"
   },
   {
-    "codHttp": 401,
+    "code": 401,
     "message": "Unauthorized"
   },
   {
-    "codHttp": 402,
+    "code": 402,
     "message": "Payment Required"
   },
   {
-    "codHttp": 403,
+    "code": 403,
     "message": "Forbidden"
   },
   {
-    "codHttp": 404,
+    "code": 404,
     "message": "Not Found"
   },
   {
-    "codHttp": 405,
+    "code": 405,
     "message": "Method Not Allowed"
   },
   {
-    "codHttp": 406,
+    "code": 406,
     "message": "Not acceptable"
   },
   {
-    "codHttp": 407,
+    "code": 407,
     "message": "Proxy Authentication Required"
   },
   {
-    "codHttp": 408,
+    "code": 408,
     "message": "Request Timeout"
   },
   {
-    "codHttp": 409,
+    "code": 409,
     "message": "Conflict"
   },
   {
-    "codHttp": 410,
+    "code": 410,
     "message": "Gone"
   },
   {
-    "codHttp": 411,
+    "code": 411,
     "message": "Length Requered"
   },
   {
-    "codHttp": 412,
+    "code": 412,
     "message": "Precondition Failed"
   },
   {
-    "codHttp": 413,
+    "code": 413,
     "message": "Payload too Large"
   },
   {
-    "codHttp": 414,
+    "code": 414,
     "message": "URI too Long"
   },
   {
-    "codHttp": 415,
+    "code": 415,
     "message": "Unsupported Media Type"
   },
   {
-    "codHttp": 416,
+    "code": 416,
     "message": "Range Not satisfiable"
   },
   {
-    "codHttp": 417,
+    "code": 417,
     "message": "Expectation Failed"
   },
   {
-    "codHttp": 418,
+    "code": 418,
     "message": "I'm a teapot"
   },
   {
-    "codHttp": 421,
+    "code": 421,
     "message": "Misdirected Request"
   },
   {
-    "codHttp": 422,
+    "code": 422,
     "message": "Unprocessable Entity"
   },
   {
-    "codHttp": 423,
+    "code": 423,
     "message": "Locked"
   },
   {
-    "codHttp": 424,
+    "code": 424,
     "message": "Failed Dependency"
   },
   {
-    "codHttp": 426,
+    "code": 426,
     "message": "Upgrade Required"
   },
   {
-    "codHttp": 428,
+    "code": 428,
     "message": "Precodition Required"
   },
   {
-    "codHttp": 429,
+    "code": 429,
     "message": "Too Many Requests"
   },
   {
-    "codHttp": 431,
+    "code": 431,
     "message": "Request Header Fields Too Large"
   },
   {
-    "codHttp": 451,
+    "code": 451,
     "message": "Unavailable For Legal Reasons"
   },
   {
-    "codHttp": 500,
+    "code": 500,
     "message": "Internal Server Error"
   },
   {
-    "codHttp": 501,
+    "code": 501,
     "message": "Not Implemented"
   },
   {
-    "codHttp": 502,
+    "code": 502,
     "message": "Bad Gateway"
   },
   {
-    "codHttp": 503,
+    "code": 503,
     "message": "Service Unavailable"
   },
   {
-    "codHttp": 504,
+    "code": 504,
     "message": "Gateway Timeout"
   },
   {
-    "codHttp": 505,
+    "code": 505,
     "message": "HTTP version Not supported"
   },
   {
-    "codHttp": 506,
+    "code": 506,
     "message": "Variant Also Negotiates"
   },
   {
-    "codHttp": 507,
+    "code": 507,
     "message": "Insufficient Storage"
   },
   {
-    "codHttp": 508,
+    "code": 508,
     "message": "loop Detected"
   },
   {
-    "codHttp": 510,
+    "code": 510,
     "message": "Not Extended"
   },
   {
-    "codHttp": 511,
+    "code": 511,
     "message": "Network Authentication Required"
   }
 ]

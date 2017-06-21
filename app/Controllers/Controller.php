@@ -42,7 +42,7 @@ abstract class Controller
      */
     public function register($data = null, Model $response = null)
     {
-        response()::setResponseModel(200, $response, $data);
+        response()::setResponse(200, $response, $data);
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class Controller
             return $model->document;
         }, $data);
 
-        response()::setResponseModel(200, $response, is_callable($callback) ?
+        response()::setResponse(200, $response, is_callable($callback) ?
             $callback($data) : $data);
     }
 

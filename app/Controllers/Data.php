@@ -44,7 +44,7 @@ class Data extends Controller
     public function register($data = null, Model $response = null)
     {
         if (($dataModel = security()::validateBody('data', request()::body())) == false) {
-            response()::setResponse(400, 'Missing required Parameters');
+            response()::message(400, 'Missing required Parameters');
 
             return;
         }
@@ -76,7 +76,7 @@ class Data extends Controller
         $data = database()->select('data', $query);
 
         parent::list($data, new DataResponse(), function ($data) {
-            return ['data' => json()::mapSet(new DataDefinition(), $data), 'message' => 'success'];
+            return ['data' => json()::mapSet(new DataDefinition(), $data)];
         });
     }
 

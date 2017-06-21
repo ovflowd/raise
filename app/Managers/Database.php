@@ -75,7 +75,7 @@ class Database
             self::$databaseHandler = self::setHandler();
 
             if (self::$databaseHandler == null) {
-                $response(response()::setResponseModel(500, new Message(), [
+                $response(response()::setResponse(500, new Message(), [
                     'message' => 'Failed to Connect upon Database',
                     'details' => 'The Database Handler doesn\'t exists',
                 ]));

@@ -44,14 +44,14 @@ class Client extends Controller
     public function register($data = null, Model $response = null)
     {
         if (($clientModel = security()::validateBody('client', request()::body())) == false) {
-            response()::setResponse(400, 'Missing required Parameters');
+            response()::message(400, 'Missing required Parameters');
 
             return;
         }
 
         $jwtHash = security()::insertToken(database()->insert('client', $clientModel));
 
-        parent::register(['message' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
+        parent::register(['details' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
     }
 
     /**
@@ -70,7 +70,7 @@ class Client extends Controller
         $data = database()->select('client', $query);
 
         parent::list($data, new ClientResponse(), function ($clients) {
-            return ['clients' => json()::mapSet(new ClientDefinition(), $clients), 'message' => 'Success'];
+            return ['clients' => json()::mapSet(new ClientDefinition(), $clients)];
         });
     }
 

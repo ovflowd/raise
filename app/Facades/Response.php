@@ -58,7 +58,7 @@ class Response extends Facade
     public static function prepare(string $contentType = null)
     {
         if ($contentType !== null) {
-            self::addHeader('Content-Type', $contentType);
+            self::header('Content-Type', $contentType);
         }
 
         // Reset the Response Model
@@ -77,7 +77,7 @@ class Response extends Facade
      *
      * @return void
      */
-    public static function addHeader(string $name, string $value)
+    public static function header(string $name, string $value)
     {
         header("{$name}: {$value}");
     }
@@ -93,7 +93,7 @@ class Response extends Facade
     public static function getResponse($callback = null)
     {
         if (self::$response == null) {
-            self::setResponse(404);
+            self::message(404);
         }
 
         if (is_callable($callback)) {
@@ -112,16 +112,15 @@ class Response extends Facade
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
      * @param int    $httpCode      desired HTTP Code
-     * @param string $description   Response Details
+     * @param string $details   Response Details
      * @param bool   $returnContent If need return the content
      *
      * @return Message|null The returned content or nothing
      */
-    public static function setResponse(int $httpCode, string $description = null, bool $returnContent = false)
+    public static function message(int $httpCode, string $details = null, bool $returnContent = false)
     {
-        self::setResponseModel($httpCode, new Message(), database()->selectById('metadata', $httpCode));
-
-        self::$response->details = $description;
+        self::setResponse($httpCode, new Message(), (array)database()->selectById('metadata', $httpCode)
+            + ['details' => $details]);
 
         return $returnContent ? self::$response : null;
     }
@@ -136,13 +135,11 @@ class Response extends Facade
      * @param string|Model $model    the namespace of the model or an instance of it
      * @param array|object $data     the data to be mapped into the Model
      */
-    public static function setResponseModel(int $httpCode, $model, $data)
+    public static function setResponse(int $httpCode, $model, $data)
     {
-        self::setCode($httpCode);
+        self::code($httpCode);
 
-        self::$response = json()::map($model, $data);
-
-        self::$response->code = $httpCode;
+        self::$response = json()::map($model, (array)database()->selectById('metadata', $httpCode) + $data);
     }
 
     /**
@@ -153,7 +150,7 @@ class Response extends Facade
      *
      * @param int $code
      */
-    public static function setCode(int $code)
+    public static function code(int $code)
     {
         http_response_code($code);
     }

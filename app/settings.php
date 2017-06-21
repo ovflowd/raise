@@ -28,11 +28,11 @@ return [
 
     /*
     |----------------------------------------------------------------------------
-    | Database Settings Block                                                  |
+    | Couchbase Settings Block                                                  |
     |----------------------------------------------------------------------------
     */
 
-    'database' => [
+    'couchbase' => [
         'address'  => 'localhost',
         'user'     => 'couch',
         'password' => 'couchbase',
