@@ -135,6 +135,8 @@ class Json extends Facade
         if ($evaluateInput) {
             $mapper->bExceptionOnUndefinedProperty = true;
             $mapper->bExceptionOnMissingData = true;
+        } else {
+            $mapper->bStrictNullTypes = false;
         }
 
         $model = is_object($model) ? $model : new $model();
