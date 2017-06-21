@@ -112,14 +112,14 @@ class Response extends Facade
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
      * @param int    $httpCode      desired HTTP Code
-     * @param string $details   Response Details
+     * @param string $details       Response Details
      * @param bool   $returnContent If need return the content
      *
      * @return Message|null The returned content or nothing
      */
     public static function message(int $httpCode, string $details = null, bool $returnContent = false)
     {
-        self::setResponse($httpCode, new Message(), (array)database()->selectById('metadata', $httpCode)
+        self::setResponse($httpCode, new Message(), (array) database()->selectById('metadata', $httpCode)
             + ['details' => $details]);
 
         return $returnContent ? self::$response : null;
@@ -139,7 +139,7 @@ class Response extends Facade
     {
         self::code($httpCode);
 
-        self::$response = json()::map($model, (array)database()->selectById('metadata', $httpCode) + $data);
+        self::$response = json()::map($model, (array) database()->selectById('metadata', $httpCode) + $data);
     }
 
     /**
