@@ -55,7 +55,7 @@ class Data extends Raise
     public $order = [];
 
     /**
-     * An array of Data
+     * An array of Data.
      *
      * The data must follow the Service Parameters
      * with validation of parameter name
@@ -94,13 +94,14 @@ class Data extends Raise
      * at.
      *
      * @param array $order the order array.
+     *
      * @throws JsonMapper_Exception
      */
     public function setOrder(array $order)
     {
         $service = database()->selectById($this->serviceId);
 
-        if(count(array_diff($order, $service->parameters)) > 0) {
+        if (count(array_diff($order, $service->parameters)) > 0) {
             throw new JsonMapper_Exception();
         }
 

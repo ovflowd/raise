@@ -93,8 +93,7 @@ class Data extends Controller
         }
 
         if (request()::query('name') !== false) {
-
-            $query->where("ANY v WITHIN data SATISFIES v.`` = 444 END");
+            $query->where('ANY v WITHIN data SATISFIES v.`` = 444 END');
         }
 
         return parent::filter($query);
