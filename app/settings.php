@@ -28,12 +28,12 @@ return [
 
     /*
     |----------------------------------------------------------------------------
-    | Database Settings Block                                                  |
+    | Couchbase Settings Block                                                  |
     |----------------------------------------------------------------------------
     */
 
-    'database' => [
-        'address'  => '172.16.9.85',
+    'couchbase' => [
+        'address'  => 'localhost',
         'user'     => 'couch',
         'password' => 'couchbase',
     ],
@@ -45,7 +45,7 @@ return [
     */
 
     'security' => [
-        'expireTime' => '10hours',
+        'expireTime' => '2hours',
         'secretKey'  => 'default-raise-secret-key',
     ],
 

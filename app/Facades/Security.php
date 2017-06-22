@@ -91,14 +91,14 @@ class Security extends Facade
     {
         // Verifies if the token is present on the headers
         if ($hash === false) {
-            response()::setResponse(403, "You didn't provided a Token");
+            response()::message(403, "You didn't provided a Token");
 
             return false;
         }
 
         // Verifies if is an valid JWT
         if (($token = json()::decode(setting('security.secretKey'), $hash)) == false) {
-            response()::setResponse(401, 'Your Token is Invalid or Expired');
+            response()::message(401, 'Your Token is Invalid or Expired');
 
             return false;
         }
@@ -108,7 +108,7 @@ class Security extends Facade
 
         // Check if the Token exists on the Database and check if is valid
         if ($tokenModel == false || $tokenModel->expireTime < microtime(true)) {
-            response()::setResponse(401, 'Your Token is Invalid or Expired');
+            response()::message(401, 'Your Token is Invalid or Expired');
 
             return false;
         }

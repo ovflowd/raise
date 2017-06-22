@@ -21,12 +21,12 @@
 
 // Main Route
 $router()->get('/', function () {
-    response()::setResponse(200, 'Welcome to RAISe');
+    response()::message(200, 'Welcome to RAISe');
 });
 
 // Easter Egg
 $router()->get('/tea', function () {
-    response()::setResponse(418, 'RAISe easter egg');
+    response()::message(418, 'RAISe easter egg');
 });
 
 /*

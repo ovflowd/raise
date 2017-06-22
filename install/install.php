@@ -134,8 +134,8 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
 {
     $metadataBucket = $connection->openBucket('metadata');
 
-    $metadataBucket->insert((string) $details->codHttp, [
-        'codHttp' => $details->codHttp,
+    $metadataBucket->insert((string) $details->code, [
+        'code'    => $details->code,
         'message' => $details->message,
     ]);
 }
@@ -462,7 +462,7 @@ if (option('skip-configuration') === null) {
 
     $configurationType = option('config-schema') !== null ? option('config-schema') : 'new';
 
-    $configurationFile = option('config-file') !== null ? option('config-file') : '../app/settings.php';
+    $configurationFile = option('config-file') !== null ? option('config-file') : (__DIR__.'/../app/settings.php');
 
     createConfigurationFile($configurationFile, $configurationType, $credentials);
 }

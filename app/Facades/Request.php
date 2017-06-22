@@ -94,6 +94,19 @@ class Request extends Facade
     }
 
     /**
+     * Set a Request Body.
+     *
+     * This is useful for overwriting the
+     * Request Body with another one.
+     *
+     * @param object|\stdClass $body
+     */
+    public static function setBody($body)
+    {
+        self::$body = $body;
+    }
+
+    /**
      * Return Requested Page Method.
      *
      * @return string

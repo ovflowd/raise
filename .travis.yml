@@ -30,8 +30,9 @@ before_install:
   - composer self-update
   - composer install --no-interaction
 script:
-  - php install/install.php --user=couch --pass=couchbase --address=localhost --skip-configuration
-  - php -S 0.0.0.0:8000 index.php 1>/dev/null &
+  - cd install/
+  - php install.php --user=couch --pass=couchbase --address=localhost --skip-configuration
+  - cd ../
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)

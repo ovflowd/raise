@@ -1,28 +1,35 @@
 <?php
 
-use Httpful\Request;
-use PHPUnit\Framework\TestCase;
+use App\Facades\Test;
 
 /**
  * Class ClientTest.
+ *
+ * Executes phpunit test cases
+ * for Client Procedures
+ *
+ * @see \App\Models\Communication\Client
+ * @see \App\Models\Response\Client
+ * @see \App\Controllers\Client
  */
-class ClientTest extends TestCase
+class ClientTest extends Test
 {
     /**
-     * Test Server URI.
-     *
-     * @var string
-     */
-    public $serverUri = 'http://127.0.0.1:8000/';
-
-    /**
      * Test the Client Register.
+     *
+     * Try to insert a standard client definition
+     * and verifies if the response is valid
+     *
+     * @uses \App\Controllers\Client
+     * @uses \App\Models\Response\Client
      *
      * @test
      */
     public function testRegister()
     {
-        $clientModel = [
+        $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
+
+        $clientModel = (object) [
             'name'       => 'Sample Test',
             'chipset'    => '0.0',
             'mac'        => 'FF:FF:FF:FF:FF',
@@ -33,8 +40,10 @@ class ClientTest extends TestCase
             'clientTime' => microtime(true),
         ];
 
-        $response = Request::post($this->serverUri.'client/register')->sendsJson()->body($clientModel)->send();
+        $this->executeRaise($clientModel);
 
-        $this->assertNotNull($response);
+        $this->assertInstanceOf(\App\Models\Response\Token::class, response()::getResponse());
+
+        $this->assertEquals(200, response()::getResponse()->code);
     }
 }

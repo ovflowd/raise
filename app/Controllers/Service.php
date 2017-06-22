@@ -43,7 +43,7 @@ class Service extends Controller
     public function register($data = null, Model $response = null)
     {
         if (($serviceBag = security()::validateBody('serviceBag', request()::body())) == false) {
-            response()::setResponse(400, 'Missing required Parameters');
+            response()::message(400, 'Missing required Parameters');
 
             return;
         }
@@ -56,7 +56,7 @@ class Service extends Controller
             return ['id' => $service->id, 'name' => $service->name];
         }, $serviceBag->services);
 
-        parent::register(['services' => $response, 'message' => 'Success'], new ServiceResponse());
+        parent::register(['services' => $response], new ServiceResponse());
     }
 
     /**
@@ -75,7 +75,7 @@ class Service extends Controller
         $data = database()->select('service', $query);
 
         parent::list($data, new ServiceResponse(), function ($services) {
-            return ['services' => json()::mapSet(new ServiceDefinition(), $services), 'message' => 'Success'];
+            return ['services' => json()::mapSet(new ServiceDefinition(), $services)];
         });
     }
 
