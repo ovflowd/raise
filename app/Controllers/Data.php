@@ -92,16 +92,15 @@ class Data extends Controller
      */
     protected function filter(Select $query = null)
     {
-        global $token;
-
         $query = new Select();
 
         if (request()::query('serviceId') !== false) {
             $query->where('serviceId', request()::query('serviceId'));
         }
 
-        if (request()::query('dataName') !== false) {
-            $query->where('data', request()::query('dataName'));
+        if (request()::query('name') !== false) {
+
+            $query->where("ANY v WITHIN data SATISFIES v.`` = 444 END");
         }
 
         return parent::filter($query);

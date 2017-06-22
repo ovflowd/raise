@@ -43,12 +43,14 @@ class Data extends Raise
 
     /**
      * An array of Data
-     * the Data set need follow the key:value pattern
-     * You can send anything as data.
+     *
+     * The data must follow the Service Parameters
+     * with validation of parameter name
+     * as an data object key
      *
      * @required
      *
-     * @var array
+     * @var array array of data objects
      */
     public $data = [];
 
