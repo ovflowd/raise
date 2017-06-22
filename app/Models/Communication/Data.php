@@ -42,6 +42,19 @@ class Data extends Raise
     public $serviceId = null;
 
     /**
+     * An array that contains the order in which the
+     * data will be presented.
+     *
+     * Data must be sent following the order in this
+     * array.
+     *
+     * @required
+     *
+     * @var array
+     */
+    public $order = [];
+
+    /**
      * An array of Data
      *
      * The data must follow the Service Parameters
@@ -50,7 +63,7 @@ class Data extends Raise
      *
      * @required
      *
-     * @var array array of data objects
+     * @var array[] array of data objects
      */
     public $data = [];
 
@@ -72,5 +85,43 @@ class Data extends Raise
         }
 
         $this->serviceId = $serviceId;
+    }
+
+    /**
+     * Set the data's order.
+     *
+     * This method sets the order that data will be sent
+     * at.
+     *
+     * @param array $order the order array.
+     * @throws JsonMapper_Exception
+     */
+    public function setOrder(array $order)
+    {
+        $service = database()->selectById($this->serviceId);
+
+        if(count(array_diff($order, $service->parameters)) > 0) {
+            throw new JsonMapper_Exception();
+        }
+
+        $this->order = $order;
+    }
+
+    /**
+     * Sets tha data.
+     *
+     * This method sets the data array that
+     * has the same number of parameters as
+     * the order array.
+     *
+     * @param array $dataSet
+     */
+    public function setData(array $dataSet)
+    {
+        $count = count($this->order);
+
+        $this->data = array_filter($dataSet, function (array $data) use ($count) {
+            return count($data) == $count;
+        });
     }
 }

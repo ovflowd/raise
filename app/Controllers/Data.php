@@ -49,12 +49,6 @@ class Data extends Controller
             return;
         }
 
-        $service = database()->selectById('service', $dataModel->serviceId);
-
-        $dataModel->data = array_filter($dataModel->data, function ($data) use ($service) {
-            return empty(array_diff($service->parameters, array_keys((array) $data)));
-        });
-
         database()->insert('data', $dataModel);
 
         parent::register(['details' => 'Data Registered Successfully', 'message' => 'Success'], new Message());

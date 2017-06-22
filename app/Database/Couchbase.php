@@ -93,6 +93,8 @@ class Couchbase implements DatabaseHandler
     {
         $query->select('*')->from("{$table} document");
 
+        var_dump($query->toSql());
+
         return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
     }
 

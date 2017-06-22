@@ -102,7 +102,7 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
         return json()::jsonEncode($optionalModel ?? $model);
     });
 
-    exit(0);
+    zexit(0);
 };
 
 /**
