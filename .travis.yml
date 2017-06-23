@@ -1,4 +1,7 @@
 dist: trusty
+os:
+  - linux
+  - osx
 sudo: required
 language: php
 php:
