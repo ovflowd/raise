@@ -47,10 +47,10 @@ class Security extends Facade
      */
     public static function insertToken(string $clientId)
     {
-        $token = database()->insert('token', json()::map(new TokenDefinition(), ['clientId' => $clientId]),
-            self::generateToken());
+        $token = database()->insert('token', ($tokenModel = json()::map(new TokenDefinition(),
+            ['clientId' => $clientId])), self::generateToken());
 
-        log()::add($token, 'token', "a token was generated on raise. (clientId:: {$clientId}).");
+        logger()::log($token, 'token', "a token was generated on raise. (clientId:: {$clientId}).", $tokenModel);
 
         return json()::encode(setting('security.secretKey'), ['token' => $token]);
     }
@@ -72,12 +72,33 @@ class Security extends Facade
     /**
      * Update the Token (Revalidate).
      *
-     * @TODO: Code this Method
+     * Creates a new Token and Hash for the same
+     * Client, when the Token is Invalid
      *
-     * @param string $hash
+     * @param string $hash the Hash to be Validated
+     *
+     * @return array|null The JWT hash if the Token has expired and exists.
      */
     public static function updateToken(string $hash)
     {
+        // Verifies if is an valid JWT
+        if (($token = json()::decode(setting('security.secretKey'), $hash)) == false) {
+            echo response()::message(401, 'Your Token is Invalid or Expired', true);
+
+            exit(1);
+        }
+
+        // Retrieve the TokenModel if it exists on the database
+        $tokenModel = database()->selectById('token', $token->token);
+
+        // Check if the Token exists on the Database and check if is valid
+        if ($tokenModel == false || $tokenModel->expireTime > microtime(true)) {
+            echo response()::message(401, 'Your Token is Invalid or not Expired', true);
+
+            exit(1);
+        }
+
+        return ['jwtHash' => self::insertToken($tokenModel->clientId), 'clientId' => $tokenModel->clientId];
     }
 
     /**

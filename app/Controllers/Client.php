@@ -51,9 +51,9 @@ class Client extends Controller
 
         $jwtHash = security()::insertToken($clientId = database()->insert('client', $clientModel));
 
-        log()::add($clientId, 'client', 'a client were registered on raise.', $jwtHash);
-
         parent::register(['details' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
+
+        logger()::log($clientId, 'client', 'a client were registered on raise.', $jwtHash);
     }
 
     /**
@@ -64,7 +64,17 @@ class Client extends Controller
      */
     public function revalidate()
     {
+        $hash = request()::headers('authorization');
 
+        if(is_array(($update = security()::updateToken($hash)))) {
+            $client = database()->selectById('client', $update->clientId);
+
+            $client->location = request()::body('location');
+
+            database()->update('client', $update->clientId, $client);
+
+            parent::register(['details' => 'Client Updated Successfully', 'token' => $update->jwtHash], new TokenResponse());
+        }
     }
 
     /**

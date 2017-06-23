@@ -32,7 +32,7 @@ return [
     |----------------------------------------------------------------------------
     */
 
-    'couchbase' => [
+    'database' => [
         'address'  => 'localhost',
         'user'     => 'couch',
         'password' => 'couchbase',

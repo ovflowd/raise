@@ -51,9 +51,9 @@ class Data extends Controller
 
         $dataId = database()->insert('data', $dataModel);
 
-        log()::add($dataId, 'data', 'a data set was registered on raise.');
-
         parent::register(['details' => 'Data Registered Successfully', 'message' => 'Success'], new Message());
+
+        logger()::log($dataId, 'data', 'a data set was registered on raise.');
     }
 
     /**

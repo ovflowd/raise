@@ -18,7 +18,7 @@
  *
  * @return \App\Facades\Facade|\App\Facades\Log|string
  */
-function log()
+function logger()
 {
     return \App\Facades\Log::get();
 }

@@ -51,7 +51,7 @@ class Service extends Controller
         $response = array_map(function (ServiceDefinition $service) {
             $serviceId = database()->insert('service', $service);
 
-            log()::add($serviceId, 'service', 'a service was registered on raise.');
+            logger()::log($serviceId, 'service', 'a service was registered on raise.');
 
             return ['id' => $serviceId, 'name' => $service->name];
         }, $serviceBag->services);

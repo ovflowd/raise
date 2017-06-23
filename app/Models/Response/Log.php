@@ -15,6 +15,8 @@
 
 namespace App\Models\Response;
 
+use App\Models\Communication\Model;
+
 /**
  * Class Log.
  *
@@ -26,7 +28,7 @@ namespace App\Models\Response;
  *
  * @since 2.0.0
  */
-class Log extends Message
+class Log extends Model
 {
     /**
      * The Unique Identifier of the relative
@@ -48,7 +50,7 @@ class Log extends Message
      * The JWT Token used for the Session
      * if it's a request that requires Token auth
      *
-     * @var string|null
+     * @var mixed|null
      */
     public $token = null;
 
@@ -69,11 +71,6 @@ class Log extends Message
      */
     public function __construct()
     {
-        $response = response()::getResponse();
-
-        $this->code = $response->code;
-        $this->message = $response->message;
-
         $this->setServerTime();
     }
 

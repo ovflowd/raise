@@ -102,7 +102,7 @@ class Couchbase implements DatabaseHandler
      * @param string $table      desired bucket
      * @param string $primaryKey a document identifier
      *
-     * @return object|bool selected document or set of documents
+     * @return object|bool|Model selected document or set of documents
      */
     public function selectById(string $table, string $primaryKey)
     {

@@ -99,9 +99,7 @@ class Database
      */
     protected static function setHandler()
     {
-        $handler = setting('raise.databaseType');
-
-        $handler = ('App\Database\\'.ucwords($handler));
+        $handler = ('App\Database\\'.ucwords(setting('raise.databaseType')));
 
         if (class_exists($handler)) {
             self::$configuration = setting('database');

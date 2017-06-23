@@ -45,12 +45,12 @@ class Log extends Facade
      *
      * @return bool|string If added successfully the log entry, if not false.
      */
-    public static function add(string $element, string $table, string $details, string $givenToken = null)
+    public static function log(string $element, string $table, string $details, string $givenToken = null)
     {
         global $token;
 
         $content = [
-            'token' => ($token(false) ?: $givenToken),
+            'token' => ($givenToken ?? ($token(false) ?: null)),
             'element' => $element,
             'table' => $table,
             'details' => $details

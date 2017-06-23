@@ -27,6 +27,22 @@ namespace App\Factories;
 class Settings extends Factory
 {
     /**
+     * Get an Element.
+     *
+     * If the element exists return in,
+     * If not return a false boolean.
+     *
+     * @param string $element name of the element
+     *
+     * @return object|array|bool the element or false if didn't found it
+     */
+    public static function get(string $element)
+    {
+        return array_key_exists($element, self::instance()->elements)
+            ? self::instance()->elements[$element] : false;
+    }
+
+    /**
      * Add an Settings Model.
      *
      * Return true if added with success, false if element already exists
