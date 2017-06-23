@@ -91,9 +91,7 @@ class Couchbase implements DatabaseHandler
      */
     public function select(string $table, Select $query)
     {
-        $query->select('*')->from("{$table} document");
-
-        var_dump($query->toSql());
+        $query->select('document')->from("{$table} document");
 
         return $this->connection->openBucket($table)->query(N1qlQuery::fromstring($query->toSql()))->rows;
     }

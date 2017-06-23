@@ -136,7 +136,9 @@ class Json extends Facade
             $mapper->bExceptionOnUndefinedProperty = true;
             $mapper->bExceptionOnMissingData = true;
         } else {
-            $mapper->bStrictNullTypes = false;
+            $mapper->undefinedPropertyHandler = function ($model, $property, $value) {
+                $model->{$property} = $value;
+            };
         }
 
         $model = is_object($model) ? $model : new $model();

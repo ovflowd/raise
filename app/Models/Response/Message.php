@@ -57,7 +57,7 @@ class Message extends Model
      * Additional Details that can be defined
      * and will be sent also on the Response.
      *
-     * @var string
+     * @var string|null
      */
     public $details;
 }

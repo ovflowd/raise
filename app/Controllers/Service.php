@@ -49,11 +49,7 @@ class Service extends Controller
         }
 
         $response = array_map(function (ServiceDefinition $service) {
-            $service->id = database()->insert('service', $service);
-
-            database()->update('service', $service->id, $service);
-
-            return ['id' => $service->id, 'name' => $service->name];
+            return ['id' => database()->insert('service', $service), 'name' => $service->name];
         }, $serviceBag->services);
 
         parent::register(['services' => $response], new ServiceResponse());

@@ -52,9 +52,9 @@ class ServiceBag extends Raise
      */
     public function setServices(array $services)
     {
-        array_walk($services, function ($service) {
+        array_walk($services, function (Service $service) {
             $service->clientTime = $this->clientTime;
-            $service->tags = $this->tags;
+            $service->setTags($this->tags);
         });
 
         $this->services = $services;

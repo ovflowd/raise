@@ -623,11 +623,21 @@
         "mac",
         "serial",
         "processor",
-        "channel",
-        "clientTime"
+        "channel"
       ],
       "type": "object",
       "properties": {
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.1111
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "example-tag"
+          }
+        },
         "name": {
           "type": "string",
           "example": "Raspberry PI"
@@ -652,20 +662,9 @@
           "type": "string",
           "example": "Ethernet"
         },
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        },
         "location": {
           "type": "string",
           "example": "-15.7757876:-48.077829"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "example-tag"
-          }
         }
       }
     },
@@ -697,9 +696,7 @@
         "serial",
         "processor",
         "channel",
-        "clientTime",
-        "services",
-        "location",
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -727,47 +724,20 @@
           "type": "string",
           "example": "C210"
         },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Service"
-          }
-        },
         "location": {
           "type": "string",
           "example": "-15.7757876:-48.077829"
-        },
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "example-tag"
-          }
         }
       }
     },
     "DataRegister": {
       "type": "object",
       "required": [
+        "order",
         "data",
-        "clientTime",
         "serviceId"
       ],
       "properties": {
-        "serviceId": {
-          "type": "string",
-          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataValues"
-          }
-        },
         "clientTime": {
           "type": "number",
           "example": 1000000000.100000
@@ -779,58 +749,60 @@
             "example": "example-tag"
           }
         },
-      }
-    },
-    "Data": {
-      "required": [
-        "data",
-        "serviceId",
-        "clientTime"
-      ],
-      "type": "object",
-      "properties": {
         "serviceId": {
           "type": "string",
           "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
-        "data": {
-          "$ref": "#/definitions/DataValues"
-        },
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        },
-        "tags": {
+        "order": {
           "type": "array",
           "items": {
             "type": "string",
-            "example": "example-tag"
+            "example": "humidity"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "example": 20.20
           }
         }
       }
     },
-    "DataValues": {
+    "Data": {
+      "required": [
+        "order",
+        "data",
+        "serviceId"
+      ],
       "type": "object",
       "properties": {
-        "press": {
-          "type": "integer",
-          "example": 35
+        "serviceId": {
+          "type": "string",
+          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "humidity"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "example": 20.0
+          }
         }
       }
     },
     "ServicesRegister": {
       "type": "object",
       "required": [
-        "services",
-        "clientTime"
+        "services"
       ],
       "properties": {
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceRegister"
-          }
-        },
         "clientTime": {
           "type": "number",
           "example": 1000000000.100000
@@ -840,6 +812,12 @@
           "items": {
             "type": "string",
             "example": "example-tag"
+          }
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRegister"
           }
         }
       }
@@ -866,14 +844,9 @@
         "name",
         "parameters",
         "clientId",
-        "returnType",
-        "id"
+        "returnType"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
-        },
         "name": {
           "type": "string",
           "example": "Get temp"
@@ -882,23 +855,12 @@
           "type": "string",
           "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
-        "parameters": {
-          "$ref": "#/definitions/Parameter"
-        },
         "returnType": {
           "type": "string",
           "example": "float"
         },
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "example-tag"
-          }
+        "parameters": {
+          "$ref": "#/definitions/Parameter"
         }
       }
     },

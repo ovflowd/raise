@@ -55,23 +55,24 @@ class Data extends Raise
     public $order = [];
 
     /**
-     * An array of Data.
+     * A Set of Data
      *
-     * The data must follow the Service Parameters
-     * with validation of parameter name
-     * as an data object key
+     * A data set contain an array
+     * of data that follows a service parameters pattern
+     * an data element need to include values for all
+     * the parameters of an service.
      *
      * @required
      *
-     * @var array[] array of data objects
+     * @var array[]
      */
     public $data = [];
 
     /**
      * Set a serviceId.
      *
-     * This method verifies the validity of the serviceId
-     * if it's invalid the method returns a null.
+     * This method verifies if the given serviceId
+     * exists, if doesn't, throws an validation error.
      *
      * @param string $serviceId the service identifier
      *                          related to this data.
@@ -91,15 +92,17 @@ class Data extends Raise
      * Set the data's order.
      *
      * This method sets the order that data will be sent
-     * at.
+     * at. The order is useful to identify which element
+     * of a data set refers to which parameter of a Service
      *
-     * @param array $order the order array.
+     * @param array $order The array specifying the Service
+     *  parameters with a given (arbitrary/user specified) order
      *
      * @throws JsonMapper_Exception
      */
     public function setOrder(array $order)
     {
-        $service = database()->selectById($this->serviceId);
+        $service = database()->selectById('data', $this->serviceId);
 
         if (count(array_diff($order, $service->parameters)) > 0) {
             throw new JsonMapper_Exception();
@@ -109,13 +112,18 @@ class Data extends Raise
     }
 
     /**
-     * Sets tha data.
+     * Sets the data.
      *
      * This method sets the data array that
      * has the same number of parameters as
      * the order array.
      *
-     * @param array $dataSet
+     * @param array[] $dataSet A data set contain an array
+     *  of data that follows a service parameters pattern
+     *  an data element need to include values for all
+     *  the parameters of an service.
+     *
+     * @example Available on Swagger API
      */
     public function setData(array $dataSet)
     {

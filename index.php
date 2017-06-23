@@ -27,4 +27,4 @@ error_reporting(0);
 |----------------------------------------------------------------------------
 */
 
-$app = require __DIR__.'/app/bootstrap.php';z
+$app = require __DIR__.'/app/bootstrap.php';

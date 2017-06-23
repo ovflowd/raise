@@ -28,13 +28,6 @@ namespace App\Models\Communication;
 class Service extends Raise
 {
     /**
-     * The Unique Identifier of the Service
-     * used on the Response.
-     *
-     * @var string
-     */
-    public $id = '';
-    /**
      * The Service Name.
      *
      * The Service name uses approaches for contextual Data
@@ -46,6 +39,7 @@ class Service extends Raise
      * @var string
      */
     public $name;
+
     /**
      * Parameters of the Service.
      *
@@ -60,6 +54,7 @@ class Service extends Raise
      * @var array
      */
     public $parameters = [];
+
     /**
      * Return Type of a Service.
      *
@@ -72,6 +67,7 @@ class Service extends Raise
      * @var string
      */
     public $returnType = 'string';
+
     /**
      * The Unique Client Identifier.
      *
@@ -97,16 +93,6 @@ class Service extends Raise
         parent::__construct();
 
         $this->setClientId();
-    }
-
-    /**
-     * Get the Related Client Unique Identifier.
-     *
-     * @return string Get the Client Identifier
-     */
-    public function getClientId()
-    {
-        return $this->clientId;
     }
 
     /**

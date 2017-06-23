@@ -45,7 +45,7 @@ return [
     */
 
     'security' => [
-        'expireTime' => '20hours',
+        'expireTime' => '2hours',
         'secretKey'  => 'default-raise-secret-key',
     ],
 

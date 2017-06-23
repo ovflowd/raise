@@ -92,6 +92,7 @@ class Data extends Controller
             $query->where('serviceId', request()::query('serviceId'));
         }
 
+        //@TODO: Implement Name Filtering
         if (request()::query('name') !== false) {
             $query->where('ANY v WITHIN data SATISFIES v.`` = 444 END');
         }
