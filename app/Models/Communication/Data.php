@@ -55,7 +55,7 @@ class Data extends Raise
     public $order = [];
 
     /**
-     * A Set of Data
+     * A Set of Data.
      *
      * A data set contain an array
      * of data that follows a service parameters pattern
@@ -96,7 +96,7 @@ class Data extends Raise
      * of a data set refers to which parameter of a Service
      *
      * @param array $order The array specifying the Service
-     *  parameters with a given (arbitrary/user specified) order
+     *                     parameters with a given (arbitrary/user specified) order
      *
      * @throws JsonMapper_Exception
      */
@@ -119,9 +119,9 @@ class Data extends Raise
      * the order array.
      *
      * @param array[] $dataSet A data set contain an array
-     *  of data that follows a service parameters pattern
-     *  an data element need to include values for all
-     *  the parameters of an service.
+     *                         of data that follows a service parameters pattern
+     *                         an data element need to include values for all
+     *                         the parameters of an service.
      *
      * @example Available on Swagger API
      */

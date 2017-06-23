@@ -48,7 +48,7 @@ abstract class Raise extends Model
     protected $tags = [];
 
     /**
-     * Set an array of Tags
+     * Set an array of Tags.
      *
      * Tags are used to contextual data filtering
      * and may be used to filter set of results
