@@ -94,7 +94,7 @@ class Service extends Raise
 
         $this->setClientId();
     }
-    
+
     /**
      * Set the Unique Client Identifier
      * That is related to this Service.
