@@ -14,6 +14,16 @@
  */
 
 /**
+ * Get the static instance of the LogFacade
+ *
+ * @return \App\Facades\Facade|\App\Facades\Log|string
+ */
+function log()
+{
+    return \App\Facades\Log::get();
+}
+
+/**
  * Get the static instance of ResponseFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Response|string
@@ -102,7 +112,7 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
         return json()::jsonEncode($optionalModel ?? $model);
     });
 
-    zexit(0);
+    exit(0);
 };
 
 /**
@@ -112,15 +122,17 @@ $response = function (\App\Models\Communication\Model $optionalModel = null) {
  * store an instance of the TokenModel and return it.
  * If the token isn't valid, echoes the output of invalid authentication and finish the execution
  *
+ * @param bool $exit If token doesn't exists and need to exit?
+ *
  * @return \App\Models\Communication\Token
  */
-$token = function () use ($response) {
+$token = function (bool $exit = true) use ($response) {
     static $tokenModel;
 
     if ($tokenModel == null) {
         $tokenModel = security()::validateToken(request()::headers('authorization'));
 
-        if ($tokenModel === false) {
+        if ($tokenModel === false && $exit) {
             $response();
 
             exit(1);

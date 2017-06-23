@@ -47,10 +47,12 @@ class Security extends Facade
      */
     public static function insertToken(string $clientId)
     {
-        return json()::encode(setting('security.secretKey'), [
-            'token' => database()->insert('token',
-                json()::map(new TokenDefinition(), ['clientId' => $clientId]), self::generateToken()),
-        ]);
+        $token = database()->insert('token', json()::map(new TokenDefinition(), ['clientId' => $clientId]),
+            self::generateToken());
+
+        log()::add($token, 'token', "a token was generated on raise. (clientId:: {$clientId}).");
+
+        return json()::encode(setting('security.secretKey'), ['token' => $token]);
     }
 
     /**
@@ -122,13 +124,13 @@ class Security extends Facade
      * If not, return a false boolean.
      *
      * @param string $modelName the Model to be validated
-     * @param object $body      the Payload to be validated
+     * @param object $body the Payload to be validated
      *
      * @return bool|object|Model the mapped model or false if doesn't exists
      */
     public static function validateBody(string $modelName, $body)
     {
-        $model = ('App\Models\Communication\\'.ucwords($modelName));
+        $model = ('App\Models\Communication\\' . ucwords($modelName));
 
         return class_exists($model) ? json()::compare($model, $body) : false;
     }

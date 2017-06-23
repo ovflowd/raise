@@ -27,22 +27,6 @@ namespace App\Factories;
 class Settings extends Factory
 {
     /**
-     * Get an Settings Model.
-     *
-     * If the element exists return in,
-     * If not return a false boolean.
-     *
-     * @param string $element The desired Setting block
-     *
-     * @return object|bool false if doesn't exists, the Model if exists
-     */
-    public static function get(string $element)
-    {
-        return array_key_exists($element, self::instance()->elements)
-            ? self::instance()->elements[$element] : false;
-    }
-
-    /**
      * Add an Settings Model.
      *
      * Return true if added with success, false if element already exists
@@ -66,13 +50,13 @@ class Settings extends Factory
     }
 
     /**
-     * Remove an Settings Model.
+     * Remove an Element.
      *
      * Return true if removed with success, false if element doesn't exists
      *
-     * @param string $element the Settings Model to be excluded
+     * @param string $element the element to be removed
      *
-     * @return bool true if removed successfully, false if doesn't exists
+     * @return bool if removed successfully or not
      */
     public static function remove(string $element)
     {

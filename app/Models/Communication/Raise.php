@@ -48,19 +48,6 @@ abstract class Raise extends Model
     protected $tags = [];
 
     /**
-     * Set an array of Tags.
-     *
-     * Tags are used to contextual data filtering
-     * and may be used to filter set of results
-     *
-     * @param array $tags The tags to be stored
-     */
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
-    }
-
-    /**
      * The time when the server handled the operation and inserted it.
      *
      * @var float (UNIX_TIMESTAMP)
@@ -77,6 +64,19 @@ abstract class Raise extends Model
     {
         $this->setClientTime();
         $this->setServerTime();
+    }
+
+    /**
+     * Set an array of Tags.
+     *
+     * Tags are used to contextual data filtering
+     * and may be used to filter set of results
+     *
+     * @param array $tags The tags to be stored
+     */
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
     }
 
     /**

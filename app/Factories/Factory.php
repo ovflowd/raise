@@ -46,7 +46,11 @@ abstract class Factory
      *
      * @return object|array|bool the element or false if didn't found it
      */
-    abstract public static function get(string $element);
+    public static function get(string $element)
+    {
+        return array_key_exists($element, self::instance()->elements)
+            ? self::instance()->elements[$element] : false;
+    }
 
     /**
      * Add an Element.

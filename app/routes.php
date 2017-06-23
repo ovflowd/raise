@@ -36,8 +36,13 @@ $router()->get('/tea', function () {
 */
 
 $router()->mount('/client', function () use ($router, $response, $token) {
-    // Client Security
+    // Client Security for List Clients
     $router()->before('GET', '/*', function () use ($router, $response, $token) {
+        $token();
+    });
+
+    // Client Security for Revalidate Process
+    $router()->before('POST', '/revalidate', function () use ($router, $response, $token) {
         $token();
     });
 
@@ -46,6 +51,9 @@ $router()->mount('/client', function () use ($router, $response, $token) {
 
     // Register a Client
     $router()->post('/register', '\App\Controllers\Client@register');
+
+    // Revalidate a Client
+    $router()->post('/revalidate', '\App\Controllers\Client@revalidate');
 });
 
 /*
@@ -55,7 +63,7 @@ $router()->mount('/client', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/service', function () use ($router, $response, $token) {
-    // Service Security
+    // Service Security for Register Services and List Services
     $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
         $token();
     });
@@ -74,7 +82,7 @@ $router()->mount('/service', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/data', function () use ($router, $response, $token) {
-    // Data Security
+    // Data Security for Register Data and List Data
     $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
         $token();
     });

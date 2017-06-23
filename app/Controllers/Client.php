@@ -49,9 +49,22 @@ class Client extends Controller
             return;
         }
 
-        $jwtHash = security()::insertToken(database()->insert('client', $clientModel));
+        $jwtHash = security()::insertToken($clientId = database()->insert('client', $clientModel));
+
+        log()::add($clientId, 'client', 'a client were registered on raise.', $jwtHash);
 
         parent::register(['details' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
+    }
+
+    /**
+     * Revalidate Process.
+     *
+     * Revalidate a Client with given location and
+     * services. A new token and JWT it's generated.
+     */
+    public function revalidate()
+    {
+
     }
 
     /**

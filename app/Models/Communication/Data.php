@@ -42,6 +42,18 @@ class Data extends Raise
     public $serviceId = null;
 
     /**
+     * The Unique Client Identifier.
+     *
+     * Each Service is related to an Service,
+     * this identified which Client the Service is associated
+     *
+     * @see Client
+     *
+     * @var string
+     */
+    protected $clientId = '';
+
+    /**
      * An array that contains the order in which the
      * data will be presented.
      *
@@ -89,6 +101,19 @@ class Data extends Raise
     }
 
     /**
+     * Set the Unique Client Identifier
+     * That is related to this Service.
+     *
+     * @param string|null $clientId the ClientId to be set
+     */
+    public function setClientId(string $clientId = null)
+    {
+        global $token;
+
+        $this->clientId = $clientId ?? $token()->clientId;
+    }
+
+    /**
      * Set the data's order.
      *
      * This method sets the order that data will be sent
@@ -102,7 +127,7 @@ class Data extends Raise
      */
     public function setOrder(array $order)
     {
-        $service = database()->selectById('data', $this->serviceId);
+        $service = database()->selectById('service', $this->serviceId);
 
         if (count(array_diff($order, $service->parameters)) > 0) {
             throw new JsonMapper_Exception();

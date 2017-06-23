@@ -49,7 +49,9 @@ class Data extends Controller
             return;
         }
 
-        database()->insert('data', $dataModel);
+        $dataId = database()->insert('data', $dataModel);
+
+        log()::add($dataId, 'data', 'a data set was registered on raise.');
 
         parent::register(['details' => 'Data Registered Successfully', 'message' => 'Success'], new Message());
     }
@@ -86,15 +88,18 @@ class Data extends Controller
      */
     protected function filter(Select $query = null)
     {
+        global $token;
+
         $query = new Select();
+
+        $query->where('clientId', $token()->clientId);
 
         if (request()::query('serviceId') !== false) {
             $query->where('serviceId', request()::query('serviceId'));
         }
 
-        //@TODO: Implement Name Filtering
-        if (request()::query('name') !== false) {
-            $query->where('ANY v WITHIN data SATISFIES v.`` = 444 END');
+        if (($name = request()::query('name')) !== false) {
+            $query->where("'{$name}' IN order");
         }
 
         return parent::filter($query);

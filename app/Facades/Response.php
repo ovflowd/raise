@@ -88,7 +88,7 @@ class Response extends Facade
      *
      * @param callable|null $callback an optional callback for result
      *
-     * @return string|object|array the result of the callback
+     * @return string|object|array|Model the result of the callback
      */
     public static function getResponse($callback = null)
     {
