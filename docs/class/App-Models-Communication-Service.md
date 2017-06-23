@@ -19,22 +19,6 @@ Properties
 ----------
 
 
-### $id
-
-The Unique Identifier of the Service
-used on the Response.
-
-
-
-```php
-public string $id = ''
-```
-
-#### Details:
-* Visibility: **public**
-
-<hr>
-
 ### $name
 
 The Service Name.
@@ -109,11 +93,11 @@ The time when the Client requested the operation.
 
 
 ```php
-public float $clientTime
+protected float $clientTime
 ```
 
 #### Details:
-* Visibility: **public**
+* Visibility: **protected**
 
 <hr>
 
@@ -125,11 +109,11 @@ Tags are used to contextual data filtering
 and may be used to filter set of results
 
 ```php
-public array $tags = array()
+protected array $tags = array()
 ```
 
 #### Details:
-* Visibility: **public**
+* Visibility: **protected**
 
 <hr>
 
@@ -171,23 +155,6 @@ mixed App\Models\Communication\Raise::__construct()
 
 <hr>
 
-### getClientId
-
-Get the Related Client Unique Identifier.
-
-
-
-```php
-string App\Models\Communication\Service::getClientId()
-```
-
-#### Details:
-* Visibility: **public**
-
-
-
-<hr>
-
 ### setClientId
 
 Set the Unique Client Identifier
@@ -208,6 +175,31 @@ mixed App\Models\Communication\Service::setClientId(string or null $clientId)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $clientId | string or null | the ClientId to be set |
+
+
+<hr>
+
+### setTags
+
+Set an array of Tags
+
+Tags are used to contextual data filtering
+and may be used to filter set of results
+
+```php
+mixed App\Models\Communication\Raise::setTags(array $tags)
+```
+
+#### Details:
+* Visibility: **public**
+* This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $tags | **array** | The tags to be stored |
 
 
 <hr>

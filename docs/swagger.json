@@ -63,49 +63,56 @@
           {
             "name": "name",
             "in": "query",
-            "description": "Filter by Client Names.",
+            "description": "Filter by Client Names.<br><b>Example:</b> `Humidity Sensor`",
             "required": false,
             "type": "string"
           },
           {
             "name": "processor",
             "in": "query",
-            "description": "Filter by Client Processor Type.",
+            "description": "Filter by Client Processor Type.<br><b>Example:</b> `Texas Instruments XXX`",
             "required": false,
             "type": "string"
           },
           {
             "name": "channel",
             "in": "query",
-            "description": "Filter By Client Communication Channel.",
+            "description": "Filter By Client Communication Channel.<br><b>Example:</b> `IEEE 802.11b`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mac",
+            "in": "query",
+            "description": "Filter By Client MAC Address.<br><b>Example:</b> `FF:FF:FF:FF:FF`",
             "required": false,
             "type": "string"
           },
           {
             "name": "tags",
             "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags. <br><b>Example:</b> tag1:tag2:tag3",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of clients. As an example you can group clients by tags. <br><b>Example:</b> `tag1:tag2:tag3`",
             "required": false,
             "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "You can limit the **size** of the result set of Clients on the response.<br><b>Example:</b> 20.",
+            "description": "You can limit the **size** of the result set of Clients on the response.<br><b>Example:</b> `20`",
             "required": false,
             "type": "string"
           },
           {
             "name": "order",
             "in": "query",
-            "description": "You can Order the Result by a specific order. The Clients **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
+            "description": "You can Order the Result by a specific order. The Clients **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> `true` (ASCENDING) `false` (DESCENDING)",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "interval",
             "in": "query",
-            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> `1451606400:1483228800` <i>(Between 2016 and 2017)</i>.",
             "required": false,
             "type": "string"
           }
@@ -279,44 +286,44 @@
         ],
         "parameters": [
           {
-            "name": "tags",
-            "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags. <br><b>Example:</b> tag1:tag2:tag3",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "You can limit the **size** of the result set of Services on the response.<br><b>Example:</b> 20.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "You can Order the Result by a specific order. The Services **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
-            "required": false,
-            "type": "boolean"
-          },
-          {
             "name": "name",
             "in": "query",
-            "description": "Filter by the name of Services",
+            "description": "Filter by the name of Services<br><b>Example:</b> `Air Cooler Temperature`",
             "required": false,
             "type": "string"
           },
           {
             "name": "id",
             "in": "query",
-            "description": "Filter by the Unique Identifier of a Service",
+            "description": "Filter by the Unique Identifier of a Service<br><b>Example:</b> `019e61290e441bca691f24d5f53b002ab0960e74`",
             "required": false,
             "type": "string"
           },
           {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of services. As an example you can group services by tags. <br><b>Example:</b> `tag1:tag2:tag3`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "You can limit the **size** of the result set of Services on the response.<br><b>Example:</b> `20`.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "You can Order the Result by a specific order. The Services **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> `true` (ASCENDING) `false` (DESCENDING)",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "interval",
             "in": "query",
-            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> `1451606400:1483228800` <i>(Between 2016 and 2017)</i>.",
             "required": false,
             "type": "string"
           }
@@ -393,13 +400,6 @@
             "schema": {
               "$ref": "#/definitions/ServicesRegister"
             }
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": true,
-            "description": "The type of the Service if it's a triggerer or a listener.<br><b>Example:</b> FALSE, TRUE",
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -455,44 +455,44 @@
         ],
         "parameters": [
           {
-            "name": "tags",
+            "name": "name",
             "in": "query",
-            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags. <br><b>Example:</b> tag1:tag2:tag3",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "You can limit the **size** of the result set of Data on the response.<br><b>Example:</b> 20.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> true (ASCENDING) false (DESCENDING).",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "dataName",
-            "in": "query",
-            "description": "Filter by the name of the Data <i>(The Key of the Data)</i>",
+            "description": "Filter by the name of the Data <i>(The Property of a Data Set)</i><br><b>Example:</b> `humidity`",
             "required": false,
             "type": "string"
           },
           {
             "name": "serviceId",
             "in": "query",
-            "description": "Filter by the ServiceId, since Data is related to Services.",
+            "description": "Filter by the ServiceId, since Data is related to Services.<br><b>Example:</b> `019e61290e441bca691f24d5f53b002ab0960e74`",
             "required": false,
             "type": "string"
           },
           {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags. <br><b>Example:</b> `tag1:tag2:tag3`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "You can limit the **size** of the result set of Data on the response.<br><b>Example:</b> `20`.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> `true` (ASCENDING) `false` (DESCENDING)",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "interval",
             "in": "query",
-            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> 1451606400:1483228800 <i>(Between 2016 and 2017)</i>.",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> `1451606400:1483228800` <i>(Between 2016 and 2017)</i>.",
             "required": false,
             "type": "string"
           }
@@ -623,7 +623,7 @@
         "mac",
         "serial",
         "processor",
-        "channel"
+        "channel",
       ],
       "type": "object",
       "properties": {
@@ -696,7 +696,7 @@
         "serial",
         "processor",
         "channel",
-        "location"
+        "location",
       ],
       "type": "object",
       "properties": {
@@ -764,7 +764,7 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "example": 20.20
+            "example": 20.20,
           }
         }
       }
@@ -785,14 +785,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "example": "humidity"
+            "example": "humidity",
           }
         },
         "data": {
           "type": "array",
           "items": {
             "type": "number",
-            "example": 20.0
+            "example": 20.0,
           }
         }
       }
@@ -843,7 +843,6 @@
       "required": [
         "name",
         "parameters",
-        "clientId",
         "returnType"
       ],
       "properties": {
@@ -851,17 +850,13 @@
           "type": "string",
           "example": "Get temp"
         },
-        "clientId": {
-          "type": "string",
-          "example": "019e61290e441bca691f24d5f53b002ab0960e74"
-        },
         "returnType": {
           "type": "string",
           "example": "float"
         },
         "parameters": {
           "$ref": "#/definitions/Parameter"
-        }
+        },
       }
     },
     "ServicesList": {

@@ -19,14 +19,14 @@ Properties
 ----------
 
 
-### $codHttp
+### $code
 
 The Applied HTTP Response Code.
 
 
 
 ```php
-public integer $codHttp
+public integer $code
 ```
 
 #### Details:

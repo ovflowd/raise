@@ -1,13 +1,15 @@
-App\Models\Response\Service
+App\Models\Response\Data
 ===============
 
-Class Service.
+Class Model.
 
-This is the Response Model of a Service
-Contains a List of Service of a Service Register set Response
+This is the base class using
+the Definition of MVC Models
+
+A Model stores Data and manipulate it.
 
 
-* Class name: Service
+* Class name: Data
 * Namespace: App\Models\Response
 * Parent class: [App\Models\Communication\Model](App-Models-Communication-Model.md)
 
@@ -49,14 +51,14 @@ public string $message
 
 <hr>
 
-### $services
+### $data
 
-A set of Services that will be returned on the Response.
+A set of Clients that will be returned on the Response.
 
 
 
 ```php
-public array $services = array()
+public array<mixed,\App\Models\Communication\Data> $data = array()
 ```
 
 #### Details:
@@ -67,30 +69,6 @@ public array $services = array()
 Methods
 -------
 
-
-### setServices
-
-Set the Services Array.
-
-Depending if is a Register or or List
-may be an ServiceDefinition or a simple array
-
-```php
-mixed App\Models\Response\Service::setServices(array $services)
-```
-
-#### Details:
-* Visibility: **public**
-
-
-#### Parameters:
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| $services | **array** | array of ServiceDefinitions or simple array |
-
-
-<hr>
 
 ### encode
 

@@ -30,11 +30,11 @@ The time when the Client requested the operation.
 
 
 ```php
-public float $clientTime
+protected float $clientTime
 ```
 
 #### Details:
-* Visibility: **public**
+* Visibility: **protected**
 
 <hr>
 
@@ -46,11 +46,11 @@ Tags are used to contextual data filtering
 and may be used to filter set of results
 
 ```php
-public array $tags = array()
+protected array $tags = array()
 ```
 
 #### Details:
-* Visibility: **public**
+* Visibility: **protected**
 
 <hr>
 
@@ -72,6 +72,30 @@ protected float $serverTime
 Methods
 -------
 
+
+### setTags
+
+Set an array of Tags
+
+Tags are used to contextual data filtering
+and may be used to filter set of results
+
+```php
+mixed App\Models\Communication\Raise::setTags(array $tags)
+```
+
+#### Details:
+* Visibility: **public**
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $tags | **array** | The tags to be stored |
+
+
+<hr>
 
 ### __construct
 
