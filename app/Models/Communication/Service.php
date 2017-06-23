@@ -96,6 +96,16 @@ class Service extends Raise
     }
 
     /**
+     * Get the Related Client Unique Identifier.
+     *
+     * @return string Get the Client Identifier
+     */
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    /**
      * Set the Unique Client Identifier
      * That is related to this Service.
      *
