@@ -32,7 +32,7 @@ class Log extends Model
 {
     /**
      * The Unique Identifier of the relative
-     * logged entry (service, data, client, token)
+     * logged entry (service, data, client, token).
      *
      * @var string|null
      */
@@ -40,7 +40,7 @@ class Log extends Model
 
     /**
      * The respective table of the related
-     * logged entry (service, data, client, token)
+     * logged entry (service, data, client, token).
      *
      * @var string|null
      */
@@ -48,7 +48,7 @@ class Log extends Model
 
     /**
      * The JWT Token used for the Session
-     * if it's a request that requires Token auth
+     * if it's a request that requires Token auth.
      *
      * @var mixed|null
      */

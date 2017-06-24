@@ -141,9 +141,9 @@ class Couchbase implements DatabaseHandler
     /**
      * Update an Element of the Couchbase.
      *
-     * @param string $table      desired bucket to update
-     * @param string $primaryKey the document identifier
-     * @param Model|object  $data       data to update
+     * @param string       $table      desired bucket to update
+     * @param string       $primaryKey the document identifier
+     * @param Model|object $data       data to update
      *
      * @return array|string|object the result of the update
      */
@@ -159,10 +159,11 @@ class Couchbase implements DatabaseHandler
     }
 
     /**
-     * Delete an Element of the Database
+     * Delete an Element of the Database.
      *
-     * @param string $table desired table to update
+     * @param string $table      desired table to update
      * @param string $primaryKey desired element to delete
+     *
      * @return bool if removed or not
      */
     public function delete(string $table, string $primaryKey)

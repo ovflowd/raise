@@ -328,7 +328,7 @@ if (option('skip-create') === null) {
         'service'  => floor((($memoryQuota / 100) * 10)),
         'token'    => floor((($memoryQuota / 100) * 10)),
         'data'     => floor((($memoryQuota / 100) * 20)),
-        'log' => floor((($memoryQuota / 100) * 20)),
+        'log'      => floor((($memoryQuota / 100) * 20)),
     ];
 
     echo writeText('INFO', '46').'Starting Creation Process...'.PHP_EOL;

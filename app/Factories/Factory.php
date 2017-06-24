@@ -46,7 +46,7 @@ abstract class Factory
      *
      * @return object|array|bool the element or false if didn't found it
      */
-    abstract static function get(string $element);
+    abstract public static function get(string $element);
 
     /**
      * Add an Element.

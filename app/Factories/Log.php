@@ -46,7 +46,7 @@ class Log extends Factory
     /**
      * Add an Log entry.
      *
-     * @param string $element the unique identifier of the log
+     * @param string       $element the unique identifier of the log
      * @param array|object $content the content of the element
      *
      * @return bool|string the unique identifier if added successfully or false if not
