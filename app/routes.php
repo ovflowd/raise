@@ -41,11 +41,6 @@ $router()->mount('/client', function () use ($router, $response, $token) {
         $token();
     });
 
-    // Client Security for Revalidate Process
-    $router()->before('POST', '/revalidate', function () use ($router, $response, $token) {
-        $token();
-    });
-
     // List Clients
     $router()->get('/', '\App\Controllers\Client@list');
 

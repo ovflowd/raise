@@ -41,11 +41,11 @@ class Log extends Facade
      * @param string $element Unique Identifier of the Inserted Element (if exists)
      * @param string $table Related Table of the Operations related to this Log entry
      * @param string $details Details upon the Operation behind the Log
-     * @param string|null $givenToken A Token (JWT) can also be given
+     * @param string|object|null $givenToken A Token (JWT) can also be given
      *
      * @return bool|string If added successfully the log entry, if not false.
      */
-    public static function log(string $element, string $table, string $details, string $givenToken = null)
+    public static function log(string $element, string $table, string $details, $givenToken = null)
     {
         global $token;
 

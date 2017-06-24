@@ -80,9 +80,17 @@ interface Database
      *
      * @param string $table      desired table to update
      * @param string $primaryKey desired element to update
-     * @param Model  $data       data to update
+     * @param Model|object  $data       data to update
      *
      * @return array|string|object the result of the update
      */
-    public function update(string $table, string $primaryKey, Model $data);
+    public function update(string $table, string $primaryKey, $data);
+
+    /**
+     * Delete an Element of the Database
+     *
+     * @param string $table      desired table to update
+     * @param string $primaryKey desired element to delete
+     */
+    public function delete(string $table, string $primaryKey);
 }

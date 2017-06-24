@@ -81,11 +81,11 @@ class Security extends Facade
      */
     public static function updateToken(string $hash)
     {
+        global $response;
+
         // Verifies if is an valid JWT
         if (($token = json()::decode(setting('security.secretKey'), $hash)) == false) {
-            echo response()::message(401, 'Your Token is Invalid or Expired', true);
-
-            exit(1);
+           $response(response()::message(401, 'Your Token is Invalid or Expired', true));
         }
 
         // Retrieve the TokenModel if it exists on the database
@@ -93,10 +93,10 @@ class Security extends Facade
 
         // Check if the Token exists on the Database and check if is valid
         if ($tokenModel == false || $tokenModel->expireTime > microtime(true)) {
-            echo response()::message(401, 'Your Token is Invalid or not Expired', true);
-
-            exit(1);
+            $response(response()::message(401, 'Your Token is Invalid or not Expired', true));
         }
+
+        database()->delete('token', $token->token);
 
         return ['jwtHash' => self::insertToken($tokenModel->clientId), 'clientId' => $tokenModel->clientId];
     }

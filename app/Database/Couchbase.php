@@ -143,16 +143,34 @@ class Couchbase implements DatabaseHandler
      *
      * @param string $table      desired bucket to update
      * @param string $primaryKey the document identifier
-     * @param Model  $data       data to update
+     * @param Model|object  $data       data to update
      *
      * @return array|string|object the result of the update
      */
-    public function update(string $table, string $primaryKey, Model $data)
+    public function update(string $table, string $primaryKey, $data)
     {
         try {
-            $result = $this->connection->openBucket($table)->upsert($primaryKey, $data->encode());
+            $result = $this->connection->openBucket($table)->upsert($primaryKey, $data);
 
             return $result->value;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Delete an Element of the Database
+     *
+     * @param string $table desired table to update
+     * @param string $primaryKey desired element to delete
+     * @return bool if removed or not
+     */
+    public function delete(string $table, string $primaryKey)
+    {
+        try {
+            $this->connection->openBucket($table)->remove($primaryKey);
+
+            return true;
         } catch (Exception $e) {
             return false;
         }

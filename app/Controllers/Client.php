@@ -67,13 +67,13 @@ class Client extends Controller
         $hash = request()::headers('authorization');
 
         if(is_array(($update = security()::updateToken($hash)))) {
-            $client = database()->selectById('client', $update->clientId);
+            $client = database()->selectById('client', $update['clientId']);
 
             $client->location = request()::body('location');
 
-            database()->update('client', $update->clientId, $client);
+            database()->update('client', $update['clientId'], $client);
 
-            parent::register(['details' => 'Client Updated Successfully', 'token' => $update->jwtHash], new TokenResponse());
+            parent::register(['details' => 'Client Updated Successfully', 'token' => $update['jwtHash']], new TokenResponse());
         }
     }
 
