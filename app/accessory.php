@@ -14,7 +14,7 @@
  */
 
 /**
- * Get the static instance of the LogFacade
+ * Get the static instance of the LogFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Log|string
  */

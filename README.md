@@ -69,7 +69,7 @@ You can learn more about the <b>RAISe</b> architecture by checking our [Wiki](wi
 
 <b>You also may read those scientific papers</b> that explain about the <b>UIoT</b> architecture and the key features, and lot more about <b>RAISe</b>
 * [Design and Evaluation of a Services Interface for the Internet of Things](http://dl.acm.org/citation.cfm?id=3023305)
-* Other Papers being Added on the list.
+* Other papers being added on the list.
 
 You can also **fetch** the [API Documentation](docs/) and check it **online** by using [Swagger UI](http://docs.uiot.org/raise/).
 
