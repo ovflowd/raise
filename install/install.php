@@ -323,9 +323,9 @@ if (option('skip-create') === null) {
     echo writeText('INFO', '46')."Your Cluster RAM size is: {$memoryQuota}MB.".PHP_EOL;
 
     $buckets = [
-        'metadata' => floor((($memoryQuota / 100) * 5)),
+        'metadata' => floor((($memoryQuota / 100) * 20)),
         'client'   => floor((($memoryQuota / 100) * 10)),
-        'service'  => floor((($memoryQuota / 100) * 10)),
+        'service'  => floor((($memoryQuota / 100) * 20)),
         'token'    => floor((($memoryQuota / 100) * 10)),
         'data'     => floor((($memoryQuota / 100) * 20)),
         'log'      => floor((($memoryQuota / 100) * 20)),
