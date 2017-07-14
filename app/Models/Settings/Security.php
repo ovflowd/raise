@@ -52,4 +52,13 @@ class Security extends Model
      * @var string
      */
     public $secretKey = 'default-raise-secret-key';
+
+    /**
+     * The Debug Variable enables full php Logging
+     * except with Notices and Warnings.
+     * Only PHP Errors. Not recommended for Production
+     *
+     * @var boolean
+     */
+    public $debug = false;
 }
