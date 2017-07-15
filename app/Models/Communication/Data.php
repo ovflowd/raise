@@ -54,6 +54,14 @@ class Data extends Raise
     protected $clientId = '';
 
     /**
+     * An array that contains the parameters of the
+     * Service related to this Data
+     *
+     * @var array
+     */
+    public $parameters = [];
+
+    /**
      * A Set of Data.
      *
      * A data set contain an array
@@ -163,6 +171,8 @@ class Data extends Raise
         $this->values = array_map(function ($values) use ($service, $order) {
             return isset($order) ? $this->orderData($values, $service) : $values;
         }, $dataSet);
+
+        $this->parameters = $service->parameters;
     }
 
     /**

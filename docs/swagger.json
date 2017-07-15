@@ -458,9 +458,9 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "parameter",
             "in": "query",
-            "description": "Filter by the name of the Data <i>(The Property of a Data Set)</i><br><b>Example:</b> `humidity`",
+            "description": "Filter by a Parameter of the Data <i>(The Property of a Data Set)</i><br><b>Example:</b> `humidity`",
             "required": false,
             "type": "string"
           },
@@ -706,9 +706,9 @@
       ],
       "type": "object",
       "properties": {
-        "channel": {
+        "name": {
           "type": "string",
-          "example": "Ethernet"
+          "example": "Raspberry PI"
         },
         "chipset": {
           "type": "string",
@@ -718,21 +718,25 @@
           "type": "string",
           "example": "FF:FF:FF:FF:FF:FF"
         },
-        "name": {
+        "serial": {
           "type": "string",
-          "example": "Raspberry PI"
+          "example": "C210"
         },
         "processor": {
           "type": "string",
           "example": "Intel I3"
         },
-        "serial": {
+        "channel": {
           "type": "string",
-          "example": "C210"
+          "example": "Ethernet"
         },
         "location": {
           "type": "string",
           "example": "-15.7757876:-48.077829"
+        },
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.100000
         }
       }
     },
@@ -788,6 +792,13 @@
           "type": "string",
           "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
+        "parameters": {
+          "type": "array",
+          "example": [
+            "humidity",
+            "temperature"
+          ]
+        },
         "values": {
           "type": "array",
           "example": [
@@ -796,6 +807,10 @@
               30.0
             ]
           ]
+        },
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.100000
         }
       }
     },
@@ -843,12 +858,16 @@
           "type": "string",
           "example": "Get temp"
         },
+        "parameters": {
+          "$ref": "#/definitions/Parameter"
+        },
         "returnType": {
           "type": "string",
           "example": "float"
         },
-        "parameters": {
-          "$ref": "#/definitions/Parameter"
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.100000
         }
       }
     },

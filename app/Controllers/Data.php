@@ -104,8 +104,8 @@ class Data extends Controller
             $query->where('serviceId', request()::query('serviceId'));
         }
 
-        if (($name = request()::query('name')) !== false) {
-            $query->where("'{$name}' IN order");
+        if (($name = request()::query('parameter')) !== false) {
+            $query->where("'{$name}' IN parameters");
         }
 
         return parent::filter($query);
