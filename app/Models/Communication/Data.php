@@ -111,7 +111,7 @@ class Data extends Raise
             throw new JsonMapper_Exception();
         }
 
-        if($service->clientId !== $token()->clientId) {
+        if ($service->clientId !== $token()->clientId) {
             throw new JsonMapper_Exception();
         }
 
