@@ -37,26 +37,28 @@ class Service extends Controller
      *
      * Validated and Registers Services unto the Database
      *
-     * @param object     $data     the payload as object from the Request
+     * @param object $data the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
     {
-        if (($serviceBag = security()::validateBody('serviceBag', request()::body())) == false) {
-            response()::message(400, 'Missing required Parameters');
+        response()::message(400, 'Missing required Parameters');
 
-            return;
+        $services = array_filter(array_map(function ($serviceModel) {
+            if (($service = security()::validateBody('service', $serviceModel))) {
+                $serviceId = database()->insert('service', $service);
+
+                logger()::log($serviceId, 'service', 'a service was registered on raise.');
+
+                return ['id' => $serviceId, 'name' => $service->name];
+            }
+
+            return null;
+        }, request()::body()));
+
+        if (count($services) > 0) {
+            parent::register(['services' => $services], new ServiceResponse());
         }
-
-        $response = array_map(function (ServiceDefinition $service) {
-            $serviceId = database()->insert('service', $service);
-
-            logger()::log($serviceId, 'service', 'a service was registered on raise.');
-
-            return ['id' => $serviceId, 'name' => $service->name];
-        }, $serviceBag->services);
-
-        parent::register(['services' => $response], new ServiceResponse());
     }
 
     /**
@@ -64,9 +66,9 @@ class Service extends Controller
      *
      * List a set of Services or a single Service based on the Request Parameters
      *
-     * @param array|object|null $data     the given Data to be Mapped
-     * @param Model             $response the Response Model
-     * @param callable          $callback an optional callback to treat the mapping result
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {

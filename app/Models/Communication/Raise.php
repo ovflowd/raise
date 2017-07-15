@@ -35,7 +35,7 @@ abstract class Raise extends Model
      *
      * @var float (UNIX_TIMESTAMP)
      */
-    protected $clientTime = 0;
+    public $clientTime = 0;
 
     /**
      * Tags Identifiers.

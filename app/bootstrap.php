@@ -55,7 +55,7 @@ response()::prepare('application/json');
 |----------------------------------------------------------------------------
 */
 
-error_reporting(!\App\Handlers\Settings::get('security.debug') ?: (E_ALL ^ E_NOTICE));
+error_reporting(!\App\Handlers\Settings::get('security.debug') ?: (E_ALL ^ (E_NOTICE | E_WARNING)));
 
 ini_set('display_errors', \App\Handlers\Settings::get('security.debug'));
 

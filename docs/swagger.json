@@ -398,7 +398,10 @@
             "required": true,
             "description": "A set of Services that will be registered on RAISe",
             "schema": {
-              "$ref": "#/definitions/ServicesRegister"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceRegister"
+              }
             }
           }
         ],
@@ -503,7 +506,7 @@
             "schema": {
               "required": [
                 "code",
-                "values"
+                "data"
               ],
               "title": "Service",
               "type": "object",
@@ -516,7 +519,7 @@
                   "type": "string",
                   "example": "Success"
                 },
-                "values": {
+                "data": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/Data"
@@ -570,7 +573,10 @@
             "required": true,
             "description": "A set of Data that will be registered on RAIse",
             "schema": {
-              "$ref": "#/definitions/DataRegister"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataRegister"
+              }
             }
           }
         ],
@@ -623,7 +629,7 @@
         "mac",
         "serial",
         "processor",
-        "channel",
+        "channel"
       ],
       "type": "object",
       "properties": {
@@ -696,7 +702,7 @@
         "serial",
         "processor",
         "channel",
-        "location",
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -734,7 +740,7 @@
       "type": "object",
       "required": [
         "order",
-        "data",
+        "values",
         "serviceId"
       ],
       "properties": {
@@ -755,24 +761,25 @@
         },
         "order": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "example": "humidity"
-          }
+          "example": [
+            "humidity",
+            "temperature"
+          ]
         },
-        "data": {
+        "values": {
           "type": "array",
-          "items": {
-            "type": "integer",
-            "example": 20.20,
-          }
+          "example": [
+            [
+              20.2,
+              30.0
+            ]
+          ]
         }
       }
     },
     "Data": {
       "required": [
-        "order",
-        "data",
+        "values",
         "serviceId"
       ],
       "type": "object",
@@ -781,26 +788,23 @@
           "type": "string",
           "example": "019e61290e441bca691f24d5f53b002ab0960e74"
         },
-        "order": {
+        "values": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "example": "humidity",
-          }
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "example": 20.0,
-          }
+          "example": [
+            [
+              20.2,
+              30.0
+            ]
+          ]
         }
       }
     },
-    "ServicesRegister": {
+    "ServiceRegister": {
       "type": "object",
       "required": [
-        "services"
+        "name",
+        "parameters",
+        "returnType"
       ],
       "properties": {
         "clientTime": {
@@ -814,17 +818,6 @@
             "example": "example-tag"
           }
         },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceRegister"
-          }
-        }
-      }
-    },
-    "ServiceRegister": {
-      "type": "object",
-      "properties": {
         "name": {
           "type": "string",
           "example": "Get temp"
@@ -856,7 +849,7 @@
         },
         "parameters": {
           "$ref": "#/definitions/Parameter"
-        },
+        }
       }
     },
     "ServicesList": {

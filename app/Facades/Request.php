@@ -56,7 +56,7 @@ class Request extends Facade
      * A Payload that was sent on the Request
      * On RAISe will be used as Registering of Data
      *
-     * @var object
+     * @var object|array
      */
     private static $body;
 
@@ -140,12 +140,16 @@ class Request extends Facade
      *
      * @param string|null $key an property/value of the payload
      *
-     * @return object|bool the entire payload or a value of it (if exists)
+     * @return array|object|bool the entire payload or a value of it (if exists)
      */
     public static function body(string $key = null)
     {
         if ($key == null) {
             return self::$body;
+        }
+
+        if(is_array(self::$body)) {
+            return array_key_exists($key, self::$body) ? self::$body[$key] : false;
         }
 
         return property_exists(self::$body, $key) ? self::$body->{$key} : false;

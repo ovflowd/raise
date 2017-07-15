@@ -54,19 +54,6 @@ class Data extends Raise
     protected $clientId = '';
 
     /**
-     * An array that contains the order in which the
-     * data will be presented.
-     *
-     * Data must be sent following the order in this
-     * array.
-     *
-     * @required
-     *
-     * @var array
-     */
-    public $order = [];
-
-    /**
      * A Set of Data.
      *
      * A data set contain an array
@@ -76,9 +63,24 @@ class Data extends Raise
      *
      * @required
      *
-     * @var array[]
+     * @var array
      */
-    public $data = [];
+    public $values = [];
+
+    /**
+     * Data constructor.
+     *
+     * Set the Timestamps of when RAISe handled
+     * this model.
+     *
+     * And set the Client Identifier
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setClientId();
+    }
 
     /**
      * Set a serviceId.
@@ -120,20 +122,22 @@ class Data extends Raise
      * at. The order is useful to identify which element
      * of a data set refers to which parameter of a Service
      *
-     * @param array $order The array specifying the Service
+     * @param array $parameters The array specifying the Service
      *                     parameters with a given (arbitrary/user specified) order
      *
      * @throws JsonMapper_Exception
      */
-    public function setOrder(array $order)
+    public function setOrder(array $parameters)
     {
+        global $order;
+
         $service = database()->selectById('service', $this->serviceId);
 
-        if (count(array_diff($order, $service->parameters)) > 0) {
+        if (count(array_diff($parameters, $service->parameters)) > 0) {
             throw new JsonMapper_Exception();
         }
 
-        $this->order = $order;
+        $order = array_flip($parameters);
     }
 
     /**
@@ -143,19 +147,53 @@ class Data extends Raise
      * has the same number of parameters as
      * the order array.
      *
-     * @param array[] $dataSet A data set contain an array
+     * @param array $dataSet A data set contain an array
      *                         of data that follows a service parameters pattern
      *                         an data element need to include values for all
      *                         the parameters of an service.
      *
      * @example Available on Swagger API
      */
-    public function setData(array $dataSet)
+    public function setValues(array $dataSet)
     {
-        $count = count($this->order);
+        global $order;
 
-        $this->data = array_filter($dataSet, function (array $data) use ($count) {
-            return count($data) == $count;
-        });
+        $service = database()->selectById('service', $this->serviceId);
+
+        $this->values = array_map(function ($values) use ($service, $order) {
+            return isset($order) ? $this->orderData($values, $service) : $values;
+        }, $dataSet);
+    }
+
+    /**
+     * Order a Set of Data
+     *
+     * Order Data based on Service Parameters and his Order Set
+     *
+     * @param array $values A set of Values to be Ordered
+     * @param Service|Model $service A given Service
+     *
+     * @return array|null Ordered Data if the Data matches the Service Parameters,
+     *          null otherwise.
+     */
+    protected function orderData(array $values, $service)
+    {
+        global $order;
+
+        return array_map(function ($parameter) use ($values, $order) {
+            return $values[$order[$parameter]];
+        }, $service->parameters);
+    }
+
+    /**
+     * Compare the size of two Arrays
+     *
+     * @param array $needle Array to compare
+     * @param array $haystack Array to be compared
+     * @return bool If has same size or not
+     */
+    protected function checkSize(array $needle, array $haystack)
+    {
+        return count($haystack) === count($needle);
     }
 }
