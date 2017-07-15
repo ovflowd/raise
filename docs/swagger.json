@@ -679,11 +679,6 @@
     },
     "ClientRegisterResponse": {
       "type": "object",
-      "required": [
-        "code",
-        "message",
-        "token"
-      ],
       "properties": {
         "code": {
           "type": "integer",
@@ -700,15 +695,6 @@
       }
     },
     "ClientResponse": {
-      "required": [
-        "name",
-        "chipset",
-        "mac",
-        "serial",
-        "processor",
-        "channel",
-        "location"
-      ],
       "type": "object",
       "properties": {
         "name": {
@@ -767,11 +753,6 @@
     },
     "ClientRevalidateResponse": {
       "type": "object",
-      "required": [
-        "code",
-        "message",
-        "token"
-      ],
       "properties": {
         "code": {
           "type": "integer",
@@ -829,11 +810,6 @@
     },
     "ServiceRegisterResponse": {
       "type": "object",
-      "required": [
-        "code",
-        "message",
-        "services"
-      ],
       "properties": {
         "code": {
           "type": "integer",
@@ -853,10 +829,6 @@
     },
     "ServiceRegisterResponseBag": {
       "type": "object",
-      "required": [
-        "id",
-        "name"
-      ],
       "properties": {
         "id": {
           "type": "string",
@@ -870,11 +842,6 @@
     },
     "ServiceResponse": {
       "type": "object",
-      "required": [
-        "name",
-        "parameters",
-        "returnType"
-      ],
       "properties": {
         "name": {
           "type": "string",
@@ -939,10 +906,6 @@
       }
     },
     "DataRegisterResponse": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -963,9 +926,6 @@
     },
     "DataRegisterResponseBag": {
       "type": "object",
-      "required": [
-        "id"
-      ],
       "properties": {
         "id": {
           "type": "string",
@@ -974,10 +934,6 @@
       }
     },
     "DataResponse": {
-      "required": [
-        "values",
-        "serviceId"
-      ],
       "type": "object",
       "properties": {
         "serviceId": {
@@ -1007,10 +963,6 @@
       }
     },
     "Error400": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1028,10 +980,6 @@
       }
     },
     "Error401": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1049,10 +997,6 @@
       }
     },
     "Error403": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1070,10 +1014,6 @@
       }
     },
     "Error422": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1091,10 +1031,6 @@
       }
     },
     "Error429": {
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
       "properties": {
         "code": {
