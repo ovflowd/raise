@@ -33,7 +33,7 @@ class Data extends Model
     /**
      * A set of Clients that will be returned on the Response.
      *
-     * @var \App\Models\Communication\Data[]
+     * @var array
      */
     public $data = [];
 }

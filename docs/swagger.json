@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.4.0",
+    "version": "2.0.0",
     "title": "UIoT RAISe API",
     "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices. <br><br><b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).<br><br><b>Security Note:</b> RAISe uses [JWT](https://jwt.io) for Token Schemas.",
     "contact": {
@@ -40,7 +40,7 @@
     },
     {
       "name": "service",
-      "description": "Services of a Client, they describes the processes of a Client"
+      "description": "Services of a Client, they describes the processes of a client"
     },
     {
       "name": "data",
@@ -139,7 +139,7 @@
                 "clients": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/Client"
+                    "$ref": "#/definitions/ClientResponse"
                   }
                 }
               }
@@ -187,7 +187,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TokenResponseClient"
+              "$ref": "#/definitions/ClientRegisterResponse"
             }
           },
           "400": {
@@ -237,7 +237,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TokenResponseClient"
+              "$ref": "#/definitions/ClientRevalidateResponse"
             }
           },
           "400": {
@@ -336,7 +336,7 @@
                 "code",
                 "services"
               ],
-              "title": "Service",
+              "title": "ServiceResponse",
               "type": "object",
               "properties": {
                 "code": {
@@ -348,7 +348,10 @@
                   "example": "Success"
                 },
                 "services": {
-                  "$ref": "#/definitions/ServicesList"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ServiceResponse"
+                  }
                 }
               }
             }
@@ -409,7 +412,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TokenResponseRegister"
+              "$ref": "#/definitions/ServiceRegisterResponse"
             }
           },
           "400": {
@@ -508,7 +511,6 @@
                 "code",
                 "data"
               ],
-              "title": "Service",
               "type": "object",
               "properties": {
                 "code": {
@@ -522,7 +524,7 @@
                 "data": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/Data"
+                    "$ref": "#/definitions/DataResponse"
                   }
                 }
               }
@@ -584,7 +586,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TokenResponse"
+              "$ref": "#/definitions/DataRegisterResponse"
             }
           },
           "400": {
@@ -629,7 +631,8 @@
         "mac",
         "serial",
         "processor",
-        "channel"
+        "channel",
+        "location"
       ],
       "type": "object",
       "properties": {
@@ -674,27 +677,29 @@
         }
       }
     },
-    "ClientRevalidate": {
-      "required": [
-        "services",
-        "location"
-      ],
+    "ClientRegisterResponse": {
       "type": "object",
+      "required": [
+        "code",
+        "message",
+        "token"
+      ],
       "properties": {
-        "services": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "example": 13
-          }
+        "code": {
+          "type": "integer",
+          "example": 200
         },
-        "location": {
+        "message": {
           "type": "string",
-          "example": "-15.7757876:-48.077829"
+          "example": "Success"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6Ijk3NDc5NTgzZjMwZDRiNTViOTRkZDkyZTAxZDk0ZWM1ZjNhMDliNzAifQ.WUHHq-34xu030Ieqgkh2owL94TCyI4nMpXIICLbqEeA"
         }
       }
     },
-    "Client": {
+    "ClientResponse": {
       "required": [
         "name",
         "chipset",
@@ -740,12 +745,164 @@
         }
       }
     },
+    "ClientRevalidate": {
+      "required": [
+        "services",
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "example": 13
+          }
+        },
+        "location": {
+          "type": "string",
+          "example": "-15.7757876:-48.077829"
+        }
+      }
+    },
+    "ClientRevalidateResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "message",
+        "token"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Success"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6Ijk3NDc5NTgzZjMwZDRiNTViOTRkZDkyZTAxZDk0ZWM1ZjNhMDliNzAifQ.WUHHq-34xu030Ieqgkh2owL94TCyI4nMpXIICLbqEeA"
+        },
+        "details": {
+          "type": "string",
+          "example": "Client Updated Successfully"
+        }
+      }
+    },
+    "ServiceRegister": {
+      "type": "object",
+      "required": [
+        "name",
+        "parameters",
+        "returnType"
+      ],
+      "properties": {
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.100000
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "example-tag"
+          }
+        },
+        "name": {
+          "type": "string",
+          "example": "Get temp"
+        },
+        "parameters": {
+          "type": "array",
+          "example": [
+            "humidity",
+            "temperature"
+          ]
+        },
+        "returnType": {
+          "type": "string",
+          "example": "float"
+        }
+      }
+    },
+    "ServiceRegisterResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "message",
+        "services"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Success"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRegisterResponseBag"
+          }
+        }
+      }
+    },
+    "ServiceRegisterResponseBag": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "85bb8597ce6d900fe1cbc07552780cb627fd40cb"
+        },
+        "name": {
+          "type": "string",
+          "example": "Get temp"
+        }
+      }
+    },
+    "ServiceResponse": {
+      "type": "object",
+      "required": [
+        "name",
+        "parameters",
+        "returnType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Humidity & Temperature Control"
+        },
+        "parameters": {
+          "type": "array",
+          "example": [
+            "humidity",
+            "temperature"
+          ]
+        },
+        "returnType": {
+          "type": "string",
+          "example": "float"
+        },
+        "clientTime": {
+          "type": "number",
+          "example": 1000000000.100000
+        }
+      }
+    },
     "DataRegister": {
       "type": "object",
       "required": [
+        "serviceId",
         "order",
-        "values",
-        "serviceId"
+        "values"
       ],
       "properties": {
         "clientTime": {
@@ -781,7 +938,42 @@
         }
       }
     },
-    "Data": {
+    "DataRegisterResponse": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataRegisterResponseBag"
+          }
+        }
+      }
+    },
+    "DataRegisterResponseBag": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "85bb8597ce6d900fe1cbc07552780cb627fd40cb"
+        }
+      }
+    },
+    "DataResponse": {
       "required": [
         "values",
         "serviceId"
@@ -812,76 +1004,6 @@
           "type": "number",
           "example": 1000000000.100000
         }
-      }
-    },
-    "ServiceRegister": {
-      "type": "object",
-      "required": [
-        "name",
-        "parameters",
-        "returnType"
-      ],
-      "properties": {
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "example-tag"
-          }
-        },
-        "name": {
-          "type": "string",
-          "example": "Get temp"
-        },
-        "parameters": {
-          "$ref": "#/definitions/Parameter"
-        },
-        "returnType": {
-          "type": "string",
-          "example": "float"
-        }
-      }
-    },
-    "Service": {
-      "type": "object",
-      "required": [
-        "name",
-        "parameters",
-        "returnType"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Get temp"
-        },
-        "parameters": {
-          "$ref": "#/definitions/Parameter"
-        },
-        "returnType": {
-          "type": "string",
-          "example": "float"
-        },
-        "clientTime": {
-          "type": "number",
-          "example": 1000000000.100000
-        }
-      }
-    },
-    "ServicesList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Service"
-      }
-    },
-    "Parameter": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "example": "example-tag"
       }
     },
     "Error400": {
@@ -986,86 +1108,6 @@
         "details": {
           "type": "string",
           "example": "You reacehd the maximum API usage for the limit time interval"
-        }
-      }
-    },
-    "TokenResponseRegister": {
-      "type": "object",
-      "required": [
-        "code",
-        "message",
-        "services"
-      ],
-      "properties": {
-        "code": {
-          "type": "integer",
-          "example": 200
-        },
-        "message": {
-          "type": "string",
-          "example": "Success"
-        },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceRegisterResponse"
-          }
-        }
-      }
-    },
-    "ServiceRegisterResponse": {
-      "type": "object",
-      "required": [
-        "id",
-        "name"
-      ],
-      "properties": {
-        "id": {
-          "type": "number",
-          "example": 1151
-        },
-        "name": {
-          "type": "string",
-          "example": "Get temp"
-        }
-      }
-    },
-    "TokenResponseClient": {
-      "type": "object",
-      "required": [
-        "code",
-        "message",
-        "token"
-      ],
-      "properties": {
-        "code": {
-          "type": "integer",
-          "example": 200
-        },
-        "message": {
-          "type": "string",
-          "example": "Client Registered Successfully"
-        },
-        "token": {
-          "type": "string",
-          "example": "AAFFAAFFAAFFAAFF"
-        }
-      }
-    },
-    "TokenResponse": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "example": 200
-        },
-        "message": {
-          "type": "string",
-          "example": "Success"
         }
       }
     }

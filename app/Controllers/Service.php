@@ -52,6 +52,8 @@ class Service extends Controller
 
                 return ['id' => $serviceId, 'name' => $service->name];
             }
+
+            return false;
         }, request()::body()));
 
         if (count($services) > 0) {

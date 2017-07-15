@@ -43,17 +43,15 @@ class Client extends Controller
      */
     public function register($data = null, Model $response = null)
     {
-        if (($clientModel = security()::validateBody('client', request()::body())) == false) {
-            response()::message(400, 'Missing required Parameters');
+        response()::message(400, 'Missing required Parameters');
 
-            return;
+        if (($clientModel = security()::validateBody('client', request()::body()))) {
+            $jwtHash = security()::insertToken($clientId = database()->insert('client', $clientModel));
+
+            parent::register(['token' => $jwtHash], new TokenResponse());
+
+            logger()::log($clientId, 'client', 'a client were registered on raise.', $jwtHash);
         }
-
-        $jwtHash = security()::insertToken($clientId = database()->insert('client', $clientModel));
-
-        parent::register(['details' => 'Client Registered Successfully', 'token' => $jwtHash], new TokenResponse());
-
-        logger()::log($clientId, 'client', 'a client were registered on raise.', $jwtHash);
     }
 
     /**

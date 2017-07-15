@@ -18,7 +18,6 @@ namespace App\Controllers;
 use App\Models\Communication\Data as DataDefinition;
 use App\Models\Communication\Model;
 use App\Models\Response\Data as DataResponse;
-use App\Models\Response\Message;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -51,12 +50,14 @@ class Data extends Controller
 
                 logger()::log($dataId, 'data', 'a data set was registered on raise.');
 
-                return $dataId;
+                return ['id' => $dataId];
             }
+
+            return false;
         }, request()::body()));
 
         if (count($dataIds) > 0) {
-            parent::register(['details' => 'Data Registered Successfully', 'message' => 'Success'], new Message());
+            parent::register(['message' => 'Success', 'data' => $dataIds], new DataResponse());
         }
     }
 
