@@ -28,7 +28,7 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moi
 | Send Data |    &#10004;  |  Ability of Sending Data froma  Service+Client within RAISe. |
 | List a Client or Clients |    &#10004;  |  Ability to Get a Client or multiple Clients, list and filter the parameters for the Response. |
 | List a Service or Services |    &#10004;  |  Ability to Get a Service or multiple Services, list and filter the parameters for the Response. |
-| List and filter Data |    &#10008;  |  Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
+| List and filter Data |    &#10004;  |  Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
 
 UIoT RAISe
 ----------
