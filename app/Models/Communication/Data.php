@@ -55,7 +55,7 @@ class Data extends Raise
 
     /**
      * An array that contains the parameters of the
-     * Service related to this Data
+     * Service related to this Data.
      *
      * @var array
      */
@@ -131,7 +131,7 @@ class Data extends Raise
      * of a data set refers to which parameter of a Service
      *
      * @param array $parameters The array specifying the Service
-     *                     parameters with a given (arbitrary/user specified) order
+     *                          parameters with a given (arbitrary/user specified) order
      *
      * @throws JsonMapper_Exception
      */
@@ -156,9 +156,9 @@ class Data extends Raise
      * the order array.
      *
      * @param array $dataSet A data set contain an array
-     *                         of data that follows a service parameters pattern
-     *                         an data element need to include values for all
-     *                         the parameters of an service.
+     *                       of data that follows a service parameters pattern
+     *                       an data element need to include values for all
+     *                       the parameters of an service.
      *
      * @example Available on Swagger API
      */
@@ -176,15 +176,15 @@ class Data extends Raise
     }
 
     /**
-     * Order a Set of Data
+     * Order a Set of Data.
      *
      * Order Data based on Service Parameters and his Order Set
      *
-     * @param array $values A set of Values to be Ordered
+     * @param array         $values  A set of Values to be Ordered
      * @param Service|Model $service A given Service
      *
      * @return array|null Ordered Data if the Data matches the Service Parameters,
-     *          null otherwise.
+     *                    null otherwise.
      */
     protected function orderData(array $values, $service)
     {
@@ -196,10 +196,11 @@ class Data extends Raise
     }
 
     /**
-     * Compare the size of two Arrays
+     * Compare the size of two Arrays.
      *
-     * @param array $needle Array to compare
+     * @param array $needle   Array to compare
      * @param array $haystack Array to be compared
+     *
      * @return bool If has same size or not
      */
     protected function checkSize(array $needle, array $haystack)

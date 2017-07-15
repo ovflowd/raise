@@ -148,7 +148,7 @@ class Request extends Facade
             return self::$body;
         }
 
-        if(is_array(self::$body)) {
+        if (is_array(self::$body)) {
             return array_key_exists($key, self::$body) ? self::$body[$key] : false;
         }
 
