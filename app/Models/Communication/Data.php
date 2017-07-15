@@ -103,7 +103,15 @@ class Data extends Raise
      */
     public function setServiceId(string $serviceId)
     {
-        if (database()->selectById('service', $serviceId) === false) {
+        global $token;
+
+        $service = database()->selectById('service', $serviceId);
+
+        if ($service === false) {
+            throw new JsonMapper_Exception();
+        }
+
+        if($service->clientId !== $token()->clientId) {
             throw new JsonMapper_Exception();
         }
 
