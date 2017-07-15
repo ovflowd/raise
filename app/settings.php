@@ -47,7 +47,7 @@ return [
     'security' => [
         'expireTime' => '20hours',
         'secretKey'  => 'default-raise-secret-key',
-        'debug'      => true,
+        'debug'      => false,
     ],
 
     /*
