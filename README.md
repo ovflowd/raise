@@ -16,19 +16,40 @@ Version | Windows | Linux | Artifacts |
 --------|---------|-------|-----------|
 Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moinqrha2n?svg=true)](https://ci.appveyor.com/project/sant0ro/raise-askjk)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise-askjk/branch/sbr/artifacts) |
 
-<b>Supported Features</b>
+<b>Core Features</b>
 
 | Feature  |  Supported?   | Description  |
 |----------|:-------------:|:-------------|
-| Home Page |    &#10004;  |  Ability of accessing the main route of **RAISe** to check the status of the middleware. |
-| Not Found Route |    &#10004;  |  Ability of accessing a non-existent route and receive a response of the route doesn't exists. |
-| Register a Client |    &#10004;  |  Ability of Registering a Client within RAISe. |
-| Revalidate a Client |    &#10008;  |  Ability of Revalidating a Client when the Token expires. |
-| Register a Service |    &#10004;  |  Ability of Registering a Service or multiple Services in one time within RAISe. |
-| Send Data |    &#10004;  |  Ability of Sending Data froma  Service+Client within RAISe. |
-| List a Client or Clients |    &#10004;  |  Ability to Get a Client or multiple Clients, list and filter the parameters for the Response. |
-| List a Service or Services |    &#10004;  |  Ability to Get a Service or multiple Services, list and filter the parameters for the Response. |
-| List and filter Data |    &#10004;  |  Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
+| Home Page | &#10004; | Ability of accessing the main route of **RAISe** to check the status of the middleware. |
+| Not Found Route | &#10004; | Ability of accessing a non-existent route and receive a response of the route doesn't exists. |
+| Register a Client | &#10004; | Ability of Registering a Client within RAISe. |
+| Revalidate a Client | &#10008; | Ability of Revalidating a Client when the Token expires. |
+| Register a Service | &#10004; | Ability of Registering a Service or multiple Services in one time within RAISe. |
+| Send Data | &#10004; | Ability of Sending Data froma  Service+Client within RAISe. |
+| List a Client or Clients | &#10004; | Ability to Get a Client or multiple Clients, list and filter the parameters for the Response. |
+| List a Service or Services | &#10004; | Ability to Get a Service or multiple Services, list and filter the parameters for the Response. |
+| List and filter Data | &#10004; | Ability to get Data, filter it with multiple simple parameters and advanced parameters like time interval. |
+
+<b>Social Features</b>
+
+| Feature  |  Supported?   | Description  |
+|----------|:-------------:|:-------------|
+| Create a Permission | &#10008; | Ability to create a new type of Permission on RAISe |
+| Edit a Permission | &#10008; | Ability to Edit Permissions on RAISe |
+| Remove a Permission | &#10008; | Ability to Remove Permissions from RAISe |
+| Create a Relationship | &#10008; | Ability to manually specify relationships between services and/or clients from different groups. |
+| Edit a Relationship | &#10008; | Ability to update the members of a specific Relationship |
+| Remove a Relationship | &#10008; | Ability to Remove existent Relationships from RAISe |
+| Create a Profile/Group | &#10008; | Ability to create a Profile. Defining Permissions and Entities (Relations) |
+| Edit a Profile/Group | &#10008; | Ability to edit the members and/or permissions from a Profile |
+| Remove a Profile/Group | &#10008; | Ability to Remove Profiles from RAISe |
+
+<b>Management Features</b>
+
+| Feature  |  Supported?   | Description  |
+|----------|:-------------:|:-------------|
+| Show Logs | &#10008; | Ability to list and show RAISe Logs |
+| Show Audit | &#10008; | Ability to list and show RAISe Audit (Logs Inference) |
 
 UIoT RAISe
 ----------
