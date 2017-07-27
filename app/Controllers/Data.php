@@ -37,7 +37,7 @@ class Data extends Controller
      *
      * Validated and Registers Data unto the Database
      *
-     * @param object $data the payload as object from the Request
+     * @param object     $data     the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
@@ -86,9 +86,9 @@ class Data extends Controller
      *
      * List a set of Data or a single Data based on the Request Parameters
      *
-     * @param array|object|null $data the given Data to be Mapped
-     * @param Model $response the Response Model
-     * @param callable $callback an optional callback to treat the mapping result
+     * @param array|object|null $data     the given Data to be Mapped
+     * @param Model             $response the Response Model
+     * @param callable          $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -128,7 +128,7 @@ class Data extends Controller
         }
 
         if (($name = request()::query('value')) !== false) {
-            $query->where("ARRAY_CONTAINS(`values`, " . (is_numeric($name) ? "{$name}" : "'{$name}'") . ")");
+            $query->where('ARRAY_CONTAINS(`values`, '.(is_numeric($name) ? "{$name}" : "'{$name}'").')');
         }
 
         return parent::filter($query);
