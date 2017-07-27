@@ -37,24 +37,26 @@ class Data extends Controller
      *
      * Validated and Registers Data unto the Database
      *
-     * @param object     $data     the payload as object from the Request
+     * @param object $data the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
     {
         response()::message(400, 'Missing required Parameters');
 
-        $dataIds = array_filter(array_map(function ($dataModel) {
+        $dataIds = [];
+
+        array_walk(request()::body(), function ($dataModel) use (&$dataIds) {
             if (($dataModel = security()::validateBody('data', $dataModel))) {
-                $dataId = database()->insert('data', $dataModel);
+                foreach ($dataModel->values as $dataSet) {
+                    $model = clone $dataModel;
+                    $model->values = $dataSet;
 
-                logger()::log($dataId, 'data', 'a data set was registered on raise.');
-
-                return ['id' => $dataId];
+                    logger()::log(($dataIds[] = database()->insert('data', $model)),
+                        'data', 'a data set was registered on raise.');
+                }
             }
-
-            return false;
-        }, request()::body()));
+        });
 
         if (count($dataIds) > 0) {
             parent::register(['message' => 'Success', 'data' => $dataIds], new DataResponse());
@@ -62,13 +64,31 @@ class Data extends Controller
     }
 
     /**
+     * List Values Process.
+     *
+     * Allows to get the Raw Data from the Values of a specific Data Set of Data
+     */
+    public function values()
+    {
+        $query = $this->filter();
+
+        $data = database()->select('data', $query);
+
+        parent::list($data, new DataResponse(), function ($data) {
+            return ['data' => array_map(function ($dataSet) {
+                return $dataSet->values;
+            }, $data)];
+        });
+    }
+
+    /**
      * List Process.
      *
      * List a set of Data or a single Data based on the Request Parameters
      *
-     * @param array|object|null $data     the given Data to be Mapped
-     * @param Model             $response the Response Model
-     * @param callable          $callback an optional callback to treat the mapping result
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -105,6 +125,10 @@ class Data extends Controller
 
         if (($name = request()::query('parameter')) !== false) {
             $query->where("'{$name}' IN parameters");
+        }
+
+        if (($name = request()::query('value')) !== false) {
+            $query->where("ARRAY_CONTAINS(`values`, " . (is_numeric($name) ? "{$name}" : "'{$name}'") . ")");
         }
 
         return parent::filter($query);

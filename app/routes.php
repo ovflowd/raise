@@ -87,6 +87,9 @@ $router()->mount('/data', function () use ($router, $response, $token) {
 
     // List Data
     $router()->get('/', '\App\Controllers\Data@list');
+
+    // List Data Values
+    $router()->get('/values', '\App\Controllers\Data@values');
 });
 
 /*

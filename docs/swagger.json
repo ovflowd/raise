@@ -227,7 +227,7 @@
             "name": "client",
             "in": "body",
             "required": true,
-            "description": "The Desired Services that need to be Revalidated",
+            "description": "A new location of the Client if necessary.",
             "schema": {
               "$ref": "#/definitions/ClientRevalidate"
             }
@@ -468,6 +468,13 @@
             "type": "string"
           },
           {
+            "name": "value",
+            "in": "query",
+            "description": "Filter by a Specific Value of the Data <br><b>Example:</b> `20.2`",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "serviceId",
             "in": "query",
             "description": "Filter by the ServiceId, since Data is related to Services.<br><b>Example:</b> `019e61290e441bca691f24d5f53b002ab0960e74`",
@@ -526,6 +533,125 @@
                   "items": {
                     "$ref": "#/definitions/DataResponse"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error403"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/Error429"
+            }
+          }
+        }
+      }
+    },
+    "/data/values": {
+      "get": {
+        "tags": [
+          "data"
+        ],
+        "description": "List the Values of a set of Data related to your Clients or Client Services",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "parameter",
+            "in": "query",
+            "description": "Filter by a Parameter of the Data <i>(The Property of a Data Set)</i><br><b>Example:</b> `humidity`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "Filter by a Specific Value of the Data <br><b>Example:</b> `20.2`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceId",
+            "in": "query",
+            "description": "Filter by the ServiceId, since Data is related to Services.<br><b>Example:</b> `019e61290e441bca691f24d5f53b002ab0960e74`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by a specific <b>group</b> tag that was given on the register of a set of data. As an example you can group data by tags. <br><b>Example:</b> `tag1:tag2:tag3`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "You can limit the **size** of the result set of Data on the response.<br><b>Example:</b> `20`.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "You can Order the Result by a specific order. The Data **will** be ordered by their `serverTime`, you can order by Ascending Timestamp or Descending Timestamp.<br><b>Example:</b> `true` (ASCENDING) `false` (DESCENDING)",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "You can Filter the Result set in a given `UNIX TIMESTAMP` interval. <br><b>Example:</b> `1451606400:1483228800` <i>(Between 2016 and 2017)</i>.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "required": [
+                "code",
+                "data"
+              ],
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "data": {
+                  "type": "array",
+                  "example": [
+                    [
+                      20.2,
+                      30.1
+                    ]
+                  ]
                 }
               }
             }
@@ -733,18 +859,10 @@
     },
     "ClientRevalidate": {
       "required": [
-        "services",
         "location"
       ],
       "type": "object",
       "properties": {
-        "services": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "example": 13
-          }
-        },
         "location": {
           "type": "string",
           "example": "-15.7757876:-48.077829"
@@ -950,10 +1068,8 @@
         "values": {
           "type": "array",
           "example": [
-            [
-              20.2,
-              30.0
-            ]
+            20.2,
+            30.1
           ]
         },
         "clientTime": {
