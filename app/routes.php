@@ -94,8 +94,78 @@ $router()->mount('/data', function () use ($router, $response, $token) {
 
 /*
 |----------------------------------------------------------------------------
+| Permission API Routes                                                     |
+|----------------------------------------------------------------------------
+*/
+
+$router()->mount('/permissions', function () use ($router, $response, $token) {
+    // Data Security for all Operations on Permissions
+    $router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
+        $token();
+    });
+
+    // Create a Permission
+    $router()->post('/register', '\App\Controllers\Permissions@register');
+
+    // List Permissions
+    $router()->get('/', '\App\Controllers\Permissions@list');
+
+    // Update a Permission
+    $router()->put('/update', '\App\Controllers\Permissions@update');
+
+    // Delete a Permission
+    $router()->delete('/remove', '\App\Controllers\Permissions@remove');
+});
+
+/*
+|----------------------------------------------------------------------------
+| Relations API Routes                                                      |
+|----------------------------------------------------------------------------
+*/
+
+$router()->mount('/relations', function () use ($router, $response, $token) {
+    // Data Security for all Operations on Relations
+    $router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
+        $token();
+    });
+
+    // Create a Relation
+    $router()->post('/register', '\App\Controllers\Relations@register');
+
+    // List Relations
+    $router()->get('/', '\App\Controllers\Relations@list');
+
+    // Update a Relation
+    $router()->put('/update', '\App\Controllers\Relations@update');
+
+    // Delete a Relation
+    $router()->delete('/remove', '\App\Controllers\Relations@remove');
+});
+
+/*
+|----------------------------------------------------------------------------
 | Management API Routes                                                     |
 |----------------------------------------------------------------------------
 */
 
 // @TODO: Define the Management API Routes
+
+/*
+|----------------------------------------------------------------------------
+| Metrics View Routes                                                       |
+|----------------------------------------------------------------------------
+*/
+
+$router()->mount('/view', function () use ($router, $response, $token) {
+    // Index Page
+    $router()->get('/', '\App\Controllers\Metrics@index');
+
+    // List Clients
+    $router()->get('/client', '\App\Controllers\Metrics@list');
+
+    // Hook a Client
+    $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
+
+    // Hook a Client Data
+    $router()->get('/client/(\w+)/data', '\App\Controllers\Metrics@data');
+});

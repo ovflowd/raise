@@ -68,6 +68,16 @@ class Response extends Facade
     }
 
     /**
+     * Set manually a override of the content type
+     *
+     * @param string $contentType The given content type
+     */
+    public static function content(string $contentType)
+    {
+        self::header('Content-Type', $contentType);
+    }
+
+    /**
      * Add a HTTP Header to the Response.
      *
      * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields List of Headers

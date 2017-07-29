@@ -24,6 +24,16 @@ function logger()
 }
 
 /**
+ * Get the Application System FS Path
+ *
+ * @return string the current application path
+ */
+function path()
+{
+    return __DIR__;
+}
+
+/**
  * Get the static instance of ResponseFacade.
  *
  * @return \App\Facades\Facade|\App\Facades\Response|string
