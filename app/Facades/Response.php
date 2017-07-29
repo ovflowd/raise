@@ -124,6 +124,8 @@ class Response extends Facade
      */
     public static function response($callback = null)
     {
+        self::header('Content-Type', self::$type);
+
         if (self::$response == null) {
             self::message(404);
         }

@@ -15,6 +15,8 @@
 
 namespace App\Controllers;
 
+use Koine\QueryBuilder\Statements\Select;
+
 /**
  * Class Metrics.
  *
@@ -36,7 +38,9 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
+        view()::add('metrics.header');
         view()::add('metrics.index');
+        view()::add('metrics.footer');
     }
 
     /**
@@ -48,7 +52,19 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
-        view()::add('metrics.list');
+        $clients = '';
+
+        foreach (database()->select('client', new Select()) as $client) {
+            $tags = empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags);
+
+            $clients .= "<li><div class='callout primary'>" .
+                "<a href='client/{$client->document->serverTime}' style='float:right' class='see-button'>Watch</a>" .
+                "<h5>{$client->document->name}</h5>[{$tags}]</div></li>";
+        }
+
+        view()::add('metrics.header');
+        view()::add('metrics.list', ['{{clients}}' => $clients]);
+        view()::add('metrics.footer');
     }
 
     /**
@@ -61,6 +77,10 @@ class Metrics extends Controller
     public function client(string $client)
     {
         response()::type('text/html');
+
+        view()::add('metrics.header');
+        view()::add('metrics.index');
+        view()::add('metrics.footer');
     }
 
     /**

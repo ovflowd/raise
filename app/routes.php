@@ -164,7 +164,7 @@ $router()->mount('/view', function () use ($router, $response, $token) {
     $router()->get('/client', '\App\Controllers\Metrics@list');
 
     // Hook a Client
-    $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
+    $router()->get('/client/([^/]+)', '\App\Controllers\Metrics@client');
 
     // Hook a Client Data
     $router()->get('/client/(\w+)/data', '\App\Controllers\Metrics@data');

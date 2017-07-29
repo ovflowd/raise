@@ -13,7 +13,7 @@
                 <h4>List Clients</h4>
 
                 <ul style="margin: 20px;list-style: none;">
-                    {{clients}}
+                    {{services}}
                 </ul>
             </div>
         </div>
