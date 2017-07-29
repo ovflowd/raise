@@ -40,7 +40,7 @@ class Metrics extends Controller
      */
     public function index()
     {
-        response()::content('text/html');
+        response()::type('text/html');
     }
 
     /**
@@ -50,7 +50,7 @@ class Metrics extends Controller
      */
     public function list()
     {
-        response()::content('text/html');
+        response()::type('text/html');
     }
 
     /**
@@ -62,7 +62,7 @@ class Metrics extends Controller
      */
     public function client(string $client)
     {
-        response()::content('text/html');
+        response()::type('text/html');
     }
 
     /**
@@ -74,6 +74,6 @@ class Metrics extends Controller
      */
     public function data(string $client)
     {
-        response()::content('text/html');
+        response()::type('text/html');
     }
 }

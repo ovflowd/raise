@@ -23,9 +23,9 @@ class RaiseTest extends Test
 
         $this->executeRaise();
 
-        $this->assertInstanceOf(\App\Models\Response\Message::class, response()::getResponse());
+        $this->assertInstanceOf(\App\Models\Response\Message::class, response()::response());
 
-        $this->assertEquals(200, response()::getResponse()->code);
+        $this->assertEquals(200, response()::response()->code);
     }
 
     /**
@@ -41,8 +41,8 @@ class RaiseTest extends Test
 
         $this->executeRaise();
 
-        $this->assertInstanceOf(\App\Models\Response\Message::class, response()::getResponse());
+        $this->assertInstanceOf(\App\Models\Response\Message::class, response()::response());
 
-        $this->assertEquals(404, response()::getResponse()->code);
+        $this->assertEquals(404, response()::response()->code);
     }
 }

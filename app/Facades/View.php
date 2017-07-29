@@ -15,13 +15,7 @@
 
 namespace App\Facades;
 
-use App\Models\Communication\Model;
-use App\Models\Communication\Raise as RaiseModel;
-use Firebase\JWT\JWT;
-use Firebase\JWT\SignatureInvalidException;
-use JsonMapper;
-use JsonMapper_Exception;
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /**
  * Class View.
@@ -38,20 +32,70 @@ use UnexpectedValueException;
  */
 class View extends Facade
 {
-    public static function add(string $view)
-    {
+    /**
+     * The HTML content to be Rendered
+     *
+     * @var string HTML content to be rendered
+     */
+    private static $content = '';
 
+    /**
+     * Includes a View unto the System
+     *
+     * @param string $view the view to be added
+     * @param array $parse variables to be parsed
+     */
+    public static function add(string $view, array $parse)
+    {
+        if (($resolve = self::resolve($view)) === false) {
+            throw new InvalidArgumentException('View doesn\'t exists.');
+        }
+
+        self::$content .= self::parse(file_get_contents($resolve), $parse);
+
+        response()::setContent(self::$content);
+    }
+
+    /**
+     * Render and Return the HTML content
+     *
+     * @param string $content content to be rendered
+     *
+     * @return string the rendered HTML content
+     */
+    public static function render(string $content)
+    {
+        return $content;
     }
 
     /**
      * Translate a view namespace unto valid view fs path
      *
-     * @param string $view
+     * @param string $view the desired view
      *
-     * @return string
+     * @return string if the view exists return the complete path if not returns false
      */
     protected static function resolve(string $view)
     {
-        return str_replace('.', '/', $view);
+        $path = path('resources/views/') . str_replace('.', '/', $view) . '.php';
+
+        return file_exists($path) ? $path : false;
+    }
+
+    /**
+     * Basic Templating Engine to Parse Variables
+     *
+     * @param string $content Content to be Parsed
+     * @param array $parse What to Parse
+     *
+     * @return mixed|string Return the Parsed Content
+     */
+    protected static function parse(string $content, array $parse)
+    {
+        foreach ($parse as $key => $replace) {
+            $content = str_replace($key, $replace, $content);
+        }
+
+        return $content;
     }
 }

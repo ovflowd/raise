@@ -42,8 +42,8 @@ class ClientTest extends Test
 
         $this->executeRaise($clientModel);
 
-        $this->assertInstanceOf(\App\Models\Response\Token::class, response()::getResponse());
+        $this->assertInstanceOf(\App\Models\Response\Token::class, response()::response());
 
-        $this->assertEquals(200, response()::getResponse()->code);
+        $this->assertEquals(200, response()::response()->code);
     }
 }

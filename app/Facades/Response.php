@@ -44,6 +44,22 @@ class Response extends Facade
     private static $response;
 
     /**
+     * Response Content Type
+     *
+     * @var string
+     */
+    private static $type = 'application/json';
+
+    /**
+     * Response HTML Content
+     *
+     * (If exists)
+     *
+     * @var string
+     */
+    private static $content;
+
+    /**
      * Prepare ResponseFacade.
      *
      * This method does some pre-configurations
@@ -58,7 +74,7 @@ class Response extends Facade
     public static function prepare(string $contentType = null)
     {
         if ($contentType !== null) {
-            self::header('Content-Type', $contentType);
+            self::$type = $contentType;
         }
 
         // Reset the Response Model
@@ -71,10 +87,16 @@ class Response extends Facade
      * Set manually a override of the content type
      *
      * @param string $contentType The given content type
+     *
+     * @return string The actual Content Type
      */
-    public static function content(string $contentType)
+    public static function type(string $contentType = null)
     {
-        self::header('Content-Type', $contentType);
+        if($contentType !== null) {
+            self::$type = $contentType;
+        }
+
+        return self::$type;
     }
 
     /**
@@ -100,7 +122,7 @@ class Response extends Facade
      *
      * @return string|object|array|Model the result of the callback
      */
-    public static function getResponse($callback = null)
+    public static function response($callback = null)
     {
         if (self::$response == null) {
             self::message(404);
@@ -111,6 +133,26 @@ class Response extends Facade
         }
 
         return self::$response;
+    }
+
+    /**
+     * Get the HTML Content
+     *
+     * @param null $callback
+     *
+     * @return string
+     */
+    public static function content($callback = null)
+    {
+        if (self::$content == null) {
+            self::message(404);
+        }
+
+        if (is_callable($callback)) {
+            return $callback(self::$content);
+        }
+
+        return self::$content;
     }
 
     /**
@@ -150,6 +192,16 @@ class Response extends Facade
         self::code($httpCode);
 
         self::$response = json()::map($model, (array) database()->selectById('metadata', $httpCode) + $data);
+    }
+
+    /**
+     * Set the HTML Content for the Response
+     *
+     * @param string $content the HTML Content
+     */
+    public static function setContent(string $content)
+    {
+        self::$content = $content;
     }
 
     /**

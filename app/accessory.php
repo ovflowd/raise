@@ -24,13 +24,25 @@ function logger()
 }
 
 /**
- * Get the Application System FS Path
+ * Get the Root System FS Path
  *
- * @return string the current application path
+ * @return string the current root path
  */
-function path()
+function root()
 {
-    return __DIR__;
+    return __DIR__ . '/../';
+}
+
+/**
+ * Get the Application or Sub Application FS Path
+ *
+ * @param string $context the application sub directory
+ *
+ * @return bool|string return the context path if exists, if not return false
+ */
+function path(string $context = '')
+{
+    return (is_dir(($path = root() . $context)) ? $path : false);
 }
 
 /**
@@ -41,6 +53,16 @@ function path()
 function response()
 {
     return \App\Facades\Response::get();
+}
+
+/**
+ * Get the static instance of ViewFacade.
+ *
+ * @return \App\Facades\Facade|\App\Facades\View|string
+ */
+function view()
+{
+    return \App\Facades\View::get();
 }
 
 /**
@@ -97,6 +119,24 @@ function setting(string $configuration)
 }
 
 /**
+ * Register the Whoops Error Handler
+ *
+ * Also return the Whoops Handler Context
+ *
+ * @return \Whoops\Run Whoops Handler
+ */
+function whoops()
+{
+    static $whoops;
+
+    if (null === $whoops) {
+        $whoops = new Whoops\Run();
+    }
+
+    return $whoops;
+}
+
+/**
  * Get the Router instance.
  *
  * If the instance already exists return it, if not create it
@@ -118,9 +158,18 @@ $router = function () {
  * @param \App\Models\Communication\Model|null $optionalModel An optional Model to override the response
  */
 $response = function (\App\Models\Communication\Model $optionalModel = null) {
-    echo response()::getResponse(function (\App\Models\Communication\Model $model) use ($optionalModel) {
-        return json()::jsonEncode($optionalModel ?? $model);
-    });
+    switch (response()::type()) {
+        case 'application/json':
+            echo response()::response(function (\App\Models\Communication\Model $model) use ($optionalModel) {
+                return json()::jsonEncode($optionalModel ?? $model);
+            });
+            break;
+        case 'text/html':
+            echo response()::content(function ($content) {
+                return view()::render($content);
+            });
+            break;
+    }
 
     exit(0);
 };
