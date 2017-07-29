@@ -41,6 +41,8 @@ class Metrics extends Controller
     public function index()
     {
         response()::type('text/html');
+
+        view()::add('metrics.index');
     }
 
     /**

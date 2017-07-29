@@ -8,6 +8,9 @@
     # Security Modules
     RewriteRule ^(app/|resources/install/|tests/|vendor/|docs/) - [F,L,NC]
 
+    # Assets
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

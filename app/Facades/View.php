@@ -45,7 +45,7 @@ class View extends Facade
      * @param string $view the view to be added
      * @param array $parse variables to be parsed
      */
-    public static function add(string $view, array $parse)
+    public static function add(string $view, array $parse = [])
     {
         if (($resolve = self::resolve($view)) === false) {
             throw new InvalidArgumentException('View doesn\'t exists.');
