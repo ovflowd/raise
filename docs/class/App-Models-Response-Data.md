@@ -58,7 +58,7 @@ A set of Clients that will be returned on the Response.
 
 
 ```php
-public array<mixed,\App\Models\Communication\Data> $data = array()
+public array $data = array()
 ```
 
 #### Details:

@@ -178,9 +178,28 @@ Methods
 -------
 
 
+### __construct
+
+RaiseModel constructor.
+
+Set the Timestamps of when RAISe handled
+this model.
+
+```php
+mixed App\Models\Communication\Raise::__construct()
+```
+
+#### Details:
+* Visibility: **public**
+* This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
+
+
+
+<hr>
+
 ### setTags
 
-Set an array of Tags
+Set an array of Tags.
 
 Tags are used to contextual data filtering
 and may be used to filter set of results
@@ -199,25 +218,6 @@ mixed App\Models\Communication\Raise::setTags(array $tags)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $tags | **array** | The tags to be stored |
-
-
-<hr>
-
-### __construct
-
-RaiseModel constructor.
-
-Set the Timestamps of when RAISe handled
-this model.
-
-```php
-mixed App\Models\Communication\Raise::__construct()
-```
-
-#### Details:
-* Visibility: **public**
-* This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 <hr>

@@ -181,7 +181,7 @@ mixed App\Models\Communication\Service::setClientId(string or null $clientId)
 
 ### setTags
 
-Set an array of Tags
+Set an array of Tags.
 
 Tags are used to contextual data filtering
 and may be used to filter set of results

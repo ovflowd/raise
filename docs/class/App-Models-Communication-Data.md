@@ -35,16 +35,31 @@ public string $serviceId = null
 
 <hr>
 
-### $order
+### $clientId
 
-An array that contains the order in which the
-data will be presented.
+The Unique Client Identifier.
 
-Data must be sent following the order in this
-array.
+Each Service is related to an Service,
+this identified which Client the Service is associated
 
 ```php
-public array $order = array()
+protected string $clientId = ''
+```
+
+#### Details:
+* Visibility: **protected**
+
+<hr>
+
+### $parameters
+
+An array that contains the parameters of the
+Service related to this Data.
+
+
+
+```php
+public array $parameters = array()
 ```
 
 #### Details:
@@ -52,9 +67,9 @@ public array $order = array()
 
 <hr>
 
-### $data
+### $values
 
-A Set of Data
+A Set of Data.
 
 A data set contain an array
 of data that follows a service parameters pattern
@@ -62,7 +77,7 @@ an data element need to include values for all
 the parameters of an service.
 
 ```php
-public array<mixed,array> $data = array()
+public array $values = array()
 ```
 
 #### Details:
@@ -120,6 +135,25 @@ Methods
 -------
 
 
+### __construct
+
+RaiseModel constructor.
+
+Set the Timestamps of when RAISe handled
+this model.
+
+```php
+mixed App\Models\Communication\Raise::__construct()
+```
+
+#### Details:
+* Visibility: **public**
+* This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
+
+
+
+<hr>
+
 ### setServiceId
 
 Set a serviceId.
@@ -145,6 +179,30 @@ mixed App\Models\Communication\Data::setServiceId(string $serviceId)
 
 <hr>
 
+### setClientId
+
+Set the Unique Client Identifier
+That is related to this Service.
+
+
+
+```php
+mixed App\Models\Communication\Data::setClientId(string or null $clientId)
+```
+
+#### Details:
+* Visibility: **public**
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $clientId | string or null | the ClientId to be set |
+
+
+<hr>
+
 ### setOrder
 
 Set the data's order.
@@ -154,7 +212,7 @@ at. The order is useful to identify which element
 of a data set refers to which parameter of a Service
 
 ```php
-mixed App\Models\Communication\Data::setOrder(array $order)
+mixed App\Models\Communication\Data::setOrder(array $parameters)
 ```
 
 #### Details:
@@ -165,13 +223,13 @@ mixed App\Models\Communication\Data::setOrder(array $order)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $order | **array** | The array specifying the Service
+| $parameters | **array** | The array specifying the Service
 parameters with a given (arbitrary/user specified) order |
 
 
 <hr>
 
-### setData
+### setValues
 
 Sets the data.
 
@@ -180,7 +238,7 @@ has the same number of parameters as
 the order array.
 
 ```php
-mixed App\Models\Communication\Data::setData(array<mixed,array> $dataSet)
+mixed App\Models\Communication\Data::setValues(array $dataSet)
 ```
 
 #### Details:
@@ -191,17 +249,65 @@ mixed App\Models\Communication\Data::setData(array<mixed,array> $dataSet)
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| $dataSet | **array&lt;mixed,array&gt;** | A data set contain an array
- of data that follows a service parameters pattern
- an data element need to include values for all
- the parameters of an service. |
+| $dataSet | **array** | A data set contain an array
+                      of data that follows a service parameters pattern
+                      an data element need to include values for all
+                      the parameters of an service. |
+
+
+<hr>
+
+### orderData
+
+Order a Set of Data.
+
+Order Data based on Service Parameters and his Order Set
+
+```php
+array|null App\Models\Communication\Data::orderData(array $values, \App\Models\Communication\Service or \App\Models\Communication\Model $service)
+```
+
+#### Details:
+* Visibility: **protected**
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $values | **array** | A set of Values to be Ordered |
+| $service | App\Models\Communication\Service or \App\Models\Communication\Model | A given Service |
+
+
+<hr>
+
+### checkSize
+
+Compare the size of two Arrays.
+
+
+
+```php
+boolean App\Models\Communication\Data::checkSize(array $needle, array $haystack)
+```
+
+#### Details:
+* Visibility: **protected**
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $needle | **array** | Array to compare |
+| $haystack | **array** | Array to be compared |
 
 
 <hr>
 
 ### setTags
 
-Set an array of Tags
+Set an array of Tags.
 
 Tags are used to contextual data filtering
 and may be used to filter set of results
@@ -220,25 +326,6 @@ mixed App\Models\Communication\Raise::setTags(array $tags)
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $tags | **array** | The tags to be stored |
-
-
-<hr>
-
-### __construct
-
-RaiseModel constructor.
-
-Set the Timestamps of when RAISe handled
-this model.
-
-```php
-mixed App\Models\Communication\Raise::__construct()
-```
-
-#### Details:
-* Visibility: **public**
-* This method is defined by [App\Models\Communication\Raise](App-Models-Communication-Raise.md)
-
 
 
 <hr>

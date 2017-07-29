@@ -15,13 +15,11 @@ Table of Contents
     * **App\Facades**
         * [Facade](App-Facades-Facade.md)
         * [Json](App-Facades-Json.md)
+        * [Log](App-Facades-Log.md)
     * **App\Factories**
         * [Factory](App-Factories-Factory.md)
-        * [Log](App-Factories-Log.md)
     * **App\Handlers**
         * [Settings](App-Handlers-Settings.md)
-    * **App\Managers**
-        * [Log](App-Managers-Log.md)
     * **App\Models**
         * **App\Models\Communication**
             * [Client](App-Models-Communication-Client.md)
@@ -29,13 +27,13 @@ Table of Contents
             * [Model](App-Models-Communication-Model.md)
             * [Raise](App-Models-Communication-Raise.md)
             * [Service](App-Models-Communication-Service.md)
-            * [ServiceBag](App-Models-Communication-ServiceBag.md)
             * [Token](App-Models-Communication-Token.md)
         * **App\Models\Interfaces**
             * [Database](App-Models-Interfaces-Database.md)
         * **App\Models\Response**
             * [Client](App-Models-Response-Client.md)
             * [Data](App-Models-Response-Data.md)
+            * [Log](App-Models-Response-Log.md)
             * [Message](App-Models-Response-Message.md)
             * [Service](App-Models-Response-Service.md)
             * [Token](App-Models-Response-Token.md)

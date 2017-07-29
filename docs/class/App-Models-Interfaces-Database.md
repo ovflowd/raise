@@ -140,7 +140,7 @@ Update an Element of the Database.
 
 
 ```php
-array|string|object App\Models\Interfaces\Database::update(string $table, string $primaryKey, \App\Models\Communication\Model $data)
+array|string|object App\Models\Interfaces\Database::update(string $table, string $primaryKey, \App\Models\Communication\Model or object $data)
 ```
 
 #### Details:
@@ -153,7 +153,31 @@ array|string|object App\Models\Interfaces\Database::update(string $table, string
 |-----------|------|-------------|
 | $table | **string** | desired table to update |
 | $primaryKey | **string** | desired element to update |
-| $data | [App\Models\Communication\Model](App-Models-Communication-Model.md) | data to update |
+| $data | App\Models\Communication\Model or object | data to update |
+
+
+<hr>
+
+### delete
+
+Delete an Element of the Database.
+
+
+
+```php
+mixed App\Models\Interfaces\Database::delete(string $table, string $primaryKey)
+```
+
+#### Details:
+* Visibility: **public**
+
+
+#### Parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| $table | **string** | desired table to update |
+| $primaryKey | **string** | desired element to delete |
 
 
 <hr>
