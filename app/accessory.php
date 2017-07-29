@@ -24,17 +24,17 @@ function logger()
 }
 
 /**
- * Get the Root System FS Path
+ * Get the Root System FS Path.
  *
  * @return string the current root path
  */
 function root()
 {
-    return __DIR__ . '/../';
+    return __DIR__.'/../';
 }
 
 /**
- * Get the Application or Sub Application FS Path
+ * Get the Application or Sub Application FS Path.
  *
  * @param string $context the application sub directory
  *
@@ -42,7 +42,7 @@ function root()
  */
 function path(string $context = '')
 {
-    return (is_dir(($path = root() . $context)) ? $path : false);
+    return is_dir(($path = root().$context)) ? $path : false;
 }
 
 /**
@@ -119,7 +119,7 @@ function setting(string $configuration)
 }
 
 /**
- * Register the Whoops Error Handler
+ * Register the Whoops Error Handler.
  *
  * Also return the Whoops Handler Context
  *

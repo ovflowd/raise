@@ -44,14 +44,14 @@ class Response extends Facade
     private static $response;
 
     /**
-     * Response Content Type
+     * Response Content Type.
      *
      * @var string
      */
     private static $type = 'application/json';
 
     /**
-     * Response HTML Content
+     * Response HTML Content.
      *
      * (If exists)
      *
@@ -84,7 +84,7 @@ class Response extends Facade
     }
 
     /**
-     * Set manually a override of the content type
+     * Set manually a override of the content type.
      *
      * @param string $contentType The given content type
      *
@@ -92,7 +92,7 @@ class Response extends Facade
      */
     public static function type(string $contentType = null)
     {
-        if($contentType !== null) {
+        if ($contentType !== null) {
             self::$type = $contentType;
         }
 
@@ -136,7 +136,7 @@ class Response extends Facade
     }
 
     /**
-     * Get the HTML Content
+     * Get the HTML Content.
      *
      * @param null $callback
      *
@@ -195,7 +195,7 @@ class Response extends Facade
     }
 
     /**
-     * Set the HTML Content for the Response
+     * Set the HTML Content for the Response.
      *
      * @param string $content the HTML Content
      */

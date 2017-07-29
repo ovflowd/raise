@@ -34,7 +34,7 @@ require_once __DIR__.'/../app/routes.php';
 |----------------------------------------------------------------------------
 */
 
-whoops()->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+whoops()->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 
 whoops()->register();
 

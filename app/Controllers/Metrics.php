@@ -15,12 +15,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Communication\Client as ClientDefinition;
-use App\Models\Communication\Model;
-use App\Models\Response\Client as ClientResponse;
-use App\Models\Response\Token as TokenResponse;
-use Koine\QueryBuilder\Statements\Select;
-
 /**
  * Class Metrics.
  *

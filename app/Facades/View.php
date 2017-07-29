@@ -33,17 +33,17 @@ use InvalidArgumentException;
 class View extends Facade
 {
     /**
-     * The HTML content to be Rendered
+     * The HTML content to be Rendered.
      *
      * @var string HTML content to be rendered
      */
     private static $content = '';
 
     /**
-     * Includes a View unto the System
+     * Includes a View unto the System.
      *
-     * @param string $view the view to be added
-     * @param array $parse variables to be parsed
+     * @param string $view  the view to be added
+     * @param array  $parse variables to be parsed
      */
     public static function add(string $view, array $parse = [])
     {
@@ -57,7 +57,7 @@ class View extends Facade
     }
 
     /**
-     * Render and Return the HTML content
+     * Render and Return the HTML content.
      *
      * @param string $content content to be rendered
      *
@@ -69,7 +69,7 @@ class View extends Facade
     }
 
     /**
-     * Translate a view namespace unto valid view fs path
+     * Translate a view namespace unto valid view fs path.
      *
      * @param string $view the desired view
      *
@@ -77,16 +77,16 @@ class View extends Facade
      */
     protected static function resolve(string $view)
     {
-        $path = path('resources/views/') . str_replace('.', '/', $view) . '.php';
+        $path = path('resources/views/').str_replace('.', '/', $view).'.php';
 
         return file_exists($path) ? $path : false;
     }
 
     /**
-     * Basic Templating Engine to Parse Variables
+     * Basic Templating Engine to Parse Variables.
      *
      * @param string $content Content to be Parsed
-     * @param array $parse What to Parse
+     * @param array  $parse   What to Parse
      *
      * @return mixed|string Return the Parsed Content
      */
