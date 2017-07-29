@@ -163,3 +163,29 @@ body {
     line-height: 1.7;
     margin: 11px;
 }
+
+.callout.warning {
+    border-color: #fca130;
+    background: rgba(252,161,48,.1);
+}
+
+.method.warning {
+    background: #fca130;
+}
+
+.callout.alert {
+    border-color: #f93e3e;
+    background: rgba(249,62,62,.1);
+}
+
+.method.alert {
+    border-color: #f93e3e;
+}
+
+.see {
+    font-size: 12px;
+    font-weight: 300 !important;
+    margin: 0;
+    font-family: Source Code Pro,monospace;
+    color: #3b4151;
+}

@@ -53,6 +53,8 @@ class Metrics extends Controller
     public function list()
     {
         response()::type('text/html');
+
+        view()::add('metrics.list');
     }
 
     /**

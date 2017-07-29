@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0.0",
-    "title": "UIoT RAISe API",
+    "title": "raise api",
     "description": "RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern. <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices. <br><br><b>RAISe</b> is open source, and maintained by the [Universal Internet of Things](https://uiot.org) open source project and the [University of Brasília](http://www.unb.br).<br><br><b>Security Note:</b> RAISe uses [JWT](https://jwt.io) for Token Schemas.",
     "contact": {
       "email": "contact@uiot.org"

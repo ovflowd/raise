@@ -29,7 +29,7 @@
 <div class="grid-container" style="margin: 50px 0;">
     <div class="grid-x">
         <div class="large-6 medium-6 small-8 cell">
-            <h2 class="title">UIoT RAISe Metrics</h2>
+            <h2 class="title">rais<k style="color:#7d8492">e</k> metrics</h2>
             <div class="description info">
                 <div>
                     <span>
@@ -51,7 +51,7 @@
                 You can check all content over the clients, like their services and data.
             </div>
             <div class="callout success">
-                <span class="method success">Go</span> <h5 style="float:right">Want to list clients and their content?</h5>
+                <span onclick='window.location.href="view/client/"'class="method success">Go</span> <h5 style="float:right">Want to list clients and their content?</h5>
             </div>
             <div class="callout info">
                 <span class="method info">Go</span> <h5 style="float:right">Want to read the raise documentation?</h5>
