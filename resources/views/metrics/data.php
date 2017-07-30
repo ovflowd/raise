@@ -38,7 +38,7 @@
 
                         $time = date('d/m/Y h:i:s', $item->document->serverTime);
 
-                        echo "<li><div class='callout primary'>" .
+                        echo "<li><div class='callout primary'>".
                             "<h5>ID: {$item->id}</h5>[ {$values}] | <small>Added at: {$time}</small></div></li>";
                     endforeach;
                     ?>

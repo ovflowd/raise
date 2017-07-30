@@ -18,8 +18,8 @@
                     }
 
                     foreach ($clients as $client):
-                        echo "<li><div class='callout primary'>" .
-                            "<a href='{$client->id}' style='float:right' class='see-button'>Watch</a>" .
+                        echo "<li><div class='callout primary'>".
+                            "<a href='{$client->id}' style='float:right' class='see-button'>Watch</a>".
                             "<h5>{$client->document->name}</h5>[{$client->document->tags}]</div></li>";
                     endforeach;
                     ?>

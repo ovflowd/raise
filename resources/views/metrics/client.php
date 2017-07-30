@@ -34,9 +34,9 @@
                     }
 
                     foreach ($services as $service):
-                        echo "<li><div class='callout primary'>" .
-                            "<a href='/view/client/{$service->id}/data' style='float:right' class='see-button'>Watch</a>" .
-                            "<h5 style='margin-bottom:0'>{$service->document->name}</h5>" .
+                        echo "<li><div class='callout primary'>".
+                            "<a href='/view/client/{$service->id}/data' style='float:right' class='see-button'>Watch</a>".
+                            "<h5 style='margin-bottom:0'>{$service->document->name}</h5>".
                             "<small>[ ID: {$service->id} ]</small></div></li>";
                     endforeach; ?>
                 </ul>
@@ -66,23 +66,23 @@
     }
 
     var data = <?= json_encode(array_map(function ($service) {
-        $dataSet = new \stdClass();
-        $dataSet->label = $service->document->name;
-        $dataSet->data = [];
-        $dataSet->fill = true;
+                        $dataSet = new \stdClass();
+                        $dataSet->label = $service->document->name;
+                        $dataSet->data = [];
+                        $dataSet->fill = true;
 
-        $query = new Koine\QueryBuilder\Statements\Select();
-        $query->where('serviceId', $service->id);
-        $query->limit(30);
+                        $query = new Koine\QueryBuilder\Statements\Select();
+                        $query->where('serviceId', $service->id);
+                        $query->limit(30);
 
-        $amount = 0;
+                        $amount = 0;
 
-        foreach (database()->select('data', $query) as $data):
+                        foreach (database()->select('data', $query) as $data):
             $dataSet->data[] = ['x' => $data->document->clientTime, 'y' => ++$amount];
-        endforeach;
+                        endforeach;
 
-        return $dataSet;
-    }, $services)); ?>;
+                        return $dataSet;
+                    }, $services)); ?>;
 
     var colorNames = Object.keys(window.chartColors);
 
