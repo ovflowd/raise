@@ -85,19 +85,34 @@ class Metrics extends Controller
         }
 
         view()::add('metrics.header');
-        view()::add('metrics.client', ['client' => $client, 'services' => database()->select('service', $query)]);
+        view()::add('metrics.client',
+            ['id' => $clientId, 'client' => $client, 'services' => database()->select('service', $query)]);
         view()::add('metrics.footer');
     }
 
     /**
      * Data Page.
      *
-     * Show a Specific Client Data
+     * Show a Specific Service Data
      *
-     * @param string $client The client to be hooked
+     * @param string $serviceId The service to be hooked
      */
-    public function data(string $client)
+    public function data(string $serviceId)
     {
         response()::type('text/html');
+
+        $service = database()->selectById('service', $serviceId);
+
+        if ($service == false) {
+            header('location: /view/');
+        }
+
+        $query = new Select();
+        $query->where('serviceId', $serviceId);
+        $query->limit(100);
+
+        view()::add('metrics.header');
+        view()::add('metrics.data', ['data' => database()->select('data', $query), 'service' => $service]);
+        view()::add('metrics.footer');
     }
 }

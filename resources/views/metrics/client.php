@@ -10,6 +10,9 @@
                 <b>Mac Address:</b> <?= $client->mac ?><br>
                 <b>Channel:</b> <?= $client->channel ?><br>
                 <b>Processor:</b> <?= $client->processor ?><br>
+                <hr>
+                <b>Registered at:</b> <?= date('d/m/Y h:i:s', $client->serverTime) ?><br>
+                <b>Unique Identifier:</b> <?= $id ?>
             </div>
             <div class="callout primary" style="margin-left:20px;">
                 <canvas id="client_data" width="auto" height="150"></canvas>
@@ -31,9 +34,9 @@
                     }
 
                     foreach ($services as $service):
-                        echo "<li><div class='callout primary'>".
-                            "<a href='/view/client/{$service->id}/data' style='float:right' class='see-button'>Watch</a>".
-                            "<h5 style='margin-bottom:0'>{$service->document->name}</h5>".
+                        echo "<li><div class='callout primary'>" .
+                            "<a href='/view/client/{$service->id}/data' style='float:right' class='see-button'>Watch</a>" .
+                            "<h5 style='margin-bottom:0'>{$service->document->name}</h5>" .
                             "<small>[ ID: {$service->id} ]</small></div></li>";
                     endforeach; ?>
                 </ul>
@@ -63,23 +66,23 @@
     }
 
     var data = <?= json_encode(array_map(function ($service) {
-                        $dataSet = new \stdClass();
-                        $dataSet->label = $service->document->name;
-                        $dataSet->data = [];
-                        $dataSet->fill = true;
+        $dataSet = new \stdClass();
+        $dataSet->label = $service->document->name;
+        $dataSet->data = [];
+        $dataSet->fill = true;
 
-                        $query = new Koine\QueryBuilder\Statements\Select();
-                        $query->where('serviceId', $service->id);
-                        $query->limit(30);
+        $query = new Koine\QueryBuilder\Statements\Select();
+        $query->where('serviceId', $service->id);
+        $query->limit(30);
 
-                        $amount = 0;
+        $amount = 0;
 
-                        foreach (database()->select('data', $query) as $data):
+        foreach (database()->select('data', $query) as $data):
             $dataSet->data[] = ['x' => $data->document->clientTime, 'y' => ++$amount];
-                        endforeach;
+        endforeach;
 
-                        return $dataSet;
-                    }, $services)); ?>;
+        return $dataSet;
+    }, $services)); ?>;
 
     var colorNames = Object.keys(window.chartColors);
 
@@ -97,13 +100,13 @@
 
     var config = {
         type: 'line',
-        data:  {
+        data: {
             datasets: data
         },
         options: {
             responsive: true,
-            title:{
-                display:true,
+            title: {
+                display: true,
                 text: "Last Data in Client Service"
             },
             scales: {
@@ -114,8 +117,8 @@
                         display: true,
                         labelString: 'Date'
                     },
-                    gridLines : {
-                        display : false
+                    gridLines: {
+                        display: false
                     }
                 }],
                 yAxes: [{
@@ -124,8 +127,8 @@
                         display: true,
                         labelString: 'Amount'
                     },
-                    gridLines : {
-                        display : false
+                    gridLines: {
+                        display: false
                     }
                 }]
             }
@@ -138,11 +141,19 @@
 </script>
 <script>
     jQuery(document).ready(function () {
+        var position = new google.maps.LatLng(<?= explode(':', $client->location)[0] ?>,<?= explode(':',
+            $client->location)[1] ?>);
+
         map = new google.maps.Map(document.getElementById('map_canvas'), {
-            center: new google.maps.LatLng(<?= explode(':', $client->location)[0] ?>,<?= explode(':', $client->location)[1] ?>),
+            center: position,
             zoom: 8,
             mapTypeId: 'roadmap',
             mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
+        });
+
+        new google.maps.Marker({
+            position: position,
+            map: map
         });
     })
 </script>

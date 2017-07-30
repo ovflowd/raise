@@ -246,3 +246,7 @@ input[type=text], input[type=password] {
 label {
     color: #3b4151;
 }
+
+hr {
+    background: rgba(59,65,81,.3);
+}
