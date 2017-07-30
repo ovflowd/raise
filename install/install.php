@@ -139,8 +139,8 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
             'code'    => $details->code,
             'message' => $details->message,
         ]);
-    } catch(Exception $e) {
-        echo writeText("Failed to Insert a Metadata.", '1;31', true);
+    } catch (Exception $e) {
+        echo writeText('Failed to Insert a Metadata.', '1;31', true);
 
         var_dump($e);
     }
@@ -301,7 +301,6 @@ try {
 
     $connection = (new CouchbaseCluster("couchbase://{$credentials['ip']}"));
     //$connection->authenticate($authenticator);
-
 } catch (CouchbaseException $e) {
     echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
 

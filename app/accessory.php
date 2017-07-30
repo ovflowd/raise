@@ -30,7 +30,7 @@ function logger()
  */
 function root()
 {
-    return __DIR__ . '/../';
+    return __DIR__.'/../';
 }
 
 /**
@@ -42,7 +42,7 @@ function root()
  */
 function path(string $context = '')
 {
-    return is_dir(($path = root() . $context)) ? $path : false;
+    return is_dir(($path = root().$context)) ? $path : false;
 }
 
 /**

@@ -33,7 +33,7 @@ use Jenssegers\Blade\Blade as BladeEngine;
 class Blade extends Facade
 {
     /**
-     * The Blade Engine Handler
+     * The Blade Engine Handler.
      *
      * @var BladeEngine
      */
@@ -41,7 +41,7 @@ class Blade extends Facade
 
     /**
      * This method tries to recover the
-     * Blade Engine Handler
+     * Blade Engine Handler.
      *
      * @return BladeEngine the Blade Engine
      */
@@ -55,10 +55,10 @@ class Blade extends Facade
     }
 
     /**
-     * Handle the BladeEngine and make a view
+     * Handle the BladeEngine and make a view.
      *
-     * @param string $view the view to be called and handled
-     * @param array $parse the variables to be extracted and parsed
+     * @param string $view  the view to be called and handled
+     * @param array  $parse the variables to be extracted and parsed
      */
     public static function make(string $view, array $parse = [])
     {
