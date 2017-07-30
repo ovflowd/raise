@@ -1,19 +1,28 @@
-<div class="grid-container" style="margin: 50px 0;">
+<div class="grid-container">
     <div class="grid-x">
-        <div class="large-6 medium-6 small-8 cell">
-            <h2 class="title">raise metrics</h2>
-            <div class="description info">
-                <div>
-                    <span>
-                        <p>RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern.
-                            <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
-                            <br><br><b>RAISe</b> is open source, and maintained by the
-                            <a href="https://uiot.org" target="_blank">Universal Internet of Things</a> open source project and the
-                            <a href="http://www.unb.br" target="_blank">University of Brasília</a>.
-                        </p>
-                    </span>
-                </div>
+        <div class="large-12 medium-12 small-12 cell">
+            <div class="callout warning">
+                <b>RAISe</b> dashboard it's under development. You probably will find multiple bugs.
             </div>
+        </div>
+        <div class="large-4 medium-4 small-8 cell">
+            <h2 class="title"><b style="color:#7d8492">raise</b> dashboard</h2>
+            <pre class="see">[ RAISe Version: 2.0.0 ]</pre>
+            <br>
+            <div class="info">
+                <b>About RAISe</b>
+                <span>
+                    <p>RAISe is an open source <b>Internet of Things</b> middleware. RAISe uses restful services as communication pattern.
+                        <br><br>RAISe is an <b>Internet of Things</b> open web service open middleware. Made to handle and store knowledge and be a restful service layer for IoT applications, clients and devices.
+                        <br><br><b>RAISe</b> is open source, and maintained by the
+                        <a href="https://uiot.org" target="_blank">Universal Internet of Things</a> open source project and the
+                        <a href="http://www.unb.br" target="_blank">University of Brasília</a>.
+                    </p>
+                </span>
+            </div>
+        </div>
+        <div class="large-2 medium-2 cell">
+            <br>
         </div>
         <div class="large-6 medium-6 small-4 cell">
             <div class="callout primary">

@@ -4,6 +4,8 @@
             <h2 class="title">{{$client->name}}</h2>
             <pre class="see">[ {{empty($client->tags) ? 'No Tags' : implode(', ', $client->tags)}} ]</pre>
             <br>
+            <b>Details</b>
+            <span class="see">You can see details about this client above.</span>
             <div class="callout warning">
                 <b>Chipset:</b> {{$client->chipset}}<br>
                 <b>Mac Address:</b> {{$client->mac}}<br>
@@ -13,6 +15,8 @@
                 <b>Registered at:</b> {{date('d/m/Y h:i:s', $client->serverTime)}}<br>
                 <b>Unique Identifier:</b> {{$client->id}}
             </div>
+            <b>Data Stream</b>
+            <span class="see">You can see a list of last <b>100</b> data records of this client above.</span>
             <div class="callout primary">
                 <canvas id="client_data" width="auto" height="150"></canvas>
             </div>
@@ -24,7 +28,7 @@
             <br>
             <b>Services</b>
             <span class="see">You can list the <b>client</b> services on the table above.</span>
-            <div style="margin-top:0" class="callout table">
+            <div class="callout table">
                 <h4>List Services</h4>
                 <ul style="margin: 20px;list-style: none;">
                     @foreach ($services as $service)

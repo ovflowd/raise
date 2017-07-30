@@ -57,11 +57,6 @@ body {
     color: #3b4151;
 }
 
-.info > div {
-    margin: 5px 20px 5px;
-    padding-right: 60px;
-}
-
 .callout.success {
     border-color: #49cc90;
     background: rgba(73, 204, 144, .1);
@@ -98,7 +93,6 @@ body {
 .callout.table {
     padding: 0 0 20px;
     border: 1px solid rgba(59, 65, 81, .3);
-    margin: 30px 0;
 }
 
 .callout.table h4 {
