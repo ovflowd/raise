@@ -85,7 +85,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Select Data on Couchbase.
      *
-     * @param string $table desired bucket to select
+     * @param string              $table desired bucket to select
      * @param Select|QueryBuilder $query a Select query to search
      *
      * @return array|string|object selected document or set of documents

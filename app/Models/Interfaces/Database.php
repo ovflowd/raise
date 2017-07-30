@@ -59,7 +59,7 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string $table desired table to select
+     * @param string              $table desired table to select
      * @param Select|QueryBuilder $query a Select query to search
      *
      * @return array|string|object selected content

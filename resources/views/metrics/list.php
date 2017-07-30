@@ -12,12 +12,13 @@
             <div class="callout table" style="margin-left:20px">
                 <h4>List Clients</h4>
                 <ul style="margin: 20px;list-style: none;">
-                    <?php if (empty($clients))
-                        return;
+                    <?php if (empty($clients)) {
+    return;
+}
 
                     foreach ($clients as $client):
-                        echo "<li><div class='callout primary'>" .
-                            "<a href='{$client->id}' style='float:right' class='see-button'>Watch</a>" .
+                        echo "<li><div class='callout primary'>".
+                            "<a href='{$client->id}' style='float:right' class='see-button'>Watch</a>".
                             "<h5>{$client->document->name}</h5>[{$client->document->tags}]</div></li>";
                     endforeach; ?>
                 </ul>

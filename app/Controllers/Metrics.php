@@ -81,7 +81,7 @@ class Metrics extends Controller
         $client = database()->selectById('client', $clientId);
 
         if ($client == false) {
-            header("location: /view/");
+            header('location: /view/');
         }
 
         view()::add('metrics.header');
