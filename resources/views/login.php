@@ -34,7 +34,8 @@
                     </div>
                     <div class="large-6 medium-6 small-12 cell">
                         <br>
-                        <div class="callout success">
+                        <div class="callout primary">
+                            <h5>Warning</h5>
                             This is an restricted area. Make sure that you have access to this management area.
                         </div>
                         <button class="mega-button" style="margin:0">Login</button>
