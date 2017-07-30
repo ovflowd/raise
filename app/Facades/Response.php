@@ -95,7 +95,7 @@ class Response extends Facade
      *
      * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields List of Headers
      *
-     * @param string $name Desired HTTP Headers
+     * @param string $name  Desired HTTP Headers
      * @param string $value the value of the Header
      *
      * @return void
@@ -136,15 +136,15 @@ class Response extends Facade
      * @see Message used Model
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP Code
-     * @param string $details Response Details
-     * @param bool $returnContent If need return the content
+     * @param int    $httpCode      desired HTTP Code
+     * @param string $details       Response Details
+     * @param bool   $returnContent If need return the content
      *
      * @return Message|null The returned content or nothing
      */
     public static function message(int $httpCode, string $details = null, bool $returnContent = false)
     {
-        self::setResponse($httpCode, new Message(), (array)database()->selectById('metadata', $httpCode)
+        self::setResponse($httpCode, new Message(), (array) database()->selectById('metadata', $httpCode)
             + ['details' => $details]);
 
         return $returnContent ? self::$response : null;
@@ -156,15 +156,15 @@ class Response extends Facade
      * @see Model base of the Models
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int $httpCode desired HTTP code
-     * @param string|Model $model the namespace of the model or an instance of it
-     * @param array|object $data the data to be mapped into the Model
+     * @param int          $httpCode desired HTTP code
+     * @param string|Model $model    the namespace of the model or an instance of it
+     * @param array|object $data     the data to be mapped into the Model
      */
     public static function setResponse(int $httpCode, $model, $data)
     {
         self::code($httpCode);
 
-        self::$response = json()::map($model, (array)database()->selectById('metadata', $httpCode) + $data);
+        self::$response = json()::map($model, (array) database()->selectById('metadata', $httpCode) + $data);
     }
 
     /**
