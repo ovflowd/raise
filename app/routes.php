@@ -148,7 +148,10 @@ $router()->mount('/relations', function () use ($router, $response, $token) {
 |----------------------------------------------------------------------------
 */
 
-// @TODO: Define the Management API Routes
+$router()->mount('/manage', function () use ($router, $response, $token) {
+    // Login Page
+    $router()->get('/', '\App\Controllers\Manage@login');
+});
 
 /*
 |----------------------------------------------------------------------------
