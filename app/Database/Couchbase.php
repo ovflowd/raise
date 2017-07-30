@@ -20,6 +20,7 @@ use App\Models\Interfaces\Database as DatabaseHandler;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
 use CouchbaseCluster;
+use Koine\QueryBuilder;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -85,7 +86,7 @@ class Couchbase implements DatabaseHandler
      * Select Data on Couchbase.
      *
      * @param string $table desired bucket to select
-     * @param Select $query a Select query to search
+     * @param Select|QueryBuilder $query a Select query to search
      *
      * @return array|string|object selected document or set of documents
      */

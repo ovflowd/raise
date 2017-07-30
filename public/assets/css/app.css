@@ -203,3 +203,11 @@ body {
     color: #3b4151;
     -webkit-appearance: none;
 }
+
+map > div {
+    border-radius: 4px;
+}
+
+#map_canvas > div {
+    border-radius: 4px;
+}

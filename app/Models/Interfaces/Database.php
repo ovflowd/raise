@@ -16,6 +16,7 @@
 namespace App\Models\Interfaces;
 
 use App\Models\Communication\Model;
+use Koine\QueryBuilder;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -59,7 +60,7 @@ interface Database
      * Select Data on Database.
      *
      * @param string $table desired table to select
-     * @param Select $query a Select query to search
+     * @param Select|QueryBuilder $query a Select query to search
      *
      * @return array|string|object selected content
      */

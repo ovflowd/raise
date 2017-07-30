@@ -42,8 +42,8 @@ class View extends Facade
     /**
      * Includes a View unto the System.
      *
-     * @param string $view  the view to be added
-     * @param array  $parse variables to be parsed
+     * @param string $view the view to be added
+     * @param array $parse variables to be parsed
      */
     public static function add(string $view, array $parse = [])
     {
@@ -51,9 +51,13 @@ class View extends Facade
             throw new InvalidArgumentException('View doesn\'t exists.');
         }
 
-        self::$content .= self::parse(file_get_contents($resolve), $parse);
+        ob_start();
+        extract($parse);
+        include_once($resolve);
+        $template = ob_get_contents();
+        ob_end_clean();
 
-        response()::setContent(self::$content);
+        response()::setContent((self::$content .= $template));
     }
 
     /**
@@ -77,7 +81,7 @@ class View extends Facade
      */
     protected static function resolve(string $view)
     {
-        $path = path('resources/views/').str_replace('.', '/', $view).'.php';
+        $path = path('resources/views/') . str_replace('.', '/', $view) . '.php';
 
         return file_exists($path) ? $path : false;
     }
@@ -86,15 +90,15 @@ class View extends Facade
      * Basic Templating Engine to Parse Variables.
      *
      * @param string $content Content to be Parsed
-     * @param array  $parse   What to Parse
+     * @param array $parse What to Parse
      *
      * @return mixed|string Return the Parsed Content
      */
     protected static function parse(string $content, array $parse)
     {
-        foreach ($parse as $key => $replace) {
+        foreach ($parse as $key => $replace):
             $content = str_replace($key, $replace, $content);
-        }
+        endforeach;
 
         return $content;
     }

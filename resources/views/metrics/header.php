@@ -9,6 +9,7 @@
           rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/foundation.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/vendor/jquery.js"></script>
 </head>
 <body>
 <div class="grid-x">

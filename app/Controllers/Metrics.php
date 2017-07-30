@@ -52,18 +52,15 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
-        $clients = '';
+        $clients = database()->select('client', new Select());
 
-        foreach (database()->select('client', new Select()) as $client) {
-            $tags = empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags);
-
-            $clients .= "<li><div class='callout primary'>" .
-                "<a href='client/{$client->document->serverTime}' style='float:right' class='see-button'>Watch</a>" .
-                "<h5>{$client->document->name}</h5>[{$tags}]</div></li>";
-        }
+        foreach ($clients as $client):
+            $client->document->tags = empty($client->document->tags) ? 'No Tags' :
+                implode(', ', $client->document->tags);
+        endforeach;
 
         view()::add('metrics.header');
-        view()::add('metrics.list', ['{{clients}}' => $clients]);
+        view()::add('metrics.list', ['clients' => $clients]);
         view()::add('metrics.footer');
     }
 
@@ -72,14 +69,23 @@ class Metrics extends Controller
      *
      * Show a Specific Client
      *
-     * @param string $client The client to be hooked
+     * @param string $clientId The client to be hooked
      */
-    public function client(string $client)
+    public function client(string $clientId)
     {
         response()::type('text/html');
 
+        $query = new Select();
+        $query->where('clientId', $clientId);
+
+        $client = database()->selectById('client', $clientId);
+
+        if ($client == false) {
+            header("location: /view/");
+        }
+
         view()::add('metrics.header');
-        view()::add('metrics.index');
+        view()::add('metrics.client', ['client' => $client, 'services' => database()->select('service', $query)]);
         view()::add('metrics.footer');
     }
 
