@@ -38,7 +38,7 @@
                             <h5>Warning</h5>
                             This is an restricted area. Make sure that you have access to this management area.
                         </div>
-                        <button class="mega-button" style="margin:0">Login</button>
+                        <button class="mega-button" style="margin:0;background:#6F71BC">Login</button>
                     </div>
                 </div>
                 <br>
