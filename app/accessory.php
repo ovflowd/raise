@@ -30,7 +30,7 @@ function logger()
  */
 function root()
 {
-    return __DIR__.'/../';
+    return __DIR__ . '/../';
 }
 
 /**
@@ -42,7 +42,7 @@ function root()
  */
 function path(string $context = '')
 {
-    return is_dir(($path = root().$context)) ? $path : false;
+    return is_dir(($path = root() . $context)) ? $path : false;
 }
 
 /**
@@ -56,13 +56,13 @@ function response()
 }
 
 /**
- * Get the static instance of ViewFacade.
+ * Get the static instance of BladeFacade.
  *
- * @return \App\Facades\Facade|\App\Facades\View|string
+ * @return \App\Facades\Facade|\App\Facades\Blade|string
  */
-function view()
+function blade()
 {
-    return \App\Facades\View::get();
+    return \App\Facades\Blade::get();
 }
 
 /**
@@ -155,21 +155,18 @@ $router = function () {
  * You can also provide a specific Model, that will override the ResponseFacade's model.
  * This accessory function echoes the output and exit the application with success status
  *
- * @param \App\Models\Communication\Model|null $optionalModel An optional Model to override the response
+ * @param \App\Models\Communication\Model|null $model An optional Model to override the response
  */
-$response = function (\App\Models\Communication\Model $optionalModel = null) {
-    switch (response()::type()) {
-        case 'application/json':
-            echo response()::response(function (\App\Models\Communication\Model $model) use ($optionalModel) {
-                return json()::jsonEncode($optionalModel ?? $model);
-            });
-            break;
-        case 'text/html':
-            echo response()::content(function ($content) {
-                return view()::render($content);
-            });
-            break;
-    }
+$response = function (\App\Models\Communication\Model $model = null) {
+    echo response()::response(function ($content) use ($model) {
+        switch (response()::type()) {
+            case 'application/json':
+                return json()::jsonEncode($model ?? $content);
+            case 'text/html':
+            default:
+                return $content;
+        }
+    });
 
     exit(0);
 };

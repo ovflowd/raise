@@ -67,16 +67,6 @@ interface Database
     public function select(string $table, Select $query);
 
     /**
-     * Count number of Elements of a specific Query.
-     *
-     * @param string $table      the desired table
-     * @param string $primaryKey the primary key to identify
-     *
-     * @return int amount of rows that the statement find
-     */
-    public function count(string $table, string $primaryKey);
-
-    /**
      * Update an Element of the Database.
      *
      * @param string       $table      desired table to update

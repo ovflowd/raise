@@ -4,7 +4,7 @@ body {
 }
 
 .top-bar, .top-bar, .top-bar ul {
-    background: #89bf04;
+    background: #8385D0;
     color: white;
     height: 56px;
 }
@@ -31,7 +31,6 @@ body {
     font-family: Open Sans, sans-serif;
     color: #3b4151;
     font-weight: bold;
-    padding: 0 20px;
 }
 
 .title small {
@@ -78,6 +77,10 @@ body {
     border: none;
     font-family: Titillium Web, sans-serif;
     color: #555;
+}
+
+.callout.primary .h5 {
+    margin-bottom:0;
 }
 
 .callout.primary h5 {
@@ -157,7 +160,7 @@ body {
     padding: 4px 40px;
     border: none;
     border-radius: 4px;
-    background: #547f00;
+    background: #6F71BC;
     font-family: Titillium Web, sans-serif;
     color: #fff;
     line-height: 1.7;
@@ -193,6 +196,7 @@ body {
 .see-button {
     font-size: 14px;
     font-weight: 700;
+    float:right;
     padding: 5px 40px 5px 10px;
     border: 2px solid #41444e;
     border-radius: 4px;
@@ -234,7 +238,7 @@ map > div {
     font-weight: bold;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     width: 100%;
     margin: 0;
     border: 2px solid #8385D0;
@@ -249,4 +253,13 @@ label {
 
 hr {
     background: rgba(59,65,81,.3);
+}
+
+#map_canvas {
+    width: auto; height: 100px;
+    border-radius:4px;
+}
+
+.grid-container {
+    margin: 50px 0 0 70px;
 }

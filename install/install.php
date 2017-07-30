@@ -132,12 +132,18 @@ function createBucket(array $details, array $credentials)
  */
 function insertMetadata(stdClass $details, CouchbaseCluster $connection)
 {
-    $metadataBucket = $connection->openBucket('metadata');
+    try {
+        $metadataBucket = $connection->openBucket('metadata');
 
-    $metadataBucket->insert((string) $details->code, [
-        'code'    => $details->code,
-        'message' => $details->message,
-    ]);
+        $metadataBucket->insert((string) $details->code, [
+            'code'    => $details->code,
+            'message' => $details->message,
+        ]);
+    } catch(Exception $e) {
+        echo writeText("Failed to Insert a Metadata.", '1;31', true);
+
+        var_dump($e);
+    }
 }
 
 /**
@@ -285,27 +291,24 @@ if (checkLibrary()) {
 
 echo PHP_EOL;
 
-$connectionOK = false;
-
 $credentials = null;
 
-while (!$connectionOK) {
-    try {
-        $credentials = setCredentials();
+try {
+    $credentials = setCredentials();
 
-        $temporaryConnection = (new CouchbaseCluster("{$credentials['ip']},{$credentials['user']},{$credentials['pass']}"));
-    } catch (CouchbaseException $e) {
-        echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
-    } finally {
-        echo PHP_EOL;
+    //$authenticator = new \Couchbase\PasswordAuthenticator();
+    //$authenticator->username($credentials['user'])->password($credentials['pass']);
 
-        echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
+    $connection = (new CouchbaseCluster("couchbase://{$credentials['ip']}"));
+    //$connection->authenticate($authenticator);
 
-        $connectionOK = true;
-    }
+} catch (CouchbaseException $e) {
+    echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
+
+    exit(1);
+} finally {
+    echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
 }
-
-$connection = (new CouchbaseCluster("{$credentials['ip']}"));
 
 if (option('skip-create') === null) {
     echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');

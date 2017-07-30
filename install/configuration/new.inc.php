@@ -34,7 +34,7 @@ return [
 
     'couchbase' => [
         'address'  => '{{ADDRESS}}',
-        'user'     => '{{USER}}',
+        'username' => '{{USER}}',
         'password' => '{{PASSWORD}}',
     ],
 
@@ -47,6 +47,7 @@ return [
     'security' => [
         'expireTime' => '2hours',
         'secretKey'  => 'default-raise-secret-key',
+        'debug'      => false
     ],
 
     /*

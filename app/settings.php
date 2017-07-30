@@ -32,9 +32,9 @@ return [
     |----------------------------------------------------------------------------
     */
 
-    'database' => [
-        'address'  => 'localhost',
-        'user'     => 'couch',
+    'couchbase' => [
+        'address'  => '127.0.0.1',
+        'username' => 'couch',
         'password' => 'couchbase',
     ],
 
@@ -45,9 +45,9 @@ return [
     */
 
     'security' => [
-        'expireTime' => '20hours',
+        'expireTime' => '2hours',
         'secretKey'  => 'default-raise-secret-key',
-        'debug'      => true,
+        'debug'      => false
     ],
 
     /*

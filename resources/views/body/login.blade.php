@@ -1,15 +1,3 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>raise - management</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
-          rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/foundation.min.css">
-    <link rel="stylesheet" href="/assets/css/app.css">
-</head>
 <body>
 <div class="bg">
     <img src="/assets/svg/symbol-two.svg">
@@ -27,10 +15,10 @@
                     <div class="large-6 medium-6 small-12 cell">
                         <br>
                         <label><b>Username</b></label>
-                        <input name="username" type="text"/>
+                        <input name="username" type="email" title="username"/>
                         <br>
                         <label><b>Password</b></label>
-                        <input name="username" type="password"/>
+                        <input name="username" type="password" title="password"/>
                     </div>
                     <div class="large-6 medium-6 small-12 cell">
                         <br>
@@ -38,7 +26,7 @@
                             <h5>Warning</h5>
                             This is an restricted area. Make sure that you have access to this management area.
                         </div>
-                        <button class="mega-button" style="margin:0;background:#6F71BC;cursor:pointer;">Login</button>
+                        <button class="mega-button" style="margin:0;cursor:pointer;">Login</button>
                     </div>
                 </div>
                 <br>
@@ -50,4 +38,3 @@
     </div>
 </div>
 </body>
-</html>

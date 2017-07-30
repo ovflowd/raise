@@ -35,6 +35,7 @@ class Manage extends Controller
     {
         response()::type('text/html');
 
-        view()::add('login');
+        blade()::make('header.login');
+        blade()::make('body.login');
     }
 }

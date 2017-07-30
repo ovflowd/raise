@@ -117,29 +117,6 @@ class Couchbase implements DatabaseHandler
     }
 
     /**
-     * Count number of Elements of a specific Query.
-     *
-     * @param string $table      the desired bucket
-     * @param string $primaryKey the document identifier
-     *
-     * @return int amount of documents that the statement find
-     */
-    public function count(string $table, string $primaryKey)
-    {
-        if (is_bool($primaryKey) || $primaryKey == null) {
-            return false;
-        }
-
-        try {
-            $elements = $this->connection->openBucket($table)->get($primaryKey);
-
-            return is_array($elements) ? count($elements) : 1;
-        } catch (Exception $e) {
-            return 0;
-        }
-    }
-
-    /**
      * Update an Element of the Couchbase.
      *
      * @param string       $table      desired bucket to update

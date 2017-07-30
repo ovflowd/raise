@@ -54,7 +54,7 @@ class Database extends Model
      *
      * @var string
      */
-    public $user = 'couch';
+    public $username = 'couch';
 
     /**
      * Database Admin Password.

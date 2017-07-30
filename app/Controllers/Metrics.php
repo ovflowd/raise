@@ -34,13 +34,13 @@ class Metrics extends Controller
      *
      * Show a Welcoming Page
      */
-    public function index()
+    public function welcome()
     {
         response()::type('text/html');
 
-        view()::add('metrics.header');
-        view()::add('metrics.index');
-        view()::add('metrics.footer');
+        blade()::make('header.welcome');
+        blade()::make('body.menu');
+        blade()::make('body.welcome');
     }
 
     /**
@@ -48,20 +48,13 @@ class Metrics extends Controller
      *
      * Show a View containing all Clients
      */
-    public function list()
+    public function clients()
     {
         response()::type('text/html');
 
-        $clients = database()->select('client', new Select());
-
-        foreach ($clients as $client):
-            $client->document->tags = empty($client->document->tags) ? 'No Tags' :
-                implode(', ', $client->document->tags);
-        endforeach;
-
-        view()::add('metrics.header');
-        view()::add('metrics.list', ['clients' => $clients]);
-        view()::add('metrics.footer');
+        blade()::make('header.clients');
+        blade()::make('body.menu');
+        blade()::make('body.clients', ['clients' => database()->select('client', new Select())]);
     }
 
     /**
@@ -69,25 +62,22 @@ class Metrics extends Controller
      *
      * Show a Specific Client
      *
-     * @param string $clientId The client to be hooked
+     * @param string $id The client to be hooked
      */
-    public function client(string $clientId)
+    public function client(string $id)
     {
         response()::type('text/html');
 
-        $query = new Select();
-        $query->where('clientId', $clientId);
+        $client = database()->selectById('client', $id);
+        $client->id = $id;
+        $client->location = explode(':', $client->location);
 
-        $client = database()->selectById('client', $clientId);
+        $services = database()->select('service', (new Select())->where('clientId', $id));
 
-        if ($client == false) {
-            header('location: /view/');
-        }
-
-        view()::add('metrics.header');
-        view()::add('metrics.client',
-            ['id' => $clientId, 'client' => $client, 'services' => database()->select('service', $query)]);
-        view()::add('metrics.footer');
+        blade()::make('header.client');
+        blade()::make('body.menu');
+        blade()::make('body.client', ['services' => $services, 'client' => $client]);
+        blade()::make('footer.client', ['latitude' => $client->location[0], 'longitude' => $client->location[1]]);
     }
 
     /**
@@ -95,24 +85,18 @@ class Metrics extends Controller
      *
      * Show a Specific Service Data
      *
-     * @param string $serviceId The service to be hooked
+     * @param string $id The service to be hooked
      */
-    public function data(string $serviceId)
+    public function data(string $id)
     {
         response()::type('text/html');
 
-        $service = database()->selectById('service', $serviceId);
+        $service = database()->selectById('service', $id);
 
-        if ($service == false) {
-            header('location: /view/');
-        }
+        $data = database()->select('data', (new Select())->where('serviceId', $id));
 
-        $query = new Select();
-        $query->where('serviceId', $serviceId);
-        $query->limit(100);
-
-        view()::add('metrics.header');
-        view()::add('metrics.data', ['data' => database()->select('data', $query), 'service' => $service]);
-        view()::add('metrics.footer');
+        blade()::make('header.data');
+        blade()::make('body.menu');
+        blade()::make('body.data', ['data' => $data, 'service' => $service]);
     }
 }

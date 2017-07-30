@@ -1,10 +1,7 @@
 <div class="grid-container" style="margin: 50px 0;">
     <div class="grid-x">
         <div class="large-6 medium-6 small-8 cell">
-            <h2 class="title">rais
-                <k style="color:#7d8492">e</k>
-                metrics
-            </h2>
+            <h2 class="title">raise metrics</h2>
             <div class="description info">
                 <div>
                     <span>

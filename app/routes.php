@@ -161,10 +161,10 @@ $router()->mount('/manage', function () use ($router, $response, $token) {
 
 $router()->mount('/view', function () use ($router, $response, $token) {
     // Index Page
-    $router()->get('/', '\App\Controllers\Metrics@index');
+    $router()->get('/', '\App\Controllers\Metrics@welcome');
 
     // List Clients
-    $router()->get('/client', '\App\Controllers\Metrics@list');
+    $router()->get('/client', '\App\Controllers\Metrics@clients');
 
     // Hook a Client
     $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
