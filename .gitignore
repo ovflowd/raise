@@ -52,3 +52,6 @@ fabric.properties
 
 # Docs Cache Folder
 docs/class/cache
+
+# Blade Engine Cache
+resources/cache/*.php
