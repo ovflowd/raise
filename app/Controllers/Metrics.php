@@ -123,7 +123,7 @@ class Metrics extends Controller
     }
 
     /**
-     * This method it's used to Search Content from RAISe
+     * This method it's used to Search Content from RAISe.
      *
      * It's used via AJAX request, mainly on the "Explore" tab on the
      *  Visualization System.

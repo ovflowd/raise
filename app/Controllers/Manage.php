@@ -50,8 +50,7 @@ class Manage extends Controller
 
         blade()::make('header.config');
         blade()::make('body.menu');
-        blade()::make('body.config', ['raise' => setting('raise'), 'database' =>
-                setting('database'), 'security' => setting('security')]);
+        blade()::make('body.config', ['raise' => setting('raise'), 'database' => setting('database'), 'security' => setting('security')]);
         blade()::make('footer.page-footer');
     }
 }
