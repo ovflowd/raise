@@ -22,11 +22,11 @@
         <div class="large-12 medium-12 cell hide-for-small-only">
             <br>
             <b class="saw">Announcement</b>
-            <div style="display: flex;flex: 3">
-                <div style="margin: 0;border-radius: 4px 0 0 4px;border: 2px solid #41444e;padding: 8px 10px;width:100%">
+            <div class="announce">
+                <div>
                     RAISe dashboard it's under development.
                 </div>
-                <button style="padding: 4px 40px;border: none;border-radius: 0 4px 4px 0;background: #41444e;color: #fff;" onclick="window.location.href='@path/manage/'">Logout</button>
+                <button onclick="window.location.href='@path/manage/'">Logout</button>
             </div>
             <br>
         </div>

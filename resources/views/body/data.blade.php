@@ -12,8 +12,8 @@
                         <b>Client Identifier:</b> {{$service->clientId}}<br>
                         <b>Parameters:</b> {{implode(', ', $service->parameters)}}<br>
                         <hr>
-                        <b>Unique Identifier:</b> {{$service->id}}<br>
-                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}
+                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}<br>
+                        <b>Unique Identifier:</b> {{$service->id}}
                     </div>
                 </div>
                 <div class="large-6 medium-6 small-12 cell">

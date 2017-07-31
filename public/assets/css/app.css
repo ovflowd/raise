@@ -4,6 +4,28 @@
     width:auto
 }
 
+.announce {
+    display:flex;
+    flex:3
+}
+
+.announce button {
+    background:#41444e;
+    border:none;
+    border-radius:0 4px 4px 0;
+    color:#fff;
+    padding:4px 40px
+}
+
+.announce div {
+    background:#FFF;
+    border:2px solid #41444e;
+    border-radius:4px 0 0 4px;
+    margin:0;
+    padding:8px 10px;
+    width:100%
+}
+
 .bg img {
     height:80px;
     margin-top:-20px;
@@ -17,6 +39,17 @@
     font-size:1.7em;
     font-weight:700;
     margin:30px 0 0 -20px
+}
+
+.box {
+    background:#d3dae2;
+    border:none;
+    border-radius:4px;
+    color:#3b4151;
+    font-family:Source Code Pro,monospace;
+    font-size:12px;
+    font-weight:600;
+    padding:10px
 }
 
 .callout h5 {
@@ -68,15 +101,6 @@
     padding:0 0 20px
 }
 
-.callout.table.is-open h4 svg {
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.callout.table h4 svg {
-    transition: all .4s;
-}
-
 .callout.table h4 {
     -ms-flex-align:center;
     -webkit-box-align:center;
@@ -99,40 +123,46 @@
     flex:1
 }
 
+.callout.table h4 svg {
+    transition:all .4s
+}
+
+.callout.table.is-open h4 svg {
+    -webkit-transform:rotate(90deg);
+    transform:rotate(90deg)
+}
+
 .callout.warning {
     background:rgba(252,161,48,.1);
     border-color:#fca130
 }
 
 .code {
-    font-size: 12px;
-    border-radius: 4px;
-    background: #41444e;
-    font-family: Source Code Pro,monospace;
-    font-weight: 600;
-    color: #fff;
-    border: none;
-}
-
-.box {
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    border: none;
-    font-family: Source Code Pro,monospace;;
-    color: #3b4151;
-    background: #d3dae2;
+    background:#41444e;
+    border:none;
+    border-radius:4px;
+    color:#fff;
+    font-family:Source Code Pro,monospace;
+    font-size:12px;
+    font-weight:600
 }
 
 .grid-container {
-    margin: 0 0 0 70px
+    margin:0 0 0 70px
 }
 
 .info p {
     color:#3b4151;
     font-family:Open Sans, sans-serif;
     font-size:14px
+}
+
+.label {
+    border-radius:57px
+}
+
+.label.secondary {
+    background:#7d8492
 }
 
 .mega-button {
@@ -150,7 +180,7 @@
 }
 
 .menu .menu-text {
-    cursor: pointer
+    cursor:pointer
 }
 
 .method {
@@ -168,11 +198,16 @@
 }
 
 .method.alert {
+    background:#f93e3e;
     border-color:#f93e3e
 }
 
 .method.info {
     background:#61affe
+}
+
+.method.secondary {
+    background:#777
 }
 
 .method.success {
@@ -183,12 +218,25 @@
     background:#fca130
 }
 
-.method.secondary {
-    background: #777
+.reveal {
+    border:none;
+    border-radius:4px;
+    box-shadow:0 1px 4px 0 rgba(0,0,0,.15);
+    outline:none
 }
 
-.method.alert {
-    background:#f93e3e
+.saw {
+    color:#3b4151;
+    cursor:pointer;
+    font-family:Titillium Web,sans-serif;
+    font-size:12px;
+    font-weight:300;
+    padding:0
+}
+
+.search_results,.search_results li {
+    list-style:none;
+    margin:0
 }
 
 .see {
@@ -197,15 +245,6 @@
     font-size:12px;
     font-weight:300!important;
     margin:0
-}
-
-.saw {
-    font-size: 12px;
-    padding: 0;
-    font-weight: 300;
-    cursor: pointer;
-    font-family: Titillium Web,sans-serif;
-    color: #3b4151;
 }
 
 .see-button {
@@ -221,6 +260,16 @@
     font-size:14px;
     font-weight:700;
     padding:5px 40px 5px 10px
+}
+
+.table-content {
+    display:none;
+    height:auto
+}
+
+.table-content ul {
+    list-style:none;
+    margin:20px
 }
 
 .title {
@@ -282,7 +331,32 @@ body {
 
 button {
     cursor:pointer;
-    outline: none
+    outline:none
+}
+
+button.secondary {
+    border:2px solid #41444e;
+    color:#3b4151;
+    display:inline
+}
+
+button.success {
+    border-color:#49cc90;
+    color:#49cc90;
+    display:inline
+}
+
+button.transparent {
+    background:#FFF;
+    border:2px solid #888;
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(0,0,0,.1);
+    font-family:Titillium Web,sans-serif;
+    font-size:14px;
+    font-weight:700;
+    line-height:1.5rem;
+    padding:5px 23px;
+    transition:all .3s
 }
 
 hr {
@@ -302,72 +376,17 @@ label {
     color:#3b4151
 }
 
-.label {
-    border-radius: 57px;
-}
-
-.label.secondary {
-    background: #7d8492;
-}
-
-button.transparent {
-    font-size: 14px;
-    font-weight: 700;
-    padding: 5px 23px;
-    transition: all .3s;
-    border: 2px solid #888;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
-    font-family: Titillium Web,sans-serif;
-    line-height: 1.5rem;
-    background: white;
-}
-
-button.success {
-    display: inline;
-    color: #49cc90;
-    border-color: #49cc90;
-}
-
 select {
-    font-size: 14px;
-    font-weight: 700;
-    padding: 5px 40px 5px 10px;
-    border: 2px solid #41444e;
-    border-radius: 4px;
-    background: #f7f7f7 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…45NjkuMjcxLS4yNjguNzA5LS4yNjguOTc4IDBMMTAgMTFsMy40MTgtMy4xNDF6Ii8+PC9zdmc+) right 10px center no-repeat;
-    background-size: 20px;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.25);
-    font-family: Titillium Web,sans-serif;
-    color: #3b4151;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-button.secondary {
-    border: 2px solid #41444e;
-    color: #3b4151;
-    display: inline;
-}
-
-.reveal {
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
-    border-radius: 4px;
-    outline: none;
-    border: none
-}
-
-.search_results, .search_results li {
-    list-style: none;
-    margin: 0
-}
-
-.table-content {
-    height: auto;
-    display: none
-}
-
-.table-content ul {
-    margin: 20px;
-    list-style: none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background:#f7f7f7 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…45NjkuMjcxLS4yNjguNzA5LS4yNjguOTc4IDBMMTAgMTFsMy40MTgtMy4xNDF6Ii8+PC9zdmc+) right 10px center no-repeat;
+    background-size:20px;
+    border:2px solid #41444e;
+    border-radius:4px;
+    box-shadow:0 1px 2px 0 rgba(0,0,0,.25);
+    color:#3b4151;
+    font-family:Titillium Web,sans-serif;
+    font-size:14px;
+    font-weight:700;
+    padding:5px 40px 5px 10px
 }
