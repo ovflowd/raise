@@ -113,5 +113,6 @@ class Metrics extends Controller
         blade()::make('header.data');
         blade()::make('body.menu');
         blade()::make('body.data', ['data' => $data, 'service' => $service]);
+        blade()::make('footer.data');
     }
 }

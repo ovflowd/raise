@@ -2,12 +2,6 @@
 
 use App\Facades\Test;
 
-/**
- * Created by PhpStorm.
- * User: Faraday
- * Date: 7/30/2017
- * Time: 9:19 PM
- */
 class ServiceTest extends Test
 {
     public function testRegister()
@@ -81,15 +75,9 @@ class ServiceTest extends Test
 
         $this->executeRaise($serviceModel);
 
-        var_dump(response()::response());
-
         $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
             'GET', $_SERVER, '/service/');
 
         $this->executeRaise();
-
-        var_dump($token()->clientId);
-
-        var_dump(response()::response());
     }
 }

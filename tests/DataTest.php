@@ -1,12 +1,7 @@
 <?php
 
 use App\Facades\Test;
-/**
- * Created by PhpStorm.
- * User: Faraday
- * Date: 7/30/2017
- * Time: 11:30 PM
- */
+
 class DataTest extends Test
 {
     public function testRegister()
@@ -62,7 +57,5 @@ class DataTest extends Test
        $this->assertInstanceOf(\App\Models\Response\Data::class, response()::response());
 
        $this->assertEquals(200, response()::response()->code);
-
-       echo 'hi';
     }
 }

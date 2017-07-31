@@ -26,17 +26,20 @@
             <b>Data Sets</b>
             <span class="see">You can see a Data Table with all Data records at <b>RAISe</b>.</span>
             <div class="callout table">
-                <h4>List Data</h4>
+                <h4>
+                    <span>List Data</span>
+                </h4>
                 <ul style="margin: 20px;list-style: none;">
                     @foreach ($data as $item)
                         <li>
                             <div class="callout primary">
                                 <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->serverTime)}}</small>
                                 <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
-                                <p style="font-family: Source Code Pro,monospace;font-size:14px">
-                                    [ @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
-                                    <b>{{$key}}:</b> {{$value}}
-                                    @endforeach]
+                                <b class="saw">Values</b>
+                                <p class="callout code small">
+                                    @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
+                                    <b>{{$key}}:</b> {{$value}},
+                                    @endforeach
                                 </p>
                             </div>
                         </li>
