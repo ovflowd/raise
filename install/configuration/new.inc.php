@@ -32,7 +32,7 @@ return [
     |----------------------------------------------------------------------------
     */
 
-    'couchbase' => [
+    'database' => [
         'address'  => '{{ADDRESS}}',
         'username' => '{{USER}}',
         'password' => '{{PASSWORD}}',

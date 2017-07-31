@@ -151,6 +151,9 @@ $router()->mount('/relations', function () use ($router, $response, $token) {
 $router()->mount('/manage', function () use ($router, $response, $token) {
     // Login Page
     $router()->get('/', '\App\Controllers\Manage@login');
+
+    // Configurations Page
+    $router()->get('/config', '\App\Controllers\Manage@config');
 });
 
 /*

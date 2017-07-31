@@ -29,7 +29,7 @@ class Manage extends Controller
     /**
      * Login Page.
      *
-     * Show a Login Page
+     * Show the Login Page
      */
     public function login()
     {
@@ -37,5 +37,20 @@ class Manage extends Controller
 
         blade()::make('header.login');
         blade()::make('body.login');
+    }
+
+    /**
+     * Config Page
+     *
+     * Show the Configuration Page
+     */
+    public function config()
+    {
+        response()::type('text/html');
+
+        blade()::make('header.config');
+        blade()::make('body.menu');
+        blade()::make('body.config', ['raise' => setting('raise'),
+            'database' => setting('database'), 'security' => setting('security')]);
     }
 }
