@@ -46,6 +46,7 @@ class Client extends Controller
         response()::message(400, 'Missing required Parameters');
 
         if (($clientModel = security()::validateBody('client', request()::body()))) {
+
             $jwtHash = security()::insertToken($clientId = database()->insert('client', $clientModel));
 
             parent::register(['token' => $jwtHash], new TokenResponse());

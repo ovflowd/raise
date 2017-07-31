@@ -88,8 +88,13 @@ class ServiceTest extends Test
 
         $this->executeRaise();
 
-        var_dump($token()->clientId);
+        $this->assertInstanceOf(\App\Models\Communication\Service::class, response()::response()->services[1]);
 
-        var_dump(response()::response());
+        $this->assertEquals(200, response()::response()->message);
+    }
+
+    public function testFilter()
+    {
+        //TODO
     }
 }
