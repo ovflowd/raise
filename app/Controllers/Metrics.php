@@ -43,6 +43,7 @@ class Metrics extends Controller
         blade()::make('body.menu');
         blade()::make('body.welcome');
         blade()::make('footer.welcome');
+        blade()::make('footer.page-footer');
     }
 
     /**
@@ -62,6 +63,7 @@ class Metrics extends Controller
         blade()::make('body.menu');
         blade()::make('body.home', ['clients' => $clients, 'logs' => $logs]);
         blade()::make('footer.home');
+        blade()::make('footer.page-footer');
     }
 
     /**
@@ -94,6 +96,7 @@ class Metrics extends Controller
         blade()::make('body.client', ['services' => $services, 'client' => $client]);
         blade()::make('footer.client',
             ['latitude' => $client->location[0], 'longitude' => $client->location[1], 'data' => $data]);
+        blade()::make('footer.page-footer');
     }
 
     /**
@@ -116,8 +119,15 @@ class Metrics extends Controller
         blade()::make('body.menu');
         blade()::make('body.data', ['data' => $data, 'service' => $service]);
         blade()::make('footer.data');
+        blade()::make('footer.page-footer');
     }
 
+    /**
+     * This method it's used to Search Content from RAISe
+     *
+     * It's used via AJAX request, mainly on the "Explore" tab on the
+     *  Visualization System.
+     */
     public function search()
     {
         response()::type('text/html');
@@ -129,14 +139,14 @@ class Metrics extends Controller
 
         $clients = array_map(function ($client) {
             return '<li><div class="callout primary"><a href="'.$client->id.
-                '" class="see-button">Watch</a><h5>'.$client->document->name.' <small>(client)</small></h5>'.
-                (empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)).'</div></li>';
+                '" class="see-button">Watch</a><h5>'.$client->document->name.' <small>(client)</small></h5><small>[ '.
+                (empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)).' ]</small></div></li>';
         }, database()->select('client', $clientQuery));
 
         $services = array_map(function ($service) {
             return '<li><div class="callout primary"><a href="'.$service->id.
-                '/data" class="see-button">Watch</a><h5>'.$service->document->name.' <small>(service)</small></h5>'.
-                (empty($service->document->tags) ? 'No Tags' : implode(', ', $service->document->tags)).'</div></li>';
+                '/data" class="see-button">Watch</a><h5>'.$service->document->name.' <small>(service)</small></h5><small>[ '.
+                (empty($service->document->tags) ? 'No Tags' : implode(', ', $service->document->tags)).' ]</small></div></li>';
         }, database()->select('service', $serviceQuery));
 
         $content = implode('', $clients).implode('', $services);

@@ -71,7 +71,9 @@ class Chart extends Model
      * If the content of the Lines will be filled
      *  by the same color of the line.
      *
-     * @var bool
+     * Options: true (start), end, origin, false (none)
+     *
+     * @var string|bool
      */
-    public $fill = true;
+    public $fill = 'origin';
 }

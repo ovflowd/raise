@@ -1,3 +1,7 @@
+#js-heightcontrol {
+    height:0
+}
+
 #map_canvas {
     border-radius:4px;
     height:100px;
@@ -35,7 +39,7 @@
 .bg span {
     color:#8385D0;
     display:inline-flex;
-    font-family:Titillium Web,sans-serif;
+    font-family:Titillium Web, sans-serif;
     font-size:1.7em;
     font-weight:700;
     margin:30px 0 0 -20px
@@ -46,7 +50,7 @@
     border:none;
     border-radius:4px;
     color:#3b4151;
-    font-family:Source Code Pro,monospace;
+    font-family:Source Code Pro, monospace;
     font-size:12px;
     font-weight:600;
     padding:10px
@@ -142,9 +146,27 @@
     border:none;
     border-radius:4px;
     color:#fff;
-    font-family:Source Code Pro,monospace;
+    font-family:Source Code Pro, monospace;
     font-size:12px;
     font-weight:600
+}
+
+.footer {
+    background:#fff;
+    bottom:0;
+    box-shadow:0 -4px 10px -4px rgba(0,0,0,.15);
+    height:100px;
+    margin:20px 0 0;
+    overflow:hidden;
+    padding:30px;
+    position:relative
+}
+
+.footer img {
+    float:right;
+    margin:-10px -105px 0 0;
+    position:relative;
+    width:200px
 }
 
 .grid-container {
@@ -228,7 +250,7 @@
 .saw {
     color:#3b4151;
     cursor:pointer;
-    font-family:Titillium Web,sans-serif;
+    font-family:Titillium Web, sans-serif;
     font-size:12px;
     font-weight:300;
     padding:0
@@ -241,7 +263,7 @@
 
 .see {
     color:#3b4151;
-    font-family:Source Code Pro,monospace;
+    font-family:Source Code Pro, monospace;
     font-size:12px;
     font-weight:300!important;
     margin:0
@@ -256,7 +278,7 @@
     box-shadow:0 1px 2px 0 rgba(0,0,0,.25);
     color:#3b4151;
     float:right;
-    font-family:Titillium Web,sans-serif;
+    font-family:Titillium Web, sans-serif;
     font-size:14px;
     font-weight:700;
     padding:5px 40px 5px 10px
@@ -351,7 +373,7 @@ button.transparent {
     border:2px solid #888;
     border-radius:4px;
     box-shadow:0 1px 2px rgba(0,0,0,.1);
-    font-family:Titillium Web,sans-serif;
+    font-family:Titillium Web, sans-serif;
     font-size:14px;
     font-weight:700;
     line-height:1.5rem;
@@ -385,7 +407,7 @@ select {
     border-radius:4px;
     box-shadow:0 1px 2px 0 rgba(0,0,0,.25);
     color:#3b4151;
-    font-family:Titillium Web,sans-serif;
+    font-family:Titillium Web, sans-serif;
     font-size:14px;
     font-weight:700;
     padding:5px 40px 5px 10px

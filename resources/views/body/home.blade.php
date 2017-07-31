@@ -19,8 +19,7 @@
                                     <a href="{{$client->id}}" class="see-button">Watch</a>
                                     <h5>{{$client->document->name}}</h5>
                                     <small>
-                                        [{{empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)}}
-                                        ]
+                                        [ {{empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)}} ]
                                     </small>
                                 </div>
                             </li>

@@ -31,3 +31,15 @@ jQuery(document).ready(function () {
         }
     });
 });
+
+function resizeControl() {
+    $('#js-heightControl').css('height', $(window).height() - $('html').height() +'px');
+}
+
+jQuery(document).ready(function () {
+    resizeControl();
+});
+
+jQuery(document).resize(function () {
+    resizeControl();
+});
