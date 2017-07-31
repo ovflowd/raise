@@ -7,6 +7,6 @@
     jQuery(document).ready(function () {
         createMap({lat: {{$latitude}}, lng: {{$longitude}}});
 
-        createChart({{json_encode($data)}})
+        createChart(document.getElementById('client_data').getContext('2d'), {!! json_encode($data) !!});
     });
 </script>
