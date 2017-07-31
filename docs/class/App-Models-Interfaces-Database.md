@@ -92,7 +92,7 @@ Select Data on Database.
 
 
 ```php
-array|string|object App\Models\Interfaces\Database::select(string $table, \Koine\QueryBuilder\Statements\Select $query)
+array|string|object App\Models\Interfaces\Database::select(string $table, \Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder $query)
 ```
 
 #### Details:
@@ -104,31 +104,7 @@ array|string|object App\Models\Interfaces\Database::select(string $table, \Koine
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $table | **string** | desired table to select |
-| $query | **Koine\QueryBuilder\Statements\Select** | a Select query to search |
-
-
-<hr>
-
-### count
-
-Count number of Elements of a specific Query.
-
-
-
-```php
-integer App\Models\Interfaces\Database::count(string $table, string $primaryKey)
-```
-
-#### Details:
-* Visibility: **public**
-
-
-#### Parameters:
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| $table | **string** | the desired table |
-| $primaryKey | **string** | the primary key to identify |
+| $query | Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder | a Select query to search |
 
 
 <hr>

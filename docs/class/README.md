@@ -22,6 +22,7 @@ Table of Contents
         * [Settings](App-Handlers-Settings.md)
     * **App\Models**
         * **App\Models\Communication**
+            * [Chart](App-Models-Communication-Chart.md)
             * [Client](App-Models-Communication-Client.md)
             * [Data](App-Models-Communication-Data.md)
             * [Model](App-Models-Communication-Model.md)

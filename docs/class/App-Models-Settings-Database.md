@@ -34,14 +34,14 @@ public string $address = 'localhost'
 
 <hr>
 
-### $user
+### $username
 
 Database Admin Username.
 
 
 
 ```php
-public string $user = 'couch'
+public string $username = 'couch'
 ```
 
 #### Details:

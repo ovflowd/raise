@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.8.5">
   <partials/>
-  <file path="accessory.php" generated-path="accessory.html" hash="7ad00b386e580f8bccd552168be332eb" package="Default">
+  <file path="accessory.php" generated-path="accessory.html" hash="98cd4d280fdaca90556085c5e432e8aa" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -10,9 +10,9 @@
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJydV9ty2zYQfddX7IMnpjyuleZRjuu6SS/uNM1MnD50RjMehIREJBTA4mJbrfJJ/Yr+WHcXAE3KtBObHosU9nZ292BBvTxt63YymR0cTOAA4BKAPi7poqd4kWiLf/TBy3SP8m1fFh/IFB/uCGboeHEruGQv+L+F4nK6TYIFB5xt6XORHrdHKCHh9yL42lj4Q6sraZ1o4Fx7abX0YJbwvlZ65VivUaXUTsJZK8pawgt4WXvfuvlsZloUmGBLeWTsapYU3SxqfvPi6Pl37KE07caqVe1zMOU3FOQHK9x//zZKoNasq9vPiMBjIOeFVyUojQ+6lGRAy7+Z1U+iFJXsErHSB6thcda2iyhy6b4drKHl1nmLiXG8ZdClV0ZDY1YraYvp5J8JdWzMHZrO5yvpi+nx5PPXIH0nXWuwGE+Ems1H8dokfBBx9vBY2H8F6fyTUbP1PaBZ9gXMrPMA5NfCiw/CyV+ErhppkbIJOy1WgHGyxhuhBXYVRNtag3QcTSYrL16ZUNb0FBN6YyrZuAVviKUoEVrWHCZVpdXRrBKCW1vOKyH/6o786ox+YjvIdLQXH1HwYCPI8nHEuZBlsLitnwg1m4/CdUn4IOTs4R7YAlwrS7VE2E56T8MNpPZ2A0tr1pzVRVpPHepyaIUVa4jAYK80eqlWwQqGdpa9wZooA1qssRyWwt1dv1a+RgmH3SnQB2Oa7VrdIIeXosFhq5ZQqUrve1iaoCu4roWHjQn7FssvhS1pPh/yMXP3Ol+CNj6XiXK7Ek3oJihuiFZaGsGWvzPE3ZIz+mI067E2pKJRH2IVYx92DMfI9M4E3GUdmXLZzyPWjmOisVJUG5A3ynmXYyt/SKWibEuUezTwu9zDU2YdcLhwnHTjbPdsDH0CXd7FFGJuieJJ5XjSTzjbnZ5CcetDy+vxWMWU8j7uEn8bfBti7h8v3v7eHRW5PTjeQ+PzN3mDxGZsNJ7Pzi+6Cv1pApRCY2WcoZ5eqUr2ec5D7BCdIHOuVdOAwaPXkhKXfXBA7bvIAvJNZ78DUeLYc4Y2SC6OLGsjHVubmAM2nRoSk8FJi28AcV8w1V1gH1zL4IbbqT9mX5n1OuhkGhe3OiDgPdPSkmh4Dc6wBmkhJgfeDJPKJ2Nqby5sv8FfCLwbE/uKSDIrqAK945c5ngtZPCIG13oKAbEVw4A5Uo9ucVrP53T/UZeotWNDREwuj9n48zQRlnpTPB/S73XuoTefpKbJoKrYNOQQ9Svz6z4a4Ktd+cnRtrv1gprsiHej4vdG5w3OKuTn7gvce7KIwIk/3U4+6m377JUGYHJ8l33oT2mWAr3L4lzN9CO/S6WVq4d7aMhBGrqwx/ylsByywhgUNI0ZcqQlTmVkGimejh1so53mLCMPo+c+CXuRT8DbIDMXMrd2x5DvapY6i2UueqtwMiQqXQNx7xCdz1PPJWMsujez+bzGEYtDvNiPvw3U35zL/jTzaTzySTqznj2LOfVBMJDbHdPz0/Hz28RaZm7k73Dc9pNHIv8PbEVoAg==</source>
+    <source>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</source>
   </file>
-  <file path="bootstrap.php" generated-path="bootstrap.html" hash="d92855a74502c26d9748f5a9deb07acc" package="Default">
+  <file path="bootstrap.php" generated-path="bootstrap.html" hash="6d0bc46c4395a4b1729a40eac8c5be4a" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -21,7 +21,7 @@
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJzNVW1P2zAQ/p5fcZMmJUElQWifCoJ1rEAl1k2FbV+qRcZxU2+p7fmFqVL+0n7F/tjOTsrbGGyISriq6/TxnR/fc3fZ3VdzFUX5xkYEGwAFgJ8KP/yqHR5q8OOn8Lf/bfHmOtYuvCku/gBydDy9AorgBb8NJEXadMA0HJg3fp52yyZDxIOvibNzqeGj4BdMG1LDSFimBbMgZ3A256IyYV/NKROGwUAROmewDbtza5Xp57lUCEinKcukrvJuo8nbnZvb2dZe8EClWmpeze3qMG6X/pA3mphfP2tOcFfu4xY1m084ogavRGtXMpiwlqeBx47mibmFC+dIrOIGww4HcqGkwcXAWVlLUjIdafbdcc0KKSjDTHg7mhRFFudZll8wUUqdk25vhnkX79x0OKB4XYMCHzpBLZfC3OOPKJWTzmB5lzeLyi94WdbsB9EYT+kse8ihDpsuvT29uh80U4EN0mDGAhGlV1pJn67O8ppb/m+Sr0ndWwQPCUVde1ARDKfGAgthNUzYyyskc+alNz1YMCzPsgfM0jQEGuEk7fdV6zN5GcKrk3Rzr2K2sz9urZO0B3fi74LTABenw8mn4STducW0Dd+KKupYL1dM9Sq2Bst7QaLV83VasbfglPiMy78aKeJ0PeKfWol8T5m1vlM9uq7XJ/5RUPmK4UzLBVApZrxyOsQHZrxmIWtNuAzH1isuDY4RqLELTAdKTbsHM12h/X6wSe4vQdPtDkW4JiGGWmOXOZFV5fPkuQnBPLsCk1NqH4nkxd/CiUWSxIZRp/HtlJXs3FVxCvt9SIbF4OQEvvjF+P3Z6GCIb9xh8XkwGY/GR2nqw8oFL4x3UHKjarIswrEm7sF/HbcmhSZOhPoNXVs/N4WwVDAsgeBYWjiUzrdxT7UtDcQIHJC6Pif0W3StrSHyausVNsKuDXWt7MZtH3Chnbhh/xtu/Ipn</source>
+    <source>eJzNVutO2zAU/p+nOJMmNUElQWi/CoIVVi4S61Bh40+1yCRu4i21PV9AlfJKe4q92I6dBApjsCEqkaqpm3Pxdy7fcbZ3ZSmDIFlbC2ANIAVwt9RdbtVcTlTjx938Y/fbyOtlWbNwprj4Q5Cg4+mtIPVe8FtDmEZ1K5j6DZPa3aftso5R4oTviTWlUPCZsyuqNKngmBuqODUgZnBeMl5or1exjHJNYShJVlLYhO3SGKkHSSIkCoRVGY2FKpJWUSeN5vpmvLHjPWRCLhQrStNtxszCbbKniP71s2IEtRKXt6Bef8ErqDGkrLI5hQltcGp47lW/MDYfcILACqYx7bAv5lJoXAytEZUgOVWBoj8sUzQVPKPYCR+OJ2ka95I4Tq4oz4VKSKsbY9/1tu46HGYYrsYCH1ieGSa4fsQfkTIhrcHiIW8GKz9neV7Ra6Iwn8Ia+pRD5ZVuvL18dU8VlQ7NSCmM84hwhPd6qntdCiF1GK3vSKvLBp0KOb2G6YUXTdtnU4zDmMUpKWinFUVbyw5UW4YwWm0iJ1hPqg0gCkcZKRzvrWEVM+zfuLMimtwDeEAyJEgfCoJ9qXBS+f7UlJubEMKSOg7pPswpzrm8D9Rkke9YFIfRYCAbn+Fb36fK5bmgprU/aqzDqA8Pyj96p16cno0mX0aTaOse0iZ9HVQkRLXokKoutxrn5JwE3f9lWD1nwTLiqJt804L37u3gHO1V6BxGvGB8eY/MaiPmkCM3kfpXyNRLp7jsfkWddGYEQjvDfnbnx/PIuNJOOvQtc4twpjBRmeAzVljlkw0zhmPEUUD7YBgeiPzGoGVoMB1K2RFYTzvpYOBtwscHo261/WhcUSGamXgiisI1xGsrBHXoUmxFoVwmwjd/SycyLuxpmlmF7wxxTi9t0YtgdwDhKB2enMBXtxh/Oj/eH+F70Ci9GE7Gx+PDyA9QxlmqnYOcaVmRReq31b0+/Nd2K6rQxHLPYX+WqtdWIaQKpsUDHAsDB8K6M8FBbaiBMgL7pKouSfY9WJqRKHm38Q6najvT2ql1J9onXCjL79j/BqVe7xw=</source>
   </file>
   <file path="Controllers\Client.php" generated-path="Controllers.Client.html" hash="f5a2e62b3b90fd2a21fef331b6a7f63e" package="Default">
     <docblock line="0">
@@ -45,7 +45,7 @@
     </parse_markers>
     <source>eJyVVutu2zYU/q+nOCsSSAoc28v+bHEuTdIWCNYMW9L2zzwYtEzbXChSJam4Ru1H2lPsxXZ4kxU3TjoZliie+/k+HvvkvJpXSdI7OEjgAGAEYG8je9mVv6xohR97c9v26eWrtswvrCkuvhH00PFwIxg5L/hdQTbKV0EwdAF7K3sfhuWqixIrfE1qM5cKPgr2QJUmHK6FoUpQA3IKH+ZMzLTT46ygQlO4qEgxp3AEJ3NjKn3c68kKBbJWBe1KNesFRd3zmodH3f6Z81DIaqnYbG5iMGaWNsilIvrffzgjqNVLEkFKqtHUhqqGV1IYJTlH9UGS1Nrv3sgJ5RqFZVkLVhDDpPCbA6fzq2SCDv+oqVpe1oxPqBreGWJoSYXRwzvKaWEGDURXnGgNm0ixNxetPWAaCJREkBm+YNYEdEULNmUFlDYwaCy2JB1rSOD24vqOts29pQaKhS+NbSsoyjGlCRiJBi75iImmFGJ3qegu2D2r6IQR11/71nPq+2+P9n/u7//y0wOji+al2AS9+XTVzuF3Yiy0MYqDQApAgLr9JjQT2Pm41UvIWBtFCgPFVpOSr4kltmuhvQ7gls6YNjaOkgXVuhsEUf6JcDZxFRMxabS1L11DLbARBqn1hhgyJppumb+uiCIlyPHfCJ7b20NvxK2sWUWWXBJ0rqPOVMnSiW7p55pqs+XJxV2JmnPYU0g5aemN0MWlk1t0xhSQVM5zFAZXPfes6jGSHqa1KCwREVhfWuYTPAUboxP8bUL5/dy58M20VxRn+fGxpiYGzI76/c7GuOOLzwfObp1sY/EeE9iFg5Mhff0RD93HEYBbSEseC7cQTADLaXUQKYSdoxa2p9EhSpHlyvc/tPYRSDM8+MIhHBp7Qyqk9lPIQPvadM1n04Zoy7ggnJMxlrExtltjUtwj8UBWFiOcc82mpZ2ixDjXJebjD6euuXkWZo59/C6IO60MngY9enHtG2EOWRMl23PjJW9pe5qYWgnwwsOziSxqO9wGjdJ6Q5H/zS2mR7GLWZN6DuePMmgEvgc5HL/AyXeM2+lwLaraOApsE/Oj9tNw6hXtlEA0+NKRFacVguZF2skqYnDkRiICE26QuqGPUCKeC4b8i4c3EHnHcMEfOg1I7LmcwBzPuVWd0ClBDjQxnU+sGdvoDgMakCVqP+yYVP5nJpyCzyEtGrZDnm6qbpsHbIPiszaBmUoalGOVDW180lkwDOF3kC8K48KrwTkIugihMwevk7f4xKaQhWZYSjlxlhoy02kOP6CfKeGablPXk3xB+H1Gv1QcCZylx2kHdnnKO9A6DbiXW0Rx6bS2vW8qOjxbzKmi2av0q7Vap3D9G1iXr/LBI5N16339UnXM/j16IPy5CveiEjb1hRI37toH9dsi0oIzPN8fWEnRTxPgz/5fHUjPTtOtkr7P+EdrfPLI+MX6OSuZebb4ENop7nbwdMxoLBX+Z7tctjOHtPuEN6eI6ZzGdJC26Zu3d1cpEja9wGf+eAL6sRmY7KOvk/8ACNV+TQ==</source>
   </file>
-  <file path="Controllers\Data.php" generated-path="Controllers.Data.html" hash="9e28d61334b9f371fbda5ad2a6f6f459" package="Default">
+  <file path="Controllers\Data.php" generated-path="Controllers.Data.html" hash="7fcbbb51ace43784f66fadbc6b75e7e3" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -54,7 +54,29 @@
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJzVV+9uGzcM/35PwRnBfBc4dlDsU9K4TVIMCLZ0XdIOGOLAlc+yrfYsXSRdPaPOI+0p9mIjJd0fXxxv3bddEPsikj9S5I+U8vJVvsijaHB4GMEhwBiAPsb00Jt/SLTBH/pwy/Tt5ZumzL+QKb48EQwQeFQLxg4FfzcQj5NNEIycw8GGPkfhddNHCQlfs8IulIYPUnzh2rAMrqTlWnILagbvF0LOjdPLRMql4XCes3TB4QW8XFibm5PBQOUoUIVOeV/p+SAomoHXPHrRPx46hFTlay3mC1s6E3ZNTi40M3/9mQmGWoMokmzJDZqSq3x0qaTVKstQ/TSKCuNXr9WUZwaFy2UhRcqsUHL0hlkGzAB9v+EzIQUtn+43cotPdG4wAoWb2MIsF732T0pIPvq14Hp9UYhsyvXo1jLLl1xaM7rlGU/tacWCy4wZj1Im/hzqrYFdMAvXTLI5N8CyUASWUogGVsIugDlrssRqMTC+QGHN5delVEnAhPePy0UjJGayXBpEaRUI8D8sl1PTiCP6GhFZXcz0HMINnwuDocA7rVJuTD8ISvlvLBNT3PUUmJxW2sFBIa3CrXH314QZ3jJ+nTPNlqAmnzBXcDAlG1LP2TpTbEp5D7KZVksnuuEPBTe2heCqtpEFJu5AhyphjsqCeTlgMBMOWDuHXAoD1MB958UE6QuzQrrUgw4bin1wZ0A+egGvduXXEwfhU0hPKY6TkxOktMHixj8cH/egey0M1mWOGg+F0BjPO9oGp8x1EyRNieC8XmGJzuDuvrHOtGbr8Ypln2PtE0I+Jmq6jpNeHb2P2gWb0L4h/r5ETBpx0iNmEDfU0aHhaaGxQwn5S6jyBXnokla3Bw3wpA1Hz0xpjgOgGcXREJEKorjx5rfc7jJ1e1+GQNJMSd7wdrpHvXJwVuE30tZ8MjWfY11xc/gWto55ubtH02mga5wcDQUWUNt600u/4d5OUHpKzS5zOK5RV7jfkkpYbSIWE4b3qdht+8do91+PTWJQuVKF/RXXBR3CcTuX2B04jU5OKhrfdQMRu3A2hO5tkVJTU7QualosAe97IPlqa/DFSSNeH9lj1J4YP6MnGgtUhWeGxnmWqZWhfpxjclxbM++pbvSAgCMOU5jzVMywL53KbXPyOcDdveuZELe78uCBRjYRxC6EORrOREaZedJ2LR4YN9BrHjiUplGZ6wz376uyK4FPurNdMs1toSXc1QXxzb5kedwyfaZ5AkKpUrbENtMeQ/8m96dbDNtT02eK6WRb51E4oHDAZX70AyXR0b4xwhszb/ex4Pa98QdAmO3VCTHH+4P02H6qX7M859Ndx0JjTHvvzTOhZZDi0csmGPUBvU1Y+hmPNVA5JR1vRtUiHWs43Dx3sTK5H+amyOxeStbc+IejpNeIYPfh8r+j8SejpDsJWY6sjEvM+qJGqN/AyR/dhvGilBe2vFht0egDcQ4r5TPj7idYqWztyIp3JSyoFxkny5nF22rJRRB0d2Hg7nf+erYSSMHyAhG4vP9i4y+BgbsPAYmH5QDt7mNt85C9oLjXJhBNK4tyDKyqSyBEMKzosotL80xNMBsHVn3mskmgygiL5YG2CebkR8PVAo+1uJtmAqlzNSVeOSgiXLnYPr0a9xaHEnfxnP2C/zqgfQLfnZ3BjGWGt3nVclnb9GAv4tbBtRVIfED/cOAmn9rn5YRC+38bUqf71QE+duHqLVQIpvOfInCj+1u8n9/cnP8+vvzl7fvzq7e38Uc/+z/2oAN9iIUZy2LJtUi9zwReQSfE24ETqIPvJKjfSZ6JOvCznBWBatUw8dqP0d85cGaO</source>
+    <source>eJzVV+9O40YQ/+6nmCJU2ygk6NRPcOQOOFVCLfQKd5UqgnIbZ5PsnbNrdtek0YVH6lP0xTqzu44dE9Jev9WIxOz8n/nNzPL6TTEroqh3cBDBAcAQgD6G9NCbf4i0wh/6cMf07emrJs2/kCi+PCP0UPGgJgydFvxdQTJMV4EwcAZ7K/ochNdVFylEfMtKO1MaPkrxyLVhOVxKy7XkFtQEPsyEnBrHl4uMS8PhrGDZjMMreD2ztjDHvZ4qkKBKnfGu0tNeYDQ9z3n4qnvUdxoyVSy1mM5sZUzYJRk518z89WcuGHL1okiyOTcoSqaKwYWSVqs8R/aTKCqNP71SY54bJM7npRQZs0LJwTtmGTAD9P2OT4QUdHyyW8gdPuO5QQ8UBrGhszr03D8pIfng15Lr5Xkp8jHXg1vLLJ9zac3gluc8sydrFFzkzHgtVeLPoA4N7IxZuGKSTbkBlocisIxcNLAQdgbMSZMkVouB8QUKZy6/LqVKAia8e1QdGiExk9VRL8rWjgD/w3I5Ng0/oq8RgdX5TM8B3PCpMOgKvNcq48Z0A6Gi/8ZyMcaox8DkeM0dDJTSKgyNu79GzPCW8NuCaTYHNfqMuXJn+2OSo4fECrbMFRtT/gPPRKu5I93wh5Ib29LkqreSJSZwX4dqYa6qwnk6oFMjDlhDp7kiBlU9912UI4QxTErpSgA6BJZ4B0+BbHSCvtqUP0+dCp9Keipykh4fI7QNFjn54eioA/GVMFifKXI8lEKjP+8pDE4ZjFMET6XBWb3EUp3C3X3jnGnNlsMFy78k2ieEbIzUeJmkndp777VzNqW4Ifm+0pg2/KRHTCBpsKNBw7NSY6eS5sdQ7XOyEBNX3IGG8rStjp6J0hwHQdOLwz5qKgnqxovfcrtN1MU+D45kuZK8Ye1kB/vawOlafyNtzSdX0ynWFYPDtxA65uXuHkXHAbZJetgXWEBt66DnPuDOVqX0VJwxc3pcwy4w3gpKWG0CFhOGd6nYbfmnaPtfT01gULkyhX2W1AXtw1E7l9gdOJWOj9cwvosDEGM47UN8W2bU3OSt85oOK4X3HZB8sTEAk7Thr/fsKWpPjp/REo0HqsILw+Msz9XCUD9OMTmurZm3VDd60ICjDlNY8ExMsC8dy21zAjqF23vXIyFpd+X+A41uAoidCXPYn4icMvOs7Vo4MG6w1zhwWppCVa5zjN9XZVsCn3Vnu2Sa21JLuKsL4pt9zoqkJfpC8wQNFUvVEptIewr9m96fbCBsR01fKKajbeylsKhwwOV+BQAl0cG+McIbM2/7enBxr/wCCLN9Y0tM8S4hvX4/2a9YUfDxttWwkZ96bHtvmjuiJZzhSmYjjKIWpqMRy77g3gNVUDXw6rQ+pL2HU8+DGktW+ClvytzuxGoNmn/YMZ2GB9u3zv8O35+Nkm5FsgLhmlQ665scaf0GsP7oAsabVFHa6ua1ga+PBEaslM+Mu8BgpfKlQzFeprCgnmQcrWAWr7MVSEHQ5YaBuwD6+9tCIDarm0UA+e6bj78lBlA/BE08HAfV7sLWFg/ZC4w7ZQLQtLJIR8fWdQmACIJruGzD0jRXI8zGvlVfuGwCaC2ExfKKNgHm6If9xQz3XRJnuUDoXI4JV04VAa46bK+1xoXGaUliXMCP+L8Fyqfw3ekpTFhueBtXLZO1TAd2atzYaBuOJPv0HwkG+Vy+qEYXyv9bl/bir07hUwyX17DWYPb+kwdupn+D9fjs5ubs9+HFL9cfzi6vb5NPfil8ws3fTYQZynLOtci8xRTewF7wdg+OoXZ9L8U7S7zd44DNak4EmK0Hied+iv4Ge49qQg==</source>
+  </file>
+  <file path="Controllers\Manage.php" generated-path="Controllers.Manage.html" hash="94c5bb9b628dff88c762091ec86d83c4" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJx1UdtOwzAMfc9X+I1tEs20x4G4PiGBhLi8TZqyLmsqsiRKXGCifBJfwY9hpy0MIVzVcXxOfBzn+DSYIIScTARMAJYA7JZsHHXGUEsfu5zmtcPbfawL+CgFfwBJhRc/wDJXob+F0XLc9sAiC8qW/aIP24IQBs9Ug8ZHeHT1s45JWbhyqKPTCH4DD6Z2Vco8W5faJQ3nQZVGwwyODWJIcyl9IMA3sdSFj5XsiUl2zMNZMT3JFUofdrGuDA5iNe5Y5CKq9Plha0UsKYRTW53oKEuFxaV3GL21RD/6numlVSnBjXKq0sNFzuGHCmgU9niije7jrXYId75BnYbr5z68A+qymA7JVDuSH1JSlHt6oF9Ru3XakxNvgt84N8c2gWtf1Q5uu/ZyakDujX8BtUfoAZnX0KxofLBpXInclWXaaJyxToQt0nw8jXg0ns9xF/ToAKkpaXBrD8Y0pYG3smqdSVv1RCSjaRuLXJN5/9BWfr37TXoX7+IL3mrT7Q==</source>
+  </file>
+  <file path="Controllers\Metrics.php" generated-path="Controllers.Metrics.html" hash="99aab484d58c866bb9fc2c696312653a" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJytWF9T2zgQf8+n2MkwY5sJMe3MvYBxC+kLcy1313DXB8Iwiq3EutqWK8lApvCR7lPcF7uVZCdO4vzhwAxG0a52V7/9aVch+FAkRafjHx524BDgDkC/7vSjR/bRoif80S8zrf9a+VNTZgd6KQ7WBD4aHi0Ed8YK/j6Be+c9VYKRceg/6feoGj71UaKFH0mpEi7gz5zdUyFJCpe5oiKnCvgErhOWT6XRS1lEc0nhvCBRQuE9BIlShTzxfV6ggJcion0upn6lKH2refS+fxwaCxEvZoJNE1U7Y2qmnVwIIv/9J2UEtfxOJycZlbhUuypGA54rwdMU1U87nVLa2S88pqlEYZaVOYuIYjwfDRIi1KnR+ZWznI7+KKmYXZQsjakYDRVRNKO5kqMhTWmEmnWKBimREr5QJVgka2DOYeEaVEIUfCE5mVIJJE3hKy+VHuYxXJQSnaGBz3zKIpPyieAZrqG1TfhKLUCyRt1sn+eA4PSP60m0g7uup/xO1IwL6KOieSwbYXV+djS3zC70c4i5i+kj/I5h9qupWjJM+AMQ+EbTiGeYVKNUCX3ztyjHmDqYlHmk4YQHo0pdz0itK/0IzA7HBLveyYmaFdR1FIbmJypLHQ9BrfXGKYmNUka+o1JC8aPoV1a15gbFMY9nfUxUuUtnt6kJ52rd53NnFbbPTKptqP3F6ANEiDthucaOwCcikzEnIoYHppJafZAyTbCepgK+NTsyLrbDnLwG44PIeoQziIkiY6KXHIXSENx1rNTpgZvjBiztXQ8VuMBcXMxqjWuWUYipjByvAeZBirvYYBlFLWZTljHlvjs+3uViB0mSN2KIsdODmyoG6cBZOMesB3oX1Zwe3e4kUrKVRTb723g0LGjEJph9q7qi9LEggmQg8bgjxw5YjOWXgo0WFIcxRbLw7zTeyier7y6svJJbrQS4mF3GDXppL6erC49C3MGZlrWIUm6LNirQxyLFcu46J9rSqsJSRJKKe+wum0hZiVuI+ZBQQeuAL+Mq5H1JeqCdoU8iBJndZaRw52i7dUxeA2GLsipFDn9LnlsaFSYm06NcDzm5pK0fJyVjmlo6VkaPwphHZWYA0W2xt75Ih+aAXtSGiJFuhKPyovFYM9zEW2dyK1jNk+8t22oequfeIoW7i0DFrjcoA3Oe3tRblksw61JQ6TQKxO5yUNtd2vAN5lExVca0aWxB6JvjW1N58uk2pXdayeZWy/XodmPh+aTpuU/ZGdr9mgV7FZ8KoP2rjw70LWpP7Xhz8Vkc9pXq0yBtXX7WTvKrzsqLakc7t42vN2B2FfPNClWQOzU8TZ7vZnQzropnqxmWlIgoecWNBa9Rtq0I+qOkUukVP/RNHZG0srY2ZO7yuKg9Pd3Bb1fX55dXQ9eUSXB+1n6eHa/bqE8tRHk7y23XstaeYcUbWoYTpCwMYnYP5v5/1o3wCwd+3YBCsIyIWTcMCCSCTs66Tr/Ra/vrzaFbm5CUHo1LpXjeDb8RFSWBT8Ig+SVsWFhuNX0HApmh59Ctog18+znwzbo1by7NCjVzW+wpMpUefADnisM10VeuE2BZ1fUR0kbbX1nk9Z3ARyjQKYLiLLWSrRfeJmu8TXeI/9HPX5acRilqyY6vd7BXijZcBxo5qqPeN0ktFvfI0qZVL01To3Y3D6G3oVDMo1gkVnr9pdm2a0WzJEmqBtbenKb2o9lxEFH9T48wGM+zQR66IQKBX9zLVMnAH+PeKi0NzHx5XSufO/8BHLw8fw==</source>
   </file>
   <file path="Controllers\Service.php" generated-path="Controllers.Service.html" hash="4517eb751d389d5dbd7feeef50ab1779" package="Default">
     <docblock line="0">
@@ -67,7 +89,7 @@
     </parse_markers>
     <source>eJyNVu9u20YM/66n4AADlgLHDop9ShqvSbsBwWagS9p9qYvgLJ3ta+U75e6U1JjzSHuKvdjI+yNLsptVQRzlSP7II38k/fqXal0lyeTkJIETgHsA+rinh978Q6Id/tCHO6a/Xr5ry/wLmeLLgWCCwPO94N6h4O8O0vtsFwRz53Cyo895eN2NUULCN6y2a6XhoxSPXBtWwo20XEtuQS3hw1rIlXF6pci5NByuKpavObyC12trK3M+magKBarWOR8rvZoERTPxmqevxmdTh5CraqvFam2jM2G35ORaM/PvP6VgqDVJEsk23KApuarmb5W0WpUlql8kSW386UwVvDQo3GxqKXJmhZL+8OJlnTuuHzE+YAbC6zu+FFKQ8MD0FuNQeJUjVlHkbX5XQvL5nzXX2+talAXX8zvLLN9waQ1alzy3Fw0j3pbMNECxDlewvynYNbMwY5KtuAFWhpqwnKI08CTsGlgEIGOsHwPjSxaOTayvS7SSgGUYn8VDIyReJx5NkrwdEvBvlsvCtCJK/k6Ixe4C9JzALV8Jg0HBe63QmxkHQZT/xUpRYAoKYLJotBsfBmppFV6Uwztm2YIZ3gN4UzHNNqAWXzB57myAeMy9kVnFtqViBdUk6Cy12jjRLX+oubE9JFfUnawxnQMdyodpi5X0csCgFhywqA45CgPUxP2t6gVyHJa1dAUBHS6X+gAvgXyMAt7elT/PHIRPJz1RnGbn58h7gyVPfz47G8FwJgyWaYUaD7XQGM97uganLA4zZFNEGJiY0ktgWrPt/VKUFI7/Z8OqtAk1jcouuKwVBz1iCWmjgWiG57XGJqXYHkM9r1WxTYdBZziCLmDWh2wHeFMgZhGqnWanU4H31vYYWvt+8SnVaoW3wljwLd2DYqr2AEPqAx//E9YvlgazR4ViwvDx8Bi45rbWEj4NRTGEyyl04GkidU5Pp3T0+aID89xFDYhLVtKUaJRGrp7ITrrIgpKJSWsFRDXIFTZHc0OTwRTO+olFTuNwOT9vyPcpZsF0QjWfRyD5U39upeR0H3kr/laP/4HI3+tvJzsYOmESIW1L3owTKrfLf6s3W2Q+3veOvDvf2aFpO+2/wg0i3ewILTtjVcWLYz3fJWPTjz6advP3jHOcvGyBF9kb09GC5V9xqIGqqKVwYTaHNNA0x9FN0Nh3lW9fU5f2xQFSYi5/aHiMWhEcHyeDB1pCKBzYtTCn0zAKOvMiOGp3onErqtOJDqhtFxm3j/Y7zBrB4bwxff42Dddh7RejpJuErLrjNm3B79c0OdjDtprwOVD6kMi/uSzgFq1q6zjTZ/NHYiiWz6fLrSwsX7l1DMcNilX2IuNkFbP4zSYyFwStMgZu//vd/SSQsHGPBOa/vOf8l4TA9IeAxMNxgHZbum8eEhkUX7QJ7NPKohwDa8oUWBIMGw4dI9iqVAvMxsCqr1y2WdUYuZo5OmUH8tPp0xqncTrMS4FkuimIaQ6KWBgP+/OwNTEdSkpTOoOfLi/9eO1zq+dr9uuHq7RQeU1fx7KxIKfHITsz8X9CcEvhx4Nw6sf8epzjnkNtY+eFMjWt6bWfk/8AW7XAIg==</source>
   </file>
-  <file path="Database\Couchbase.php" generated-path="Database.Couchbase.html" hash="32596627923f70d71d5a4b6cfc0388fd" package="Default">
+  <file path="Database\Couchbase.php" generated-path="Database.Couchbase.html" hash="a5d972f5968831376262b0c9934e7b51" package="Default">
     <docblock line="0">
       <description>_    _ _____   _______
 | |  | |_   _| |__   __|
@@ -86,42 +108,43 @@
     <namespace-alias name="Exception">\Couchbase\Exception</namespace-alias>
     <namespace-alias name="N1qlQuery">\Couchbase\N1qlQuery</namespace-alias>
     <namespace-alias name="CouchbaseCluster">\CouchbaseCluster</namespace-alias>
+    <namespace-alias name="QueryBuilder">\Koine\QueryBuilder</namespace-alias>
     <namespace-alias name="Select">\Koine\QueryBuilder\Statements\Select</namespace-alias>
-    <class final="false" abstract="false" namespace="App\Database" line="39" package="Default">
+    <class final="false" abstract="false" namespace="App\Database" line="40" package="Default">
       <extends/>
       <implements>\App\Models\Interfaces\Database</implements>
       <name>Couchbase</name>
       <full_name>\App\Database\Couchbase</full_name>
-      <docblock line="39">
+      <docblock line="40">
         <description>Class Couchbase.</description>
         <long-description>A Couchbase Handler is a Database Handler that
 Handles and does all operations with a Couchbase Database</long-description>
-        <tag name="see" line="39" description="You will need Couchbase PHP SDK!" link="\App\Database\CouchbaseCluster"/>
-        <tag name="see" line="39" description="Couchbase Documentation" link="https://developer.couchbase.com/documentation/server/current/introduction/intro.html"/>
-        <tag name="see" line="39" description="CR Design Pattern" link="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern"/>
-        <tag name="version" line="39" description="2.0.0"/>
-        <tag name="since" line="39" description="2.0.0"/>
-        <tag name="package" line="39" description="Default"/>
+        <tag name="see" line="40" description="You will need Couchbase PHP SDK!" link="\App\Database\CouchbaseCluster"/>
+        <tag name="see" line="40" description="Couchbase Documentation" link="https://developer.couchbase.com/documentation/server/current/introduction/intro.html"/>
+        <tag name="see" line="40" description="CR Design Pattern" link="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern"/>
+        <tag name="version" line="40" description="2.0.0"/>
+        <tag name="since" line="40" description="2.0.0"/>
+        <tag name="package" line="40" description="Default"/>
       </docblock>
-      <property static="false" visibility="private" namespace="App\Database" line="46" package="Default">
+      <property static="false" visibility="private" namespace="App\Database" line="47" package="Default">
         <name>$connection</name>
         <full_name>\App\Database\Couchbase::connection</full_name>
         <default>null</default>
-        <docblock line="46">
+        <docblock line="47">
           <description>The Couchbase Connection Instance.</description>
           <long-description></long-description>
-          <tag name="var" line="46" description="" type="\CouchbaseCluster" variable="">
+          <tag name="var" line="47" description="" type="\CouchbaseCluster" variable="">
             <type>\CouchbaseCluster</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="53" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="54" package="Default">
         <name>connect</name>
         <full_name>\App\Database\Couchbase::connect()</full_name>
-        <docblock line="53">
+        <docblock line="54">
           <description>Connect to the Database.</description>
           <long-description></long-description>
-          <tag name="param" line="53" description="&lt;p&gt;the connection string for Couchbase&lt;/p&gt;" type="array|object" variable="$connection">
+          <tag name="param" line="54" description="&lt;p&gt;the connection string for Couchbase&lt;/p&gt;" type="array|object" variable="$connection">
             <type>array</type>
             <type>object</type>
           </tag>
@@ -133,31 +156,31 @@ Handles and does all operations with a Couchbase Database</long-description>
           <type>array|object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="61" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="62" package="Default">
         <name>destroy</name>
         <full_name>\App\Database\Couchbase::destroy()</full_name>
-        <docblock line="61">
+        <docblock line="62">
           <description>Destroy the Connection.</description>
           <long-description>(only if the connection it's already active)</long-description>
           <tag name="inherited_from" description="\App\Models\Interfaces\Database::destroy()" refers="\App\Models\Interfaces\Database::destroy()" link="/classes/App.Models.Interfaces.Database.html#method_destroy"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="75" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="76" package="Default">
         <name>insert</name>
         <full_name>\App\Database\Couchbase::insert()</full_name>
-        <docblock line="75">
+        <docblock line="76">
           <description>Insert Documents on Couchbase.</description>
           <long-description></long-description>
-          <tag name="param" line="75" description="&lt;p&gt;desired bucket&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="76" description="&lt;p&gt;desired bucket&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="75" description="&lt;p&gt;data to be inserted&lt;/p&gt;" type="\App\Models\Communication\Model" variable="$data">
+          <tag name="param" line="76" description="&lt;p&gt;data to be inserted&lt;/p&gt;" type="\App\Models\Communication\Model" variable="$data">
             <type>\App\Models\Communication\Model</type>
           </tag>
-          <tag name="param" line="75" description="&lt;p&gt;defined primary key or generated&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="76" description="&lt;p&gt;defined primary key or generated&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="return" line="75" description="generated or defined primary key or the result of the primary key" type="integer|string">
+          <tag name="return" line="76" description="generated or defined primary key or the result of the primary key" type="integer|string">
             <type>integer</type>
             <type>string</type>
           </tag>
@@ -179,19 +202,20 @@ Handles and does all operations with a Couchbase Database</long-description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="92" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="93" package="Default">
         <name>select</name>
         <full_name>\App\Database\Couchbase::select()</full_name>
-        <docblock line="92">
+        <docblock line="93">
           <description>Select Data on Couchbase.</description>
           <long-description></long-description>
-          <tag name="param" line="92" description="&lt;p&gt;desired bucket to select&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="93" description="&lt;p&gt;desired bucket to select&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="92" description="&lt;p&gt;a Select query to search&lt;/p&gt;" type="\Koine\QueryBuilder\Statements\Select" variable="$query">
+          <tag name="param" line="93" description="&lt;p&gt;a Select query to search&lt;/p&gt;" type="\Koine\QueryBuilder\Statements\Select|\Koine\QueryBuilder" variable="$query">
             <type>\Koine\QueryBuilder\Statements\Select</type>
+            <type>\Koine\QueryBuilder</type>
           </tag>
-          <tag name="return" line="92" description="selected document or set of documents" type="array|string|object">
+          <tag name="return" line="93" description="selected document or set of documents" type="array|string|object">
             <type>array</type>
             <type>string</type>
             <type>object</type>
@@ -206,22 +230,22 @@ Handles and does all operations with a Couchbase Database</long-description>
         <argument line="0" by_reference="false">
           <name>$query</name>
           <default></default>
-          <type>\Koine\QueryBuilder\Statements\Select</type>
+          <type>\Koine\QueryBuilder\Statements\Select|\Koine\QueryBuilder</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="107" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="108" package="Default">
         <name>selectById</name>
         <full_name>\App\Database\Couchbase::selectById()</full_name>
-        <docblock line="107">
+        <docblock line="108">
           <description>Select an Object by its Identifier.</description>
           <long-description></long-description>
-          <tag name="param" line="107" description="&lt;p&gt;desired bucket&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="108" description="&lt;p&gt;desired bucket&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="107" description="&lt;p&gt;a document identifier&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="108" description="&lt;p&gt;a document identifier&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="return" line="107" description="selected document or set of documents" type="object|boolean|\App\Models\Communication\Model">
+          <tag name="return" line="108" description="selected document or set of documents" type="object|boolean|\App\Models\Communication\Model">
             <type>object</type>
             <type>boolean</type>
             <type>\App\Models\Communication\Model</type>
@@ -238,51 +262,23 @@ Handles and does all operations with a Couchbase Database</long-description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="126" package="Default">
-        <name>count</name>
-        <full_name>\App\Database\Couchbase::count()</full_name>
-        <docblock line="126">
-          <description>Count number of Elements of a specific Query.</description>
-          <long-description></long-description>
-          <tag name="param" line="126" description="&lt;p&gt;the desired bucket&lt;/p&gt;" type="string" variable="$table">
-            <type>string</type>
-          </tag>
-          <tag name="param" line="126" description="&lt;p&gt;the document identifier&lt;/p&gt;" type="string" variable="$primaryKey">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="126" description="amount of documents that the statement find" type="integer">
-            <type>integer</type>
-          </tag>
-          <tag name="inherited_from" description="\App\Models\Interfaces\Database::count()" refers="\App\Models\Interfaces\Database::count()" link="/classes/App.Models.Interfaces.Database.html#method_count"/>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$table</name>
-          <default></default>
-          <type>string</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$primaryKey</name>
-          <default></default>
-          <type>string</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="150" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="128" package="Default">
         <name>update</name>
         <full_name>\App\Database\Couchbase::update()</full_name>
-        <docblock line="150">
+        <docblock line="128">
           <description>Update an Element of the Couchbase.</description>
           <long-description></long-description>
-          <tag name="param" line="150" description="&lt;p&gt;desired bucket to update&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="128" description="&lt;p&gt;desired bucket to update&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="150" description="&lt;p&gt;the document identifier&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="128" description="&lt;p&gt;the document identifier&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="param" line="150" description="&lt;p&gt;data to update&lt;/p&gt;" type="\App\Models\Communication\Model|object" variable="$data">
+          <tag name="param" line="128" description="&lt;p&gt;data to update&lt;/p&gt;" type="\App\Models\Communication\Model|object" variable="$data">
             <type>\App\Models\Communication\Model</type>
             <type>object</type>
           </tag>
-          <tag name="return" line="150" description="the result of the update" type="array|string|object">
+          <tag name="return" line="128" description="the result of the update" type="array|string|object">
             <type>array</type>
             <type>string</type>
             <type>object</type>
@@ -305,19 +301,19 @@ Handles and does all operations with a Couchbase Database</long-description>
           <type>\App\Models\Communication\Model|object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="169" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Database" line="147" package="Default">
         <name>delete</name>
         <full_name>\App\Database\Couchbase::delete()</full_name>
-        <docblock line="169">
+        <docblock line="147">
           <description>Delete an Element of the Database.</description>
           <long-description></long-description>
-          <tag name="param" line="169" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="147" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="169" description="&lt;p&gt;desired element to delete&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="147" description="&lt;p&gt;desired element to delete&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="return" line="169" description="if removed or not" type="boolean">
+          <tag name="return" line="147" description="if removed or not" type="boolean">
             <type>boolean</type>
           </tag>
           <tag name="inherited_from" description="\App\Models\Interfaces\Database::delete()" refers="\App\Models\Interfaces\Database::delete()" link="/classes/App.Models.Interfaces.Database.html#method_delete"/>
@@ -334,7 +330,18 @@ Handles and does all operations with a Couchbase Database</long-description>
         </argument>
       </method>
     </class>
-    <source>eJzFV+tu2zYU/u+nOAsCVA5iK83PpHXaOAUaFN2yZf0xwIBBS7TFRSIVknJq1H6kPcVebIcXyZJ8iTNkmIM45OG5kd/Hc5h3V3mSdzrhyUkHTgDGAOZrbD5m5D5maYk/5suKzV+3vqyvuYExxcHGQoiOR+uFsfWCv0sIxt2lXxjZgOHSfI/8cNnHFbP4gRQ6ERK+cTanUpEUbrmmklMNYgq/J4zPlNVLWUS5ovAxJ1FC4RzeJVrn6iIMRY4LopAR7Qs5C72iCp1m77x/NrAeIpEvJJslugzG9MIEuZZE/f1XyghqhZ0OJxlVaGpC5aMbosmEKHrZ6RTKib6KmKZqNBRZVnAWEc0Ed8LLto7dyxR9qcoREAXl+DPhcUqlMxuKIkqMdPTpe0Rz47W98PPbx/TXgspFa2GYFkqXfr4IxunIql0XLI2pHN1romlGuVaje5rSSF9W9BimRKm1pxKWj2sR+CyBKSBV6pVUJ0QbCzdHFR5DLMwgTQGhkfZ8FDwxnaD92m3pqSSCops7gj9EgZboiVMa14zvPt/B/c2XnyrLkgwxndPUhO1H1Z4ikYWxiApzAjabUFGJBAijQkqUhYxrKeIismt20k90ltaTrZtvBKW8/8QeWE5jRiwHzSwcJoTxnpj2JPIJj4BNWIqUG+dEG4bD8De4oYrNONw5SXkSlpuCAzK3f1YdD+NIyVIUdqImcMCyPHUYt+nV+dExJcACbj4neK1qR40jzqndO949pQnG6XvN0uDDnMgNcPxiaP/mks2RZHAcrb29B16keCna4X1A0ALZsybCRtCcSJIBkZIslmLypzGpuze2tanSEosFTEUt02aKxQRrA0wL7gy8bVDz2bWK7rzM51gnTPUGzT3Rp42jCI5+1Lz0BiSOEXS1Om2K8XrKtixHGJ+EjFdH3Usbd7VxXsgSpOTCbngNVn/v5mJnExy0I4vS9tjICCp1xX8FaFGvFtsQ80gcI6wpdWExHSbxBk+K6IHqlr4tlphajETwadoh8mOCxLYZ0HhHECReRuTiC11gkCmWvhi8CB5QhmyYUW6qUOWhciSpLvAe4oVfem+VqrHb4c6ggOAWqe1QZlZT2IuJ20nQOJ5Tv3u7+dNtu3L4bODIsKLfxrha1726ggnj5wn9HtiuqNKxxCIgsnGuaBGL8WShqQrOz7pdfy23cqI3MNbXFqvA5dntDXz6PvKpS7k3oDzCHQQNj/5kveoubrleZO//y2nVZJThirLuWkY+xvGj6YfYf/zcTa0RkVGygxmu9Li4ZQVyUahpcu5KGE4o91wpRWovDZyHNg0aiW6gbaW9gTd9UwZ6g7BMpchM/bF+VlUOR9vwOAxoGyyoHhsXFybEvU03KDPR4v4xRdBRXYon9QzEhMMv7vgmC2BYRW5jTJFNGfbp16khWy4OWUPEqnA7kHbgLidCpEt3IV8L5+vFbdzGejPZNuAa2bmeWQr4mvP+UBRnZlKLUKNDnRLObW8wJ2lBLyuVFeDDNkogqB6jcEy7rZy8jylJVd10BxfwfuMp8iKb4MMOT/FT+V7BMQGV0wgRisBy7nBWmAL8UmZYm4O5gf0BSGaTr2NvX77WlSqf14ANI97Lici4eTkd2BQCpsaGng1MzX9ajV7hm8WBOO2jGy3ReWXC4TZsWQ2qCF248udSE13A239HxrPnifgtj81TFYuSp2DZyA/sQP6EdpYm01cKG2Ov/cGEbLyTqpfwltdSI+ghzWzzLdNwsZ3DTuV5EvsXwn9Q2orcvUQ2Y/3vRe4GKbyVW8/8l7On3znRM5xqvoOdob9NxjS2ae1ghikrpsRImom5e/tyofdywPl7lb52GOQutwPqi5avjPCq8w//hPDd</source>
+    <source>eJzFVutu2zYU/u+n4IIAlYPYyvIzaZ0mToAGxbZsaX8MMGDQIm1xoUmFpJwatR9pT7EX2+FFsi624wIZpqIOeXiu/D4e8v1VlmadTnxy0kEnCI0Rsj9j+9mR/+zSCv7ZHye2f/36qrrmB9YUBq2FGByPNgtj5wX+r1A07q7CwsgFjFf2dxSGqz6s2MWPODepVOirYAuqNOboXhiqBDVITtGXlImZdnqcJVRoiq4znKQUnaP3qTGZvohjmcGCzFVC+1LN4qCoY6/ZO++fDZyHRGZLxWapKYIxs7RBbhTW//zNGQatuNMReE41mNpQ2egWGzzBml52Orn2ol8koVyPhnI+zwVLsGFSeOFlU8fVMgVfunSEsEbF+BMWhFPlzYYyT1IrHd19S2hmvTYXfv35mf+eU7VsLAx5rk3h57Nkgo6c2k3OONktHz0abOicCqNHj5TTxFyWtBlyrPUmQgHX9UaEQvaIaYTLkkqpSbGxFn4OKoIgIu2AcwSQKbdvGr0wk4L9xm3hqSCIpu1K0Z8yB0vwJCglFeOHTw/o8fbzT6VlQRJCF5TbsP2krCmR85jIJLc74LKJNVVAjDjJlQJZzIRRkuSJW3OTfmrmvJps1bwVlIr+C3tiGSUMO27aWTxMMRM9Oe0p4BlsAZswDlQcZ9hY5qPhH+iWajYT6MFLip1wnJUCAaP7Z+X2MAFULURxJ6kDh9g84x7jJu063zu2NTjA7XcCx62y1TASgrra4UxqgyFOP2gWBh8XWLXACYux+5sptgCSoeNk4+0DEjmHw9IMHwIiI4E9GyK0gmZY4TnCSuHlSk7+siZV99a2MtVGQRNBU1nJtJ5iPoGegaa58AbBNqr47DpFv1/2OzYp071BvSb60tqK6Oh7xUtvgAkB0PX6tC6G46masgxgfJGKrI+6ly7uurVfwBKg5NIVvAGrv7c44m2igypyKG2PDYygypT81wgsqt1iG2IBiWOAlVMfFtJhCk7wJE+eqGnouyYKqREgQkjTDYEfEyC2y4CSHUGAeHOslp/pEoJMofURFEToCWTAhhkVtguVHkpHipocziEc+FXwVqpaux3uLAoAbs7dzWVnFYW9mPhKotr2nIbqXfGn26ry+LRwZNDR7wmsVnWvrtCEifOUfovcban5WEETkPNxpmlO5HiyNFRH52fdbjiWWznRG1jrG4dV5PPs9gYh/RD51KfcG1CRQAVRzWPY2aC6i1v+LnLn/wdoVfsCx+r0ssTRznfDgw+4qt6N6PjZzuBmCtn4qfOAVZLu4IxvSj6jojf5kNRef/6wWLZo/8ApRHovQbyHJkFCYj7RFg+ctDcIpu+KQMCruy/XUTHt9hl5BxhOlZzbZuVcr8u0jraBdxgrXPyofLFcXNgQj66CqEjOyMdnDgwBdSVf9Ct8wAL95nd0skQMWs49gRTZlMGl/jYNZ8spwxvUWBluB/ge79VESr7yp/etoL9Z3pMm/O1kmxwwQNjNzLEiNKgPh6I4s5NKhAodqpTwbnuDBeY5vSxV1ghex0mKovJFi45pt5FT8DHFXFdNd3Dha0bscwK4cOefNUWz/aEusZsR9oTnLsZe+wpDbPDdHKndZeVrZcuNVgt6SFtp3zc1F9vp5FVep1Lo4v8Bo/LM3xbtWP87t27hrG3l1isv0T1txote4VT9reINacgATIlLawczbLNBbAqVzuXCv0+ENHs54P29STs5DHKf2wF9xKg3Rnjd+RegB0f8</source>
+  </file>
+  <file path="Facades\Blade.php" generated-path="Facades.Blade.html" hash="bcf2ebfb8bf645f1278687f6ccb7d1d3" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJydVd1u0zAUvs9THFBF0mkkgMRNR/kbg8EN0za4WafKdU4bQ2pHttMxrX0knoIX49hOujQFCeGqyanP//cduy9eVUUVRdnBQQQHAFMA95i65aSwnGpNH/fw2+4d9OuuLgjOlYQ9RUaBJ/eKqY9C3zUk0+G6UUx8wmztnpNGXKekccrXrLaF0vBFihVqw0r4KC1qiRbUHC4LIRfG25WCozQIbyrGC4Rn8KKwtjKjLFMVKVStOaZKL7LG0GTB8vGz9MlLH4Gr6laLRWHbZMLeuiRvNTO/fpaCkVUWRZIt0ZCrS1VN3jPOcjRHUVRT8k8U2eCCfCdvS9oPT2AGvHAiF0Li0Rb745KZRtX2+wZCRLAFs1AwmZdogF6wZJItSLbUXQhrcVmVzCKEuC1iBhHa3hfCFvUs5WqZfdvWls28ewjyQdjTerbjSH4l02yFpXfMFTfZ8/Tpjts7xeslSsusUHIvLcr0RnwXFeaCedDdryx0Nq2YdQzuhnBAu87OgrLtxdNAWiIpfbJtUEhCv93KIn4PI+APizI3DYrRXeSm28Pt1gFNTNtBAA1OPcQ6bQxau9crprukNfuZf1darBzuxtXOYeCBIVp7uT7QkNp+vo+SvKj+fsJjjS6kmBPZIBojyBUaGVtqSxhr+jVqtDUB+dcy6xkNe1vlvJbcI+2rTYajPb8AlltURSLrsoTxGAyW89Eo9Djs2LjV1cEYJN50gyZXGsPBM0m8Enhj4uH1IXQ2uTuB8XB4tI26ibZi0103R7Db7CFN94CBJdJNkYPVwp0SRf5c0fw4Clq7f2L+/1CtNFZME649KEP5DeZH0Z/3H7+kg1YJqsbJuaDSLV1BSUxnpYgP77MkfQYGlVZWcUVUQfKALgR7mwymFyfnX0/Or+LTy8uzi/h6CI8ewd4uPCB2YzWfx8OdkG69grg9yzGMwg8ndxroUPTwblvG5m43z/T088VlfL15mBq0lm7rJNZMGEx9Z13iu+DsUL/F7s/cBxrvD1rDbrgyv5MAbvT2WCay2JJY1FQTDJwJ+BheoumZIXBWlpj7SOEiznveTGt26zhg2oQK6NYQbFaGAZz560gzbpso3i7/l2lylSfd4g6bZE2uMVxd9ydtwBX9NUoL4/5w+WhNmBBgF2xTKfpHpCthRCQdhyhJG24L/Cb6DbOka9Y=</source>
   </file>
   <file path="Facades\Facade.php" generated-path="Facades.Facade.html" hash="4dac9176487fe95e65fd2dc46df965df" package="Default">
     <docblock line="0">
@@ -826,7 +833,7 @@ A Log Manager manages the I/O of the Logs and their availability and data.</long
     </parse_markers>
     <source>eJytV21v2kgQ/s6vmA+RMBHFvZ5U6ejb0QvXRGobAuSkU1NZixlgW+N1d9ehqOQn3a+4P3azLzaOITTplSS28czOyzPPzG6ev8oWWaMRHh834BggAjCXyHzMk/sY0YZ+zMW+Nncn31Rl7sEspYcdQUiGr7aCyFqhvw0EUWvjBVfWYbgx1yv/uOmQxAh/Z7leCAmXKb9GqVgCZ6lGmaIGMYPxgqdzZfUSHmOqEHoZixcIT+D5QutMdcNQZCQQuYyxI+Q89IoqdJqPnnQev7QWYpGtJZ8vdOGM67Vx8loy9e8/CWekFTYaKVuioqXGVXb1J4vZFNWzRiMn56S6zNXVUOQUo789K6H+I2FKwRC/5Kh0kWAPnAmg9VPQAk5ZOk0Q6ApLlgFLEtCUkF8GPM1ybVNO+GeEU6S1UrXhHRJOU7tswNaJYNM2XOQo1yMtCaQ2oI5LUBUiFPBg2lnxzzzDKWcWIPMtdEFFGdMGbTgRcb7EVDPNRWpAMSENnLAwaiEjKQHaeVx64ikhVbwKG3EVA8CvGtOp8hA0vjUMFy1a5nNc6KHJaY4wogiKjDtep1C9R05vudKRmEWn4/EgWlgz0YxjQgH0rhlP2CQpAb1l1hUSgqJEc0bpS3AmVKseyTWTwKRklj2LW/ZCe88kv2YaQRk8YzjyOvACPnwkuhwGwRc6eNMft2FwPjLXS7qc9N/2x/02nA/GZ+fvR62DAK1Wq87qVwvNQAotYpGoUM7iJ09/eVrcHymMf+ss9DIBg5h3rPZlqyzHLClkGe3S6h9M3KlQ3k3Kpvnd1F+L6RqCMuedFHsF9SkSpmHFFChDGSJlpYUK7fMUhr2zEcKKU49NfAcyw845MQVtSlTBE6bZvqTF5BPGemMrfTDLCYX93dxsr4Jr1h/gtl0e+TrsdOvF6E6OHoz8iw1qPy0HEjMmsYqsn2QrrhfV10WKBsiDqRHhcokd2p46NODDJUtzllDCoUSF8hqnHQqbmzZVHftCGl04ikb94V/9IbyzC+oeKEq29A257bU3NOLTnW53uh7Ggp5ed5vNuyqz6w5cYLCNSuUZfX+TiEkZm0c7n9BmVIA9y9PY1itzwAbOYBFwuxZV2zv0/twQcgPUfBQms263MlmKR1/Iik7ZhP6pokFxKDSsCtxTLpPAO/zQHPYvLvujcXQ5PGt+pIY8HdDj24heDv9utT15eibI1q7TglkVrYrSEZX1zGx0pDHjCUZz1FEsaOdPtQqaJCW22J2wuce26Tda+EmJNGh1u+Z+grGYYoDLTK+D0noLXkHz200TuluPZM+Yutnh+4iOHKzcucwoqnOZTiMK6JfmyCxPYEbHFkFIrSTXfjrWet8NNNsuLBV2TxEp7rSI45cfN1dKT91BwuZ5H0Ip1MZRYBfcQRSPmZ9V+xEYos5lun8/2glaOmVH2vtE6cgX1OMr7FS5+rAAD54aqg2/SXPaCI4+4xpUhjGfrangrm3Mrj9BHwxO70jWduRmIoQ7spFfTgNSubNq0YqGFWliTF+zJEcjYt4fweG07oOXtxcUY8GE/QJMCnUI+QwCJ/byimwX4nJOFOKbRr0YNs+ILEb4lXZKZa23awZMc91+88GofaRmm7FE4XeKeHv/sI1CyDEqKRUMzXHMn0L3deJ7obHThV6yYmtFvQXntnlqYu/JRmNAmgpUadOcSk1S92QKMwOb/sWQeh2WBTVxZe4ocpAqvqfrjPFLXcKlUa4hoChddK37UMQ080/nx3ZC1MhhzHAV2cyCinLrDnuHWWRXbilkvu7jz36CFhUpLFeMtC0SNcuPXn4zb28ewM3qea3OzJkUy12lsnZ3sPXn0HE7StwW68uPCZoT4YMG1y0DdC72/9P8T1Jaqz+dldbqj88su7xCCvt9/7y6afwH6B8p3A==</source>
   </file>
-  <file path="Facades\Response.php" generated-path="Facades.Response.html" hash="f0fe91cb84b12047aac2500babff0e9f" package="Default">
+  <file path="Facades\Response.php" generated-path="Facades.Response.html" hash="f9f18a4d7be208fcd02fff7b9942ef72" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -835,7 +842,7 @@ A Log Manager manages the I/O of the Logs and their availability and data.</long
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJy9V21P20gQ/u5fMVchkXAhBor6AQotBfWKdJUQ5T4dJ2tjr8m2jtfyrslFmJ90v+L+2M3si+3YCUL3oUYkZudlZ555ZnZ5/6GYF0EQ7u0FsAcQAdBHRA+92YdENf7Qh1mmbyuvuzL7Qqb4MhCE6Pi+FUTGC/7WMIrGtRPcmw3Dmj7v3Ws9RQkJP7JKz2UJf+TikZeKZXCda17mXINM4W4u8gdl9DIR81xxuChYPOdwBO/nWhfqJAxlgQJZlTGfyvIhdIoqtJr7R9ODc+MhlsWqFA9z7TcTekWbfCqZ+vefTDDUCoMgZwuu0JS2Ku4/s5glXJ0GQaXsyleZ8EzdX8rFospFzLSQuV087evcoiOJsdxfZoLnerv8K1eKPfDTpmqXGVMKvNyDdQE2HNBzpmHBcrRRwPIE5viRcYMUx9RWmoCDkmdM8wSWQs/RhoOsdFFpiCVinBPCZEAC/jePK8qEALm9uP7GfX0U5+CR5vl0KX6IgieCGazpr9DGFBVMU+HgSsbVAr0z747831ihd2rQRynWZnrQ7CRyBN0vhUG8hgGGiDEnykEQPAXEawMXPXutogF36pa99G7uBBa7pcgymHFQBoa8j4GBqefh4yMrwRWqtgV1otB8F6V4RLRBUeYx7JQuHixqL9Kbkhes5E3ENqNhxELBgmN3JJBIrLOSC4678H0sXyoeqtIgrLy+liQ0jimbdef9XLpVXS6X0+VbU8+bUmoZy0yFZRofvj0+DI+jS0uW/btVwadzvcjg9vMlyfo+cWu2wPRLot6O4xhZGfA95zQttCRbd1FyXSGFbMy1T6F2Pm+tlLJzIIscX4g1jmZrybqyVDOcCN4grfLYlNhBNdoU7hnkVZaNjbmlGT0ihdGa2i9nTrGjRI/iWXpyMucYSTna7cK3O1nbaHza2D0HzWsYUu1w/nWraLkbrG/RUMxFfNo6cUBavQeuR26v5wEZL5IEGHy5u7uBLyZkIlJ36z4vXzERfhdKRzKNyGtkgYhSwTPsXhJRtexe6mUO0SgGuOJKlDjFOjGqLQaPLKss/e2bo4U12kK2RymS1zDGFbQb22R94z5jnMWbJ6P8fAJPVu/5zdZq/Navu6PPxEx5pCCDmGUZm2WcxhcrChxEPnwjMub0MmPxD2Pl8hTN3FeDkloUveeayIRMbZ2ALAgDPJ2bxRQPbeRflQ3mpOeegaaWs+881jUrS7aq/QTmztQXyHt9TR2QzR6dURvj9p4d9MpLXbuw8310fHC8uTvJo1CRh6qNYNx36GBoFPqBbPa/1ridM2QzXb5toUu/wKTHBlpQKSIvObjiKaN6rM+biZG5M8+LNo0Dp4IOsU87o+qVJ83Ru8N3/ntf8fjwwB40puMv0d2WOSEwB3x2yD+pWQiT7ryg5S3DIuGaiUw54JvMr+xyz2gmZUZb2fp4AK9TyDlvWky359yWpvD3B9Nhd6YPaB1dNHeyEnJprm+vaQbPV0KigWEySNFSfmKz6OVwBinL1GB4WQaqbrO1/nO+9KmMxhMYme4eQ8I0mzFUHe+foz32/afVdTLaxVsMIxmdf97JeK1ZfoU/d12wu3B23kT+13h4qPXi/zA4DU/cabi9ZxiogsciRSh9ehtvjZbcZmhRXn5c2ev7z6S4fVqir3E83sZxN293FuYLHwq+/f/GZWOlyDuc890LldA9p3aG24GOFcKCgndq/sCLA55JCzyUMDIMXLZgvYbLXa71+GwzmNhNNzOVQGgp2qXN8LL0Xcl8NMZpz4qRd/2/OIy8tSG9RDZTo87sHV71GwZFPsjIpDP+aRTb6XDoxSKZuBqLwY1nmIPV8/g8B/8B07UH8g==</source>
+    <source>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</source>
   </file>
   <file path="Facades\Security.php" generated-path="Facades.Security.html" hash="28547f09b7bbd4de830eb38eb3962455" package="Default">
     <docblock line="0">
@@ -1108,6 +1115,107 @@ retrieves it, does find algorithms, and many other things</long-description>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
     <source>eJydVs1u4zYQvusp5hBAUuC1ggV6STZp0yza7iFA0fWe1oVBy2ObjUwKJOXUWOeR+hR9sc5QpGJLdrAog8g05+/jNz/yhx/rdZ0kxeVlApcAMwB+zHjxrl0s2tMfP/wxf7by/aGs3bApbQaCghxPXwUz74X+95DN8n0QTH3AYs/PadjuxyRh4U+icWtt4IuSWzRWVPBJOTQKHeglTNZSrazXq2SJyiLc16JcI7yHD2vnantdFLomgW5MiWNtVkVQtEWr+e79+OrOeyh1vTNytXYxmHQ7DvKzEfbffyopSKtIEiU2aMmUQ9XTR6HEinRvkqSx7dFH4cRcWJw+6KZc8w6Ehe7Lb0ItKjQ3nf6jXmBlp/5eS/JrOw9sF/fnzP4gMJruM31EawnKTZfZh0rYV/tI6D0EyCAtCHjEhRROmxFIBwuNFmyNpVzKEmqjCQwxBRQaiEUjnKRQ7MVp2IgnBCSedo6zAGIrZCXmFXr1ZaNK1qaELSl9jlJi0Pqk8b7UG0KNytmIa0KnEWtEuPGf1lt0nAQiwGKFPsTIA/JOleKjbUgc3YihsCiAk1UQ8VlwFAvNIvbJ7s77yesEscZQjZ/lk6yZTV9l/K2I5M5q4bhoO7bhI1q5UvB7ex4h+KLTCqgkx1cdLqmo1uJRkZRHaU2+Jdy/PuW8WiKlsk6wWbgqhzO4GJA4DkbR9sxlD4QDho7tt8L0VTyAT31APSDBQeE/ayO3wiGQiaM6vFj0W6B/5YeQeKKOtku5atpS7V9v0hbJqwJYmgAb0Ud1ipUo+4zOtUNneHNhjNjt9fwvAvPmjY5ADO/zK023Uyz17/NgkLy2/XHAgVz6TlapA/xbWtc2cFsTTnYWvfSSlais7pkOKsSga4waFMn+VNbfznIzp1EcKYnzAlbognaWe722wHmtKj2neXJhwsgLxPEi8BkNhOX1db9a4PYWVFNV+YEjXue0g8AewDiI8/9i8epQZ90m92HiAM9+uLoagcJnCJM8y0fwdeCHV7ppNVK4vYP0Fxpt1Ns0kkMNQEMOO/LT0WkfC3RkaFsfk1MT1lfCtCuFE47+zImcw4OX5DtIfncXJnWk8agdDjweeAtld9pha/Ey6KPP39lHNATKJ84rKy/OzMrAQrSxNMYxvmJK34j0re/5njuKsBtJb0ob31KDAXSmyeZaVycbK+4JcotqBEtqXuQDpfuzRzvimm7UbzV7vtUu1l0/ZOnRj5ppOm7KZ20WlrLnR2GWGiHpB0ZMymRXY5rnea89/Xtr1sLNov/8TFsek8RNGULFIGm/KwNl3D/RefZmKXnCYuW8JP8BueBd7Q==</source>
+  </file>
+  <file path="Models\Communication\Chart.php" generated-path="Models.Communication.Chart.html" hash="2cb187752828b7b25947f3a17bac8e30" package="Default">
+    <docblock line="0">
+      <description>_    _ _____   _______
+| |  | |_   _| |__   __|
+| |  | | | |  ___ | |
+| |  | | | | / _ \| |
+| |__| |_| || (_)|| |
+\_____/|____\____/|_|.</description>
+      <long-description></long-description>
+      <tag name="author" line="0" description="Universal Internet of Things"/>
+      <tag name="license" line="0" description="Apache 2 &lt;https://opensource.org/licenses/Apache-2.0&gt;"/>
+      <tag name="copyright" line="0" description="University of Brasília"/>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="App\Models\Communication" line="31" package="Default">
+      <extends>\App\Models\Communication\Model</extends>
+      <name>Chart</name>
+      <full_name>\App\Models\Communication\Chart</full_name>
+      <docblock line="31">
+        <description>Class Chart.</description>
+        <long-description>A Chart Model it's a Data Set for
+ ChartJS Library</long-description>
+        <tag name="see" line="31" description="" link="http://www.chartjs.org/"/>
+        <tag name="see" line="31" description="" link="http://www.chartjs.org/docs/latest/"/>
+        <tag name="version" line="31" description="2.0.0"/>
+        <tag name="since" line="31" description="2.0.0"/>
+        <tag name="package" line="31" description="Default"/>
+        <tag name="inherited_from" description="\App\Models\Communication\Model" refers="\App\Models\Communication\Model" link="/classes/App.Models.Communication.Model.html"/>
+      </docblock>
+      <property static="false" visibility="public" namespace="App\Models\Communication" line="40" package="Default">
+        <name>$label</name>
+        <full_name>\App\Models\Communication\Chart::label</full_name>
+        <default>''</default>
+        <docblock line="40">
+          <description>The Label of the DataSet.</description>
+          <long-description></long-description>
+          <tag name="required" line="40" description=""/>
+          <tag name="var" line="40" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="App\Models\Communication" line="49" package="Default">
+        <name>$data</name>
+        <full_name>\App\Models\Communication\Chart::data</full_name>
+        <default>array()</default>
+        <docblock line="49">
+          <description>The content of the Data Set.</description>
+          <long-description></long-description>
+          <tag name="required" line="49" description=""/>
+          <tag name="var" line="49" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="App\Models\Communication" line="76" package="Default">
+        <name>$fill</name>
+        <full_name>\App\Models\Communication\Chart::fill</full_name>
+        <default>true</default>
+        <docblock line="76">
+          <description>If the content of the Lines will be filled
+ by the same color of the line.</description>
+          <long-description></long-description>
+          <tag name="var" line="76" description="" type="boolean" variable="">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Communication" line="57" package="Default">
+        <name>setData</name>
+        <full_name>\App\Models\Communication\Chart::setData()</full_name>
+        <docblock line="57">
+          <description>Iterate between an Data Set of Data Documents
+ and rearrange it to the Chart.JS Data Document pattern.</description>
+          <long-description></long-description>
+          <tag name="param" line="57" description="&lt;p&gt;the Data Set to be Hooked&lt;/p&gt;" type="array" variable="$data">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$data</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Communication" line="40" package="Default">
+        <name>encode</name>
+        <full_name>\App\Models\Communication\Model::encode()</full_name>
+        <docblock line="40">
+          <description>Get all public properties of the Model
+It's used for the Response Mapping on Lists.</description>
+          <long-description></long-description>
+          <tag name="return" line="40" description="the public properties of a Model" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <inherited_from>\App\Models\Communication\Model</inherited_from>
+      </method>
+    </class>
+    <source>eJyVVMFu2zAMvfsreAjgJG3iose1zdq1h3XoTu0OQxMEss3E2mzJk+SmQdNP2lfsx0bKduI2AYYpiKWIj3x8JOPzj2VWBkE0HAYwBJgD8GPOi0/1YtOGPvzw17zX9k3XVh/YlQ57hogCT3eGuY9C3w3054NNY5h6wmjDz2lz3IzJwsZLUblMG/im5BMaK3K4VQ6NQgd6AQ+ZVEvrcblMUFmEq1IkGcIpnGfOlfZDFOmSDLoyCY61WUYN0EY1cnQ6Ppn4CIku10YuM9eSSbdmkk9G2D+/cykIFQWBEgVacmWqcvpVp5jb6bUuikrJRDip1dm2uNe5sBauM2FcK+iq/gneEaQLLQi4EU7APWlaaOOb4jFf7uFOxkaYdVsMiwgsi1StVqtxwqgf1sv6lz3ViY1y4dC6qA3nRWoFVILxyZZDKtLWXkVBstMA+OxQpbZOPngJeHS8VF5DagfCnYhJF5XN0Q/WRbLGDaDFXRr8VUmD6fv7J2HAOkNNba4iv5dVTF2DXu5jX0AYUokPcCeaZkO5Ljv8L70wRqwPsqcc7gIeZ/vktzSSVFqI0a0QFQi1aykl4883OqkKys62ToRKwSATqiXSKIDTPu96Xqj7b/ygFI4nf09NKYwo6rybJLviOWiM8Fnrn1vBb3QtKpXw1IJFx079TqSBB9Z95tVzWJSaJ7JbCF40uEh/J+jXGQgLvSeRVzjoeL+N8EhA7IffR8UoDY8b+GiSNnJHkySXtD/IAgezo6OzbZjXQ6y7xJiaQ8PFBHqi0JVy+0lk0hIVZfo4YyXhc+jh7HcM4TrsOM+6zB3+bvvreXs3fndSoYWVzHNuwIL2bQMA4rXHWHqZkF9Ob7jGKyevvRbzYMZa5wfnkiOTCGcqPAteg7/a96lk</source>
   </file>
   <file path="Models\Communication\Client.php" generated-path="Models.Communication.Client.html" hash="ffcbb5912b217d6c63b348198a2e6dbb" package="Default">
     <docblock line="0">
@@ -2385,7 +2493,7 @@ It's used for the Response Mapping on Lists.</description>
     </class>
     <source>eJyFVMtu2zAQvOsr9hDAjutIQY5pmsZNfPChPeSB9mDAoKW1RVQiFZJKGtT5pHxFf6y7pB6ukrYyLFPc4c7M7spnH6u8iqJkMolgArAC4NuKL16Fi0M7+vDNb/NviO/2Y2HBR2nxKpBQ4mUfWPks9N3BeHW4awJLT5js+L5slruYIhy8ELXLtYE7JR/QWFHAQjk0Ch3oDdzmUm2txxUyRWURZpVIc4QTOMudq+xpkuiKAro2KcbabJMGaJOAPDqJj899hlRXT0Zuc9eSSffEJJ+MsL9eCikIlUSREiVaOspU1fKzzrCwy0tdlrWSqXBSq/ddcS8LYS3c6u+oWkOz8Aj+IEgLAm5IRingCjdSSU5ArPtQoTLI9SNIB4+yKGCNYJ02mAFBHZm9Ek6shcW2Zl48xchafNxuWqlIc7uVRGmvDfCHQ5VZuBaSsvyMeCS8Bb4mVGYkKxKVL819jbDI6EFuJJq4AbXYORW1y1pJg3YK69p5nU2OPaOZRgtKu2l7HPvj0o0sGCyEI6dOUxla9pBnOmAOp9JcqC2TBpD1FGrkmGWo9cLgfU0Ss+H+gzBUYkPD1Wwl/req1zQ9cJD61IuMGj2slNcw98bhVpY4pPyaY+hZQG7Zf6hTVwKpwGKqqR9xSe2WzQM3++7L4ptPa50oq7dUbwot3JuiAwsf/ptsoiHTdUqzNZR9g6GDHbflN+ORzVzPFjcIVPWs6ApJWJrskkd8mGlGw2ybbPNO0luKN7VK/ZCsVp2y8aFHhAn1WGGoFaenf2Aag3wdsJKjc2LsyRjAsedXdehs/q+NNDmuNiqk/6f4AfNAfiOv7w184MFz2jF69G4U03lHczge0RjUhv6S4h48Opz2Bg299by5735fZev5OfoN30K92w==</source>
   </file>
-  <file path="Models\Interfaces\Database.php" generated-path="Models.Interfaces.Database.html" hash="ce5b14300bf5c44cbbf443620f8dd51e" package="Default">
+  <file path="Models\Interfaces\Database.php" generated-path="Models.Interfaces.Database.html" hash="7e76be8eb93ea2d56224c32627a567a0" package="Default">
     <docblock line="0">
       <description>_    _ _____   _______
 | |  | |_   _| |__   __|
@@ -2400,25 +2508,26 @@ It's used for the Response Mapping on Lists.</description>
       <tag name="package" line="0" description="Default"/>
     </docblock>
     <namespace-alias name="Model">\App\Models\Communication\Model</namespace-alias>
+    <namespace-alias name="QueryBuilder">\Koine\QueryBuilder</namespace-alias>
     <namespace-alias name="Select">\Koine\QueryBuilder\Statements\Select</namespace-alias>
-    <interface namespace="App\Models\Interfaces" line="31" package="Default">
+    <interface namespace="App\Models\Interfaces" line="32" package="Default">
       <name>Database</name>
       <full_name>\App\Models\Interfaces\Database</full_name>
-      <docblock line="31">
+      <docblock line="32">
         <description>Interface Database.</description>
         <long-description>An Interface used to Describe
 the default methods of an DatabaseHandler</long-description>
-        <tag name="version" line="31" description="2.0.0"/>
-        <tag name="since" line="31" description="2.0.0"/>
-        <tag name="package" line="31" description="Default"/>
+        <tag name="version" line="32" description="2.0.0"/>
+        <tag name="since" line="32" description="2.0.0"/>
+        <tag name="package" line="32" description="Default"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="38" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="39" package="Default">
         <name>connect</name>
         <full_name>\App\Models\Interfaces\Database::connect()</full_name>
-        <docblock line="38">
+        <docblock line="39">
           <description>Connect to the Database.</description>
           <long-description></long-description>
-          <tag name="param" line="38" description="&lt;p&gt;the connection string&lt;/p&gt;" type="array|object" variable="$connection">
+          <tag name="param" line="39" description="&lt;p&gt;the connection string&lt;/p&gt;" type="array|object" variable="$connection">
             <type>array</type>
             <type>object</type>
           </tag>
@@ -2429,30 +2538,30 @@ the default methods of an DatabaseHandler</long-description>
           <type>array|object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="45" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="46" package="Default">
         <name>destroy</name>
         <full_name>\App\Models\Interfaces\Database::destroy()</full_name>
-        <docblock line="45">
+        <docblock line="46">
           <description>Destroy the Connection.</description>
           <long-description>(only if the connection it's already active)</long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="56" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="57" package="Default">
         <name>insert</name>
         <full_name>\App\Models\Interfaces\Database::insert()</full_name>
-        <docblock line="56">
+        <docblock line="57">
           <description>Insert Data on Database.</description>
           <long-description></long-description>
-          <tag name="param" line="56" description="&lt;p&gt;desired table to insert&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="57" description="&lt;p&gt;desired table to insert&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="56" description="&lt;p&gt;data to be inserted&lt;/p&gt;" type="\App\Models\Communication\Model" variable="$data">
+          <tag name="param" line="57" description="&lt;p&gt;data to be inserted&lt;/p&gt;" type="\App\Models\Communication\Model" variable="$data">
             <type>\App\Models\Communication\Model</type>
           </tag>
-          <tag name="param" line="56" description="&lt;p&gt;defined primary key or generated&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="57" description="&lt;p&gt;defined primary key or generated&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="return" line="56" description="generated or defined primary key or the result of the primary key" type="integer|string">
+          <tag name="return" line="57" description="generated or defined primary key or the result of the primary key" type="integer|string">
             <type>integer</type>
             <type>string</type>
           </tag>
@@ -2473,19 +2582,20 @@ the default methods of an DatabaseHandler</long-description>
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="66" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="67" package="Default">
         <name>select</name>
         <full_name>\App\Models\Interfaces\Database::select()</full_name>
-        <docblock line="66">
+        <docblock line="67">
           <description>Select Data on Database.</description>
           <long-description></long-description>
-          <tag name="param" line="66" description="&lt;p&gt;desired table to select&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="67" description="&lt;p&gt;desired table to select&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="66" description="&lt;p&gt;a Select query to search&lt;/p&gt;" type="\Koine\QueryBuilder\Statements\Select" variable="$query">
+          <tag name="param" line="67" description="&lt;p&gt;a Select query to search&lt;/p&gt;" type="\Koine\QueryBuilder\Statements\Select|\Koine\QueryBuilder" variable="$query">
             <type>\Koine\QueryBuilder\Statements\Select</type>
+            <type>\Koine\QueryBuilder</type>
           </tag>
-          <tag name="return" line="66" description="selected content" type="array|string|object">
+          <tag name="return" line="67" description="selected content" type="array|string|object">
             <type>array</type>
             <type>string</type>
             <type>object</type>
@@ -2499,53 +2609,26 @@ the default methods of an DatabaseHandler</long-description>
         <argument line="0" by_reference="false">
           <name>$query</name>
           <default></default>
-          <type>\Koine\QueryBuilder\Statements\Select</type>
+          <type>\Koine\QueryBuilder\Statements\Select|\Koine\QueryBuilder</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="76" package="Default">
-        <name>count</name>
-        <full_name>\App\Models\Interfaces\Database::count()</full_name>
-        <docblock line="76">
-          <description>Count number of Elements of a specific Query.</description>
-          <long-description></long-description>
-          <tag name="param" line="76" description="&lt;p&gt;the desired table&lt;/p&gt;" type="string" variable="$table">
-            <type>string</type>
-          </tag>
-          <tag name="param" line="76" description="&lt;p&gt;the primary key to identify&lt;/p&gt;" type="string" variable="$primaryKey">
-            <type>string</type>
-          </tag>
-          <tag name="return" line="76" description="amount of rows that the statement find" type="integer">
-            <type>integer</type>
-          </tag>
-        </docblock>
-        <argument line="0" by_reference="false">
-          <name>$table</name>
-          <default></default>
-          <type>string</type>
-        </argument>
-        <argument line="0" by_reference="false">
-          <name>$primaryKey</name>
-          <default></default>
-          <type>string</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="87" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="78" package="Default">
         <name>update</name>
         <full_name>\App\Models\Interfaces\Database::update()</full_name>
-        <docblock line="87">
+        <docblock line="78">
           <description>Update an Element of the Database.</description>
           <long-description></long-description>
-          <tag name="param" line="87" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="78" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="87" description="&lt;p&gt;desired element to update&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="78" description="&lt;p&gt;desired element to update&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
-          <tag name="param" line="87" description="&lt;p&gt;data to update&lt;/p&gt;" type="\App\Models\Communication\Model|object" variable="$data">
+          <tag name="param" line="78" description="&lt;p&gt;data to update&lt;/p&gt;" type="\App\Models\Communication\Model|object" variable="$data">
             <type>\App\Models\Communication\Model</type>
             <type>object</type>
           </tag>
-          <tag name="return" line="87" description="the result of the update" type="array|string|object">
+          <tag name="return" line="78" description="the result of the update" type="array|string|object">
             <type>array</type>
             <type>string</type>
             <type>object</type>
@@ -2567,16 +2650,16 @@ the default methods of an DatabaseHandler</long-description>
           <type>\App\Models\Communication\Model|object</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="95" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="App\Models\Interfaces" line="86" package="Default">
         <name>delete</name>
         <full_name>\App\Models\Interfaces\Database::delete()</full_name>
-        <docblock line="95">
+        <docblock line="86">
           <description>Delete an Element of the Database.</description>
           <long-description></long-description>
-          <tag name="param" line="95" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
+          <tag name="param" line="86" description="&lt;p&gt;desired table to update&lt;/p&gt;" type="string" variable="$table">
             <type>string</type>
           </tag>
-          <tag name="param" line="95" description="&lt;p&gt;desired element to delete&lt;/p&gt;" type="string" variable="$primaryKey">
+          <tag name="param" line="86" description="&lt;p&gt;desired element to delete&lt;/p&gt;" type="string" variable="$primaryKey">
             <type>string</type>
           </tag>
         </docblock>
@@ -2592,7 +2675,7 @@ the default methods of an DatabaseHandler</long-description>
         </argument>
       </method>
     </interface>
-    <source>eJylVc1u2zAMvvspeCiwNOjiose12NqmA1YUOwxdbwYCxWYSbbbkSXIHY94j7Sn2YiMlO02cX3QK4sgi+ZH69Im5+lAuyiiKh8MIhgATAH5MePAsDDY19OGHX+bfYG9WbWHCoTTZMMQEnLwYJh6Fvg0MJqdNa0h8wrjhZ9JOmxFZ2HgtKrfQBp6UfEZjRQ73yqFR6EDP4OtCqrn1frlMUVmEm1KkC4QLuFo4V9p3caxLMujKpDjSZh63jjYOnm8vRufvPUKqy9rI+cJ1yaSrOcmtEfbvn1wK8oqjSIkCLYVyqjL5rDPMbeKLmtGivYyiyq7ZxrooKiVT4aRWYfHS+zxoqTD5UqGpbyuZZ2iSRyccFqicTR4xx9RdLg9qmQLuhBNTYbHj6EatGAk4A6fhDm1q5BTZwREhGc5ElTsokPjMLG9MqCXUJ6GyHE1Hut+9VkDcjM67RSsV4XdLcSQ3Cop+RSwmXzCPIYy1UrQLLoiLWKnc2zu361IYUYAwRtSNnn7jkJM0xHIdHLvyap2hc2+DY/9bVlM6WJhVKri03oMVlFPislcekeSMrj3+eOnYr26gVV6DnPXLkO6NBZEbFFkNgtae8XRvUVlIN9hSyT1J0jhPEGh1iKhAAJyQU47exNjS8NH7JeJbesReoFcfwEnGedpAnpL/FNsQzHZkK40shKkfsGY1kXYzaJfgO63RLZ2jQiNeEJZABl1liDHlmhZt6cpxO+CYb4OWZasD+ysOe5kOOxms8XTW7t5v/mzLrrYcS7iErzuWjROxHqwX02Y4+cFtAET3Hl59kDDpYgef4cKEtN29CVkoLynVUSfZy1Nw7vO0VtMWVsa6Ug5UVUzR8Ml8zEPP8k0FbImpnFEW39mOV3DoUiucHZZhTxJe9hlVImf1bgWCKHz9VKzRPy2BCOeRbNd8gdSY7eUtZYQ+bUcp6qkk+SH33pa1TtrHaSuMvRe/8hn2hq/d5BCObTW7APzdWfbmLf1jLeoYoW7e7jWI7cQHl8PMn4Uat/b8HP/jAF5N/QHSM1/Wgb8PdjlKdb+jf+csELI=</source>
+    <source>eJylVEtu2zAQ3esUszBQx0itIMsmaPMr0CDoomizE2DQ0thiK5MqSQUQqh6pp+jFOkNKji3LdtMqiEzN583jmyEv35V5GUXxZBLBBGAGwK8ZP7wKD7sa+uOXN/Nv8DebvrDgVFrsOGICTp4dM49C/w2MZydN60h8wbjhd9Iumyl52HklKpdrA49KPqGxooB75dAodKAX8CWXaml9XCFTVBbhuhRpjnAOl7lzpX0Tx7okh65MilNtlnEbaOMQ+fp8evbWI6S6rI1c5q4rJl3NRW6MsL9/FVJQVBxFSqzQUiqXKpOPOsPCJp7Ugoz2Iooqu+W71atVpWQqnNQqGC98zIOWCpNPFZr6ppJFhmafPfnshMMVKmeTz1hg6i7WDVyXhjvhxFxY7LS7VhtOAs7AabhDmxo5Rw5wJFSGC1EVDlZIOmeWNyzUGuqDUFmBpmuGV0UrIM2mZ53RSkX4nSmO5A6h6EfEQ+YJ8zOBW60U7YIJMYkN5t7fhV2VwogVCGNE3ej5V04ZpSGXeXDuxqd1huahTY79b1nNqeGwqFQIaaPHGygnpGWPHonkjK49/u06sM9urFVRg1z0aUj3yoIoDIqsBkG2Jzw5SCoL5cYDTO5pVI3zAoFWx4QKAsCIggr0LsaWhlvvTaS39Ii9RD+VAKOM67SJvKT4ObYpmO2pVhq5EqZ+wJqniWY3g9YE38hGp3eJCo14RlgDGXSVIcWUa1q0dSjn7YFjvQ1aHlsd1N8IOKh02Ml4S6fTdvd+86cDuxpoSziEL2zL1tP2aKc91iP3AEK5ZvNKgNF3/gLRcQmfHkGYNN+jdDhKgVB3okJJIkEz7OiOOahgCO4r2HIInAb0eixJXOSb5X3h77GucS9R7uBYV77CwfStOQ3p2LLZB+AnY33zDJyOray/EXt3drcghkUPIX3Rdyf1NHAcvNEK/I8G/LP0R0TPPK0jlyOHHN87bfpn9AdFer3i</source>
   </file>
   <file path="Models\Response\Client.php" generated-path="Models.Response.Client.html" hash="a404ef44e997d2b07672814a3ecc96c9" package="Default">
     <docblock line="0">
@@ -3182,7 +3265,7 @@ It's used for the Response Mapping on Lists.</description>
     </class>
     <source>eJytUsFuEzEQvfsr5sABInWdBqkHUkEhFRSkShWk6iVS5DrOrsFrrzzeLhHLJ/EV/Bhje5e0EIGQcBLbmTfzPG9mTl80VcMYn0wYTADWAHFbxxVveUWop0/ckjmeGe/vY/kSQ+nyG8CJeLUH1omFfj08Xj/pB2CVHuR93FfDtS8IieCZaEPlPFxbfac8CgNvbVDeqgBuC8tK2xKTn9FSWVTwshGyUjCD0yqEBp9x7hoCXOulKpwv+eCIPHsezYrp88QgXbPzuqzC+JgOu/jIKy/w+zejBXlxxqyoFVJofKpZXbqNMrh6TyZHrHPGWnyALFxdt1ZLEbSz2Tj/WfyFEYiwdJ+UHQWTJAT6BhIxskIKi7mI7JxinQ1CWzKRW2tSPT60UirEbWvMjsi1soHQUiOVLMYIu8kE8EZZ5VNOY6GTYmeB6lFMRyNqS0JHE2dynzCoz0HZDebk2BcW5yjpiisKSXWgJDZwsVxe7dUsKKAY3EbvM1QKxo51XVd0T1O3rrwLTjqD3G/l7OT4ZDyPUMnjaVGF2mT6yArnaqutjrLw1wfuhAdtw/Cfp7Npb2kc4JGkWOrKAQUPM7+k4opSwda7Onfo9eL/Kxlf+YsYDJ6m/6CeOjMcllTm1lNb3t0s4UJgRVJEgE4bA7cKME4NDcL9CfyjyI9dKLTjVFzvNq2MCfPEfe5kWxPbMGf/JCHEGZuzr+wH07FkFg==</source>
   </file>
-  <file path="Models\Settings\Database.php" generated-path="Models.Settings.Database.html" hash="422f29776339bee6d29105b170ec59a6" package="Default">
+  <file path="Models\Settings\Database.php" generated-path="Models.Settings.Database.html" hash="471b364c6e13a50ccc49502cbdf48f86" package="Default">
     <docblock line="0">
       <description>_    _ _____   _______
 | |  | |_   _| |__   __|
@@ -3228,8 +3311,8 @@ Supported Databases: {Couchbase}</long-description>
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="App\Models\Settings" line="57" package="Default">
-        <name>$user</name>
-        <full_name>\App\Models\Settings\Database::user</full_name>
+        <name>$username</name>
+        <full_name>\App\Models\Settings\Database::username</full_name>
         <default>'couch'</default>
         <docblock line="57">
           <description>Database Admin Username.</description>
@@ -3312,7 +3395,7 @@ It's used for the Response Mapping on Lists.</description>
         </docblock>
       </property>
     </class>
-    <source>eJzFU91q2zAUvvdTnItBt0CtUnbVdluzjNFcDMqy3hmCIp3EAlsykpwt1H2kPcVebEey5TTNfmEwhdhH+s7Pp+8cX71pyibL2GSSwQRgCRAey7CC1a8AdfQLj3gc3j3ePcZ6I4SScQQwSlzsgWXMQv8Oni9fdANQxIKsC89iMLuckABe89aXxsKdVlu0jlcw1x6tRg9mDZ9KpTcu+lVKoHYI04aLEuEcrkrvG3fBmGkIMK0VmBu7YYOjY73n6Xl+9jpmEKbZWbUpfSqm/C4UeWu5+/a1Upy8WJZpXqOj0FCqKT4YiZUrFuh9oHKZZa3rkXfc8xV3WMxMK8pgAXcwbm64lhXay9F/yDQzdd1qJbhXRveHRz5RgjVRcGOVkDvZY+rU41nF3R5O0k5hYA0xLXgDEp2waoWjL7jhYiFg0TaNsR7lCLsLuB9v9JBa5hAhiS9xixV1wOYi+ZFVM2lEW6P28ZrMoSXBmWitpTOmtLdGtiJicZOXvq7gPQ3CXs07inKpZmNDEWrYExEOwafqp+jYbaOBZiE/G6+hNDU5HbFMHKgI+MWjlq4XL7vPwmcU9Q5rsveb325fwlRKixRNF7gxzocZygfPFHBNTT7q4SF4TP8ww5ZbcN5Sv4YjFt9Nu6Khh2d8IPEKTiojeFUSkxOakp8xn8pa6Sjz/+FLOWwgGyfn90RvqT2fjZW/Jjp+O/+UajPUHumGVD+ijE7ZRx8QrGkiPk7ni7+S909ZyVSFWNW707QlXg/Zdw0r0to=</source>
+    <source>eJzFU91q2zAUvvdTnItBt0CtUnbVdluzjNFcDMqy3hmCIp3EAlsykpwt1H2kPcVebEey5TTNfmEwhdhH+s7Pp+8cX71pyibL2GSSwQRgCRAey7CC1a8AdfQLj3gc3j3ePcZ6I4SScQQwSlzsgWXMQv8Oni9fdANQxIKsC89iMLuckABe89aXxsKdVlu0jlcw1x6tRg9mDZ9KpTcu+lVKoHYI04aLEuEcrkrvG3fBmGkIMK0VmBu7YYOjY73n6Xl+9jpmEKbZWbUpfSqm/C4UeWu5+/a1Upy8WJZpXqOj0FCqKT4YiZUrFuh9oHKZZa3rkXfc8xV3WMxMK8pgAXcwbm64lhXay9F/yDQzdd1qJbhXRveHRz5RgjVRcGOVkDvZY+rU41nF3R5O0k5hYA0xLXgDEp2waoWjL7jhYiFg0TaNsR7lCLsLuB9v9JBa5hAhiS9xixV1wOYi+ZFVM2lEW6P28ZrMoSXBmWitpTOmtLdGtiJicZOXvq7gPQ3CXs07inKpZmNDEWrYExEOwafqp+jYbaOBZiE/G6+hNDU5HbFMHKgI+MWjlq4XL7vPwmcU9Q5rsveb325fwlRKixRNF7gxzocZygfPFHBNTT7q4SF4TP8ww5ZbcN5Sv4YjFt9Nu6Khh2d8IPEKTiojeFUSkxOakp8xn8pa6Sjz/+HbDpUD4Tg9vyd7Sy36bKz8Ndnx+/mndJuh9kg3pPoRZXTKPvqIYE1T8XE6X/yVxH/KSqYqxKrenaYt8XrIvgMb7tR7</source>
   </file>
   <file path="Models\Settings\Log.php" generated-path="Models.Settings.Log.html" hash="d8c4d02e40c402cacbf9722ef9df9c1a" package="Default">
     <docblock line="0">
@@ -3581,7 +3664,7 @@ It's used for the Response Mapping on Lists.</description>
     </class>
     <source>eJylVNtOGzEQfd+vmIdKQETWiMcCLRQqQa+opOUlUuTszmZddu2Vx26aNv2kfkV/rGPvJaHAUzfK2ppzPJcz4z1+2ZRNkojRKIERwAwgvGbhCbv2CdCaf+EVzWFt8fU21m7CUd48AAQ7nm6AWfTC/zXszvbWHTCNAcU6vKfddp0yEsBT6V1pLHzW6htakhVcaYdWowNTwKRUekGRV6kMNSGcNTIrEQ7huHSuoedCmIYB422GqbEL0RFJtMzxYXrwInrITLOyalG6PphyqxDklZX053elJLNEkmhZI/HREKqZvjc5VjS9QedCKkdJ4ukecm7q2muVSaeMbo1Hg/jnlSSCG8y85WB9zWfQuYNIB1dKBzlSZtUcN/RWiYIzof1wLNKkReAMcihYtIEprVNMdDTI2liWxTLUc3ogFm40sCzpQW8kpbne3iSS7F7egN8d6pzadJOfSZioWGF4RtwlViS2Uf2IMsDE3KHmY43idJ2qcb/nulIRDMlxJcQmBJ7YHQJy1plA393r+TWy3xycGQSC0iyhlnoVHcNSVRWwVeY55v0pr52qomO3lQkH8HXN2i2VKyPK9VnULnpKu8O9j1NCjsUzxiPG6aU8koLDelkJ1KLwOgulpkPOKZO2K4DcZL5m71GSf51/kzaQeQg6k4hr4+c8v/CsTXgSCjyBncOSx5t2eK4eUZ67ZPm2vMVVOyG9IHFKuBehzje3EygllVtt2BiBOxLJkmIbOeVunOEywLx+Oru6eVqgcAm/Ll2qjFDaWZP7KI2IES7+QwWKpYXKWIQcC+krN7ZSEY5baHyHqydkucC5X8AXaZWcVwiow0JQeFYndOqdWSw2cXlCMmxcOxkfuIN86UDqHG6l1eHi98XDR12t4PryGl5bayylgQ0WM/4M8B3pLub1IMID0ULJc2OqRwvOY9InUMiK8Cj5lfwFTBLJwg==</source>
   </file>
-  <file path="routes.php" generated-path="routes.html" hash="3ae7211e93f8052dbac611b5fa943aae" package="Default">
+  <file path="routes.php" generated-path="routes.html" hash="81d7347d0089723d3a9a545b7f308417" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -3590,9 +3673,9 @@ It's used for the Response Mapping on Lists.</description>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJzNVt1q2zAUvvdTnIuCndDUXdnFyErX9IdRWElpsu0mEDT3xBFzJCPJgTLvkfYUe7EdyXKapmnWBadMxrbs7+g7R0ffsXX8IZ/mQRC32wG0AcYA9jK2zfaqZqGSDntxr+29wstlrOrYodR5AsREPHoAxo6FzhKicav0wMg5jEt7HflueUCIBU9ZYaZSwWfB56g0y+BKGFQCDcgJDKdcpNrZZTxBoRF6OUumCEdwPDUm1904ljkBslAJHkiVxt5Qx5Vl5+jg8MQxJDK/VzydmtoZN/fWyZli+vevjDOyim3egrLTYAtKOGOaJ9C7uYJbWRjUsHUrG47NTTiGa8ZFFVuwp+xNRa3OSYomCuNwHyaFSAyXAqIW/AhsHAp1LinLUavbnaHWLMXo6PBwH8KvmCVyhmAk3PauBhi23gc/6bRuLpkmarhM06duDLIXe3r75h15cvSAFSem6YOn5lfwPOMoTBNLuIsVXErmTBbCpjNxAa9ktKD6ibzxPuzVqaWukd9R1CmnlfLzHWBSKFsmEyrRT1wbD2hnt+T2G5IFRuHHyyH5DOP2dp4dq3sT0ULaJ7egPqhNASy0Go56eT46l8IomWVU5aNqBH1AtAmX2G4x5U46zHOuUuZSW07l7TZxL2we8c9Zxu+Ywb97qC03+1hY7VDoA1Rz+oA2oPRXErquAt5a6fWEH0l9oQ2PamDirtJf/WZDBZQ3/cEOy2BJuD6YbZTrh66V7vJE/6HQasq60nal0QtmWCN/09fSKBXt6s/t5QJ1s12vTgctlGmf/gNVrgvjJYK0455X4zrWDVJ0ZKtf/AURfGFZ8bSEK765w55n9fgO9X3NBO1yZg1sOHa0XTwd9i/6XbjACRe006Pt+NqQgz8bcz5U</source>
+    <source>eJzNWN1u2jAUvucpfDGJwNqmq3YxdVVX2qINqVUR0O4GCbnhNLEa4sh2YNWyR9pT7MVmO05IKQmUEtQggsk5+c7xOd/n/Jx8C72wVrObzRpqIjRCSO1GalOjZFOmWH7UTh9Wv4k9ztuSgTpVDl4YbAk8nBtGGkV+Y2SNGrExDHVAO1b7oRnGB9KijGc4Eh5l6DYgU2Ac+6gTCGABCEQf0MAjgcu1n08cCDigVogdD9AROvGECPmxbdNQGmjEHDigzLWNI7cTz/2jg8NTjeDQ8IkR1xNpMCKeVJBzhvm/vz7B0stWdavF+1vcajE6x5w4qNXtoB6NBHC08RZvOTc9YRtdYxIkudU+MPXDrMb+qQvCqtv1PfQQBY4gNEBWA/2uqTwY8JDKKluN4+MJcI5dsI4OD/dQ/Sf4Dp0AEhT1Wp0+1Btfa3/kV4VpYy6hUdt1X4YRgNeO9PnTFxlJwyNIMMF155G238ELn0AgttHCKjqYK+aERoEqp6MTXqhoJPVjGec99CEtrRwK+ghBWnLZKTPfPjgRUzJ5kBK9IlwYA9d+ubD3ID3Aqn9vD2TMut3cLLJG1Ucs2Uj1TzfUJFWWQMbV+rAVhsMLGghGfV+qfJicIRcQLuo5tB64RFMHG8xFyJByhcmMXxl25vMMf4p9MsYCVkdIPctjZF4VEr0PbCoX0C0wfUdE50nCGzM9nfAzqmfcMFaOcDBO+JceKVFA3L3pVyiDHHFNMpsw15y6lLr5ib5CaClkqrSqOHqJBd7K1XRXHJWiXby4rU9QPdvl7NSmjJnq3ztg5bI01iGkOq+YjctQS6iowRZX/AwI3WE/einhBG+qbcWoxl4hv7vAJoRz1Z03snxH/A6zhPkWaY59H91IaKzAOJKA88KsXH7j7u0gvmxftQft6jh/wSC5vM8T24T5uWkVC6Bk7iU6yEMvyuE2HK/MPlLIUVh4b5LHN265CJfgw4oIY+2iKzSh09VBjFuF6uuBbxj31kvMjtTH0oQr1V5WlvelvDStTXSXTalYdYWzLtHcHLZQcYVZr9LbHLtEbUXo62gtX5OqlXaNA/k0P9nCg/WOlDbRCW8ssyvqEnkRkxCvYFNSpDNfnVtpM0Aw4nB0R2D2thvrHTVjKhPduBWdYAy/Xt2KpERns+QVV157fcDM8cwrtKWIXHuU4hqXPKxHZ3J15t49xWy8HDh701MM7C1k+4PSx8KXEnlU2xrOPjZKsU34IvSSG/d8iPQRqTiOdjD8/w+KLSF4</source>
   </file>
-  <file path="settings.php" generated-path="settings.html" hash="926d27f44bd9e8456e55f3729a34da9b" package="Default">
+  <file path="settings.php" generated-path="settings.html" hash="f1faec74d606a28dcef39e99231cf19f" package="Default">
     <docblock line="0">
       <description>_    _ _____   _______
 | |  | |_   _| |__   __|
@@ -3606,7 +3689,7 @@ It's used for the Response Mapping on Lists.</description>
       <tag name="copyright" line="0" description="University of Brasília"/>
       <tag name="package" line="0" description="Default"/>
     </docblock>
-    <source>eJy9VElOwzAU3ecUfxeoSF11yTysKljRsqKoMskntgix5QGolCtxCi6Gf+LSMqworaPYlt+f/J7twxMtdJKwXi+BHsAMgLoZNZp1jaAmfNS1yzR2eLOKdRNyDZMfAAuBp0tg1kYJfwM7s90mAtM2IWuon8Zp0w8IgafcO6EM3NTyGY3lFYxqh6ZGB+oBJkLWpW3tKpljbRHONM8FwhAOhXPa7jOmdACUNzn2lSlZNLSss8yG/cFxGyFXem5kKdwimXRzSnJuuH1/qyQPVixJDDpvarhNEiKO9dqhyf6xdRHh+mwU9jNG52iTcF6p/BH+1JoN1Uh00JgaLi2mcHQcaFkkTQvu+D23OJnrDktz5XNBS+ne0kxzJ9LPUsksond7G6f4YlHQ2jRvnOIld99o5kVh0Nq04y5UzyuhrFul2Fs06Se9baSvClj7okzxu0hbkGGMuTd029Y+7BuXwcZSv6uAr1oanMineNSHAxGeHLtKc3ANb8clzqNUBT5wX7msvTxZh2aPAV7xKfDel/F2BB9nPG5NlStV/svrswVVKlVGQRbk3B0kH0CEgEY=</source>
+    <source>eJy9VM1O4zAQvucp5haoSI16ZIEF9oTYE3RPtKrcZBpbZGPL4yxUyivxFLwYnvzQ8HNa2k4Ue5RvPDP+vtinP62yUSRGowhGAAsAHhZs7LXGUB0eHprPPLd4PcRah5cG5xMgQuLZBlg0WcJbw8HisO6AWVNQ1DzOOrceB4TBC1l5ZRz8KfU/dCQLuC49uhI9mBVMlS5zauIKnWJJCJdWpgphAqfKe0snQhgbAFO5FMfG5aILJNFGJpPx8XmTITV27XSufF9M+zUXuXKSXp4LLUOUiCKHvnIl3EcREydGzVQnW7Q2I9xeXof93KH3vEm4Kkz6AP9l9Y56ZDp4jp3UhDGcnQda+qJxJr1cSsLp2rZYnJoqVfwpPtqEWelV/NYqh3Xo/GjnFP/qG/o2zTuneMPdB5plljkkilvuQveyUIb8kOKKwomRf4cqvFeA6NG47GuR9iDDHaaV49P27Z995zJQ1+pHFfDJaodT3ZM8UeHGoSHLYWW4Om5w3SmV4UpWhU+as5O0aPIQ4MGaDJdV3h2OsGYlC8K9qfLb5Fu5ffagSmHyTpCenPmP6BW5RYGC</source>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="global" full_name="global"/>
