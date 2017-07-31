@@ -4,7 +4,15 @@
             <h2 class="title"><b style="color:#7d8492">raise</b> settings</h2>
             <pre class="see">[ RAISe Version: 2.0.0 ]</pre>
             <br>
-            <b>Details</b> <small class="see">You can see the details about your server configuration here.</small>
+            <b>System Details</b>
+            <small class="see">You can see the details about the host os behind raise.</small>
+            <div class="callout code small">
+                <b>System Version:</b> {{php_uname()}}<br>
+                <b>PHP Version:</b> {{phpversion()}}<br>
+                <b>Allocated Memory:</b> {{memory_get_usage() >> 10}}KB
+            </div>
+            <b>RAISe Details</b>
+            <small class="see">You can see the details about your server configuration here.</small>
             <div class="callout table">
                 <h4>RAISe Configuration Schema</h4>
                 <div class="table-content" style="display: block">
@@ -45,6 +53,14 @@
         </div>
         <div class="large-6 medium-6 small-4 cell">
             <div class="callout primary">
+                <h5>Welcome</h5>
+                Welcome to the RAISe settings dashboard. Remember that all information displayed here it's crucial for
+                the operation of your raise instance.
+            </div>
+            <b>System Alerts</b>
+            <small class="see">This are you can see RAISe system alerts</small>
+            <hr style="margin-top: 0;margin-bottom:17px">
+            <div class="callout success small">
                 <h5>Updates</h5>
                 Congratulations! You're using the latest version of <b>RAISe</b>.
                 Using the latest version it's good for the environment.
