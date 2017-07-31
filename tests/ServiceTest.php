@@ -8,14 +8,14 @@ class ServiceTest extends Test
     {
         $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
 
-        $clientModel = (object)[
-            'name' => 'Sample Test',
-            'chipset' => '0.0',
-            'mac' => 'FF:FF:FF:FF:FF',
-            'serial' => 'm3t41xR3l02d3d',
-            'processor' => 'AMD SUX-K2',
-            'channel' => 'ieee-4chan(nel)-802154',
-            'location' => '0:0',
+        $clientModel = (object) [
+            'name'       => 'Sample Test',
+            'chipset'    => '0.0',
+            'mac'        => 'FF:FF:FF:FF:FF',
+            'serial'     => 'm3t41xR3l02d3d',
+            'processor'  => 'AMD SUX-K2',
+            'channel'    => 'ieee-4chan(nel)-802154',
+            'location'   => '0:0',
             'clientTime' => microtime(true),
         ];
 
@@ -24,15 +24,15 @@ class ServiceTest extends Test
         $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => response()::response()->token],
             'POST', $_SERVER, '/service/register');
 
-        $serviceModel = array(
-            (object)[
+        $serviceModel = [
+            (object) [
                 'clientTime' => microtime(true),
-                'tags' => array('example-tag'),
-                'name' => 'Get temp',
-                'parameters' => array('humidity', 'temperature'),
-                'returnType' => 'float'
-            ]
-        );
+                'tags'       => ['example-tag'],
+                'name'       => 'Get temp',
+                'parameters' => ['humidity', 'temperature'],
+                'returnType' => 'float',
+            ],
+        ];
 
         $this->executeRaise($serviceModel);
 
@@ -45,14 +45,14 @@ class ServiceTest extends Test
     {
         $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
 
-        $clientModel = (object)[
-            'name' => 'Sample Test',
-            'chipset' => '0.0',
-            'mac' => 'FF:FF:FF:FF:FF',
-            'serial' => 'm3t41xR3l02d3d',
-            'processor' => 'AMD SUX-K2',
-            'channel' => 'ieee-4chan(nel)-802154',
-            'location' => '0:0',
+        $clientModel = (object) [
+            'name'       => 'Sample Test',
+            'chipset'    => '0.0',
+            'mac'        => 'FF:FF:FF:FF:FF',
+            'serial'     => 'm3t41xR3l02d3d',
+            'processor'  => 'AMD SUX-K2',
+            'channel'    => 'ieee-4chan(nel)-802154',
+            'location'   => '0:0',
             'clientTime' => microtime(true),
         ];
 
@@ -63,15 +63,15 @@ class ServiceTest extends Test
         $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
             'POST', $_SERVER, '/service/register');
 
-        $serviceModel = array(
-            (object)[
+        $serviceModel = [
+            (object) [
                 'clientTime' => microtime(true),
-                'tags' => array('example-tag'),
-                'name' => 'Get temp',
-                'parameters' => array('humidity', 'temperature'),
-                'returnType' => 'float'
-            ]
-        );
+                'tags'       => ['example-tag'],
+                'name'       => 'Get temp',
+                'parameters' => ['humidity', 'temperature'],
+                'returnType' => 'float',
+            ],
+        ];
 
         $this->executeRaise($serviceModel);
 

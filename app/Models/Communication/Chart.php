@@ -31,7 +31,7 @@ namespace App\Models\Communication;
 class Chart extends Model
 {
     /**
-     * The Label of the DataSet
+     * The Label of the DataSet.
      *
      * @required
      *
@@ -40,7 +40,7 @@ class Chart extends Model
     public $label = '';
 
     /**
-     * The content of the Data Set
+     * The content of the Data Set.
      *
      * @required
      *
@@ -50,7 +50,7 @@ class Chart extends Model
 
     /**
      * Iterate between an Data Set of Data Documents
-     *  and rearrange it to the Chart.JS Data Document pattern
+     *  and rearrange it to the Chart.JS Data Document pattern.
      *
      * @param array $data the Data Set to be Hooked
      */
@@ -69,7 +69,7 @@ class Chart extends Model
 
     /**
      * If the content of the Lines will be filled
-     *  by the same color of the line
+     *  by the same color of the line.
      *
      * @var bool
      */
