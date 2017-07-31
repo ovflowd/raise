@@ -82,7 +82,7 @@ class ServiceTest extends Test
 
         $this->assertInstanceOf(\App\Models\Communication\Service::class, response()::response()->services[0]);
 
-        $this->assertEquals(200, response()::response()->message);
+        $this->assertEquals(200, response()::response()->code);
     }
 
     public function testFilter()

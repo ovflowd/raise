@@ -361,3 +361,13 @@ button.secondary {
     list-style: none;
     margin: 0
 }
+
+.table-content {
+    height: auto;
+    display: none
+}
+
+.table-content ul {
+    margin: 20px;
+    list-style: none;
+}

@@ -10,7 +10,9 @@
                     <span class="see">You can see details about this service above.</span>
                     <div class="callout info">
                         <b>Client Identifier:</b> {{$service->clientId}}<br>
-                        <b>Service Parameters:</b> {{implode(', ', $service->parameters)}}<br>
+                        <b>Parameters:</b> {{implode(', ', $service->parameters)}}<br>
+                        <hr>
+                        <b>Unique Identifier:</b> {{$service->id}}<br>
                         <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}
                     </div>
                 </div>
@@ -21,30 +23,34 @@
                         The limit of data visualization it's to the last 100 entries. (For performance and security
                         reasons). You can see the tags from the <b>data</b>, and the values of it.
                     </div>
+                    <div class="callout code">
+                        Keep in mind that this page it's only a brief of what this service has.
+                    </div>
                 </div>
             </div>
             <b>Data Sets</b>
             <span class="see">You can see a Data Table with all Data records at <b>RAISe</b>.</span>
             <div class="callout table">
-                <h4>
-                    <span>List Data</span>
-                </h4>
-                <ul style="margin: 20px;list-style: none;">
-                    @foreach ($data as $item)
-                        <li>
-                            <div class="callout primary">
-                                <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
-                                <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
-                                <b class="saw">Values</b>
-                                <p class="callout code small">
-                                    @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
-                                    <b>{{$key}}:</b> {{$value}},
-                                    @endforeach
-                                </p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <h4><span>List Data</span></h4>
+                <div class="table-content">
+                    <ul>
+                        @foreach ($data as $item)
+                            <li>
+                                <div class="callout primary">
+                                    <small style="float:right"><b>Added
+                                            at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
+                                    <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
+                                    <b class="saw">Values</b>
+                                    <p class="callout code small">
+                                        @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
+                                            <b>{{$key}}:</b> {{$value}},
+                                        @endforeach
+                                    </p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

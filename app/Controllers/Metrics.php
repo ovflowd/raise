@@ -108,6 +108,7 @@ class Metrics extends Controller
         response()::type('text/html');
 
         $service = database()->selectById('service', $id);
+        $service->id = $id;
 
         $data = database()->select('data', (new Select())->where('serviceId', $id)->orderBy('clientTime desc'));
 
