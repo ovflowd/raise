@@ -110,8 +110,6 @@ class ClientTest extends Test
 
         $this->assertInstanceOf(\App\Models\Communication\Client::class, response()::response()->clients[0]);
 
-        var_dump(response()::response()->clients[0]);
-
         $this->assertEquals('Sample Test', response()::response()->clients[0]->name);
 
         $this->assertEquals('FF:FF:FF:FF:FF', response()::response()->clients[0]->mac);

@@ -62,5 +62,7 @@ class DataTest extends Test
        $this->assertInstanceOf(\App\Models\Response\Data::class, response()::response());
 
        $this->assertEquals(200, response()::response()->code);
+
+       echo 'hi';
     }
 }

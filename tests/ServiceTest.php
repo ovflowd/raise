@@ -46,4 +46,50 @@ class ServiceTest extends Test
 
         $this->assertEquals(200, response()::response()->code);
     }
+
+    public function testList()
+    {
+        $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
+
+        $clientModel = (object)[
+            'name' => 'Sample Test',
+            'chipset' => '0.0',
+            'mac' => 'FF:FF:FF:FF:FF',
+            'serial' => 'm3t41xR3l02d3d',
+            'processor' => 'AMD SUX-K2',
+            'channel' => 'ieee-4chan(nel)-802154',
+            'location' => '0:0',
+            'clientTime' => microtime(true),
+        ];
+
+        $this->executeRaise($clientModel);
+
+        $token = response()::response()->token;
+
+        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+            'POST', $_SERVER, '/service/register');
+
+        $serviceModel = array(
+            (object)[
+                'clientTime' => microtime(true),
+                'tags' => array('example-tag'),
+                'name' => 'Get temp',
+                'parameters' => array('humidity', 'temperature'),
+                'returnType' => 'float'
+            ]
+        );
+
+        $this->executeRaise($serviceModel);
+
+        var_dump(response()::response());
+
+        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+            'GET', $_SERVER, '/service/');
+
+        $this->executeRaise();
+
+        var_dump($token()->clientId);
+
+        var_dump(response()::response());
+    }
 }
