@@ -40,7 +40,7 @@ class Manage extends Controller
     }
 
     /**
-     * Config Page
+     * Config Page.
      *
      * Show the Configuration Page
      */
@@ -51,6 +51,6 @@ class Manage extends Controller
         blade()::make('header.config');
         blade()::make('body.menu');
         blade()::make('body.config', ['raise' => setting('raise'),
-            'database' => setting('database'), 'security' => setting('security')]);
+            'database'                        => setting('database'), 'security' => setting('security'), ]);
     }
 }
