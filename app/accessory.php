@@ -51,7 +51,7 @@ function path(string $context = '')
  */
 function app(string $context = '')
 {
-    return path('app/' . $context);
+    return path('app/'.$context);
 }
 
 /**
@@ -63,7 +63,7 @@ function app(string $context = '')
  */
 function resources(string $context = '')
 {
-    return path('resources/' . $context);
+    return path('resources/'.$context);
 }
 
 /*

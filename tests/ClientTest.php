@@ -48,9 +48,7 @@ class ClientTest extends Test
     }
 
     /**
-     * Test the Client Listing
-     *
-     *
+     * Test the Client Listing.
      */
     public function testList()
     {
@@ -80,9 +78,7 @@ class ClientTest extends Test
     }
 
     /**
-     * Test the Client Filtering
-     *
-     *
+     * Test the Client Filtering.
      */
     public function testFilter()
     {

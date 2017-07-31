@@ -11,7 +11,7 @@
                     <div class="callout info">
                         <b>Client Identifier:</b> {{$service->clientId}}<br>
                         <b>Service Parameters:</b> {{implode(', ', $service->parameters)}}<br>
-                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->serverTime)}}
+                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}
                     </div>
                 </div>
                 <div class="large-6 medium-6 small-12 cell">
@@ -26,17 +26,20 @@
             <b>Data Sets</b>
             <span class="see">You can see a Data Table with all Data records at <b>RAISe</b>.</span>
             <div class="callout table">
-                <h4>List Data</h4>
+                <h4>
+                    <span>List Data</span>
+                </h4>
                 <ul style="margin: 20px;list-style: none;">
                     @foreach ($data as $item)
                         <li>
                             <div class="callout primary">
-                                <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->serverTime)}}</small>
+                                <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
                                 <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
-                                <p style="font-family: Source Code Pro,monospace;font-size:14px">
-                                    [ @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
-                                    <b>{{$key}}:</b> {{$value}}
-                                    @endforeach]
+                                <b class="saw">Values</b>
+                                <p class="callout code small">
+                                    @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
+                                    <b>{{$key}}:</b> {{$value}},
+                                    @endforeach
                                 </p>
                             </div>
                         </li>
