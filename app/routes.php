@@ -163,6 +163,9 @@ $router()->mount('/view', function () use ($router, $response, $token) {
     // Index Page
     $router()->get('/', '\App\Controllers\Metrics@welcome');
 
+    // Search Route
+    $router()->get('/search', '\App\Controllers\Metrics@search');
+
     // Show Dashboard
     $router()->get('/client', '\App\Controllers\Metrics@home');
 

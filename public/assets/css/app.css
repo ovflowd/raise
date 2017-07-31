@@ -183,6 +183,10 @@
     background:#fca130
 }
 
+.method.secondary {
+    background: #777
+}
+
 .method.alert {
     background:#f93e3e
 }
@@ -344,4 +348,16 @@ button.secondary {
     border: 2px solid #41444e;
     color: #3b4151;
     display: inline;
+}
+
+.reveal {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
+    border-radius: 4px;
+    outline: none;
+    border: none
+}
+
+.search_results, .search_results li {
+    list-style: none;
+    margin: 0
 }

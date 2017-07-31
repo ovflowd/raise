@@ -33,7 +33,7 @@
             </div>
             <div class="callout alert">
                 <span onclick="window.location.href='http://docs.uiot.org/raise/'" class="method alert">GO</span>
-                <h5 style="float:right">Want to read the RAISe documentation?</h5>
+                <h5 style="float:right">Want to check the RAISe configuration?</h5>
             </div>
         </div>
     </div>

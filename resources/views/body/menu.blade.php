@@ -8,7 +8,7 @@
                     <span>raise</span>
                 </li>
                 <li>
-                    <button class="mega-button">explore</button>
+                    <button data-open="explore-modal" class="mega-button">explore</button>
                 </li>
             </ul>
             <div class="top-bar-right show-for-large show-for-medium">
@@ -29,6 +29,19 @@
                 <button style="padding: 4px 40px;border: none;border-radius: 0 4px 4px 0;background: #41444e;color: #fff;" onclick="window.location.href='@path/manage/'">Logout</button>
             </div>
             <br>
+        </div>
+    </div>
+</div>
+<div class="reveal" id="explore-modal" data-reveal>
+    <b class="saw">Explore at RAISe</b>
+    <div style="display: flex;flex: 3">
+        <input class="search_at" title="explore at raise" placeholder="search at raise..." type="text" style="margin: 0;border-radius: 4px 0 0 4px;border: 2px solid #8385D0;padding: 8px 10px;width:100%">
+        <button style="padding: 4px 40px;border: none;border-radius: 0 4px 4px 0;background: #8385D0;color: #fff;">Search</button>
+    </div>
+    <br>
+    <div class="grid-x">
+        <div class="large-12 medium-12 small-12 cell">
+            <ul class="search_results"></ul>
         </div>
     </div>
 </div>
