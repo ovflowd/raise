@@ -84,7 +84,7 @@ class Metrics extends Controller
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
-                'data' => database()->select('data', (new Select())->where('serviceId',
+                'data'  => database()->select('data', (new Select())->where('serviceId',
                     $service->id)->orderBy('clientTime desc')->limit(100)),
             ]);
         }, $services);
@@ -127,18 +127,18 @@ class Metrics extends Controller
         $serviceQuery = (new Select())->where("CONTAINS(name, '{$content}')")->limit(10);
 
         $clients = array_map(function ($client) {
-            return '<li><div class="callout primary"><a href="' . $client->id .
-                '" class="see-button">Watch</a><h5>' . $client->document->name . ' <small>(client)</small></h5>' .
-                (empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)) . '</div></li>';
+            return '<li><div class="callout primary"><a href="'.$client->id.
+                '" class="see-button">Watch</a><h5>'.$client->document->name.' <small>(client)</small></h5>'.
+                (empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)).'</div></li>';
         }, database()->select('client', $clientQuery));
 
         $services = array_map(function ($service) {
-            return '<li><div class="callout primary"><a href="' . $service->id .
-                '/data" class="see-button">Watch</a><h5>' . $service->document->name . ' <small>(service)</small></h5>' .
-                (empty($service->document->tags) ? 'No Tags' : implode(', ', $service->document->tags)) . '</div></li>';
+            return '<li><div class="callout primary"><a href="'.$service->id.
+                '/data" class="see-button">Watch</a><h5>'.$service->document->name.' <small>(service)</small></h5>'.
+                (empty($service->document->tags) ? 'No Tags' : implode(', ', $service->document->tags)).'</div></li>';
         }, database()->select('service', $serviceQuery));
 
-        $content = implode('', $clients) . implode('', $services);
+        $content = implode('', $clients).implode('', $services);
 
         response()::setContent(empty($content) ? '<center><b class="saw">No Results</b></center>' : $content);
     }
