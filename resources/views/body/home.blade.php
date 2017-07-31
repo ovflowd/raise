@@ -1,10 +1,5 @@
 <div class="grid-container">
     <div class="grid-x grid-padding-x">
-        <div class="large-12 medium-12 small-12 cell">
-                <div class="callout warning small">
-                <b>Warning!</b> it seems that this instance of raise it's out of memory.
-            </div>
-        </div>
         <div class="large-6 medium-6 small-12 cell">
             <h2 class="title">list <b style="color:#7d8492">clients</b></h2>
             <pre class="see">[ Base Information: Couchbase{Client} ]</pre>

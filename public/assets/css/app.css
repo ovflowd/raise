@@ -293,3 +293,11 @@ input[type=text],input[type=password],input[type=email] {
 label {
     color:#3b4151
 }
+
+.label {
+    border-radius: 57px;
+}
+
+.label.secondary {
+    background: #7d8492;
+}

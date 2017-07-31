@@ -15,6 +15,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Communication\Chart;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -79,10 +80,19 @@ class Metrics extends Controller
 
         $services = database()->select('service', (new Select())->where('clientId', $id));
 
+        $data = array_map(function ($service) {
+            return json()::map(new Chart(), [
+                'label' => $service->document->name,
+                'data' => database()->select('data', (new Select())->where('serviceId',
+                    $service->id)->orderBy('clientTime', 'desc')->limit(100))
+            ]);
+        }, $services);
+
         blade()::make('header.client');
         blade()::make('body.menu');
         blade()::make('body.client', ['services' => $services, 'client' => $client]);
-        blade()::make('footer.client', ['latitude' => $client->location[0], 'longitude' => $client->location[1]]);
+        blade()::make('footer.client',
+            ['latitude' => $client->location[0], 'longitude' => $client->location[1], 'data' => $data]);
     }
 
     /**
@@ -103,12 +113,5 @@ class Metrics extends Controller
         blade()::make('header.data');
         blade()::make('body.menu');
         blade()::make('body.data', ['data' => $data, 'service' => $service]);
-    }
-
-    protected function filter(Select $query = null)
-    {
-        $query = new Select();
-
-
     }
 }

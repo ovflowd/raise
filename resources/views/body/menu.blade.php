@@ -11,6 +11,9 @@
                     <button class="mega-button">explore</button>
                 </li>
             </ul>
+            <div class="top-bar-right">
+                <span class="label secondary">0</span> new notifications
+            </div>
         </div>
     </div>
 </div>
