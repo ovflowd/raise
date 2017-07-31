@@ -83,8 +83,8 @@ class Metrics extends Controller
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
-                'data' => database()->select('data', (new Select())->where('serviceId',
-                    $service->id)->orderBy('clientTime', 'desc')->limit(100))
+                'data'  => database()->select('data', (new Select())->where('serviceId',
+                    $service->id)->orderBy('clientTime', 'desc')->limit(100)),
             ]);
         }, $services);
 
