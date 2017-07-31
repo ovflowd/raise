@@ -14,6 +14,7 @@ use App\Facades\Test;
  */
 class ClientTest extends Test
 {
+    public $testToken;
     /**
      * Test the Client Register.
      *
