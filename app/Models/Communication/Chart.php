@@ -58,11 +58,13 @@ class Chart extends Model
     {
         $temporary = [];
 
-        foreach ($data as $value)
+        foreach ($data as $value) {
             $temporary[date('Y-m-d', $value->document->clientTime)]++;
+        }
 
-        foreach($temporary as $date => $amount)
+        foreach ($temporary as $date => $amount) {
             $this->data[] = ['x' => $date, 'y' => $amount];
+        }
     }
 
     /**
