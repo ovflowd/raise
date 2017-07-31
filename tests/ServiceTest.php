@@ -79,5 +79,14 @@ class ServiceTest extends Test
             'GET', $_SERVER, '/service/');
 
         $this->executeRaise();
+
+        $this->assertInstanceOf(\App\Models\Communication\Service::class, response()::response()->services[1]);
+
+        $this->assertEquals(200, response()::response()->message);
+    }
+
+    public function testFilter()
+    {
+        //TODO
     }
 }
