@@ -13,15 +13,11 @@
  * @copyright University of Brasília
  */
 
-/**
- * Get the static instance of the LogFacade.
- *
- * @return \App\Facades\Facade|\App\Facades\Log|string
- */
-function logger()
-{
-    return \App\Facades\Log::get();
-}
+/*
+|----------------------------------------------------------------------------
+| File System Helper Functions                                              |
+|----------------------------------------------------------------------------
+*/
 
 /**
  * Get the Root System FS Path.
@@ -42,7 +38,48 @@ function root()
  */
 function path(string $context = '')
 {
-    return is_dir(($path = root().$context)) ? $path : false;
+    return is_dir(($path = (root().str_replace('.', '/', $context))))
+        ? $path : false;
+}
+
+/**
+ * Get the Application App or Sub Application App FS Path.
+ *
+ * @param string $context the application sub directory
+ *
+ * @return bool|string return the context path if exists, if not return false
+ */
+function app(string $context = '')
+{
+    return path('app/' . $context);
+}
+
+/**
+ * Get the Application Resources or Sub Application Resources FS Path.
+ *
+ * @param string $context the application sub directory
+ *
+ * @return bool|string return the context path if exists, if not return false
+ */
+function resources(string $context = '')
+{
+    return path('resources/' . $context);
+}
+
+/*
+|----------------------------------------------------------------------------
+| Facade Callable Helper Functions                                          |
+|----------------------------------------------------------------------------
+*/
+
+/**
+ * Get the static instance of the LogFacade.
+ *
+ * @return \App\Facades\Facade|\App\Facades\Log|string
+ */
+function logger()
+{
+    return \App\Facades\Log::get();
 }
 
 /**
@@ -117,6 +154,12 @@ function setting(string $configuration)
 {
     return \App\Handlers\Settings::get($configuration);
 }
+
+/*
+|----------------------------------------------------------------------------
+| System Helpers Functions                                                  |
+|----------------------------------------------------------------------------
+*/
 
 /**
  * Register the Whoops Error Handler.

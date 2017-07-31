@@ -163,8 +163,8 @@ $router()->mount('/view', function () use ($router, $response, $token) {
     // Index Page
     $router()->get('/', '\App\Controllers\Metrics@welcome');
 
-    // List Clients
-    $router()->get('/client', '\App\Controllers\Metrics@clients');
+    // Show Dashboard
+    $router()->get('/client', '\App\Controllers\Metrics@home');
 
     // Hook a Client
     $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');

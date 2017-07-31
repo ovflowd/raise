@@ -32,13 +32,12 @@
                 You can check all content over the clients, like their services and data.
             </div>
             <div class="callout success">
-                <span style="cursor:pointer" onclick='window.location.href="/view/client/"'
-                      class="method success">Go</span> <h5 style="float:right">Want to list clients and their
-                    content?</h5>
+                <span onclick="window.location.href='@path/view/client/'" class="method success">GO</span>
+                <h5 style="float:right">Went to solutions center and manage it.</h5>
             </div>
             <div class="callout info">
-                <span style="cursor:pointer" onclick='window.location.href="http://docs.uiot.org/raise/"'
-                      class="method info">Go</span> <h5 style="float:right">Want to read the raise documentation?</h5>
+                <span onclick="window.location.href='http://docs.uiot.org/raise/'" class="method info">GO</span>
+                <h5 style="float:right">Want to read the RAISe documentation?</h5>
             </div>
         </div>
     </div>

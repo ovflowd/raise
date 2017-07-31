@@ -50,6 +50,9 @@ request()::prepare($router()->getRequestHeaders(), $router()->getRequestMethod()
 // Prepare ResponseFacade, applying the response schema
 response()::prepare('application/json');
 
+// Prepare the Blade Engine, applying custom directives
+blade()::prepare();
+
 /*
 |----------------------------------------------------------------------------
 | Store Settings                                                            |

@@ -6,6 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>raise - welcome</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/foundation.min.css">
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="@path/assets/css/foundation.min.css">
+    <link rel="stylesheet" href="@path/assets/css/app.css">
 </head>

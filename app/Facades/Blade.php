@@ -40,29 +40,50 @@ class Blade extends Facade
     private static $blade;
 
     /**
-     * This method tries to recover the
-     * Blade Engine Handler.
+     * Get the Blade Engine Instance
      *
-     * @return BladeEngine the Blade Engine
+     * Create if an instance doesn't exists
+     *
+     * @return BladeEngine
      */
-    protected static function cover()
+    public static function blade(): BladeEngine
     {
-        if (null === self::$blade) {
-            self::$blade = new BladeEngine([path('resources/views')], path('resources/cache'));
+        if (null == self::$blade) {
+            self::$blade = new BladeEngine([resources('views')], resources('cache'));
         }
 
         return self::$blade;
     }
 
     /**
+     * This method tries to recover the
+     * Blade Engine Handler.
+     *
+     * @return BladeEngine
+     */
+    public static function prepare()
+    {
+        self::blade();
+
+        self::blade()->compiler()->directive('path', function () {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+                ? 'https://' : 'http://';
+
+            return "{$protocol}{$_SERVER['HTTP_HOST']}" . setting('raise.path');
+        });
+
+        return self::blade();
+    }
+
+    /**
      * Handle the BladeEngine and make a view.
      *
-     * @param string $view  the view to be called and handled
-     * @param array  $parse the variables to be extracted and parsed
+     * @param string $view the view to be called and handled
+     * @param array $parse the variables to be extracted and parsed
      */
     public static function make(string $view, array $parse = [])
     {
-        $content = self::cover()->make($view, $parse);
+        $content = self::blade()->make($view, $parse);
 
         response()::setContent($content);
     }

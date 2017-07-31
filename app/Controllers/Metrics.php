@@ -46,15 +46,20 @@ class Metrics extends Controller
     /**
      * List Page.
      *
-     * Show a View containing all Clients
+     * Show a View containing a Dashboard with
+     * Clients, Logs, and more
      */
-    public function clients()
+    public function home()
     {
         response()::type('text/html');
 
-        blade()::make('header.clients');
+        $clients = database()->select('client', new Select());
+        $logs = database()->select('log', (new Select())->limit(100));
+
+        blade()::make('header.home');
         blade()::make('body.menu');
-        blade()::make('body.clients', ['clients' => database()->select('client', new Select())]);
+        blade()::make('body.home', ['clients' => $clients, 'logs' => $logs]);
+        blade()::make('footer.home');
     }
 
     /**
@@ -98,5 +103,12 @@ class Metrics extends Controller
         blade()::make('header.data');
         blade()::make('body.menu');
         blade()::make('body.data', ['data' => $data, 'service' => $service]);
+    }
+
+    protected function filter(Select $query = null)
+    {
+        $query = new Select();
+
+
     }
 }
