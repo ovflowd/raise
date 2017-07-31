@@ -57,8 +57,6 @@ class DataTest extends Test
            ]
        );
 
-       var_dump($dataModel);
-
        $this->executeRaise($dataModel);
 
        $this->assertInstanceOf(\App\Models\Response\Data::class, response()::response());
