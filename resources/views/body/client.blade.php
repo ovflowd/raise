@@ -29,7 +29,9 @@
             <b>Services</b>
             <span class="see">You can list the <b>client</b> services on the table above.</span>
             <div class="callout table">
-                <h4>List Services</h4>
+                <h4>
+                    <span>List Services</span>
+                </h4>
                 <ul style="margin: 20px;list-style: none;">
                     @foreach ($services as $service)
                         <li>
