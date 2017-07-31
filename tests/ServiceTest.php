@@ -80,7 +80,7 @@ class ServiceTest extends Test
 
         $this->executeRaise();
 
-        $this->assertInstanceOf(\App\Models\Communication\Service::class, response()::response()->services[1]);
+        $this->assertInstanceOf(\App\Models\Communication\Service::class, response()::response()->services[0]);
 
         $this->assertEquals(200, response()::response()->message);
     }
@@ -88,5 +88,7 @@ class ServiceTest extends Test
     public function testFilter()
     {
         //TODO
+
+        $this->assertEquals(true, true);
     }
 }
