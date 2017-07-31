@@ -1,11 +1,6 @@
 <div class="grid-container">
-    <div class="grid-x">
-        <div class="large-12 medium-12 small-12 cell">
-            <div class="callout warning">
-                <b>RAISe</b> dashboard it's under development. You probably will find multiple bugs.
-            </div>
-        </div>
-        <div class="large-4 medium-4 small-8 cell">
+    <div class="grid-x grid-padding-x">
+        <div class="large-6 medium-6 small-8 cell">
             <h2 class="title"><b style="color:#7d8492">raise</b> dashboard</h2>
             <pre class="see">[ RAISe Version: 2.0.0 ]</pre>
             <br>
@@ -21,9 +16,6 @@
                 </span>
             </div>
         </div>
-        <div class="large-2 medium-2 cell">
-            <br>
-        </div>
         <div class="large-6 medium-6 small-4 cell">
             <div class="callout primary">
                 <h5>Welcome to RAISe Dashboard</h5>
@@ -37,6 +29,10 @@
             </div>
             <div class="callout info">
                 <span onclick="window.location.href='http://docs.uiot.org/raise/'" class="method info">GO</span>
+                <h5 style="float:right">Want to read the RAISe documentation?</h5>
+            </div>
+            <div class="callout alert">
+                <span onclick="window.location.href='http://docs.uiot.org/raise/'" class="method alert">GO</span>
                 <h5 style="float:right">Want to read the RAISe documentation?</h5>
             </div>
         </div>

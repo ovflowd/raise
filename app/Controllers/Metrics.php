@@ -54,8 +54,8 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
-        $clients = database()->select('client', new Select());
-        $logs = database()->select('log', (new Select())->limit(100));
+        $clients = database()->select('client', (new Select())->orderBy('clientTime desc'));
+        $logs = database()->select('log', (new Select())->limit(100)->orderBy('clientTime desc'));
 
         blade()::make('header.home');
         blade()::make('body.menu');
@@ -78,13 +78,13 @@ class Metrics extends Controller
         $client->id = $id;
         $client->location = explode(':', $client->location);
 
-        $services = database()->select('service', (new Select())->where('clientId', $id));
+        $services = database()->select('service', (new Select())->where('clientId', $id)->orderBy('clientTime desc'));
 
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
                 'data'  => database()->select('data', (new Select())->where('serviceId',
-                    $service->id)->orderBy('clientTime', 'desc')->limit(100)),
+                    $service->id)->orderBy('clientTime desc')->limit(100)),
             ]);
         }, $services);
 
@@ -108,7 +108,7 @@ class Metrics extends Controller
 
         $service = database()->selectById('service', $id);
 
-        $data = database()->select('data', (new Select())->where('serviceId', $id));
+        $data = database()->select('data', (new Select())->where('serviceId', $id)->orderBy('clientTime desc'));
 
         blade()::make('header.data');
         blade()::make('body.menu');

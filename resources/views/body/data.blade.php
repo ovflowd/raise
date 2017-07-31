@@ -11,7 +11,7 @@
                     <div class="callout info">
                         <b>Client Identifier:</b> {{$service->clientId}}<br>
                         <b>Service Parameters:</b> {{implode(', ', $service->parameters)}}<br>
-                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->serverTime)}}
+                        <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}
                     </div>
                 </div>
                 <div class="large-6 medium-6 small-12 cell">
@@ -33,7 +33,7 @@
                     @foreach ($data as $item)
                         <li>
                             <div class="callout primary">
-                                <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->serverTime)}}</small>
+                                <small style="float:right"><b>Added at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
                                 <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
                                 <b class="saw">Values</b>
                                 <p class="callout code small">

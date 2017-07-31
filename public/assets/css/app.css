@@ -126,7 +126,7 @@
 }
 
 .grid-container {
-    margin:50px 0 0 70px
+    margin: 0 0 0 70px
 }
 
 .info p {
@@ -181,6 +181,10 @@
 
 .method.warning {
     background:#fca130
+}
+
+.method.alert {
+    background:#f93e3e
 }
 
 .see {
@@ -300,4 +304,44 @@ label {
 
 .label.secondary {
     background: #7d8492;
+}
+
+button.transparent {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 23px;
+    transition: all .3s;
+    border: 2px solid #888;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    font-family: Titillium Web,sans-serif;
+    line-height: 1.5rem;
+    background: white;
+}
+
+button.success {
+    display: inline;
+    color: #49cc90;
+    border-color: #49cc90;
+}
+
+select {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 40px 5px 10px;
+    border: 2px solid #41444e;
+    border-radius: 4px;
+    background: #f7f7f7 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…45NjkuMjcxLS4yNjguNzA5LS4yNjguOTc4IDBMMTAgMTFsMy40MTgtMy4xNDF6Ii8+PC9zdmc+) right 10px center no-repeat;
+    background-size: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.25);
+    font-family: Titillium Web,sans-serif;
+    color: #3b4151;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button.secondary {
+    border: 2px solid #41444e;
+    color: #3b4151;
+    display: inline;
 }

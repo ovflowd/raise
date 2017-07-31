@@ -12,7 +12,7 @@
                 <b>Channel:</b> {{$client->channel}}<br>
                 <b>Processor:</b> {{$client->processor}}<br>
                 <hr>
-                <b>Registered at:</b> {{date('d/m/Y h:i:s', $client->serverTime)}}<br>
+                <b>Registered at:</b> {{date('d/m/Y h:i:s', $client->clientTime)}}<br>
                 <b>Unique Identifier:</b> {{$client->id}}
             </div>
             <b>Data Stream</b>
