@@ -134,6 +134,10 @@
     padding:0 0 20px
 }
 
+.callout.table.is-open .table-content {
+    display:block
+}
+
 .callout.table.is-open h4 {
     border-bottom:1px solid rgba(59,65,81,.3);
     margin:0 0 5px
@@ -293,6 +297,7 @@
 }
 
 .table-content {
+    display:none;
     height:auto
 }
 
