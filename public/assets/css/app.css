@@ -130,10 +130,6 @@
     transition:all .4s
 }
 
-.callout.table.is-open {
-    padding:0 0 20px
-}
-
 .callout.table.is-open .table-content {
     display:block
 }
