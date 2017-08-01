@@ -156,9 +156,9 @@ class Response extends Facade
      * @see Model base of the Models
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Codes
      *
-     * @param int          $httpCode desired HTTP code
+     * @param int                 $httpCode desired HTTP code
      * @param string|Model|object $model    the namespace of the model or an instance of it
-     * @param array|object $data     the data to be mapped into the Model
+     * @param array|object        $data     the data to be mapped into the Model
      */
     public static function setResponse(int $httpCode, $model, $data)
     {
