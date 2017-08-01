@@ -102,21 +102,20 @@
 
 .callout.table {
     border:1px solid rgba(59,65,81,.3);
-    padding:0 0 20px
+    padding:0
 }
 
 .callout.table h4 {
     -ms-flex-align:center;
     -webkit-box-align:center;
     align-items:center;
-    border-bottom:1px solid rgba(59,65,81,.3);
     color:#777;
     cursor:pointer;
     display:flex;
     font-family:Titillium Web, sans-serif;
     font-size:16px;
     font-weight:700;
-    margin:0 0 5px;
+    margin:0;
     padding:10px 20px 10px 10px;
     transition:all .2s
 }
@@ -129,6 +128,15 @@
 
 .callout.table h4 svg {
     transition:all .4s
+}
+
+.callout.table.is-open {
+    padding:0 0 20px
+}
+
+.callout.table.is-open h4 {
+    border-bottom:1px solid rgba(59,65,81,.3);
+    margin:0 0 5px
 }
 
 .callout.table.is-open h4 svg {
@@ -285,7 +293,6 @@
 }
 
 .table-content {
-    display:none;
     height:auto
 }
 

@@ -61,26 +61,29 @@
             <small class="see">This are you can see RAISe system alerts</small>
             <hr style="margin-top: 0;margin-bottom:17px">
             <div class="callout success small">
-                <h5>Updates</h5>
+                <h5>Success</h5>
                 Congratulations! You're using the latest version of <b>RAISe</b>.
                 Using the latest version it's good for the environment.
             </div>
             @if($security->secretKey == 'default-raise-secret-key')
                 <div class="callout alert small">
-                    <h5>Not Good!</h5>
+                    <h5>Danger</h5>
                     Your <b>raise</b> instance it's using the default <b>crypto key</b> built in with
                     raise. Please consider changing it on your settings file.
                 </div>
             @endif
-            <div class="callout warning small">
-                <h5>Warning!</h5>
-
-                This is a sensitive area. Please make sure that any change make here it's with totally <b>certain</b>.
-                Remember, the <b>raise</b> configuration it's what makes raise working.
-            </div>
+            @if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off'))
+                <div class="callout warning small">
+                    <h5>Warning</h5>
+                    This <b>raise</b> instance it's not running under <b>HTTPS</b> protocol. This means that all the
+                    data can be leaked
+                    or intercepted be steal. Please enable https to ensure a proper tunnel and security on your raise
+                    instance.
+                </div>
+            @endif
             @if($security->debug == true)
                 <div class="callout info small">
-                    <h5>For Developers..</h5>
+                    <h5>Information</h5>
                     It seems that your server has debug mode enabled. If you're using this <b>raise</b> instance for
                     production purposes, consider disabling it.
                 </div>

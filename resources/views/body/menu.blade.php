@@ -35,7 +35,7 @@
 <div class="reveal" id="explore-modal" data-reveal>
     <b class="saw">Explore at RAISe</b>
     <div style="display: flex;flex: 3">
-        <input class="search_at" title="explore at raise" placeholder="search at raise..." type="text" style="margin: 0;border-radius: 4px 0 0 4px;border: 2px solid #8385D0;padding: 8px 10px;width:100%">
+        <input class="search_at" title="explore at raise" placeholder="search a tag, client or device..." type="text" style="margin: 0;border-radius: 4px 0 0 4px;border: 2px solid #8385D0;padding: 8px 10px;width:100%">
         <button style="padding: 4px 40px;border: none;border-radius: 0 4px 4px 0;background: #8385D0;color: #fff;">Search</button>
     </div>
     <br>
