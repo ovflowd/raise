@@ -31,8 +31,6 @@ class ClientTest extends Test
 
         $this->assertInstanceOf(\App\Models\Response\Token::class, $clientResponse);
 
-        var_dump($clientResponse);
-
         $this->assertEquals(200, $clientResponse->code);
     }
 

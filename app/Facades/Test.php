@@ -117,7 +117,7 @@ abstract class Test extends TestCase
      *
      * @return \App\Models\Communication\Model|array|object|string
      */
-    protected function createService($token = null, ServiceModel $model = null)
+    protected function createService($token, ServiceModel $model = null)
     {
         $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
             'POST', $_SERVER, '/service/register');
@@ -146,7 +146,7 @@ abstract class Test extends TestCase
      *
      * @return \App\Models\Communication\Model|array|object|string
      */
-    protected function createData($serviceId, $token, DataModel $model)
+    protected function createData($serviceId, $token, DataModel $model = null)
     {
         $this->configureRaise(['Content-Type' => 'application/json', 'authorizaion' => $token],
             'POST', $_SERVER, '/data/register');
