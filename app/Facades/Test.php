@@ -16,10 +16,11 @@
 namespace App\Facades;
 
 use App\Handlers\Settings;
-use PHPUnit\Framework\TestCase;
 use App\Models\Communication\Client as ClientModel;
-use App\Models\Communication\Service as ServiceModel;
 use App\Models\Communication\Data as DataModel;
+use App\Models\Communication\Service as ServiceModel;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class Test.
  *
@@ -84,6 +85,7 @@ abstract class Test extends TestCase
 
     /**
      * @param ClientModel|null $model
+     *
      * @return \App\Models\Communication\Model|array|object|string
      */
     protected function createClient(ClientModel $model = null)
@@ -110,8 +112,9 @@ abstract class Test extends TestCase
     }
 
     /**
-     * @param null $token
+     * @param null              $token
      * @param ServiceModel|null $model
+     *
      * @return \App\Models\Communication\Model|array|object|string
      */
     protected function createService($token = null, ServiceModel $model = null)
@@ -137,12 +140,13 @@ abstract class Test extends TestCase
     }
 
     /**
-     * @param null $serviceId
-     * @param null $token
+     * @param null      $serviceId
+     * @param null      $token
      * @param DataModel $model
+     *
      * @return \App\Models\Communication\Model|array|object|string
      */
-    protected function createData($serviceId = null, $token = null, DataModel $model)
+    protected function createData($serviceId, $token, DataModel $model)
     {
         $this->configureRaise(['Content-Type' => 'application/json', 'authorizaion' => $token],
             'POST', $_SERVER, '/data/register');
