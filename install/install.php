@@ -304,7 +304,7 @@ try {
     $connection = (new CouchbaseCluster("couchbase://{$credentials['ip']}"));
     //$connection->authenticate($authenticator);
 } catch (CouchbaseException $e) {
-    echo writeText("Your couchbase credentials are incorrect. Please try again.", '1;31', true);
+    echo writeText('Your couchbase credentials are incorrect. Please try again.', '1;31', true);
 
     exit(1);
 } finally {
