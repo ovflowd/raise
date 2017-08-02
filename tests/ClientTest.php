@@ -34,69 +34,36 @@ class ClientTest extends Test
         $this->assertEquals(200, $clientResponse->code);
     }
 
-//    /**
-//     * Test the Client Listing.
-//     */
-//    public function testList()
-//    {
-//        $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
-//
-//        $clientModel = (object) [
-//            'name'       => 'Sample Test',
-//            'chipset'    => '0.0',
-//            'mac'        => 'FF:FF:FF:FF:FF',
-//            'serial'     => 'm3t41xR3l02d3d',
-//            'processor'  => 'AMD SUX-K2',
-//            'channel'    => 'ieee-4chan(nel)-802154',
-//            'location'   => '0:0',
-//            'clientTime' => microtime(true),
-//        ];
-//
-//        $this->executeRaise($clientModel);
-//
-//        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => response()::response()->token],
-//            'GET', $_SERVER, '/client');
-//
-//        $this->executeRaise();
-//
-//        $this->assertInstanceOf(\App\Models\Communication\Client::class, response()::response()->clients[0]);
-//
-//        $this->assertEquals(200, response()::response()->code);
-//    }
-//
-//    /**
-//     * Test the Client Filtering.
-//     */
-//    public function testFilter()
-//    {
-//        $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
-//
-//        $clientModel = (object) [
-//            'name'       => 'Sample Test',
-//            'chipset'    => '0.0',
-//            'mac'        => 'FF:FF:FF:FF:FF',
-//            'serial'     => 'm3t41xR3l02d3d',
-//            'processor'  => 'AMD SUX-K2',
-//            'channel'    => 'ieee-4chan(nel)-802154',
-//            'location'   => '0:0',
-//            'clientTime' => microtime(true),
-//        ];
-//
-//        $this->executeRaise($clientModel);
-//
-//        $path = '/client?name=Sample Test&mac=FF:FF:FF:FF:FF';
-//
-//        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => response()::response()->token],
-//            'GET', $_SERVER, $path);
-//
-//        $this->executeRaise();
-//
-//        $this->assertInstanceOf(\App\Models\Communication\Client::class, response()::response()->clients[0]);
-//
-//        $this->assertEquals('Sample Test', response()::response()->clients[0]->name);
-//
-//        $this->assertEquals('FF:FF:FF:FF:FF', response()::response()->clients[0]->mac);
-//
-//        $this->assertEquals(200, response()::response()->code);
-//    }
+    /**
+     * Test the Client Listing.
+     */
+    public function testList()
+    {
+        $clientResponse = $this->createClient();
+
+        $queryResponse = $this->createQuery($clientResponse->token, '/client');
+
+        $this->assertInstanceOf(\App\Models\Communication\Client::class, $queryResponse->clients[0]);
+
+        $this->assertEquals(200, response()::response()->code);
+    }
+
+    /**
+     * Test the Client Filtering.
+     */
+    public function testFilter()
+    {
+        $clientResponse = $this->createClient();
+
+        $queryResponse = $this->createQuery($clientResponse->token,
+            '/client?name=Sample Test&mac=FF:FF:FF:FF:FF');
+
+        $this->assertInstanceOf(\App\Models\Communication\Client::class, $queryResponse->clients[0]);
+
+        $this->assertEquals('Sample Test', $queryResponse->clients[0]->name);
+
+        $this->assertEquals('FF:FF:FF:FF:FF', $queryResponse->clients[0]->mac);
+
+        $this->assertEquals(200, $queryResponse->code);
+    }
 }

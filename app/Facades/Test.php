@@ -167,4 +167,19 @@ abstract class Test extends TestCase
 
         return response()::response();
     }
+
+    /**
+     * @param $token
+     * @param $path
+     * @return \App\Models\Communication\Model|array|object|string
+     */
+    protected function createQuery($token, $path)
+    {
+        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+            'GET', $_SERVER, $path);
+
+        $this->executeRaise();
+
+        return response()::response();
+    }
 }
