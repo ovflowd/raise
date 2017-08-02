@@ -171,6 +171,7 @@ abstract class Test extends TestCase
     /**
      * @param $token
      * @param $path
+     *
      * @return \App\Models\Communication\Model|array|object|string
      */
     protected function createQuery($token, $path)
