@@ -258,7 +258,8 @@ function progressBar($done, $total, $info = '', $width = 50)
     $percent = round(($done * 100) / $total);
     $bar = round(($width * $percent) / 100);
 
-    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat('=', $bar), str_repeat(' ', $width - $bar), $info);
+    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat('=', $bar),
+        str_repeat(' ', $width - $bar), $info);
 }
 
 /*
@@ -268,21 +269,22 @@ function progressBar($done, $total, $info = '', $width = 50)
 echo PHP_EOL.PHP_EOL;
 
 echo writeText('Welcome to the RAISe Installer.', '0;31', true);
-echo writeText('This Installer will do many checks before continue, be patient.', '43', true);
+echo writeText('This Installer will perform various checks before continuing, please be patient.',
+    '43', true);
 
 echo PHP_EOL;
 
 if (checkVersion()) {
-    echo writeText('OK', '42').'php version passed.'.PHP_EOL;
+    echo writeText('OK', '42').'Php version check successful.'.PHP_EOL;
 } else {
     echo writeText('ERROR',
-            '41')."Your PHP version isn't correct. You need use php 7 or higher. Actually using: ".phpversion().PHP_EOL;
+            '41')."Your PHP version isn't compatible. Php 7 or higher is needed. Currently Using: ".phpversion().PHP_EOL;
 
     exit(1);
 }
 
 if (checkLibrary()) {
-    echo writeText('OK', '42').'Library Checks Passed...'.PHP_EOL;
+    echo writeText('OK', '42').'Library check successful.'.PHP_EOL;
 } else {
     echo writeText('ERROR', '41')."Couchbase Library for PHP isn't installed correctly.".PHP_EOL;
 
@@ -302,15 +304,15 @@ try {
     $connection = (new CouchbaseCluster("couchbase://{$credentials['ip']}"));
     //$connection->authenticate($authenticator);
 } catch (CouchbaseException $e) {
-    echo writeText("Your credentials aren't correct. Try again please.", '1;31', true);
+    echo writeText("Your couchbase credentials are incorrect. Please try again.", '1;31', true);
 
     exit(1);
 } finally {
-    echo writeText('Connected Successfully to Couchbase Server.', '0;32', true);
+    echo writeText('Connection to Couchbase Server was successfully established .', '0;32', true);
 }
 
 if (option('skip-create') === null) {
-    echo writeText('Now the Buckets will be created. Please wait...', '0;34', 'true');
+    echo writeText('Creating buckets. Please wait...', '0;34', 'true');
 
     echo PHP_EOL;
 
