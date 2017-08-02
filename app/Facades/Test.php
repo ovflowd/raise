@@ -17,7 +17,9 @@ namespace App\Facades;
 
 use App\Handlers\Settings;
 use PHPUnit\Framework\TestCase;
-
+use App\Models\Communication\Client as ClientModel;
+use App\Models\Communication\Service as ServiceModel;
+use App\Models\Communication\Data as DataModel;
 /**
  * Class Test.
  *
@@ -78,5 +80,87 @@ abstract class Test extends TestCase
 
         // Run the Route and set a Callback
         $router()->run();
+    }
+
+    /**
+     * @param ClientModel|null $model
+     * @return \App\Models\Communication\Model|array|object|string
+     */
+    protected function createClient(ClientModel $model = null)
+    {
+        $this->configureRaise(['Content-Type' => 'application/json'],
+            'POST', $_SERVER, '/client/register');
+
+        $clientModel = (object) [
+            'name'       => 'Sample Test',
+            'chipset'    => '0.0',
+            'mac'        => 'FF:FF:FF:FF:FF',
+            'serial'     => 'm3t41xR3l02d3d',
+            'processor'  => 'AMD SUX-K2',
+            'channel'    => 'ieee-4chan(nel)-802154',
+            'location'   => '0:0',
+            'clientTime' => microtime(true),
+        ];
+
+        $model = is_null($model) ? $clientModel : $model;
+
+        $this->executeRaise($model);
+
+        return response()::response();
+    }
+
+    /**
+     * @param null $token
+     * @param ServiceModel|null $model
+     * @return \App\Models\Communication\Model|array|object|string
+     */
+    protected function createService($token = null, ServiceModel $model = null)
+    {
+        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+            'POST', $_SERVER, '/service/register');
+
+        $serviceModel = [
+            (object) [
+                'clientTime' => microtime(true),
+                'tags'       => ['example-tag'],
+                'name'       => 'Get temp',
+                'parameters' => ['humidity', 'temperature'],
+                'returnType' => 'float',
+            ],
+        ];
+
+        $model = is_null($model) ? $serviceModel : $model;
+
+        $this->executeRaise($model);
+
+        return response()::response();
+    }
+
+    /**
+     * @param null $serviceId
+     * @param null $token
+     * @param DataModel $model
+     * @return \App\Models\Communication\Model|array|object|string
+     */
+    protected function createData($serviceId = null, $token = null, DataModel $model)
+    {
+        $this->configureRaise(['Content-Type' => 'application/json', 'authorizaion' => $token],
+            'POST', $_SERVER, '/data/register');
+
+        $dataModel = [
+            (object) [
+                'clientTime' => microtime(true),
+                'tags'       => ['example-tag'],
+                'serviceId'  => $serviceId,
+                'order'      => ['humidity', 'temperature'],
+                'values'     => [['20.2', '30']],
+            ],
+        ];
+
+        $model = is_null($model) ? $dataModel : $model;
+
+        $this->executeRaise($model);
+
+        return response()::response();
     }
 }
