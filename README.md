@@ -12,13 +12,13 @@
 
 <b>Builds</b>
 
-Version | Windows | Linux | Artifacts |
---------|---------|-------|-----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moinqrha2n?svg=true)](https://ci.appveyor.com/project/sant0ro/raise-askjk)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise-askjk/branch/sbr/artifacts) |
+Version | Windows | Linux | macOS |Artifacts |
+--------|---------|-------|-------|----------|
+Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moinqrha2n?svg=true)](https://ci.appveyor.com/project/sant0ro/raise-askjk)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | None Yet | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise-askjk/branch/sbr/artifacts) |
 
 <b>Core Features</b>
 
-| Feature  |  Supported?   | Description  |
+| Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
 | Home Page | &#10004; | Ability of accessing the main route of **RAISe** to check the status of the middleware. |
 | Not Found Route | &#10004; | Ability of accessing a non-existent route and receive a response of the route doesn't exists. |
@@ -33,7 +33,7 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moi
 
 <b>Social Features</b>
 
-| Feature  |  Supported?   | Description  |
+| Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
 | Create a Permission | &#10008; | Ability to create a new type of Permission on RAISe |
 | Edit a Permission | &#10008; | Ability to Edit Permissions on RAISe |
@@ -47,10 +47,29 @@ Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moi
 
 <b>Management Features</b>
 
-| Feature  |  Supported?   | Description  |
+| Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
 | Show Logs | &#10008; | Ability to list and show RAISe Logs |
 | Show Audit | &#10008; | Ability to list and show RAISe Audit (Logs Inference) |
+
+<b>Data Visualization System</b>
+
+| Feature  |  Coded?       | Description  |
+|----------|:-------------:|:-------------|
+| Show RAISe Environment Settings | &#10004; | View that displays the actual environment settings and alerts. |
+| Search Feature | &#10004; | Feature to explore (search) for clients and services, by name or tag. |
+| Home Page | &#10004; | View to list Clients and Logs (last registered).  |
+| Hook a Client | &#10004; | View to see detailed data about a Client (map location, description, graphs and it services)  |
+| Hook a Client Service | &#10004; | View to see detailed info about a specific service and list last 100 data entries.  |
+
+<b>RAISe IntelliX</b> (Algorithms)
+
+| Feature  |  Coded?       | Description  |
+|----------|:-------------:|:-------------|
+| Data Clustering | &#10008; | Ability to cluster data by dimensional criteria, like, time, space, tags and social relationships. |
+| Data Behaviour Analysis | &#10008; | Ability to scan and determine if a specific set of data has strange behaviour |
+| Data Confiability | &#10008; | Ability to scan and determine if a specific set of data it's fair or not |
+| Social Relationships | &#10008; | Ability to create social relationships and group relationships |
 
 UIoT RAISe
 ----------
