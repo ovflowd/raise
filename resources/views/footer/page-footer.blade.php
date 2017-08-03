@@ -4,7 +4,7 @@
         <div class="footer">
             <small><b>© Copyright 2017 - <a href="http://www.unb.br/">University of Brasília</a></b></small><br>
             <small>this system uses swagger and zurb' foundation as base style.</small>
-            <img src="assets/svg/symbol-two.svg" style="">
+            <img src="@path/assets/svg/symbol-two.svg" style="">
         </div>
     </div>
 </div>
