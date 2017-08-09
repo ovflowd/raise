@@ -177,7 +177,7 @@ class Data extends Raise
         $service = database()->selectById('service', $this->serviceId);
 
         $this->values = array_map(function ($values) use ($service, $order) {
-            return isset($order) ? $this->orderData($values, $service) : $values;
+            return isset($order) ? $this->orderData($values, $service) : (array)$values;
         }, $dataSet);
 
         $this->parameters = $service->parameters;
