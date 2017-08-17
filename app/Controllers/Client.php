@@ -62,7 +62,7 @@ class Client extends Controller
      */
     public function revalidate()
     {
-        $hash = request()::headers('authorization');
+        $hash = request()::headers('Authorization') ?: request()::headers('authorization');
 
         if (is_array(($update = security()::updateToken($hash)))) {
             $client = database()->selectById('client', $update['clientId']);
