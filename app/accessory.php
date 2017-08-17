@@ -229,7 +229,7 @@ $token = function (bool $exit = true) use ($response) {
     static $tokenModel;
 
     if ($tokenModel == null) {
-        $tokenModel = security()::validateToken(request()::headers('authorization') ?: request()::headers('Authorization'));
+        $tokenModel = security()::validateToken(request()::headers('Authorization') ?: request()::headers('authorization'));
 
         if ($tokenModel === false && $exit) {
             $response();
