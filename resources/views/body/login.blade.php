@@ -1,6 +1,6 @@
 <body>
 <div class="bg">
-    <img src="/assets/svg/symbol-two.svg">
+    <img src="@path/assets/svg/symbol-two.svg">
     <span>raise</span>
 </div>
 <div class="grid-container" style="padding-top:50px;">
