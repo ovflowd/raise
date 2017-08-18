@@ -13,7 +13,9 @@
  * @copyright University of Brasília
  */
 
-namespace App\Models\Communication;
+namespace App\Models\Response;
+
+use App\Models\Communication\Model;
 
 /**
  * Class Chart.
@@ -59,7 +61,7 @@ class Chart extends Model
         $temporary = [];
 
         foreach ($data as $value) {
-            $temporary[date('Y-m-d', $value->document->clientTime)]++;
+            $temporary[date('Y-m-d h:i', $value->document->clientTime)]++;
         }
 
         foreach ($temporary as $date => $amount) {

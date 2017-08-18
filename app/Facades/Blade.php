@@ -69,7 +69,7 @@ class Blade extends Facade
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
                 ? 'https://' : 'http://';
 
-            return "{$protocol}{$_SERVER['HTTP_HOST']}".setting('raise.path');
+            return "{$protocol}{$_SERVER['HTTP_HOST']}" . setting('raise.path');
         });
 
         return self::blade();
@@ -78,8 +78,8 @@ class Blade extends Facade
     /**
      * Handle the BladeEngine and make a view.
      *
-     * @param string $view  the view to be called and handled
-     * @param array  $parse the variables to be extracted and parsed
+     * @param string $view the view to be called and handled
+     * @param array $parse the variables to be extracted and parsed
      */
     public static function make(string $view, array $parse = [])
     {

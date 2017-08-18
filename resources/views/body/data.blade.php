@@ -28,6 +28,11 @@
                     </div>
                 </div>
             </div>
+            <b>Data Graph</b>
+            <span class="see">You can see a Graph with all Data records at <b>RAISe</b>.</span>
+            <div class="callout box">
+                <canvas id="service_data" width="auto" height="50"></canvas>
+            </div>
             <b>Data Sets</b>
             <span class="see">You can see a Data Table with all Data records at <b>RAISe</b>.</span>
             <div class="callout table">

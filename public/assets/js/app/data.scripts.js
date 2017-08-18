@@ -11,27 +11,6 @@ window.chartColors = {
     ten: '#ededed'
 };
 
-/**
- * Create a Google Map with Marker
- * @param position
- * @returns {google.maps.Map}
- */
-function createMap(position) {
-    var googleMap = new google.maps.Map(document.getElementById('map_canvas'), {
-        center: position,
-        zoom: 8,
-        mapTypeId: 'roadmap',
-        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
-    });
-
-    new google.maps.Marker({
-        position: position,
-        map: googleMap
-    });
-
-    return googleMap;
-}
-
 function createChart(context, data) {
     var color = Chart.helpers.color, colorNames = Object.keys(window.chartColors);
 

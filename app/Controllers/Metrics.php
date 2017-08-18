@@ -15,7 +15,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Communication\Chart;
+use App\Models\Response\Chart;
 use Koine\QueryBuilder\Statements\Select;
 
 /**
@@ -80,6 +80,7 @@ class Metrics extends Controller
         $client = database()->selectById('client', $id);
         $client->id = $id;
         $client->location = explode(':', $client->location);
+        $client->token = database()->select('token', (new Select())->where('clientId', $id))[0]->document;
 
         $services = database()->select('service', (new Select())->where('clientId', $id)->orderBy('clientTime desc'));
 
@@ -115,10 +116,16 @@ class Metrics extends Controller
 
         $data = database()->select('data', (new Select())->where('serviceId', $id)->orderBy('clientTime desc'));
 
+        $graph = [json()::map(new Chart(), [
+            'label' => $service->name,
+            'data'  => database()->select('data', (new Select())->where('serviceId', $service->id)
+                ->orderBy('clientTime desc'))
+        ])];
+
         blade()::make('header.data');
         blade()::make('body.menu');
         blade()::make('body.data', ['data' => $data, 'service' => $service]);
-        blade()::make('footer.data');
+        blade()::make('footer.data', ['graph' => $graph]);
         blade()::make('footer.page-footer');
     }
 
