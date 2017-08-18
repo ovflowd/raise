@@ -119,7 +119,7 @@ class Metrics extends Controller
         $graph = [json()::map(new Chart(), [
             'label' => $service->name,
             'data'  => database()->select('data', (new Select())->where('serviceId', $service->id)
-                ->orderBy('clientTime desc'))
+                ->orderBy('clientTime desc')),
         ])];
 
         blade()::make('header.data');
