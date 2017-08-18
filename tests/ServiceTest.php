@@ -15,7 +15,7 @@ class ServiceTest extends Test
         $this->assertEquals(200, $serviceResponse->code);
     }
 
-//    public function testList()
+    //    public function testList()
 //    {
 //        $this->configureRaise(['Content-Type' => 'application/json'], 'POST', $_SERVER, '/client/register');
 //
