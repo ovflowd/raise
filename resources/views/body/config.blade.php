@@ -14,8 +14,8 @@
             <b>RAISe Details</b>
             <small class="see">You can see the details about your server configuration here.</small>
             <div class="callout table">
-                <h4>RAISe Configuration Schema</h4>
-                <div class="table-content" style="display: block">
+                <h4><span>RAISe Configuration Schema</span></h4>
+                <div class="table-content">
                     <ul>
                         <li>
                             <b class="see">raise internal settings</b>
