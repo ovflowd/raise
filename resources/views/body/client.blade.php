@@ -3,13 +3,15 @@
         <div class="large-12 medium-12 small-12 cell">
             @if($client->token->expireTime < time())
                 <div class="callout alert small">
-                    <b>Warning:</b> Your Client Token has already expired on <b><?= date('d/m/Y h:i:s', $client->token->expireTime) ?></b>.
+                    <b>Warning:</b> Your Client Token has already expired on <b><?= date('d/m/Y h:i:s',
+                            $client->token->expireTime) ?></b>.
                     It's recommended to revalidate the Client.
                 </div>
             @endif
         </div>
         <div class="large-6 medium-6 small-12 cell">
-            <h2 class="title">@if($client->token->expireTime < time()) <s>{{$client->name}}</s> @else {{$client->name}} @endif</h2>
+            @if($client->token->expireTime < time()) <h2 class="title" style="color:rgba(59, 65, 81, 0.52)">
+                <s>{{$client->name}}</s></h2> @else <h2 class="title">{{$client->name}}</h2> @endif
             <pre class="see">[ {{empty($client->tags) ? 'No Tags' : implode(', ', $client->tags)}} ]</pre>
             <br>
             <b>Details</b>
