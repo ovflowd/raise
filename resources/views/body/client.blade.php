@@ -45,7 +45,7 @@
                         @foreach ($services as $service)
                             <li>
                                 <div class="callout primary">
-                                    <a href="/view/client/{{$service->id}}/data" class="see-button">Watch</a>
+                                    <a href="/view/service/{{$service->id}}" class="see-button">Watch</a>
                                     <h5>{{$service->document->name}}</h5>
                                     <small>[ ID: {{$service->id}} ]</small>
                                 </div>

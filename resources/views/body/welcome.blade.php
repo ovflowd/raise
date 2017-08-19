@@ -24,7 +24,7 @@
                 You can check all content over the clients, like their services and data.
             </div>
             <div class="callout success">
-                <span onclick="window.location.href='@path/view/client/'" class="method success">GO</span>
+                <span onclick="window.location.href='@path/view/home/'" class="method success">GO</span>
                 <h5 style="float:right">Went to solutions center and manage it.</h5>
             </div>
             <div class="callout info">

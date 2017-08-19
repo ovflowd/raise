@@ -54,10 +54,11 @@
                 <div class="tabs-panel" id="list-clients">
                     @foreach ($clients as $client)
                         <div class="callout primary">
-                            <a href="{{$client->id}}" class="see-button">Watch</a>
+                            <a href="@path/view/client/{{$client->id}}" class="see-button">Watch</a>
                             <h5>{{$client->document->name}}</h5>
+                            <small style="margin-top: -5px;display: block"><b>Added at:</b> {{date('d/m/Y h:i:s', $client->document->clientTime)}}</small>
                             <small>
-                                [ {{empty($client->document->tags) ? 'No Tags' : implode(', ', $client->document->tags)}}
+                                [ {{empty($client->document->tags) ? 'No Tags' : 'Tags: ' . implode(', ', $client->document->tags)}}
                                 ]
                             </small>
                         </div>
@@ -66,18 +67,43 @@
                 <div class="tabs-panel" id="list-logs">
                     @foreach ($logs as $log)
                         <div class="callout primary">
+                            <small style="float: right"><b>Added at:</b> {{date('d/m/Y h:i:s', $client->document->clientTime)}}</small>
                             <h5>ID: {{$log->id}}
                                 <small>({{$log->document->table}})</small>
                             </h5>
                             <small>
-                                <b>details:</b> {{$log->document->details}}<br>
-                                <b>logged at:</b> {{date('d/m/Y h:i:s', $log->document->serverTime)}}
+                                <b>Details:</b> {{$log->document->details}}
+                                <b>Document:</b> {{$log->document->element}}
                             </small>
                         </div>
                     @endforeach
                 </div>
                 <div class="tabs-panel" id="list-statistics">
-                    <b>No content yet.</b>
+                    <b>Last Client</b>
+                    <span class="see">Last Client that sent a data Stream.</span>
+                    <div class="callout primary">
+                        <a href="@path/view/client/{{$lastClient->id}}" class="see-button">Watch Client</a>
+                        <h5>{{$lastClient->document->name}}</h5>
+                        <small style="margin-top: -5px;display: block"><b>Added at:</b> {{date('d/m/Y h:i:s', $lastClient->document->clientTime)}}</small>
+                        <small>
+                            [ {{empty($lastClient->document->tags) ? 'No Tags' : 'Tags: ' . implode(', ', $lastClient->document->tags)}}
+                            ]
+                        </small>
+                    </div>
+                    <b>Last Data</b>
+                    <span class="see">Last Data Document registered at RAISe</span>
+                    <div class="callout primary">
+                        <small style="float:right"><b>Added
+                                at:</b> {{date('d/m/Y h:i:s', $lastData->document->clientTime)}}</small>
+                        <h5 style="color:#7d8492">ID: {{$lastData->id}}</h5>
+                        <b class="saw">Values</b>
+                        <a href="@path/view/service/{{$dataService->id}}" class="see-button">Watch Service</a>
+                        <p class="callout code small" style="max-width: 80%">
+                            @foreach (array_combine($dataService->document->parameters, $lastData->document->values) as $key => $value)
+                                <b>{{$key}}:</b> {{$value}},
+                            @endforeach
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

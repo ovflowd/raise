@@ -170,11 +170,11 @@ $router()->mount('/view', function () use ($router, $response, $token) {
     $router()->get('/search', '\App\Controllers\Metrics@search');
 
     // Show Dashboard
-    $router()->get('/client', '\App\Controllers\Metrics@home');
+    $router()->get('/home', '\App\Controllers\Metrics@home');
 
     // Hook a Client
     $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
 
-    // Hook a Client Data
-    $router()->get('/client/(\w+)/data', '\App\Controllers\Metrics@data');
+    // Hook a Service Data
+    $router()->get('/service/(\w+)', '\App\Controllers\Metrics@data');
 });

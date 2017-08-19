@@ -21,15 +21,15 @@ jQuery(document).ready(function () {
         table.parent().addClass('is-open');
     }, 1000);
 
-    jQuery(document).on('click', '.callout.table h4 svg.toggle', function () {
-        if(jQuery(this).parent().parent().hasClass('is-open')) {
-            jQuery(this).parent().parent().removeClass('is-open');
+    jQuery(document).on('click', '.callout.table h4', function () {
+        if(jQuery(this).parent().hasClass('is-open')) {
+            jQuery(this).parent().removeClass('is-open');
 
-            jQuery(this).parent().siblings().slideUp();
+            jQuery(this).siblings().slideUp();
         } else {
-            jQuery(this).parent().parent().addClass('is-open');
+            jQuery(this).parent().addClass('is-open');
 
-            jQuery(this).parent().siblings().slideDown();
+            jQuery(this).siblings().slideDown();
         }
     });
 });
