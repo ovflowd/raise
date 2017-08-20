@@ -154,4 +154,14 @@ class Couchbase implements DatabaseHandler
             return false;
         }
     }
+
+    /**
+     * Get the Couchbase Connection Handler
+     *
+     * @return CouchbaseCluster
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
 }

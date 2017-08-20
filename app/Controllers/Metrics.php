@@ -58,20 +58,12 @@ class Metrics extends Controller
 
         $clients = database()->select('client', (new Select())->orderBy('clientTime desc'));
         $logs = database()->select('log', (new Select())->limit(100)->orderBy('clientTime desc'));
-        $lastData = database()->select('data', (new Select())->orderBy('clientTime desc')->limit(1))[0];
-        $dataService = database()->select('service', (new Select())->where('META(document).id', $lastData->document->serviceId))[0];
+        $data = database()->select('data', (new Select())->orderBy('clientTime desc')->limit(1))[0];
+        $service = database()->selectById('service', $data->document->serviceId);
 
         blade()::make('header.home');
         blade()::make('body.menu');
-        blade()::make('body.home', [
-            'clients' => $clients,
-            'logs' => $logs,
-            'lastClient' => reset(array_filter($clients, function ($client) use ($lastData) {
-                return $client->id == $lastData->document->clientId;
-            })),
-            'lastData' => $lastData,
-            'dataService' => $dataService
-        ]);
+        blade()::make('body.home', ['clients' => $clients, 'logs' => $logs, 'data' => $data, 'service' => $service]);
         blade()::make('footer.home');
         blade()::make('footer.page-footer');
     }

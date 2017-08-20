@@ -84,4 +84,11 @@ interface Database
      * @param string $primaryKey desired element to delete
      */
     public function delete(string $table, string $primaryKey);
+
+    /**
+     * Get the Database Connection Handler
+     *
+     * @return mixed|bool
+     */
+    public function getConnection();
 }
