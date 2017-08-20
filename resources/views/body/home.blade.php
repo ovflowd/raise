@@ -53,8 +53,8 @@
                     </div>
                 </div>
                 <div class="tabs-panel" id="list-clients">
-                    <b>Search Clients</b>
-                    <span class="see">Search a client by tags or by the name.</span>
+                    <b>Filter Clients</b>
+                    <span class="see">Search a client by tags, name or the date.</span>
                     <input type="text" class="client-search" maxlength="100" placeholder="Search a Client.."/>
                     <br>
                     <ul class="list">
@@ -63,7 +63,7 @@
                                 <div class="callout primary">
                                     <a href="@path/view/client/{{$client->id}}" class="see-button">Watch</a>
                                     <h5 class="client-name">{{$client->document->name}}</h5>
-                                    <small style="margin-top: -5px;display: block"><b>Added
+                                    <small class="client-date" style="margin-top: -5px;display: block"><b>Added
                                             at:</b> {{date('d/m/Y h:i:s', $client->document->clientTime)}}</small>
                                     <small>
                                         [ {{empty($client->document->tags) ? 'No Tags' : 'Tags: ' . implode(', ', $client->document->tags)}} ]
@@ -76,14 +76,18 @@
                     <ul class="pagination"></ul>
                 </div>
                 <div class="tabs-panel" id="list-logs">
+                    <b>Filter Logs</b>
+                    <span class="see">Search a log entry by bucket or date</span>
+                    <input type="text" class="log-search" maxlength="100" placeholder="Search a Log entry.."/>
+                    <br>
                     <ul class="list">
                         @foreach ($logs as $log)
                             <li>
                                 <div class="callout primary">
-                                    <small style="float: right"><b>Added
+                                    <small style="float: right" class="log-date"><b>Added
                                             at:</b> {{date('d/m/Y h:i:s', $client->document->clientTime)}}</small>
                                     <h5>ID: {{$log->id}}
-                                        <small>({{$log->document->table}})</small>
+                                        <small class="log-type">({{$log->document->table}})</small>
                                     </h5>
                                     <small>
                                         <b>Details:</b> {{$log->document->details}}

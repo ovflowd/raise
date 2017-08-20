@@ -5,15 +5,16 @@
 <script>
     jQuery(document).ready(function () {
         new List('list-clients', {
-            valueNames: ['client-name', {name: 'client-tags', attr: 'value'}],
+            valueNames: ['client-name', {name: 'client-tags', attr: 'value'}, 'client-date'],
             listClass: 'list',
             searchClass: 'client-search',
             page: 5,
             pagination: true
         });
         new List('list-logs', {
-            valueNames: [],
+            valueNames: ['log-date', 'log-type'],
             listClass: 'list',
+            searchClass: 'log-search',
             page: 5,
             pagination: true
         });
