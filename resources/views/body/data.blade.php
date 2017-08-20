@@ -37,12 +37,19 @@
             <span class="see">You can see a Data Table with all Data records at <b>RAISe</b>.</span>
             <div class="callout table">
                 <h4><span>List Data</span></h4>
-                <div class="table-content">
+                <div class="table-content" id="list-data">
                     <ul>
+                        <li>
+                            <b>Filter Data</b>
+                            <span class="see">Search Data by date or values.</span>
+                            <input type="text" class="data-search" style="padding:20px" maxlength="100" placeholder="Search a Data entry.."/>
+                        </li>
+                    </ul>
+                    <ul class="list">
                         @foreach ($data as $item)
                             <li>
                                 <div class="callout primary">
-                                    <small style="float:right"><b>Added
+                                    <small style="float:right" class="data-date"><b>Added
                                             at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
                                     <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
                                     <b class="saw">Values</b>
@@ -51,10 +58,12 @@
                                             <b>{{$key}}:</b> {{$value}},
                                         @endforeach
                                     </p>
+                                    <input type="hidden" class="data-values" value="{{implode(', ', $item->document->values)}}"/>
                                 </div>
                             </li>
                         @endforeach
                     </ul>
+                    <ul class="pagination"></ul>
                 </div>
             </div>
         </div>
