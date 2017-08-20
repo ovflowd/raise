@@ -86,7 +86,7 @@ interface Database
     public function delete(string $table, string $primaryKey);
 
     /**
-     * Get the Database Connection Handler
+     * Get the Database Connection Handler.
      *
      * @return mixed|bool
      */

@@ -156,7 +156,7 @@ class Couchbase implements DatabaseHandler
     }
 
     /**
-     * Get the Couchbase Connection Handler
+     * Get the Couchbase Connection Handler.
      *
      * @return CouchbaseCluster
      */
