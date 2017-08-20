@@ -49,23 +49,23 @@ class Manage extends Controller
         response()::type('text/html');
 
         $couchbase = [
-            'client' => database()->getConnection()->openBucket('client')->manager()->info(),
-            'token' => database()->getConnection()->openBucket('token')->manager()->info(),
-            'data' => database()->getConnection()->openBucket('data')->manager()->info(),
-            'service' => database()->getConnection()->openBucket('service')->manager()->info()
+            'client'  => database()->getConnection()->openBucket('client')->manager()->info(),
+            'token'   => database()->getConnection()->openBucket('token')->manager()->info(),
+            'data'    => database()->getConnection()->openBucket('data')->manager()->info(),
+            'service' => database()->getConnection()->openBucket('service')->manager()->info(),
         ];
 
         $settings = [
-            'raise' => setting('raise'),
+            'raise'    => setting('raise'),
             'database' => setting('database'),
-            'security' => setting('security')
+            'security' => setting('security'),
         ];
 
         blade()::make('header.config');
         blade()::make('body.menu');
         blade()::make('body.config', [
             'couchbase' => $couchbase,
-            'settings' => $settings
+            'settings'  => $settings,
         ]);
         blade()::make('footer.page-footer');
         blade()::make('footer.config');
