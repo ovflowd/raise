@@ -89,7 +89,7 @@ class Metrics extends Controller
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
-                'data' => database()->select('data', (new Select())->where('serviceId',
+                'data'  => database()->select('data', (new Select())->where('serviceId',
                     $service->id)->orderBy('clientTime desc')->limit(100)),
             ]);
         }, $services);
@@ -121,9 +121,9 @@ class Metrics extends Controller
         $graph = [
             json()::map(new Chart(), [
                 'label' => $service->name,
-                'data' => database()->select('data', (new Select())->where('serviceId', $service->id)
+                'data'  => database()->select('data', (new Select())->where('serviceId', $service->id)
                     ->orderBy('clientTime desc')),
-            ])
+            ]),
         ];
 
         blade()::make('header.data');
@@ -149,7 +149,7 @@ class Metrics extends Controller
             ->limit(10);
 
         response()::setResponse(200, new \stdClass(), [
-            'clients' => database()->select('client', $clientQuery),
+            'clients'  => database()->select('client', $clientQuery),
             'services' => database()->select('service', $serviceQuery),
         ]);
     }
