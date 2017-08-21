@@ -25,7 +25,7 @@ function createChart(context, data) {
         value.pointBorderColor = 'rgb(0, 0, 0)';
 
         jQuery.each(value.data, function (item, element) {
-            element.x = moment(element.x).format('MMM, DD H:mm:ss');
+            element.x = moment(element.x).format('ddd, DD MMM YYYY HH:mm:ss O');
         });
     });
 
