@@ -2,18 +2,18 @@
     <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 small-12 cell">
             <h2 class="title">{{$service->name}}</h2>
-            <pre class="see">[ {{empty($service->tags) ? 'No Tags' : implode(', ', $service->tags)}} ]</pre>
+            <pre class="see hide-for-small-only">[ {{empty($service->tags) ? 'No Tags' : implode(', ', $service->tags)}} ]</pre>
             <br>
             <div class="grid-x grid-padding-x">
                 <div class="large-6 medium-6 small-12 cell">
                     <b>Details</b>
                     <span class="see">You can see details about this service above.</span>
                     <div class="callout info">
-                        <b>Client Identifier:</b> {{$service->clientId}}<br>
+                        <div class="hide-for-small-only"><b>Client Identifier:</b> {{$service->clientId}}<br></div>
                         <b>Parameters:</b> {{implode(', ', $service->parameters)}}<br>
                         <hr>
                         <b>Registered at:</b> {{date('d/m/Y h:i:s', $service->clientTime)}}<br>
-                        <b>Unique Identifier:</b> {{$service->id}}
+                        <div class="hide-for-small-only"><b>Unique Identifier:</b> {{$service->id}}</div>
                     </div>
                 </div>
                 <div class="large-6 medium-6 small-12 cell">
@@ -51,7 +51,7 @@
                                 <div class="callout primary">
                                     <small style="float:right" class="data-date"><b>Added
                                             at:</b> {{date('d/m/Y h:i:s', $item->document->clientTime)}}</small>
-                                    <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
+                                    <h5 style="color:#7d8492" class="hide-for-small-only">ID: {{$item->id}}</h5>
                                     <b class="saw">Values</b>
                                     <p class="callout code small">
                                         @foreach (array_combine((array)$service->parameters, (array)$item->document->values) as $key => $value)

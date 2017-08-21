@@ -8,7 +8,7 @@
                     <span>raise</span>
                 </li>
                 <li>
-                    <button data-open="explore-modal" class="mega-button">explore</button>
+                    <button data-open="explore-modal" class="mega-button hide-for-small-only">explore</button>
                 </li>
             </ul>
             <div class="top-bar-right show-for-large show-for-medium">
@@ -32,6 +32,7 @@
         </div>
     </div>
 </div>
+<br class="show-for-small-only">
 <div class="reveal" id="explore-modal" data-reveal>
     <b class="saw">Explore at RAISe</b>
     <div style="display: flex;flex: 3">

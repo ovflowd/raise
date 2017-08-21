@@ -8,7 +8,7 @@
                 <li class="tabs-title is-active"><a data-tabs-target="welcome">Welcome</a></li>
                 <li class="tabs-title"><a data-tabs-target="list-clients" href="#list-clients">List Clients</a></li>
                 <li class="tabs-title"><a data-tabs-target="list-logs" href="#list-logs">List Logs</a></li>
-                <li class="tabs-title"><a data-tabs-target="list-statistics" href="#list-statistics">See statistics</a>
+                <li class="tabs-title hide-for-small-only"><a data-tabs-target="list-statistics" href="#list-statistics">See statistics</a>
                 </li>
             </ul>
             <div class="tabs-content" data-tabs-content="items-tabs">

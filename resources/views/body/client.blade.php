@@ -12,7 +12,7 @@
         <div class="large-6 medium-6 small-12 cell">
             @if($client->token->expireTime < time()) <h2 class="title" style="color:rgba(59, 65, 81, 0.52)">
                 <s>{{$client->name}}</s></h2> @else <h2 class="title">{{$client->name}}</h2> @endif
-            <pre class="see">[ {{empty($client->tags) ? 'No Tags' : implode(', ', $client->tags)}} ]</pre>
+            <pre class="see hide-for-small-only">[ {{empty($client->tags) ? 'No Tags' : implode(', ', $client->tags)}} ]</pre>
             <br>
             <b>Details</b>
             <span class="see">You can see details about this client above.</span>
@@ -23,7 +23,7 @@
                 <b>Processor:</b> {{$client->processor}}<br>
                 <hr>
                 <b>Registered at:</b> {{date('d/m/Y h:i:s', $client->clientTime)}}<br>
-                <b>Unique Identifier:</b> {{$client->id}}
+                <div class="hide-for-small-only"><b>Unique Identifier:</b> {{$client->id}}</div>
             </div>
             <b>Data Stream</b>
             <span class="see">You can see a list of last <b>100</b> data records of this client above.</span>

@@ -1,6 +1,6 @@
 <div class="grid-container">
     <div class="grid-x grid-padding-x">
-        <div class="large-6 medium-6 small-8 cell">
+        <div class="large-6 medium-6 small-12 cell">
             <h2 class="title"><b style="color:#7d8492">raise</b> dashboard</h2>
             <pre class="see">[ RAISe Version: 2.0.0 ]</pre>
             <br>
@@ -16,7 +16,7 @@
                 </span>
             </div>
         </div>
-        <div class="large-6 medium-6 small-4 cell">
+        <div class="large-6 medium-6 small-12 cell">
             <div class="callout primary">
                 <h5>Welcome to RAISe Dashboard</h5>
 
