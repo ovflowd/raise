@@ -21,8 +21,8 @@
                             <b class="see">raise internal settings</b>
                             <div class="callout primary">
                                 <small>
-                                    <b>Database Type:</b> {{$settings->raise->databaseType}}<br>
-                                    <b>Base Path:</b> {{empty($settings->raise->path) ? '/' : $settings->raise->path}}<br>
+                                    <b>Database Type:</b> {{$settings['raise']->databaseType}}<br>
+                                    <b>Base Path:</b> {{empty($settings['raise']->path) ? '/' : $settings['raise']->path}}<br>
                                     <b>Working Directory:</b> {{$_SERVER['DOCUMENT_ROOT']}}
                                 </small>
                             </div>
@@ -31,8 +31,8 @@
                             <b class="see">raise database settings</b>
                             <div class="callout primary">
                                 <small>
-                                    <b>Server Address: </b> {{$settings->database->address}}<br>
-                                    <b>Server Username:</b> {{$settings->database->username}}<br>
+                                    <b>Server Address: </b> {{$settings['database']->address}}<br>
+                                    <b>Server Username:</b> {{$settings['database']->username}}<br>
                                     <b>Server Password:</b> ****** <sup>(hidden)</sup>
                                 </small>
                             </div>
@@ -41,9 +41,9 @@
                             <b class="see">raise security settings</b>
                             <div class="callout primary">
                                 <small>
-                                    <b>Token Refresh Time:</b> {{$settings->security->expireTime}}<br>
+                                    <b>Token Refresh Time:</b> {{$settings['security']->expireTime}}<br>
                                     <b>Server Secret Key:</b> ****** <sup>(hidden)</sup><br>
-                                    <b>Debug Mode:</b> {{$settings->security->debug ? 'Enabled' : 'Disabled'}}
+                                    <b>Debug Mode:</b> {{$settings['security']->debug ? 'Enabled' : 'Disabled'}}
                                 </small>
                             </div>
                         </li>
@@ -65,7 +65,7 @@
                 Congratulations! You're using the latest version of <b>RAISe</b>.
                 Using the latest version it's good for the environment.
             </div>
-            @if($settings->security->secretKey == 'default-raise-secret-key')
+            @if($settings['security']->secretKey == 'default-raise-secret-key')
                 <div class="callout alert small">
                     <h5>Danger</h5>
                     Your <b>raise</b> instance it's using the default <b>crypto key</b> built in with

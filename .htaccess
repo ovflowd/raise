@@ -6,7 +6,7 @@
     RewriteEngine On
 
     # Security Modules
-    RewriteRule ^(app/|resources/install/|tests/|vendor/|docs/) - [F,L,NC]
+    RewriteRule ^(app/|resources/|install/|tests/|vendor/|docs/) - [F,L,NC]
 
     # Assets
     RewriteRule ^assets/(.*)$ public/assets/$1 [L]

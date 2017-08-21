@@ -46,7 +46,7 @@ class Blade extends Facade
      *
      * @return BladeEngine
      */
-    public static function blade(): BladeEngine
+    public static function blade()
     {
         if (null == self::$blade) {
             self::$blade = new BladeEngine([resources('views')], resources('cache'));
