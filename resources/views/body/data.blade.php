@@ -54,7 +54,7 @@
                                     <h5 style="color:#7d8492">ID: {{$item->id}}</h5>
                                     <b class="saw">Values</b>
                                     <p class="callout code small">
-                                        @foreach (array_combine($service->parameters, $item->document->values) as $key => $value)
+                                        @foreach (array_combine((array)$service->parameters, (array)$item->document->values) as $key => $value)
                                             <b>{{$key}}:</b> {{$value}},
                                         @endforeach
                                     </p>
