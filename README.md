@@ -103,6 +103,8 @@ You can <b>Contribute</b> on RAISe! <b>RAISe</b> is open source, and everyone ca
 
 Check the [Contributing Guide](CONTRIBUTING.md).
 
+If you're a collaborator check out our **Waffle**. [![](https://img.shields.io/badge/waffle-uiot%2Fraise-blue.svg)](https://waffle.io/uiot/raise)
+
 Documentation
 -------------
 
