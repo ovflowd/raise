@@ -122,7 +122,7 @@
                         <b class="saw">Values</b>
                         <a href="@path/view/service/{{$data->document->serviceId}}" class="see-button">Watch Service</a>
                         <p class="callout code small" style="max-width: 80%">
-                            @foreach (array_combine($service->parameters, $data->document->values) as $key => $value)
+                            @foreach (array_combine((array)$service->parameters, (array)$data->document->values) as $key => $value)
                                 <b>{{$key}}:</b> {{$value}},
                             @endforeach
                         </p>
