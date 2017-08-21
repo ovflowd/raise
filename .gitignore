@@ -1,4 +1,5 @@
 
+
 ### Composer template
 composer.phar
 /vendor/
@@ -55,3 +56,6 @@ docs/class/cache
 
 # Blade Engine Cache
 resources/cache/*.php
+
+# Settings
+app/settings.php
