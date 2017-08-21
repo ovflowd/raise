@@ -58,7 +58,7 @@
                                             <b>{{$key}}:</b> {{$value}},
                                         @endforeach
                                     </p>
-                                    <input type="hidden" class="data-values" value="{{implode(', ', $item->document->values)}}"/>
+                                    <input type="hidden" class="data-values" value="{{implode(', ', (array)$item->document->values)}}"/>
                                 </div>
                             </li>
                         @endforeach
