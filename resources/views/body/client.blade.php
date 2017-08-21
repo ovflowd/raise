@@ -1,4 +1,4 @@
-<div class="grid-container">
+@<div class="grid-container">
     <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 small-12 cell">
             @if($client->token->expireTime < time())
@@ -45,7 +45,7 @@
                         @foreach ($services as $service)
                             <li>
                                 <div class="callout primary">
-                                    <a href="/view/service/{{$service->id}}" class="see-button">Watch</a>
+                                    <a href="@path/view/service/{{$service->id}}" class="see-button">Watch</a>
                                     <h5>{{$service->document->name}}</h5>
                                     <small>[ ID: {{$service->id}} ]</small>
                                 </div>
