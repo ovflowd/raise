@@ -81,7 +81,7 @@ class Metrics extends Controller
 
         $client = database()->selectById('client', $id);
         $client->id = $id;
-        $client->location = explode(':', $client->location);
+        $client->location = (array)explode(':', $client->location);
         $client->token = database()->select('token', (new Select())->where('clientId', $id))[0]->document;
 
         $services = database()->select('service', (new Select())->where('clientId', $id)->orderBy('clientTime desc'));
