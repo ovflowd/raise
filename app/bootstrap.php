@@ -62,6 +62,9 @@ blade()::prepare();
 // Gather Settings from configuration file and store it on SettingsHandler
 \App\Handlers\Settings::store(require_once __DIR__.'/../app/settings.php');
 
+// Set the running Time Zone
+date_default_timezone_set(setting('raise.timeZone'));
+
 /*
 |----------------------------------------------------------------------------
 | Error Logging                                                             |

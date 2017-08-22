@@ -53,4 +53,14 @@ class Raise extends Model
      * @var string
      */
     public $path = '';
+
+    /**
+     * The time zone that PHP will run and store the data.
+     *
+     * @see http://php.net/manual/pt_BR/function.date-default-timezone-set.php
+     * @see https://www.ietf.org/rfc/rfc2822.txt
+     *
+     * @var string
+     */
+    public $timeZone = 'America/Sao_Paulo';
 }

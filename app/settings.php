@@ -24,6 +24,7 @@ return [
     'raise' => [
         'databaseType' => 'couchbase',
         'path'         => '',
+        'timeZone'     => 'America/Sao_Paulo',
     ],
 
     /*

@@ -54,6 +54,8 @@ class Chart extends Model
      * Iterate between an Data Set of Data Documents
      *  and rearrange it to the Chart.JS Data Document pattern.
      *
+     * @see https://www.ietf.org/rfc/rfc2822.txt
+     *
      * @param array $data the Data Set to be Hooked
      */
     public function setData(array $data)
