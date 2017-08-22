@@ -59,12 +59,13 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string              $table desired table to select
-     * @param Select|QueryBuilder $query a Select query to search
+     * @param string $table desired table to select
+     * @param string|Select|QueryBuilder $query a Select query to search
+     * @param bool $override If need override the select statement
      *
-     * @return array|string|object selected content
+     * @return Model|array|object|string selected content
      */
-    public function select(string $table, Select $query);
+    public function select(string $table, $query, bool $override = true);
 
     /**
      * Update an Element of the Database.

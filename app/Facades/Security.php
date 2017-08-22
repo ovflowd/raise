@@ -89,7 +89,7 @@ class Security extends Facade
         }
 
         // Retrieve the TokenModel if it exists on the database
-        $tokenModel = database()->selectById('token', $token->token);
+        $tokenModel = database()->select('token', $token->token);
 
         // Check if the Token exists on the Database and check if is valid
         if ($tokenModel == false || $tokenModel->expireTime > microtime(true)) {
@@ -127,7 +127,7 @@ class Security extends Facade
         }
 
         // Retrieve the TokenModel if it exists on the database
-        $tokenModel = database()->selectById('token', $token->token);
+        $tokenModel = database()->select('token', $token->token);
 
         // Check if the Token exists on the Database and check if is valid
         if ($tokenModel == false || $tokenModel->expireTime < microtime(true)) {

@@ -105,7 +105,7 @@ class Data extends Raise
     {
         global $token;
 
-        $service = database()->selectById('service', $serviceId);
+        $service = database()->select('service', $serviceId);
 
         if ($service === false) {
             throw new JsonMapper_Exception();
@@ -147,7 +147,7 @@ class Data extends Raise
     {
         global $order;
 
-        $service = database()->selectById('service', $this->serviceId);
+        $service = database()->select('service', $this->serviceId);
 
         if (count(array_diff($parameters, $service->parameters)) > 0) {
             throw new JsonMapper_Exception();
@@ -174,7 +174,7 @@ class Data extends Raise
     {
         global $order;
 
-        $service = database()->selectById('service', $this->serviceId);
+        $service = database()->select('service', $this->serviceId);
 
         $this->values = array_map(function ($values) use ($service, $order) {
             return isset($order) ? $this->orderData($values, $service) : (array) $values;

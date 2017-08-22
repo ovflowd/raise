@@ -65,7 +65,7 @@ class Client extends Controller
         $hash = request()::headers('Authorization') ?: request()::headers('authorization');
 
         if (is_array(($update = security()::updateToken($hash)))) {
-            $client = database()->selectById('client', $update['clientId']);
+            $client = database()->select('client', $update['clientId']);
 
             $client->location = request()::body('location');
 

@@ -144,7 +144,7 @@ class Response extends Facade
      */
     public static function message(int $httpCode, string $details = null, bool $returnContent = false)
     {
-        self::setResponse($httpCode, new Message(), (array) database()->selectById('metadata', $httpCode)
+        self::setResponse($httpCode, new Message(), (array) database()->select('metadata', $httpCode)
             + ['details' => $details]);
 
         return $returnContent ? self::$response : null;
@@ -164,7 +164,7 @@ class Response extends Facade
     {
         self::code($httpCode);
 
-        self::$response = json()::map($model, (array) database()->selectById('metadata', $httpCode) + $data);
+        self::$response = json()::map($model, (array) database()->select('metadata', $httpCode) + $data);
     }
 
     /**

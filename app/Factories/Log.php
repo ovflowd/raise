@@ -40,7 +40,7 @@ class Log extends Factory
      */
     public static function get(string $element)
     {
-        return database()->selectById('log', $element);
+        return database()->select('log', $element);
     }
 
     /**

@@ -53,7 +53,7 @@ class Couchbase implements DatabaseHandler
      */
     public function connect($connection)
     {
-        $this->connection = new CouchbaseCluster("{$connection->address},{$connection->user},{$connection->password}");
+        $this->connection = new CouchbaseCluster("{$connection->address},{$connection->username},{$connection->password}");
     }
 
     /**
@@ -67,8 +67,8 @@ class Couchbase implements DatabaseHandler
     /**
      * Insert Documents on Couchbase.
      *
-     * @param string $table      desired bucket
-     * @param Model  $data       data to be inserted
+     * @param string $table desired bucket
+     * @param Model $data data to be inserted
      * @param string $primaryKey defined primary key or generated
      *
      * @return int|string generated or defined primary key or the result of the primary key
@@ -85,43 +85,35 @@ class Couchbase implements DatabaseHandler
     /**
      * Select Data on Couchbase.
      *
-     * @param string              $table desired bucket to select
-     * @param Select|QueryBuilder $query a Select query to search
+     * @param string $table desired table to select
+     * @param string|Select|QueryBuilder $query a Select query to search
+     * @param bool $override If need override the select statement
      *
-     * @return array|string|object selected document or set of documents
+     * @return Model|array|object|string selected content
      */
-    public function select(string $table, Select $query)
+    public function select(string $table, $query, bool $override = true)
     {
-        $query->select('document, META(document).id')->from("{$table} document");
+        $bucket = $this->connection->openBucket($table);
 
-        return $this->connection->openBucket($table)->query(N1qlQuery::fromString($query->toSql()))->rows;
-    }
+        if ($query instanceof Select) {
+            $query->from("{$table} document");
 
-    /**
-     * Select an Object by its Identifier.
-     *
-     * @param string $table      desired bucket
-     * @param string $primaryKey a document identifier
-     *
-     * @return object|bool|Model selected document or set of documents
-     */
-    public function selectById(string $table, string $primaryKey)
-    {
-        try {
-            $result = $this->connection->openBucket($table)->get($primaryKey);
+            if ($override === true) {
+                $query->select('document, META(document).id');
+            }
 
-            return $result->value;
-        } catch (Exception $e) {
-            return false;
+            return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
         }
+
+        return $bucket->get((string)$query)->value;
     }
 
     /**
      * Update an Element of the Couchbase.
      *
-     * @param string       $table      desired bucket to update
-     * @param string       $primaryKey the document identifier
-     * @param Model|object $data       data to update
+     * @param string $table desired bucket to update
+     * @param string $primaryKey the document identifier
+     * @param Model|object $data data to update
      *
      * @return array|string|object the result of the update
      */
@@ -139,7 +131,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Delete an Element of the Database.
      *
-     * @param string $table      desired table to update
+     * @param string $table desired table to update
      * @param string $primaryKey desired element to delete
      *
      * @return bool if removed or not
