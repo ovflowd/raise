@@ -35,9 +35,9 @@ function createChart(context, data) {
             zoom: {
                 enabled: true,
                 drag: true,
-                mode: 'y',
+                mode: 'xy',
                 limits: {
-                    max: 10,
+                    max: 100,
                     min: 0.5
                 }
             },
