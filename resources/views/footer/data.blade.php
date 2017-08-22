@@ -3,7 +3,9 @@
 <script src="@path/assets/js/app/app.min.js"></script>
 <script src="@path/assets/js/vendor/moment.min.js"></script>
 <script src="@path/assets/js/vendor/chart.min.js"></script>
-<script src="@path/assets/js/app/data.scripts.min.js"></script>
+<script src="@path/assets/js/vendor/hammer.min.js"></script>
+<script src="@path/assets/js/vendor/chart.zoom.min.js"></script>
+<script src="@path/assets/js/app/data.scripts.js"></script>
 <script src="@path/assets/js/vendor/list.min.js"></script>
 <script>
     jQuery(document).ready(function () {

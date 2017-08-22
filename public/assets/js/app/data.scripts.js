@@ -33,6 +33,15 @@ function createChart(context, data) {
         type: 'line',
         data: {datasets: dataSet},
         options: {
+            zoom: {
+                enabled: true,
+                drag: true,
+                mode: 'xy'
+            },
+            pan: {
+                enabled: true,
+                mode: 'xy'
+            },
             responsive: true,
             title: {
                 display: false,
@@ -46,7 +55,7 @@ function createChart(context, data) {
             scales: {
                 xAxes: [{
                     type: "time",
-                    display: false,
+                    display: true,
                     scaleLabel: {
                         display: true,
                         labelString: 'Date Registered'
