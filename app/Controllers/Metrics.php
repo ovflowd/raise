@@ -97,8 +97,7 @@ class Metrics extends Controller
         blade()::make('header.client');
         blade()::make('body.menu');
         blade()::make('body.client', ['services' => $services, 'client' => $client]);
-        blade()::make('footer.client',
-            ['latitude' => $client->location[0], 'longitude' => $client->location[1], 'data' => $data]);
+        blade()::make('footer.client', ['location' => $client->location, 'data' => $data]);
         blade()::make('footer.page-footer');
     }
 
