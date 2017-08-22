@@ -7,7 +7,7 @@
 <script src="@path/assets/js/app/client.scripts.min.js"></script>
 <script>
     jQuery(document).ready(function () {
-        createMap({lat: {{$latitude or '0.0'}}, lng: {{$longitude or '0.0'}}});
+        createMap({lat: {{$location[0] or '0.0'}}, lng: {{$location[1] or '0.0'}}});
 
         createChart(document.getElementById('client_data').getContext('2d'), {!! json_encode($data) !!});
     });
