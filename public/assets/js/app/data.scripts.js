@@ -7,7 +7,7 @@ window.chartColors = {
     six: '#7d8492',
     seven: '#3b4151',
     eight: '#8385d0',
-    nine: '#6f71bc'
+    nine: '#6f71bc',
 };
 
 function createChart(context, data) {
@@ -32,18 +32,35 @@ function createChart(context, data) {
         type: 'line',
         data: {datasets: dataSet},
         options: {
+            zoom: {
+                enabled: true,
+                drag: true,
+                mode: 'y',
+                limits: {
+                    max: 10,
+                    min: 0.5
+                }
+            },
             responsive: true,
             title: {
-                display: true,
-                text: "RAISe Data Graph"
+                display: false,
+                text: null
+            },
+            legend: {
+                labels: {
+                    usePointStyle: false
+                }
             },
             scales: {
                 xAxes: [{
                     type: "time",
                     display: true,
                     scaleLabel: {
-                        display: false,
+                        display: true,
                         labelString: 'Date'
+                    },
+                    time: {
+                        tooltipFormat: 'll HH:mm'
                     },
                     ticks: {
                         maxRotation: 0
@@ -61,27 +78,20 @@ function createChart(context, data) {
                     ticks: {
                         beginAtZero: true,
                         callback: function (value) {
-                            if (value % 1 === 0) {
-                                return value;
-                            }
+                            return (value % 1 === 0) ? value : null
                         }
                     },
                     gridLines: {
                         display: false
                     }
                 }]
-            },
-            zoom: {
-                enabled: true,
-                drag: true,
-                mode: 'x',
-                limits: {
-                    max: 10,
-                    min: 0.5
-                }
             }
         }
     };
 
     window.myLine = new Chart(context, config);
+}
+
+function resetZoom() {
+    window.myLine.resetZoom()
 }

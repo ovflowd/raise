@@ -77,5 +77,5 @@ class Chart extends Model
      *
      * @var string|bool
      */
-    public $fill = false;
+    public $fill = 'origin';
 }
