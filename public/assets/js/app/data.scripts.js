@@ -32,30 +32,17 @@ function createChart(context, data) {
         type: 'line',
         data: {datasets: dataSet},
         options: {
-            zoom: {
-                enabled: true,
-                drag: true,
-                mode: 'xy'
-            },
             responsive: true,
             title: {
                 display: true,
                 text: "RAISe Data Graph"
             },
-            legend: {
-                labels: {
-                    usePointStyle: false
-                }
-            },
             scales: {
                 xAxes: [{
                     type: "time",
-                    time: {
-                        tooltipFormat: 'll HH:mm'
-                    },
                     display: true,
                     scaleLabel: {
-                        display: true,
+                        display: false,
                         labelString: 'Date'
                     },
                     ticks: {
@@ -83,6 +70,15 @@ function createChart(context, data) {
                         display: false
                     }
                 }]
+            },
+            zoom: {
+                enabled: true,
+                drag: true,
+                mode: 'x',
+                limits: {
+                    max: 10,
+                    min: 0.5
+                }
             }
         }
     };
