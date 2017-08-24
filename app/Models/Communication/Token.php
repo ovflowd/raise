@@ -42,6 +42,18 @@ class Token extends Raise
     public $clientId;
 
     /**
+     * The Group Unique Name.
+     *
+     * Tokens are related to groups, so this property
+     *  it's used to link Tokens and their Clients with Groups.
+     *
+     * Groups are specified in Tokens because
+     *
+     * @var string
+     */
+    public $groupId;
+
+    /**
      * Token Expire Time.
      *
      * When the Token goes expire,
@@ -50,6 +62,16 @@ class Token extends Raise
      * @var float
      */
     public $expireTime;
+
+    /**
+     * Token Expire Time.
+     *
+     * When the Token goes expire,
+     * in seconds.milliseconds on UNIX Timestamp
+     *
+     * @var float
+     */
+    public $profile;
 
     /**
      * Token constructor.

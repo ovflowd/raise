@@ -18,6 +18,7 @@ namespace App\Facades;
 use App\Models\Communication\Client as ClientDefinition;
 use App\Models\Communication\Model;
 use App\Models\Communication\Token as TokenDefinition;
+use Koine\QueryBuilder\Statements\Select;
 
 /**
  * Class Security.
@@ -42,13 +43,17 @@ class Security extends Facade
      * @see ClientDefinition
      *
      * @param string $clientId the given Client Identifier
+     * @param string $group the group that the Token will belong
      *
      * @return string the JWT Generated Hash
      */
-    public static function insertToken(string $clientId)
+    public static function insertToken(string $clientId, string $group = 'client')
     {
+        // If the specified group doesn't exists, the default group "client" will be assigned.
+        $group = self::group($group) !== false ? $group : 'client';
+
         $token = database()->insert('token', ($tokenModel = json()::map(new TokenDefinition(),
-            ['clientId' => $clientId])), self::generateToken());
+            ['clientId' => $clientId, 'groupId' => $group])), self::generateHash());
 
         logger()::log($token, 'token', "a token was generated on raise. (clientId:: {$clientId}).", $tokenModel);
 
@@ -64,7 +69,7 @@ class Security extends Facade
      *
      * @return string the generated openssl bytes encoded into a string
      */
-    protected static function generateToken()
+    public static function generateHash()
     {
         return bin2hex(openssl_random_pseudo_bytes(20));
     }
@@ -98,7 +103,7 @@ class Security extends Facade
 
         database()->delete('token', $token->token);
 
-        return ['jwtHash' => self::insertToken($tokenModel->clientId), 'clientId' => $tokenModel->clientId];
+        return ['jwtHash' => self::insertToken($tokenModel->clientId, $tokenModel->groupId), 'clientId' => $tokenModel->clientId];
     }
 
     /**
@@ -145,14 +150,54 @@ class Security extends Facade
      * If not, return a false boolean.
      *
      * @param string $modelName the Model to be validated
-     * @param object $body      the Payload to be validated
+     * @param object $body the Payload to be validated
      *
      * @return bool|object|Model the mapped model or false if doesn't exists
      */
     public static function validateBody(string $modelName, $body)
     {
-        $model = ('App\Models\Communication\\'.ucwords($modelName));
+        $model = ('App\Models\Communication\\' . ucwords($modelName));
 
         return class_exists($model) ? json()::compare($model, $body) : false;
+    }
+
+    /**
+     * Get a specific Group/Profile by the Unique Name
+     *
+     * @param string $uniqueName the unique name of the profile/group
+     *
+     * @return mixed|bool return the document and the unique identifier if the group exists if not return false
+     */
+    public static function group(string $uniqueName)
+    {
+        $group = database()->select('profile', (new Select())->where('uniqueName', $uniqueName)->limit(1));
+
+        return current($group);
+    }
+
+    /**
+     * Check if a permission exists or if a group has a specific permission
+     *
+     * @param string $name the name of the permission
+     * @param string|null $group the unique group name
+     *
+     * @return bool return true if permission exists, or if the permission exists and the group has the permission,
+     *  false if the group doesn't exists, or if the permission doesn't exists or if the permission exists and the group exists
+     *  but the group doesn't have this permission.
+     */
+    public static function permission(string $name, string $group = null)
+    {
+        // Try to gather the permission
+        $permission = database()->select('permission', (new Select())->where('name', $name)->limit(1));
+
+        // If the group is not specified checks if the group exists
+        if($group === null) {
+            return current($permission) !== false;
+        }
+
+        // Group specified, try to gather the group
+        $group = current(database()->select('profile', (new Select())->where('uniqueName', $group)->limit(1)));
+
+        return $group !== false && in_array($name, $group->document->permissions);
     }
 }
