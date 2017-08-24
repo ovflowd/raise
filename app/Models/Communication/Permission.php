@@ -31,7 +31,7 @@ use JsonMapper_Exception;
 class Permission extends Model
 {
     /**
-     * The permission name
+     * The permission name.
      *
      * The name describes an understandable API
      * name for the permission.
@@ -45,7 +45,7 @@ class Permission extends Model
     public $name;
 
     /**
-     * The Description of the Permission
+     * The Description of the Permission.
      *
      * eg.: "This permission grants that a Client
      *  can register data to it's context"
@@ -57,7 +57,7 @@ class Permission extends Model
     public $description;
 
     /**
-     * Set the Name of the Permission
+     * Set the Name of the Permission.
      *
      * This method verifies if already exists a Permission
      *  with this name, if not allows to store,

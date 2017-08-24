@@ -30,7 +30,7 @@ use JsonMapper_Exception;
 class Profile extends Model
 {
     /**
-     * The Name of the Group
+     * The Name of the Group.
      *
      * eg. Administrators, Clients, Managers
      *
@@ -42,7 +42,7 @@ class Profile extends Model
 
     /**
      * The unique name of the Group
-     * used to identify in access
+     * used to identify in access.
      *
      * @required
      *
@@ -51,7 +51,7 @@ class Profile extends Model
     public $uniqueName;
 
     /**
-     * The Description of the Group
+     * The Description of the Group.
      *
      * eg. "Clients are the users of RAISe"
      *
@@ -97,7 +97,7 @@ class Profile extends Model
     public $relations = [];
 
     /**
-     * Set the Unique Name of the Group
+     * Set the Unique Name of the Group.
      *
      * This method verifies if already exists a Group
      *  with this Unique Name, if not allows to store,
@@ -126,7 +126,7 @@ class Profile extends Model
     }
 
     /**
-     * Set the Permissions of this Group
+     * Set the Permissions of this Group.
      *
      * this method verifies if the permission names stored
      *  on the $permissions array is fullified with valid permissions
@@ -142,7 +142,7 @@ class Profile extends Model
     public function setPermissions(array $permissions = [])
     {
         array_walk($permissions, function (string $permission) {
-            if(security()::permission($permission) === false) {
+            if (security()::permission($permission) === false) {
                 throw new JsonMapper_Exception('One or more permissions provided doesn\'t exists.');
             }
         });
