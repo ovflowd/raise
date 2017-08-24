@@ -59,9 +59,9 @@ interface Database
     /**
      * Select Data on Database.
      *
-     * @param string $table desired table to select
-     * @param string|Select|QueryBuilder $query a Select query to search
-     * @param bool $override If need override the select statement
+     * @param string                     $table    desired table to select
+     * @param string|Select|QueryBuilder $query    a Select query to search
+     * @param bool                       $override If need override the select statement
      *
      * @return Model|array|object|string selected content
      */
