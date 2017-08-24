@@ -1,8 +1,8 @@
 <?php
 
-require_once('../vendor/autoload.php');
+require_once '../vendor/autoload.php';
 
-/**
+/*
  *  _    _ _____   _______
  * | |  | |_   _| |__   __|
  * | |  | | | |  ___ | |
@@ -466,7 +466,7 @@ if (option('skip-fill') === null) {
 
     echo writeText('[INFO]', '46').'Creating Basic Permissions.'.PHP_EOL;
 
-    /** CLIENT PERMISSIONS **/
+    /* CLIENT PERMISSIONS **/
 
     // Create Client Read Context Permission
     $connection->openBucket('permission')->insert(\App\Facades\Security::generateHash(),
@@ -484,7 +484,7 @@ if (option('skip-fill') === null) {
     $connection->openBucket('permission')->insert(\App\Facades\Security::generateHash(),
         \App\Facades\Json::map(new \App\Models\Communication\Permission(), ['name' => 'client_write_global', 'description' => 'Write on Global context.']));
 
-    /** SERVICE PERMISSIONS **/
+    /* SERVICE PERMISSIONS **/
 
     // Create Service Read Context Permission
     $connection->openBucket('permission')->insert(\App\Facades\Security::generateHash(),
@@ -502,7 +502,7 @@ if (option('skip-fill') === null) {
     $connection->openBucket('permission')->insert(\App\Facades\Security::generateHash(),
         \App\Facades\Json::map(new \App\Models\Communication\Permission(), ['name' => 'service_write_global', 'description' => 'Write on Global context.']));
 
-    /** DATA PERMISSIONS **/
+    /* DATA PERMISSIONS **/
 
     // Create Data Read Context Permission
     $connection->openBucket('permission')->insert(\App\Facades\Security::generateHash(),
@@ -525,14 +525,12 @@ if (option('skip-fill') === null) {
     // Create Clients Group
     $connection->openBucket('profile')->insert(\App\Facades\Security::generateHash(),
         \App\Facades\Json::map(new \App\Models\Communication\Profile(),
-            ['name' => 'Client', 'uniqueName' => 'client', 'description' => 'The clients Group', 'permissions' =>
-                ['client_read_context', 'client_write_context', 'service_read_context', 'service_write_context', 'data_read_context', 'data_write_context']]));
+            ['name' => 'Client', 'uniqueName' => 'client', 'description' => 'The clients Group', 'permissions' => ['client_read_context', 'client_write_context', 'service_read_context', 'service_write_context', 'data_read_context', 'data_write_context']]));
 
     // Create Administrator Group
     $connection->openBucket('profile')->insert(\App\Facades\Security::generateHash(),
         \App\Facades\Json::map(new \App\Models\Communication\Profile(),
-            ['name' => 'Administrator', 'uniqueName' => 'administrator', 'description' => 'The Administrator Group', 'permissions' =>
-                ['client_read_global', 'client_write_global', 'service_read_global', 'service_write_global', 'data_read_global', 'data_write_global']]));
+            ['name' => 'Administrator', 'uniqueName' => 'administrator', 'description' => 'The Administrator Group', 'permissions' => ['client_read_global', 'client_write_global', 'service_read_global', 'service_write_global', 'data_read_global', 'data_write_global']]));
 
     echo writeText('[INFO]', '46').'Creating Administrator Token.'.PHP_EOL;
 
