@@ -23,8 +23,8 @@ return [
 
     'raise' => [
         'databaseType' => 'couchbase',
-        'path'         => '',
-        'timeZone'     => 'America/Sao_Paulo',
+        'path' => '',
+        'timeZone' => 'America/Sao_Paulo',
     ],
 
     /*
@@ -34,7 +34,7 @@ return [
     */
 
     'database' => [
-        'address'  => '{{ADDRESS}}',
+        'address' => '{{ADDRESS}}',
         'username' => '{{USER}}',
         'password' => '{{PASSWORD}}',
     ],
@@ -47,8 +47,8 @@ return [
 
     'security' => [
         'expireTime' => '2hours',
-        'secretKey'  => 'default-raise-secret-key',
-        'debug'      => false,
+        'secretKey' => 'default-raise-secret-key',
+        'debug' => false,
     ],
 
     /*
