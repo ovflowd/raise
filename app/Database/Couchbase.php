@@ -53,7 +53,7 @@ class Couchbase implements DatabaseHandler
      */
     public function connect($connection)
     {
-        $this->connection = new CouchbaseCluster("{$connection->address},{$connection->username},{$connection->password}");
+        $this->connection = new CouchbaseCluster("{$connection->address}");
     }
 
     /**
