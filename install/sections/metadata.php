@@ -16,9 +16,9 @@
 /** @var $connection CouchbaseCluster */
 global $connection;
 
-echo writeText('[INFO]', '46') . 'Filling Metadata Bucket with Codes.' . PHP_EOL;
+echo writeText('[INFO]', '46').'Filling Metadata Bucket with Codes.'.PHP_EOL;
 
-$metadataJson = json_decode(file_get_contents(__DIR__ . '/../metadata.json'));
+$metadataJson = json_decode(file_get_contents(__DIR__.'/../metadata.json'));
 
 $progress = 1;
 
