@@ -48,7 +48,7 @@ class Couchbase implements DatabaseHandler
     private $connection = null;
 
     /**
-     * The Couchbase Authenticator
+     * The Couchbase Authenticator.
      *
      * @var ClassicAuthenticator
      */
@@ -80,8 +80,8 @@ class Couchbase implements DatabaseHandler
     /**
      * Insert Documents on Couchbase.
      *
-     * @param string $table desired bucket
-     * @param Model $data data to be inserted
+     * @param string $table      desired bucket
+     * @param Model  $data       data to be inserted
      * @param string $primaryKey defined primary key or generated
      *
      * @return int|string generated or defined primary key or the result of the primary key
@@ -98,9 +98,9 @@ class Couchbase implements DatabaseHandler
     /**
      * Select Data on Couchbase.
      *
-     * @param string $table desired table to select
-     * @param string|Select|QueryBuilder $query a Select query to search
-     * @param bool $override If need override the select statement
+     * @param string                     $table    desired table to select
+     * @param string|Select|QueryBuilder $query    a Select query to search
+     * @param bool                       $override If need override the select statement
      *
      * @return Model|array|object|string selected content
      */
@@ -118,15 +118,15 @@ class Couchbase implements DatabaseHandler
             return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
         }
 
-        return $bucket->get((string)$query)->value;
+        return $bucket->get((string) $query)->value;
     }
 
     /**
      * Update an Element of the Couchbase.
      *
-     * @param string $table desired bucket to update
-     * @param string $primaryKey the document identifier
-     * @param Model|object $data data to update
+     * @param string       $table      desired bucket to update
+     * @param string       $primaryKey the document identifier
+     * @param Model|object $data       data to update
      *
      * @return array|string|object the result of the update
      */
@@ -144,7 +144,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Delete an Element of the Database.
      *
-     * @param string $table desired table to update
+     * @param string $table      desired table to update
      * @param string $primaryKey desired element to delete
      *
      * @return bool if removed or not
@@ -171,7 +171,7 @@ class Couchbase implements DatabaseHandler
     }
 
     /**
-     * Get the Couchbase Authenticator Handler
+     * Get the Couchbase Authenticator Handler.
      *
      * @return ClassicAuthenticator
      */
