@@ -36,6 +36,11 @@ try {
     $clientBucket = $connection->openBucket('client');
 
     $clientBucket->manager()->createN1qlPrimaryIndex('', false, false);
+    $clientBucket->manager()->createN1qlIndex('tags', ['tags']);
+    $clientBucket->manager()->createN1qlIndex('clientTime', ['clientTime']);
+    $clientBucket->manager()->createN1qlIndex('name', ['name']);
+    $clientBucket->manager()->createN1qlIndex('processor', ['processor']);
+    $clientBucket->manager()->createN1qlIndex('channel', ['channel']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
 }
@@ -46,6 +51,10 @@ try {
     $serviceBucket = $connection->openBucket('service');
 
     $serviceBucket->manager()->createN1qlPrimaryIndex('', false, false);
+    $clientBucket->manager()->createN1qlIndex('tags', ['tags']);
+    $clientBucket->manager()->createN1qlIndex('clientTime', ['clientTime']);
+    $clientBucket->manager()->createN1qlIndex('name', ['name']);
+    $clientBucket->manager()->createN1qlIndex('clientId', ['clientId']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
 }
@@ -56,6 +65,7 @@ try {
     $tokenBucket = $connection->openBucket('token');
 
     $tokenBucket->manager()->createN1qlPrimaryIndex('', false, false);
+    $clientBucket->manager()->createN1qlIndex('clientId', ['clientId']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
 }
@@ -66,6 +76,13 @@ try {
     $dataBucket = $connection->openBucket('data');
 
     $dataBucket->manager()->createN1qlPrimaryIndex('', false, false);
+    $clientBucket->manager()->createN1qlIndex('clientId',['clientId']);
+    $clientBucket->manager()->createN1qlIndex('serviceId',['serviceId']);
+    $clientBucket->manager()->createN1qlIndex('parameters',['parameters']);
+    $clientBucket->manager()->createN1qlIndex('values',['values']);
+    $clientBucket->manager()->createN1qlIndex('tags', ['tags']);
+    $clientBucket->manager()->createN1qlIndex('clientTime', ['clientTime']);
+
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
 }
@@ -76,6 +93,7 @@ try {
     $responseBucket = $connection->openBucket('log');
 
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
+    $clientBucket->manager()->createN1qlIndex('clientTime', ['clientTime']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
