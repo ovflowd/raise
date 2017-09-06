@@ -14,7 +14,7 @@
  */
 
 /**
- * @var $connection CouchbaseCluster
+ * @var CouchbaseCluster
  */
 
 // Section Administrator Token
