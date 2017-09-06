@@ -13,9 +13,10 @@
  * @copyright University of Brasília
  */
 
-/** @var $credentials array */
-/** @var $memoryQuota string */
-global $credentials, $memoryQuota;
+/**
+ * @var $credentials array
+ * @var $memoryQuota string
+ */
 
 echo writeText('INFO', '46') . 'Getting Information from the Cluster via API....' . PHP_EOL;
 

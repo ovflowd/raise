@@ -22,6 +22,7 @@ ini_set('register_argc_argv', true);
 // We don't want error reporting during execution of the script
 ini_set('display_errors', false);
 
+// Disable Error Reporting
 error_reporting(0);
 
 // Include Composer Autoloader
@@ -34,7 +35,7 @@ require_once __DIR__ . '/../app/accessory.php';
 require_once __DIR__ . '/functions.php';
 
 // Gather Application Settings
-\App\Handlers\Settings::store(require_once __DIR__ . '/../app/settings.php');
+\App\Handlers\Settings::store(require_once __DIR__ . '/configuration/settings.php');
 
 // Available Options
 $options = getopt(null, [
@@ -51,6 +52,7 @@ $options = getopt(null, [
 ]);
 
 // Create all future defined variables
+$connection = null;
 $credentials = [];
 $serverInfo = [];
 $memoryQuota = '';
@@ -169,7 +171,7 @@ if (option('skip-configuration') === null) {
 
     echo 'Creating Configuration File...' . PHP_EOL;
 
-    $configurationType = option('config-schema') !== null ? option('config-schema') : 'new';
+    $configurationType = option('config-schema') !== null ? option('config-schema') : 'settings';
 
     $configurationFile = option('config-file') !== null ? option('config-file') : (__DIR__ . '/../app/settings.php');
 

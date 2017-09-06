@@ -13,8 +13,9 @@
  * @copyright University of Brasília
  */
 
-/** @var $connection CouchbaseCluster */
-global $connection;
+/**
+ * @var $connection CouchbaseCluster
+ */
 
 echo writeText('[INFO]', '46') . 'Filling Metadata Bucket with Codes.' . PHP_EOL;
 

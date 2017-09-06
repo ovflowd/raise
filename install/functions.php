@@ -36,7 +36,7 @@ function option(string $key)
  */
 function createConfigurationFile(string $fileName, string $configType, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__ . "/configuration/{$configType}.inc.php");
+    $configurationFile = file_get_contents(__DIR__ . "/configuration/{$configType}.php");
 
     $configurationFile = replaceArray([
         '{{ADDRESS}}' => $credentials['ip'],

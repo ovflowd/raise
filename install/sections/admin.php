@@ -13,8 +13,9 @@
  * @copyright University of Brasília
  */
 
-/** @var $connection CouchbaseCluster */
-global $connection;
+/**
+ * @var $connection CouchbaseCluster
+ */
 
 // Section Administrator Token
 echo writeText('[INFO]', '46') . 'Creating Administrator Token.' . PHP_EOL;

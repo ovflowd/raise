@@ -13,8 +13,9 @@
  * @copyright University of Brasília
  */
 
-/** @var $permission \Couchbase\Bucket */
-global $permission;
+/**
+ * @var $permission \Couchbase\Bucket
+ */
 
 // Create Service Read Context Permission
 $permission->insert(\App\Facades\Security::generateHash(),

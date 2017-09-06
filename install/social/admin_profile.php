@@ -13,8 +13,9 @@
  * @copyright University of Brasília
  */
 
-/** @var $profiles \Couchbase\Bucket */
-global $profiles;
+/**
+ * @var $profiles \Couchbase\Bucket
+ */
 
 // Create Administrator Group
 $profiles->insert(\App\Facades\Security::generateHash(),

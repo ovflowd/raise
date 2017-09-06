@@ -13,11 +13,12 @@
  * @copyright University of Brasília
  */
 
-/** @var $connection CouchbaseCluster */
-/** @var $memoryQuota string */
-/** @var $buckets array */
-/** @var $credentials array */
-global $connection, $memoryQuota, $buckets, $credentials;
+/**
+ * @var $connection CouchbaseCluster
+ * @var $memoryQuota string
+ * @var $buckets array
+ * @var $credentials array
+ */
 
 $buckets = [
     'metadata' => floor((($memoryQuota / 100) * 10)),
