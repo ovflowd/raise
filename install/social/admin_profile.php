@@ -21,8 +21,8 @@
 $profiles->insert(\App\Facades\Security::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Profile(),
         [
-            'name' => 'Administrator',
-            'uniqueName' => 'administrator',
+            'name'        => 'Administrator',
+            'uniqueName'  => 'administrator',
             'description' => 'The Administrator Group',
             'permissions' => [
                 'client_read_global',
@@ -30,6 +30,6 @@ $profiles->insert(\App\Facades\Security::generateHash(),
                 'service_read_global',
                 'service_write_global',
                 'data_read_global',
-                'data_write_global'
-            ]
+                'data_write_global',
+            ],
         ]));

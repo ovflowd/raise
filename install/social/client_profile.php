@@ -21,8 +21,8 @@
 $profiles->insert(\App\Facades\Security::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Profile(),
         [
-            'name' => 'Client',
-            'uniqueName' => 'client',
+            'name'        => 'Client',
+            'uniqueName'  => 'client',
             'description' => 'The clients Group',
             'permissions' => [
                 'client_read_context',
@@ -30,6 +30,6 @@ $profiles->insert(\App\Facades\Security::generateHash(),
                 'service_read_context',
                 'service_write_context',
                 'data_read_context',
-                'data_write_context'
-            ]
+                'data_write_context',
+            ],
         ]));
