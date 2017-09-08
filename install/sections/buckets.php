@@ -14,12 +14,11 @@
  */
 
 /**
- * @var $connection CouchbaseCluster
- * @var $memoryQuota string
- * @var $buckets array
- * @var $credentials array
+ * @var CouchbaseCluster
+ * @var $memoryQuota     string
+ * @var $buckets         array
+ * @var $credentials     array
  */
-
 $buckets = [
     'metadata'   => floor((($memoryQuota / 100) * 10)),
     'client'     => floor((($memoryQuota / 100) * 10)),

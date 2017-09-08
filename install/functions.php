@@ -32,15 +32,15 @@ function option(string $key)
  *
  * @param string $fileName
  * @param string $configType
- * @param array $credentials
+ * @param array  $credentials
  */
 function createConfigurationFile(string $fileName, string $configType, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__ . "/configuration/{$configType}.php");
+    $configurationFile = file_get_contents(__DIR__."/configuration/{$configType}.php");
 
     $configurationFile = replaceArray([
-        '{{ADDRESS}}' => $credentials['ip'],
-        '{{USER}}' => $credentials['user'],
+        '{{ADDRESS}}'  => $credentials['ip'],
+        '{{USER}}'     => $credentials['user'],
         '{{PASSWORD}}' => $credentials['pass'],
     ], $configurationFile);
 
@@ -50,7 +50,7 @@ function createConfigurationFile(string $fileName, string $configType, array $cr
 /**
  * Replace all items from an Array unto a String.
  *
- * @param array $elements
+ * @param array  $elements
  * @param string $needle
  *
  * @return mixed|string
@@ -75,12 +75,12 @@ function replaceArray(array $elements, string $needle)
 function createBucket(array $details, array $credentials)
 {
     $bucket = [
-        'authType' => 'sasl',
-        'bucketType' => 'membase',
-        'flushEnabled' => 0,
-        'name' => $details['name'],
-        'ramQuotaMB' => $details['memory'],
-        'replicaIndex' => 0,
+        'authType'      => 'sasl',
+        'bucketType'    => 'membase',
+        'flushEnabled'  => 0,
+        'name'          => $details['name'],
+        'ramQuotaMB'    => $details['memory'],
+        'replicaIndex'  => 0,
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
@@ -105,7 +105,7 @@ function createBucket(array $details, array $credentials)
 /**
  * Insert a Metadata Object on Metadata Table.
  *
- * @param stdClass $details
+ * @param stdClass         $details
  * @param CouchbaseCluster $connection
  */
 function insertMetadata(stdClass $details, CouchbaseCluster $connection)
@@ -113,8 +113,8 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
     try {
         $metadataBucket = $connection->openBucket('metadata');
 
-        $metadataBucket->insert((string)$details->code, [
-            'code' => $details->code,
+        $metadataBucket->insert((string) $details->code, [
+            'code'    => $details->code,
             'message' => $details->message,
         ]);
     } catch (Exception $e) {
@@ -128,8 +128,8 @@ function insertMetadata(stdClass $details, CouchbaseCluster $connection)
  * Communicate with the Couchbase CLI.
  *
  * @param string $url
- * @param array $credentials
- * @param mixed $post
+ * @param array  $credentials
+ * @param mixed  $post
  *
  * @return array|object
  */
@@ -163,13 +163,13 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
  *
  * @param string $text
  * @param string $color
- * @param bool $endOfLine
+ * @param bool   $endOfLine
  *
  * @return string
  */
 function writeText(string $text, string $color = '0', bool $endOfLine = false)
 {
-    return "\033[{$color}m{$text}\033[0m " . ($endOfLine ? PHP_EOL : '');
+    return "\033[{$color}m{$text}\033[0m ".($endOfLine ? PHP_EOL : '');
 }
 
 /**
@@ -224,10 +224,10 @@ function setCredentials()
 /**
  * CLI Progress Bar.
  *
- * @param int $done
- * @param int $total
+ * @param int    $done
+ * @param int    $total
  * @param string $info
- * @param int $width
+ * @param int    $width
  *
  * @return string
  */
