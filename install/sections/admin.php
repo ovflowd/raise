@@ -14,7 +14,7 @@
  */
 
 // Section Administrator Token
-echo writeText('[INFO]', '46').'Creating Administrator Token.'.PHP_EOL;
+echo writeText('[INFO]', '96;1').'Creating Administrator Token.'.PHP_EOL;
 
 // Create Internal Administrator Token
 $token = bin2hex(openssl_random_pseudo_bytes(20));
@@ -47,4 +47,4 @@ echo "Your administration Hash is: {$adminHash}".PHP_EOL;
 
 echo writeText('Important Note. Don\'t lose your Administration Token.'.PHP_EOL.
     'It is important. The hash can be generated again if you loose the token.',
-    '43', true);
+    '93;1', true);

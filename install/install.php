@@ -118,7 +118,7 @@ if (option('skip-create') === null) {
 if (option('skip-fill') === null) {
     echo PHP_EOL;
 
-    echo writeText('INFO', '46').'Waiting Buckets to be Ready....'.PHP_EOL;
+    echo writeText('[INFO]', '96;1').'Waiting Buckets to be Ready....'.PHP_EOL;
 
     $progress = 0;
 
@@ -144,9 +144,9 @@ if (option('skip-fill') === null) {
 if (option('skip-permissions') === null) {
     echo PHP_EOL;
 
-    echo writeText('[INFO]', '46').'Creating Basic Permissions.'.PHP_EOL;
+    echo writeText('[INFO]', '96;1').'Creating Basic Permissions.'.PHP_EOL;
 
-    $permission = database()->getConnection()->openBucket('permissions');
+    $permission = database()->getConnection()->openBucket('permission');
 
     /* CLIENT PERMISSIONS **/
     require_once __DIR__.'/social/client_permissions.php';
@@ -162,7 +162,7 @@ if (option('skip-permissions') === null) {
 if (option('skip-profiles') === null) {
     echo PHP_EOL;
 
-    echo writeText('[INFO]', '46').'Creating Basic Groups.'.PHP_EOL;
+    echo writeText('[INFO]', '96;1').'Creating Basic Groups.'.PHP_EOL;
 
     $profiles = database()->getConnection()->openBucket('profile');
 
@@ -177,4 +177,4 @@ if (option('skip-profiles') === null) {
 require_once __DIR__.'/sections/admin.php';
 
 
-echo "\033[42mSetup Finished.\033[0m".PHP_EOL;
+echo "\033[92;1mSetup Finished.\033[0m".PHP_EOL;

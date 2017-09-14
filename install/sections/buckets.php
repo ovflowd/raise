@@ -30,7 +30,7 @@ $buckets = [
     'relation'   => floor((($memoryQuota / 100) * 10)),
 ];
 
-echo writeText('INFO', '46').'Starting Creation Process...'.PHP_EOL;
+echo writeText('[INFO]', '96;1').'Starting Creation Process...'.PHP_EOL;
 
 echo progressBar(0, 9);
 

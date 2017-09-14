@@ -13,7 +13,7 @@
  * @copyright University of Brasília
  */
 
-echo writeText('INFO', '46').'Starting to Fill Buckets...'.PHP_EOL;
+echo writeText('[INFO]', '96;1').'Starting to Fill Buckets...'.PHP_EOL;
 
 echo progressBar(0, 9);
 
