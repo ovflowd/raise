@@ -113,7 +113,7 @@ class Profile extends Model
     public function setUniqueName(string $name)
     {
         // Check if Group Exists
-        if (security()::permission($name) !== false) {
+        if (security()::group($name) !== false) {
             throw new JsonMapper_Exception('Already exists a group with this unique name.');
         }
 

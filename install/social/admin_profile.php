@@ -19,7 +19,7 @@
 
 // Create Administrator Group
 $profiles->insert(security()::generateHash(),
-    \App\Facades\Json::map(new \App\Models\Communication\Profile(),
+    json()::map(new \App\Models\Communication\Profile(),
         [
             'name' => 'Administrator',
             'uniqueName' => 'administrator',

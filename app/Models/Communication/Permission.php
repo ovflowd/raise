@@ -73,8 +73,8 @@ class Permission extends Model
     public function setName(string $name)
     {
         // Check if Group Exists
-        if (security()::group($name) !== false) {
-            throw new JsonMapper_Exception('Already exists a group with this unique name.');
+        if (security()::permission($name) !== false) {
+            throw new JsonMapper_Exception('Already exists a permission with this unique name.');
         }
 
         // Check if unique name is alphabetic only

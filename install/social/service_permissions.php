@@ -19,20 +19,20 @@
 
 // Create Service Read Context Permission
 $permission->insert(security()::generateHash(),
-    \App\Facades\Json::map(new \App\Models\Communication\Permission(),
+    json()::map(new \App\Models\Communication\Permission(),
         ['name' => 'service_read_context', 'description' => 'Read own Context.']));
 
 // Create Service Write Context Permission
 $permission->insert(security()::generateHash(),
-    \App\Facades\Json::map(new \App\Models\Communication\Permission(),
+    json()::map(new \App\Models\Communication\Permission(),
         ['name' => 'service_write_context', 'description' => 'Write on own Context.']));
 
 // Create Service Read Global Permission
 $permission->insert(security()::generateHash(),
-    \App\Facades\Json::map(new \App\Models\Communication\Permission(),
+    json()::map(new \App\Models\Communication\Permission(),
         ['name' => 'service_read_global', 'description' => 'Read on Global context.']));
 
 // Create Service Write Global Permission
 $permission->insert(security()::generateHash(),
-    \App\Facades\Json::map(new \App\Models\Communication\Permission(),
+    json()::map(new \App\Models\Communication\Permission(),
         ['name' => 'service_write_global', 'description' => 'Write on Global context.']));
