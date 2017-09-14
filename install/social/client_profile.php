@@ -14,11 +14,11 @@
  */
 
 /**
- * @var \Couchbase\Bucket
+ * @var $profiles \Couchbase\Bucket
  */
 
 // Create Clients Group
-$profiles->insert(\App\Facades\Security::generateHash(),
+$profiles->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Profile(),
         [
             'name'        => 'Client',

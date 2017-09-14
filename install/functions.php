@@ -31,16 +31,15 @@ function option(string $key)
  * Create a Configuration File.
  *
  * @param string $fileName
- * @param string $configType
  * @param array  $credentials
  */
-function createConfigurationFile(string $fileName, string $configType, array $credentials)
+function createConfigurationFile(string $fileName, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__."/configuration/{$configType}.php");
+    $configurationFile = file_get_contents(__DIR__."/configuration/settings.php");
 
     $configurationFile = replaceArray([
         '{{ADDRESS}}'  => $credentials['ip'],
-        '{{USER}}'     => $credentials['user'],
+        '{{USERNAME}}'     => $credentials['user'],
         '{{PASSWORD}}' => $credentials['pass'],
     ], $configurationFile);
 
@@ -106,12 +105,11 @@ function createBucket(array $details, array $credentials)
  * Insert a Metadata Object on Metadata Table.
  *
  * @param stdClass         $details
- * @param CouchbaseCluster $connection
  */
-function insertMetadata(stdClass $details, CouchbaseCluster $connection)
+function insertMetadata(stdClass $details)
 {
     try {
-        $metadataBucket = $connection->openBucket('metadata');
+        $metadataBucket = database()->getConnection()->openBucket('metadata');
 
         $metadataBucket->insert((string) $details->code, [
             'code'    => $details->code,

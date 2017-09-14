@@ -13,9 +13,6 @@
  * @copyright University of Brasília
  */
 
-/**
- * @var CouchbaseCluster
- */
 echo writeText('[INFO]', '46').'Filling Metadata Bucket with Codes.'.PHP_EOL;
 
 $metadataJson = json_decode(file_get_contents(__DIR__.'/../metadata.json'));
@@ -25,7 +22,7 @@ $progress = 1;
 echo progressBar(0, 60);
 
 foreach ($metadataJson as $metadata) {
-    insertMetadata($metadata, $connection);
+    insertMetadata($metadata);
 
     echo progressBar($progress++, 60);
 }

@@ -14,25 +14,25 @@
  */
 
 /**
- * @var \Couchbase\Bucket
+ * @var $permission \Couchbase\Bucket
  */
 
 // Create Client Read Context Permission
-$permission->insert(\App\Facades\Security::generateHash(),
+$permission->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Permission(),
         ['name' => 'client_read_context', 'description' => 'Read own Context.']));
 
 // Create Client Write Context Permission
-$permission->insert(\App\Facades\Security::generateHash(),
+$permission->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Permission(),
         ['name' => 'client_write_context', 'description' => 'Write on own Context.']));
 
 // Create Client Read Global Permission
-$permission->insert(\App\Facades\Security::generateHash(),
+$permission->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Permission(),
         ['name' => 'client_read_global', 'description' => 'Read on Global context.']));
 
 // Create Client Write Global Permission
-$permission->insert(\App\Facades\Security::generateHash(),
+$permission->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Permission(),
         ['name' => 'client_write_global', 'description' => 'Write on Global context.']));

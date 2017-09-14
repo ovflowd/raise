@@ -14,15 +14,15 @@
  */
 
 /**
- * @var \Couchbase\Bucket
+ * @var $profiles \Couchbase\Bucket
  */
 
 // Create Administrator Group
-$profiles->insert(\App\Facades\Security::generateHash(),
+$profiles->insert(security()::generateHash(),
     \App\Facades\Json::map(new \App\Models\Communication\Profile(),
         [
-            'name'        => 'Administrator',
-            'uniqueName'  => 'administrator',
+            'name' => 'Administrator',
+            'uniqueName' => 'administrator',
             'description' => 'The Administrator Group',
             'permissions' => [
                 'client_read_global',

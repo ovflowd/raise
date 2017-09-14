@@ -34,9 +34,6 @@ require_once __DIR__.'/../app/accessory.php';
 // Include Installer Functions
 require_once __DIR__.'/functions.php';
 
-// Gather Application Settings
-\App\Handlers\Settings::store(require_once __DIR__.'/configuration/settings.php');
-
 // Available Options
 $options = getopt(null, [
     'user::',
@@ -53,6 +50,7 @@ $options = getopt(null, [
 
 // Create all future defined variables
 $connection = null;
+$authenticator = null;
 $credentials = [];
 $serverInfo = [];
 $memoryQuota = '';
@@ -88,6 +86,19 @@ try {
     exit(1);
 } finally {
     echo writeText('Connection to Couchbase Server was successfully established .', '0;32', true);
+
+    echo PHP_EOL;
+
+    echo 'Creating Configuration File...'.PHP_EOL;
+
+    // Replace Settings File Content
+    createConfigurationFile(__DIR__.'/../app/settings.php', $credentials);
+
+    // Store Settings on Settings Handler
+    \App\Handlers\Settings::store(require_once __DIR__.'/../app/settings.php');
+
+    // Clear Connection variable and Authenticator
+    $connection = $authenticator = null;
 }
 
 // Section to create the Couchbase Buckets
@@ -135,7 +146,7 @@ if (option('skip-permissions') === null) {
 
     echo writeText('[INFO]', '46').'Creating Basic Permissions.'.PHP_EOL;
 
-    $permission = $connection->openBucket('permission');
+    $permission = database()->getConnection()->openBucket('permissions');
 
     /* CLIENT PERMISSIONS **/
     require_once __DIR__.'/social/client_permissions.php';
@@ -153,7 +164,7 @@ if (option('skip-profiles') === null) {
 
     echo writeText('[INFO]', '46').'Creating Basic Groups.'.PHP_EOL;
 
-    $profiles = $connection->openBucket('profile');
+    $profiles = database()->getConnection()->openBucket('profile');
 
     /* CLIENT PROFILE **/
     require_once __DIR__.'/social/client_profile.php';
@@ -165,17 +176,5 @@ if (option('skip-profiles') === null) {
 // Create Administrator Account
 require_once __DIR__.'/sections/admin.php';
 
-// Configuration File only for Old RAISe
-if (option('skip-configuration') === null) {
-    echo PHP_EOL;
-
-    echo 'Creating Configuration File...'.PHP_EOL;
-
-    $configurationType = option('config-schema') !== null ? option('config-schema') : 'settings';
-
-    $configurationFile = option('config-file') !== null ? option('config-file') : (__DIR__.'/../app/settings.php');
-
-    createConfigurationFile($configurationFile, $configurationType, $credentials);
-}
 
 echo "\033[42mSetup Finished.\033[0m".PHP_EOL;

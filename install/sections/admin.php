@@ -13,10 +13,6 @@
  * @copyright University of Brasília
  */
 
-/**
- * @var CouchbaseCluster
- */
-
 // Section Administrator Token
 echo writeText('[INFO]', '46').'Creating Administrator Token.'.PHP_EOL;
 
@@ -24,7 +20,7 @@ echo writeText('[INFO]', '46').'Creating Administrator Token.'.PHP_EOL;
 $token = bin2hex(openssl_random_pseudo_bytes(20));
 
 // Create Administrator Client
-$connection->openBucket('client')->insert($clientId = \App\Facades\Security::generateHash(),
+database()->getConnection()->openBucket('client')->insert($clientId = security()::generateHash(),
     json()::map(new \App\Models\Communication\Client(), [
         'name'      => 'RAISe Engine',
         'chipset'   => 'No Chipset',
@@ -36,7 +32,7 @@ $connection->openBucket('client')->insert($clientId = \App\Facades\Security::gen
     ]));
 
 // Create Administrator Profile
-$connection->openBucket('token')->insert($token,
+database()->getConnection()->openBucket('token')->insert($token,
     json()::map(new \App\Models\Communication\Token(), [
         'clientId'   => $clientId,
         'expireTime' => '2145916800',

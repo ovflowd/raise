@@ -14,7 +14,6 @@
  */
 
 /**
- * @var CouchbaseCluster
  * @var $memoryQuota     string
  * @var $buckets         array
  * @var $credentials     array

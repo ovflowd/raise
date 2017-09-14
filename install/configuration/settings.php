@@ -35,7 +35,7 @@ return [
 
     'database' => [
         'address'  => '{{ADDRESS}}',
-        'username' => '{{USER}}',
+        'username' => '{{USERNAME}}',
         'password' => '{{PASSWORD}}',
     ],
 
