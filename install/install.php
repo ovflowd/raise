@@ -160,7 +160,6 @@ if (option('skip-permissions') === null) {
 
 // Section to create the RAISe Profiles
 if (option('skip-profiles') === null) {
-    echo PHP_EOL;
 
     echo writeText('[INFO]', '96;1').'Creating Basic Groups.'.PHP_EOL;
 
