@@ -118,7 +118,7 @@ class Profile extends Model
         }
 
         // Check if unique name is alphabetic only
-        if (preg_match('/[^a-z_\-]/i', $name) !== false) {
+        if (preg_match('/^[a-z_]*$/', $name) === 0) {
             throw new JsonMapper_Exception('Only alphabet characters and hyphens are allowed');
         }
 
