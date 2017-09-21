@@ -14,8 +14,8 @@
  */
 
 /**
- * @var $credentials array
- * @var $memoryQuota string
+ * @var array $credentials
+ * @var string $memoryQuota
  */
 echo writeText('[INFO]', '96;1').'Getting Information from the Cluster via API....'.PHP_EOL;
 

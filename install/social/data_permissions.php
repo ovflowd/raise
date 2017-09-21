@@ -14,7 +14,7 @@
  */
 
 /**
- * @var $permission \Couchbase\Bucket
+ * @var \Couchbase\Bucket $permission
  */
 
 // Create Data Read Context Permission
