@@ -160,7 +160,6 @@ if (option('skip-permissions') === null) {
 
 // Section to create the RAISe Profiles
 if (option('skip-profiles') === null) {
-
     echo writeText('[INFO]', '96;1').'Creating Basic Groups.'.PHP_EOL;
 
     $profiles = database()->getConnection()->openBucket('profile');
@@ -174,6 +173,5 @@ if (option('skip-profiles') === null) {
 
 // Create Administrator Account
 require_once __DIR__.'/sections/admin.php';
-
 
 echo "\033[92;1mSetup Finished.\033[0m".PHP_EOL;

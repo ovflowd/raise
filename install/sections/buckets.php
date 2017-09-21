@@ -14,9 +14,9 @@
  */
 
 /**
- * @var string $memoryQuota
- * @var array $buckets
- * @var array $credentials
+ * @var string
+ * @var array  $buckets
+ * @var array  $credentials
  */
 $buckets = [
     'metadata'   => floor((($memoryQuota / 100) * 10)),

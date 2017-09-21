@@ -14,7 +14,7 @@
  */
 
 /**
- * @var \Couchbase\Bucket $profiles
+ * @var \Couchbase\Bucket
  */
 
 // Create Clients Group
