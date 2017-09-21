@@ -35,12 +35,12 @@ function option(string $key)
  */
 function createConfigurationFile(string $fileName, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__."/configuration/settings.php");
+    $configurationFile = file_get_contents(__DIR__.'/configuration/settings.php');
 
     $configurationFile = replaceArray([
-        '{{ADDRESS}}'  => $credentials['ip'],
+        '{{ADDRESS}}'      => $credentials['ip'],
         '{{USERNAME}}'     => $credentials['user'],
-        '{{PASSWORD}}' => $credentials['pass'],
+        '{{PASSWORD}}'     => $credentials['pass'],
     ], $configurationFile);
 
     file_put_contents($fileName, $configurationFile);
@@ -104,7 +104,7 @@ function createBucket(array $details, array $credentials)
 /**
  * Insert a Metadata Object on Metadata Table.
  *
- * @param stdClass         $details
+ * @param stdClass $details
  */
 function insertMetadata(stdClass $details)
 {
