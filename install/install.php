@@ -75,8 +75,9 @@ try {
     $connection = new CouchbaseCluster("couchbase://{$credentials['ip']}");
 
     // Set Credentials
-    $authenticator = new \Couchbase\ClassicAuthenticator();
-    $authenticator->cluster($credentials['user'], $credentials['pass']);
+    $authenticator = new \Couchbase\PasswordAuthenticator();
+    $authenticator->username($credentials['user']);
+    $authenticator->password($credentials['pass']);
 
     // Try to Authenticate
     $connection->authenticate($authenticator);

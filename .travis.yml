@@ -34,8 +34,6 @@ before_install:
 script:
   - cd install/
   - php install.php --user=couch --pass=couchbase --address=localhost --skip-configuration
-  - cd ../
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - sudo shutdown -h 0

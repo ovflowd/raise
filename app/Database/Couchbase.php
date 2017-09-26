@@ -17,9 +17,9 @@ namespace App\Database;
 
 use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
-use Couchbase\ClassicAuthenticator;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
+use Couchbase\PasswordAuthenticator;
 use CouchbaseCluster;
 use Koine\QueryBuilder;
 use Koine\QueryBuilder\Statements\Select;
@@ -50,7 +50,7 @@ class Couchbase implements DatabaseHandler
     /**
      * The Couchbase Authenticator.
      *
-     * @var ClassicAuthenticator
+     * @var PasswordAuthenticator
      */
     private $authenticator = null;
 
@@ -63,8 +63,9 @@ class Couchbase implements DatabaseHandler
     {
         $this->connection = new CouchbaseCluster("couchbase://{$connection->address}");
 
-        $this->authenticator = new ClassicAuthenticator();
-        $this->authenticator->cluster($connection->username, $connection->password);
+        $this->authenticator = new PasswordAuthenticator();
+        $this->authenticator->username($connection->username);
+        $this->authenticator->password($connection->password);
 
         $this->connection->authenticate($this->authenticator);
     }
@@ -173,7 +174,7 @@ class Couchbase implements DatabaseHandler
     /**
      * Get the Couchbase Authenticator Handler.
      *
-     * @return ClassicAuthenticator
+     * @return PasswordAuthenticator
      */
     public function getAuthenticator()
     {

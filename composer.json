@@ -48,20 +48,12 @@
       "email": "sergio.augusto@redes.unb.br"
     },
     {
-      "name": "Iury Farias",
-      "email": "lucas.farias@uiot.org"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/sant0ro/phpdoc-md"
+      "name": "Lucas Alves",
+      "email": "lucas.alves@uiot.org"
     }
   ],
   "require-dev": {
     "swagger-api/swagger-ui": "^3.0",
-    "phpdocumentor/phpdocumentor": "^2.9",
-    "phpunit/phpunit": "^6.2",
     "sant0ro/phpdoc-md": "^0.5.0"
   },
   "scripts": {

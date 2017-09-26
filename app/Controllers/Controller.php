@@ -37,7 +37,7 @@ abstract class Controller
      *
      * Validated and Registers Models unto the Database
      *
-     * @param object     $data     the payload as object from the Request
+     * @param object $data the payload as object from the Request
      * @param Model|null $response a Response Model to be used as Response
      */
     public function register($data = null, Model $response = null)
@@ -50,9 +50,9 @@ abstract class Controller
      *
      * List a set of Models or a single Model based on the Request Parameters
      *
-     * @param array|object|null $data     the given Data to be Mapped
-     * @param Model             $response the Response Model
-     * @param callable          $callback an optional callback to treat the mapping result
+     * @param array|object|null $data the given Data to be Mapped
+     * @param Model $response the Response Model
+     * @param callable $callback an optional callback to treat the mapping result
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
@@ -80,12 +80,14 @@ abstract class Controller
     {
         $query = $query == null ? new Select() : $query;
 
+        // Filter by Semantic Tags
         if (request()::query('tags') !== false) {
             array_walk(explode(':', request()::query('tags')), function ($tag) use ($query) {
                 $query->where("'{$tag}' IN tags");
             });
         }
 
+        // Filter by Intervals of Data
         if (request()::query('interval') !== false) {
             $interval = explode(':', request()::query('interval'));
 
@@ -93,12 +95,19 @@ abstract class Controller
             $query->where('clientTime', $interval[1], '<=');
         }
 
+        // Limit Result Set
         if (request()::query('limit') !== false) {
             $query->limit(request()::query('limit'));
         }
 
-        $query->orderBy('clientTime '.(request()::query('order') === false ? 'DESC' : 'ASC'));
-
-        return $query;
+        // Order the Data set
+        switch (request()::query('order')) {
+            case 'ASC':
+                return $query->where('clientTime > 0')
+                    ->orderBy('clientTime ASC');
+            default:
+                return $query->where('-clientTime < 0')
+                    ->orderBy('-clientTime ASC');
+        }
     }
 }
