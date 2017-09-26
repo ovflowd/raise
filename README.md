@@ -3,7 +3,7 @@
   <h4 align="center">RAISe</h4>
   <p align="center">
     <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
-    <img src="https://badge.waffle.io/uiot/raise.png?label=ready&title=Ready"/>
+    <img src="https://badge.waffle.io/uiot/raise.svg?label=in%20progress&title=In%20Progress"/>
   </p>
 </p>
 
