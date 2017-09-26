@@ -20,12 +20,27 @@ Properties
 
 ### $connection
 
-The Couchbase Connection Instance.
+The Couchbase Cluster Connection Instance.
 
 
 
 ```php
 private \CouchbaseCluster $connection = null
+```
+
+#### Details:
+* Visibility: **private**
+
+<hr>
+
+### $authenticator
+
+The Couchbase Authenticator.
+
+
+
+```php
+private \Couchbase\PasswordAuthenticator $authenticator = null
 ```
 
 #### Details:
@@ -112,7 +127,7 @@ Select Data on Database.
 
 
 ```php
-array|string|object App\Models\Interfaces\Database::select(string $table, \Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder $query)
+\App\Models\Communication\Model|array|object|string App\Models\Interfaces\Database::select(string $table, string or \Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder $query, boolean $override)
 ```
 
 #### Details:
@@ -125,31 +140,8 @@ array|string|object App\Models\Interfaces\Database::select(string $table, \Koine
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | $table | **string** | desired table to select |
-| $query | Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder | a Select query to search |
-
-
-<hr>
-
-### selectById
-
-Select an Object by its Identifier.
-
-
-
-```php
-object|boolean|\App\Models\Communication\Model App\Database\Couchbase::selectById(string $table, string $primaryKey)
-```
-
-#### Details:
-* Visibility: **public**
-
-
-#### Parameters:
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| $table | **string** | desired bucket |
-| $primaryKey | **string** | a document identifier |
+| $query | string or \Koine\QueryBuilder\Statements\Select or \Koine\QueryBuilder | a Select query to search |
+| $override | **boolean** | If need override the select statement |
 
 
 <hr>
@@ -201,6 +193,41 @@ mixed App\Models\Interfaces\Database::delete(string $table, string $primaryKey)
 |-----------|------|-------------|
 | $table | **string** | desired table to update |
 | $primaryKey | **string** | desired element to delete |
+
+
+<hr>
+
+### getConnection
+
+Get the Database Connection Handler.
+
+
+
+```php
+mixed|boolean App\Models\Interfaces\Database::getConnection()
+```
+
+#### Details:
+* Visibility: **public**
+* This method is defined by [App\Models\Interfaces\Database](App-Models-Interfaces-Database.md)
+
+
+
+<hr>
+
+### getAuthenticator
+
+Get the Couchbase Authenticator Handler.
+
+
+
+```php
+\Couchbase\PasswordAuthenticator App\Database\Couchbase::getAuthenticator()
+```
+
+#### Details:
+* Visibility: **public**
+
 
 
 <hr>

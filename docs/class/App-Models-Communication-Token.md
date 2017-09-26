@@ -37,6 +37,24 @@ public string $clientId
 
 <hr>
 
+### $groupId
+
+The Group Unique Name.
+
+Tokens are related to groups, so this property
+ it's used to link Tokens and their Clients with Groups.
+
+Groups are specified in Tokens because
+
+```php
+public string $groupId
+```
+
+#### Details:
+* Visibility: **public**
+
+<hr>
+
 ### $expireTime
 
 Token Expire Time.
@@ -46,6 +64,22 @@ in seconds.milliseconds on UNIX Timestamp
 
 ```php
 public float $expireTime
+```
+
+#### Details:
+* Visibility: **public**
+
+<hr>
+
+### $profile
+
+Token Expire Time.
+
+When the Token goes expire,
+in seconds.milliseconds on UNIX Timestamp
+
+```php
+public float $profile
 ```
 
 #### Details:

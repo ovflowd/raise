@@ -1,4 +1,4 @@
-App\Models\Communication\Chart
+App\Models\Response\Chart
 ===============
 
 Class Chart.
@@ -8,7 +8,7 @@ A Chart Model it's a Data Set for
 
 
 * Class name: Chart
-* Namespace: App\Models\Communication
+* Namespace: App\Models\Response
 * Parent class: [App\Models\Communication\Model](App-Models-Communication-Model.md)
 
 
@@ -54,10 +54,10 @@ public array $data = array()
 If the content of the Lines will be filled
  by the same color of the line.
 
-
+Options: true (start), end, origin, false (none)
 
 ```php
-public boolean $fill = true
+public string $fill = 'origin'
 ```
 
 #### Details:
@@ -77,7 +77,7 @@ Iterate between an Data Set of Data Documents
 
 
 ```php
-mixed App\Models\Communication\Chart::setData(array $data)
+mixed App\Models\Response\Chart::setData(array $data)
 ```
 
 #### Details:

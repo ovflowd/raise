@@ -52,6 +52,21 @@ public string $path = ''
 
 <hr>
 
+### $timeZone
+
+The time zone that PHP will run and store the data.
+
+
+
+```php
+public string $timeZone = 'America/Sao_Paulo'
+```
+
+#### Details:
+* Visibility: **public**
+
+<hr>
+
 ### 
 
 

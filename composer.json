@@ -54,6 +54,7 @@
   ],
   "require-dev": {
     "swagger-api/swagger-ui": "^3.0",
+    "phpdocumentor/phpdocumentor": "^2.9",
     "sant0ro/phpdoc-md": "^0.5.0"
   },
   "scripts": {

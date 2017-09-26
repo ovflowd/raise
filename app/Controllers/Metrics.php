@@ -57,11 +57,15 @@ class Metrics extends Controller
         response()::type('text/html');
 
         $clients = database()->select('client', (new Select())->orderBy('clientTime desc'));
-        $logs = database()->select('log', (new Select())->limit(100)->orderBy('clientTime desc'));
-        $data = database()->select('data', (new Select())->orderBy('clientTime desc')->limit(1))[0];
 
-        $service = !empty($data) && $data->document !== null ?
-            database()->select('service', $data->document->serviceId) : [];
+        $logs = database()->select('log',
+            (new Select())->limit(100)->where('-clientTime < 0')
+                ->orderBy('-clientTime ASC')->limit(100));
+        $data = database()->select('data', (new Select())->where('-clientTime < 0')
+            ->orderBy('-clientTime ASC')->limit(1))[0];
+
+        $service = !empty($data) && $data->document !== null ? database()->select('service',
+            $data->document->serviceId) : [];
 
         blade()::make('header.home');
         blade()::make('body.menu');
@@ -83,16 +87,17 @@ class Metrics extends Controller
 
         $client = database()->select('client', $id);
         $client->id = $id;
-        $client->location = (array) explode(':', $client->location);
+        $client->location = (array)explode(':', $client->location);
         $client->token = database()->select('token', (new Select())->where('clientId', $id))[0]->document;
 
-        $services = database()->select('service', (new Select())->where('clientId', $id)->orderBy('clientTime desc'));
+        $services = database()->select('service', (new Select())->where('clientId', $id)
+            ->where('-clientTime < 0')->orderBy('-clientTime ASC'));
 
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
-                'data'  => database()->select('data', (new Select())->where('serviceId',
-                    $service->id)->orderBy('clientTime desc')->limit(100)),
+                'data' => database()->select('data', (new Select())->where('serviceId',
+                    $service->id)->where('-clientTime < 0')->orderBy('-clientTime ASC')->limit(100)),
             ]);
         }, $services);
 
@@ -117,13 +122,14 @@ class Metrics extends Controller
         $service = database()->select('service', $id);
         $service->id = $id;
 
-        $data = database()->select('data', (new Select())->where('serviceId', $id)->orderBy('clientTime desc'));
+        $data = database()->select('data', (new Select())->where('serviceId', $id)
+            ->where('-clientTime < 0')->orderBy('-clientTime ASC'));
 
         $graph = [
             json()::map(new Chart(), [
                 'label' => $service->name,
-                'data'  => database()->select('data', (new Select())->where('serviceId', $service->id)
-                    ->orderBy('clientTime desc')),
+                'data' => database()->select('data', (new Select())->where('serviceId', $service->id)
+                    ->where('-clientTime < 0')->orderBy('-clientTime ASC')),
             ]),
         ];
 
@@ -150,7 +156,7 @@ class Metrics extends Controller
             ->limit(10);
 
         response()::setResponse(200, new \stdClass(), [
-            'clients'  => database()->select('client', $clientQuery),
+            'clients' => database()->select('client', $clientQuery),
             'services' => database()->select('service', $serviceQuery),
         ]);
     }
