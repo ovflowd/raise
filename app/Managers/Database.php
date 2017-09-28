@@ -99,7 +99,7 @@ class Database
      */
     protected static function setHandler()
     {
-        $handler = ('App\Database\\' . str_replace(' ', '',
+        $handler = ('App\Database\\'.str_replace(' ', '',
                 ucwords(str_replace('-', ' ', setting('raise.databaseType')))));
 
         if (class_exists($handler)) {
