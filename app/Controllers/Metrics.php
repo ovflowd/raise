@@ -56,12 +56,12 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
-        $clients = database()->select('client', (new Select())->orderBy('clientTime desc'));
+        $clients = database()->select('client', (new Select())->orderBy('-clientTime asc'));
 
         $logs = database()->select('log', (new Select())->where('-serverTime < 0')
-            ->orderBy('-serverTime ASC')->limit(100));
+            ->orderBy('-serverTime asc')->limit(100));
         $data = database()->select('data', (new Select())->where('-clientTime < 0')
-            ->orderBy('-clientTime ASC')->limit(1))[0];
+            ->orderBy('-clientTime asc')->limit(1))[0];
 
         $service = !empty($data) && $data->document !== null ? database()->select('service',
             $data->document->serviceId) : [];
@@ -90,13 +90,13 @@ class Metrics extends Controller
         $client->token = database()->select('token', (new Select())->where('clientId', $id))[0]->document;
 
         $services = database()->select('service', (new Select())->where('clientId', $id)
-            ->where('-clientTime < 0')->orderBy('-clientTime ASC'));
+            ->where('-clientTime < 0')->orderBy('-clientTime asc'));
 
         $data = array_map(function ($service) {
             return json()::map(new Chart(), [
                 'label' => $service->document->name,
                 'data'  => database()->select('data', (new Select())->where('serviceId',
-                    $service->id)->where('-clientTime < 0')->orderBy('-clientTime ASC')->limit(100)),
+                    $service->id)->where('-clientTime < 0')->orderBy('-clientTime asc')->limit(100)),
             ]);
         }, $services);
 
@@ -122,13 +122,13 @@ class Metrics extends Controller
         $service->id = $id;
 
         $data = database()->select('data', (new Select())->where('serviceId', $id)
-            ->where('-clientTime < 0')->orderBy('-clientTime ASC'));
+            ->where('-clientTime < 0')->orderBy('-clientTime asc'));
 
         $graph = [
             json()::map(new Chart(), [
                 'label' => $service->name,
                 'data'  => database()->select('data', (new Select())->where('serviceId', $service->id)
-                    ->where('-clientTime < 0')->orderBy('-clientTime ASC')),
+                    ->where('-clientTime < 0')->orderBy('-clientTime asc')),
             ]),
         ];
 
