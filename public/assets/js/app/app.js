@@ -41,7 +41,7 @@ jQuery(document).ready(function () {
         if(content.length < 3) {
             results.html('');
         } else {
-            jQuery.get('/view/search?content=' + content, function (data) {
+            jQuery.get(window.explore_at + content, function (data) {
                 results.html('');
 
                 if(data.clients && data.clients.length) {

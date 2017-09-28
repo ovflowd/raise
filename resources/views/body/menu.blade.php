@@ -33,6 +33,9 @@
     </div>
 </div>
 <br class="show-for-small-only">
+<script>
+    window.explore_at = '@path/view/search?content=';
+</script>
 <div class="reveal" id="explore-modal" data-reveal>
     <b class="saw">Explore at RAISe</b>
     <div style="display: flex;flex: 3">
