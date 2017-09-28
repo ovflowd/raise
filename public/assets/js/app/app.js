@@ -41,7 +41,7 @@ jQuery(document).ready(function () {
         if(content.length < 3) {
             results.html('');
         } else {
-            jQuery.get(window.explore_at + content, function (data) {
+            jQuery.get(window.base_url + 'view/search?content=' + content, function (data) {
                 results.html('');
 
                 if(data.clients && data.clients.length) {
@@ -65,7 +65,7 @@ jQuery(document).ready(function () {
 });
 
 function exploreElement(type, element) {
-    var url = (type === 'client' ? '/view/client/' + element.id : '/view/client/' + element.id + '/data');
+    var url = window.base_url + (type === 'client' ? 'view/client/' + element.id : 'view/client/' + element.id + 'data');
 
     return '<li><div class="callout primary"><a href="' + url + '" class="see-button">Watch</a><h5>' + element.document.name + ' <small>(' + type + ')</small></h5><small>[ ' + ((element.document.tags && element.document.tags.length) ? element.document.tags.join(', ') : 'No Tags') + ' ]</small></div></li>';
 }
