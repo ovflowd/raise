@@ -155,8 +155,8 @@ try {
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 
     // Create Domain Identify Indexes
-    $responseBucket->manager()->createN1qlIndex('index-clientTime', ['clientTime']);
-    $responseBucket->manager()->createN1qlIndex('index-clientTime-', ['-clientTime']);
+    $responseBucket->manager()->createN1qlIndex('index-serverTime', ['serverTime']);
+    $responseBucket->manager()->createN1qlIndex('index-serverTime-', ['-serverTime']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
