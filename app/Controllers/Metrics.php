@@ -56,7 +56,7 @@ class Metrics extends Controller
     {
         response()::type('text/html');
 
-        $clients = database()->select('client', (new Select())->orderBy('-clientTime asc'));
+        $clients = database()->select('client', (new Select())->where('-clientTime < 0')->orderBy('-clientTime asc'));
 
         $logs = database()->select('log', (new Select())->where('-serverTime < 0')
             ->orderBy('-serverTime asc')->limit(100));
