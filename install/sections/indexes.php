@@ -39,6 +39,11 @@ try {
     $clientBucket->manager()->createN1qlIndex('index-name', ['name']);
     $clientBucket->manager()->createN1qlIndex('index-processor', ['processor']);
     $clientBucket->manager()->createN1qlIndex('index-channel', ['channel']);
+
+    $clientBucket->manager()->createN1qlIndex('index-tags-clientTime', ['tags', 'clientTime']);
+    $clientBucket->manager()->createN1qlIndex('index-name-clientTime', ['name', 'clientTime']);
+    $clientBucket->manager()->createN1qlIndex('index-processor-clientTime', ['processor', 'clientTime']);
+    $clientBucket->manager()->createN1qlIndex('index-channel-clientTime', ['channel', 'clientTime']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
 }
@@ -54,6 +59,10 @@ try {
     $serviceBucket->manager()->createN1qlIndex('index-clientTime', ['clientTime']);
     $serviceBucket->manager()->createN1qlIndex('index-name', ['name']);
     $serviceBucket->manager()->createN1qlIndex('index-clientId', ['clientId']);
+
+    $serviceBucket->manager()->createN1qlIndex('index-tags-clientTime', ['tags', 'clientTime']);
+    $serviceBucket->manager()->createN1qlIndex('index-name-clientTime', ['name', 'clientTime']);
+    $serviceBucket->manager()->createN1qlIndex('index-clientId-clientTime', ['clientId', 'clientTime']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Service Bucket!'.PHP_EOL;
 }
@@ -66,6 +75,7 @@ try {
     $tokenBucket->manager()->createN1qlPrimaryIndex('', false, false);
 
     $tokenBucket->manager()->createN1qlIndex('index-clientId', ['clientId']);
+    $tokenBucket->manager()->createN1qlIndex('index-clientId-clientTime', ['clientId', 'clientTime']);
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Token Bucket!'.PHP_EOL;
 }
@@ -82,6 +92,12 @@ try {
     $dataBucket->manager()->createN1qlIndex('index-parameters', ['parameters']);
     $dataBucket->manager()->createN1qlIndex('index-tags', ['tags']);
     $dataBucket->manager()->createN1qlIndex('index-clientTime', ['clientTime']);
+
+    $dataBucket->manager()->createN1qlIndex('index-clientId-clientTime', ['clientId', 'clientTime']);
+    $dataBucket->manager()->createN1qlIndex('index-serviceId-clientTime', ['serviceId', 'clientTime']);
+    $dataBucket->manager()->createN1qlIndex('index-parameters-clientTime', ['parameters', 'clientTime']);
+    $dataBucket->manager()->createN1qlIndex('index-tags-clientTime', ['tags', 'clientTime']);
+
 } catch (CouchbaseException $e) {
     echo '[WARN] Failed to Fill Data Bucket!'.PHP_EOL;
 }
