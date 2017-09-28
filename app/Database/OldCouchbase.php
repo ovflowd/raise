@@ -17,9 +17,9 @@ namespace App\Database;
 
 use App\Models\Communication\Model;
 use App\Models\Interfaces\Database as DatabaseHandler;
+use Couchbase\ClassicAuthenticator;
 use Couchbase\Exception;
 use Couchbase\N1qlQuery;
-use Couchbase\ClassicAuthenticator;
 use CouchbaseCluster;
 use Koine\QueryBuilder;
 use Koine\QueryBuilder\Statements\Select;
