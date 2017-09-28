@@ -64,16 +64,6 @@ class Token extends Raise
     public $expireTime;
 
     /**
-     * Token Expire Time.
-     *
-     * When the Token goes expire,
-     * in seconds.milliseconds on UNIX Timestamp
-     *
-     * @var float
-     */
-    public $profile;
-
-    /**
      * Token constructor.
      *
      * Set the Timestamps of when RAISe handled
