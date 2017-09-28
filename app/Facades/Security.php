@@ -50,7 +50,7 @@ class Security extends Facade
     public static function insertToken(string $clientId, string $group = 'client')
     {
         // If the specified group doesn't exists, the default group "client" will be assigned.
-        $group = self::group($group) !== false ? $group : 'client';
+        //$group = self::group($group) !== false ? $group : 'client';
 
         $token = database()->insert('token', ($tokenModel = json()::map(new TokenDefinition(),
             ['clientId' => $clientId, 'groupId' => $group])), self::generateHash());
