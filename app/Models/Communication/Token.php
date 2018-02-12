@@ -78,14 +78,16 @@ class Token extends Raise
         $this->setExpireTime();
     }
 
-    /**
-     * Set the Token Expire Time.
-     *
-     * @return $this
-     */
-    public function setExpireTime()
+	/**
+	 * Set the Token Expire Time.
+	 *
+	 * @param bool $neverExpire
+	 * @return $this
+	 */
+    public function setExpireTime($neverExpire = false)
     {
-        $this->expireTime = strtotime('+'.setting('security.expireTime'), $this->serverTime);
+        $this->expireTime = (!$neverExpire ? strtotime('+'.setting('security.expireTime'),
+	        $this->serverTime) : 2145916800);
 
         return $this;
     }

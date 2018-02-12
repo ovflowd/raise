@@ -35,8 +35,8 @@ database()->getConnection()->openBucket('client')->insert($clientId = security()
 database()->getConnection()->openBucket('token')->insert($token,
     json()::map(new \App\Models\Communication\Token(), [
         'clientId'   => $clientId,
-        'expireTime' => '2145916800',
         'profile'    => 'administrator',
+	    'groupId'   => 0
     ]));
 
 // Administrator Hash

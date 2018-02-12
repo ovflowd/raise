@@ -56,9 +56,7 @@ abstract class Controller
      */
     public function list($data = null, Model $response = null, $callback = null)
     {
-        $data = array_map(function ($model) {
-            return $model->document;
-        }, $data);
+        $data = array_map('document', $data);
 
         response()::setResponse(200, $response, is_callable($callback) ?
             $callback($data) : $data);

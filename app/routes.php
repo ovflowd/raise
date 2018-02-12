@@ -178,3 +178,11 @@ $router()->mount('/view', function () use ($router, $response, $token) {
     // Hook a Service Data
     $router()->get('/service/(\w+)', '\App\Controllers\Metrics@data');
 });
+
+/*
+|----------------------------------------------------------------------------
+| Prototype Routes                                                          |
+|----------------------------------------------------------------------------
+*/
+
+$router()->get('/all-data', '\App\Controllers\Data@listAll');
