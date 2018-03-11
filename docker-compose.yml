@@ -20,7 +20,7 @@ services:
       - 11210:11210
   composer:
     restart: 'no'
-    image: composer/composer:php7
+    image: composer:latest
     command: install
     volumes:
       - .:/raise-core
