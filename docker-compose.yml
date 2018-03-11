@@ -13,7 +13,7 @@ services:
     depends_on:
       - raise
   couchbase:
-    mem_limit: 2G
+    mem_limit: 8G
     image: couchbase/server
     volumes:
       - ./couchbase:/opt/couchbase/var
