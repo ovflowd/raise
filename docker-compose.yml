@@ -1,16 +1,17 @@
-version: "2"
+version: "2.1"
 services:
   web:
-    image: nginx:latest
+    image: nginx
     ports:
       - "8080:80"
     volumes:
-      - .:/usr/app
       - ./docker/nginx.conf:/etc/nginx/conf.d/raise.conf
+    volumes_from:
+      - raise
     links:
-      - raise
+      - php
     depends_on:
-      - raise
+      - php
   couchbase:
     mem_limit: 2G
     image: couchbase/server
@@ -21,16 +22,22 @@ services:
       - 8092:8092
       - 8093:8093
       - 11210:11210
-    command: /opt/couchbase/bin/couchbase-cli cluster-init \
-      -c localhost:8091 --cluster-username=couchbase --cluster-password=couchbase --cluster-name='raise' \
-      --services=data,index,query --cluster-ramsize=1024 --cluster-index-ramsize=256
+  composer:
+    image: composer
+    restart: 'no'
+    volumes_from:
+      - raise
+    command: install --no-dev
   raise:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/usr/app
-    depends_on:
-      - couchbase
+      - .:/app
     links:
       - couchbase
+  php:
+    restart: 'always'
+    image: php:7.2-fpm
+    volumes_from:
+      - raise

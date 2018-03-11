@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM debian:stretch-slim
 
 RUN apt-get update \
     && apt install -y wget gnupg \
@@ -15,21 +15,3 @@ RUN pecl install pcs-1.3.3 \
     && docker-php-ext-enable pcs
 RUN pecl install couchbase \
     && docker-php-ext-enable couchbase
-
-FROM composer:latest
-
-RUN mkdir -p /usr/app
-
-WORKDIR /usr/app
-
-ADD composer.json /usr/app
-ADD index.php /usr/app
-ADD vendor/ /usr/app
-ADD resources/ /usr/app
-ADD public/ /usr/app
-ADD install/ /usr/app
-ADD app/ /usr/app
-
-RUN composer install
-
-CMD ["php", "install/install.php"]
