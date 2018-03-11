@@ -13,9 +13,7 @@ services:
       - raise
   couchbase:
     mem_limit: 2G
-    build:
-      context: .
-      dockerfile: Dockerfile.couchbase
+    image: couchbase/server
     volumes:
       - ./couchbase:/opt/couchbase/var
     ports:
@@ -23,21 +21,16 @@ services:
       - 8092:8092
       - 8093:8093
       - 11210:11210
+    command: /opt/couchbase/bin/couchbase-cli cluster-init \
+      -c localhost:8091 --cluster-username=couchbase --cluster-password=couchbase --cluster-name='raise' \
+      --services=data,index,query --cluster-ramsize=1024 --cluster-index-ramsize=256
   raise:
     build:
       context: .
-      dockerfile: Dockerfile.raise
+      dockerfile: Dockerfile
     volumes:
       - .:/usr/app
     depends_on:
       - couchbase
     links:
       - couchbase
-  install:
-    volumes:
-      - .:/usr/app
-    build:
-      context: .
-      dockerfile: Dockerfile.install
-    depends_on:
-      - raise
