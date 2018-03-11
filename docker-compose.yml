@@ -5,11 +5,14 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/raise-core
+      - .:/usr/app
       - ./docker/nginx.conf:/etc/nginx/conf.d/raise.conf
     links:
       - raise
+    depends_on:
+      - raise
   couchbase:
+    mem_limit: 2G
     image: couchbase/server
     volumes:
       - ./couchbase:/opt/couchbase/var
@@ -20,15 +23,24 @@ services:
       - 11210:11210
   composer:
     restart: 'no'
+    working_dir: /usr/app
     image: composer:latest
     command: install
     volumes:
-      - .:/raise-core
+      - .:/usr/app
+    depends_on:
+      - raise
   raise:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.raise
     volumes:
-      - .:/raise-core
+      - .:/usr/app
     links:
+      - couchbase
+  install:
+    build:
+      context: .
+      dockerfile: Dockerfile.install
+    depends_on:
       - composer

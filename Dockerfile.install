@@ -1,7 +1,5 @@
 FROM php:7.2-fpm
 
-RUN mkdir -p /raise-core
-
-WORKDIR /raise-core
+WORKDIR /usr/app
 
 CMD ["php", "install/install.php"]
