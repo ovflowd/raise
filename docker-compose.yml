@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./docker/nginx.conf:/etc/nginx/conf.d/raise.conf
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
     volumes_from:
       - raise
     links:
