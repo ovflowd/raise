@@ -12,11 +12,9 @@ RUN echo "Installing Lib Couchbase Dependencies" \
     && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential
 
 RUN echo "Installing PCS Extension" \
-    && pecl install pcs-1.3.3 \
-    && docker-php-ext-enable pcs
+    && pecl install pcs-1.3.3
 
 RUN echo "Installing Couchbase Extension" \
-    && pecl install couchbase \
-    && docker-php-ext-enable couchbase
+    && pecl install couchbase
 
 RUN echo "Read te Documentation of RAISe in order to configure RAISe here: goo.gl/9ukom5"

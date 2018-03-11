@@ -31,13 +31,15 @@ services:
   raise:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: raise.Dockerfile
     volumes:
       - .:/app
     links:
       - couchbase
   php:
     restart: 'always'
-    image: php:7.2-fpm
+    build:
+      context: .
+      dockerfile: php.Dockerfile
     volumes_from:
       - raise
