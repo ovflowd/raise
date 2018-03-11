@@ -8,8 +8,9 @@ RUN apt-get update \
     && apt update \
     && wget -O ~/libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb \
     && dpkg --install ~/libssl.deb \
-    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential \
-    && apt install -y --no-install-recommends git zip
+    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential
+
+FROM php:7.2
 
 RUN pecl install pcs-1.3.3 \
     && docker-php-ext-enable pcs
