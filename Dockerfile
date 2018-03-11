@@ -1,6 +1,7 @@
-FROM debian:stretch-slim
+FROM php:7.2
 
-RUN apt-get update \
+RUN \
+    && apt update \
     && apt install -y wget gnupg \
     && wget -O /etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1404.list \
     && wget -O ~/couchbase.key http://packages.couchbase.com/ubuntu/couchbase.key \
@@ -10,9 +11,9 @@ RUN apt-get update \
     && dpkg --install ~/libssl.deb \
     && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential
 
-FROM php:7.2
-
-RUN pecl install pcs-1.3.3 \
+RUN \
+    && pecl install pcs-1.3.3 \
     && docker-php-ext-enable pcs
-RUN pecl install couchbase \
+RUN \
+    && pecl install couchbase \
     && docker-php-ext-enable couchbase
