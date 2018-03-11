@@ -1,4 +1,4 @@
-FROM php:7.2
+FROM php:7.2-fpm
 
 RUN echo "Installing Lib Couchbase Dependencies" \
     && apt update \
@@ -16,5 +16,8 @@ RUN echo "Installing PCS Extension" \
 
 RUN echo "Installing Couchbase Extension" \
     && pecl install couchbase
+
+COPY docker/php.ini /etc/php
+COPY docker/php.ini /usr/local/etc/php/
 
 RUN echo "Read te Documentation of RAISe in order to configure RAISe here: goo.gl/9ukom5"

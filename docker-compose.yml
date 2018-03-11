@@ -9,9 +9,9 @@ services:
     volumes_from:
       - raise
     links:
-      - php
+      - raise
     depends_on:
-      - php
+      - raise
   couchbase:
     mem_limit: 2G
     image: couchbase/server
@@ -29,17 +29,11 @@ services:
       - raise
     command: install --no-dev
   raise:
+    restart: 'always'
     build:
       context: .
-      dockerfile: raise.Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - .:/app
     links:
       - couchbase
-  php:
-    restart: 'always'
-    build:
-      context: .
-      dockerfile: php.Dockerfile
-    volumes_from:
-      - raise
