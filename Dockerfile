@@ -1,17 +1,5 @@
 FROM php:7.2-fpm
 
-RUN mkdir -p /usr/app
-
-WORKDIR /usr/app
-
-ADD composer.json /usr/app
-ADD index.php /usr/app
-ADD vendor/ /usr/app
-ADD resources/ /usr/app
-ADD public/ /usr/app
-ADD install/ /usr/app
-ADD app/ /usr/app
-
 RUN apt-get update \
     && apt install -y wget gnupg \
     && wget -O /etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1404.list \
@@ -28,8 +16,20 @@ RUN pecl install pcs-1.3.3 \
 RUN pecl install couchbase \
     && docker-php-ext-enable couchbase
 
-RUN curl --silent --show-error https://getcomposer.org/installer | php
+FROM composer:latest
 
-RUN php composer.phar install
+RUN mkdir -p /usr/app
+
+WORKDIR /usr/app
+
+ADD composer.json /usr/app
+ADD index.php /usr/app
+ADD vendor/ /usr/app
+ADD resources/ /usr/app
+ADD public/ /usr/app
+ADD install/ /usr/app
+ADD app/ /usr/app
+
+RUN composer install
 
 CMD ["php", "install/install.php"]
