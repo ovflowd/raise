@@ -36,6 +36,8 @@ services:
       dockerfile: Dockerfile.raise
     volumes:
       - .:/usr/app
+    depends_on:
+      - couchbase
     links:
       - couchbase
   install:
