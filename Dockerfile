@@ -22,7 +22,5 @@ COPY docker/php.ini /usr/local/etc/php/
 
 RUN docker-php-ext-install json
 RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install curl
-RUN docker-php-ext-install mcrypt
 
 RUN echo "Read te Documentation of RAISe in order to configure RAISe here: goo.gl/9ukom5"
