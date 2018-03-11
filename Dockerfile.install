@@ -1,9 +1,8 @@
 FROM php:7.2-fpm
+FROM composer:latest
 
 WORKDIR /usr/app
 
-RUN /opt/couchbase/bin/couchbase-cli.exe cluster-init \
-    -c localhost:8091 --cluster-username=couchbase --cluster-password=couchbase --cluster-name='raise' \
-    --services=data,index,query --cluster-ramsize=1024 --cluster-index-ramsize=256
+RUN composer install
 
 CMD ["php", "install/install.php"]
