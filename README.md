@@ -3,19 +3,8 @@
   <h4 align="center">RAISe</h4>
   <p align="center">
     <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg"/>
-    <img src="https://badge.waffle.io/uiot/raise.svg?label=in%20progress&title=In%20Progress"/>
   </p>
 </p>
-
-
-[![Github All Releases](https://img.shields.io/github/downloads/uiot/raise/total.svg)](https://github.com/uiot/raise/releases) [![Packagist](https://img.shields.io/packagist/v/uiot/raise.svg)](https://packagist.org/packages/uiot/raise) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Code Climate](https://codeclimate.com/github/UIoT/RAISe/badges/gpa.svg)](https://codeclimate.com/github/UIoT/RAISe) [![Style CI](https://styleci.io/repos/34536644/shield?style=flat)](https://styleci.io/repos/34536644/) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/UIoT/RAISe/badges/quality-score.png?b=sbr)](https://scrutinizer-ci.com/g/UIoT/RAISe/?branch=sbr) [![codecov](https://codecov.io/gh/uiot/RAISe/branch/sbr/graph/badge.svg)](https://codecov.io/gh/uiot/RAISe/branch/sbr)
--------------
-
-<b>Builds</b>
-
-Version | Windows | Linux | macOS |Artifacts |
---------|---------|-------|-------|----------|
-Latest  | [![Build status](https://ci.appveyor.com/api/projects/status/jjwmx9moinqrha2n?svg=true)](https://ci.appveyor.com/project/sant0ro/raise-askjk)   | [![Build Status](https://travis-ci.org/uiot/raise.svg?branch=sbr)](https://travis-ci.org/uiot/raise) | None Yet | [Artifacts](https://ci.appveyor.com/project/sant0ro/raise-askjk/branch/sbr/artifacts) |
 
 <b>Core Features</b>
 
