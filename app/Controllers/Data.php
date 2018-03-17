@@ -133,7 +133,9 @@ class Data extends Controller
 				'services' => json()::mapSet(new ServiceDefinition(), $data['services']),
 				'clients'  => json()::mapSet(new ClientDefinition(), $data['clients'])
 			];
-		});
+		}, 'documentWId');
+
+		return false;
 	}
 
 	/**

@@ -35,7 +35,7 @@ abstract class Raise extends Model
      *
      * @var float (UNIX_TIMESTAMP)
      */
-    protected $clientTime = 0;
+    public $clientTime = 0;
 
     /**
      * Tags Identifiers.
@@ -45,14 +45,14 @@ abstract class Raise extends Model
      *
      * @var array
      */
-    protected $tags = [];
+    public $tags = [];
 
     /**
      * The time when the server handled the operation and inserted it.
      *
      * @var float (UNIX_TIMESTAMP)
      */
-    protected $serverTime = 0;
+    public $serverTime = 0;
 
     /**
      * RaiseModel constructor.

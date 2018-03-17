@@ -646,6 +646,12 @@
                 },
                 "data": {
                   "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
                   "example": [
                     [
                       20.2,
@@ -853,7 +859,7 @@
         },
         "clientTime": {
           "type": "number",
-          "example": 1000000000.100000
+          "example": 1000000000.1
         }
       }
     },
@@ -900,7 +906,7 @@
       "properties": {
         "clientTime": {
           "type": "number",
-          "example": 1000000000.100000
+          "example": 1000000000.1
         },
         "tags": {
           "type": "array",
@@ -915,6 +921,9 @@
         },
         "parameters": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": [
             "humidity",
             "temperature"
@@ -967,6 +976,9 @@
         },
         "parameters": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": [
             "humidity",
             "temperature"
@@ -978,7 +990,7 @@
         },
         "clientTime": {
           "type": "number",
-          "example": 1000000000.100000
+          "example": 1000000000.1
         }
       }
     },
@@ -992,7 +1004,7 @@
       "properties": {
         "clientTime": {
           "type": "number",
-          "example": 1000000000.100000
+          "example": 1000000000.1
         },
         "tags": {
           "type": "array",
@@ -1007,6 +1019,9 @@
         },
         "order": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": [
             "humidity",
             "temperature"
@@ -1014,10 +1029,16 @@
         },
         "values": {
           "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "example": [
             [
               20.2,
-              30.0
+              30
             ]
           ]
         }
@@ -1060,6 +1081,9 @@
         },
         "parameters": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": [
             "humidity",
             "temperature"
@@ -1067,6 +1091,9 @@
         },
         "values": {
           "type": "array",
+          "items": {
+            "type": "number"
+          },
           "example": [
             20.2,
             30.1
@@ -1074,7 +1101,7 @@
         },
         "clientTime": {
           "type": "number",
-          "example": 1000000000.100000
+          "example": 1000000000.1
         }
       }
     },
