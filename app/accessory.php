@@ -200,6 +200,28 @@ function document($data)
 }
 
 /**
+ * Retrieve Document Models from Data
+ *
+ * @param $data array|\App\Models\Communication\Model|object
+ *
+ * @return \App\Models\Communication\Model|array|object
+ */
+function documentWId($data)
+{
+	if (is_array($data)) {
+		return array_map('documentWId', $data);
+	}
+
+	if (is_object(($data)) && property_exists($data, 'document')) {
+		$data->document->id = $data->id;
+
+		return $data->document;
+	}
+
+	return $data;
+}
+
+/**
  * Get the Router instance.
  *
  * If the instance already exists return it, if not create it
