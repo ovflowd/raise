@@ -44,7 +44,7 @@ docker-compose up -d
 **Third**: set the database up
 
 Access the Couchbase container using `docker-compose exec couchbase bash`
-and configure it
+and configure it:
 
 ```bash
 /opt/couchbase/bin/couchbase-cli cluster-init -c COUCHBASE-ADDRESS:8091 --cluster-username=DESIRED USER --cluster-password=DESIRED PASS --cluster-name='raise' --services=data,index,query --cluster-ramsize=CLUSTER SIZE IN MB (RAM MEMORY) --cluster-index-ramsize=256
@@ -54,7 +54,7 @@ and configure it
 **Fourth**: set RAISe up
 
 Access the RAISe container using `docker-compose exec raise bash`
-and configure it
+and configure it with your previously defined values:
 
 ```bash
 php /app/install/install.php
