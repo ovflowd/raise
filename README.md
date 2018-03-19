@@ -23,6 +23,8 @@ UIoT RAISe
 > In fact, **RAISe** it's a knowledge layer, in other words, a middleware for the *Internet of Things*, we can actually call it as an surface too.
 > The *API's* of **RAISe** are really simple, you can search more about what each *actor*, *component*, *api* and *entities* of **RAISe** on our [wiki](wiki). You also can read the papers related to the **RAISe** architecture and approaches, our went to our [academics repository](https://github.com/uiot/academics) and learn/read more about the **UIoT** architecture, papers, power-points and other related academic stuff.
 
+Check the [features guide](FEATURES.md).
+
 
 Installation in four steps
 ------------------------------
