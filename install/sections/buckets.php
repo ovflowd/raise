@@ -15,35 +15,35 @@
 
 /**
  * @var string
- * @var array  $buckets
- * @var array  $credentials
+ * @var array $buckets
+ * @var array $credentials
  */
 $buckets = [
-    'metadata'   => floor((($memoryQuota / 100) * 10)),
-    'client'     => floor((($memoryQuota / 100) * 10)),
-    'service'    => floor((($memoryQuota / 100) * 10)),
-    'token'      => floor((($memoryQuota / 100) * 10)),
-    'data'       => floor((($memoryQuota / 100) * 20)),
-    'log'        => floor((($memoryQuota / 100) * 10)),
-    'permission' => floor((($memoryQuota / 100) * 5)),
-    'profile'    => floor((($memoryQuota / 100) * 5)),
-    'relation'   => floor((($memoryQuota / 100) * 10)),
+	'metadata'   => floor((($memoryQuota / 100) * 10)),
+	'client'     => floor((($memoryQuota / 100) * 10)),
+	'service'    => floor((($memoryQuota / 100) * 10)),
+	'token'      => floor((($memoryQuota / 100) * 10)),
+	'data'       => floor((($memoryQuota / 100) * 20)),
+	'log'        => floor((($memoryQuota / 100) * 10)),
+	'permission' => floor((($memoryQuota / 100) * 5)),
+	'profile'    => floor((($memoryQuota / 100) * 5)),
+	'relation'   => floor((($memoryQuota / 100) * 10)),
 ];
 
-echo writeText('[INFO]', '96;1').'Starting Creation Process...'.PHP_EOL;
+echo writeText('[INFO]', '96;1') . 'Starting Creation Process...' . PHP_EOL;
 
 echo progressBar(0, 9);
 
 $progress = 1;
 
 foreach ($buckets as $bucketName => $bucketMemory) {
-    echo progressBar($progress++, 9, "Creating Bucket: {$bucketName}.              ");
+	echo progressBar($progress++, 9, "Creating Bucket: {$bucketName}.              ");
 
-    sleep(1);
+	sleep(1);
 
-    if (createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials) == false) {
-        exit(1);
-    }
+	if (createBucket(['name' => $bucketName, 'memory' => $bucketMemory], $credentials) == false) {
+		exit(1);
+	}
 }
 
 echo progressBar(9, 9, 'Buckets Created Successfully.');

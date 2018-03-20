@@ -19,17 +19,17 @@
 
 // Create Clients Group
 $profiles->insert(security()::generateHash(),
-    json()::map(new \App\Models\Communication\Profile(),
-        [
-            'name'        => 'Client',
-            'uniqueName'  => 'client',
-            'description' => 'The clients Group',
-            'permissions' => [
-                'client_read_context',
-                'client_write_context',
-                'service_read_context',
-                'service_write_context',
-                'data_read_context',
-                'data_write_context',
-            ],
-        ]));
+	json()::map(new \App\Models\Communication\Profile(),
+		[
+			'name'        => 'Client',
+			'uniqueName'  => 'client',
+			'description' => 'The clients Group',
+			'permissions' => [
+				'client_read_context',
+				'client_write_context',
+				'service_read_context',
+				'service_write_context',
+				'data_read_context',
+				'data_write_context',
+			],
+		]));

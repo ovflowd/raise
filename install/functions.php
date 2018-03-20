@@ -22,45 +22,45 @@
  */
 function option(string $key)
 {
-    global $options;
+	global $options;
 
-    return array_key_exists($key, $options) && is_string($options[$key]) ? $options[$key] : null;
+	return array_key_exists($key, $options) && is_string($options[$key]) ? $options[$key] : null;
 }
 
 /**
  * Create a Configuration File.
  *
  * @param string $fileName
- * @param array  $credentials
+ * @param array $credentials
  */
 function createConfigurationFile(string $fileName, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__.'/configuration/settings.php');
+	$configurationFile = file_get_contents(__DIR__ . '/configuration/settings.php');
 
-    $configurationFile = replaceArray([
-        '{{ADDRESS}}'      => $credentials['ip'],
-        '{{USERNAME}}'     => $credentials['user'],
-        '{{PASSWORD}}'     => $credentials['pass'],
-    ], $configurationFile);
+	$configurationFile = replaceArray([
+		'{{ADDRESS}}'  => $credentials['ip'],
+		'{{USERNAME}}' => $credentials['user'],
+		'{{PASSWORD}}' => $credentials['pass'],
+	], $configurationFile);
 
-    file_put_contents($fileName, $configurationFile);
+	file_put_contents($fileName, $configurationFile);
 }
 
 /**
  * Replace all items from an Array unto a String.
  *
- * @param array  $elements
+ * @param array $elements
  * @param string $needle
  *
  * @return mixed|string
  */
 function replaceArray(array $elements, string $needle)
 {
-    foreach ($elements as $oldText => $newText) {
-        $needle = str_replace($oldText, $newText, $needle);
-    }
+	foreach ($elements as $oldText => $newText) {
+		$needle = str_replace($oldText, $newText, $needle);
+	}
 
-    return $needle;
+	return $needle;
 }
 
 /**
@@ -73,32 +73,32 @@ function replaceArray(array $elements, string $needle)
  */
 function createBucket(array $details, array $credentials)
 {
-    $bucket = [
-        'authType'      => 'sasl',
-        'bucketType'    => 'membase',
-        'flushEnabled'  => 0,
-        'name'          => $details['name'],
-        'ramQuotaMB'    => $details['memory'],
-        'replicaIndex'  => 0,
-        'replicaNumber' => 1,
-        'threadsNumber' => 3,
-    ];
+	$bucket = [
+		'authType'      => 'sasl',
+		'bucketType'    => 'membase',
+		'flushEnabled'  => 0,
+		'name'          => $details['name'],
+		'ramQuotaMB'    => $details['memory'],
+		'replicaIndex'  => 0,
+		'replicaNumber' => 1,
+		'threadsNumber' => 3,
+	];
 
-    $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
+	$response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
 
-    $try = 0;
+	$try = 0;
 
-    while ($response['info']['http_code'] != 202) {
-        $response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
+	while ($response['info']['http_code'] != 202) {
+		$response = communicateCouchbase('pools/default/buckets', $credentials, $bucket);
 
-        if (($try++) >= 10) {
-            echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
+		if (($try++) >= 10) {
+			echo writeText("Failed to create Bucket on Couchbase after {$try} times. Aborting.", '41', true);
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 
-    return $response['info']['http_code'] == 202;
+	return $response['info']['http_code'] == 202;
 }
 
 /**
@@ -108,52 +108,52 @@ function createBucket(array $details, array $credentials)
  */
 function insertMetadata(stdClass $details)
 {
-    try {
-        $metadataBucket = database()->getConnection()->openBucket('metadata');
+	try {
+		$metadataBucket = database()->getConnection()->openBucket('metadata');
 
-        $metadataBucket->insert((string) $details->code, [
-            'code'    => $details->code,
-            'message' => $details->message,
-        ]);
-    } catch (Exception $e) {
-        echo writeText('Failed to Insert a Metadata.', '1;31', true);
+		$metadataBucket->insert((string)$details->code, [
+			'code'    => $details->code,
+			'message' => $details->message,
+		]);
+	} catch (Exception $e) {
+		echo writeText('Failed to Insert a Metadata.', '1;31', true);
 
-        var_dump($e);
-    }
+		var_dump($e);
+	}
 }
 
 /**
  * Communicate with the Couchbase CLI.
  *
  * @param string $url
- * @param array  $credentials
- * @param mixed  $post
+ * @param array $credentials
+ * @param mixed $post
  *
  * @return array|object
  */
 function communicateCouchbase(string $url, array $credentials, $post = null)
 {
-    $ch = curl_init();
+	$ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_USERPWD, "{$credentials['user']}:{$credentials['pass']}");
-    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($ch, CURLOPT_URL, "http://{$credentials['ip']}:8091/{$url}");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_USERPWD, "{$credentials['user']}:{$credentials['pass']}");
+	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	curl_setopt($ch, CURLOPT_URL, "http://{$credentials['ip']}:8091/{$url}");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    if ($post != null) {
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    }
+	if ($post != null) {
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	}
 
-    $server_output = curl_exec($ch);
+	$server_output = curl_exec($ch);
 
-    $info = curl_getinfo($ch);
+	$info = curl_getinfo($ch);
 
-    curl_setopt($ch, CURLOPT_VERBOSE, true);
-    curl_close($ch);
+	curl_setopt($ch, CURLOPT_VERBOSE, true);
+	curl_close($ch);
 
-    return ['body' => json_decode($server_output), 'info' => $info];
+	return ['body' => json_decode($server_output), 'info' => $info];
 }
 
 /**
@@ -161,13 +161,13 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
  *
  * @param string $text
  * @param string $color
- * @param bool   $endOfLine
+ * @param bool $endOfLine
  *
  * @return string
  */
 function writeText(string $text, string $color = '0', bool $endOfLine = false)
 {
-    return "\033[{$color}m{$text}\033[0m ".($endOfLine ? PHP_EOL : '');
+	return "\033[{$color}m{$text}\033[0m " . ($endOfLine ? PHP_EOL : '');
 }
 
 /**
@@ -177,7 +177,7 @@ function writeText(string $text, string $color = '0', bool $endOfLine = false)
  */
 function checkLibrary()
 {
-    return class_exists('CouchbaseCluster');
+	return class_exists('CouchbaseCluster');
 }
 
 /**
@@ -187,7 +187,7 @@ function checkLibrary()
  */
 function checkVersion()
 {
-    return PHP_MAJOR_VERSION >= 7;
+	return PHP_MAJOR_VERSION >= 7;
 }
 
 /**
@@ -197,43 +197,53 @@ function checkVersion()
  */
 function setCredentials()
 {
-    echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.',
-        '0;32', true);
+	if (!empty(getenv('COUCHBASE_HOST')) && !empty(getenv('COUCHBASE_USERNAME')) && !empty(getenv('COUCHBASE_PASSWORD'))) {
+		echo writeText('Retrieving Database Configuration from Environment File...', '0;32', true);
 
-    if (option('user') !== null && option('pass') !== null && option('address') !== null) {
-        return ['ip' => option('address'), 'user' => option('user'), 'pass' => option('pass')];
-    }
+		return [
+			'ip'   => getenv('COUCHBASE_HOST'),
+			'user' => getenv('COUCHBASE_USERNAME'),
+			'pass' => getenv('COUCHBASE_PASSWORD')
+		];
+	}
 
-    echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
+	echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.',
+		'0;32', true);
 
-    $ip = str_replace("\n", '', fgets(STDIN));
+	if (option('user') !== null && option('pass') !== null && option('address') !== null) {
+		return ['ip' => option('address'), 'user' => option('user'), 'pass' => option('pass')];
+	}
 
-    echo 'Please input Couchbase Username (eg.: user): ';
+	echo 'Please input Couchbase Server Address (eg.: 127.0.0.1): ';
 
-    $user = str_replace("\n", '', fgets(STDIN));
+	$ip = str_replace("\n", '', fgets(STDIN));
 
-    echo 'Please input Couchbase Password (eg.: pass): ';
+	echo 'Please input Couchbase Username (eg.: user): ';
 
-    $pass = str_replace("\n", '', fgets(STDIN));
+	$user = str_replace("\n", '', fgets(STDIN));
 
-    return str_replace(["\n", "\t", "\r"], '', ['ip' => $ip, 'user' => $user, 'pass' => $pass]);
+	echo 'Please input Couchbase Password (eg.: pass): ';
+
+	$pass = str_replace("\n", '', fgets(STDIN));
+
+	return str_replace(["\n", "\t", "\r"], '', ['ip' => $ip, 'user' => $user, 'pass' => $pass]);
 }
 
 /**
  * CLI Progress Bar.
  *
- * @param int    $done
- * @param int    $total
+ * @param int $done
+ * @param int $total
  * @param string $info
- * @param int    $width
+ * @param int $width
  *
  * @return string
  */
 function progressBar($done, $total, $info = '', $width = 50)
 {
-    $percent = round(($done * 100) / $total);
-    $bar = round(($width * $percent) / 100);
+	$percent = round(($done * 100) / $total);
+	$bar = round(($width * $percent) / 100);
 
-    return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat('=', $bar),
-        str_repeat(' ', $width - $bar), $info);
+	return sprintf("%s%%[%s>%s]%s\r", $percent, str_repeat('=', $bar),
+		str_repeat(' ', $width - $bar), $info);
 }

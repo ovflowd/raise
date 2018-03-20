@@ -35,29 +35,29 @@ use App\Factories\Log as LogFactory;
  */
 class Log extends Facade
 {
-    /**
-     * Add a Log Entry on the Database.
-     *
-     * @param string             $element    Unique Identifier of the Inserted Element (if exists)
-     * @param string             $table      Related Table of the Operations related to this Log entry
-     * @param string             $details    Details upon the Operation behind the Log
-     * @param string|object|null $givenToken A Token (JWT) can also be given
-     *
-     * @return bool|string If added successfully the log entry, if not false.
-     */
-    public static function log(string $element, string $table, string $details, $givenToken = null)
-    {
-        global $token;
+	/**
+	 * Add a Log Entry on the Database.
+	 *
+	 * @param string $element Unique Identifier of the Inserted Element (if exists)
+	 * @param string $table Related Table of the Operations related to this Log entry
+	 * @param string $details Details upon the Operation behind the Log
+	 * @param string|object|null $givenToken A Token (JWT) can also be given
+	 *
+	 * @return bool|string If added successfully the log entry, if not false.
+	 */
+	public static function log(string $element, string $table, string $details, $givenToken = null)
+	{
+		global $token;
 
-        $content = [
-            'token'   => ($givenToken ?? ($token(false) ?: null)),
-            'element' => $element,
-            'table'   => $table,
-            'details' => $details,
-        ];
+		$content = [
+			'token'   => ($givenToken ?? ($token(false) ?: null)),
+			'element' => $element,
+			'table'   => $table,
+			'details' => $details,
+		];
 
-        $time = microtime(true);
+		$time = microtime(true);
 
-        return LogFactory::add("log-{$table}-{$time}", $content);
-    }
+		return LogFactory::add("log-{$table}-{$time}", $content);
+	}
 }

@@ -32,52 +32,51 @@ use App\Models\Communication\Model;
  */
 class Chart extends Model
 {
-    /**
-     * The Label of the DataSet.
-     *
-     * @required
-     *
-     * @var string
-     */
-    public $label = '';
+	/**
+	 * The Label of the DataSet.
+	 *
+	 * @required
+	 *
+	 * @var string
+	 */
+	public $label = '';
 
-    /**
-     * The content of the Data Set.
-     *
-     * @required
-     *
-     * @var array
-     */
-    public $data = [];
+	/**
+	 * The content of the Data Set.
+	 *
+	 * @required
+	 *
+	 * @var array
+	 */
+	public $data = [];
+	/**
+	 * If the content of the Lines will be filled
+	 *  by the same color of the line.
+	 *
+	 * Options: true (start), end, origin, false (none)
+	 *
+	 * @var string|bool
+	 */
+	public $fill = 'origin';
 
-    /**
-     * Iterate between an Data Set of Data Documents
-     *  and rearrange it to the Chart.JS Data Document pattern.
-     *
-     * @see https://www.ietf.org/rfc/rfc2822.txt
-     *
-     * @param array $data the Data Set to be Hooked
-     */
-    public function setData(array $data)
-    {
-        $temporary = [];
+	/**
+	 * Iterate between an Data Set of Data Documents
+	 *  and rearrange it to the Chart.JS Data Document pattern.
+	 *
+	 * @see https://www.ietf.org/rfc/rfc2822.txt
+	 *
+	 * @param array $data the Data Set to be Hooked
+	 */
+	public function setData(array $data)
+	{
+		$temporary = [];
 
-        foreach ($data as $value) {
-            $temporary[date('Y-m-d h:i', $value->document->clientTime)]++;
-        }
+		foreach ($data as $value) {
+			$temporary[date('Y-m-d h:i', $value->document->clientTime)]++;
+		}
 
-        foreach ($temporary as $date => $amount) {
-            $this->data[] = ['x' => $date, 'y' => $amount];
-        }
-    }
-
-    /**
-     * If the content of the Lines will be filled
-     *  by the same color of the line.
-     *
-     * Options: true (start), end, origin, false (none)
-     *
-     * @var string|bool
-     */
-    public $fill = 'origin';
+		foreach ($temporary as $date => $amount) {
+			$this->data[] = ['x' => $date, 'y' => $amount];
+		}
+	}
 }

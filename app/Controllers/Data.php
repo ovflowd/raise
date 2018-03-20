@@ -87,58 +87,6 @@ class Data extends Controller
 	}
 
 	/**
-	 * List Process.
-	 *
-	 * List a set of Data or a single Data based on the Request Parameters
-	 *
-	 * @param array|object|null $data the given Data to be Mapped
-	 * @param Model $response the Response Model
-	 * @param callable $callback an optional callback to treat the mapping result
-	 */
-	public function list($data = null, Model $response = null, $callback = null)
-	{
-		$query = $this->filter();
-
-		$data = database()->select('data', $query);
-
-		parent::list($data, new DataResponse(), function ($data) {
-			return ['data' => json()::mapSet(new DataDefinition(), $data)];
-		});
-	}
-
-	/**
-	 * List All RAISe Content Process.
-	 *
-	 * List all Data Contained in RAISe
-	 */
-	public function listAll()
-	{
-		// Actually we need providing a time.
-		if(request()::query('interval') === false) {
-			return response()::message(400, 'Missing required Parameters (interval)');
-		}
-
-		// Get all Correspondent Data
-		$data = database()->select('data', parent::filter());
-
-		// Get all Correspondent Services
-		$services = database()->select('service', parent::filter());
-
-		// Get all Correspondent Clients
-		$clients = database()->select('client', parent::filter());
-
-		parent::list(compact('data', 'services', 'clients'), new AllResponse(), function (array $data) {
-			return [
-				'data'     => json()::mapSet(new DataDefinition(), $data['data']),
-				'services' => json()::mapSet(new ServiceDefinition(), $data['services']),
-				'clients'  => json()::mapSet(new ClientDefinition(), $data['clients'])
-			];
-		}, 'documentWId');
-
-		return false;
-	}
-
-	/**
 	 * Filter Input Data.
 	 *
 	 * Used to filter and apply a several filters and patches
@@ -169,5 +117,57 @@ class Data extends Controller
 		}
 
 		return parent::filter($query);
+	}
+
+	/**
+	 * List Process.
+	 *
+	 * List a set of Data or a single Data based on the Request Parameters
+	 *
+	 * @param array|object|null $data the given Data to be Mapped
+	 * @param Model $response the Response Model
+	 * @param callable $callback an optional callback to treat the mapping result
+	 */
+	public function list($data = null, Model $response = null, $callback = null)
+	{
+		$query = $this->filter();
+
+		$data = database()->select('data', $query);
+
+		parent::list($data, new DataResponse(), function ($data) {
+			return ['data' => json()::mapSet(new DataDefinition(), $data)];
+		});
+	}
+
+	/**
+	 * List All RAISe Content Process.
+	 *
+	 * List all Data Contained in RAISe
+	 */
+	public function listAll()
+	{
+		// Actually we need providing a time.
+		if (request()::query('interval') === false) {
+			return response()::message(400, 'Missing required Parameters (interval)');
+		}
+
+		// Get all Correspondent Data
+		$data = database()->select('data', parent::filter());
+
+		// Get all Correspondent Services
+		$services = database()->select('service', parent::filter());
+
+		// Get all Correspondent Clients
+		$clients = database()->select('client', parent::filter());
+
+		parent::list(compact('data', 'services', 'clients'), new AllResponse(), function (array $data) {
+			return [
+				'data'     => json()::mapSet(new DataDefinition(), $data['data']),
+				'services' => json()::mapSet(new ServiceDefinition(), $data['services']),
+				'clients'  => json()::mapSet(new ClientDefinition(), $data['clients'])
+			];
+		}, 'documentWId');
+
+		return false;
 	}
 }

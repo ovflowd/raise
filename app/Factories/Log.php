@@ -28,45 +28,45 @@ use App\Models\Response\Log as LogResponse;
  */
 class Log extends Factory
 {
-    /**
-     * Get an Log Entry.
-     *
-     * If the element exists return in,
-     * If not return a false boolean.
-     *
-     * @param string $element unique identifier of the log entry
-     *
-     * @return object|array|bool the log entry or false if didn't found it
-     */
-    public static function get(string $element)
-    {
-        return database()->select('log', $element);
-    }
+	/**
+	 * Get an Log Entry.
+	 *
+	 * If the element exists return in,
+	 * If not return a false boolean.
+	 *
+	 * @param string $element unique identifier of the log entry
+	 *
+	 * @return object|array|bool the log entry or false if didn't found it
+	 */
+	public static function get(string $element)
+	{
+		return database()->select('log', $element);
+	}
 
-    /**
-     * Add an Log entry.
-     *
-     * @param string       $element the unique identifier of the log
-     * @param array|object $content the content of the element
-     *
-     * @return bool|string the unique identifier if added successfully or false if not
-     */
-    public static function add(string $element, $content)
-    {
-        return database()->insert('log', json()::map(new LogResponse(), $content), $element);
-    }
+	/**
+	 * Add an Log entry.
+	 *
+	 * @param string $element the unique identifier of the log
+	 * @param array|object $content the content of the element
+	 *
+	 * @return bool|string the unique identifier if added successfully or false if not
+	 */
+	public static function add(string $element, $content)
+	{
+		return database()->insert('log', json()::map(new LogResponse(), $content), $element);
+	}
 
-    /**
-     * Remove an Element.
-     *
-     * Logs aren't removable so will return false in any case
-     *
-     * @param string $element the element to be removed
-     *
-     * @return bool if removed successfully or not
-     */
-    public static function remove(string $element)
-    {
-        return false;
-    }
+	/**
+	 * Remove an Element.
+	 *
+	 * Logs aren't removable so will return false in any case
+	 *
+	 * @param string $element the element to be removed
+	 *
+	 * @return bool if removed successfully or not
+	 */
+	public static function remove(string $element)
+	{
+		return false;
+	}
 }

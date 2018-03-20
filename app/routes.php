@@ -21,12 +21,12 @@
 
 // Main Route
 $router()->get('/', function () {
-    response()::message(200, 'Welcome to RAISe');
+	response()::message(200, 'Welcome to RAISe');
 });
 
 // Easter Egg
 $router()->get('/tea', function () {
-    response()::message(418, 'RAISe easter egg');
+	response()::message(418, 'RAISe easter egg');
 });
 
 /*
@@ -36,19 +36,19 @@ $router()->get('/tea', function () {
 */
 
 $router()->mount('/client', function () use ($router, $response, $token) {
-    // Client Security for List Clients
-    $router()->before('GET', '/*', function () use ($router, $response, $token) {
-        $token();
-    });
+	// Client Security for List Clients
+	$router()->before('GET', '/*', function () use ($router, $response, $token) {
+		$token();
+	});
 
-    // List Clients
-    $router()->get('/', '\App\Controllers\Client@list');
+	// List Clients
+	$router()->get('/', '\App\Controllers\Client@list');
 
-    // Register a Client
-    $router()->post('/register', '\App\Controllers\Client@register');
+	// Register a Client
+	$router()->post('/register', '\App\Controllers\Client@register');
 
-    // Revalidate a Client
-    $router()->post('/revalidate', '\App\Controllers\Client@revalidate');
+	// Revalidate a Client
+	$router()->post('/revalidate', '\App\Controllers\Client@revalidate');
 });
 
 /*
@@ -58,16 +58,16 @@ $router()->mount('/client', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/service', function () use ($router, $response, $token) {
-    // Service Security for Register Services and List Services
-    $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
-        $token();
-    });
+	// Service Security for Register Services and List Services
+	$router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
+		$token();
+	});
 
-    // Register a Service
-    $router()->post('/register', '\App\Controllers\Service@register');
+	// Register a Service
+	$router()->post('/register', '\App\Controllers\Service@register');
 
-    // List Service
-    $router()->get('/', '\App\Controllers\Service@list');
+	// List Service
+	$router()->get('/', '\App\Controllers\Service@list');
 });
 
 /*
@@ -77,19 +77,19 @@ $router()->mount('/service', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/data', function () use ($router, $response, $token) {
-    // Data Security for Register Data and List Data
-    $router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
-        $token();
-    });
+	// Data Security for Register Data and List Data
+	$router()->before('GET|POST', '/*', function () use ($router, $response, $token) {
+		$token();
+	});
 
-    // Register Data
-    $router()->post('/register', '\App\Controllers\Data@register');
+	// Register Data
+	$router()->post('/register', '\App\Controllers\Data@register');
 
-    // List Data
-    $router()->get('/', '\App\Controllers\Data@list');
+	// List Data
+	$router()->get('/', '\App\Controllers\Data@list');
 
-    // List Data Values
-    $router()->get('/values', '\App\Controllers\Data@values');
+	// List Data Values
+	$router()->get('/values', '\App\Controllers\Data@values');
 });
 
 /*
@@ -99,22 +99,22 @@ $router()->mount('/data', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/permissions', function () use ($router, $response, $token) {
-    // Data Security for all Operations on Permissions
-    $router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
-        $token();
-    });
+	// Data Security for all Operations on Permissions
+	$router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
+		$token();
+	});
 
-    // Create a Permission
-    $router()->post('/register', '\App\Controllers\Permissions@register');
+	// Create a Permission
+	$router()->post('/register', '\App\Controllers\Permissions@register');
 
-    // List Permissions
-    $router()->get('/', '\App\Controllers\Permissions@list');
+	// List Permissions
+	$router()->get('/', '\App\Controllers\Permissions@list');
 
-    // Update a Permission
-    $router()->put('/update', '\App\Controllers\Permissions@update');
+	// Update a Permission
+	$router()->put('/update', '\App\Controllers\Permissions@update');
 
-    // Delete a Permission
-    $router()->delete('/remove', '\App\Controllers\Permissions@remove');
+	// Delete a Permission
+	$router()->delete('/remove', '\App\Controllers\Permissions@remove');
 });
 
 /*
@@ -124,22 +124,22 @@ $router()->mount('/permissions', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/relations', function () use ($router, $response, $token) {
-    // Data Security for all Operations on Relations
-    $router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
-        $token();
-    });
+	// Data Security for all Operations on Relations
+	$router()->before('GET|POST|PUT|DELETE', '/*', function () use ($router, $response, $token) {
+		$token();
+	});
 
-    // Create a Relation
-    $router()->post('/register', '\App\Controllers\Relations@register');
+	// Create a Relation
+	$router()->post('/register', '\App\Controllers\Relations@register');
 
-    // List Relations
-    $router()->get('/', '\App\Controllers\Relations@list');
+	// List Relations
+	$router()->get('/', '\App\Controllers\Relations@list');
 
-    // Update a Relation
-    $router()->put('/update', '\App\Controllers\Relations@update');
+	// Update a Relation
+	$router()->put('/update', '\App\Controllers\Relations@update');
 
-    // Delete a Relation
-    $router()->delete('/remove', '\App\Controllers\Relations@remove');
+	// Delete a Relation
+	$router()->delete('/remove', '\App\Controllers\Relations@remove');
 });
 
 /*
@@ -149,11 +149,11 @@ $router()->mount('/relations', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/manage', function () use ($router, $response, $token) {
-    // Login Page
-    $router()->get('/', '\App\Controllers\Manage@login');
+	// Login Page
+	$router()->get('/', '\App\Controllers\Manage@login');
 
-    // Configurations Page
-    $router()->get('/config', '\App\Controllers\Manage@config');
+	// Configurations Page
+	$router()->get('/config', '\App\Controllers\Manage@config');
 });
 
 /*
@@ -163,20 +163,20 @@ $router()->mount('/manage', function () use ($router, $response, $token) {
 */
 
 $router()->mount('/view', function () use ($router, $response, $token) {
-    // Index Page
-    $router()->get('/', '\App\Controllers\Metrics@welcome');
+	// Index Page
+	$router()->get('/', '\App\Controllers\Metrics@welcome');
 
-    // Search Route
-    $router()->get('/search', '\App\Controllers\Metrics@search');
+	// Search Route
+	$router()->get('/search', '\App\Controllers\Metrics@search');
 
-    // Show Dashboard
-    $router()->get('/home', '\App\Controllers\Metrics@home');
+	// Show Dashboard
+	$router()->get('/home', '\App\Controllers\Metrics@home');
 
-    // Hook a Client
-    $router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
+	// Hook a Client
+	$router()->get('/client/(\w+)', '\App\Controllers\Metrics@client');
 
-    // Hook a Service Data
-    $router()->get('/service/(\w+)', '\App\Controllers\Metrics@data');
+	// Hook a Service Data
+	$router()->get('/service/(\w+)', '\App\Controllers\Metrics@data');
 });
 
 /*

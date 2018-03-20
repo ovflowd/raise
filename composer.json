@@ -38,27 +38,8 @@
     "email": "contact@uiot.org",
     "github": "https://github.com/uiot/"
   },
-  "authors": [
-    {
-      "name": "Claudio Santoro",
-      "email": "claudio.santoro@redes.unb.br"
-    },
-    {
-      "name": "Sérgio Bittencourt",
-      "email": "sergio.augusto@redes.unb.br"
-    },
-    {
-      "name": "Lucas Alves",
-      "email": "lucas.alves@uiot.org"
-    }
-  ],
-  "require-dev": {
-    "swagger-api/swagger-ui": "^3.0",
-    "phpdocumentor/phpdocumentor": "^2.9",
-    "sant0ro/phpdoc-md": "^0.5.0"
-  },
   "scripts": {
-    "post-create-project-cmd": "cd install/ && php install.php"
+    "post-create-project-cmd": "php install/install.php"
   },
   "require": {
     "php": "^7.0",
@@ -67,7 +48,8 @@
     "firebase/php-jwt": "^4.0",
     "netresearch/jsonmapper": "^1.1",
     "filp/whoops": "^2.1",
-    "jenssegers/blade": "^1.1"
+    "jenssegers/blade": "^1.1",
+    "vlucas/phpdotenv": "^2.4"
   },
   "autoload": {
     "psr-4": {

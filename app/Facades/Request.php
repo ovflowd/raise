@@ -31,145 +31,145 @@ use Bramus\Router\Router;
  */
 class Request extends Facade
 {
-    /**
-     * Requested Page Sent Headers.
-     *
-     * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields Available Headers
-     * @see Router (used to gather headers)
-     *
-     * @var array of headers
-     */
-    private static $headers = [];
+	/**
+	 * Requested Page Sent Headers.
+	 *
+	 * @see https://en.wikipedia.org/wiki/List_of_HTTP_header_fields Available Headers
+	 * @see Router (used to gather headers)
+	 *
+	 * @var array of headers
+	 */
+	private static $headers = [];
 
-    /**
-     * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS).
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html HTTP Methods
-     *
-     * @var string the requested method
-     */
-    private static $method = 'GET';
+	/**
+	 * Requested Page Method (GET, POST, PUT, DELETE, OPTIONS).
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html HTTP Methods
+	 *
+	 * @var string the requested method
+	 */
+	private static $method = 'GET';
 
-    /**
-     * Requested Page Body (POST, PUT).
-     *
-     * A Payload that was sent on the Request
-     * On RAISe will be used as Registering of Data
-     *
-     * @var object|array
-     */
-    private static $body;
+	/**
+	 * Requested Page Body (POST, PUT).
+	 *
+	 * A Payload that was sent on the Request
+	 * On RAISe will be used as Registering of Data
+	 *
+	 * @var object|array
+	 */
+	private static $body;
 
-    /**
-     * Requested Page Query String.
-     *
-     * @see https://en.wikipedia.org/wiki/Query_string Documentation of QS
-     *
-     * @var array
-     */
-    private static $query = [];
+	/**
+	 * Requested Page Query String.
+	 *
+	 * @see https://en.wikipedia.org/wiki/Query_string Documentation of QS
+	 *
+	 * @var array
+	 */
+	private static $query = [];
 
-    /**
-     * Prepare the RequestFacade with the Requested Page Data.
-     *
-     * @see https://secure.php.net/manual/en/reserved.variables.server.php $_SERVER Manual
-     *
-     * @param array  $headers Given Headers
-     * @param string $method  Given Requested Method
-     * @param array  $server  $_SERVER super Global
-     */
-    public static function prepare(array $headers, string $method, array $server)
-    {
-        self::$headers = $headers;
+	/**
+	 * Prepare the RequestFacade with the Requested Page Data.
+	 *
+	 * @see https://secure.php.net/manual/en/reserved.variables.server.php $_SERVER Manual
+	 *
+	 * @param array $headers Given Headers
+	 * @param string $method Given Requested Method
+	 * @param array $server $_SERVER super Global
+	 */
+	public static function prepare(array $headers, string $method, array $server)
+	{
+		self::$headers = $headers;
 
-        self::$method = $method;
+		self::$method = $method;
 
-        parse_str(parse_url($server['REQUEST_URI'], PHP_URL_QUERY), $queryArray);
+		parse_str(parse_url($server['REQUEST_URI'], PHP_URL_QUERY), $queryArray);
 
-        self::$query = $queryArray;
+		self::$query = $queryArray;
 
-        $phpInput = file_get_contents('php://input');
+		$phpInput = file_get_contents('php://input');
 
-        self::$body = json()::jsonDecode(empty($phpInput) ? '{}' : $phpInput);
-    }
+		self::$body = json()::jsonDecode(empty($phpInput) ? '{}' : $phpInput);
+	}
 
-    /**
-     * Set a Request Body.
-     *
-     * This is useful for overwriting the
-     * Request Body with another one.
-     *
-     * @param object|\stdClass $body
-     */
-    public static function setBody($body)
-    {
-        self::$body = $body;
-    }
+	/**
+	 * Set a Request Body.
+	 *
+	 * This is useful for overwriting the
+	 * Request Body with another one.
+	 *
+	 * @param object|\stdClass $body
+	 */
+	public static function setBody($body)
+	{
+		self::$body = $body;
+	}
 
-    /**
-     * Return Requested Page Method.
-     *
-     * @return string
-     */
-    public static function method()
-    {
-        return self::$method;
-    }
+	/**
+	 * Return Requested Page Method.
+	 *
+	 * @return string
+	 */
+	public static function method()
+	{
+		return self::$method;
+	}
 
-    /**
-     * Return Requested Page Sent Headers.
-     *
-     * @param string|null $key specify a header to be returned
-     *
-     * @return array|bool the entire set of headers or only a value of a specific header
-     */
-    public static function headers(string $key = null)
-    {
-        if ($key == null) {
-            return self::$headers;
-        }
+	/**
+	 * Return Requested Page Sent Headers.
+	 *
+	 * @param string|null $key specify a header to be returned
+	 *
+	 * @return array|bool the entire set of headers or only a value of a specific header
+	 */
+	public static function headers(string $key = null)
+	{
+		if ($key == null) {
+			return self::$headers;
+		}
 
-        return array_key_exists($key, self::$headers) ? self::$headers[$key] : false;
-    }
+		return array_key_exists($key, self::$headers) ? self::$headers[$key] : false;
+	}
 
-    /**
-     * Return the Requested Body or a Parameter of the Body.
-     *
-     * Note.: Always an Object
-     * Note.: Return false if doesn't exists
-     *
-     * @param string|null $key an property/value of the payload
-     *
-     * @return array|object|bool the entire payload or a value of it (if exists)
-     */
-    public static function body(string $key = null)
-    {
-        if ($key == null) {
-            return self::$body;
-        }
+	/**
+	 * Return the Requested Body or a Parameter of the Body.
+	 *
+	 * Note.: Always an Object
+	 * Note.: Return false if doesn't exists
+	 *
+	 * @param string|null $key an property/value of the payload
+	 *
+	 * @return array|object|bool the entire payload or a value of it (if exists)
+	 */
+	public static function body(string $key = null)
+	{
+		if ($key == null) {
+			return self::$body;
+		}
 
-        if (is_array(self::$body)) {
-            return array_key_exists($key, self::$body) ? self::$body[$key] : false;
-        }
+		if (is_array(self::$body)) {
+			return array_key_exists($key, self::$body) ? self::$body[$key] : false;
+		}
 
-        return property_exists(self::$body, $key) ? self::$body->{$key} : false;
-    }
+		return property_exists(self::$body, $key) ? self::$body->{$key} : false;
+	}
 
-    /**
-     * Return the Query String or a Parameter from the Query String if exists.
-     *
-     * Note.: Return false if doesn't exists
-     *
-     * @param string|null $key a specific query string element
-     *
-     * @return array|bool the entire query string as array or a value of it (if exists)
-     */
-    public static function query(string $key = null)
-    {
-        if ($key == null) {
-            return self::$query;
-        }
+	/**
+	 * Return the Query String or a Parameter from the Query String if exists.
+	 *
+	 * Note.: Return false if doesn't exists
+	 *
+	 * @param string|null $key a specific query string element
+	 *
+	 * @return array|bool the entire query string as array or a value of it (if exists)
+	 */
+	public static function query(string $key = null)
+	{
+		if ($key == null) {
+			return self::$query;
+		}
 
-        return array_key_exists($key, self::$query) ? self::$query[$key] : false;
-    }
+		return array_key_exists($key, self::$query) ? self::$query[$key] : false;
+	}
 }

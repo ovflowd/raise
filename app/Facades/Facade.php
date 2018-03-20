@@ -28,13 +28,13 @@ namespace App\Facades;
  */
 abstract class Facade
 {
-    /**
-     * Get the Facade Instance.
-     *
-     * @return Facade|string
-     */
-    public static function get()
-    {
-        return static::class;
-    }
+	/**
+	 * Get the Facade Instance.
+	 *
+	 * @return Facade|string
+	 */
+	public static function get()
+	{
+		return static::class;
+	}
 }
