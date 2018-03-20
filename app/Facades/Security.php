@@ -65,8 +65,9 @@ class Security extends Facade
 
 		database()->delete('token', $token->token);
 
-		return ['jwtHash'  => self::insertToken($tokenModel->clientId, $tokenModel->groupId),
-		        'clientId' => $tokenModel->clientId
+		return [
+			'jwtHash'  => self::insertToken($tokenModel->clientId, $tokenModel->groupId),
+			'clientId' => $tokenModel->clientId
 		];
 	}
 

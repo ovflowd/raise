@@ -200,6 +200,10 @@ function setCredentials()
 	if (!empty(getenv('COUCHBASE_HOST')) && !empty(getenv('COUCHBASE_USERNAME')) && !empty(getenv('COUCHBASE_PASSWORD'))) {
 		echo writeText('Retrieving Database Configuration from Environment File...', '0;32', true);
 
+		echo getenv('COUCHBASE_HOST');
+		echo getenv('COUCHBASE_USERNAME');
+		echo getenv('COUCHBASE_PASSWORD');
+
 		return [
 			'ip'   => getenv('COUCHBASE_HOST'),
 			'user' => getenv('COUCHBASE_USERNAME'),

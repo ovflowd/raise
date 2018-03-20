@@ -11,4 +11,6 @@ wait_for_start() {
 
 wait_for_start wget -q couchbase:8091
 
-php /app/install/install.php
+cd /app/
+
+php install/install.php
