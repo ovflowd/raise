@@ -22,9 +22,9 @@ $progress = 1;
 echo progressBar(0, 60);
 
 foreach ($metadataJson as $metadata) {
-	insertMetadata($metadata);
+    insertMetadata($metadata);
 
-	echo progressBar($progress++, 60);
+    echo progressBar($progress++, 60);
 }
 
 echo progressBar(60, 60);

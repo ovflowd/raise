@@ -16,17 +16,10 @@ RUN pecl install couchbase
 
 RUN docker-php-ext-install json
 RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install curl
 RUN docker-php-ext-enable igbinary
 RUN docker-php-ext-enable pcs
 RUN docker-php-ext-enable couchbase
 
 RUN echo "register_argc_argv = true" >> /usr/local/etc/php/php.ini
 RUN echo "register_argc_argv = true" >> /etc/php.ini
-
-WORKDIR /app
-
-ADD raise-init.sh .
-ADD .env .
-
-RUN sed -i 's/\r$//' raise-init.sh
-RUN sed -i 's/\r$//' .env
