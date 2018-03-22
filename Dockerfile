@@ -23,6 +23,10 @@ RUN docker-php-ext-enable couchbase
 RUN echo "register_argc_argv = true" >> /usr/local/etc/php/php.ini
 RUN echo "register_argc_argv = true" >> /etc/php.ini
 
-ADD raise-init.sh /
+WORKDIR /app
 
-RUN sed -i 's/\r$//' /raise-init.sh
+ADD raise-init.sh .
+ADD .env .
+
+RUN sed -i 's/\r$//' raise-init.sh
+RUN sed -i 's/\r$//' .env

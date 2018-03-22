@@ -49,7 +49,8 @@
     "netresearch/jsonmapper": "^1.1",
     "filp/whoops": "^2.1",
     "jenssegers/blade": "^1.1",
-    "vlucas/phpdotenv": "^2.4"
+    "vlucas/phpdotenv": "^2.4",
+    "nategood/httpful": "^0.2.20"
   },
   "autoload": {
     "psr-4": {

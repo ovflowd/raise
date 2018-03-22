@@ -13,9 +13,7 @@ services:
     depends_on:
       - raise
   couchbase:
-    build:
-      context: .
-      dockerfile: couchbase.Dockerfile
+    image: couchbase/server
     volumes:
       - ./couchbase:/opt/couchbase/var
     ports:
@@ -23,8 +21,6 @@ services:
       - 8092:8092
       - 8093:8093
       - 11210:11210
-    env_file:
-      - .env
   composer:
     image: composer
     restart: 'no'
@@ -32,11 +28,11 @@ services:
       - .:/app
     command: install --no-dev
   raise:
-    restart: 'always'
+    restart: 'no'
     build:
       context: .
-      dockerfile: raise.Dockerfile
-    command: "bash /raise-init.sh"
+      dockerfile: Dockerfile
+    command: "bash /app/raise-init.sh"
     volumes_from:
       - composer
     depends_on:

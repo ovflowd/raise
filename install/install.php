@@ -89,7 +89,7 @@ try {
 
 	// Try to Authenticate
 	$connection->authenticate($authenticator);
-} catch (CouchbaseException $e) {
+} catch (Exception $e) {
 	echo writeText('Your couchbase credentials are incorrect. Please try again.', '1;31', true);
 
 	exit(1);
@@ -108,6 +108,15 @@ try {
 
 	// Clear Connection variable and Authenticator
 	$connection = $authenticator = null;
+}
+
+// Initializes the Cluster if an Environment Configuration is Present
+if (!empty(getenv('COUCHBASE_HOST')) && !empty(getenv('COUCHBASE_USERNAME')) && !empty(getenv('COUCHBASE_PASSWORD'))) {
+	echo writeText('Initializing Couchbase Cluster...', '1;31', true);
+
+
+
+	echo writeText('Couchbase Cluster Initialized!', '1;31', true);
 }
 
 // Section to create the Couchbase Buckets
