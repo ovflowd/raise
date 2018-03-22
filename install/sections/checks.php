@@ -22,10 +22,10 @@ echo writeText('This Installer will perform various checks before continuing, pl
 echo PHP_EOL;
 
 if (checkVersion()) {
-    echo writeText('[OK]', '92;1') . 'Php version check successful.' . PHP_EOL;
+    echo writeText('[OK]', '92;1') . 'php version check successful.' . PHP_EOL;
 } else {
     echo writeText('[ERROR]',
-            '91;1') . "Your PHP version isn't compatible. Php 7 or higher is needed. Currently Using: " . phpversion() . PHP_EOL;
+            '91;1') . "Your PHP version isn't compatible. php 7 or higher is needed. Currently Using: " . phpversion() . PHP_EOL;
 
     exit(1);
 }

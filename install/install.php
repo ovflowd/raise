@@ -25,26 +25,26 @@ set_time_limit(0);
 ini_set('register_argc_argv', true);
 
 // We don't want error reporting during execution of the script
-ini_set('display_errors', false);
+ini_set('display_errors', true);
 
-// Disable Error Reporting
-error_reporting(E_ALL ^ (E_WARNING | E_NOTICE));
+// Only Critical Errors
+ini_set('error_reporting', (E_ALL ^ (E_NOTICE | E_WARNING)));
 
 /*
  * Start the Installer Component
  */
 
+// Include Installer Functions
+require_once __DIR__ . '/functions.php';
+
+// Include Composer Autoloader
+include_once __DIR__ . '/../vendor/autoload.php';
+
 // Get Couchbase Information
 require_once __DIR__ . '/sections/checks.php';
 
-// Include Composer Autoloader
-require_once __DIR__ . '/../vendor/autoload.php';
-
 // Include Installer Functions
 require_once __DIR__ . '/../app/accessory.php';
-
-// Include Installer Functions
-require_once __DIR__ . '/functions.php';
 
 $environment = new Dotenv\Dotenv(__DIR__ . '/../');
 $environment->load();
@@ -78,7 +78,11 @@ $credentials = setCredentials();
 if (checkCluster()) {
     echo writeText('Initializing Couchbase Cluster...', '1;31', true);
 
-    createCluster($credentials, getenv('COUCHBASE_BASE_RAM'), getenv('COUCHBASE_INDEX_RAM'));
+    if (!createCluster($credentials, getenv('COUCHBASE_BASE_RAM'), getenv('COUCHBASE_INDEX_RAM'))) {
+        echo writeText("Failed to Setup Couchbase Cluster. Exiting...", '41', true);
+
+        exit(1);
+    }
 
     echo writeText('Couchbase Cluster Initialized!', '1;31', true);
 }
@@ -193,3 +197,5 @@ require_once __DIR__ . '/sections/admin.php';
 file_put_contents(__DIR__ . '/install.lock', 'installation-locked');
 
 echo "\033[92;1mSetup Finished.\033[0m" . PHP_EOL;
+
+exit(0);

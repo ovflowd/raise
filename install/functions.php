@@ -13,6 +13,8 @@
  * @copyright University of Brasília
  */
 
+use Httpful\Mime;
+
 /**
  * Return an Argument Option.
  *
@@ -133,11 +135,13 @@ function insertMetadata(stdClass $details)
  */
 function communicateCouchbase(string $url, array $credentials, $post = null)
 {
-    $request = \Httpful\Request::post("http://{$credentials['ip']}:8091/{$url}")
-        ->authenticateWith($credentials['user'], $credentials['pass']);
+    $request = ($post !== null) ? \Httpful\Request::post("http://{$credentials['ip']}:8091/{$url}")
+        : \Httpful\Request::get("http://{$credentials['ip']}:8091/{$url}");
+
+    $request->withoutStrictSsl()->authenticateWith($credentials['user'], $credentials['pass']);
 
     if ($post !== null) {
-        $request->body(http_build_query($post));
+        $request->sendsType(Mime::FORM)->body(http_build_query($post));
     }
 
     try {
@@ -161,8 +165,29 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
  */
 function createCluster(array $credentials, int $baseRam, int $indexRam)
 {
+    $response = communicateCouchbase('nodes/self/controller/settings', $credentials, [
+        'data_path' => '/opt/couchbase/var/lib/couchbase/data',
+        'index_path' => '/opt/couchbase/var/lib/couchbase/data'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Setup Settings Path.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('pools/default', $credentials, [
+        'memoryQuota' => $baseRam
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Allocate Cluster Resources.", '41', true);
+
+        return false;
+    }
+
     $response = communicateCouchbase('node/controller/setupServices', $credentials, [
-        'services' => 'index,n1ql'
+        'services' => 'kv,index,n1ql'
     ]);
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
@@ -171,13 +196,12 @@ function createCluster(array $credentials, int $baseRam, int $indexRam)
         return false;
     }
 
-    $response = communicateCouchbase('nodes/self/controller/settings', $credentials, [
-        'data_path' => '/opt/couchbase/var/lib/couchbase/data',
-        'index_path' => '/opt/couchbase/var/lib/couchbase/data'
+    $response = communicateCouchbase('settings/indexes', $credentials, [
+        'storageMode' => 'memory_optimized'
     ]);
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
-        echo writeText("Failed to Setup Settings Path.", '41', true);
+        echo writeText("Failed to Configure Cluster Indexes Mode.", '41', true);
 
         return false;
     }
@@ -190,6 +214,16 @@ function createCluster(array $credentials, int $baseRam, int $indexRam)
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
         echo writeText("Failed to Setup Couchbase Credentials.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('pools/default', $credentials, [
+        'indexMemoryQuota' => $indexRam
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Configure Cluster Indexing RAM.", '41', true);
 
         return false;
     }

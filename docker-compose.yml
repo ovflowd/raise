@@ -10,6 +10,7 @@ services:
       - composer
     links:
       - raise
+      - composer
     depends_on:
       - raise
   couchbase:
@@ -29,6 +30,9 @@ services:
     command: install --no-dev
   raise:
     restart: 'no'
+    entrypoint: ['docker-php-entrypoint']
+    expose:
+      - 9000
     build:
       context: .
       dockerfile: Dockerfile

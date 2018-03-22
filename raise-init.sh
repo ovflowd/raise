@@ -13,3 +13,5 @@ wait_for_start() {
 wait_for_start wget -qO- couchbase:8091 &> /dev/null
 
 php /app/install/install.php
+
+php-fpm

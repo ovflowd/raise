@@ -8,18 +8,19 @@ RUN apt update \
     && apt update \
     && wget -O ~/libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb \
     && dpkg --install ~/libssl.deb \
-    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential
+    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential \
+    && apt install -y zlib1g-dev
 
 RUN pecl install pcs-1.3.3
 RUN pecl install igbinary
 RUN pecl install couchbase
 
-RUN docker-php-ext-install json
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install curl
 RUN docker-php-ext-enable igbinary
 RUN docker-php-ext-enable pcs
 RUN docker-php-ext-enable couchbase
 
 RUN echo "register_argc_argv = true" >> /usr/local/etc/php/php.ini
-RUN echo "register_argc_argv = true" >> /etc/php.ini
+
+EXPOSE 9000
+
+WORKDIR /app
