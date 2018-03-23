@@ -7,7 +7,7 @@ With [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker
 
 This is an optional step in development environment.
 But, for safety reasons, set your own username and password to access the RAISe's database when you'd be in production (or even in a server).
-To do that, access the file named `.env` with your favorite text editor and type your configuration.
+To do that, access the file named `.env` with your favorite text editor and type your values.
 
 In this file, you can also configure the ammount of memory the database will be able to use.
 
