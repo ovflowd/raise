@@ -1,38 +1,31 @@
 Installation in four steps
 ------------------------------
 
-With [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed, just go to the **RAISe** installation folder and follow these four instructions:
+With [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed, just go to the **RAISe** installation folder and follow these three instructions:
 
-**First**: build the containers
+**First**: set the database up (optional)
 
-```bash
-docker-compose build
-```
+This is an optional step in development environment.
+But, for safety reasons, set your own username and password to access the RAISe's database.
+To do that, access the file named `.env` with your favorite text editor and type your configuration.
 
-**Second**: run the containers using
+In this file, you can also configure the ammount of memory the database will be able to use.
 
-```bash
-docker-compose up -d
-```
+*Note:* We recommend to use at least 4 GB as base RAM and 1 GB for index RAM.
 
-**Third**: set the database up
 
-Access the Couchbase container using `docker-compose exec couchbase bash`
-and configure it:
+**Second**: build the containers
 
 ```bash
-/opt/couchbase/bin/couchbase-cli cluster-init -c COUCHBASE-ADDRESS:8091 --cluster-username=DESIRED USER --cluster-password=DESIRED PASS --cluster-name='raise' --services=data,index,query --cluster-ramsize=CLUSTER SIZE IN MB (RAM MEMORY) --cluster-index-ramsize=256
+docker-compose build --no-cache
 ```
-*Observation:* replace `DESIRED USER`, `DESIRED PASS` and `CLUSTER SIZE IN MB (RAM MEMORY)` with your own values.
 
-**Fourth**: set RAISe up
-
-Access the RAISe container using `docker-compose exec raise bash`
-and configure it with your previously defined values:
+**Third**: run the containers using
 
 ```bash
-php /app/install/install.php
+docker-compose up
 ```
+
 
 Now you're ready to go!
 
