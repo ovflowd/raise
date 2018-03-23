@@ -33,154 +33,154 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class Test extends TestCase
 {
-    /**
-     * Configure a RAISe Test Case.
-     *
-     * Emulates a RAISe scenario with standard Data
-     * configured on the Continuous Integration Environments
-     * without requesting HTTP Requests
-     *
-     * @param array  $headers The HTTP Headers
-     * @param string $method  The Request Method
-     * @param array  $server  The php's $_SERVER environment
-     * @param string $path    Execution Path
-     */
-    protected function configureRaise(array $headers, string $method, array $server, string $path = '')
-    {
-        global $settings;
+	/**
+	 * @param ClientModel|null $model
+	 *
+	 * @return \App\Models\Communication\Model|array|object|string
+	 */
+	protected function createClient(ClientModel $model = null)
+	{
+		$this->configureRaise(['Content-Type' => 'application/json'],
+			'POST', $_SERVER, '/client/register');
 
-        $server['REQUEST_URI'] = $path;
-        $server['REQUEST_METHOD'] = $method;
-        $server['SERVER_PROTOCOL'] = 'http';
-        $server['SCRIPT_NAME'] = '/index.php';
+		$clientModel = (object)[
+			'name'       => 'Sample Test',
+			'chipset'    => '0.0',
+			'mac'        => 'FF:FF:FF:FF:FF',
+			'serial'     => 'm3t41xR3l02d3d',
+			'processor'  => 'AMD SUX-K2',
+			'channel'    => 'ieee-4chan(nel)-802154',
+			'location'   => '0:0',
+			'clientTime' => microtime(true),
+		];
 
-        $_SERVER = $server;
+		$model = is_null($model) ? $clientModel : $model;
 
-        request()::prepare($headers, $method, $server);
+		$this->executeRaise($model);
 
-        response()::prepare();
+		return response()::response();
+	}
 
-        Settings::store($settings);
-    }
+	/**
+	 * Configure a RAISe Test Case.
+	 *
+	 * Emulates a RAISe scenario with standard Data
+	 * configured on the Continuous Integration Environments
+	 * without requesting HTTP Requests
+	 *
+	 * @param array $headers The HTTP Headers
+	 * @param string $method The Request Method
+	 * @param array $server The php's $_SERVER environment
+	 * @param string $path Execution Path
+	 */
+	protected function configureRaise(array $headers, string $method, array $server, string $path = '')
+	{
+		global $settings;
 
-    /**
-     * RAISe Eexutor method.
-     *
-     * Execute's RAISe Router
-     * and let the User add a Request Body
-     *
-     * @param object|\stdClass|null $body Desired Request Body
-     */
-    protected function executeRaise($body = null)
-    {
-        // Globalize the Variables
-        global $router;
+		$server['REQUEST_URI'] = $path;
+		$server['REQUEST_METHOD'] = $method;
+		$server['SERVER_PROTOCOL'] = 'http';
+		$server['SCRIPT_NAME'] = '/index.php';
 
-        // Set a Body
-        request()::setBody($body);
+		$_SERVER = $server;
 
-        // Run the Route and set a Callback
-        $router()->run();
-    }
+		request()::prepare($headers, $method, $server);
 
-    /**
-     * @param ClientModel|null $model
-     *
-     * @return \App\Models\Communication\Model|array|object|string
-     */
-    protected function createClient(ClientModel $model = null)
-    {
-        $this->configureRaise(['Content-Type' => 'application/json'],
-            'POST', $_SERVER, '/client/register');
+		response()::prepare();
 
-        $clientModel = (object) [
-            'name'       => 'Sample Test',
-            'chipset'    => '0.0',
-            'mac'        => 'FF:FF:FF:FF:FF',
-            'serial'     => 'm3t41xR3l02d3d',
-            'processor'  => 'AMD SUX-K2',
-            'channel'    => 'ieee-4chan(nel)-802154',
-            'location'   => '0:0',
-            'clientTime' => microtime(true),
-        ];
+		Settings::store($settings);
+	}
 
-        $model = is_null($model) ? $clientModel : $model;
+	/**
+	 * RAISe Eexutor method.
+	 *
+	 * Execute's RAISe Router
+	 * and let the User add a Request Body
+	 *
+	 * @param object|\stdClass|null $body Desired Request Body
+	 */
+	protected function executeRaise($body = null)
+	{
+		// Globalize the Variables
+		global $router;
 
-        $this->executeRaise($model);
+		// Set a Body
+		request()::setBody($body);
 
-        return response()::response();
-    }
+		// Run the Route and set a Callback
+		$router()->run();
+	}
 
-    /**
-     * @param null              $token
-     * @param ServiceModel|null $model
-     *
-     * @return \App\Models\Communication\Model|array|object|string
-     */
-    protected function createService($token, ServiceModel $model = null)
-    {
-        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
-            'POST', $_SERVER, '/service/register');
+	/**
+	 * @param null $token
+	 * @param ServiceModel|null $model
+	 *
+	 * @return \App\Models\Communication\Model|array|object|string
+	 */
+	protected function createService($token, ServiceModel $model = null)
+	{
+		$this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+			'POST', $_SERVER, '/service/register');
 
-        $serviceModel = [
-            (object) [
-                'clientTime' => microtime(true),
-                'tags'       => ['example-tag'],
-                'name'       => 'Get temp',
-                'parameters' => ['humidity', 'temperature'],
-                'returnType' => 'float',
-            ],
-        ];
+		$serviceModel = [
+			(object)[
+				'clientTime' => microtime(true),
+				'tags'       => ['example-tag'],
+				'name'       => 'Get temp',
+				'parameters' => ['humidity', 'temperature'],
+				'returnType' => 'float',
+			],
+		];
 
-        $model = is_null($model) ? $serviceModel : $model;
+		$model = is_null($model) ? $serviceModel : $model;
 
-        $this->executeRaise($model);
+		$this->executeRaise($model);
 
-        return response()::response();
-    }
+		return response()::response();
+	}
 
-    /**
-     * @param null      $serviceId
-     * @param null      $token
-     * @param DataModel $model
-     *
-     * @return \App\Models\Communication\Model|array|object|string
-     */
-    protected function createData($serviceId, $token, DataModel $model = null)
-    {
-        $this->configureRaise(['Content-Type' => 'application/json', 'authorizaion' => $token],
-            'POST', $_SERVER, '/data/register');
+	/**
+	 * @param null $serviceId
+	 * @param null $token
+	 * @param DataModel $model
+	 *
+	 * @return \App\Models\Communication\Model|array|object|string
+	 */
+	protected function createData($serviceId, $token, DataModel $model = null)
+	{
+		$this->configureRaise(['Content-Type' => 'application/json', 'authorizaion' => $token],
+			'POST', $_SERVER, '/data/register');
 
-        $dataModel = [
-            (object) [
-                'clientTime' => microtime(true),
-                'tags'       => ['example-tag'],
-                'serviceId'  => $serviceId,
-                'order'      => ['humidity', 'temperature'],
-                'values'     => [['20.2', '30']],
-            ],
-        ];
+		$dataModel = [
+			(object)[
+				'clientTime' => microtime(true),
+				'tags'       => ['example-tag'],
+				'serviceId'  => $serviceId,
+				'order'      => ['humidity', 'temperature'],
+				'values'     => [['20.2', '30']],
+			],
+		];
 
-        $model = is_null($model) ? $dataModel : $model;
+		$model = is_null($model) ? $dataModel : $model;
 
-        $this->executeRaise($model);
+		$this->executeRaise($model);
 
-        return response()::response();
-    }
+		return response()::response();
+	}
 
-    /**
-     * @param $token
-     * @param $path
-     *
-     * @return \App\Models\Communication\Model|array|object|string
-     */
-    protected function createQuery($token, $path)
-    {
-        $this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
-            'GET', $_SERVER, $path);
+	/**
+	 * @param $token
+	 * @param $path
+	 *
+	 * @return \App\Models\Communication\Model|array|object|string
+	 */
+	protected function createQuery($token, $path)
+	{
+		$this->configureRaise(['Content-Type' => 'application/json', 'authorization' => $token],
+			'GET', $_SERVER, $path);
 
-        $this->executeRaise();
+		$this->executeRaise();
 
-        return response()::response();
-    }
+		return response()::response();
+	}
 }

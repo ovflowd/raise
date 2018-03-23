@@ -21,8 +21,8 @@
 $profiles->insert(security()::generateHash(),
     json()::map(new \App\Models\Communication\Profile(),
         [
-            'name'        => 'Client',
-            'uniqueName'  => 'client',
+            'name' => 'Client',
+            'uniqueName' => 'client',
             'description' => 'The clients Group',
             'permissions' => [
                 'client_read_context',

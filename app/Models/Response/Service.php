@@ -29,47 +29,47 @@ use App\Models\Communication\Model;
  */
 class Service extends Model
 {
-    /**
-     * The Applied HTTP Response Code.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
-     *
-     * @var int
-     */
-    public $code;
+	/**
+	 * The Applied HTTP Response Code.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
+	 *
+	 * @var int
+	 */
+	public $code;
 
-    /**
-     * The HTTP Response Message from the RFC.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
-     *
-     * @var string
-     */
-    public $message;
+	/**
+	 * The HTTP Response Message from the RFC.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
+	 *
+	 * @var string
+	 */
+	public $message;
 
-    /**
-     * A set of Services that will be returned on the Response.
-     *
-     * @var array
-     */
-    public $services = [];
+	/**
+	 * A set of Services that will be returned on the Response.
+	 *
+	 * @var array
+	 */
+	public $services = [];
 
-    /**
-     * Set the Services Array.
-     *
-     * Depending if is a Register or or List
-     * may be an ServiceDefinition or a simple array
-     *
-     * @param array $services array of ServiceDefinitions or simple array
-     */
-    public function setServices(array $services)
-    {
-        $this->services = array_map(function ($service) {
-            if ($service instanceof \App\Models\Communication\Service) {
-                return $service;
-            }
+	/**
+	 * Set the Services Array.
+	 *
+	 * Depending if is a Register or or List
+	 * may be an ServiceDefinition or a simple array
+	 *
+	 * @param array $services array of ServiceDefinitions or simple array
+	 */
+	public function setServices(array $services)
+	{
+		$this->services = array_map(function ($service) {
+			if ($service instanceof \App\Models\Communication\Service) {
+				return $service;
+			}
 
-            return $service;
-        }, $services);
-    }
+			return $service;
+		}, $services);
+	}
 }

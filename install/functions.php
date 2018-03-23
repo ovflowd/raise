@@ -13,6 +13,8 @@
  * @copyright University of Brasília
  */
 
+use Httpful\Mime;
+
 /**
  * Return an Argument Option.
  *
@@ -31,16 +33,16 @@ function option(string $key)
  * Create a Configuration File.
  *
  * @param string $fileName
- * @param array  $credentials
+ * @param array $credentials
  */
 function createConfigurationFile(string $fileName, array $credentials)
 {
-    $configurationFile = file_get_contents(__DIR__.'/configuration/settings.php');
+    $configurationFile = file_get_contents(__DIR__ . '/configuration/settings.php');
 
     $configurationFile = replaceArray([
-        '{{ADDRESS}}'      => $credentials['ip'],
-        '{{USERNAME}}'     => $credentials['user'],
-        '{{PASSWORD}}'     => $credentials['pass'],
+        '{{ADDRESS}}' => $credentials['ip'],
+        '{{USERNAME}}' => $credentials['user'],
+        '{{PASSWORD}}' => $credentials['pass'],
     ], $configurationFile);
 
     file_put_contents($fileName, $configurationFile);
@@ -49,7 +51,7 @@ function createConfigurationFile(string $fileName, array $credentials)
 /**
  * Replace all items from an Array unto a String.
  *
- * @param array  $elements
+ * @param array $elements
  * @param string $needle
  *
  * @return mixed|string
@@ -74,12 +76,12 @@ function replaceArray(array $elements, string $needle)
 function createBucket(array $details, array $credentials)
 {
     $bucket = [
-        'authType'      => 'sasl',
-        'bucketType'    => 'membase',
-        'flushEnabled'  => 0,
-        'name'          => $details['name'],
-        'ramQuotaMB'    => $details['memory'],
-        'replicaIndex'  => 0,
+        'authType' => 'sasl',
+        'bucketType' => 'membase',
+        'flushEnabled' => 0,
+        'name' => $details['name'],
+        'ramQuotaMB' => $details['memory'],
+        'replicaIndex' => 0,
         'replicaNumber' => 1,
         'threadsNumber' => 3,
     ];
@@ -111,8 +113,8 @@ function insertMetadata(stdClass $details)
     try {
         $metadataBucket = database()->getConnection()->openBucket('metadata');
 
-        $metadataBucket->insert((string) $details->code, [
-            'code'    => $details->code,
+        $metadataBucket->insert((string)$details->code, [
+            'code' => $details->code,
             'message' => $details->message,
         ]);
     } catch (Exception $e) {
@@ -126,34 +128,107 @@ function insertMetadata(stdClass $details)
  * Communicate with the Couchbase CLI.
  *
  * @param string $url
- * @param array  $credentials
- * @param mixed  $post
+ * @param array $credentials
+ * @param mixed $post
  *
  * @return array|object
  */
 function communicateCouchbase(string $url, array $credentials, $post = null)
 {
-    $ch = curl_init();
+    $request = ($post !== null) ? \Httpful\Request::post("http://{$credentials['ip']}:8091/{$url}")
+        : \Httpful\Request::get("http://{$credentials['ip']}:8091/{$url}");
 
-    curl_setopt($ch, CURLOPT_USERPWD, "{$credentials['user']}:{$credentials['pass']}");
-    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($ch, CURLOPT_URL, "http://{$credentials['ip']}:8091/{$url}");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $request->withoutStrictSsl()->authenticateWith($credentials['user'], $credentials['pass']);
 
-    if ($post != null) {
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    if ($post !== null) {
+        $request->sendsType(Mime::FORM)->body(http_build_query($post));
     }
 
-    $server_output = curl_exec($ch);
+    try {
+        $response = $request->send();
 
-    $info = curl_getinfo($ch);
+        return ['body' => $response->body, 'info' => $response->meta_data];
+    } catch (\Httpful\Exception\ConnectionErrorException $e) {
+        echo writeText('[ERROR]', '91;1') . "Failed to send a Request to Couchbase. " . PHP_EOL;
 
-    curl_setopt($ch, CURLOPT_VERBOSE, true);
-    curl_close($ch);
+        return ['body' => null, 'info' => null];
+    }
+}
 
-    return ['body' => json_decode($server_output), 'info' => $info];
+/**
+ * Configure a Couchbase Cluster
+ *
+ * @param array $credentials
+ * @param int $baseRam
+ * @param int $indexRam
+ * @return bool
+ */
+function createCluster(array $credentials, int $baseRam, int $indexRam)
+{
+    $response = communicateCouchbase('nodes/self/controller/settings', $credentials, [
+        'data_path' => '/opt/couchbase/var/lib/couchbase/data',
+        'index_path' => '/opt/couchbase/var/lib/couchbase/data'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Setup Settings Path.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('pools/default', $credentials, [
+        'memoryQuota' => $baseRam
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Allocate Cluster Resources.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('node/controller/setupServices', $credentials, [
+        'services' => 'kv,index,n1ql'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Setup Couchbase Cluster.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('settings/indexes', $credentials, [
+        'storageMode' => 'memory_optimized'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Configure Cluster Indexes Mode.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('settings/web', $credentials, [
+        'username' => $credentials['user'],
+        'password' => $credentials['pass'],
+        'port' => 'SAME'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Setup Couchbase Credentials.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('pools/default', $credentials, [
+        'indexMemoryQuota' => $indexRam
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Configure Cluster Indexing RAM.", '41', true);
+
+        return false;
+    }
+
+    return true;
 }
 
 /**
@@ -161,13 +236,13 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
  *
  * @param string $text
  * @param string $color
- * @param bool   $endOfLine
+ * @param bool $endOfLine
  *
  * @return string
  */
 function writeText(string $text, string $color = '0', bool $endOfLine = false)
 {
-    return "\033[{$color}m{$text}\033[0m ".($endOfLine ? PHP_EOL : '');
+    return "\033[{$color}m{$text}\033[0m " . ($endOfLine ? PHP_EOL : '');
 }
 
 /**
@@ -177,7 +252,7 @@ function writeText(string $text, string $color = '0', bool $endOfLine = false)
  */
 function checkLibrary()
 {
-    return class_exists('CouchbaseCluster');
+    return class_exists('CouchbaseCluster') && class_exists('Dotenv\Dotenv');
 }
 
 /**
@@ -191,12 +266,42 @@ function checkVersion()
 }
 
 /**
+ * Check if composer autoload exists
+ *
+ * @return bool
+ */
+function checkComposer()
+{
+    return file_exists(__DIR__ . '/../vendor/autoload.php');
+}
+
+/**
+ * Check if we need configure the Cluster
+ *
+ * @return bool
+ */
+function checkCluster()
+{
+    return getenv('CONFIGURE_CLUSTER') == true;
+}
+
+/**
  * Set User Credentials for Couchbase.
  *
  * @return array
  */
 function setCredentials()
 {
+    if (!empty(getenv('COUCHBASE_HOST')) && !empty(getenv('COUCHBASE_USERNAME')) && !empty(getenv('COUCHBASE_PASSWORD'))) {
+        echo writeText('Retrieving Database Configuration from Environment File...', '0;32', true);
+
+        return [
+            'ip' => getenv('COUCHBASE_HOST'),
+            'user' => getenv('COUCHBASE_USERNAME'),
+            'pass' => getenv('COUCHBASE_PASSWORD')
+        ];
+    }
+
     echo writeText('Now we need configure Couchbase Credentials. Follow the questions, please be sure of what you input.',
         '0;32', true);
 
@@ -222,10 +327,10 @@ function setCredentials()
 /**
  * CLI Progress Bar.
  *
- * @param int    $done
- * @param int    $total
+ * @param int $done
+ * @param int $total
  * @param string $info
- * @param int    $width
+ * @param int $width
  *
  * @return string
  */

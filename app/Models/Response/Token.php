@@ -30,30 +30,30 @@ use App\Models\Communication\Model;
  */
 class Token extends Model
 {
-    /**
-     * The Applied HTTP Response Code.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
-     *
-     * @var int
-     */
-    public $code;
+	/**
+	 * The Applied HTTP Response Code.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
+	 *
+	 * @var int
+	 */
+	public $code;
 
-    /**
-     * The HTTP Response Message from the RFC.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
-     *
-     * @var string
-     */
-    public $message;
+	/**
+	 * The HTTP Response Message from the RFC.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
+	 *
+	 * @var string
+	 */
+	public $message;
 
-    /**
-     * The generated JWT Hash that will be sent on the Response.
-     *
-     * @see https://jwt.io/introduction/ JWT Documentation
-     *
-     * @var string
-     */
-    public $token;
+	/**
+	 * The generated JWT Hash that will be sent on the Response.
+	 *
+	 * @see https://jwt.io/introduction/ JWT Documentation
+	 *
+	 * @var string
+	 */
+	public $token;
 }

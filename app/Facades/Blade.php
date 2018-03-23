@@ -32,59 +32,59 @@ use Jenssegers\Blade\Blade as BladeEngine;
  */
 class Blade extends Facade
 {
-    /**
-     * The Blade Engine Handler.
-     *
-     * @var BladeEngine
-     */
-    private static $blade;
+	/**
+	 * The Blade Engine Handler.
+	 *
+	 * @var BladeEngine
+	 */
+	private static $blade;
 
-    /**
-     * Get the Blade Engine Instance.
-     *
-     * Create if an instance doesn't exists
-     *
-     * @return BladeEngine
-     */
-    public static function blade()
-    {
-        if (null == self::$blade) {
-            self::$blade = new BladeEngine([resources('views')], resources('cache'));
-        }
+	/**
+	 * This method tries to recover the
+	 * Blade Engine Handler.
+	 *
+	 * @return BladeEngine
+	 */
+	public static function prepare()
+	{
+		self::blade();
 
-        return self::$blade;
-    }
+		self::blade()->compiler()->directive('path', function () {
+			$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+				? 'https://' : 'http://';
 
-    /**
-     * This method tries to recover the
-     * Blade Engine Handler.
-     *
-     * @return BladeEngine
-     */
-    public static function prepare()
-    {
-        self::blade();
+			return "{$protocol}{$_SERVER['HTTP_HOST']}" . setting('raise.path');
+		});
 
-        self::blade()->compiler()->directive('path', function () {
-            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-                ? 'https://' : 'http://';
+		return self::blade();
+	}
 
-            return "{$protocol}{$_SERVER['HTTP_HOST']}".setting('raise.path');
-        });
+	/**
+	 * Get the Blade Engine Instance.
+	 *
+	 * Create if an instance doesn't exists
+	 *
+	 * @return BladeEngine
+	 */
+	public static function blade()
+	{
+		if (null == self::$blade) {
+			self::$blade = new BladeEngine([resources('views')], resources('cache'));
+		}
 
-        return self::blade();
-    }
+		return self::$blade;
+	}
 
-    /**
-     * Handle the BladeEngine and make a view.
-     *
-     * @param string $view  the view to be called and handled
-     * @param array  $parse the variables to be extracted and parsed
-     */
-    public static function make(string $view, array $parse = [])
-    {
-        $content = self::blade()->make($view, $parse);
+	/**
+	 * Handle the BladeEngine and make a view.
+	 *
+	 * @param string $view the view to be called and handled
+	 * @param array $parse the variables to be extracted and parsed
+	 */
+	public static function make(string $view, array $parse = [])
+	{
+		$content = self::blade()->make($view, $parse);
 
-        response()::setContent($content);
-    }
+		response()::setContent($content);
+	}
 }

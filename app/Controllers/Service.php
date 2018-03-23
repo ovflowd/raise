@@ -32,81 +32,81 @@ use Koine\QueryBuilder\Statements\Select;
  */
 class Service extends Controller
 {
-    /**
-     * Register Process.
-     *
-     * Validated and Registers Services unto the Database
-     *
-     * @param object     $data     the payload as object from the Request
-     * @param Model|null $response a Response Model to be used as Response
-     */
-    public function register($data = null, Model $response = null)
-    {
-        response()::message(400, 'Missing required Parameters');
+	/**
+	 * Register Process.
+	 *
+	 * Validated and Registers Services unto the Database
+	 *
+	 * @param object $data the payload as object from the Request
+	 * @param Model|null $response a Response Model to be used as Response
+	 */
+	public function register($data = null, Model $response = null)
+	{
+		response()::message(400, 'Missing required Parameters');
 
-        $services = array_filter(array_map(function ($serviceModel) {
-            if (($service = security()::validateBody('service', $serviceModel))) {
-                $serviceId = database()->insert('service', $service);
+		$services = array_filter(array_map(function ($serviceModel) {
+			if (($service = security()::validateBody('service', $serviceModel))) {
+				$serviceId = database()->insert('service', $service);
 
-                logger()::log($serviceId, 'service', 'a service was registered on raise.');
+				logger()::log($serviceId, 'service', 'a service was registered on raise.');
 
-                return ['id' => $serviceId, 'name' => $service->name];
-            }
+				return ['id' => $serviceId, 'name' => $service->name];
+			}
 
-            return false;
-        }, request()::body()));
+			return false;
+		}, request()::body()));
 
-        if (count($services) > 0) {
-            parent::register(['services' => $services], new ServiceResponse());
-        }
-    }
+		if (count($services) > 0) {
+			parent::register(['services' => $services], new ServiceResponse());
+		}
+	}
 
-    /**
-     * List Process.
-     *
-     * List a set of Services or a single Service based on the Request Parameters
-     *
-     * @param array|object|null $data     the given Data to be Mapped
-     * @param Model             $response the Response Model
-     * @param callable          $callback an optional callback to treat the mapping result
-     */
-    public function list($data = null, Model $response = null, $callback = null)
-    {
-        $query = $this->filter();
+	/**
+	 * List Process.
+	 *
+	 * List a set of Services or a single Service based on the Request Parameters
+	 *
+	 * @param array|object|null $data the given Data to be Mapped
+	 * @param Model $response the Response Model
+	 * @param callable $callback an optional callback to treat the mapping result
+	 */
+	public function list($data = null, Model $response = null, $callback = null)
+	{
+		$query = $this->filter();
 
-        $data = database()->select('service', $query);
+		$data = database()->select('service', $query);
 
-        parent::list($data, new ServiceResponse(), function ($services) {
-            return ['services' => json()::mapSet(new ServiceDefinition(), $services)];
-        });
-    }
+		parent::list($data, new ServiceResponse(), function ($services) {
+			return ['services' => json()::mapSet(new ServiceDefinition(), $services)];
+		});
+	}
 
-    /**
-     * Filter Input Data.
-     *
-     * Used to filter and apply a several filters and patches
-     * into a Query that will be used on the Database
-     *
-     * @param Select|null $query the Select Query class
-     *
-     * @return Select the Select Query class
-     */
-    protected function filter(Select $query = null)
-    {
-        global $token;
+	/**
+	 * Filter Input Data.
+	 *
+	 * Used to filter and apply a several filters and patches
+	 * into a Query that will be used on the Database
+	 *
+	 * @param Select|null $query the Select Query class
+	 *
+	 * @return Select the Select Query class
+	 */
+	protected function filter(Select $query = null)
+	{
+		global $token;
 
-        $query = new Select();
+		$query = new Select();
 
-        $query->where('clientId', $token()->clientId);
+		$query->where('clientId', $token()->clientId);
 
-        if (request()::query('id') !== false) {
-            $query->where('META(document).id', request()::query('id'));
-        }
+		if (request()::query('id') !== false) {
+			$query->where('META(document).id', request()::query('id'));
+		}
 
-        if (request()::query('name') !== false) {
-            $query->where('name', request()::query('name'));
-        }
+		if (request()::query('name') !== false) {
+			$query->where('name', request()::query('name'));
+		}
 
-        return parent::filter($query);
-    }
+		return parent::filter($query);
+	}
 }

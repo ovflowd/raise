@@ -30,58 +30,58 @@ use JsonMapper_Exception;
  */
 class Permission extends Model
 {
-    /**
-     * The permission name.
-     *
-     * The name describes an understandable API
-     * name for the permission.
-     *
-     * eg.: CONTEXT_READ
-     *
-     * @required
-     *
-     * @var string
-     */
-    public $name;
+	/**
+	 * The permission name.
+	 *
+	 * The name describes an understandable API
+	 * name for the permission.
+	 *
+	 * eg.: CONTEXT_READ
+	 *
+	 * @required
+	 *
+	 * @var string
+	 */
+	public $name;
 
-    /**
-     * The Description of the Permission.
-     *
-     * eg.: "This permission grants that a Client
-     *  can register data to it's context"
-     *
-     * @required
-     *
-     * @var string
-     */
-    public $description;
+	/**
+	 * The Description of the Permission.
+	 *
+	 * eg.: "This permission grants that a Client
+	 *  can register data to it's context"
+	 *
+	 * @required
+	 *
+	 * @var string
+	 */
+	public $description;
 
-    /**
-     * Set the Name of the Permission.
-     *
-     * This method verifies if already exists a Permission
-     *  with this name, if not allows to store,
-     *  if yes, throws an error.
-     *
-     * Also if the unique name has numbers or special characters
-     *  or even white space also throws an exception
-     *
-     * @param string $name
-     *
-     * @throws JsonMapper_Exception
-     */
-    public function setName(string $name)
-    {
-        // Check if Group Exists
-        if (security()::permission($name) !== false) {
-            throw new JsonMapper_Exception('Already exists a permission with this unique name.');
-        }
+	/**
+	 * Set the Name of the Permission.
+	 *
+	 * This method verifies if already exists a Permission
+	 *  with this name, if not allows to store,
+	 *  if yes, throws an error.
+	 *
+	 * Also if the unique name has numbers or special characters
+	 *  or even white space also throws an exception
+	 *
+	 * @param string $name
+	 *
+	 * @throws JsonMapper_Exception
+	 */
+	public function setName(string $name)
+	{
+		// Check if Group Exists
+		if (security()::permission($name) !== false) {
+			throw new JsonMapper_Exception('Already exists a permission with this unique name.');
+		}
 
-        // Check if unique name is alphabetic only
-        if (preg_match('/^[a-z_]*$/', $name) === 0) {
-            throw new JsonMapper_Exception('Only alphabet characters and hyphens are allowed');
-        }
+		// Check if unique name is alphabetic only
+		if (preg_match('/^[a-z_]*$/', $name) === 0) {
+			throw new JsonMapper_Exception('Only alphabet characters and hyphens are allowed');
+		}
 
-        $this->name = $name;
-    }
+		$this->name = $name;
+	}
 }

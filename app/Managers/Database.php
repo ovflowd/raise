@@ -38,76 +38,76 @@ use App\Models\Response\Message;
  */
 class Database
 {
-    /**
-     * The instance of the Desired Database Handler.
-     *
-     * @see CouchbaseHandler
-     * @see DatabaseHandler
-     *
-     * @var DatabaseHandler the Instance of the Database Handler
-     */
-    private static $databaseHandler;
+	/**
+	 * The instance of the Desired Database Handler.
+	 *
+	 * @see CouchbaseHandler
+	 * @see DatabaseHandler
+	 *
+	 * @var DatabaseHandler the Instance of the Database Handler
+	 */
+	private static $databaseHandler;
 
-    /**
-     * Connection Configuration.
-     *
-     * The configuration schema of the Database
-     *
-     * @see DatabaseSettings
-     *
-     * @var array|object
-     */
-    private static $configuration;
+	/**
+	 * Connection Configuration.
+	 *
+	 * The configuration schema of the Database
+	 *
+	 * @see DatabaseSettings
+	 *
+	 * @var array|object
+	 */
+	private static $configuration;
 
-    /**
-     * Get the Database Handler.
-     *
-     * Creates the Connection if doesn't exists and instantiates the Handler
-     * if also doesn't exists.
-     *
-     * @return CouchbaseHandler|DatabaseHandler the Database Handler
-     */
-    public static function getHandler()
-    {
-        global $response;
+	/**
+	 * Get the Database Handler.
+	 *
+	 * Creates the Connection if doesn't exists and instantiates the Handler
+	 * if also doesn't exists.
+	 *
+	 * @return CouchbaseHandler|DatabaseHandler the Database Handler
+	 */
+	public static function getHandler()
+	{
+		global $response;
 
-        if (self::$databaseHandler == null) {
-            self::$databaseHandler = self::setHandler();
+		if (self::$databaseHandler == null) {
+			self::$databaseHandler = self::setHandler();
 
-            if (self::$databaseHandler == null) {
-                $response(response()::setResponse(500, new Message(), [
-                    'message' => 'Failed to Connect upon Database',
-                    'details' => 'The Database Handler doesn\'t exists',
-                ]));
-            }
+			if (self::$databaseHandler == null) {
+				$response(response()::setResponse(500, new Message(), [
+					'message' => 'Failed to Connect upon Database',
+					'details' => 'The Database Handler doesn\'t exists',
+				]));
+			}
 
-            self::$databaseHandler->connect(self::$configuration);
-        }
+			self::$databaseHandler->connect(self::$configuration);
+		}
 
-        return self::$databaseHandler;
-    }
+		return self::$databaseHandler;
+	}
 
-    /**
-     * Set the Database Handler.
-     *
-     * check if the desired Database Handler exists
-     * store it and create it.
-     *
-     * Also retrieves the configuration schema
-     *
-     * @return bool|DatabaseHandler the Handler if exists, false if not
-     */
-    protected static function setHandler()
-    {
-        $handler = ('App\Database\\'.str_replace(' ', '',
-                ucwords(str_replace('-', ' ', setting('raise.databaseType')))));
+	/**
+	 * Set the Database Handler.
+	 *
+	 * check if the desired Database Handler exists
+	 * store it and create it.
+	 *
+	 * Also retrieves the configuration schema
+	 *
+	 * @return bool|DatabaseHandler the Handler if exists, false if not
+	 */
+	protected static function setHandler()
+	{
+		$handler = ('App\Database\\' . str_replace(' ', '',
+				ucwords(str_replace('-', ' ', setting('raise.databaseType')))));
 
-        if (class_exists($handler)) {
-            self::$configuration = setting('database');
+		if (class_exists($handler)) {
+			self::$configuration = setting('database');
 
-            return new $handler();
-        }
+			return new $handler();
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

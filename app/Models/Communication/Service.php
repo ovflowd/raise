@@ -27,84 +27,84 @@ namespace App\Models\Communication;
  */
 class Service extends Raise
 {
-    /**
-     * The Service Name.
-     *
-     * The Service name uses approaches for contextual Data
-     * so we recommend using names that can related
-     * of what exactly that service does
-     *
-     * @required
-     *
-     * @var string
-     */
-    public $name;
+	/**
+	 * The Service Name.
+	 *
+	 * The Service name uses approaches for contextual Data
+	 * so we recommend using names that can related
+	 * of what exactly that service does
+	 *
+	 * @required
+	 *
+	 * @var string
+	 */
+	public $name;
 
-    /**
-     * Parameters of the Service.
-     *
-     * The parameters are like the header definitions
-     * defines what a Data must have when it's registered
-     * unto a Service
-     *
-     * @see Data
-     *
-     * @required
-     *
-     * @var array
-     */
-    public $parameters = [];
+	/**
+	 * Parameters of the Service.
+	 *
+	 * The parameters are like the header definitions
+	 * defines what a Data must have when it's registered
+	 * unto a Service
+	 *
+	 * @see Data
+	 *
+	 * @required
+	 *
+	 * @var array
+	 */
+	public $parameters = [];
 
-    /**
-     * Return Type of a Service.
-     *
-     * This is like what the Service return exactly
-     * and the returned data of the headers() definition
-     * it's used as an response for a client
-     *
-     * @required
-     *
-     * @var string
-     */
-    public $returnType = 'string';
+	/**
+	 * Return Type of a Service.
+	 *
+	 * This is like what the Service return exactly
+	 * and the returned data of the headers() definition
+	 * it's used as an response for a client
+	 *
+	 * @required
+	 *
+	 * @var string
+	 */
+	public $returnType = 'string';
 
-    /**
-     * The Unique Client Identifier.
-     *
-     * Each Service is related to an Service,
-     * this identified which Client the Service is associated
-     *
-     * @see Client
-     *
-     * @var string
-     */
-    protected $clientId = '';
+	/**
+	 * The Unique Client Identifier.
+	 *
+	 * Each Service is related to an Service,
+	 * this identified which Client the Service is associated
+	 *
+	 * @see Client
+	 *
+	 * @var string
+	 */
+	protected $clientId = '';
 
-    /**
-     * Service constructor.
-     *
-     * Set the Timestamps of when RAISe handled
-     * this model.
-     *
-     * And set the Client Identifier
-     */
-    public function __construct()
-    {
-        parent::__construct();
+	/**
+	 * Service constructor.
+	 *
+	 * Set the Timestamps of when RAISe handled
+	 * this model.
+	 *
+	 * And set the Client Identifier
+	 */
+	public function __construct()
+	{
+		parent::__construct();
 
-        $this->setClientId();
-    }
+		$this->setClientId();
+	}
 
-    /**
-     * Set the Unique Client Identifier
-     * That is related to this Service.
-     *
-     * @param string|null $clientId the ClientId to be set
-     */
-    public function setClientId(string $clientId = null)
-    {
-        global $token;
+	/**
+	 * Set the Unique Client Identifier
+	 * That is related to this Service.
+	 *
+	 * @param string|null $clientId the ClientId to be set
+	 */
+	public function setClientId(string $clientId = null)
+	{
+		global $token;
 
-        $this->clientId = $clientId ?? $token()->clientId;
-    }
+		$this->clientId = $clientId ?? $token()->clientId;
+	}
 }

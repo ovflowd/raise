@@ -30,58 +30,58 @@ use App\Models\Communication\Model;
  */
 class Log extends Model
 {
-    /**
-     * The Unique Identifier of the relative
-     * logged entry (service, data, client, token).
-     *
-     * @var string|null
-     */
-    public $element = null;
+	/**
+	 * The Unique Identifier of the relative
+	 * logged entry (service, data, client, token).
+	 *
+	 * @var string|null
+	 */
+	public $element = null;
 
-    /**
-     * The respective table of the related
-     * logged entry (service, data, client, token).
-     *
-     * @var string|null
-     */
-    public $table;
+	/**
+	 * The respective table of the related
+	 * logged entry (service, data, client, token).
+	 *
+	 * @var string|null
+	 */
+	public $table;
 
-    /**
-     * The JWT Token used for the Session
-     * if it's a request that requires Token auth.
-     *
-     * @var mixed|null
-     */
-    public $token = null;
+	/**
+	 * The JWT Token used for the Session
+	 * if it's a request that requires Token auth.
+	 *
+	 * @var mixed|null
+	 */
+	public $token = null;
 
-    /**
-     * The time when the server handled the operation and inserted it.
-     *
-     * @var float (UNIX_TIMESTAMP)
-     */
-    protected $serverTime = 0;
+	/**
+	 * The time when the server handled the operation and inserted it.
+	 *
+	 * @var float (UNIX_TIMESTAMP)
+	 */
+	protected $serverTime = 0;
 
-    /**
-     * Log constructor.
-     *
-     * Picks the result content of the result Response
-     * and set the serverTime
-     *
-     * Since every Response actually has a $code and a $message
-     */
-    public function __construct()
-    {
-        $this->setServerTime();
-    }
+	/**
+	 * Log constructor.
+	 *
+	 * Picks the result content of the result Response
+	 * and set the serverTime
+	 *
+	 * Since every Response actually has a $code and a $message
+	 */
+	public function __construct()
+	{
+		$this->setServerTime();
+	}
 
-    /**
-     * Set manually serverTime
-     * with the ability of setting the with the current microtime.
-     *
-     * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
-     */
-    public function setServerTime(float $serverTime = null)
-    {
-        $this->serverTime = $serverTime ?? microtime(true);
-    }
+	/**
+	 * Set manually serverTime
+	 * with the ability of setting the with the current microtime.
+	 *
+	 * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
+	 */
+	public function setServerTime(float $serverTime = null)
+	{
+		$this->serverTime = $serverTime ?? microtime(true);
+	}
 }

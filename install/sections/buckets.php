@@ -15,22 +15,22 @@
 
 /**
  * @var string
- * @var array  $buckets
- * @var array  $credentials
+ * @var array $buckets
+ * @var array $credentials
  */
 $buckets = [
-    'metadata'   => floor((($memoryQuota / 100) * 10)),
-    'client'     => floor((($memoryQuota / 100) * 10)),
-    'service'    => floor((($memoryQuota / 100) * 10)),
-    'token'      => floor((($memoryQuota / 100) * 10)),
-    'data'       => floor((($memoryQuota / 100) * 20)),
-    'log'        => floor((($memoryQuota / 100) * 10)),
+    'metadata' => floor((($memoryQuota / 100) * 10)),
+    'client' => floor((($memoryQuota / 100) * 10)),
+    'service' => floor((($memoryQuota / 100) * 10)),
+    'token' => floor((($memoryQuota / 100) * 10)),
+    'data' => floor((($memoryQuota / 100) * 20)),
+    'log' => floor((($memoryQuota / 100) * 10)),
     'permission' => floor((($memoryQuota / 100) * 5)),
-    'profile'    => floor((($memoryQuota / 100) * 5)),
-    'relation'   => floor((($memoryQuota / 100) * 10)),
+    'profile' => floor((($memoryQuota / 100) * 5)),
+    'relation' => floor((($memoryQuota / 100) * 10)),
 ];
 
-echo writeText('[INFO]', '96;1').'Starting Creation Process...'.PHP_EOL;
+echo writeText('[INFO]', '96;1') . 'Starting Creation Process...' . PHP_EOL;
 
 echo progressBar(0, 9);
 

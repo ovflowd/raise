@@ -31,28 +31,28 @@ use App\Models\Communication\Model;
  */
 class Data extends Model
 {
-    /**
-     * The Applied HTTP Response Code.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
-     *
-     * @var int
-     */
-    public $code;
+	/**
+	 * The Applied HTTP Response Code.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Code Definitions
+	 *
+	 * @var int
+	 */
+	public $code;
 
-    /**
-     * The HTTP Response Message from the RFC.
-     *
-     * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
-     *
-     * @var string
-     */
-    public $message;
+	/**
+	 * The HTTP Response Message from the RFC.
+	 *
+	 * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html HTTP Message Definitions
+	 *
+	 * @var string
+	 */
+	public $message;
 
-    /**
-     * A set of Data that will be returned on the Response.
-     *
-     * @var array
-     */
-    public $data = [];
+	/**
+	 * A set of Data that will be returned on the Response.
+	 *
+	 * @var array
+	 */
+	public $data = [];
 }

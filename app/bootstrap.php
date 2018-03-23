@@ -20,13 +20,13 @@
 */
 
 // Register Composer Autoloader
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Register Accessor Functions
-require_once __DIR__.'/../app/accessory.php';
+require_once __DIR__ . '/../app/accessory.php';
 
 // Register the middleware Routes
-require_once __DIR__.'/../app/routes.php';
+require_once __DIR__ . '/../app/routes.php';
 
 /*
 |----------------------------------------------------------------------------
@@ -60,7 +60,7 @@ blade()::prepare();
 */
 
 // Gather Settings from configuration file and store it on SettingsHandler
-\App\Handlers\Settings::store(require_once __DIR__.'/../app/settings.php');
+\App\Handlers\Settings::store(require_once __DIR__ . '/../app/settings.php');
 
 // Set the running Time Zone
 date_default_timezone_set(setting('raise.timeZone'));

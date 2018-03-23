@@ -31,14 +31,14 @@ namespace App\Models\Communication;
  */
 abstract class Model
 {
-    /**
-     * Get all public properties of the Model
-     * It's used for the Response Mapping on Lists.
-     *
-     * @return array the public properties of a Model
-     */
-    public function encode()
-    {
-        return get_object_vars($this);
-    }
+	/**
+	 * Get all public properties of the Model
+	 * It's used for the Response Mapping on Lists.
+	 *
+	 * @return array the public properties of a Model
+	 */
+	public function encode()
+	{
+		return get_object_vars($this);
+	}
 }

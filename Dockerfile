@@ -1,7 +1,6 @@
 FROM php:7.2-fpm
 
-RUN echo "Installing Lib Couchbase Dependencies" \
-    && apt update \
+RUN apt update \
     && apt install -y wget gnupg \
     && wget -O /etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1404.list \
     && wget -O ~/couchbase.key http://packages.couchbase.com/ubuntu/couchbase.key \
@@ -9,18 +8,19 @@ RUN echo "Installing Lib Couchbase Dependencies" \
     && apt update \
     && wget -O ~/libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb \
     && dpkg --install ~/libssl.deb \
-    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential
+    && apt install -y libssl1.0.0 libcouchbase2-libevent libcouchbase2-libevent libcouchbase2-core libcouchbase-dev libcouchbase2-bin build-essential \
+    && apt install -y zlib1g-dev
 
-RUN echo "Installing PCS Extension" \
-    && pecl install pcs-1.3.3
+RUN pecl install pcs-1.3.3
+RUN pecl install igbinary
+RUN pecl install couchbase
 
-RUN echo "Installing Couchbase Extension" \
-    && pecl install couchbase
+RUN docker-php-ext-enable igbinary
+RUN docker-php-ext-enable pcs
+RUN docker-php-ext-enable couchbase
 
-COPY docker/php.ini /etc/php
-COPY docker/php.ini /usr/local/etc/php/
+RUN echo "register_argc_argv = true" >> /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-install json
-RUN docker-php-ext-install mbstring
+EXPOSE 9000
 
-RUN echo "Read te Documentation of RAISe in order to configure RAISe here: goo.gl/9ukom5"
+WORKDIR /app

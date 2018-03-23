@@ -29,60 +29,60 @@ namespace App\Factories;
  */
 abstract class Factory
 {
-    /**
-     * Elements of the Factory.
-     *
-     * @var array
-     */
-    protected $elements = [];
+	/**
+	 * Elements of the Factory.
+	 *
+	 * @var array
+	 */
+	protected $elements = [];
 
-    /**
-     * Get an Element.
-     *
-     * If the element exists return in,
-     * If not return a false boolean.
-     *
-     * @param string $element name of the element
-     *
-     * @return object|array|bool the element or false if didn't found it
-     */
-    abstract public static function get(string $element);
+	/**
+	 * Get an Element.
+	 *
+	 * If the element exists return in,
+	 * If not return a false boolean.
+	 *
+	 * @param string $element name of the element
+	 *
+	 * @return object|array|bool the element or false if didn't found it
+	 */
+	abstract public static function get(string $element);
 
-    /**
-     * Add an Element.
-     *
-     * @param string       $element the name of the element to be added
-     * @param array|object $content the content of the element
-     *
-     * @return bool if added successfully or not
-     */
-    abstract public static function add(string $element, $content);
+	/**
+	 * Add an Element.
+	 *
+	 * @param string $element the name of the element to be added
+	 * @param array|object $content the content of the element
+	 *
+	 * @return bool if added successfully or not
+	 */
+	abstract public static function add(string $element, $content);
 
-    /**
-     * Remove an Element.
-     *
-     * Return true if removed with success, false if element doesn't exists
-     *
-     * @param string $element the element to be removed
-     *
-     * @return bool if removed successfully or not
-     */
-    abstract public static function remove(string $element);
+	/**
+	 * Remove an Element.
+	 *
+	 * Return true if removed with success, false if element doesn't exists
+	 *
+	 * @param string $element the element to be removed
+	 *
+	 * @return bool if removed successfully or not
+	 */
+	abstract public static function remove(string $element);
 
-    /**
-     * Create an Instance if not exists
-     * If exists, return the instance.
-     *
-     * @return Factory
-     */
-    protected static function instance()
-    {
-        static $instance = null;
+	/**
+	 * Create an Instance if not exists
+	 * If exists, return the instance.
+	 *
+	 * @return Factory
+	 */
+	protected static function instance()
+	{
+		static $instance = null;
 
-        if (null === $instance) {
-            $instance = new static();
-        }
+		if (null === $instance) {
+			$instance = new static();
+		}
 
-        return $instance;
-    }
+		return $instance;
+	}
 }

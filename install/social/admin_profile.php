@@ -21,8 +21,8 @@
 $profiles->insert(security()::generateHash(),
     json()::map(new \App\Models\Communication\Profile(),
         [
-            'name'        => 'Administrator',
-            'uniqueName'  => 'administrator',
+            'name' => 'Administrator',
+            'uniqueName' => 'administrator',
             'description' => 'The Administrator Group',
             'permissions' => [
                 'client_read_global',

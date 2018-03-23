@@ -13,7 +13,7 @@
  * @copyright University of Brasília
  */
 
-echo writeText('[INFO]', '96;1').'Starting to Fill Buckets...'.PHP_EOL;
+echo writeText('[INFO]', '96;1') . 'Starting to Fill Buckets...' . PHP_EOL;
 
 echo progressBar(0, 9);
 
@@ -24,7 +24,7 @@ try {
 
     $metadataBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Metadata Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Metadata Bucket!' . PHP_EOL;
 }
 
 echo progressBar(2, 9, 'Filling Client Bucket...                  ');
@@ -57,7 +57,7 @@ try {
     $clientBucket->manager()->createN1qlIndex('index-processor-clientTime-', ['processor', '-clientTime']);
     $clientBucket->manager()->createN1qlIndex('index-channel-clientTime-', ['channel', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Client Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
 }
 
 echo progressBar(3, 9, 'Filling Service Bucket...                  ');
@@ -87,7 +87,7 @@ try {
     $serviceBucket->manager()->createN1qlIndex('index-name-clientTime-', ['name', '-clientTime']);
     $serviceBucket->manager()->createN1qlIndex('index-clientId-clientTime-', ['clientId', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Service Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
 }
 
 echo progressBar(4, 9, 'Filling Token Bucket...                  ');
@@ -111,7 +111,7 @@ try {
     // Create Inverse Time Related Indexes
     $tokenBucket->manager()->createN1qlIndex('index-clientId-clientTime-', ['clientId', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Token Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
 }
 
 echo progressBar(5, 9, 'Filling Data Bucket...                  ');
@@ -143,7 +143,7 @@ try {
     $dataBucket->manager()->createN1qlIndex('index-parameters-clientTime-', ['parameters', '-clientTime']);
     $dataBucket->manager()->createN1qlIndex('index-tags-clientTime-', ['tags', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Data Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
 }
 
 echo progressBar(6, 9, 'Filling Log Bucket...                 ');
@@ -158,7 +158,7 @@ try {
     $responseBucket->manager()->createN1qlIndex('index-serverTime', ['serverTime']);
     $responseBucket->manager()->createN1qlIndex('index-serverTime-', ['-serverTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
 echo progressBar(7, 9, 'Filling Permission Bucket...                 ');
@@ -169,7 +169,7 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
 echo progressBar(8, 9, 'Filling Profile Bucket...                 ');
@@ -180,7 +180,7 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
 echo progressBar(9, 9, 'Filling Relations Bucket...                 ');
@@ -191,7 +191,7 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Response Bucket!'.PHP_EOL;
+    echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
 echo progressBar(9, 9, 'Buckets Filled.                            ');

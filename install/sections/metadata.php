@@ -13,9 +13,9 @@
  * @copyright University of Brasília
  */
 
-echo writeText('[INFO]', '96;1').'Filling Metadata Bucket with Codes.'.PHP_EOL;
+echo writeText('[INFO]', '96;1') . 'Filling Metadata Bucket with Codes.' . PHP_EOL;
 
-$metadataJson = json_decode(file_get_contents(__DIR__.'/../metadata.json'));
+$metadataJson = json_decode(file_get_contents(__DIR__ . '/../metadata.json'));
 
 $progress = 1;
 

@@ -36,42 +36,42 @@ use App\Models\Interfaces\Database as DatabaseHandler;
  */
 class Database extends Model
 {
-    /**
-     * Database IPv4 Address or Hostname.
-     *
-     * @uses DatabaseHandler
-     * @uses CouchbaseHandler
-     *
-     * @var string
-     */
-    public $address = 'localhost';
+	/**
+	 * Database IPv4 Address or Hostname.
+	 *
+	 * @uses DatabaseHandler
+	 * @uses CouchbaseHandler
+	 *
+	 * @var string
+	 */
+	public $address = 'localhost';
 
-    /**
-     * Database Admin Username.
-     *
-     * @uses DatabaseHandler
-     * @uses CouchbaseHandler
-     *
-     * @var string
-     */
-    public $username = 'couch';
+	/**
+	 * Database Admin Username.
+	 *
+	 * @uses DatabaseHandler
+	 * @uses CouchbaseHandler
+	 *
+	 * @var string
+	 */
+	public $username = 'couch';
 
-    /**
-     * Database Admin Password.
-     *
-     * @uses DatabaseInterface
-     * @uses CouchbaseHandler
-     *
-     * @var string
-     */
-    public $password = 'couchbase';
+	/**
+	 * Database Admin Password.
+	 *
+	 * @uses DatabaseInterface
+	 * @uses CouchbaseHandler
+	 *
+	 * @var string
+	 */
+	public $password = 'couchbase';
 
-    /**
-     * Desired Database for RAISe.
-     *
-     * @uses DatabaseHandler
-     *
-     * @var string
-     */
-    public $database = 'my-database';
+	/**
+	 * Desired Database for RAISe.
+	 *
+	 * @uses DatabaseHandler
+	 *
+	 * @var string
+	 */
+	public $database = 'my-database';
 }
