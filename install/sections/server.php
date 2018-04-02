@@ -23,6 +23,8 @@ $serverInfo = communicateCouchbase('pools/default', $credentials)['body'];
 
 $memoryQuota = $serverInfo->memoryQuota;
 
-communicateCouchbase('pools/default', $credentials, ['indexMemoryQuota' => ($memoryQuota / 8)]);
+$indexMemoryQuota = $serverInfo->indexMemoryQuota;
 
-echo writeText('[INFO]', '96;1') . "Your Cluster RAM size is: {$memoryQuota}MB." . PHP_EOL;
+echo writeText('[INFO]', '96;1') . "Your Cluster Data RAM size is: {$memoryQuota}MB." . PHP_EOL;
+
+echo writeText('[INFO]', '96;1') . "Your Cluster Indexing RAM size is: {$indexMemoryQuota}MB." . PHP_EOL;
