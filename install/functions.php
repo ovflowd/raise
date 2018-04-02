@@ -200,7 +200,7 @@ function createCluster(array $credentials, int $baseRam, int $indexRam)
 
     $response = communicateCouchbase('pools/default', $credentials, [
         'memoryQuota' => (int)$baseRam,
-        'indexMemoryQuota' => (int)($indexRam * 2)
+        'indexMemoryQuota' => (int)$indexRam
     ]);
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
