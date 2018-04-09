@@ -165,27 +165,6 @@ function communicateCouchbase(string $url, array $credentials, $post = null)
  */
 function createCluster(array $credentials, int $baseRam, int $indexRam)
 {
-    $response = communicateCouchbase('nodes/self/controller/settings', $credentials, [
-        'data_path' => '/opt/couchbase/var/lib/couchbase/data',
-        'index_path' => '/opt/couchbase/var/lib/couchbase/data'
-    ]);
-
-    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
-        echo writeText("Failed to Setup Settings Path.", '41', true);
-
-        return false;
-    }
-
-    $response = communicateCouchbase('pools/default', $credentials, [
-        'memoryQuota' => $baseRam
-    ]);
-
-    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
-        echo writeText("Failed to Allocate Cluster Resources.", '41', true);
-
-        return false;
-    }
-
     $response = communicateCouchbase('node/controller/setupServices', $credentials, [
         'services' => 'kv,index,n1ql'
     ]);
@@ -196,12 +175,13 @@ function createCluster(array $credentials, int $baseRam, int $indexRam)
         return false;
     }
 
-    $response = communicateCouchbase('settings/indexes', $credentials, [
-        'storageMode' => 'memory_optimized'
+    $response = communicateCouchbase('nodes/self/controller/settings', $credentials, [
+        'data_path' => '/opt/couchbase/var/lib/couchbase/data',
+        'index_path' => '/opt/couchbase/var/lib/couchbase/data'
     ]);
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
-        echo writeText("Failed to Configure Cluster Indexes Mode.", '41', true);
+        echo writeText("Failed to Setup Settings Path.", '41', true);
 
         return false;
     }
@@ -219,11 +199,22 @@ function createCluster(array $credentials, int $baseRam, int $indexRam)
     }
 
     $response = communicateCouchbase('pools/default', $credentials, [
-        'indexMemoryQuota' => $indexRam
+        'memoryQuota' => (int)$baseRam,
+        'indexMemoryQuota' => (int)$indexRam
     ]);
 
     if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
-        echo writeText("Failed to Configure Cluster Indexing RAM.", '41', true);
+        echo writeText("Failed to Allocate Cluster Resources.", '41', true);
+
+        return false;
+    }
+
+    $response = communicateCouchbase('settings/indexes', $credentials, [
+        'storageMode' => 'memory_optimized'
+    ]);
+
+    if ($response['info']['http_code'] != 202 && $response['info']['http_code'] != 200) {
+        echo writeText("Failed to Configure Cluster Indexes Mode.", '41', true);
 
         return false;
     }
