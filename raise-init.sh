@@ -10,6 +10,11 @@ wait_for_start() {
     done
 }
 
+while [ ! -f /app/vendor/autoload.php ]
+do
+  sleep 5
+done
+
 wait_for_start wget -qO- couchbase:8091 &> /dev/null
 
 php /app/install/install.php
