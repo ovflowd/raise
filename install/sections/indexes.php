@@ -24,6 +24,8 @@ try {
 
     $metadataBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Metadata Bucket!' . PHP_EOL;
 }
 
@@ -57,7 +59,9 @@ try {
     $clientBucket->manager()->createN1qlIndex('index-processor-clientTime-', ['processor', '-clientTime']);
     $clientBucket->manager()->createN1qlIndex('index-channel-clientTime-', ['channel', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
+    echo $e->getMessage();
+
+	echo '[WARN] Failed to Fill Client Bucket!' . PHP_EOL;
 }
 
 echo progressBar(3, 9, 'Filling Service Bucket...                  ');
@@ -87,7 +91,9 @@ try {
     $serviceBucket->manager()->createN1qlIndex('index-name-clientTime-', ['name', '-clientTime']);
     $serviceBucket->manager()->createN1qlIndex('index-clientId-clientTime-', ['clientId', '-clientTime']);
 } catch (CouchbaseException $e) {
-    echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
+    echo $e->getMessage();
+
+	echo '[WARN] Failed to Fill Service Bucket!' . PHP_EOL;
 }
 
 echo progressBar(4, 9, 'Filling Token Bucket...                  ');
@@ -111,6 +117,8 @@ try {
     // Create Inverse Time Related Indexes
     $tokenBucket->manager()->createN1qlIndex('index-clientId-clientTime-', ['clientId', '-clientTime']);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Token Bucket!' . PHP_EOL;
 }
 
@@ -143,6 +151,8 @@ try {
     $dataBucket->manager()->createN1qlIndex('index-parameters-clientTime-', ['parameters', '-clientTime']);
     $dataBucket->manager()->createN1qlIndex('index-tags-clientTime-', ['tags', '-clientTime']);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Data Bucket!' . PHP_EOL;
 }
 
@@ -158,6 +168,8 @@ try {
     $responseBucket->manager()->createN1qlIndex('index-serverTime', ['serverTime']);
     $responseBucket->manager()->createN1qlIndex('index-serverTime-', ['-serverTime']);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
@@ -169,6 +181,8 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
@@ -180,6 +194,8 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 
@@ -191,6 +207,8 @@ try {
     // Create Primary Indexes
     $responseBucket->manager()->createN1qlPrimaryIndex('', false, false);
 } catch (CouchbaseException $e) {
+	echo $e->getMessage();
+
     echo '[WARN] Failed to Fill Response Bucket!' . PHP_EOL;
 }
 

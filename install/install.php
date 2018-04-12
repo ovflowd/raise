@@ -144,7 +144,7 @@ if (option('skip-fill') === null) {
     // Check if all the buckets are ready to be filled.
     while (true) {
         $data = array_filter(communicateCouchbase('pools/default/buckets', $credentials)['body'], function ($bucket) {
-            return $bucket->nodes[0]->status != 'healthy';
+            return $bucket->nodes[0] && $bucket->nodes[0]->status != 'healthy';
         });
 
         if (count($data) == 0) {
