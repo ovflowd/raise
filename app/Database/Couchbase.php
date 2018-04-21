@@ -89,11 +89,16 @@ class Couchbase implements DatabaseHandler
 	 */
 	public function insert(string $table, Model $data, string $primaryKey = null)
 	{
-		$itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
+		try {
+			$itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
 
-		$this->connection->openBucket($table)->insert($itemId, $data->encode());
+			$bucket = $this->connection->openBucket($table);
 
-		return $itemId;
+			return !empty($bucket->insert($itemId, $data->encode()))
+				? $itemId : false;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 
 	/**
@@ -107,19 +112,23 @@ class Couchbase implements DatabaseHandler
 	 */
 	public function select(string $table, $query, bool $override = true)
 	{
-		$bucket = $this->connection->openBucket($table);
+		try {
+			$bucket = $this->connection->openBucket($table);
 
-		if ($query instanceof Select) {
-			$query->from("{$table} document");
+			if ($query instanceof Select) {
+				$query->from("{$table} document");
 
-			if ($override === true) {
-				$query->select('document, META(document).id');
+				if ($override === true) {
+					$query->select('document, META(document).id');
+				}
+
+				return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
 			}
 
-			return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
+			return $bucket->get((string)$query)->value;
+		} catch (Exception $e) {
+			return false;
 		}
-
-		return $bucket->get((string)$query)->value;
 	}
 
 	/**
@@ -134,7 +143,9 @@ class Couchbase implements DatabaseHandler
 	public function update(string $table, string $primaryKey, $data)
 	{
 		try {
-			$result = $this->connection->openBucket($table)->upsert($primaryKey, $data);
+			$bucket = $this->connection->openBucket($table);
+
+			$result = $bucket->upsert($primaryKey, $data);
 
 			return $result->value;
 		} catch (Exception $e) {
@@ -153,9 +164,9 @@ class Couchbase implements DatabaseHandler
 	public function delete(string $table, string $primaryKey)
 	{
 		try {
-			$this->connection->openBucket($table)->remove($primaryKey);
+			$bucket = $this->connection->openBucket($table);
 
-			return true;
+			return !empty($bucket->remove($primaryKey));
 		} catch (Exception $e) {
 			return false;
 		}
