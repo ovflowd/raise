@@ -15,6 +15,8 @@
 
 namespace App\Models\Communication;
 
+use Traits\MappableTrait;
+
 /**
  * Class Model.
  *
@@ -25,12 +27,14 @@ namespace App\Models\Communication;
  *
  * @see https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC Pattern
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */
 abstract class Model
 {
+    use MappableTrait;
+
 	/**
 	 * Get all public properties of the Model
 	 * It's used for the Response Mapping on Lists.

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c957fc681b0cfd4cd91f468d8118541a",
+    "content-hash": "77e6fdf5e013b059a44531da61b841d6",
     "packages": [
         {
             "name": "bramus/router",
@@ -885,6 +885,98 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "runz0rd/common-php",
+            "version": "v2.2.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/runz0rd/common-php.git",
+                "reference": "530bf1d2bbe9e32b12f8b00266687e051792c3e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/runz0rd/common-php/zipball/530bf1d2bbe9e32b12f8b00266687e051792c3e1",
+                "reference": "530bf1d2bbe9e32b12f8b00266687e051792c3e1",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Common\\": "src/Common/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Pejanovic",
+                    "email": "pejan123@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "My collection of common libraries for php.",
+            "keywords": [
+                "common",
+                "helpers",
+                "library",
+                "php",
+                "utilities"
+            ],
+            "time": "2017-05-07T08:44:27+00:00"
+        },
+        {
+            "name": "runz0rd/mapper-php",
+            "version": "v2.2.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/runz0rd/mapper-php.git",
+                "reference": "5b19e4b0784d045dc0e9da9cfd98d65567c82695"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/runz0rd/mapper-php/zipball/5b19e4b0784d045dc0e9da9cfd98d65567c82695",
+                "reference": "5b19e4b0784d045dc0e9da9cfd98d65567c82695",
+                "shasum": ""
+            },
+            "require": {
+                "runz0rd/common-php": "2.2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Pejanovic",
+                    "email": "pejan123@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "Model mapping, unmapping and validation",
+            "keywords": [
+                "library",
+                "mapper",
+                "object",
+                "php",
+                "traits",
+                "validator"
+            ],
+            "time": "2017-03-17T14:04:55+00:00"
         },
         {
             "name": "symfony/debug",
