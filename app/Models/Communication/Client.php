@@ -21,7 +21,7 @@ namespace App\Models\Communication;
  * A Client Model is a Schema Definition of
  * A Client and how it will be stored on the Database
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */

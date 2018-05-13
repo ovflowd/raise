@@ -21,7 +21,7 @@ namespace App\Models\Communication;
  * A Service Model is a Schema Definition of
  * A Service and how it will be stored on the Database
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */

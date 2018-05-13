@@ -24,7 +24,7 @@ namespace App\Models\Communication;
  * This Model contains all items that are by default
  * stored on a Document
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */

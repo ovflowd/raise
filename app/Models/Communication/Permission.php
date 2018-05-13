@@ -24,7 +24,7 @@ use JsonMapper_Exception;
  * they are useful to grant special conditions or "permissions"
  * to a group.
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */

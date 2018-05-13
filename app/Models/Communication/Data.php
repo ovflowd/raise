@@ -23,7 +23,7 @@ use JsonMapper_Exception;
  * A Data Model is a Schema Definition of
  * A Data and how it will be stored on the Database
  *
- * @version 2.0.0
+ * @version 2.1.0
  *
  * @since 2.0.0
  */
