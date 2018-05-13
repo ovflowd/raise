@@ -51,7 +51,7 @@ class Service extends Raise
 	 *
 	 * @required
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	public $parameters = [];
 

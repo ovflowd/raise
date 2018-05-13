@@ -43,7 +43,7 @@ abstract class Raise extends Model
 	 * Tags are used to contextual data filtering
 	 * and may be used to filter set of results
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	public $tags = [];
 

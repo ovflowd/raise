@@ -81,7 +81,7 @@ class Profile extends Model
 	 *
 	 * @required
 	 *
-	 * @var array|null
+	 * @var string[]|null
 	 */
 	public $permissions = [];
 
@@ -92,7 +92,7 @@ class Profile extends Model
 	 * Depending of the purpose of the group, directly relations
 	 *  aren't required. Like Access Groups.
 	 *
-	 * @var array|null
+	 * @var string[]|null
 	 */
 	public $relations = [];
 

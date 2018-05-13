@@ -40,13 +40,15 @@ class Data extends Raise
 	 * @var string
 	 */
 	public $serviceId = null;
+
 	/**
 	 * An array that contains the parameters of the
 	 * Service related to this Data.
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	public $parameters = [];
+
 	/**
 	 * A Set of Data.
 	 *
@@ -60,6 +62,7 @@ class Data extends Raise
 	 * @var array
 	 */
 	public $values = [];
+
 	/**
 	 * The Unique Client Identifier.
 	 *
