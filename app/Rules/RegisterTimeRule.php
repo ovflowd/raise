@@ -20,16 +20,15 @@ use Validator\IRule;
 use Validator\ModelValidatorException;
 
 /**
- * Class UniqueNameRule.
+ * Class RegisterTimeRule.
  *
- * A Mapping Rule used to verify the existence
- *  of given Permissions
+ * A Mapping Rule used to set current Time to a Property
  *
  * @version 2.1.0
  *
  * @since 2.1.0
  */
-class PermissionRule implements IRule
+class RegisterTimeRule implements IRule
 {
     /**
      * Used in your @rule annotation (single value)
@@ -40,7 +39,7 @@ class PermissionRule implements IRule
      */
     function getNames()
     {
-        return ['permissionRule'];
+        return ['serverTime', 'clientTime'];
     }
 
     /**
@@ -55,10 +54,6 @@ class PermissionRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        array_walk($property->getPropertyValue(), function (string $permission) {
-            if (security()::permission($permission) === false) {
-                throw new ModelValidatorException('One or more permissions provided doesn\'t exists.');
-            }
-        });
+        $property->setPropertyValue($property->getPropertyValue() ?? microtime(true));
     }
 }

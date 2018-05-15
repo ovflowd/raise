@@ -20,16 +20,15 @@ use Validator\IRule;
 use Validator\ModelValidatorException;
 
 /**
- * Class UniqueNameRule.
+ * Class MacAddressRule.
  *
- * A Mapping Rule used to verify the existence
- *  of given Permissions
+ * A Mapping Rule used to set a Mac Address of a Client
  *
  * @version 2.1.0
  *
  * @since 2.1.0
  */
-class PermissionRule implements IRule
+class MacAddressRule implements IRule
 {
     /**
      * Used in your @rule annotation (single value)
@@ -40,7 +39,7 @@ class PermissionRule implements IRule
      */
     function getNames()
     {
-        return ['permissionRule'];
+        return ['macAddress'];
     }
 
     /**
@@ -55,10 +54,8 @@ class PermissionRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        array_walk($property->getPropertyValue(), function (string $permission) {
-            if (security()::permission($permission) === false) {
-                throw new ModelValidatorException('One or more permissions provided doesn\'t exists.');
-            }
-        });
+        if (preg_match('/([a-fA-F0-9]{2}[:|\-]?){6}/', $property->getPropertyValue()) !== 1) {
+            throw new ModelValidatorException('Given MAC Address isn\'t a valid MAC.');
+        }
     }
 }

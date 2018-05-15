@@ -15,8 +15,11 @@
 
 namespace App\Rules;
 
+use App\Models\Communication\Model;
+use App\Models\Communication\Service;
 use Common\ModelReflection\ModelProperty;
 use Validator\IRule;
+use Validator\ModelValidatorException;
 
 /**
  * Class UniqueNameRule.
@@ -54,6 +57,38 @@ class ParameterRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        // TODO: Implement validate() method.
+        $service = database()->select('service', $property->getObject()->serviceId);
+
+        if (count(array_diff($property->getPropertyValue(), $service->parameters)) > 0) {
+            throw new ModelValidatorException('Wrong amount of parameters given.');
+        }
+
+        $order = array_flip($property->getPropertyValue());
+
+        $property->getObject()->values = array_map(function ($values) use ($service, $order) {
+            return isset($order) ? $this->orderData($values, $service) : (array)$values;
+        }, $property->getObject()->values);
+
+        $property->setPropertyValue($service->parameters);
+    }
+
+    /**
+     * Order a Set of Data.
+     *
+     * Order Data based on Service Parameters and his Order Set
+     *
+     * @param array $values A set of Values to be Ordered
+     * @param Service|Model $service A given Service
+     *
+     * @return array|null Ordered Data if the Data matches the Service Parameters,
+     *                    null otherwise.
+     */
+    protected function orderData(array $values, $service)
+    {
+        global $order;
+
+        return array_map(function ($parameter) use ($values, $order) {
+            return $values[$order[$parameter]];
+        }, $service->parameters);
     }
 }

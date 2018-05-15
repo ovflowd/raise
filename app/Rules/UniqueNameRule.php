@@ -17,6 +17,7 @@ namespace App\Rules;
 
 use Common\ModelReflection\ModelProperty;
 use Validator\IRule;
+use Validator\ModelValidatorException;
 
 /**
  * Class UniqueNameRule.
@@ -54,6 +55,24 @@ class UniqueNameRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        // TODO: Implement validate() method.
+        $name = $property->getPropertyValue();
+
+        switch ($property->getPropertyName()) {
+            case 'uniqueName':
+                if (security()::group($name) !== false) {
+                    throw new ModelValidatorException('Already exists a group with this unique name.');
+                }
+                break;
+            case 'name':
+                if (security()::permission($name) !== false) {
+                    throw new ModelValidatorException('Already exists a permission with this unique name.');
+                }
+                break;
+        }
+
+        // Check if unique name is alphabetic only
+        if (preg_match('/^[a-z_]*$/', $name) === 0) {
+            throw new ModelValidatorException('Only alphabet characters and hyphens are allowed');
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace App\Rules;
 
 use Common\ModelReflection\ModelProperty;
 use Validator\IRule;
+use Validator\ModelValidatorException;
 
 /**
  * Class ServiceIdRule.
@@ -53,6 +54,16 @@ class ServiceIdRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        // TODO: Implement validate() method.
+        global $token;
+
+        $service = database()->select('service', $property->getPropertyValue());
+
+        if ($service === false) {
+            throw new ModelValidatorException('Service not Found or not valid.');
+        }
+
+        if ($service->clientId !== $token()->clientId) {
+            throw new ModelValidatorException('Provided Service doesn\'t belong to current Token.');
+        }
     }
 }
