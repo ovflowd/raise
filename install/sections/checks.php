@@ -16,8 +16,8 @@
 echo PHP_EOL . PHP_EOL;
 
 echo writeText('Welcome to the RAISe Installer.', '0;31', true);
-echo writeText('This Installer will perform various checks before continuing, please be patient.',
-    '93;1', true);
+echo writeText('This Installer will perform various checks before continuing, please be patient.', '93;1', true);
+echo writeText('Don\'t forget to allocate sufficient RAM to your Docker Environment!', '91;1', true);
 
 echo PHP_EOL;
 

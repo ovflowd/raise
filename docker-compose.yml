@@ -1,12 +1,12 @@
-version: "2"
+version: '2'
 services:
   web:
     image: nginx
     ports:
       - 8080:80
     volumes:
-      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - .:/app:ro
+      - './docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro'
+      - '.:/app:ro'
     links:
       - raise
     depends_on:
@@ -14,7 +14,7 @@ services:
   couchbase:
     image: couchbase/server
     volumes:
-      - ./couchbase:/opt/couchbase/var:rw
+      - './couchbase:/opt/couchbase/var:rw'
     ports:
       - 8091:8091
       - 8092:8092
@@ -22,7 +22,8 @@ services:
       - 11210:11210
   raise:
     volumes:
-      - .:/app:rw
+      - '.:/app:rw'
+      - '/app/vendor'
     restart: 'no'
     entrypoint: ['docker-php-entrypoint']
     expose:
@@ -30,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "bash /app/raise-init.sh"
+    command: 'bash /app/raise-init.sh'
     depends_on:
       - couchbase
     links:
