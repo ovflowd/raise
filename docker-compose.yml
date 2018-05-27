@@ -5,30 +5,24 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
-    volumes_from:
-      - composer
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - .:/app:ro
     links:
       - raise
-      - composer
     depends_on:
       - raise
   couchbase:
     image: couchbase/server
     volumes:
-      - ./couchbase:/opt/couchbase/var
+      - ./couchbase:/opt/couchbase/var:rw
     ports:
       - 8091:8091
       - 8092:8092
       - 8093:8093
       - 11210:11210
-  composer:
-    image: composer
-    restart: 'no'
-    volumes:
-      - .:/app
-    command: install --no-dev
   raise:
+    volumes:
+      - .:/app:rw
     restart: 'no'
     entrypoint: ['docker-php-entrypoint']
     expose:
@@ -37,10 +31,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: "bash /app/raise-init.sh"
-    volumes_from:
-      - composer
     depends_on:
-      - composer
       - couchbase
     links:
       - couchbase
