@@ -57,31 +57,9 @@ class Log extends Model
 	/**
 	 * The time when the server handled the operation and inserted it.
 	 *
-	 * @var float (UNIX_TIMESTAMP)
+     * @rule serverTime
+     *
+	 * @var float
 	 */
 	protected $serverTime = 0;
-
-	/**
-	 * Log constructor.
-	 *
-	 * Picks the result content of the result Response
-	 * and set the serverTime
-	 *
-	 * Since every Response actually has a $code and a $message
-	 */
-	public function __construct()
-	{
-		$this->setServerTime();
-	}
-
-	/**
-	 * Set manually serverTime
-	 * with the ability of setting the with the current microtime.
-	 *
-	 * @param float|null $serverTime Server Time on UNIX_TIMESTAMP with milliseconds
-	 */
-	public function setServerTime(float $serverTime = null)
-	{
-		$this->serverTime = $serverTime ?? microtime(true);
-	}
 }

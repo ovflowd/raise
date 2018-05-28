@@ -48,7 +48,7 @@ $router()->mount('/client', function () use ($router, $response, $token) {
 	$router()->post('/register', '\App\Controllers\Client@register');
 
 	// Revalidate a Client
-	$router()->post('/revalidate', '\App\Controllers\Client@revalidate');
+	$router()->post('/revalidate', '\App\Controllers\Client@update');
 });
 
 /*

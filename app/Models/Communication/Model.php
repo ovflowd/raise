@@ -16,6 +16,8 @@
 namespace App\Models\Communication;
 
 use Traits\MappableTrait;
+use Traits\ConvertibleTrait;
+use Traits\ValidatableTrait;
 
 /**
  * Class Model.
@@ -34,6 +36,8 @@ use Traits\MappableTrait;
 abstract class Model
 {
     use MappableTrait;
+    use ConvertibleTrait;
+    use ValidatableTrait;
 
     /**
      * Get all public properties of the Model

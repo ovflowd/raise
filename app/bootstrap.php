@@ -21,6 +21,7 @@
 
 // Include Composer Autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
+
 // Register Accessor Functions
 require_once __DIR__ . '/../app/accessory.php';
 

@@ -26,7 +26,7 @@
  */
 function root()
 {
-	return __DIR__ . '/../';
+    return __DIR__ . '/../';
 }
 
 /**
@@ -38,8 +38,8 @@ function root()
  */
 function path(string $context = '')
 {
-	return is_dir(($path = (root() . str_replace('.', '/', $context))))
-		? $path : false;
+    return is_dir(($path = (root() . str_replace('.', '/', $context))))
+        ? $path : false;
 }
 
 /**
@@ -51,7 +51,7 @@ function path(string $context = '')
  */
 function app(string $context = '')
 {
-	return path('app/' . $context);
+    return path('app/' . $context);
 }
 
 /**
@@ -63,7 +63,7 @@ function app(string $context = '')
  */
 function resources(string $context = '')
 {
-	return path('resources/' . $context);
+    return path('resources/' . $context);
 }
 
 /*
@@ -79,7 +79,7 @@ function resources(string $context = '')
  */
 function logger()
 {
-	return \App\Facades\Log::get();
+    return \App\Facades\Log::get();
 }
 
 /**
@@ -89,7 +89,7 @@ function logger()
  */
 function response()
 {
-	return \App\Facades\Response::get();
+    return \App\Facades\Response::get();
 }
 
 /**
@@ -99,7 +99,7 @@ function response()
  */
 function blade()
 {
-	return \App\Facades\Blade::get();
+    return \App\Facades\Blade::get();
 }
 
 /**
@@ -109,7 +109,7 @@ function blade()
  */
 function request()
 {
-	return \App\Facades\Request::get();
+    return \App\Facades\Request::get();
 }
 
 /**
@@ -119,7 +119,7 @@ function request()
  */
 function database()
 {
-	return \App\Managers\Database::getHandler();
+    return \App\Managers\Database::getHandler();
 }
 
 /**
@@ -129,7 +129,7 @@ function database()
  */
 function json()
 {
-	return \App\Facades\Json::get();
+    return \App\Facades\Json::get();
 }
 
 /**
@@ -139,7 +139,7 @@ function json()
  */
 function security()
 {
-	return \App\Facades\Security::get();
+    return \App\Facades\Security::get();
 }
 
 /**
@@ -152,7 +152,7 @@ function security()
  */
 function setting(string $configuration)
 {
-	return \App\Handlers\Settings::get($configuration);
+    return \App\Handlers\Settings::get($configuration);
 }
 
 /*
@@ -170,13 +170,13 @@ function setting(string $configuration)
  */
 function whoops()
 {
-	static $whoops;
+    static $whoops;
 
-	if (null === $whoops) {
-		$whoops = new Whoops\Run();
-	}
+    if (null === $whoops) {
+        $whoops = new Whoops\Run();
+    }
 
-	return $whoops;
+    return $whoops;
 }
 
 /**
@@ -188,15 +188,15 @@ function whoops()
  */
 function document($data)
 {
-	if (is_array($data)) {
-		return array_map('document', $data);
-	}
+    if (is_array($data)) {
+        return array_map('document', $data);
+    }
 
-	if (is_object(($data)) && property_exists($data, 'document')) {
-		return $data->document;
-	}
+    if (is_object(($data)) && property_exists($data, 'document')) {
+        return $data->document;
+    }
 
-	return $data;
+    return $data;
 }
 
 /**
@@ -208,17 +208,17 @@ function document($data)
  */
 function documentWId($data)
 {
-	if (is_array($data)) {
-		return array_map('documentWId', $data);
-	}
+    if (is_array($data)) {
+        return array_map('documentWId', $data);
+    }
 
-	if (is_object(($data)) && property_exists($data, 'document')) {
-		$data->document->id = $data->id;
+    if (is_object(($data)) && property_exists($data, 'document')) {
+        $data->document->id = $data->id;
 
-		return $data->document;
-	}
+        return $data->document;
+    }
 
-	return $data;
+    return $data;
 }
 
 /**
@@ -229,9 +229,28 @@ function documentWId($data)
  * @return \Bramus\Router\Router
  */
 $router = function () {
-	static $router;
+    static $router;
 
-	return $router ?? ($router = new \Bramus\Router\Router());
+    return $router ?? ($router = new \Bramus\Router\Router());
+};
+
+/**
+ * Get the Mapping Rules.
+ *
+ * If the instance already exists return it, if not create it
+ *
+ * @return Validator\ModelValidator
+ */
+$ruler = function () {
+    static $ruler;
+
+    if($ruler === null) {
+        $ruler = new \Validator\ModelValidator();
+
+        $ruler->loadRules(__DIR__ . '/Rules/');
+    }
+
+    return $ruler;
 };
 
 /**
@@ -243,17 +262,17 @@ $router = function () {
  * @param \App\Models\Communication\Model|null $model An optional Model to override the response
  */
 $response = function (\App\Models\Communication\Model $model = null) {
-	echo response()::response(function ($content) use ($model) {
-		switch (response()::type()) {
-			case 'application/json':
-				return json()::jsonEncode($model ?? $content);
-			case 'text/html':
-			default:
-				return $content;
-		}
-	});
+    echo response()::response(function ($content) use ($model) {
+        switch (response()::type()) {
+            case 'application/json':
+                return json()::jsonEncode($model ?? $content);
+            case 'text/html':
+            default:
+                return $content;
+        }
+    });
 
-	exit(0);
+    exit(0);
 };
 
 /**
@@ -268,17 +287,17 @@ $response = function (\App\Models\Communication\Model $model = null) {
  * @return \App\Models\Communication\Token
  */
 $token = function (bool $exit = true) use ($response) {
-	static $tokenModel;
+    static $tokenModel;
 
-	if ($tokenModel == null) {
-		$tokenModel = security()::validateToken(request()::headers('Authorization') ?: request()::headers('authorization'));
+    if ($tokenModel == null) {
+        $tokenModel = security()::validateToken(request()::headers('Authorization') ?: request()::headers('authorization'));
 
-		if ($tokenModel === false && $exit) {
-			$response();
+        if ($tokenModel === false && $exit) {
+            $response();
 
-			exit(1);
-		}
-	}
+            exit(1);
+        }
+    }
 
-	return $tokenModel;
+    return $tokenModel;
 };
