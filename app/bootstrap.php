@@ -19,7 +19,7 @@
 |----------------------------------------------------------------------------
 */
 
-// Register Composer Autoloader
+// Include Composer Autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Register Accessor Functions

@@ -33,14 +33,15 @@ use Koine\QueryBuilder\Statements\Select;
  */
 class Client extends Controller
 {
-	/**
-	 * Register Process.
-	 *
-	 * Validated and Registers Clients unto the Database
-	 *
-	 * @param object $data the payload as object from the Request
-	 * @param Model|null $response a Response Model to be used as Response
-	 */
+    /**
+     * Register Process.
+     *
+     * Validated and Registers Clients unto the Database
+     *
+     * @param object $data the payload as object from the Request
+     * @param Model|null $response a Response Model to be used as Response
+     * @throws \Mapper\ModelMapperException
+     */
 	public function register($data = null, Model $response = null)
 	{
 		response()::message(400, 'Missing required Parameters');
@@ -55,12 +56,13 @@ class Client extends Controller
 	}
 
 	/**
-	 * Revalidate Process.
+	 * Re-validate Process.
 	 *
-	 * Revalidate a Client with given location and
+	 * Re-validate a Client with given location and
 	 * services. A new token and JWT it's generated.
+     * @throws \Mapper\ModelMapperException
 	 */
-	public function revalidate()
+	public function update()
 	{
 		$hash = request()::headers('Authorization') ?: request()::headers('authorization');
 

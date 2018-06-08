@@ -10,10 +10,7 @@ wait_for_start() {
     done
 }
 
-while [ ! -f /app/vendor/autoload.php ]
-do
-  sleep 5
-done
+composer install --no-dev --optimize-autoloader
 
 wait_for_start wget -qO- couchbase:8091 &> /dev/null
 

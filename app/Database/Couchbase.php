@@ -95,7 +95,7 @@ class Couchbase implements DatabaseHandler
 			$bucket = $this->connection->openBucket($table);
 
 			return !empty($bucket->insert($itemId, $data->encode()))
-				? $itemId : false;
+                ? $itemId : false;
 		} catch (Exception $e) {
 			return false;
 		}

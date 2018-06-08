@@ -32,4 +32,10 @@ use App\Models\Communication\Model;
  */
 class Log extends Model
 {
+    /**
+     * Eanble or disable Debugging
+     *
+     * @var bool
+     */
+    public $debug = false;
 }

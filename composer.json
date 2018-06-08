@@ -46,11 +46,11 @@
     "bramus/router": "^1.1",
     "koine/query-builder": "^0.9.7",
     "firebase/php-jwt": "^4.0",
-    "netresearch/jsonmapper": "^1.1",
     "filp/whoops": "^2.1",
     "jenssegers/blade": "^1.1",
     "vlucas/phpdotenv": "^2.4",
-    "nategood/httpful": "^0.2.20"
+    "nategood/httpful": "^0.2.20",
+    "runz0rd/mapper-php": "^2.2"
   },
   "autoload": {
     "psr-4": {
