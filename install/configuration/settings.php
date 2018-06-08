@@ -58,6 +58,6 @@ return [
     */
 
     'log' => [
-
+        'debug' => false,
     ],
 ];
