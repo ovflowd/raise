@@ -20,8 +20,6 @@ use App\Models\Communication\Raise as RaiseModel;
 use Firebase\JWT\JWT;
 use Firebase\JWT\SignatureInvalidException;
 use InvalidArgumentException;
-use JsonMapper;
-use JsonMapper_Exception;
 use Mapper\ModelMapperException;
 use UnexpectedValueException;
 

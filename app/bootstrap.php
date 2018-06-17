@@ -75,6 +75,8 @@ error_reporting(!\App\Handlers\Settings::get('security.debug') ?: (E_ALL ^ (E_NO
 
 ini_set('display_errors', \App\Handlers\Settings::get('security.debug'));
 
+ini_set('couchbase.log_level', 'FATAL');
+
 /*
 |----------------------------------------------------------------------------
 | Run the Router                                                            |
