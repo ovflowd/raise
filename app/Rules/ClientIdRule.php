@@ -43,6 +43,18 @@ class ClientIdRule implements IRule
     }
 
     /**
+     * Get Current Client Identifier
+     *
+     * @return string|null
+     */
+    static function getClientId()
+    {
+        global $token;
+
+        return $token() ? $token()->clientId : null;
+    }
+
+    /**
      * Define your rule and have your property pass it
      * Additional rule parameters are stored inside $params
      * Should throw an Exception on failure
@@ -56,6 +68,6 @@ class ClientIdRule implements IRule
     {
         global $token;
 
-        $property->setPropertyValue($property->getPropertyValue() ?? $token()->clientId);
+        $property->setPropertyValue($property->getPropertyValue() ?? self::getClientId());
     }
 }

@@ -15,6 +15,8 @@
 
 namespace App\Models\Communication;
 
+use App\Rules\ExpireTimeRule;
+
 /**
  * Class Token.
  *
@@ -64,4 +66,16 @@ class Token extends Raise
      * @var float
      */
     public $expireTime;
+
+    /**
+     * Base RAISe Model Constructor
+     *
+     * Prepares the Timestamps and other Default Stuff
+     */
+    public function __construct()
+    {
+        $this->expireTime = ExpireTimeRule::calculate(microtime(true));
+
+        parent::__construct();
+    }
 }

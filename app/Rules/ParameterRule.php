@@ -66,7 +66,7 @@ class ParameterRule implements IRule
         $order = array_flip($property->getPropertyValue());
 
         $property->getObject()->values = array_map(function ($values) use ($service, $order) {
-            return isset($order) ? $this->orderData($values, $service) : (array)$values;
+            return $this->orderData($values, $service, $order);
         }, $property->getObject()->values);
 
         $property->setPropertyValue($service->parameters);
@@ -79,14 +79,13 @@ class ParameterRule implements IRule
      *
      * @param array $values A set of Values to be Ordered
      * @param Service|Model $service A given Service
+     * @param array $order
      *
      * @return array|null Ordered Data if the Data matches the Service Parameters,
      *                    null otherwise.
      */
-    protected function orderData(array $values, $service)
+    protected function orderData(array $values, $service, $order)
     {
-        global $order;
-
         return array_map(function ($parameter) use ($values, $order) {
             return $values[$order[$parameter]];
         }, $service->parameters);

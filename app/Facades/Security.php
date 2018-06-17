@@ -45,7 +45,6 @@ class Security extends Facade
      * @param string $hash the Hash to be Validated
      *
      * @return array|null The JWT hash if the Token has expired and exists.
-     * @throws \Mapper\ModelMapperException
      */
     public static function updateToken(string $hash)
     {
@@ -82,7 +81,6 @@ class Security extends Facade
      * @param string $group the group that the Token will belong
      *
      * @return string the JWT Generated Hash
-     * @throws \Mapper\ModelMapperException
      */
     public static function insertToken(string $clientId, string $group = 'client')
     {

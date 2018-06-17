@@ -166,7 +166,7 @@ class Response extends Facade
      */
     public static function status(int $httpCode, string $details = null, bool $returnContent = false)
     {
-        self::setResponse($httpCode, new Message(), ['code' => $httpCode, 'message' => $details]);
+        self::setResponse($httpCode, new Message(), ['code' => $httpCode, 'message' => $details], false);
 
         return $returnContent ? self::$response : null;
     }
@@ -180,12 +180,15 @@ class Response extends Facade
      * @param int $httpCode desired HTTP code
      * @param string|Model|object $model the namespace of the model or an instance of it
      * @param array|object $data the data to be mapped into the Model
+     * @param bool $checkBase
      */
-    public static function setResponse(int $httpCode, $model, $data)
+    public static function setResponse(int $httpCode, $model, $data, bool $checkBase = true)
     {
         self::code($httpCode);
 
-        self::$response = json()::map($model, $data);
+        $finalData = $checkBase ? (array)database()->select('metadata', $httpCode) + $data : $data;
+
+        self::$response = json()::map($model, $finalData);
     }
 
     /**

@@ -15,6 +15,8 @@
 
 namespace App\Models\Communication;
 
+use App\Rules\ClientIdRule;
+
 /**
  * Class Service.
  *
@@ -81,4 +83,16 @@ class Service extends Raise
      * @var string
      */
     protected $clientId = '';
+
+    /**
+     * Base RAISe Model Constructor
+     *
+     * Prepares the Timestamps and other Default Stuff
+     */
+    public function __construct()
+    {
+        $this->clientId = ClientIdRule::getClientId();
+
+        parent::__construct();
+    }
 }

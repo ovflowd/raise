@@ -102,9 +102,10 @@ class Couchbase implements DatabaseHandler
 
             $bucket = $this->connection->openBucket($table);
 
-            $bucket->operationTimeout = 2000;
-            $bucket->httpTimeout = 500;
-            $bucket->n1qlTimeout = 2000;
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
             return !empty($bucket->insert($itemId, $data->encode()))
                 ? $itemId : false;
@@ -127,9 +128,10 @@ class Couchbase implements DatabaseHandler
         try {
             $bucket = $this->connection->openBucket($table);
 
-            $bucket->operationTimeout = 2000;
-            $bucket->httpTimeout = 500;
-            $bucket->n1qlTimeout = 2000;
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
             if ($query instanceof Select) {
                 $query->from("{$table} document");
@@ -161,9 +163,10 @@ class Couchbase implements DatabaseHandler
         try {
             $bucket = $this->connection->openBucket($table);
 
-            $bucket->operationTimeout = 2000;
-            $bucket->httpTimeout = 500;
-            $bucket->n1qlTimeout = 2000;
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
             $result = $bucket->upsert($primaryKey, $data);
 
@@ -186,9 +189,10 @@ class Couchbase implements DatabaseHandler
         try {
             $bucket = $this->connection->openBucket($table);
 
-            $bucket->operationTimeout = 2000;
-            $bucket->httpTimeout = 500;
-            $bucket->n1qlTimeout = 2000;
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
             return !empty($bucket->remove($primaryKey));
         } catch (Exception $e) {
@@ -228,12 +232,15 @@ class Couchbase implements DatabaseHandler
 
         switch ($protocolError) {
             case 22:
-            case 23:
                 response()::status("5{$protocolError}", 'Please wait, Couchbase is warming up.');
 
                 break;
+            case 23:
+                response()::status("5{$protocolError}", 'Couchbase communication timed out.');
+
+                break;
             default:
-                response()::status("5{$protocolError}", 'Couchbase had a strange behavior. Please check the logs.');
+                response()::status("5{$protocolError}", 'Couchbase had a strange behaviour, check the logs.');
 
                 break;
         }

@@ -50,7 +50,8 @@
     "jenssegers/blade": "^1.1",
     "vlucas/phpdotenv": "^2.4",
     "nategood/httpful": "^0.2.20",
-    "runz0rd/mapper-php": "^2.2"
+    "runz0rd/mapper-php": "^2.2",
+    "doctrine/instantiator": "^1.1"
   },
   "autoload": {
     "psr-4": {
