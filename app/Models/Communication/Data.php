@@ -53,7 +53,7 @@ class Data extends Raise
      *
      * @required
      *
-     * @var array
+     * @var array[]
      */
     public $values = [];
 

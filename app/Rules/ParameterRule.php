@@ -59,13 +59,29 @@ class ParameterRule implements IRule
     {
         $service = database()->select('service', $property->getObject()->serviceId);
 
-        if (count(array_diff($property->getPropertyValue(), $service->parameters)) > 0) {
+        $parameters = count($service->parameters);
+
+        if ($parameters <= 1) {
+            $property->setPropertyValue($service->parameters);
+
+            return;
+        }
+
+        if (count($property->getPropertyValue()) !== $parameters) {
             throw new ModelValidatorException('Wrong amount of parameters given.');
         }
 
         $order = array_flip($property->getPropertyValue());
 
-        $property->getObject()->values = array_map(function ($values) use ($service, $order) {
+        $property->getObject()->values = array_map(function ($values) use ($service, $order, $parameters) {
+            if (!is_array($values)) {
+                throw new ModelValidatorException('Your data object must contain array of values.');
+            }
+
+            if ($parameters > 1 && count($values) !== $parameters) {
+                throw new ModelValidatorException('Wrong amount of values given it must match the parameters.');
+            }
+
             return $this->orderData($values, $service, $order);
         }, $property->getObject()->values);
 
