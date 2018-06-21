@@ -65,7 +65,7 @@ class Data extends Raise
      *
      * @var string[]
      */
-    public $parameters = [];
+    public $order = [];
 
     /**
      * The Unique Client Identifier.

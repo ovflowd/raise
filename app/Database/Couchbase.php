@@ -143,7 +143,11 @@ class Couchbase implements DatabaseHandler
                 return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
             }
 
-            return $bucket->get((string)$query)->value;
+            try {
+                return $bucket->get((string)$query)->value;
+            } catch (Exception $e) {
+                return false;
+            }
         } catch (Exception $e) {
             return $this->getCouchbaseResponseError($e->getCode());
         }
@@ -225,28 +229,38 @@ class Couchbase implements DatabaseHandler
      * has strange behaviors.
      *
      * @param int $protocolError
+     * @return bool
      */
     protected function getCouchbaseResponseError(int $protocolError)
     {
         global $response;
 
+        $returnMessage = false;
+
         switch ($protocolError) {
             case 22:
-                response()::status("5{$protocolError}", 'Please wait, Couchbase is warming up.');
+                // Couchbase Warming Up Message
+                $response(response()::status("5{$protocolError}", 'Please wait, Couchbase is warming up.'));
 
                 break;
             case 23:
-                response()::status("5{$protocolError}", 'Couchbase communication timed out.');
+                // Timeout of Communication
+                $response(response()::status("5{$protocolError}", 'Couchbase communication timed out.'));
+
+                break;
+            case 13:
+                // When Something doesn't exists in Couchbase
+                $returnMessage = false;
 
                 break;
             default:
-                response()::status("5{$protocolError}", 'Couchbase had a strange behaviour, check the logs.');
+                // Other Generic Errors
+                $response(response()::status("5{$protocolError}",
+                    'Couchbase had a strange behaviour, check the logs.'));
 
                 break;
         }
 
-        $response();
-
-        exit(1);
+        return $returnMessage;
     }
 }
