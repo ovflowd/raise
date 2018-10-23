@@ -50,10 +50,8 @@ class Blade extends Facade
 		self::blade();
 
 		self::blade()->compiler()->directive('path', function () {
-			$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-				? 'https://' : 'http://';
-
-			return "{$protocol}{$_SERVER['HTTP_HOST']}" . setting('raise.path');
+		    return '<?php $protocol = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off") ? "https://" : "http://";
+                        echo "{$protocol}{$_SERVER["HTTP_HOST"]}" . setting("raise.path"); ?>';
 		});
 
 		return self::blade();
