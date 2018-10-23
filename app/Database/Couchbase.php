@@ -40,155 +40,227 @@ use Koine\QueryBuilder\Statements\Select;
  */
 class Couchbase implements DatabaseHandler
 {
-	/**
-	 * The Couchbase Cluster Connection Instance.
-	 *
-	 * @var CouchbaseCluster
-	 */
-	private $connection = null;
+    /**
+     * The Couchbase Cluster Connection Instance.
+     *
+     * @var CouchbaseCluster
+     */
+    private $connection = null;
 
-	/**
-	 * The Couchbase Authenticator.
-	 *
-	 * @var PasswordAuthenticator
-	 */
-	private $authenticator = null;
+    /**
+     * The Couchbase Authenticator.
+     *
+     * @var PasswordAuthenticator
+     */
+    private $authenticator = null;
 
-	/**
-	 * Connect to the Database.
-	 *
-	 * @param array|object $connection the connection string for Couchbase
-	 */
-	public function connect($connection)
-	{
-		$this->connection = new CouchbaseCluster("couchbase://{$connection->address}");
+    /**
+     * Connect to the Database.
+     *
+     * @param array|object $connection the connection string for Couchbase
+     * @return bool
+     */
+    public function connect($connection)
+    {
+        try {
+            $this->authenticator = new PasswordAuthenticator();
 
-		$this->authenticator = new PasswordAuthenticator();
-		$this->authenticator->username($connection->username);
-		$this->authenticator->password($connection->password);
+            $this->authenticator->username($connection->username);
+            $this->authenticator->password($connection->password);
 
-		$this->connection->authenticate($this->authenticator);
-	}
+            $this->connection = new CouchbaseCluster("couchbase://{$connection->address}");
 
-	/**
-	 * Destroy the Connection.
-	 */
-	public function destroy()
-	{
-		$this->connection = null;
-	}
+            $this->connection->authenticate($this->authenticator);
+        } catch (Exception $e) {
+            return $this->getCouchbaseResponseError($e->getCode());
+        }
 
-	/**
-	 * Insert Documents on Couchbase.
-	 *
-	 * @param string $table desired bucket
-	 * @param Model $data data to be inserted
-	 * @param string $primaryKey defined primary key or generated
-	 *
-	 * @return int|string generated or defined primary key or the result of the primary key
-	 */
-	public function insert(string $table, Model $data, string $primaryKey = null)
-	{
-		try {
-			$itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
+        return true;
+    }
 
-			$bucket = $this->connection->openBucket($table);
+    /**
+     * Destroy the Connection.
+     */
+    public function destroy()
+    {
+        $this->connection = null;
+    }
 
-			return !empty($bucket->insert($itemId, $data->encode()))
+    /**
+     * Insert Documents on Couchbase.
+     *
+     * @param string $table desired bucket
+     * @param Model $data data to be inserted
+     * @param string $primaryKey defined primary key or generated
+     *
+     * @return int|string generated or defined primary key or the result of the primary key
+     */
+    public function insert(string $table, Model $data, string $primaryKey = null)
+    {
+        try {
+            $itemId = $primaryKey ?? bin2hex(openssl_random_pseudo_bytes(20));
+
+            $bucket = $this->connection->openBucket($table);
+
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
+
+            return !empty($bucket->insert($itemId, $data->encode()))
                 ? $itemId : false;
-		} catch (Exception $e) {
-			return false;
-		}
-	}
+        } catch (Exception $e) {
+            return $this->getCouchbaseResponseError($e->getCode());
+        }
+    }
 
-	/**
-	 * Select Data on Couchbase.
-	 *
-	 * @param string $table desired table to select
-	 * @param string|Select|QueryBuilder $query a Select query to search
-	 * @param bool $override If need override the select statement
-	 *
-	 * @return Model|array|object|string selected content
-	 */
-	public function select(string $table, $query, bool $override = true)
-	{
-		try {
-			$bucket = $this->connection->openBucket($table);
+    /**
+     * Select Data on Couchbase.
+     *
+     * @param string $table desired table to select
+     * @param string|Select|QueryBuilder $query a Select query to search
+     * @param bool $override If need override the select statement
+     *
+     * @return Model|array|object|string selected content
+     */
+    public function select(string $table, $query, bool $override = true)
+    {
+        try {
+            $bucket = $this->connection->openBucket($table);
 
-			if ($query instanceof Select) {
-				$query->from("{$table} document");
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
-				if ($override === true) {
-					$query->select('document, META(document).id');
-				}
+            if ($query instanceof Select) {
+                $query->from("{$table} document");
 
-				return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
-			}
+                if ($override === true) {
+                    $query->select('document, META(document).id');
+                }
 
-			return $bucket->get((string)$query)->value;
-		} catch (Exception $e) {
-			return false;
-		}
-	}
+                return $bucket->query(N1qlQuery::fromString($query->toSql()))->rows;
+            }
 
-	/**
-	 * Update an Element of the Couchbase.
-	 *
-	 * @param string $table desired bucket to update
-	 * @param string $primaryKey the document identifier
-	 * @param Model|object $data data to update
-	 *
-	 * @return array|string|object the result of the update
-	 */
-	public function update(string $table, string $primaryKey, $data)
-	{
-		try {
-			$bucket = $this->connection->openBucket($table);
+            try {
+                return $bucket->get((string)$query)->value;
+            } catch (Exception $e) {
+                return false;
+            }
+        } catch (Exception $e) {
+            return $this->getCouchbaseResponseError($e->getCode());
+        }
+    }
 
-			$result = $bucket->upsert($primaryKey, $data);
+    /**
+     * Update an Element of the Couchbase.
+     *
+     * @param string $table desired bucket to update
+     * @param string $primaryKey the document identifier
+     * @param Model|object $data data to update
+     *
+     * @return array|string|object the result of the update
+     */
+    public function update(string $table, string $primaryKey, $data)
+    {
+        try {
+            $bucket = $this->connection->openBucket($table);
 
-			return $result->value;
-		} catch (Exception $e) {
-			return false;
-		}
-	}
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
 
-	/**
-	 * Delete an Element of the Database.
-	 *
-	 * @param string $table desired table to update
-	 * @param string $primaryKey desired element to delete
-	 *
-	 * @return bool if removed or not
-	 */
-	public function delete(string $table, string $primaryKey)
-	{
-		try {
-			$bucket = $this->connection->openBucket($table);
+            $result = $bucket->upsert($primaryKey, $data);
 
-			return !empty($bucket->remove($primaryKey));
-		} catch (Exception $e) {
-			return false;
-		}
-	}
+            return $result->value;
+        } catch (Exception $e) {
+            return $this->getCouchbaseResponseError($e->getCode());
+        }
+    }
 
-	/**
-	 * Get the Couchbase Connection Handler.
-	 *
-	 * @return CouchbaseCluster
-	 */
-	public function getConnection()
-	{
-		return $this->connection;
-	}
+    /**
+     * Delete an Element of the Database.
+     *
+     * @param string $table desired table to update
+     * @param string $primaryKey desired element to delete
+     *
+     * @return bool if removed or not
+     */
+    public function delete(string $table, string $primaryKey)
+    {
+        try {
+            $bucket = $this->connection->openBucket($table);
 
-	/**
-	 * Get the Couchbase Authenticator Handler.
-	 *
-	 * @return PasswordAuthenticator
-	 */
-	public function getAuthenticator()
-	{
-		return $this->authenticator;
-	}
+            $bucket->operationTimeout = 1000000;
+            $bucket->httpTimeout = 1000000;
+            $bucket->n1qlTimeout = 1000000;
+            $bucket->viewTimeout = 1000000;
+
+            return !empty($bucket->remove($primaryKey));
+        } catch (Exception $e) {
+            return $this->getCouchbaseResponseError($e->getCode());
+        }
+    }
+
+    /**
+     * Get the Couchbase Connection Handler.
+     *
+     * @return CouchbaseCluster
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
+     * Get the Couchbase Authenticator Handler.
+     *
+     * @return PasswordAuthenticator
+     */
+    public function getAuthenticator()
+    {
+        return $this->authenticator;
+    }
+
+    /**
+     * Provide a Call Back to Kill the Application when Couchbase
+     * has strange behaviors.
+     *
+     * @param int $protocolError
+     * @return bool
+     */
+    protected function getCouchbaseResponseError(int $protocolError)
+    {
+        global $response;
+
+        $returnMessage = false;
+
+        switch ($protocolError) {
+            case 22:
+                // Couchbase Warming Up Message
+                $response(response()::status("5{$protocolError}", 'Please wait, Couchbase is warming up.'));
+
+                break;
+            case 23:
+                // Timeout of Communication
+                $response(response()::status("5{$protocolError}", 'Couchbase communication timed out.'));
+
+                break;
+            case 13:
+                // When Something doesn't exists in Couchbase
+                $returnMessage = false;
+
+                break;
+            default:
+                // Other Generic Errors
+                $response(response()::status("5{$protocolError}",
+                    'Couchbase had a strange behaviour, check the logs.'));
+
+                break;
+        }
+
+        return $returnMessage;
+    }
 }

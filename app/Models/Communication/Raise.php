@@ -34,8 +34,6 @@ abstract class Raise extends Model
      * The time when the Client requested the operation.
      *
      * @rule clientTime
-     *
-     * @var float
      */
     public $clientTime = 0;
 
@@ -53,8 +51,17 @@ abstract class Raise extends Model
      * The time when the server handled the operation and inserted it.
      *
      * @rule serverTime
-     *
-     * @var float
      */
     public $serverTime = 0;
+
+    /**
+     * Base RAISe Model Constructor
+     *
+     * Prepares the Timestamps and other Default Stuff
+     */
+    public function __construct()
+    {
+        $this->clientTime = microtime(true);
+        $this->serverTime = microtime(true);
+    }
 }

@@ -34,7 +34,7 @@ require_once __DIR__ . '/../app/routes.php';
 |----------------------------------------------------------------------------
 */
 
-whoops()->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+whoops()->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 
 whoops()->register();
 
@@ -74,6 +74,8 @@ date_default_timezone_set(setting('raise.timeZone'));
 error_reporting(!\App\Handlers\Settings::get('security.debug') ?: (E_ALL ^ (E_NOTICE | E_WARNING)));
 
 ini_set('display_errors', \App\Handlers\Settings::get('security.debug'));
+
+ini_set('couchbase.log_level', 'FATAL');
 
 /*
 |----------------------------------------------------------------------------

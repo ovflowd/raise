@@ -15,6 +15,8 @@
 
 namespace App\Models\Communication;
 
+use App\Rules\ClientIdRule;
+
 /**
  * Class Data.
  *
@@ -51,7 +53,7 @@ class Data extends Raise
      *
      * @required
      *
-     * @var array
+     * @var array[]
      */
     public $values = [];
 
@@ -63,7 +65,7 @@ class Data extends Raise
      *
      * @var string[]
      */
-    public $parameters = [];
+    public $order = [];
 
     /**
      * The Unique Client Identifier.
@@ -78,4 +80,16 @@ class Data extends Raise
      * @var string
      */
     protected $clientId = '';
+
+    /**
+     * Base RAISe Model Constructor
+     *
+     * Prepares the Timestamps and other Default Stuff
+     */
+    public function __construct()
+    {
+        $this->clientId = ClientIdRule::getClientId();
+
+        parent::__construct();
+    }
 }

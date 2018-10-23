@@ -50,7 +50,7 @@ class Log extends Model
 	 * The JWT Token used for the Session
 	 * if it's a request that requires Token auth.
 	 *
-	 * @var mixed|null
+	 * @var object
 	 */
 	public $token = null;
 

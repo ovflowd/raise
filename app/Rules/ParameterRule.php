@@ -59,14 +59,30 @@ class ParameterRule implements IRule
     {
         $service = database()->select('service', $property->getObject()->serviceId);
 
-        if (count(array_diff($property->getPropertyValue(), $service->parameters)) > 0) {
+        $parameters = count($service->parameters);
+
+        if ($parameters <= 1) {
+            $property->setPropertyValue($service->parameters);
+
+            return;
+        }
+
+        if (count($property->getPropertyValue()) !== $parameters) {
             throw new ModelValidatorException('Wrong amount of parameters given.');
         }
 
         $order = array_flip($property->getPropertyValue());
 
-        $property->getObject()->values = array_map(function ($values) use ($service, $order) {
-            return isset($order) ? $this->orderData($values, $service) : (array)$values;
+        $property->getObject()->values = array_map(function ($values) use ($service, $order, $parameters) {
+            if (!is_array($values)) {
+                throw new ModelValidatorException('Your data object must contain array of values.');
+            }
+
+            if ($parameters > 1 && count($values) !== $parameters) {
+                throw new ModelValidatorException('Wrong amount of values given it must match the parameters.');
+            }
+
+            return $this->orderData($values, $service, $order);
         }, $property->getObject()->values);
 
         $property->setPropertyValue($service->parameters);
@@ -79,14 +95,13 @@ class ParameterRule implements IRule
      *
      * @param array $values A set of Values to be Ordered
      * @param Service|Model $service A given Service
+     * @param array $order
      *
      * @return array|null Ordered Data if the Data matches the Service Parameters,
      *                    null otherwise.
      */
-    protected function orderData(array $values, $service)
+    protected function orderData(array $values, $service, $order)
     {
-        global $order;
-
         return array_map(function ($parameter) use ($values, $order) {
             return $values[$order[$parameter]];
         }, $service->parameters);

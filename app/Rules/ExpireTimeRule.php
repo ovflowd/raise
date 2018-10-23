@@ -43,6 +43,17 @@ class ExpireTimeRule implements IRule
     }
 
     /**
+     * Calculate the Height of Expire Time
+     *
+     * @param float $time Current Time
+     * @return false|int Expire Time
+     */
+    static function calculate(float $time)
+    {
+        return strtotime('+' . setting('security.expireTime'), $time);
+    }
+
+    /**
      * Define your rule and have your property pass it
      * Additional rule parameters are stored inside $params
      * Should throw an Exception on failure
@@ -54,6 +65,6 @@ class ExpireTimeRule implements IRule
      */
     function validate(ModelProperty $property, array $params = array())
     {
-        $property->setPropertyValue(strtotime('+' . setting('security.expireTime'), microtime(true)));
+        $property->setPropertyValue(self::calculate($property->getPropertyValue()));
     }
 }

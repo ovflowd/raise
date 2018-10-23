@@ -20,10 +20,9 @@ use App\Models\Communication\Raise as RaiseModel;
 use Firebase\JWT\JWT;
 use Firebase\JWT\SignatureInvalidException;
 use InvalidArgumentException;
-use JsonMapper;
-use JsonMapper_Exception;
 use Mapper\ModelMapperException;
 use UnexpectedValueException;
+use Validator\ModelValidatorException;
 
 /**
  * Class Json.
@@ -153,6 +152,8 @@ class Json extends Facade
 
             return $model;
         } catch (InvalidArgumentException $e) {
+            return null;
+        } catch(ModelValidatorException $e) {
             return null;
         }
     }
