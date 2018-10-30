@@ -2,6 +2,7 @@ version: '2'
 services:
   web:
     image: nginx
+    restart: always
     ports:
       - 8080:80
     volumes:
@@ -13,6 +14,7 @@ services:
       - raise
   couchbase:
     image: couchbase/server
+    restart: always
     volumes:
       - './couchbase:/opt/couchbase/var:rw'
     ports:
@@ -21,10 +23,10 @@ services:
       - 8093:8093
       - 11210:11210
   raise:
+    restart: always
     volumes:
       - '.:/app:rw'
       - '/app/vendor'
-    restart: 'no'
     entrypoint: ['docker-php-entrypoint']
     expose:
       - 9000

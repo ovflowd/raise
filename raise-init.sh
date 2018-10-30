@@ -10,10 +10,16 @@ wait_for_start() {
     done
 }
 
-composer install --no-dev --optimize-autoloader
-
 wait_for_start wget -qO- couchbase:8091 &> /dev/null
 
-php /app/install/install.php
+if [ ! -f /app/install/install.lock ]; then
+   echo "Installing Composer Dependencies"
+
+   composer install --no-dev --optimize-autoloader
+
+   echo "Running RAISe Installer.."
+
+   php /app/install/install.php
+fi
 
 php-fpm
